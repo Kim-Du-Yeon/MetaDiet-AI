@@ -479,31 +479,111 @@ LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 
 ## Slide 21. Demo Scenario
 
-**시나리오 1: 자연어 식단 기록**
-```text
-사용자: 아침에 현미밥 200g 닭가슴살 150g 먹었어
-→ diet_logger
-→ CSV 영양성분 계산
-→ confirm 대기
-→ 사용자 확정
-→ meal_logs 저장
-```
-
-**시나리오 2: 저녁 치킨 약속**
-```text
-사용자: 오늘 저녁 치킨 약속 있는데 아침 점심 어떻게 먹을까?
-→ strategy
-→ 현재 목표/남은 칼로리 기반 조언
-```
-
-**시나리오 3: 인바디 갱신**
+**시나리오 1: 인바디 비교 후 목표 재설정**
 ```text
 인바디 사진 업로드
-→ OCR/Vision
-→ inbody_logs 저장
-→ inbody Agent
-→ diet_strategies 갱신
+→ OCR/Vision으로 체중·골격근·체지방률 추출
+→ 이전 인바디와 비교
+→ inbody Agent가 현재 전략 조회
+→ RAG 근거 기반으로 칼로리/단백질 목표 재설정
 ```
+
+보여줄 기술:
+- Vision/OCR
+- Supabase `inbody_logs`
+- `inbody` Agent
+- RAG 기반 설명
+- `diet_strategies` active 전략 갱신
+
+**시나리오 2: 어제 식단 기반 오늘 조언**
+```text
+사용자: 어제 식단 기반으로 오늘 어떻게 먹을까?
+→ strategy Agent
+→ 어제/오늘 섭취량 조회
+→ RAG 문서 근거와 현재 목표를 함께 반영
+→ 오늘 식단 조언 생성
+```
+
+보여줄 기술:
+- Agent routing
+- DB 조회
+- RAG grounded advice
+- 목표 칼로리/단백질 기반 reasoning
+
+**시나리오 3: 음식 사진 업로드 후 CSV lookup 기록**
+```text
+음식 사진 업로드
+→ Vision은 음식명만 추출
+→ 사용자가 g과 끼니 선택
+→ CSV lookup으로 칼로리/탄단지 계산
+→ confirm에서 사용자 확인 후 저장
+```
+
+보여줄 기술:
+- Vision을 데이터 파싱에만 제한
+- CSV lookup으로 영양성분 hallucination 방지
+- Human-in-the-loop
+- `diet_logger` → `confirm`
+
+**시나리오 4: 롤백 후 식단 수정(Time Travel)**
+```text
+사용자: 닭가슴살 200g으로 기록
+→ diet_logger
+→ confirm 대기
+→ checkpoint 생성
+→ rollback으로 이전 pending 상태 복원
+→ 연어 200g으로 수정
+→ confirm 후 저장
+```
+
+보여줄 기술:
+- LangGraph checkpoint
+- Time travel / rollback
+- State 기반 pending 복원
+- confirm 수정 흐름
+
+**시나리오 5: 하루 식단 계획 + validator 피드백 루프**
+```text
+사용자: 내일 하루 식단 짜줘
+→ meal_plan Agent가 식단 생성
+→ validator Agent가 목표 칼로리/단백질 검증
+→ 실패 시 feedback을 반영해 재생성
+→ 통과 후 confirm 대기
+```
+
+보여줄 기술:
+- Subgraph
+- 상호 검증 및 피드백 루프
+- `validation_attempts`
+- HITL confirm
+
+**시나리오 6: 월간 리포트**
+```text
+사용자: 최근 한 달 식단 리포트 보여줘
+→ reporter Agent
+→ meal_logs 통계 분석
+→ 목표 대비 초과/부족, 누락률, 단백질 달성률 요약
+→ 개선 제안
+```
+
+보여줄 기술:
+- reporter Agent
+- analytics tool
+- 장기 데이터 기반 요약
+- 향후 Goal Manager 확장과 연결
+
+**시나리오 7: 잘못된 음식 인식 거절**
+```text
+사진에서 연어롤로 인식
+사용자: 이거 아니야
+→ foodEntry/pending state 초기화
+→ 잘못된 기록 방지
+```
+
+보여줄 기술:
+- 사용자 확인 UX
+- 잘못된 Vision 결과 방지
+- dead interrupt 방지 guardrail
 
 ---
 
@@ -518,10 +598,15 @@ LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 | GraphRAG/Exa 미적용 | 과제 이후 외부 검색/GraphRAG 실험 |
 | 인바디 OCR 품질은 실제 이미지 의존 | OCR confidence 및 수동 보정 UI 추가 |
 | 목표가 방향성 중심임 | `target_weight_kg`, `target_date`, `goal_priority`를 장기 목표 state로 저장 |
+| 회원가입/온보딩이 MVP 수준 | 이름, 나이, 신체정보 입력 방식(직접 입력/인바디 업로드), 목표 유형과 상세 수치 설정을 포함한 초기 온보딩 플로우 추가 |
 
 **장기 목표 관리 확장**
 
 현재 MVP는 목표 방향성(다이어트/증량/유지)과 인바디 기반 전략 조정을 구현했다. 향후 확장에서는 `target_weight_kg`, `target_date`, `goal_priority`를 장기 목표 state로 저장하고, `Goal Manager Agent`가 목표 달성률, 감량 속도, 근손실 여부를 평가해 전략을 재설정하도록 확장할 수 있다.
+
+**초기 온보딩 확장**
+
+향후에는 회원가입 후 사용자 이름, 나이, 신체정보 입력 방식(직접 입력 또는 인바디 업로드), 목표 유형(다이어트/증량/유지), 목표 체중/목표 기간/우선순위를 필수로 설정하도록 하여 장기 코칭의 기준 state를 명확히 만들 수 있다.
 
 **향후 개선 시나리오 예시**
 
