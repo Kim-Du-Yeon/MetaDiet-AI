@@ -5,7 +5,7 @@ from app.core.config import get_settings
 from app.tools.analytics import get_yesterday_summary, get_pattern_analysis
 
 llm = ChatOpenAI(
-    model="gpt-4o",
+    model="gpt-4o-mini",
     temperature=0.3,
     openai_api_key=get_settings().openai_api_key
 )
@@ -125,3 +125,4 @@ async def strategy_node(state: AgentState) -> dict:
         "agent_used": "strategy",
         "rag_grounded": rag_grounded,
     }
+

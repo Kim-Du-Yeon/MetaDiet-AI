@@ -135,7 +135,7 @@ async def check_missing_meals_tool(
     LLM이 흐름 기반으로 판단 (시간 하드코딩 없음).
     """
     llm = ChatOpenAI(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         temperature=0,
         openai_api_key=get_settings().openai_api_key
     )

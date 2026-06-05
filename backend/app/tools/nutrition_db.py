@@ -73,7 +73,7 @@ async def _get_column_mapping() -> dict:
         return {}
 
     llm = ChatOpenAI(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         temperature=0,
         openai_api_key=get_settings().openai_api_key
     )
@@ -119,7 +119,7 @@ async def _decompose_keywords_with_llm(food_name: str) -> list[str]:
         "연어"     → ["연어"]
     """
     llm = ChatOpenAI(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         temperature=0,
         openai_api_key=get_settings().openai_api_key
     )
@@ -193,7 +193,7 @@ async def _find_best_match_with_llm(
     candidate_names = candidates[food_col].head(20).tolist()
 
     llm = ChatOpenAI(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         temperature=0,
         openai_api_key=get_settings().openai_api_key
     )

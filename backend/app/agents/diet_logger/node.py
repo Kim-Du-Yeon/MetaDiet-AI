@@ -17,7 +17,7 @@ from app.tools.agent_tools import get_today_meals_tool, check_missing_meals_tool
 from app.tools.nutrition_db import nutrition_db_tool
 import json, re
 
-llm = ChatOpenAI(model="gpt-4o", temperature=0,
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0,
                  openai_api_key=get_settings().openai_api_key)
 
 PARSE_PROMPT = ChatPromptTemplate.from_messages([
@@ -194,3 +194,4 @@ async def diet_logger_node(state: AgentState) -> dict:
         "plan_date":             today,
         "rag_grounded":          rag_grounded,
     }
+

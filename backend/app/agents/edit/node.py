@@ -4,7 +4,7 @@ from app.schemas.models import AgentState
 from app.core.config import get_settings
 import json, re
 
-llm = ChatOpenAI(model="gpt-4o", temperature=0,
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0,
                  openai_api_key=get_settings().openai_api_key)
 
 EDIT_PARSE_PROMPT = ChatPromptTemplate.from_messages([

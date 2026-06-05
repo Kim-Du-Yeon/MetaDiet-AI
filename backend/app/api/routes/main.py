@@ -347,7 +347,7 @@ async def upload_image(user_id: str, file: UploadFile = File(...)):
 @app.post("/meal/photo")
 async def meal_photo(user_id: str, file: UploadFile = File(...)):
     """
-    음식 사진 → GPT-4o Vision으로 음식명 인식 → 확인용 응답 반환.
+    음식 사진 → GPT-4o-mini Vision으로 음식명 인식 → 확인용 응답 반환.
     저장은 하지 않음. 사용자가 "네 + 각 음식 몇 g" 응답하면 기존 /chat(diet_logger)로 연결.
     (Vision은 음식명 파싱에만 사용 — 양·저장은 기존 HITL 흐름이 담당)
     """
@@ -532,3 +532,4 @@ async def delete_meal(meal_id: str, user_id: str):
 @app.get("/health")
 async def health():
     return {"status":"ok"}
+

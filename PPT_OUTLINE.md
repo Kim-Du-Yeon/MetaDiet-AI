@@ -356,8 +356,8 @@ if grounded == False:
 
 | 영역 | 모델/설정 | 이유 |
 |---|---|---|
-| Supervisor / Agent reasoning | `gpt-4o` | 한국어 의도 분류와 복합 reasoning |
-| OCR / Vision | `gpt-4o` | 인바디/음식 사진 이해 |
+| Supervisor / Agent reasoning | `gpt-4o-mini` | 한국어 의도 분류와 복합 reasoning |
+| OCR / Vision | `gpt-4o-mini` | 인바디/음식 사진 이해 |
 | RAG answerer | `gpt-4o-mini` | 근거 기반 QA 비용 절감 |
 | Eval judge | `gpt-4o-mini` | 평가 자동화 비용 절감 |
 | Synthetic eval dataset 생성 | `gpt-4o-mini` | 평가 문항 생성 |
@@ -583,3 +583,4 @@ LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 5. 검증: routing eval, RAG eval, LangSmith
 6. 개선 과정: 무엇을 어떻게 고도화했나
 7. 포트폴리오 메시지: AI Agent/LLM Engineer로서의 설계 역량
+

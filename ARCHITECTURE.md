@@ -1,4 +1,4 @@
-﻿# Diet Agent 보고서용 핵심 정리
+# Diet Agent 보고서용 핵심 정리
 
 이 프로젝트는 단순 칼로리 기록 앱이 아니라, **LangGraph 기반 Multi-Agent 식단 코칭 시스템**이다. 사용자의 식단 입력, 사진 기반 음식 인식, 인바디 업로드, 식단 조언, 식단 계획, 리포트, 기록 수정 요청을 각각 다른 Agent가 처리하고, Supervisor Agent가 의도를 판단해 적절한 Agent로 라우팅한다. 또한 식단 기록은 Human-in-the-loop 방식으로 사용자의 확인을 받은 뒤 저장하며, LangGraph checkpointer를 통해 대화 상태와 interrupt 상태를 관리한다.
 
@@ -10,7 +10,7 @@
 |---|---|---|---|
 | 영양성분 계산 | CSV lookup | `docs/nutrition/식품성분표_10개정판.csv` | 칼로리, 탄수화물, 단백질, 지방, 나트륨처럼 정량 수치가 필요한 영역은 RAG보다 구조화된 식품성분표 조회가 정확하고 재현성이 높다. |
 | 영양지식 조언 | RAG | WHO, Dietary Guidelines, 논문 PDF | 단백질 섭취, 감량 전략, 식사 타이밍, 건강한 식단 구성처럼 문서 근거가 필요한 설명형 지식은 RAG로 검색하고 출처를 함께 제공한다. |
-| 음식 사진 인식 | Vision | GPT-4o Vision | 사진에서는 음식명만 추출하고, 양(g)과 저장 여부는 사용자가 직접 확인한다. |
+| 음식 사진 인식 | Vision | GPT-4o-mini Vision | 사진에서는 음식명만 추출하고, 양(g)과 저장 여부는 사용자가 직접 확인한다. |
 | 인바디 분석 | OCR/Vision + Agent | 인바디 이미지, DB 이력, RAG | 인바디 수치를 추출하고 이전 이력 및 현재 전략과 비교해 목표 칼로리/영양소를 재설정한다. |
 
 따라서 영양성분은 RAG가 아니라 **CSV 기반 deterministic lookup**이며, 영양 조언은 **문서 근거 기반 RAG**로 처리한다. 이 구조는 수치 계산의 정확성과 설명형 조언의 근거성을 동시에 확보하기 위한 설계이다.
@@ -149,10 +149,10 @@ flowchart TD
     U -->|"인바디 사진"| INBODY["/inbody/upload<br/>(routes/main.py + inbody_ocr.py)"]
     U -->|"타임트래블"| TT["/chat/history, /chat/rollback"]
 
-    PHOTO -->|"GPT-4o Vision → 음식명 리스트<br/>'연어롤 맞나요?'"| U
+    PHOTO -->|"GPT-4o-mini Vision → 음식명 리스트<br/>'연어롤 맞나요?'"| U
     U -->|"'네, 연어롤 200g'<br/>(텍스트로)"| CHAT
 
-    INBODY -->|"GPT-4o Vision → 수치 추출<br/>→ inbody_logs 저장"| GRAPH
+    INBODY -->|"GPT-4o-mini Vision → 수치 추출<br/>→ inbody_logs 저장"| GRAPH
 
     CHAT --> GRAPH[["LangGraph 오케스트레이션"]]
     TT --> CKPT[(체크포인터)]
@@ -251,7 +251,7 @@ flowchart LR
 sequenceDiagram
     participant U as React
     participant P as /meal/photo
-    participant V as food_vision.py (GPT-4o)
+    participant V as food_vision.py (GPT-4o-mini)
     participant C as /chat (diet_logger)
     participant DB as meal_logs
 
@@ -361,8 +361,8 @@ sequenceDiagram
 ### Vision / OCR
 | 파일 | 기능 |
 |---|---|
-| [app/ocr/inbody_ocr.py](backend/app/ocr/inbody_ocr.py) | 인바디 사진 → 키·체중·골격근·체지방률·BMR 추출(GPT-4o Vision) |
-| [app/ocr/food_vision.py](backend/app/ocr/food_vision.py) | 음식 사진 → 음식명 리스트(GPT-4o Vision, 양 추정 X) |
+| [app/ocr/inbody_ocr.py](backend/app/ocr/inbody_ocr.py) | 인바디 사진 → 키·체중·골격근·체지방률·BMR 추출(GPT-4o-mini Vision) |
+| [app/ocr/food_vision.py](backend/app/ocr/food_vision.py) | 음식 사진 → 음식명 리스트(GPT-4o-mini Vision, 양 추정 X) |
 
 ### 인프라/스키마
 | 파일 | 기능 |
@@ -396,7 +396,7 @@ flowchart LR
     end
     subgraph EXT["외부/로컬"]
       PINE[(Pinecone diet-agent-rag<br/>1536-dim)]
-      OAI["OpenAI gpt-4o/4o-mini<br/>embeddings·Vision"]
+      OAI["OpenAI gpt-4o-mini<br/>embeddings·Vision"]
       FR["FlashRank (로컬)"]
       BM["BM25 chunks.pkl (로컬)"]
     end
@@ -420,4 +420,5 @@ flowchart LR
 | Storage `inbody-images` | 인바디 원본 사진 |
 | Pinecone | 영양지식 PDF 임베딩(dense) |
 | chunks.pkl | BM25 sparse 코퍼스(로컬) |
+
 

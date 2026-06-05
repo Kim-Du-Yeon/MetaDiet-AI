@@ -13,7 +13,7 @@ ocr/inbody_ocr.py
            "근손실 없이 체지방만 줄었는가"를 판단하는 근거로 활용
 
 구현 방식:
-  GPT-4o Vision을 사용 (별도 Vision 전용 기능이 아니라
+  GPT-4o-mini Vision을 사용 (별도 Vision 전용 기능이 아니라
   인바디 "데이터 파싱"에만 Vision 사용 - 식단 인식과 구분)
   → tesseract OCR 대비 한국어 인바디 용지 인식률 월등히 높음
 """
@@ -54,7 +54,7 @@ async def extract_inbody_from_image(image_bytes: bytes) -> dict:
     b64 = base64.b64encode(image_bytes).decode("utf-8")
 
     response = await client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         messages=[
             {
                 "role": "user",
@@ -87,3 +87,4 @@ async def extract_inbody_from_image(image_bytes: bytes) -> dict:
             raise ValueError(f"인바디 OCR 실패: {field} 추출 불가. 이미지를 다시 업로드해주세요.")
 
     return data
+

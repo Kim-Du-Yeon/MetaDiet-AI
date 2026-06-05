@@ -10,7 +10,7 @@ from app.db.supabase_client import get_supabase
 from app.core.config import get_settings
 import json, re
 
-llm = ChatOpenAI(model="gpt-4o", temperature=0.2, openai_api_key=get_settings().openai_api_key)
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.2, openai_api_key=get_settings().openai_api_key)
 sb = get_supabase()
 
 ANALYSIS_PROMPT = ChatPromptTemplate.from_messages([

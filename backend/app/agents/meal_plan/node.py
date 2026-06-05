@@ -6,7 +6,7 @@ from app.tools.analytics import get_yesterday_summary, get_pattern_analysis
 import json, re
 from datetime import date, timedelta
 
-llm = ChatOpenAI(model="gpt-4o", temperature=0.3,
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.3,
                  openai_api_key=get_settings().openai_api_key)
 
 MEAL_PLAN_PROMPT = ChatPromptTemplate.from_messages([
@@ -221,3 +221,4 @@ async def meal_plan_node(state: AgentState) -> dict:
         "rag_context": rag_context,
         "rag_grounded": rag_grounded,
     }
+

@@ -4,7 +4,7 @@ from app.schemas.models import AgentState
 from app.core.config import get_settings
 from app.tools.analytics import get_pattern_analysis, get_inbody_diet_correlation, get_missing_meal_alert
 
-llm = ChatOpenAI(model="gpt-4o", temperature=0.3,
+llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.3,
                  openai_api_key=get_settings().openai_api_key)
 
 REPORT_PROMPT = ChatPromptTemplate.from_messages([

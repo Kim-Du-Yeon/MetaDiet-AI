@@ -26,7 +26,7 @@ import json, re
 MAX_ATTEMPTS = 3
 
 llm = ChatOpenAI(
-    model="gpt-4o",
+    model="gpt-4o-mini",
     temperature=0,
     openai_api_key=get_settings().openai_api_key
 )

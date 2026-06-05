@@ -85,3 +85,4 @@ npm start
 - RAG is used for nutrition knowledge and advice with document grounding.
 - Food photos are used to identify food names only; grams and meal type are confirmed by the user.
 - `.env`, virtual environments, local DB files, and generated caches are ignored by Git.
+

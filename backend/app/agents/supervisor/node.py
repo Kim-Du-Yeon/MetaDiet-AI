@@ -4,7 +4,7 @@ from app.schemas.models import AgentState, extract_messages_context
 from app.core.config import get_settings
 
 llm = ChatOpenAI(
-    model="gpt-4o",
+    model="gpt-4o-mini",
     temperature=0,
     openai_api_key=get_settings().openai_api_key
 )
@@ -125,3 +125,4 @@ def route_to_agent(state: AgentState) -> str:
         return "confirm"
 
     return intent
+

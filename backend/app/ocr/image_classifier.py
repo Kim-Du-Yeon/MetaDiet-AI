@@ -24,7 +24,7 @@ async def classify_image_type(image_bytes: bytes) -> str:
     """이미지 종류 판단 → 'inbody' | 'food' | 'unknown'."""
     b64 = base64.b64encode(image_bytes).decode("utf-8")
     resp = await client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         messages=[{
             "role": "user",
             "content": [
@@ -42,3 +42,4 @@ async def classify_image_type(image_bytes: bytes) -> str:
     if "food" in out:
         return "food"
     return "unknown"
+

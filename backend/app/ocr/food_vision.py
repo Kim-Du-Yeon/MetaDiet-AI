@@ -1,7 +1,7 @@
 """
 ocr/food_vision.py
 
-음식 사진 → 음식명 리스트 추출 (GPT-4o Vision).
+음식 사진 → 음식명 리스트 추출 (GPT-4o-mini Vision).
 
 설계 원칙 (inbody_ocr와 동일 철학):
   - Vision을 '데이터 파싱'에만 사용. AI가 식단을 멋대로 자동 기록하는 게 아니라
@@ -35,7 +35,7 @@ async def identify_foods_from_image(image_bytes: bytes) -> list[str]:
     """음식 사진 bytes → 음식명 리스트. 인식 실패 시 빈 리스트."""
     b64 = base64.b64encode(image_bytes).decode("utf-8")
     resp = await client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         messages=[{
             "role": "user",
             "content": [
@@ -54,3 +54,4 @@ async def identify_foods_from_image(image_bytes: bytes) -> list[str]:
     except json.JSONDecodeError:
         return []
     return [f.strip() for f in foods if isinstance(f, str) and f.strip()]
+
