@@ -1,0 +1,38 @@
+[
+  {"message": "닭가슴살 200g 먹었어", "context": [], "pending": false, "expected": "diet_logger"},
+  {"message": "오늘 점심에 김치찌개랑 공기밥 먹었어", "context": [], "pending": false, "expected": "diet_logger"},
+  {"message": "방금 아메리카노 한 잔 마셨어", "context": [], "pending": false, "expected": "diet_logger"},
+
+  {"message": "내일 하루 식단 좀 짜줘", "context": [], "pending": false, "expected": "meal_plan"},
+  {"message": "다이어트용으로 하루치 식단 계획 세워줘", "context": [], "pending": false, "expected": "meal_plan"},
+
+  {"message": "단백질은 하루에 얼마나 먹어야 해?", "context": [], "pending": false, "expected": "strategy"},
+  {"message": "지금 칼로리 남았는데 뭐 먹으면 좋을까?", "context": [], "pending": false, "expected": "strategy"},
+  {"message": "살 빼려면 탄수화물 줄이는 게 맞아?", "context": [], "pending": false, "expected": "strategy"},
+
+  {"message": "응 확정해줘",
+   "context": [{"role": "assistant", "content": "내일 식단 제안: 아침 오트밀, 점심 닭가슴살 샐러드, 저녁 연어구이. 확정하시겠어요?"}],
+   "pending": true, "expected": "confirm"},
+  {"message": "ok 그대로 기록",
+   "context": [{"role": "assistant", "content": "오늘 식단 제안을 드렸습니다. 확정할까요?"}],
+   "pending": true, "expected": "confirm"},
+  {"message": "점심을 치킨샐러드로 바꿔줘",
+   "context": [{"role": "assistant", "content": "내일 식단 제안: 점심 닭가슴살 샐러드 ... 확정하시겠어요?"}],
+   "pending": true, "expected": "confirm"},
+
+  {"message": "아까 기록한 저녁 메뉴 삭제해줘", "context": [], "pending": false, "expected": "edit"},
+  {"message": "어제 저장한 점심 칼로리 좀 수정해줘", "context": [], "pending": false, "expected": "edit"},
+
+  {"message": "인바디 결과 분석해서 전략 업데이트 해줘", "context": [], "pending": false, "expected": "inbody"},
+
+  {"message": "이번 주 식단 리포트 보여줘", "context": [], "pending": false, "expected": "reporter"},
+  {"message": "최근 한 달 단백질 섭취 통계 알려줘", "context": [], "pending": false, "expected": "reporter"},
+
+  {"message": "그거 그대로 기록해줘",
+   "context": [{"role": "user", "content": "저녁에 연어 150g이랑 현미밥 먹을 예정이야"},
+               {"role": "assistant", "content": "연어와 현미밥 좋은 선택이에요."}],
+   "pending": false, "expected": "diet_logger"},
+  {"message": "위에서 말한 저녁으로 기록",
+   "context": [{"role": "user", "content": "저녁은 삼겹살 200g 먹었어"}],
+   "pending": false, "expected": "diet_logger"}
+]
