@@ -132,53 +132,24 @@ async def check_missing_meals_tool(
     """
     오늘 식단 흐름에서 누락된 끼니 감지.
     확정 저장된 끼니 + 현재 pending 끼니를 합산해서 판단.
-    LLM이 흐름 기반으로 판단 (시간 하드코딩 없음).
+    방금 기록한 끼니보다 앞선 끼니만 누락으로 본다.
     """
-    llm = ChatOpenAI(
-        model="gpt-4o-mini",
-        temperature=0,
-        openai_api_key=get_settings().openai_api_key
-    )
+    order = ["breakfast", "lunch", "dinner"]
+    labels = {"breakfast": "아침", "lunch": "점심", "dinner": "저녁"}
 
-    prompt = ChatPromptTemplate.from_messages([
-        ("system", """당신은 사용자의 하루 식단 흐름을 파악하는 AI입니다.
+    recorded = set(logged_meals or []) | set(pending_meals or []) | set(just_recorded or [])
+    current = [m for m in (just_recorded or []) if m in order]
+    if not current:
+        return {"has_missing": False, "missing_meals": [], "reason": "간식 또는 끼니 정보 없음"}
 
-[오늘 확정 저장된 끼니]: {logged_meals}
-[현재 대기 중인 끼니]: {pending_meals}
-[방금 기록하려는 끼니]: {just_recorded}
+    latest_idx = max(order.index(m) for m in current)
+    missing = [m for m in order[:latest_idx] if m not in recorded]
 
-판단 기준:
-- 사람마다 식사 패턴이 다릅니다. 시간이 아닌 흐름으로 판단하세요.
-- 방금 기록하려는 끼니 기준으로 그 이전에 빠진 끼니가 있으면 누락
-- 방금 기록하려는 끼니 이후는 아직 안 먹었을 수 있으니 누락 아님
-- 예시: 아침 기록 후 저녁 기록(방금) → 점심 누락
-- 예시: 점심 기록 후 저녁 기록(방금) → 아침 누락
-- 예시: 저녁 기록 후 아침 기록(방금) → 누락 아님 (다음날일 수 있음)
-- 사용자가 의도적으로 건너뛴다고 언급했으면 누락 아님
-- 방금 기록한 끼니가 비어있던 끼니를 채우는 경우 누락 아님
-- 누락된 끼니가 여러 개일 수 있습니다.
-
-아래 JSON으로만 응답하세요:
-{{
-  "has_missing": true/false,
-  "missing_meals": ["아침", "점심"] 또는 [],
-  "reason": "판단 이유 한 문장"
-}}
-JSON 외 텍스트 금지."""),
-        ("human", "오늘 식단 흐름에서 누락된 끼니가 있는지 판단해주세요.")
-    ])
-
-    try:
-        resp = await llm.ainvoke(prompt.format_messages(
-            logged_meals=logged_meals if logged_meals else "없음",
-            pending_meals=pending_meals if pending_meals else "없음",
-            just_recorded=just_recorded if just_recorded else "없음",
-        ))
-        raw = re.sub(r"```json|```", "", resp.content).strip()
-        return json.loads(raw)
-    except Exception as e:
-        print(f"=== check_missing_meals_tool 오류: {e} ===")
-        return {"has_missing": False, "missing_meals": [], "reason": "판단 실패"}
+    return {
+        "has_missing": bool(missing),
+        "missing_meals": [labels[m] for m in missing],
+        "reason": "방금 기록한 끼니보다 앞선 끼니만 누락으로 판단",
+    }
 
 
 # ── Tool 6: RAG 영양 지식 검색 ──────────────────────────────────────

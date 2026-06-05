@@ -28,6 +28,9 @@ PARSE_PROMPT = ChatPromptTemplate.from_messages([
 [최근 대화 맥락]: {recent_context}
 
 규칙:
+- 현재 사용자 메시지에 새로 말한 음식만 파싱하세요.
+- 최근 대화 맥락의 음식은 사용자가 "그거", "아까 말한 것", "위 음식"처럼 명시적으로 참조할 때만 사용하세요.
+- 현재 메시지가 "점심 쌀밥 100g, 닭가슴살 200g"이면 이전 아침/간식 기록을 절대 포함하지 마세요.
 - 사용자가 명시한 음식은 이미 기록된 끼니여도 반드시 파싱 (중복 여부는 사용자가 결정)
 - 오타 교정 (예: "달각슴살" → "닭가슴살")
 - meal_type: 명시 없으면 미기록 끼니로 추정
@@ -98,6 +101,26 @@ def _format_display(pending_meals: list, today_meals: list) -> str:
     return "\n".join(lines)
 
 
+def _references_previous_context(message: str) -> bool:
+    msg = message or ""
+    return any(k in msg for k in ["그거", "그걸", "그 음식", "아까", "위에서", "방금", "말한대로", "말한 대로"])
+
+
+def _filter_current_message_items(items: list, message: str) -> list:
+    if _references_previous_context(message):
+        return items
+
+    normalized_msg = re.sub(r"\s+", "", message or "").lower()
+    filtered = []
+    for item in items:
+        food_name = str(item.get("food_name", ""))
+        normalized_food = re.sub(r"\s+", "", food_name).lower()
+        if normalized_food and normalized_food in normalized_msg:
+            filtered.append(item)
+
+    return filtered or items
+
+
 async def diet_logger_node(state: AgentState) -> dict:
     """파싱 + 영양계산 + RAG피드백 → pending_meals 저장"""
     from datetime import date
@@ -115,6 +138,7 @@ async def diet_logger_node(state: AgentState) -> dict:
         recent_context=recent_context,
     ))
     items = json.loads(re.sub(r"```json|```", "", parse_resp.content).strip())
+    items = _filter_current_message_items(items, state["message"])
 
     # 사용자가 버튼으로 끼니를 지정했으면(forced_meal_type) LLM 추측 대신 강제 적용.
     # 끼니는 추론할 사실이 아니라 사용자가 정하는 값 → 오분류(점심/간식 임의지정) 방지.

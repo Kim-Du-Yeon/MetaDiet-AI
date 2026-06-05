@@ -527,12 +527,13 @@ LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 
 **시나리오 4: 롤백 후 식단 수정(Time Travel)**
 ```text
-사용자: 닭가슴살 200g으로 기록
+사용자: 점심 쌀밥 100g, 닭가슴살 200g 먹었어
 → diet_logger
 → confirm 대기
 → checkpoint 생성
 → rollback으로 이전 pending 상태 복원
-→ 연어 200g으로 수정
+→ 닭가슴살 말고 고등어 200g으로 수정
+→ overwrite_on_confirm=True로 기존 점심 기록 대체
 → confirm 후 저장
 ```
 
@@ -541,6 +542,7 @@ LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 - Time travel / rollback
 - State 기반 pending 복원
 - confirm 수정 흐름
+- 수정 전 식단과 수정 후 식단이 중복 누적되지 않도록 overwrite 저장
 
 **시나리오 5: 하루 식단 계획 + validator 피드백 루프**
 ```text
@@ -584,6 +586,28 @@ LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 - 사용자 확인 UX
 - 잘못된 Vision 결과 방지
 - dead interrupt 방지 guardrail
+
+**실제 촬영용 통합 시나리오**
+```text
+1. 연어롤 사진 업로드
+2. 사용자: 이거 아니야
+3. 사용자: 아침 연어롤 200g
+4. 사용자: 응 확정해줘
+5. 사용자: 점심 쌀밥 100g, 닭가슴살 200g 먹었어
+6. 사용자: 저장해
+7. 사용자: step3으로 롤백
+8. 사용자: 닭가슴살 말고 고등어 200g으로 수정
+9. 사용자: 확정
+10. 사용자: 간식 단백질 보충제 30g, 삶은 계란 2개
+11. 사용자: 확정
+12. 사용자: 저녁 제육볶음 150g, 쌀밥 200g
+13. 사용자: 확정
+14. 사용자: 오늘 식단 총평해줘. 목표 칼로리와 단백질 기준으로 잘한 점, 부족한 점, 내일 개선 방향까지 알려줘.
+15. 사용자: 내일 하루 식단 계획을 짜줘. 저녁에는 후라이드 치킨 한 마리를 먹을 예정이니까, 그걸 고려해서 아침과 점심 식단을 구체적으로 짜줘.
+16. 인바디 사진 업로드
+```
+
+이 흐름으로 Vision 결과 거절, 자연어 식단 파싱, CSV lookup, HITL confirm, checkpoint rollback, overwrite 수정 저장, 오늘 총평 routing, RAG 기반 식단 계획, 인바디 OCR 기반 전략 갱신을 한 번에 보여준다.
 
 ---
 

@@ -11,9 +11,9 @@ export async function sendChatMessage(
       user_id: userId,
       message,
       thread_id: threadId,
-      pending_meals: pendingState.pending_meals || null,
-      awaiting_confirmation: pendingState.awaiting_confirmation || false,
-      plan_date: pendingState.plan_date || null,
+      pending_meals: null,
+      awaiting_confirmation: false,
+      plan_date: null,
       meal_type: mealType,   // 사용자가 버튼으로 고른 끼니(있으면 강제 적용)
       messages: messages.slice(-10).map(m => ({
         role: m.role,

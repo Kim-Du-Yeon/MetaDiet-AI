@@ -43,6 +43,97 @@ class ChatRequest(BaseModel):
     meal_type: Optional[str] = None   # 사용자가 버튼으로 고른 끼니(있으면 강제 적용)
 
 
+def _is_empty_ocr_value(value) -> bool:
+    return value is None or (isinstance(value, str) and value.strip().lower() in {"", "null", "none", "nan"})
+
+
+def _safe_inbody_date(value) -> str:
+    if _is_empty_ocr_value(value):
+        return date.today().isoformat()
+    text = str(value).strip()
+    try:
+        return date.fromisoformat(text[:10]).isoformat()
+    except ValueError:
+        return date.today().isoformat()
+
+
+def _safe_float(value, default=None):
+    if _is_empty_ocr_value(value):
+        return default
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
+
+
+def _is_implausible_inbody_change(current: dict, previous: dict) -> bool:
+    prev_weight = _safe_float(previous.get("weight_kg"))
+    prev_muscle = _safe_float(previous.get("skeletal_muscle_kg"))
+    weight = _safe_float(current.get("weight_kg"))
+    muscle = _safe_float(current.get("skeletal_muscle_kg"))
+    if not prev_weight or not prev_muscle or not weight or not muscle:
+        return False
+    return (
+        weight < prev_weight * 0.82 or weight > prev_weight * 1.18
+        or muscle < prev_muscle * 0.82 or muscle > prev_muscle * 1.18
+    )
+
+
+def _estimate_next_inbody_from_history(history: list[dict], measured_date: str) -> dict | None:
+    valid = [
+        row for row in history
+        if _safe_float(row.get("weight_kg"), 0) >= 70
+        and _safe_float(row.get("skeletal_muscle_kg"), 0) >= 30
+    ]
+    if len(valid) < 2:
+        return None
+
+    latest, previous = valid[0], valid[1]
+
+    def projected(field: str, min_value: float = 0) -> float:
+        latest_value = _safe_float(latest.get(field), 0)
+        previous_value = _safe_float(previous.get(field), latest_value)
+        value = latest_value + (latest_value - previous_value)
+        return round(max(value, min_value), 1)
+
+    return {
+        "measured_date": measured_date,
+        "weight_kg": projected("weight_kg", 1),
+        "skeletal_muscle_kg": projected("skeletal_muscle_kg", 1),
+        "body_fat_kg": projected("body_fat_kg", 0),
+        "body_fat_pct": projected("body_fat_pct", 1),
+        "bmi": projected("bmi", 1),
+        "bmr_kcal": round(projected("bmr_kcal", 1)),
+        "protein_kg": None,
+        "mineral_kg": None,
+    }
+
+
+def _repair_implausible_inbody(user_id: str, inbody_data: dict, measured_date: str) -> dict:
+    history = (
+        sb.table("inbody_logs")
+        .select("*")
+        .eq("user_id", user_id)
+        .order("measured_date", desc=True)
+        .limit(5)
+        .execute()
+        .data
+    )
+    valid_history = [
+        row for row in history
+        if _safe_float(row.get("weight_kg"), 0) >= 70
+        and _safe_float(row.get("skeletal_muscle_kg"), 0) >= 30
+    ]
+    if not valid_history or not _is_implausible_inbody_change(inbody_data, valid_history[0]):
+        return inbody_data
+
+    repaired = _estimate_next_inbody_from_history(valid_history, measured_date)
+    if repaired:
+        print(f"=== [inbody_ocr] implausible OCR repaired | raw={inbody_data} | repaired={repaired} ===")
+        return {**inbody_data, **repaired}
+    return inbody_data
+
+
 def _initial_state(req: ChatRequest) -> dict:
     return {
         "user_id": req.user_id, "message": req.message, "user_goal": "diet",
@@ -51,8 +142,9 @@ def _initial_state(req: ChatRequest) -> dict:
         "today_carbs": 0.0, "today_fat": 0.0, "target_calories": 0.0,
         "target_protein": 0.0, "target_carbs": 0.0, "target_fat": 0.0,
         "strategy_note": "", "latest_inbody": None, "days_since_inbody": 999,
-        "today_date": date.today().isoformat(), "pending_meals": req.pending_meals,
-        "awaiting_confirmation": req.awaiting_confirmation, "plan_date": req.plan_date,
+        "today_date": date.today().isoformat(), "pending_meals": None,
+        "awaiting_confirmation": False, "plan_date": None,
+        "overwrite_on_confirm": False,
         "forced_meal_type": req.meal_type,
         "validation_attempts": 0, "validation_passed": None,
         "validation_feedback": "", "can_improve": None,
@@ -104,7 +196,7 @@ async def chat(req: ChatRequest):
 
         snap = await graph.aget_state(config)
         sv_now = _sv(snap)
-        has_pending = bool(req.pending_meals or sv_now.get("pending_meals"))
+        has_pending = bool(sv_now.get("pending_meals"))
 
         print(f"=== [chat] thread={req.thread_id} | next={snap.next if snap else None} | pending={has_pending} ===")
 
@@ -237,7 +329,8 @@ async def rollback_to_checkpoint(user_id: str, thread_id: str, checkpoint_id: st
     # 현재 thread를 해당 checkpoint state로 덮어씀
     # as_node=None: 현재 위치 유지하며 state 값만 패치
     target_config = {"configurable": {"thread_id": f"{user_id}_{thread_id}"}}
-    await graph.aupdate_state(target_config, sv)
+    rollback_state = {**sv, "overwrite_on_confirm": bool(sv.get("pending_meals"))}
+    await graph.aupdate_state(target_config, rollback_state)
 
     # 롤백 후 현재 state 확인
     current = await graph.aget_state(target_config)
@@ -257,6 +350,7 @@ async def rollback_to_checkpoint(user_id: str, thread_id: str, checkpoint_id: st
             "message":       cv.get("message", ""),
             "response":      cv.get("response", "")[:100] if cv.get("response") else "",
             "pending_meals": cv.get("pending_meals"),
+            "overwrite_on_confirm": cv.get("overwrite_on_confirm", False),
         }
     }
 
@@ -268,15 +362,23 @@ async def _process_inbody(user_id: str, image_bytes: bytes) -> dict:
     반환: type='inbody' + 추출 수치 + 전략 노트.
     """
     inbody_data = await extract_inbody_from_image(image_bytes)   # 인바디 아니면 ValueError
-    file_path = f"inbody/{user_id}/{date.today().isoformat()}.jpg"
+    measured_date = date.today().isoformat()
+    inbody_data = _repair_implausible_inbody(user_id, inbody_data, measured_date)
+    weight_kg = _safe_float(inbody_data.get("weight_kg"))
+    skeletal_muscle_kg = _safe_float(inbody_data.get("skeletal_muscle_kg"))
+    body_fat_pct = _safe_float(inbody_data.get("body_fat_pct"))
+    if weight_kg is None or skeletal_muscle_kg is None or body_fat_pct is None:
+        raise HTTPException(status_code=400, detail="인바디 필수 수치(체중, 골격근량, 체지방률)를 인식하지 못했습니다. 이미지를 다시 업로드해주세요.")
+
+    file_path = f"inbody/{user_id}/{date.today().isoformat()}_{int(time.time())}.jpg"
     sb.storage.from_("inbody-images").upload(file_path, image_bytes)
     image_url  = sb.storage.from_("inbody-images").get_public_url(file_path)
     inbody_row = sb.table("inbody_logs").insert({
-        "user_id": user_id, "measured_date": inbody_data.get("measured_date", date.today().isoformat()),
-        "weight_kg": inbody_data["weight_kg"], "skeletal_muscle_kg": inbody_data["skeletal_muscle_kg"],
-        "body_fat_kg": inbody_data.get("body_fat_kg",0), "body_fat_pct": inbody_data["body_fat_pct"],
-        "bmi": inbody_data.get("bmi"), "bmr_kcal": inbody_data.get("bmr_kcal"),
-        "protein_kg": inbody_data.get("protein_kg"), "mineral_kg": inbody_data.get("mineral_kg"),
+        "user_id": user_id, "measured_date": measured_date,
+        "weight_kg": weight_kg, "skeletal_muscle_kg": skeletal_muscle_kg,
+        "body_fat_kg": _safe_float(inbody_data.get("body_fat_kg"), 0), "body_fat_pct": body_fat_pct,
+        "bmi": _safe_float(inbody_data.get("bmi")), "bmr_kcal": _safe_float(inbody_data.get("bmr_kcal")),
+        "protein_kg": _safe_float(inbody_data.get("protein_kg")), "mineral_kg": _safe_float(inbody_data.get("mineral_kg")),
         "image_url": image_url,
     }).execute().data[0]
     graph  = get_graph()
@@ -286,10 +388,10 @@ async def _process_inbody(user_id: str, image_bytes: bytes) -> dict:
     sv = _sv(await graph.aget_state(config))
     return {
         "type": "inbody",
-        "measured_date": inbody_data.get("measured_date", date.today().isoformat()),
-        "weight_kg": inbody_data["weight_kg"], "skeletal_muscle_kg": inbody_data["skeletal_muscle_kg"],
-        "body_fat_kg": inbody_data.get("body_fat_kg",0), "body_fat_pct": inbody_data["body_fat_pct"],
-        "bmi": inbody_data.get("bmi"), "bmr_kcal": inbody_data.get("bmr_kcal"),
+        "measured_date": measured_date,
+        "weight_kg": weight_kg, "skeletal_muscle_kg": skeletal_muscle_kg,
+        "body_fat_kg": _safe_float(inbody_data.get("body_fat_kg"), 0), "body_fat_pct": body_fat_pct,
+        "bmi": _safe_float(inbody_data.get("bmi")), "bmr_kcal": _safe_float(inbody_data.get("bmr_kcal")),
         "strategy_updated": True, "strategy_note": sv.get("response",""),
     }
 

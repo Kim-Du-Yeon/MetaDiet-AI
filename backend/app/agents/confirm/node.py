@@ -121,17 +121,20 @@ async def confirm_node(state: AgentState) -> dict:
 
     # ── confirm: 저장 ─────────────────────────────────────────────────
     if action == "confirm":
-        # 저장 전 같은 날짜+끼니의 기존 기록 삭제 (롤백 후 중복 저장 방지)
-        # 예: 삼겹살 150g 저장 후 롤백 → 닭가슴살로 저장 시 삼겹살 자동 삭제
-        try:
-            from app.db.supabase_client import get_supabase
-            sb = get_supabase()
-            meal_types_to_overwrite = list(set(m["meal_type"] for m in pending))
-            for mt in meal_types_to_overwrite:
-                sb.table("meal_logs").delete()                  .eq("user_id", user_id)                  .eq("log_date", plan_date)                  .eq("meal_type", mt)                  .execute()
-                print(f"=== [confirm] 기존 {mt} 기록 삭제 ({plan_date}) ===")
-        except Exception as e:
-            print(f"=== [confirm] 기존 기록 삭제 실패: {e} ===")
+        from app.db.supabase_client import get_supabase
+        sb = get_supabase()
+
+        # meal_plan은 하루/끼니 계획을 확정하는 흐름이라 기존 끼니를 덮어쓴다.
+        # diet_logger는 "추가로 먹은 음식" 기록이므로 기존 같은 끼니를 삭제하지 않는다.
+        overwrite_existing = state.get("agent_used") == "meal_plan" or bool(state.get("overwrite_on_confirm"))
+        if overwrite_existing:
+            try:
+                meal_types_to_overwrite = list(set(m["meal_type"] for m in pending))
+                for mt in meal_types_to_overwrite:
+                    sb.table("meal_logs").delete()                  .eq("user_id", user_id)                  .eq("log_date", plan_date)                  .eq("meal_type", mt)                  .execute()
+                    print(f"=== [confirm] 기존 {mt} 기록 삭제 ({plan_date}) ===")
+            except Exception as e:
+                print(f"=== [confirm] 기존 기록 삭제 실패: {e} ===")
 
         saved = 0
         for meal in pending:
@@ -148,12 +151,27 @@ async def confirm_node(state: AgentState) -> dict:
         total_prot   = round(sum(m["protein_g"]        for m in pending))
         total_fat    = round(sum(m.get("fat_g",0)     for m in pending))
         total_sodium = round(sum(m.get("sodium_mg",0)  for m in pending))
+
+        try:
+            today_rows = sb.table("meal_logs").select(
+                "calories,protein_g,carbs_g,fat_g"
+            ).eq("user_id", user_id).eq("log_date", plan_date).execute().data
+            today_cal = round(sum(r.get("calories", 0) for r in today_rows))
+            today_carbs = round(sum(r.get("carbs_g", 0) for r in today_rows))
+            today_prot = round(sum(r.get("protein_g", 0) for r in today_rows))
+            today_fat = round(sum(r.get("fat_g", 0) for r in today_rows))
+            today_summary = f"\n\n📈 **오늘 누적 합계**: {today_cal}kcal | 탄 {today_carbs}g | 단 {today_prot}g | 지 {today_fat}g"
+        except Exception as e:
+            print(f"=== [confirm] 오늘 누적 합계 조회 실패: {e} ===")
+            today_summary = ""
+
         print(f"=== [confirm] 저장 완료: {saved}/{len(pending)}개 ===")
         return {
-            "response":              f"✅ **{plan_date} 식단이 캘린더에 저장됐습니다!**\n\n📊 {total_cal}kcal | 탄 {total_carbs}g | 단 {total_prot}g | 지 {total_fat}g | 나트륨 {total_sodium}mg\n\n더 드신 음식이 있으면 언제든지 말씀해주세요.",
+            "response":              f"✅ **{plan_date} 식단이 캘린더에 저장됐습니다!**\n\n📊 {total_cal}kcal | 탄 {total_carbs}g | 단 {total_prot}g | 지 {total_fat}g | 나트륨 {total_sodium}mg{today_summary}\n\n더 드신 음식이 있으면 언제든지 말씀해주세요.",
             "agent_used":            "confirm",
             "pending_meals":         None,
             "awaiting_confirmation": False,
+            "overwrite_on_confirm":  False,
         }
 
     # ── modify: LLM이 수정 후 재제안, CSV로 영양 재계산 ─────────────
@@ -191,6 +209,7 @@ async def confirm_node(state: AgentState) -> dict:
             "agent_used":            "confirm",
             "pending_meals":         recalculated,
             "awaiting_confirmation": True,  # supervisor가 다음 요청도 confirm으로 라우팅
+            "overwrite_on_confirm":  state.get("overwrite_on_confirm"),
         }
 
     # ── cancel ───────────────────────────────────────────────────────
@@ -200,4 +219,5 @@ async def confirm_node(state: AgentState) -> dict:
             "agent_used":            "confirm",
             "pending_meals":         None,
             "awaiting_confirmation": False,
+            "overwrite_on_confirm":  False,
         }

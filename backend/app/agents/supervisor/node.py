@@ -60,6 +60,9 @@ def _heuristic_intent(message: str, has_pending: bool) -> str | None:
     if any(k in msg for k in ["인바디", "체성분", "골격근", "체지방"]):
         return "inbody"
 
+    if "오늘" in msg and any(k in msg for k in ["총평", "피드백", "평가", "잘한 점", "부족한 점", "개선 방향"]):
+        return "strategy"
+
     if any(k in msg for k in ["리포트", "보고서", "통계", "패턴", "전달", "지난달", "이번 달", "이번달", "한달", "월간", "주간", "어땠"]):
         return "reporter"
 

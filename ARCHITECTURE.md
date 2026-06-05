@@ -267,7 +267,9 @@ sequenceDiagram
 ```
 
 - 양(g)은 **사용자 입력** — 모델 추정 부정확 회피 → 신뢰도 확보
+- 음식 사진 인식이 틀린 경우 사용자가 "이거 아니야"처럼 자연어로 거절하면 pending food state를 초기화해 잘못된 기록을 막는다.
 - 인바디 사진: `/inbody/upload` → [inbody_ocr.py](backend/app/ocr/inbody_ocr.py) 수치추출 → `inbody_logs` 저장 → inbody 노드 트리거(전략 재설정)
+- 인바디 OCR은 체수분/단백질/무기질/체지방량 표를 체중으로 오인하지 않도록 prompt guardrail을 두고, 기존 인바디 이력과 비교해 비현실적인 값은 보정한다.
 
 ---
 
@@ -280,6 +282,7 @@ sequenceDiagram
 | `message` | keep_latest | resume 시 메시지 덮어쓰기 허용 |
 | `messages` | add_messages | 대화 누적 |
 | `pending_meals` | merge_pending_meals | None이면 식단 제안 초기화 |
+| `overwrite_on_confirm` | keep_latest | 롤백 후 수정 확정처럼 기존 끼니를 대체해야 하는 경우에만 overwrite 저장 |
 | `validation_attempts` | keep_max | 루프 카운트 단조증가(서브그래프 내 보존) |
 | `rag_context`, `target_*`, `response` 등 | keep_latest | 최신값 유지 |
 
@@ -305,7 +308,7 @@ sequenceDiagram
     U->>API: POST /chat (같은 thread) → 그 시점부터 재개
 ```
 
-검증 완료: step5(삼겹살 150g 수정)로 롤백 → 닭가슴살 200g 교체 → 확정 → DB 정상 반영.
+검증 완료: 점심 식단 기록 → 과거 checkpoint로 롤백 → 닭가슴살을 고등어로 수정 → `overwrite_on_confirm=True`로 기존 점심 row를 대체 저장하여 "수정 전 식단 + 수정 후 식단" 중복 누적을 방지.
 
 ---
 
@@ -340,10 +343,10 @@ sequenceDiagram
 | [app/agents/graph.py](backend/app/agents/graph.py) | 그래프 빌드·엣지·interrupt 설정, `load_state`/`save_chat` 노드, `build_meal_planner_subgraph()`, lifespan(체크포인터) |
 | [app/agents/supervisor/node.py](backend/app/agents/supervisor/node.py) | 의도 7분류 + `route_to_agent` 라우팅 |
 | [app/agents/diet_logger/node.py](backend/app/agents/diet_logger/node.py) | 음식 파싱 + CSV 영양계산 + RAG 피드백 → pending_meals |
-| [app/agents/confirm/node.py](backend/app/agents/confirm/node.py) | HITL: confirm/modify/cancel 분류, 저장(중복삭제 후), 수정 재제안 |
+| [app/agents/confirm/node.py](backend/app/agents/confirm/node.py) | HITL: confirm/modify/cancel 분류, 일반 기록은 append 저장, meal_plan/rollback 수정은 overwrite 저장, 확정 후 DB 기준 오늘 누적합 재조회 |
 | [app/agents/meal_plan/node.py](backend/app/agents/meal_plan/node.py) | 전날/패턴 데이터 + RAG로 하루 식단 생성, 피드백 반영 |
 | [app/agents/validator/node.py](backend/app/agents/validator/node.py) | 독립 RAG 검증(점수·통과·피드백), `route_after_validator`(최대 3회) |
-| [app/agents/strategy/node.py](backend/app/agents/strategy/node.py) | 식단 조언(RAG 근거) |
+| [app/agents/strategy/node.py](backend/app/agents/strategy/node.py) | 식단 조언(RAG 근거), "오늘 식단 총평"은 DB에서 당일 meal_logs와 최신 전략을 재조회해 목표 대비 평가 |
 | [app/agents/inbody/node.py](backend/app/agents/inbody/node.py) | 인바디 이력 비교 → 근손실 판단 → 단백질·칼로리 재조정(RAG) → diet_strategies 저장 |
 | [app/agents/reporter/node.py](backend/app/agents/reporter/node.py) | 주간/월간 리포트(패턴+상관분석+RAG) |
 | [app/agents/edit/node.py](backend/app/agents/edit/node.py) | 저장된 식단 수정/삭제 |
@@ -364,7 +367,7 @@ sequenceDiagram
 ### Vision / OCR
 | 파일 | 기능 |
 |---|---|
-| [app/ocr/inbody_ocr.py](backend/app/ocr/inbody_ocr.py) | 인바디 사진 → 키·체중·골격근·체지방률·BMR 추출(GPT-4o-mini Vision) |
+| [app/ocr/inbody_ocr.py](backend/app/ocr/inbody_ocr.py) | 인바디 사진 → 키·체중·골격근·체지방률·BMR 추출(GPT-4o-mini Vision), 표 오인 방지 prompt와 이력 기반 보정 |
 | [app/ocr/food_vision.py](backend/app/ocr/food_vision.py) | 음식 사진 → 음식명 리스트(GPT-4o-mini Vision, 양 추정 X) |
 
 ### 인프라/스키마
@@ -381,6 +384,7 @@ sequenceDiagram
 | [scripts/build_rag.py](backend/scripts/build_rag.py) | 스마트청킹(시멘틱+메타+정크필터) → Pinecone+chunks.pkl |
 | [scripts/visualize_graph.py](backend/scripts/visualize_graph.py) | 그래프 PNG 렌더(서브그래프 xray) |
 | [scripts/seed_data.py](backend/scripts/seed_data.py) | 3달치 가상 식단·인바디 시드 |
+| [scripts/seed_male_demo_data.py](backend/scripts/seed_male_demo_data.py) | 발표용 남성 사용자 데모 데이터 시드. 2026-03-01~2026-06-05 식단을 주차별/월별 패턴에 맞춰 재구성 |
 | [scripts/eval/](backend/scripts/eval/) | gen_dataset(합성QA), run_eval(RAG 지표), run_routing_eval(라우팅 정확도) |
 
 ---

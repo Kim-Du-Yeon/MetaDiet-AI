@@ -110,6 +110,7 @@ class AgentState(TypedDict):
     pending_meals:         Annotated[Optional[list], merge_pending_meals]
     awaiting_confirmation: Annotated[bool, keep_latest]
     plan_date:             Annotated[Optional[str], keep_latest]
+    overwrite_on_confirm:  Annotated[Optional[bool], keep_latest]
 
     # 사용자가 버튼으로 고른 끼니(아침/점심/저녁/간식). 있으면 diet_logger가
     # LLM 추측 대신 이 값을 강제 적용 → 끼니 오분류 방지(끼니는 사용자 사실).

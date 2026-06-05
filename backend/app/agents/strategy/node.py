@@ -3,6 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState, extract_messages_context
 from app.core.config import get_settings
 from app.tools.analytics import get_yesterday_summary, get_pattern_analysis
+from datetime import date
 
 llm = ChatOpenAI(
     model="gpt-4o-mini",
@@ -26,6 +27,9 @@ STRATEGY_PROMPT = ChatPromptTemplate.from_messages([
 {rag_context}
 
 중요 지침:
+- 사용자가 "오늘", "오늘 식단", "오늘 총평"을 물으면 [오늘 현재까지 섭취] 수치를 기준으로 답하세요.
+- [최근 7일 패턴]과 [전날 데이터]는 참고 맥락일 뿐이며, 오늘 섭취량처럼 표현하지 마세요.
+- 오늘 총평에서 "평균 칼로리", "30일", "이번달", "다음 달 전략", "목표 달성 예상" 같은 리포트 표현을 쓰지 마세요.
 - 칼로리를 초과했더라도 "굶어라"고 하지 마세요
 - RAG 근거를 바탕으로 초과 시에도 최소한 먹어야 할 것을 제안하세요
 - 칼로리가 남았으면 RAG 근거로 어떤 음식이 좋은지 구체적으로 제안하세요
@@ -45,6 +49,24 @@ async def strategy_node(state: AgentState) -> dict:
     target_protein = state.get("target_protein", 130)
     today_cal = state.get("today_calories", 0)
     today_protein = state.get("today_protein", 0)
+    try:
+        today = date.today().isoformat()
+        meal_rows = sb.table("meal_logs").select(
+            "calories,protein_g,carbs_g,fat_g"
+        ).eq("user_id", user_id).eq("log_date", today).execute().data
+        if meal_rows:
+            today_cal = round(sum(r.get("calories", 0) for r in meal_rows), 1)
+            today_protein = round(sum(r.get("protein_g", 0) for r in meal_rows), 1)
+
+        strategy_rows = sb.table("diet_strategies").select(
+            "daily_calories,protein_g"
+        ).eq("user_id", user_id).eq("is_active", True).limit(1).execute().data
+        if strategy_rows:
+            target_cal = strategy_rows[0].get("daily_calories", target_cal)
+            target_protein = strategy_rows[0].get("protein_g", target_protein)
+    except Exception as e:
+        print(f"=== [strategy] 최신 오늘 합계 조회 실패: {e} ===")
+
     remaining_cal = round(target_cal - today_cal)
 
     # 어제 데이터

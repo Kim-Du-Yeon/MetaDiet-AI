@@ -66,7 +66,20 @@
 
 Routing evaluation에서는 18개 케이스 모두에서 Supervisor의 intent와 최종 route가 기대값과 일치했다. 이는 Multi-Agent 구조에서 각 Agent의 역할이 분리되어 있고, 사용자의 요청이 적절한 node로 전달되는지 확인하기 위한 기본 안정성 검증이다.
 
-다만 이 평가는 synthetic dataset 기반이므로, 실제 사용자의 오타, 구어체, 사진 업로드 후 후속 발화 같은 edge case는 별도의 smoke test로 보완했다. 수동 smoke test에서는 식단 기록, 식단 계획, 리포트, 수정, confirm 취소, pending 없는 "아니야" fallback, 비이미지 업로드 거절 흐름을 확인했다.
+다만 이 평가는 synthetic dataset 기반이므로, 실제 사용자의 오타, 구어체, 사진 업로드 후 후속 발화 같은 edge case는 별도의 smoke test로 보완했다.
+
+### 실제 데모 시나리오 Smoke Test
+
+| 검증 항목 | 확인 내용 |
+|---|---|
+| 음식 사진 오인 거절 | 사진 인식 후 "이거 아니야" 입력 시 pending food state를 초기화하고 잘못된 기록을 방지 |
+| 자연어 식단 기록 | "아침 연어롤 200g", "점심 쌀밥 100g, 닭가슴살 200g"처럼 끼니/음식/중량을 파싱 |
+| HITL confirm | "응 확정해줘", "저장해" 입력 시 pending 식단만 DB에 저장 |
+| 이전 식단 중복 방지 | 새 식단 입력 시 이전 pending/history 음식이 재파싱되어 중복 합산되지 않는지 확인 |
+| Rollback 수정 | checkpoint rollback 후 닭가슴살을 고등어로 수정하면 기존 점심 row를 대체 저장 |
+| 오늘 식단 총평 | "오늘 식단 총평" 요청 시 당일 DB meal_logs와 최신 목표 칼로리/단백질을 재조회해 평가 |
+| 내일 식단 계획 | 저녁 치킨 약속 같은 제약조건을 반영해 meal_plan Agent가 아침/점심 계획 생성 |
+| 인바디 갱신 | 인바디 사진 업로드 후 OCR 결과를 이력과 비교하고 전략 갱신 흐름으로 연결 |
 
 ## 3. RAG Evaluation
 
