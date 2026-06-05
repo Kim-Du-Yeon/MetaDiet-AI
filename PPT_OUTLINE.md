@@ -517,6 +517,11 @@ LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 | 일부 DB/RAG 호출은 node 내부에 남음 | tool-only boundary 강화 |
 | GraphRAG/Exa 미적용 | 과제 이후 외부 검색/GraphRAG 실험 |
 | 인바디 OCR 품질은 실제 이미지 의존 | OCR confidence 및 수동 보정 UI 추가 |
+| 목표가 방향성 중심임 | `target_weight_kg`, `target_date`, `goal_priority`를 장기 목표 state로 저장 |
+
+**장기 목표 관리 확장**
+
+현재 MVP는 목표 방향성(다이어트/증량/유지)과 인바디 기반 전략 조정을 구현했다. 향후 확장에서는 `target_weight_kg`, `target_date`, `goal_priority`를 장기 목표 state로 저장하고, `Goal Manager Agent`가 목표 달성률, 감량 속도, 근손실 여부를 평가해 전략을 재설정하도록 확장할 수 있다.
 
 **발표 메시지**
 > MVP에서는 안정성과 설명 가능성을 우선했고, 이후에는 corpus 확장과 실제 사용자 평가셋 구축이 핵심 개선 방향입니다.
