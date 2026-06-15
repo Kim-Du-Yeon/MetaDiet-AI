@@ -17,14 +17,23 @@ Supervisor 라우팅 판단 평가기.
 실행:
   D:\\AX\\diet_agent\\backend\\venv\\Scripts\\python.exe scripts/eval/run_routing_eval.py
 """
-import sys, os, json, asyncio
+import sys, os, json, asyncio, argparse
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from pathlib import Path
-from collections import Counter
+from dotenv import load_dotenv
+
+BACKEND_DIR = Path(__file__).resolve().parents[2]
+load_dotenv(BACKEND_DIR / ".env")
+os.environ.setdefault("LANGCHAIN_TRACING_V2", os.getenv("LANGSMITH_TRACING",  "true"))
+os.environ.setdefault("LANGCHAIN_API_KEY",     os.getenv("LANGSMITH_API_KEY",  ""))
+os.environ.setdefault("LANGCHAIN_PROJECT",     os.getenv("LANGSMITH_PROJECT",  "diet-agent"))
+os.environ.setdefault("LANGCHAIN_ENDPOINT",    os.getenv("LANGSMITH_ENDPOINT", "https://api.smith.langchain.com"))
+
+from collections import Counter, defaultdict
+from langsmith import traceable, tracing_context, Client
 from app.agents.supervisor.node import supervisor_node, route_to_agent
 
-DATA_PATH   = Path(__file__).parent / "routing_dataset.json"
 REPORT_PATH = Path(__file__).parent / "routing_report.json"
 
 
@@ -53,7 +62,14 @@ async def eval_one(case: dict) -> dict:
     }
 
 
-async def main():
+@traceable(
+    name="routing-eval",
+    run_type="chain",
+    project_name=os.getenv("LANGSMITH_PROJECT", "diet-agent"),
+    tags=["eval", "routing"],
+)
+async def main(dataset: str = "routing_dataset.json"):
+    DATA_PATH = Path(__file__).parent / dataset
     cases = json.loads(DATA_PATH.read_text(encoding="utf-8"))
     print(f"=== Supervisor 라우팅 평가: {len(cases)}케이스 ===\n")
 
@@ -78,6 +94,20 @@ async def main():
         for k, v in confusion.most_common():
             print(f"    {k} : {v}")
 
+    # edge_type별 정확도 (edge_type 필드가 있을 때만 출력)
+    if any(c.get("edge_type") for c in cases):
+        print("\n=== edge_type별 정확도 ===")
+        et_rows: dict = defaultdict(list)
+        for c, r in zip(cases, rows):
+            if c.get("edge_type"):
+                et_rows[c["edge_type"]].append(r)
+        for et, rs in et_rows.items():
+            ok = sum(x["intent_ok"] for x in rs)
+            acc = round(ok / len(rs), 3)
+            fails = [r["message"][:28] for r in rs if not r["intent_ok"]]
+            note = f"  ← 점검필요: {fails}" if fails else ""
+            print(f"  {et:24} : {acc} ({ok}/{len(rs)}){note}")
+
     summary = {"n": n, "intent_accuracy": intent_acc, "route_accuracy": route_acc,
                "confusion": dict(confusion)}
     REPORT_PATH.write_text(
@@ -87,4 +117,13 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--dataset", type=str, default="routing_dataset.json")
+    args = ap.parse_args()
+    _tracing = os.getenv("LANGSMITH_TRACING", "true").lower() == "true"
+    try:
+        with tracing_context(enabled=_tracing):
+            asyncio.run(main(args.dataset))
+    finally:
+        if _tracing:
+            Client().flush()

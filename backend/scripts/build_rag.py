@@ -32,10 +32,6 @@ from app.core.config import get_settings
 
 settings = get_settings()
 
-MIN_PAGE_CHARS = 200   # 이보다 짧은 페이지는 스킵(표지·간지 등)
-MAX_CHUNK_CHARS = 1200  # 의미 청크가 이보다 크면 분할(검색 정밀도)
-CHUNK_OVERLAP = 150
-
 
 def _clean_title(filename: str) -> str:
     """파일명 → 사람이 읽을 수 있는 문서 제목으로 정규화."""
@@ -46,7 +42,7 @@ def _clean_title(filename: str) -> str:
 def _is_junk(text: str) -> bool:
     """목차·참고문헌·정크 페이지 판별(검색 노이즈 제거)."""
     t = text.strip()
-    if len(t) < MIN_PAGE_CHARS:
+    if len(t) < settings.rag_min_page_chars:
         return True
     # 목차 점선 리더("......") 다수 → 목차 페이지
     if t.count("....") >= 3:
@@ -77,9 +73,9 @@ def build_index(docs_dir: str, clear: bool = True):
         print(f"PDF 없음: {docs_path.resolve()}")
         return
 
-    semantic = SemanticChunker(embeddings, breakpoint_threshold_type="percentile")
-    capper = RecursiveCharacterTextSplitter(chunk_size=MAX_CHUNK_CHARS,
-                                            chunk_overlap=CHUNK_OVERLAP)
+    semantic = SemanticChunker(embeddings, breakpoint_threshold_type=settings.rag_semantic_threshold_type)
+    capper = RecursiveCharacterTextSplitter(chunk_size=settings.rag_max_chunk_chars,
+                                            chunk_overlap=settings.rag_chunk_overlap)
 
     all_chunks = []
     for pdf_path in pdf_files:

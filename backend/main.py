@@ -10,8 +10,8 @@ import selectors
 if sys.platform.startswith("win"):
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
-# LangSmith 명시적 설정
-os.environ["LANGCHAIN_TRACING_V2"] = "true"
+# LangSmith 명시적 설정 (.env의 LANGSMITH_TRACING 값 반영, 미설정 시 true)
+os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGSMITH_TRACING", "true")
 os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGSMITH_API_KEY", "")
 os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGSMITH_PROJECT", "diet-agent")
 os.environ["LANGCHAIN_ENDPOINT"] = os.getenv("LANGSMITH_ENDPOINT", "https://api.smith.langchain.com")

@@ -71,6 +71,12 @@ class Settings(BaseSettings):
     rag_rerank_model:     str   = "ms-marco-MiniLM-L-12-v2"  # FlashRank 로컬 모델
     rag_chunks_path:      str   = ""      # 비우면 _default_chunks_path 사용
 
+    # 청킹 빌드 파라미터 (build_rag.py에서 사용; eval로 튜닝)
+    rag_min_page_chars:          int = 200
+    rag_max_chunk_chars:         int = 1200
+    rag_chunk_overlap:           int = 150
+    rag_semantic_threshold_type: str = "percentile"
+
     # CSV 경로: .env의 NUTRITION_CSV_PATH 우선, 없으면 자동 계산
     nutrition_csv_path: str = ""
 

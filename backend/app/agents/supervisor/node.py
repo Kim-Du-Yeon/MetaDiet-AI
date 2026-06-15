@@ -50,13 +50,28 @@ SUPERVISOR_PROMPT = ChatPromptTemplate.from_messages([
 ])
 
 
+# 음식/음료 명칭 신호 — 섭취 신호와 함께 있으면 diet_logger 우선
+_FOOD_KW = (
+    "닭가슴살", "고등어", "삼겹살", "치킨", "샐러드", "김치찌개", "밥",
+    "프로틴", "쉐이크", "shake", "아메리카노", "아아", "아메", "커피",
+    "chicken", "salad", "라뚜기",
+)
+# 섭취/기록 행위 신호
+_INTAKE_KW = (
+    "먹었", "먹음", "먹었다", "마셨", "마셨어", "마심",
+    "한잔", "한 잔", "기록", "기록해줘", "저장해줘",
+)
+
+
 def _heuristic_intent(message: str, has_pending: bool) -> str | None:
     """명확한 사용자 요청은 LLM 분류 전에 안전하게 라우팅한다."""
     msg = (message or "").lower()
 
+    # 1. pending 식단 확정/수정/취소 → confirm 최우선
     if has_pending and any(k in msg for k in ["응", "네", "확정", "저장", "취소", "아니", "수정", "바꿔", "변경"]):
         return "confirm"
 
+    # 2. 인바디/리포트/피드백 — 명시적 전용 신호
     if any(k in msg for k in ["인바디", "체성분", "골격근", "체지방"]):
         return "inbody"
 
@@ -66,9 +81,17 @@ def _heuristic_intent(message: str, has_pending: bool) -> str | None:
     if any(k in msg for k in ["리포트", "보고서", "통계", "패턴", "전달", "지난달", "이번 달", "이번달", "한달", "월간", "주간", "어땠"]):
         return "reporter"
 
+    # 3. 저장된 기록의 수정/삭제 → edit
     if any(k in msg for k in ["수정", "삭제", "지워", "바꿔", "변경"]) and any(k in msg for k in ["기록", "식단", "아까", "먹은", "저장"]):
         return "edit"
 
+    # 4. 음식 신호 + 섭취 신호 동시 존재 → diet_logger 우선
+    #    mixed intent("먹었고 단백질 더 먹어야 하나?", "식단 짜줘, 아 삼겹살 기록해줘" 등)에서
+    #    strategy/meal_plan으로 밀리지 않도록 meal_plan 체크보다 먼저 처리
+    if any(k in msg for k in _FOOD_KW) and any(k in msg for k in _INTAKE_KW):
+        return "diet_logger"
+
+    # 5. 하루 전체 식단 계획 → meal_plan
     if any(k in msg for k in ["식단 짜", "식단짜", "식단 계획", "식단 추천", "하루 식단", "meal plan", "플랜"]):
         return "meal_plan"
 

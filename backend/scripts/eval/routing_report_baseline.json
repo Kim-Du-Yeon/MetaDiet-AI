@@ -1,0 +1,154 @@
+{
+  "summary": {
+    "n": 18,
+    "intent_accuracy": 1.0,
+    "route_accuracy": 1.0,
+    "confusion": {}
+  },
+  "rows": [
+    {
+      "message": "닭가슴살 200g 먹었어",
+      "expected": "diet_logger",
+      "intent": "diet_logger",
+      "route": "diet_logger",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "오늘 점심에 김치찌개랑 공기밥 먹었어",
+      "expected": "diet_logger",
+      "intent": "diet_logger",
+      "route": "diet_logger",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "방금 아메리카노 한 잔 마셨어",
+      "expected": "diet_logger",
+      "intent": "diet_logger",
+      "route": "diet_logger",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "내일 하루 식단 좀 짜줘",
+      "expected": "meal_plan",
+      "intent": "meal_plan",
+      "route": "meal_plan",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "다이어트용으로 하루치 식단 계획 세워줘",
+      "expected": "meal_plan",
+      "intent": "meal_plan",
+      "route": "meal_plan",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "단백질은 하루에 얼마나 먹어야 해?",
+      "expected": "strategy",
+      "intent": "strategy",
+      "route": "strategy",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "지금 칼로리 남았는데 뭐 먹으면 좋을까?",
+      "expected": "strategy",
+      "intent": "strategy",
+      "route": "strategy",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "살 빼려면 탄수화물 줄이는 게 맞아?",
+      "expected": "strategy",
+      "intent": "strategy",
+      "route": "strategy",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "응 확정해줘",
+      "expected": "confirm",
+      "intent": "confirm",
+      "route": "confirm",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "ok 그대로 기록",
+      "expected": "confirm",
+      "intent": "confirm",
+      "route": "confirm",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "점심을 치킨샐러드로 바꿔줘",
+      "expected": "confirm",
+      "intent": "confirm",
+      "route": "confirm",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "아까 기록한 저녁 메뉴 삭제해줘",
+      "expected": "edit",
+      "intent": "edit",
+      "route": "edit",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "어제 저장한 점심 칼로리 좀 수정해줘",
+      "expected": "edit",
+      "intent": "edit",
+      "route": "edit",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "인바디 결과 분석해서 전략 업데이트 해줘",
+      "expected": "inbody",
+      "intent": "inbody",
+      "route": "inbody",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "이번 주 식단 리포트 보여줘",
+      "expected": "reporter",
+      "intent": "reporter",
+      "route": "reporter",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "최근 한 달 단백질 섭취 통계 알려줘",
+      "expected": "reporter",
+      "intent": "reporter",
+      "route": "reporter",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "그거 그대로 기록해줘",
+      "expected": "diet_logger",
+      "intent": "diet_logger",
+      "route": "diet_logger",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "위에서 말한 저녁으로 기록",
+      "expected": "diet_logger",
+      "intent": "diet_logger",
+      "route": "diet_logger",
+      "intent_ok": true,
+      "route_ok": true
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+[
+  {"message": "라뚜기 먹었어",     "context": [], "pending": false, "expected": "diet_logger", "edge_type": "typo"},
+  {"message": "아아 한잔 했어",    "context": [], "pending": false, "expected": "diet_logger", "edge_type": "typo"},
+  {"message": "치킨 먹음",         "context": [], "pending": false, "expected": "diet_logger", "edge_type": "typo"},
+
+  {"message": "닭가슴살 먹었어",   "context": [], "pending": false, "expected": "diet_logger", "edge_type": "missing_unit"},
+  {"message": "밥 한 그릇 먹었어", "context": [], "pending": false, "expected": "diet_logger", "edge_type": "missing_unit"},
+  {"message": "프로틴 한 스쿱 마셨어", "context": [], "pending": false, "expected": "diet_logger", "edge_type": "missing_unit"},
+
+  {"message": "",               "context": [], "pending": false, "expected": "strategy", "edge_type": "empty_or_irrelevant"},
+  {"message": "안녕",           "context": [], "pending": false, "expected": "strategy", "edge_type": "empty_or_irrelevant"},
+  {"message": "오늘 날씨 어때?", "context": [], "pending": false, "expected": "strategy", "edge_type": "empty_or_irrelevant"},
+
+  {"message": "chicken salad 먹었어", "context": [], "pending": false, "expected": "diet_logger", "edge_type": "mixed_lang"},
+  {"message": "프로틴 shake 마셨어",  "context": [], "pending": false, "expected": "diet_logger", "edge_type": "mixed_lang"},
+  {"message": "오늘 gym 다녀왔어",    "context": [], "pending": false, "expected": "strategy",    "edge_type": "mixed_lang"},
+
+  {
+    "message": "취소해줘",
+    "context": [{"role": "assistant", "content": "내일 식단 제안: 아침 오트밀, 점심 닭가슴살 샐러드, 저녁 연어구이. 확정하시겠어요?"}],
+    "pending": true, "expected": "confirm", "edge_type": "pending_flow"
+  },
+  {
+    "message": "아니 됐어",
+    "context": [{"role": "assistant", "content": "오늘 식단 제안을 드렸습니다. 확정할까요?"}],
+    "pending": true, "expected": "confirm", "edge_type": "pending_flow"
+  },
+  {
+    "message": "닭가슴살 말고 고등어로 바꿔줘",
+    "context": [{"role": "assistant", "content": "내일 식단 제안: 아침 오트밀, 점심 닭가슴살 샐러드, 저녁 연어구이. 확정하시겠어요?"}],
+    "pending": true, "expected": "confirm", "edge_type": "pending_flow"
+  },
+
+  {"message": "닭가슴살 200g 먹었고 단백질 더 먹어야 하나?",      "context": [], "pending": false, "expected": "diet_logger", "edge_type": "mixed_intent"},
+  {"message": "식단 짜줘, 아 그리고 어제 저녁 삼겹살 기록해줘", "context": [], "pending": false, "expected": "diet_logger", "edge_type": "mixed_intent"},
+  {"message": "오늘 먹은 거 기록하고 살 빼는 전략도 알려줘",     "context": [], "pending": false, "expected": "diet_logger", "edge_type": "mixed_intent"}
+]

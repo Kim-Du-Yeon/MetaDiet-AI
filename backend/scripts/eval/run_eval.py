@@ -22,12 +22,21 @@ import sys, os, json, asyncio, argparse, re
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from pathlib import Path
+from dotenv import load_dotenv
+
+BACKEND_DIR = Path(__file__).resolve().parents[2]
+load_dotenv(BACKEND_DIR / ".env")
+os.environ.setdefault("LANGCHAIN_TRACING_V2", os.getenv("LANGSMITH_TRACING",  "true"))
+os.environ.setdefault("LANGCHAIN_API_KEY",     os.getenv("LANGSMITH_API_KEY",  ""))
+os.environ.setdefault("LANGCHAIN_PROJECT",     os.getenv("LANGSMITH_PROJECT",  "diet-agent"))
+os.environ.setdefault("LANGCHAIN_ENDPOINT",    os.getenv("LANGSMITH_ENDPOINT", "https://api.smith.langchain.com"))
+
+from langsmith import traceable, tracing_context, Client
 from langchain_openai import ChatOpenAI
 from app.core.config import get_settings
 from app.rag.retriever import retrieve
 from app.rag.qa import answer_from_knowledge, NO_EVIDENCE
 
-DATA_PATH   = Path(__file__).parent / "qa_dataset.json"
 REPORT_PATH = Path(__file__).parent / "eval_report.json"
 
 judge = ChatOpenAI(model="gpt-4o-mini", temperature=0,
@@ -120,7 +129,14 @@ MODES = {
 }
 
 
-async def main(k: int, label: str, mode: str):
+@traceable(
+    name="rag-eval",
+    run_type="chain",
+    project_name=os.getenv("LANGSMITH_PROJECT", "diet-agent"),
+    tags=["eval", "rag"],
+)
+async def main(k: int, label: str, mode: str, dataset: str = "qa_dataset.json"):
+    DATA_PATH = Path(__file__).parent / dataset
     if not DATA_PATH.exists():
         print(f"데이터셋 없음. 먼저 gen_dataset.py 실행. ({DATA_PATH})")
         return
@@ -189,5 +205,12 @@ if __name__ == "__main__":
     ap.add_argument("--k", type=int, default=4)
     ap.add_argument("--label", type=str, default="")
     ap.add_argument("--mode", type=str, default="full", choices=list(MODES))
+    ap.add_argument("--dataset", type=str, default="qa_dataset.json")
     args = ap.parse_args()
-    asyncio.run(main(args.k, args.label or args.mode, args.mode))
+    _tracing = os.getenv("LANGSMITH_TRACING", "true").lower() == "true"
+    try:
+        with tracing_context(enabled=_tracing):
+            asyncio.run(main(args.k, args.label or args.mode, args.mode, args.dataset))
+    finally:
+        if _tracing:
+            Client().flush()

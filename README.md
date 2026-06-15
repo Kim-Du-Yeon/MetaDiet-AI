@@ -14,7 +14,7 @@ MetaDiet AI is a personalized diet coaching system built with a LangGraph-based 
 - InBody OCR/Vision flow for strategy updates
 - Meal plan generation with validator feedback loop
 - Checkpointing, time travel, and rollback with LangGraph checkpointer
-- Routing and RAG evaluation reports
+- Structured evaluation pipeline with reproducible datasets and LangSmith tracing
 
 ## Architecture Highlights
 
@@ -78,6 +78,42 @@ cd frontend
 npm install
 npm start
 ```
+
+## Evaluation
+
+### Supervisor Routing
+
+- Baseline routing eval: **18/18** (intent_accuracy 1.00, route_accuracy 1.00)
+- Edge-case routing eval: **15/18 → 18/18** after adding food/intake keyword signals
+  (`_FOOD_KW` / `_INTAKE_KW`) to `_heuristic_intent()` with "log-first" policy
+- 6 edge types covered: typo, missing_unit, empty_or_irrelevant, mixed_lang, pending_flow, mixed_intent
+- Eval datasets: `routing_dataset.json` (18 cases), `edge_dataset.json` (18 cases)
+- Detail: [EDGE_EVAL_REPORT.md](backend/scripts/eval/EDGE_EVAL_REPORT.md)
+
+### RAG (Hybrid Retrieval + Grounded QA)
+
+- Gold dataset: `gold_dataset.json` — 20 bilingual QA items (EN 10 + KO 10)
+- Eval modes: dense / hybrid / full — page_hit, excerpt_hit, faithfulness, citation_rate
+- full mode result: source_hit 1.00 / page_hit 1.00 / excerpt_hit 0.90 / avg_score 0.978
+- Detail: [EVALUATION.md](EVALUATION.md)
+
+### Ragas Evaluation (Experimental)
+
+- Framework: ragas 0.2.15 — `faithfulness` + `context_recall` on `gold_dataset.json`
+- English QA (n=10): faithfulness **0.900** / context_recall **0.950** — stable
+- Korean QA (n=10): faithfulness **0.200** / context_recall **0.300** — cross-lingual retrieval gap
+- Finding: the performance gap is driven by querying an English PDF corpus with Korean questions,
+  not by RAG pipeline failure; improvement direction is query translation or multilingual embedding
+- Note: ragas has a dependency conflict with `langchain-community>=0.4.2` and is **not reflected
+  in `requirements.txt`**; managed as an experimental report only
+- Detail: [RAGAS_EVAL_REPORT.md](backend/scripts/eval/RAGAS_EVAL_REPORT.md)
+
+### LangSmith Tracing
+
+- `routing-eval` and `rag-eval` traces confirmed in the `diet-agent` LangSmith project
+- `LANGSMITH_*` env vars mapped to `LANGCHAIN_*` in all eval scripts
+- `tracing_context(enabled=True)` + `Client().flush()` applied for reliable trace delivery
+- Detail: [EVALUATION.md](EVALUATION.md)
 
 ## Notes
 
