@@ -81,7 +81,7 @@ npm start
 
 ## Evaluation
 
-Evaluation datasets (`routing_dataset.json`, `edge_dataset.json`, `gold_dataset.json`) contain input QA items used for testing.
+Evaluation datasets (`routing_dataset.json`, `edge_dataset.json`, `qa_dataset.json`, `gold_dataset.json`) contain input QA items used for testing.
 Result reports (`routing_report_*.json`, `ragas_report_*.json`) record eval run outputs and are committed for reproducibility.
 Detailed file classification: [EVALUATION.md](EVALUATION.md).
 
@@ -96,9 +96,10 @@ Detailed file classification: [EVALUATION.md](EVALUATION.md).
 
 ### RAG (Hybrid Retrieval + Grounded QA)
 
-- Gold dataset: `gold_dataset.json` — EN/KO bilingual QA 10쌍, 총 20개 (동일 근거 공유, cross-lingual retrieval 영향 분리 목적)
-- Eval modes: dense / hybrid / full — page_hit, excerpt_hit, faithfulness, citation_rate
+- Ablation dataset: `qa_dataset.json` — 10 EN QA items; dense / hybrid / full mode comparison (`run_eval.py`)
 - full mode result: source_hit 1.00 / page_hit 1.00 / excerpt_hit 0.90 / avg_score 0.978
+  (`source_hit`, `page_hit`, `excerpt_hit` are custom string-match metrics in `run_eval.py`, not Ragas metrics)
+- Cross-lingual dataset: `gold_dataset.json` — EN/KO bilingual QA 10쌍, 총 20개; Ragas faithfulness/context_recall + cross-lingual analysis (`run_ragas_eval.py`)
 - Detail: [EVALUATION.md](EVALUATION.md)
 
 ### Ragas Evaluation

@@ -9,9 +9,13 @@
 | 평가 스크립트 | `scripts/eval/run_ragas_eval.py` |
 | 상태 | 별도 평가 스크립트로 관리 — 기본 실행 환경과 분리 운영, requirements.txt 미반영 |
 
-**배경:** 기존 `run_eval.py`는 커스텀 LLM judge(gpt-4o-mini)로 faithfulness를 0/1 이진 판정한다.
-ragas는 동일 개념을 연속값(0.0~1.0)으로 측정하며, `context_recall`을 통해 retrieval 의미 커버리지도
-측정할 수 있다. 두 접근의 결과를 비교하고, 향후 개선 방향을 도출하기 위해 ragas 평가를 추가했다.
+**배경:** 기존 `run_eval.py`는 `qa_dataset.json`(EN QA 10개, `run_eval.py` 기본 데이터셋)을 기반으로
+커스텀 LLM judge(gpt-4o-mini)로 faithfulness를 0/1 이진 판정하고, source_hit·page_hit·excerpt_hit 등
+커스텀 검색 지표를 측정한다(`excerpt_hit`은 Ragas 지표가 아니라 `run_eval.py`의 문자열 매칭 지표다).
+이를 보완하기 위해 `gold_dataset.json`(EN/KO bilingual QA 10쌍, 총 20개, `run_ragas_eval.py` 기본 데이터셋)을
+별도로 구축하고, Ragas 표준 지표(faithfulness·context_recall)로 동일 파이프라인을 재평가하는
+`run_ragas_eval.py`를 추가했다(별도 평가 환경/스크립트로 관리, `requirements.txt` 미반영).
+Ragas는 faithfulness를 claim 단위 연속값(0.0~1.0)으로 측정하며, `context_recall`로 retrieval 의미 커버리지도 측정한다.
 
 ---
 
