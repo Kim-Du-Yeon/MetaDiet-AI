@@ -1,9 +1,12 @@
 # Routing / RAG Evaluation Summary
 
-이 문서는 보고서에 바로 옮길 수 있도록 routing evaluation과 RAG evaluation 결과를 정리한 것이다. 원본 결과 파일은 다음 두 개다.
+이 문서는 보고서에 바로 옮길 수 있도록 routing evaluation과 RAG evaluation 결과를 정리한 것이다. 평가 결과 파일 목록:
 
-- `backend/scripts/eval/routing_report.json`
-- `backend/scripts/eval/eval_report.json`
+- `routing_report.json`, `eval_report.json` — 초기 결과
+- `routing_report_baseline.json`, `routing_report_edge_before.json`, `routing_report_edge_after.json` — edge eval 전후 비교
+- `ragas_report_full.json`, `ragas_report_limit3.json` — Ragas 평가 결과
+
+평가 입력 데이터셋(`*_dataset.json`)과 실행 결과 report(`*_report*.json`) 파일 분류는 Section 8 참고.
 
 ## 1. 평가 목적
 
@@ -66,7 +69,7 @@
 
 Routing evaluation에서는 18개 케이스 모두에서 Supervisor의 intent와 최종 route가 기대값과 일치했다. 이는 Multi-Agent 구조에서 각 Agent의 역할이 분리되어 있고, 사용자의 요청이 적절한 node로 전달되는지 확인하기 위한 기본 안정성 검증이다.
 
-다만 이 평가는 synthetic dataset 기반이므로, 실제 사용자의 오타, 구어체, 사진 업로드 후 후속 발화 같은 edge case는 별도의 smoke test로 보완했다.
+다만 이 평가는 정형화된 표현 기반이므로, 실제 사용자의 오타, 구어체, 사진 업로드 후 후속 발화 같은 edge case는 별도의 edge-case 평가셋(`edge_dataset.json`)으로 보완했다. (→ Section 5)
 
 ### 실제 데모 시나리오 Smoke Test
 
@@ -86,6 +89,11 @@ Routing evaluation에서는 18개 케이스 모두에서 Supervisor의 intent와
 ### 평가 설정
 
 `eval_report.json`은 영양지식 PDF에서 생성한 QA 케이스에 대해 검색 모드별 성능을 비교한다. 각 모드는 `k=4`, 평가 질문 수 `n=10`으로 측정했다.
+
+> `gold_dataset.json`은 EN/KO bilingual QA 10쌍(총 20개)으로 구성된다.
+> 각 쌍은 동일한 gold_source·gold_page·gold_excerpt를 공유하며, 이 평가에서는
+> 영어 항목 10개(n=10)를 기준으로 모드별 비교를 수행했다.
+> 언어별 성능 분리 측정은 Section 7 Ragas 평가 참고.
 
 | 모드 | 설명 |
 |---|---|
@@ -285,3 +293,47 @@ Ragas 평가 결과 전체 평균은 faithfulness 0.55, context_recall 0.575였�
 ### 상세 보고서
 
 `backend/scripts/eval/RAGAS_EVAL_REPORT.md`
+
+---
+
+## 8. 평가 파일 분류
+
+| 파일명 | 분류 | 목적 | 개수 | 근거 파일 |
+|--------|------|------|------|----------|
+| `routing_dataset.json` | 실제 평가 입력 데이터셋 | 정상 입력 baseline 라우팅 정확도 검증 (회귀 테스트) | 18개 | [routing_dataset.json](backend/scripts/eval/routing_dataset.json) |
+| `edge_dataset.json` | 실제 평가 입력 데이터셋 | 실사용 취약 입력 패턴 라우팅 안정성 검증 | 18개 | [edge_dataset.json](backend/scripts/eval/edge_dataset.json) |
+| `gold_dataset.json` | 실제 평가 입력 데이터셋 | RAG 검색 품질 + grounded generation 진단 | 20개 (EN 10 + KO 10, 10쌍) | [gold_dataset.json](backend/scripts/eval/gold_dataset.json) |
+| `ragas_report_limit3.json` | Smoke/Limit test 결과 report | --limit 1 (동작 확인) + --limit 3 (샘플링 성능 확인) 사전 점검 | 실행 2회분 누적 | [ragas_report_limit3.json](backend/scripts/eval/ragas_report_limit3.json) |
+| `ragas_report_full.json` | 평가 실행 결과 report | n=1, n=3, n=20 전체 Ragas 실행 결과 누적 | 실행 3회분 누적 | [ragas_report_full.json](backend/scripts/eval/ragas_report_full.json) |
+| `routing_report_baseline.json` | 평가 실행 결과 report | standard 18케이스 baseline 결과 (18/18) | 1회 | [routing_report_baseline.json](backend/scripts/eval/routing_report_baseline.json) |
+| `routing_report_edge_before.json` | 평가 실행 결과 report | 개선 전 edge 18케이스 결과 (15/18) | 1회 | [routing_report_edge_before.json](backend/scripts/eval/routing_report_edge_before.json) |
+| `routing_report_edge_after.json` | 평가 실행 결과 report | 개선 후 edge 18케이스 결과 (18/18) | 1회 | [routing_report_edge_after.json](backend/scripts/eval/routing_report_edge_after.json) |
+| `run_routing_eval.py` | 코드 파일 | supervisor_node 실호출 방식 routing 평가 러너 | — | [run_routing_eval.py](backend/scripts/eval/run_routing_eval.py) |
+| `run_eval.py` | 코드 파일 | RAG QA 평가 러너 (커스텀 LLM judge, 6개 지표) | — | [run_eval.py](backend/scripts/eval/run_eval.py) |
+| `run_ragas_eval.py` | 코드 파일 | Ragas 표준 지표 평가 러너 (faithfulness·context_recall) | — | [run_ragas_eval.py](backend/scripts/eval/run_ragas_eval.py) |
+| `EDGE_EVAL_REPORT.md` | 문서화 파일 | edge-case 평가 분석·개선 내용 기록 | — | [EDGE_EVAL_REPORT.md](backend/scripts/eval/EDGE_EVAL_REPORT.md) |
+| `RAGAS_EVAL_REPORT.md` | 문서화 파일 | Ragas 평가 설정·결과·해석·개선 방향 기록 | — | [RAGAS_EVAL_REPORT.md](backend/scripts/eval/RAGAS_EVAL_REPORT.md) |
+| `EVALUATION.md` | 문서화 파일 | 전체 평가 체계 종합 문서 | — | [EVALUATION.md](EVALUATION.md) |
+| `README.md` | 문서화 파일 | 프로젝트 개요 + 평가 수치 요약 | — | [README.md](README.md) |
+
+> **데이터셋 vs 결과 report 구분**: `*_dataset.json`은 평가 입력 QA 케이스를 담은 파일이다.
+> `*_report*.json`은 eval 스크립트 실행 후 저장된 결과 기록으로, 재현 가능한 실행 이력을 위해 커밋에 포함한다.
+> 데이터셋 규모(routing 18개, edge 18개, gold 20개)는 대규모 일반화 성능 보장이 아니라
+> 핵심 시나리오 회귀 테스트 및 취약 패턴 진단을 목적으로 구성되었다.
+
+---
+
+## 9. 프로젝트 업그레이드 흐름
+
+| 단계 | 문제/동기 | 조치 | 결과 수치 | 의미 |
+|------|-----------|------|-----------|------|
+| ① 기능 구현 | 식단 기록·상담·플랜·리포트 기능 필요 | FastAPI + 8 에이전트 구현, TypedDict AgentState 설계 | — | 기능 베이스 완성 |
+| ② Multi-Agent 구조화 | 단일 LLM 흐름의 확장성 한계 | LangGraph StateGraph, HITL(interrupt_before), Postgres checkpointer 도입 | — | 멀티턴·상태 영속화 확보 |
+| ③ 기본 routing 평가셋 구축 | 라우팅 정확도 측정 체계 부재 | `routing_dataset.json` 18개 구성 + `run_routing_eval.py` 작성 | **18/18 (1.0)** | 7개 에이전트 baseline 확인 |
+| ④ Edge case 문제 발견 | 실사용 패턴(오타·혼합 의도)에서 오분류 | `edge_dataset.json` 18개 구성 + 평가 실행 | **15/18 (0.833)** — 오분류 3건 확인 | 취약점 정량화 |
+| ⑤ Heuristic 개선 | diet_logger→strategy 2건, diet_logger→meal_plan 1건 오분류 | `_FOOD_KW`·`_INTAKE_KW` 추가 + log-first policy | **18/18 (1.0)** | 취약점 해소 검증 |
+| ⑥ RAG 파이프라인 구축 | 단순 dense retrieval의 recall 한계 | SemanticChunker + BM25 + RRF + FlashRank 4단계 hybrid RAG | — | 다단계 검색 구조 확보 |
+| ⑦ Gold dataset + RAG 평가 | RAG 검색 품질 측정 체계 부재 | `gold_dataset.json` 20개 직접 작성 + `run_eval.py` 3모드 ablation | **source_hit 1.0 / page_hit 1.0 / excerpt_hit 0.90** | dense < hybrid < full 개선 확인 |
+| ⑧ LangSmith tracing 연동 | eval 실행 시 trace 미전송 | `tracing_context` + `Client().flush()` + 환경변수 매핑 적용 | trace 전송 확인 | eval 파이프라인 관측성 확보 |
+| ⑨ Ragas 평가 + cross-lingual 분석 | 커스텀 judge 한계 (0/1 이진 판정) + KO 성능 의문 | `run_ragas_eval.py` 작성 → smoke(n=1) → limit(n=3) → full(n=20) | **EN 0.900/0.950 · KO 0.200/0.300** | cross-lingual retrieval 한계 정량 분리 |
+| ⑩ 문서화 | 평가 체계 가시화 필요 | `EVALUATION.md`·`README`·`EDGE_EVAL_REPORT.md`·`RAGAS_EVAL_REPORT.md` 작성 | — | 재현 가능한 평가 기록 확보 |

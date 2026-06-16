@@ -132,11 +132,11 @@ if any(k in msg for k in _FOOD_KW) and any(k in msg for k in _INTAKE_KW):
 
 ## 8. 평가 파일 목록
 
-| 파일 | 설명 |
-|------|------|
-| `routing_dataset.json` | 일반 케이스 18개 (baseline, 7개 라우트 레이블) |
-| `edge_dataset.json` | edge case 18개 (6종 × 3개, `edge_type` 필드 포함) |
-| `run_routing_eval.py` | 라우팅 평가 스크립트 (`--dataset` 인자로 데이터셋 선택) |
-| `routing_report_baseline.json` | baseline eval 결과 (intent_accuracy: 1.000) |
-| `routing_report_edge_before.json` | 개선 전 edge eval 결과 (intent_accuracy: 0.833) |
-| `routing_report_edge_after.json` | 개선 후 edge eval 결과 (intent_accuracy: 1.000) |
+| 파일 | 분류 | 설명 |
+|------|------|------|
+| `routing_dataset.json` | 평가 입력 데이터셋 | 7개 Agent label 커버, 회귀 테스트용 18케이스 |
+| `edge_dataset.json` | 평가 입력 데이터셋 | 6종 edge-type × 3케이스, 취약 패턴 진단용 18케이스 |
+| `run_routing_eval.py` | 평가 코드 | 라우팅 평가 스크립트 (`--dataset` 인자로 데이터셋 선택) |
+| `routing_report_baseline.json` | 실행 결과 report | baseline eval 결과 (intent_accuracy: 1.000) |
+| `routing_report_edge_before.json` | 실행 결과 report | 개선 전 edge eval 결과 (intent_accuracy: 0.833) |
+| `routing_report_edge_after.json` | 실행 결과 report | 개선 후 edge eval 결과 (intent_accuracy: 1.000) |

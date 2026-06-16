@@ -20,7 +20,7 @@ ragas는 동일 개념을 연속값(0.0~1.0)으로 측정하며, `context_recall
 | 항목 | 값 |
 |------|----|
 | 데이터셋 | `gold_dataset.json` |
-| 샘플 수 | 20개 (영어 10 + 한국어 10) |
+| 샘플 수 | 20개 (EN/KO bilingual QA 10쌍 — 동일 gold_source·gold_page·gold_excerpt 공유) |
 | 모드 | `full` (dense + BM25 hybrid + FlashRank reranking) |
 | k | 4 |
 | Judge LLM | gpt-4o-mini (temperature=0) |
@@ -207,10 +207,10 @@ Ragas 평가 결과 전체 평균은 faithfulness 0.55, context_recall 0.575였�
 
 ## 8. 평가 파일 목록
 
-| 파일 | 설명 |
-|------|------|
-| `gold_dataset.json` | 정식 평가 데이터셋 (EN 10 + KO 10, 총 20개) |
-| `run_ragas_eval.py` | ragas 평가 스크립트 (`--dataset` / `--mode` / `--k` / `--limit` 인자 지원) |
-| `ragas_report.json` | 평가 결과 누적 저장 (실행마다 append) |
-| `ragas_report_full.json` | 전체 20개 실행 결과 별도 보존 |
-| `ragas_report_limit3.json` | limit 3 테스트 결과 별도 보존 |
+| 파일 | 분류 | 설명 |
+|------|------|------|
+| `gold_dataset.json` | 평가 입력 데이터셋 | EN/KO bilingual QA 10쌍, 총 20개 |
+| `run_ragas_eval.py` | 평가 코드 | ragas 평가 스크립트 (`--dataset` / `--mode` / `--k` / `--limit` 인자 지원) |
+| `ragas_report.json` | 실행 결과 report (누적) | 평가 결과 누적 저장 (실행마다 append) |
+| `ragas_report_full.json` | 실행 결과 report | 전체 20개(EN+KO) 실행 결과 별도 보존 |
+| `ragas_report_limit3.json` | 실행 결과 report (limit 기반 사전 점검) | --limit 1·--limit 3 파이프라인 동작 확인 결과 — 성능 주장 근거 아님 |

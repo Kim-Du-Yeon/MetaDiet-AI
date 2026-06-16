@@ -81,6 +81,10 @@ npm start
 
 ## Evaluation
 
+Evaluation datasets (`routing_dataset.json`, `edge_dataset.json`, `gold_dataset.json`) contain input QA items used for testing.
+Result reports (`routing_report_*.json`, `ragas_report_*.json`) record eval run outputs and are committed for reproducibility.
+Detailed file classification: [EVALUATION.md](EVALUATION.md).
+
 ### Supervisor Routing
 
 - Baseline routing eval: **18/18** (intent_accuracy 1.00, route_accuracy 1.00)
@@ -92,7 +96,7 @@ npm start
 
 ### RAG (Hybrid Retrieval + Grounded QA)
 
-- Gold dataset: `gold_dataset.json` — 20 bilingual QA items (EN 10 + KO 10)
+- Gold dataset: `gold_dataset.json` — EN/KO bilingual QA 10쌍, 총 20개 (동일 근거 공유, cross-lingual retrieval 영향 분리 목적)
 - Eval modes: dense / hybrid / full — page_hit, excerpt_hit, faithfulness, citation_rate
 - full mode result: source_hit 1.00 / page_hit 1.00 / excerpt_hit 0.90 / avg_score 0.978
 - Detail: [EVALUATION.md](EVALUATION.md)
