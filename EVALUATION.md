@@ -357,6 +357,127 @@ Ragas 평가 결과 전체 평균은 faithfulness 0.55, context_recall 0.575였�
 
 ---
 
+## 기술적 판단 근거 (Technical Rationale)
+
+### 1. Mixed Intent 라우팅 정책
+
+음식 기록 의도와 전략 상담 의도가 혼재한 경우, 서비스 흐름상 먼저 기록을 해야 이후 단백질 부족 여부나
+남은 칼로리 판단이 정확해진다. 그래서 음식명 신호와 섭취·기록 표현이 동시에 존재하면 `diet_logger`를
+우선하는 log-first policy를 `_heuristic_intent()`에 반영했다.
+
+명확한 패턴은 라우팅 휴리스틱으로 먼저 처리하고, 그 외 애매한 케이스는 LLM 판단으로 위임한다.
+평가 기준(rubric)은 변경하지 않았으며, 동일한 `edge_dataset.json`과 `expected` label로
+개선 전후를 비교했다.
+
+| 입력 예시 | 포함된 의도 | 개선 전 | 개선 후 |
+|-----------|------------|---------|---------|
+| 아아 한잔 했어 | 음료 기록 | strategy | diet_logger |
+| 닭가슴살 200g 먹었고 단백질 더 먹어야 하나? | 기록 + 전략 상담 | strategy | diet_logger |
+| 식단 짜줘, 아 그리고 어제 저녁 삼겹살 기록해줘 | 식단 계획 + 기록 | meal_plan | diet_logger |
+
+edge-case routing accuracy: 15/18(0.833) → 18/18(1.000). 상세: [EDGE_EVAL_REPORT.md](backend/scripts/eval/EDGE_EVAL_REPORT.md)
+
+---
+
+### 2. Dense + BM25 + RRF 융합 방식
+
+| 방식 | 기준 | 장점 | 한계 |
+|------|------|------|------|
+| Dense retrieval | 임베딩 기반 의미 유사도 | 표현이 달라도 의미가 유사하면 검색 가능 | 정확한 키워드 매칭에 약함 |
+| BM25 | 키워드 빈도·희귀도·문서 길이 | 정확한 단어·전문 용어 매칭에 강함 | 의미적으로 유사한 표현을 놓칠 수 있음 |
+
+Dense는 cosine similarity 스케일, BM25는 문서 특성에 따라 점수 범위가 고정되지 않는다.
+두 점수를 단순 합산하면 BM25 점수가 클 때 의미적으로 중요한 Dense 결과가 묻힐 수 있다.
+
+| 방식 | 결합 기준 |
+|------|---------|
+| 단순 점수 합산 | Dense 점수 + BM25 점수 (스케일 불일치) |
+| RRF | Dense 순위 + BM25 순위 (스케일 무관) |
+
+RRF는 각 검색기에서 몇 위로 검색됐는지를 기준으로 결합하므로, 점수 스케일 차이 없이 두 방식의 장점을 안정적으로 융합한다.
+dense 단독 → hybrid(dense+BM25+RRF) 전환으로 page_hit 0.80 → 1.00 개선.
+
+---
+
+### 3. Rerank Threshold 0.15
+
+FlashRank reranker가 후보 문서에 관련성 점수를 부여한 뒤, 0.15 미만 문서는 답변 근거에서 제외한다.
+관련성이 낮은 문서를 답변 생성에 포함하면 hallucination 위험이 커지기 때문이다.
+
+0.15는 grid search로 찾은 절대 최적값이 아니라, FlashRank 점수 분포와 grounded generation 목적을 고려해
+설정한 운영 기준값이다. full mode 평가에서 아래 결과가 안정적으로 확인되어 현재 값으로 유지했다.
+
+| 지표 | 결과 |
+|------|------|
+| source_hit | 1.00 |
+| page_hit | 1.00 |
+| excerpt_hit (`run_eval.py` 커스텀 지표, Ragas 지표 아님) | 0.90 |
+| avg_score | 0.978 |
+
+config로 분리되어 있어 향후 데이터셋 확장 시 threshold ablation 실험이 가능하다.
+
+---
+
+### 4. Chunk Size 1,200자 / Overlap 150자
+
+청킹은 문서를 검색 가능한 단위로 분할하는 과정으로, chunk size와 overlap은 검색 품질에 직접 영향을 준다.
+
+| 극단 | 문제 |
+|------|------|
+| 너무 작음 | 근거 문맥이 끊겨 필요한 정보가 완전하게 들어오지 않음 |
+| 너무 큼 | 단일 chunk에 여러 주제가 섞여 precision 저하 |
+
+| 설정 | 설계 기준값 의미 |
+|------|----------------|
+| chunk size 1,200자 | 문맥을 충분히 보존하면서도 불필요한 주제가 섞이지 않도록 설정한 상한 |
+| overlap 150자 | chunk 경계에서 중요한 근거 문장이 잘리는 것을 줄이기 위한 완충 구간 |
+
+grid search로 찾은 최적값이 아니며, 문서 구조와 검색 품질 간 trade-off를 고려해 설정한 설계 기준값이다.
+config로 관리되어 향후 재실험 가능하다.
+
+---
+
+### 5. Validator Loop 3회 제한 및 이관 구조
+
+`meal_plan` Agent가 생성한 식단을 `validator` Agent가 영양 기준으로 검토하고,
+부족한 조건을 feedback으로 AgentState에 저장해 다음 생성에 반영하는 루프 구조다.
+
+흐름:
+
+1. `meal_plan` → 식단 생성
+2. `validator` → 영양 기준 충족 여부 검토
+3. 부족 조건을 feedback으로 state에 저장
+4. 다음 생성에서 feedback 반영 후 재생성
+5. 최대 3회까지 반복
+6. 3회 초과 시 자동 재생성 중단 → 사용자 확인 단계로 이관
+
+3회는 LLM 기반 루프의 무한 반복 위험을 방지하기 위한 운영 기준값이다.
+3회 초과 후 바로 거절하지 않으며, 사용자가 아래 중 하나를 선택하도록 한다.
+
+| 선택 | 의미 |
+|------|------|
+| 확정 | 현재 식단을 그대로 사용 |
+| 수정 | 사용자가 원하는 방향으로 수정 |
+| 취소 | 식단 저장 취소 |
+
+이 구조는 RAG에서 근거 부족 시 답변 생성을 제한하는 것과는 다른 레이어다.
+LLM 기반 루프의 무한 반복 위험을 상한으로 방지하되, 최종 판단은 사용자에게 위임한다.
+
+---
+
+### 6. 전체 평가 흐름 요약
+
+| 단계 | 내용 |
+|------|------|
+| 1 | 기능별 Agent 구현 + Supervisor routing 설계 |
+| 2 | `routing_dataset.json`으로 baseline 18/18 확인 |
+| 3 | `edge_dataset.json`으로 취약 입력 평가 → 15/18 발견 |
+| 4 | 복합 의도 라우팅 정책 개선(rubric 변경 아님) → 18/18 달성 |
+| 5 | Hybrid RAG 구축 (dense + BM25 + RRF + FlashRank) |
+| 6 | `qa_dataset.json`으로 dense / hybrid / full 검색 품질 비교 |
+| 7 | `gold_dataset.json`으로 Ragas EN/KO cross-lingual 분석 |
+| 8 | LangSmith로 eval 실행 trace 관측성 확보 (지표 계산은 Python 스크립트 담당) |
+
 ## 9. 프로젝트 업그레이드 흐름
 
 | 단계 | 문제/동기 | 조치 | 결과 수치 | 의미 |

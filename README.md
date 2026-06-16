@@ -127,6 +127,8 @@ Dataset roles by evaluation domain:
 - `tracing_context(enabled=True)` + `Client().flush()` applied for reliable trace delivery
 - Detail: [EVALUATION.md](EVALUATION.md)
 
+Detailed technical rationale for routing policy, RAG evaluation metrics, reranking, chunking, and validator loop design is documented in [EVALUATION.md](EVALUATION.md).
+
 ## Notes
 
 - Nutrition values are calculated through CSV lookup, not RAG, to reduce hallucination.
