@@ -97,15 +97,15 @@ npm start
 - full mode result: source_hit 1.00 / page_hit 1.00 / excerpt_hit 0.90 / avg_score 0.978
 - Detail: [EVALUATION.md](EVALUATION.md)
 
-### Ragas Evaluation (Experimental)
+### Ragas Evaluation
 
 - Framework: ragas 0.2.15 — `faithfulness` + `context_recall` on `gold_dataset.json`
 - English QA (n=10): faithfulness **0.900** / context_recall **0.950** — stable
 - Korean QA (n=10): faithfulness **0.200** / context_recall **0.300** — cross-lingual retrieval gap
 - Finding: the performance gap is driven by querying an English PDF corpus with Korean questions,
   not by RAG pipeline failure; improvement direction is query translation or multilingual embedding
-- Note: ragas has a dependency conflict with `langchain-community>=0.4.2` and is **not reflected
-  in `requirements.txt`**; managed as an experimental report only
+- Note: ragas is managed via a separate evaluation script (`run_ragas_eval.py`),
+  independent of the main `requirements.txt` environment
 - Detail: [RAGAS_EVAL_REPORT.md](backend/scripts/eval/RAGAS_EVAL_REPORT.md)
 
 ### LangSmith Tracing

@@ -1,4 +1,4 @@
-# Ragas 기반 RAG 평가 보고서 (Experimental)
+# Ragas 기반 RAG 평가 보고서
 
 ## 1. 개요
 
@@ -7,7 +7,7 @@
 | 평가 목적 | ragas 표준 지표로 기존 RAG 파이프라인의 faithfulness / context_recall을 정량 측정 |
 | 평가 일자 | 2026-06-15 |
 | 평가 스크립트 | `scripts/eval/run_ragas_eval.py` |
-| 상태 | **Experimental** — 의존성 충돌 경고로 인해 requirements.txt 미반영 |
+| 상태 | 별도 평가 스크립트로 관리 — 기본 실행 환경과 분리 운영, requirements.txt 미반영 |
 
 **배경:** 기존 `run_eval.py`는 커스텀 LLM judge(gpt-4o-mini)로 faithfulness를 0/1 이진 판정한다.
 ragas는 동일 개념을 연속값(0.0~1.0)으로 측정하며, `context_recall`을 통해 retrieval 의미 커버리지도
@@ -177,7 +177,7 @@ RAG 인덱스 재구성 비용이 크므로, retriever.py 앞단에 번역 레�
 | import 성공 조건 | `langchain-community==0.4.1` (기본 0.4.2에서 import 실패) |
 | 충돌 경고 | `langchain-experimental 0.4.2`가 `langchain-community>=0.4.2`를 요구 — `pip check` 경고 잔존 |
 | requirements.txt | **미반영** — 충돌 해소 전까지 보류 |
-| 현재 상태 | experimental 운영 (수동 downgrade 환경에서만 실행 가능) |
+| 현재 상태 | 별도 평가 환경으로 분리 운영 (langchain-community 0.4.1 환경에서 실행) |
 
 ### 충돌 관계 요약
 

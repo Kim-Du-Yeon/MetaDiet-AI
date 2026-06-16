@@ -219,15 +219,15 @@ eval 스크립트 실행 시 LangSmith에 trace가 남지 않는 문제가 있�
 | LLM 비용 추적 | ChatOpenAI 호출 토큰 수 및 비용 확인 가능 |
 | Agent 운영 관측성 | Supervisor routing 판단 근거를 trace 단위로 비교 가능 |
 
-## 7. Ragas 기반 RAG 평가 (Experimental)
+## 7. Ragas 기반 RAG 평가
 
 ### 배경
 
 기존 `run_eval.py`는 커스텀 LLM judge로 faithfulness를 측정한다. 이를 보완하기 위해
 ragas 0.2.15의 표준 지표로 동일 파이프라인을 재평가하는 `run_ragas_eval.py`를 추가했다.
 
-단, ragas 도입 시 `langchain-community` 버전 충돌 경고가 남아 있어 현재 **experimental 상태**로 유지한다.
-`requirements.txt` 반영은 보류한다.
+ragas는 별도 평가 스크립트(`run_ragas_eval.py`)로 관리하며, 기본 실행 환경과 분리해 운영한다.
+`requirements.txt`에는 미반영하고, 별도 Ragas 평가 리포트로 관리한다.
 
 ### 평가 설정
 
@@ -276,7 +276,7 @@ ragas 0.2.15의 표준 지표로 동일 파이프라인을 재평가하는 `run_
 
 ragas import를 위해 `langchain-community`를 0.4.1로 낮췄다.
 `langchain-experimental 0.4.2`가 `langchain-community>=0.4.2`를 요구하므로 `pip check` 경고가 잔존한다.
-`requirements.txt` 반영은 충돌 해소 후 진행한다.
+`requirements.txt`에는 미반영하며, Ragas 평가는 별도 평가 환경에서 운영한다.
 
 ### 포트폴리오용 요약
 
