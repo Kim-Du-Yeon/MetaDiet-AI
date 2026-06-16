@@ -85,6 +85,8 @@ Evaluation datasets (`routing_dataset.json`, `edge_dataset.json`, `qa_dataset.js
 Result reports (`routing_report_*.json`, `ragas_report_*.json`) record eval run outputs and are committed for reproducibility.
 Detailed file classification: [EVALUATION.md](EVALUATION.md).
 
+Evaluation datasets are separated by purpose — routing correctness, edge-case robustness, RAG retrieval quality, and cross-lingual response quality are each measured with a dedicated dataset and independent script. Performance numbers are regression and diagnostic baselines for the covered scenarios, not claims of generalized coverage.
+
 Dataset roles by evaluation domain:
 - `routing_dataset.json` / `edge_dataset.json` — routing gold-labeled datasets; `expected` field is the ground-truth agent label for each case
 - `qa_dataset.json` — RAG ablation dataset for `run_eval.py`; custom metrics (source_hit, page_hit, excerpt_hit) only, no gold_answer

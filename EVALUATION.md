@@ -8,6 +8,31 @@
 
 평가 입력 데이터셋(`*_dataset.json`)과 실행 결과 report(`*_report*.json`) 파일 분류는 Section 8 참고.
 
+---
+
+## 목적별 평가 데이터셋 구성 (Evaluation Datasets by Purpose)
+
+평가 대상(routing / RAG 검색 품질 / Ragas 응답 품질)을 분리하여 각각 전용 데이터셋과 스크립트로 독립적으로 검증했다.
+성능 수치는 서비스 전체 성능 보장이 아닌 핵심 시나리오 회귀 테스트 및 진단 목적이다.
+
+| 데이터셋 | 분류 | 평가 목적 | gold/정답 기준 | 스크립트 | 주요 지표 | 결과 |
+|---------|------|---------|-------------|---------|---------|------|
+| `routing_dataset.json` | standard routing gold-labeled dataset | 정상 입력 → 올바른 Agent 라우팅 회귀 테스트 (7 Agent label 커버) | `expected` (Agent 이름) | `run_routing_eval.py` | intent_accuracy, route_accuracy | 18/18 **(1.000)** |
+| `edge_dataset.json` | edge routing gold-labeled dataset | 오타·구어체·mixed intent 등 6종 취약 패턴 진단 | `expected` + `edge_type` | `run_routing_eval.py` | intent_accuracy | 15/18 → 18/18 **(1.000)** |
+| `qa_dataset.json` | RAG ablation dataset | dense / hybrid / full 모드별 RAG 검색 품질 비교 (`gold_answer` 없음) | `gold_source`, `gold_page`, `gold_excerpt` | `run_eval.py` | source_hit, page_hit, excerpt_hit†, avg_score | full: 1.00 / 1.00 / 0.90 / **0.978** |
+| `gold_dataset.json` | Ragas/cross-lingual RAG ground-truth dataset | Ragas 기반 응답 품질 측정 + EN/KO 성능 분리 분석 | `gold_answer` + `language` | `run_ragas_eval.py` | faithfulness, context_recall | EN: 0.900/0.950, KO: 0.200/0.300 |
+
+> †`excerpt_hit`은 `run_eval.py`의 커스텀 문자열 매칭 지표로, Ragas의 `context_recall`과 개념은 유사하지만 측정 방식이 다르다.
+
+**데이터셋 분리의 의미:**
+- routing 평가의 gold 기준은 `expected` label(어떤 Agent로 가야 하는가). `gold_dataset.json`은 routing 평가와 무관하다.
+- `qa_dataset.json`은 `gold_answer` 없이 RAG 검색 모드 비교만 하는 ablation 전용이다.
+- `gold_dataset.json`은 `gold_answer` + `language` 필드가 있어야 Ragas context_recall 측정과 EN/KO 분리가 가능하다.
+- edge-case 성능 개선(15/18 → 18/18)은 평가 기준(rubric) 변경이 아니라 `_heuristic_intent()` heuristic 우선순위 로직 수정이다.
+- LangSmith는 eval 실행 trace 관측 도구이며, 성능 지표 계산은 Python eval 스크립트가 담당한다.
+
+---
+
 ## 1. 평가 목적
 
 | 평가 | 목적 | 확인하고 싶은 것 |
