@@ -23,7 +23,7 @@ Ragas는 faithfulness를 claim 단위 연속값(0.0~1.0)으로 측정하며, `co
 
 | 항목 | 값 |
 |------|----|
-| 데이터셋 | `gold_dataset.json` |
+| 데이터셋 | `gold_dataset.json` (Ragas/cross-lingual RAG ground-truth dataset) |
 | 샘플 수 | 20개 (EN/KO bilingual QA 10쌍 — 동일 gold_source·gold_page·gold_excerpt 공유) |
 | 모드 | `full` (dense + BM25 hybrid + FlashRank reranking) |
 | k | 4 |
@@ -213,7 +213,7 @@ Ragas 평가 결과 전체 평균은 faithfulness 0.55, context_recall 0.575였�
 
 | 파일 | 분류 | 설명 |
 |------|------|------|
-| `gold_dataset.json` | 평가 입력 데이터셋 | EN/KO bilingual QA 10쌍, 총 20개 |
+| `gold_dataset.json` | Ragas/cross-lingual RAG ground-truth dataset | EN/KO bilingual QA 10쌍, 총 20개 — `gold_answer` + `language` 필드 포함 (`qa_dataset.json`과 달리 Ragas context_recall 측정 및 EN/KO 언어별 분리 가능) |
 | `run_ragas_eval.py` | 평가 코드 | ragas 평가 스크립트 (`--dataset` / `--mode` / `--k` / `--limit` 인자 지원) |
 | `ragas_report.json` | 실행 결과 report (누적) | 평가 결과 누적 저장 (실행마다 append) |
 | `ragas_report_full.json` | 실행 결과 report | 전체 20개(EN+KO) 실행 결과 별도 보존 |

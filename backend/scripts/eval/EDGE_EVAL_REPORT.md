@@ -15,7 +15,7 @@
 
 ## 2. Baseline Routing Eval
 
-- **데이터셋:** `routing_dataset.json` — 18케이스, 7개 라우트 레이블 커버
+- **데이터셋:** `routing_dataset.json` (standard routing gold-labeled dataset) — `expected` label이 정답 기준, 18케이스, 7개 Agent label 커버
 - **라우트 레이블:** `diet_logger` / `meal_plan` / `strategy` / `confirm` / `edit` / `inbody` / `reporter`
 
 | 지표 | 결과 |
@@ -30,7 +30,7 @@
 
 ## 3. Edge Routing Eval — 개선 전/후 비교
 
-- **데이터셋:** `edge_dataset.json` — 6종 edge type × 3케이스 = 18케이스
+- **데이터셋:** `edge_dataset.json` (edge routing gold-labeled dataset) — `expected` label + `edge_type`이 정답 기준, 6종 edge type × 3케이스 = 18케이스
 
 | 지표 | Before | After |
 |------|--------|-------|
@@ -60,6 +60,9 @@
 ---
 
 ## 5. `_heuristic_intent()` 개선 내용
+
+> 이 개선은 평가 기준(rubric) 변경이 아니라 `_heuristic_intent()` heuristic 우선순위 로직 자체를 수정한 것이다.
+> 평가 데이터셋(`edge_dataset.json`)과 정답 레이블(`expected`)은 Before/After 모두 동일하게 유지했다.
 
 **변경 파일:** `app/agents/supervisor/node.py`
 
@@ -134,8 +137,8 @@ if any(k in msg for k in _FOOD_KW) and any(k in msg for k in _INTAKE_KW):
 
 | 파일 | 분류 | 설명 |
 |------|------|------|
-| `routing_dataset.json` | 평가 입력 데이터셋 | 7개 Agent label 커버, 회귀 테스트용 18케이스 |
-| `edge_dataset.json` | 평가 입력 데이터셋 | 6종 edge-type × 3케이스, 취약 패턴 진단용 18케이스 |
+| `routing_dataset.json` | routing gold-labeled dataset | `expected` label 기반, 7개 Agent label 커버, 회귀 테스트용 18케이스 |
+| `edge_dataset.json` | edge routing gold-labeled dataset | `expected` label + `edge_type` 기반, 6종 edge-type × 3케이스, 취약 패턴 진단용 18케이스 |
 | `run_routing_eval.py` | 평가 코드 | 라우팅 평가 스크립트 (`--dataset` 인자로 데이터셋 선택) |
 | `routing_report_baseline.json` | 실행 결과 report | baseline eval 결과 (intent_accuracy: 1.000) |
 | `routing_report_edge_before.json` | 실행 결과 report | 개선 전 edge eval 결과 (intent_accuracy: 0.833) |

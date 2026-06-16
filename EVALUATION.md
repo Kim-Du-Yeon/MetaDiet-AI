@@ -299,10 +299,10 @@ Ragas 평가 결과 전체 평균은 faithfulness 0.55, context_recall 0.575였�
 
 | 파일명 | 분류 | 목적 | 개수 | 근거 파일 |
 |--------|------|------|------|----------|
-| `routing_dataset.json` | 평가 입력 데이터셋 | 정상 입력 baseline 라우팅 정확도 검증 (회귀 테스트) | 18개 | [routing_dataset.json](backend/scripts/eval/routing_dataset.json) |
-| `edge_dataset.json` | 평가 입력 데이터셋 | 실사용 취약 입력 패턴 라우팅 안정성 검증 | 18개 | [edge_dataset.json](backend/scripts/eval/edge_dataset.json) |
-| `qa_dataset.json` | 평가 입력 데이터셋 | `run_eval.py` 기본 데이터셋 — dense/hybrid/full 3모드 ablation용 EN QA 10개 (`excerpt_hit` 등 커스텀 지표 측정) | 10개 | [qa_dataset.json](backend/scripts/eval/qa_dataset.json) |
-| `gold_dataset.json` | 평가 입력 데이터셋 | `run_ragas_eval.py` 기본 데이터셋 — EN/KO bilingual QA 10쌍, Ragas faithfulness/context_recall + cross-lingual retrieval 분석 전용 | 20개 (EN 10 + KO 10, 10쌍) | [gold_dataset.json](backend/scripts/eval/gold_dataset.json) |
+| `routing_dataset.json` | routing gold-labeled dataset | 정상 입력 baseline 라우팅 정확도 검증 — `expected` label이 정답 기준 (회귀 테스트) | 18개 | [routing_dataset.json](backend/scripts/eval/routing_dataset.json) |
+| `edge_dataset.json` | edge routing gold-labeled dataset | 실사용 취약 입력 패턴 라우팅 안정성 검증 — `expected` label + `edge_type`이 정답 기준 | 18개 | [edge_dataset.json](backend/scripts/eval/edge_dataset.json) |
+| `qa_dataset.json` | RAG ablation dataset | `run_eval.py` 기본 데이터셋 — dense/hybrid/full 3모드 ablation용 EN QA 10개 (`excerpt_hit` 등 커스텀 지표 측정 — Ragas 지표 아님, gold_answer 없음) | 10개 | [qa_dataset.json](backend/scripts/eval/qa_dataset.json) |
+| `gold_dataset.json` | Ragas/cross-lingual RAG ground-truth dataset | `run_ragas_eval.py` 기본 데이터셋 — EN/KO bilingual QA 10쌍, `gold_answer` + `language` 필드 포함, Ragas faithfulness/context_recall + cross-lingual retrieval 분석 전용 (routing 평가와 무관) | 20개 (EN 10 + KO 10, 10쌍) | [gold_dataset.json](backend/scripts/eval/gold_dataset.json) |
 | `ragas_report_limit3.json` | Smoke/Limit test 결과 report | --limit 1 (동작 확인) + --limit 3 (샘플링 성능 확인) 사전 점검 | 실행 2회분 누적 | [ragas_report_limit3.json](backend/scripts/eval/ragas_report_limit3.json) |
 | `ragas_report_full.json` | 평가 실행 결과 report | n=1, n=3, n=20 전체 Ragas 실행 결과 누적 | 실행 3회분 누적 | [ragas_report_full.json](backend/scripts/eval/ragas_report_full.json) |
 | `routing_report_baseline.json` | 평가 실행 결과 report | standard 18케이스 baseline 결과 (18/18) | 1회 | [routing_report_baseline.json](backend/scripts/eval/routing_report_baseline.json) |
@@ -324,6 +324,11 @@ Ragas 평가 결과 전체 평균은 faithfulness 0.55, context_recall 0.575였�
 > **데이터셋-스크립트 대응**: `qa_dataset.json`은 `run_eval.py`(커스텀 지표: source_hit·page_hit·excerpt_hit·faithfulness 0/1) 전용,
 > `gold_dataset.json`은 `run_ragas_eval.py`(Ragas 지표: faithfulness·context_recall) 전용으로 서로 다른 스크립트와 1:1로 대응한다.
 > `excerpt_hit`은 `run_eval.py`의 커스텀 문자열 매칭 지표이며 Ragas 지표가 아니다.
+>
+> **평가 영역별 gold 역할 구분**: 이 프로젝트에서 "gold"는 평가 영역에 따라 형태가 다르다.
+> routing 평가(`routing_dataset.json`, `edge_dataset.json`)는 `expected` label을 정답 기준으로 하는 routing gold-labeled dataset이고,
+> RAG 평가(`qa_dataset.json`, `gold_dataset.json`)는 `gold_source`·`gold_page`·`gold_excerpt`를 정답 기준으로 하는 RAG ground-truth dataset이다.
+> `gold_dataset.json`은 Ragas 표준 지표 및 EN/KO cross-lingual 분석 전용이며, routing 평가와는 무관하다.
 
 ---
 
@@ -333,11 +338,11 @@ Ragas 평가 결과 전체 평균은 faithfulness 0.55, context_recall 0.575였�
 |------|-----------|------|-----------|------|
 | ① 기능 구현 | 식단 기록·상담·플랜·리포트 기능 필요 | FastAPI + 8 에이전트 구현, TypedDict AgentState 설계 | — | 기능 베이스 완성 |
 | ② Multi-Agent 구조화 | 단일 LLM 흐름의 확장성 한계 | LangGraph StateGraph, HITL(interrupt_before), Postgres checkpointer 도입 | — | 멀티턴·상태 영속화 확보 |
-| ③ 기본 routing 평가셋 구축 | 라우팅 정확도 측정 체계 부재 | `routing_dataset.json` 18개 구성 + `run_routing_eval.py` 작성 | **18/18 (1.0)** | 7개 에이전트 baseline 확인 |
-| ④ Edge case 문제 발견 | 실사용 패턴(오타·혼합 의도)에서 오분류 | `edge_dataset.json` 18개 구성 + 평가 실행 | **15/18 (0.833)** — 오분류 3건 확인 | 취약점 정량화 |
-| ⑤ Heuristic 개선 | diet_logger→strategy 2건, diet_logger→meal_plan 1건 오분류 | `_FOOD_KW`·`_INTAKE_KW` 추가 + log-first policy | **18/18 (1.0)** | 취약점 해소 검증 |
+| ③ 기본 routing 평가셋 구축 | 라우팅 정확도 측정 체계 부재 | `routing_dataset.json` 18개(standard routing gold-labeled dataset — `expected` label 기반, 7개 Agent label 커버) 구성 + `run_routing_eval.py` 작성 | **18/18 (1.0)** | 7개 에이전트 baseline 확인 |
+| ④ Edge case 문제 발견 | 실사용 패턴(오타·혼합 의도)에서 오분류 | `edge_dataset.json` 18개(edge routing gold-labeled dataset — `expected` label + `edge_type` 기반, 6종 edge type) 구성 + 평가 실행 | **15/18 (0.833)** — 오분류 3건 확인 | 취약점 정량화 |
+| ⑤ Heuristic 개선 | diet_logger→strategy 2건, diet_logger→meal_plan 1건 오분류 | `_FOOD_KW`·`_INTAKE_KW` 추가 + log-first policy | **18/18 (1.0)** | 취약점 해소 검증 — 평가 기준(rubric) 변경 아님, `_heuristic_intent()` heuristic 우선순위 로직 자체 수정 |
 | ⑥ RAG 파이프라인 구축 | 단순 dense retrieval의 recall 한계 | SemanticChunker + BM25 + RRF + FlashRank 4단계 hybrid RAG | — | 다단계 검색 구조 확보 |
-| ⑦ RAG 평가셋 구축 + 3모드 ablation | RAG 검색 품질 측정 체계 부재 | `qa_dataset.json` 10개(EN) 구축 + `run_eval.py` dense/hybrid/full 3모드 비교 (커스텀 지표: source_hit·page_hit·excerpt_hit) | **source_hit 1.0 / page_hit 1.0 / excerpt_hit 0.90** | dense < hybrid < full 개선 확인 |
+| ⑦ RAG 평가셋 구축 + 3모드 ablation | RAG 검색 품질 측정 체계 부재 | `qa_dataset.json` 10개(EN, RAG ablation dataset — gold_answer 없음) 구축 + `run_eval.py` dense/hybrid/full 3모드 비교 (커스텀 지표: source_hit·page_hit·**excerpt_hit** — Ragas 지표 아님) | **source_hit 1.0 / page_hit 1.0 / excerpt_hit 0.90** | dense < hybrid < full 개선 확인 |
 | ⑧ LangSmith tracing 연동 | eval 실행 시 trace 미전송 | `tracing_context` + `Client().flush()` + 환경변수 매핑 적용 | trace 전송 확인 | eval 실행 trace 관측성 확보 (성능 지표 계산은 Python 스크립트 담당, LangSmith는 trace 관측 전용) |
-| ⑨ Ragas 평가 + cross-lingual 분석 | 커스텀 judge 한계 (0/1 이진 판정) + KO 성능 의문 | `gold_dataset.json` 20개(EN/KO bilingual) 구축 + `run_ragas_eval.py` → smoke(n=1) → limit(n=3) → full(n=20) | **EN 0.900/0.950 · KO 0.200/0.300** | cross-lingual retrieval 한계 정량 분리 |
+| ⑨ Ragas 평가 + cross-lingual 분석 | 커스텀 judge 한계 (0/1 이진 판정) + KO 성능 의문 | `gold_dataset.json` 20개(Ragas/cross-lingual RAG ground-truth dataset — EN/KO bilingual, `gold_answer`+`language` 필드 포함) 구축 + `run_ragas_eval.py` → smoke(n=1) → limit(n=3) → full(n=20) | **EN 0.900/0.950 · KO 0.200/0.300** | cross-lingual retrieval 한계 정량 분리 |
 | ⑩ 문서화 | 평가 체계 가시화 필요 | `EVALUATION.md`·`README`·`EDGE_EVAL_REPORT.md`·`RAGAS_EVAL_REPORT.md` 작성 | — | 재현 가능한 평가 기록 확보 |

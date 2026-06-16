@@ -85,6 +85,11 @@ Evaluation datasets (`routing_dataset.json`, `edge_dataset.json`, `qa_dataset.js
 Result reports (`routing_report_*.json`, `ragas_report_*.json`) record eval run outputs and are committed for reproducibility.
 Detailed file classification: [EVALUATION.md](EVALUATION.md).
 
+Dataset roles by evaluation domain:
+- `routing_dataset.json` / `edge_dataset.json` — routing gold-labeled datasets; `expected` field is the ground-truth agent label for each case
+- `qa_dataset.json` — RAG ablation dataset for `run_eval.py`; custom metrics (source_hit, page_hit, excerpt_hit) only, no gold_answer
+- `gold_dataset.json` — Ragas/cross-lingual RAG ground-truth dataset for `run_ragas_eval.py`; includes `gold_answer` + `language` fields for Ragas faithfulness/context_recall and EN/KO analysis
+
 ### Supervisor Routing
 
 - Baseline routing eval: **18/18** (intent_accuracy 1.00, route_accuracy 1.00)
