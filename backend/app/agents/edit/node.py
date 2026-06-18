@@ -35,6 +35,17 @@ NUTRITION_PROMPT = ChatPromptTemplate.from_messages([
 ])
 
 
+def _resolve_target_date(message: str, today) -> str:
+    """메시지의 상대 날짜 표현을 해석. 명시 없으면 오늘."""
+    from datetime import timedelta
+    msg = message or ""
+    if any(k in msg for k in ["그저께", "그그제", "그제"]):
+        return (today - timedelta(days=2)).isoformat()
+    if "어제" in msg:
+        return (today - timedelta(days=1)).isoformat()
+    return today.isoformat()
+
+
 async def edit_node(state: AgentState) -> AgentState:
     from app.db.supabase_client import get_supabase
     from datetime import date
@@ -42,14 +53,15 @@ async def edit_node(state: AgentState) -> AgentState:
     user_id = state["user_id"]
     message = state["message"]
 
-    # 오늘 식단 조회
+    # 메시지의 상대 날짜("어제"/"그제") 해석 후 해당 날짜 식단 조회
+    target_date = _resolve_target_date(message, date.today())
     rows = sb.table("meal_logs").select("*").eq(
-        "user_id", user_id).eq("log_date", date.today().isoformat()).execute().data
+        "user_id", user_id).eq("log_date", target_date).execute().data
 
     if not rows:
         return {
             **state,
-            "response": "오늘 기록된 식단이 없습니다.",
+            "response": f"{target_date}에 기록된 식단이 없습니다.",
             "agent_used": "edit",
         }
 

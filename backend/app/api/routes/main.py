@@ -9,12 +9,13 @@ HITL 흐름:
   /chat/resume   → aupdate_state({"message": user_input}) + ainvoke(None)
                  → confirm 실행 → 저장/수정/취소
 """
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from app.agents.graph import get_graph, lifespan
 from app.ocr.inbody_ocr import extract_inbody_from_image
 from app.db.supabase_client import get_supabase
+from app.core.auth import get_current_user, get_current_auth_id
 from app.schemas.models import InbodyUploadResponse, ResumeRequest
 from pydantic import BaseModel
 from typing import Optional
@@ -34,7 +35,6 @@ app.add_middleware(
 
 class ChatRequest(BaseModel):
     message: str
-    user_id: str
     thread_id: str = "default"
     pending_meals: Optional[list] = None
     awaiting_confirmation: bool = False
@@ -134,9 +134,9 @@ def _repair_implausible_inbody(user_id: str, inbody_data: dict, measured_date: s
     return inbody_data
 
 
-def _initial_state(req: ChatRequest) -> dict:
+def _initial_state(req: ChatRequest, user_id: str) -> dict:
     return {
-        "user_id": req.user_id, "message": req.message, "user_goal": "diet",
+        "user_id": user_id, "message": req.message,
         "intent": "", "response": "", "messages": req.messages[-10:] if req.messages else [],
         "agent_used": "", "today_calories": 0.0, "today_protein": 0.0,
         "today_carbs": 0.0, "today_fat": 0.0, "target_calories": 0.0,
@@ -189,10 +189,10 @@ async def _stream(graph, config: dict):
 
 
 @app.post("/chat")
-async def chat(req: ChatRequest):
+async def chat(req: ChatRequest, current_user: str = Depends(get_current_user)):
     async def generate():
         graph  = get_graph()
-        config = {"configurable": {"thread_id": f"{req.user_id}_{req.thread_id}"}}
+        config = {"configurable": {"thread_id": f"{current_user}_{req.thread_id}"}}
 
         snap = await graph.aget_state(config)
         sv_now = _sv(snap)
@@ -228,10 +228,10 @@ async def chat(req: ChatRequest):
             # pending 없는 완료된 thread → 새 thread로 전환
             new_tid = str(int(time.time()))
             print(f"=== [chat] 완료된 thread → 새 thread: {new_tid} ===")
-            config = {"configurable": {"thread_id": f"{req.user_id}_{new_tid}"}}
+            config = {"configurable": {"thread_id": f"{current_user}_{new_tid}"}}
 
         try:
-            await graph.ainvoke(_initial_state(req), config=config)
+            await graph.ainvoke(_initial_state(req, current_user), config=config)
         except Exception as e:
             print(f"=== [chat] 오류: {e} ===")
             yield f"data: {json.dumps({'type':'error','content':str(e)}, ensure_ascii=False)}\n\n"
@@ -242,7 +242,7 @@ async def chat(req: ChatRequest):
 
 
 @app.post("/chat/resume")
-async def resume_chat(req: ResumeRequest):
+async def resume_chat(req: ResumeRequest, current_user: str = Depends(get_current_user)):
     """
     interrupt_before=["confirm"] 재개.
     aupdate_state로 message 업데이트 후 ainvoke(None)으로 confirm 실행.
@@ -250,7 +250,7 @@ async def resume_chat(req: ResumeRequest):
     """
     async def generate():
         graph  = get_graph()
-        config = {"configurable": {"thread_id": f"{req.user_id}_{req.thread_id}"}}
+        config = {"configurable": {"thread_id": f"{current_user}_{req.thread_id}"}}
         snap   = await graph.aget_state(config)
         if not snap or not snap.next:
             yield f"data: {json.dumps({'type':'error','content':'재개할 대화가 없습니다.'}, ensure_ascii=False)}\n\n"
@@ -278,14 +278,14 @@ async def resume_chat(req: ResumeRequest):
 
 
 @app.get("/chat/history/{thread_id}")
-async def get_chat_history(thread_id: str, user_id: str):
+async def get_chat_history(thread_id: str, current_user: str = Depends(get_current_user)):
     """
     특정 thread의 체크포인트 이력 조회 (타임 트래블용).
     thread_id: 실제 thread ID (done 이벤트의 thread_id 값)
                예: 1780499418  (타임스탬프 기반)
     """
     graph  = get_graph()
-    config = {"configurable": {"thread_id": f"{user_id}_{thread_id}"}}
+    config = {"configurable": {"thread_id": f"{current_user}_{thread_id}"}}
     snap   = await graph.aget_state(config)
     if not snap: return {"checkpoints": [], "current": None}
     history = []
@@ -310,7 +310,7 @@ async def get_chat_history(thread_id: str, user_id: str):
 
 
 @app.post("/chat/rollback")
-async def rollback_to_checkpoint(user_id: str, thread_id: str, checkpoint_id: str):
+async def rollback_to_checkpoint(thread_id: str, checkpoint_id: str, current_user: str = Depends(get_current_user)):
     """
     특정 체크포인트로 state 롤백 (타임 트래블).
     LangGraph update_state로 해당 checkpoint의 state를 현재 thread에 덮어씀.
@@ -319,7 +319,7 @@ async def rollback_to_checkpoint(user_id: str, thread_id: str, checkpoint_id: st
     graph = get_graph()
 
     # 롤백할 체크포인트 state 읽기
-    src_config = {"configurable": {"thread_id": f"{user_id}_{thread_id}", "checkpoint_id": checkpoint_id}}
+    src_config = {"configurable": {"thread_id": f"{current_user}_{thread_id}", "checkpoint_id": checkpoint_id}}
     snap = await graph.aget_state(src_config)
     if not snap:
         raise HTTPException(404, "체크포인트를 찾을 수 없습니다.")
@@ -328,7 +328,7 @@ async def rollback_to_checkpoint(user_id: str, thread_id: str, checkpoint_id: st
 
     # 현재 thread를 해당 checkpoint state로 덮어씀
     # as_node=None: 현재 위치 유지하며 state 값만 패치
-    target_config = {"configurable": {"thread_id": f"{user_id}_{thread_id}"}}
+    target_config = {"configurable": {"thread_id": f"{current_user}_{thread_id}"}}
     rollback_state = {**sv, "overwrite_on_confirm": bool(sv.get("pending_meals"))}
     await graph.aupdate_state(target_config, rollback_state)
 
@@ -383,7 +383,7 @@ async def _process_inbody(user_id: str, image_bytes: bytes) -> dict:
     }).execute().data[0]
     graph  = get_graph()
     config = {"configurable": {"thread_id": f"{user_id}_inbody"}}
-    await graph.ainvoke({**_initial_state(ChatRequest(message="인바디 업로드됨. 전략을 재설정해주세요.", user_id=user_id)),
+    await graph.ainvoke({**_initial_state(ChatRequest(message="인바디 업로드됨. 전략을 재설정해주세요."), user_id),
                          "intent":"inbody","latest_inbody":inbody_row,"days_since_inbody":0}, config=config)
     sv = _sv(await graph.aget_state(config))
     return {
@@ -412,18 +412,18 @@ async def _process_food(image_bytes: bytes) -> dict:
 
 
 @app.post("/inbody/upload", response_model=InbodyUploadResponse)
-async def upload_inbody(user_id: str, file: UploadFile = File(...)):
+async def upload_inbody(file: UploadFile = File(...), current_user: str = Depends(get_current_user)):
     if not file.content_type or not file.content_type.startswith("image/"):
         raise HTTPException(400, "이미지 파일만 업로드 가능합니다.")
     try:
-        r = await _process_inbody(user_id, await file.read())
+        r = await _process_inbody(current_user, await file.read())
     except ValueError as e:
         raise HTTPException(422, str(e))
     return InbodyUploadResponse(**{k: v for k, v in r.items() if k != "type"})
 
 
 @app.post("/image/upload")
-async def upload_image(user_id: str, file: UploadFile = File(...)):
+async def upload_image(file: UploadFile = File(...), current_user: str = Depends(get_current_user)):
     """
     통합 이미지 업로드 — Agent가 사진 종류를 판단해 분기.
       inbody → 체성분 추출 + 전략 재설정
@@ -437,7 +437,7 @@ async def upload_image(user_id: str, file: UploadFile = File(...)):
     kind = await classify_image_type(image_bytes)
     if kind == "inbody":
         try:
-            return await _process_inbody(user_id, image_bytes)
+            return await _process_inbody(current_user, image_bytes)
         except ValueError:
             # 인바디로 분류됐으나 수치 추출 실패 → 음식으로 폴백
             return await _process_food(image_bytes)
@@ -447,7 +447,7 @@ async def upload_image(user_id: str, file: UploadFile = File(...)):
 
 
 @app.post("/meal/photo")
-async def meal_photo(user_id: str, file: UploadFile = File(...)):
+async def meal_photo(file: UploadFile = File(...), current_user: str = Depends(get_current_user)):
     """
     음식 사진 → GPT-4o-mini Vision으로 음식명 인식 → 확인용 응답 반환.
     저장은 하지 않음. 사용자가 "네 + 각 음식 몇 g" 응답하면 기존 /chat(diet_logger)로 연결.
@@ -483,11 +483,11 @@ async def nutrition_lookup(req: NutritionLookupRequest):
 
 
 @app.get("/calories/history")
-async def get_calories_history(user_id: str):
+async def get_calories_history(current_user: str = Depends(get_current_user)):
     rows = (
         sb.table("meal_logs")
         .select("log_date,calories")
-        .eq("user_id", user_id)
+        .eq("user_id", current_user)
         .order("log_date", desc=False)
         .execute()
         .data
@@ -495,7 +495,7 @@ async def get_calories_history(user_id: str):
     strategy_rows = (
         sb.table("diet_strategies")
         .select("daily_calories")
-        .eq("user_id", user_id)
+        .eq("user_id", current_user)
         .eq("is_active", True)
         .order("created_at", desc=True)
         .limit(1)
@@ -521,7 +521,7 @@ async def get_calories_history(user_id: str):
 
 
 @app.get("/calendar/month/{year_month}")
-async def get_calendar_month(year_month: str, user_id: str):
+async def get_calendar_month(year_month: str, current_user: str = Depends(get_current_user)):
     try:
         year, month = map(int, year_month.split("-"))
         start = date(year, month, 1)
@@ -532,7 +532,7 @@ async def get_calendar_month(year_month: str, user_id: str):
     rows = (
         sb.table("meal_logs")
         .select("log_date,calories")
-        .eq("user_id", user_id)
+        .eq("user_id", current_user)
         .gte("log_date", start.isoformat())
         .lte("log_date", end.isoformat())
         .execute()
@@ -541,7 +541,7 @@ async def get_calendar_month(year_month: str, user_id: str):
     strategy_rows = (
         sb.table("diet_strategies")
         .select("daily_calories")
-        .eq("user_id", user_id)
+        .eq("user_id", current_user)
         .eq("is_active", True)
         .order("created_at", desc=True)
         .limit(1)
@@ -570,51 +570,66 @@ async def get_calendar_month(year_month: str, user_id: str):
 
 
 @app.get("/calendar/{target_date}")
-async def get_calendar(target_date: str, user_id: str):
-    rows  = sb.table("meal_logs").select("*").eq("user_id",user_id).eq("log_date",target_date).execute().data
+async def get_calendar(target_date: str, current_user: str = Depends(get_current_user)):
+    rows  = sb.table("meal_logs").select("*").eq("user_id",current_user).eq("log_date",target_date).execute().data
     total = {k: sum(r.get(k,0) for r in rows) for k in ["calories","protein_g","carbs_g","fat_g"]}
     return {"date": target_date, "meals": rows, "total": total}
 
 
 @app.get("/report/weekly")
-async def weekly_report(user_id: str):
+async def weekly_report(current_user: str = Depends(get_current_user)):
     graph  = get_graph()
-    config = {"configurable": {"thread_id": f"{user_id}_report"}}
-    await graph.ainvoke({**_initial_state(ChatRequest(message="이번 주 식단 리포트를 보여주세요.", user_id=user_id)),
+    config = {"configurable": {"thread_id": f"{current_user}_report"}}
+    await graph.ainvoke({**_initial_state(ChatRequest(message="이번 주 식단 리포트를 보여주세요."), current_user),
                          "intent":"reporter"}, config=config)
     return {"report": _sv(await graph.aget_state(config)).get("response","")}
 
 
 @app.get("/inbody/history")
-async def get_inbody_history(user_id: str):
-    return sb.table("inbody_logs").select("*").eq("user_id",user_id).order("measured_date",desc=False).execute().data
+async def get_inbody_history(current_user: str = Depends(get_current_user)):
+    return sb.table("inbody_logs").select("*").eq("user_id",current_user).order("measured_date",desc=False).execute().data
 
 
 @app.get("/strategy/current")
-async def get_current_strategy(user_id: str):
-    rows = sb.table("diet_strategies").select("*").eq("user_id",user_id).eq("is_active",True).order("created_at",desc=True).limit(1).execute().data
+async def get_current_strategy(current_user: str = Depends(get_current_user)):
+    rows = sb.table("diet_strategies").select("*").eq("user_id",current_user).eq("is_active",True).order("created_at",desc=True).limit(1).execute().data
     return rows[0] if rows else {}
 
 
 @app.post("/users/setup")
-async def setup_user(user_id: str, goal: str, height_cm: float, weight_kg: float, age: int, gender: str):
+async def setup_user(goal: str, height_cm: float, weight_kg: float, age: int, gender: str,
+                      auth_id: str = Depends(get_current_auth_id)):
+    """
+    회원가입 직후 프로필 입력. users row가 아직 없을 수 있으므로(신규 가입자)
+    get_current_user 대신 get_current_auth_id를 쓰고, 여기서 upsert 처리한다.
+    """
     bmr = (88.362+13.397*weight_kg+4.799*height_cm-5.677*age) if gender=="male" else (447.593+9.247*weight_kg+3.098*height_cm-4.330*age)
     if goal=="diet":   cal, prot, note = round(bmr*1.4-400), round(weight_kg*2.0), f"체중 감량: {round(bmr*1.4-400)}kcal"
     elif goal=="bulk": cal, prot, note = round(bmr*1.4+400), round(weight_kg*2.2), f"근육 증량: {round(bmr*1.4+400)}kcal"
     else:              cal, prot, note = round(bmr*1.4),     round(weight_kg*1.8), f"체중 유지: {round(bmr*1.4)}kcal"
     carbs_g, fat_g = round((cal*0.5)/4), round((cal*0.25)/9)
-    sb.table("users").update({"goal":goal,"height_cm":height_cm,"age":age,"weight_kg":weight_kg}).eq("id",user_id).execute()
+
+    existing = sb.table("users").select("id").eq("auth_id", auth_id).limit(1).execute().data
+    if existing:
+        user_id = existing[0]["id"]
+        sb.table("users").update({"goal":goal,"height_cm":height_cm,"age":age,"weight_kg":weight_kg}).eq("id",user_id).execute()
+    else:
+        user_id = sb.table("users").insert({
+            "auth_id": auth_id, "name": "", "goal": goal,
+            "height_cm": height_cm, "age": age, "weight_kg": weight_kg,
+        }).execute().data[0]["id"]
+
     sb.table("diet_strategies").update({"is_active":False}).eq("user_id",user_id).eq("is_active",True).execute()
     sb.table("diet_strategies").insert({"user_id":user_id,"daily_calories":cal,"protein_g":prot,"carbs_g":carbs_g,"fat_g":fat_g,"strategy_note":note,"triggered_by":"initial","is_active":True}).execute()
     return {"daily_calories":cal,"protein_g":prot,"carbs_g":carbs_g,"fat_g":fat_g,"bmr":round(bmr),"strategy_note":note}
 
 
 class MealUpdateRequest(BaseModel):
-    user_id: str; meal_id: str; quantity_g: float
+    meal_id: str; quantity_g: float
 
 
 @app.put("/meal/update")
-async def update_meal(req: MealUpdateRequest):
+async def update_meal(req: MealUpdateRequest, current_user: str = Depends(get_current_user)):
     from app.agents.diet_logger.node import NUTRITION_LLM_PROMPT, llm
     import re as _re, json as _json
     row = sb.table("meal_logs").select("food_name").eq("id",req.meal_id).execute().data
@@ -626,8 +641,8 @@ async def update_meal(req: MealUpdateRequest):
 
 
 @app.delete("/meal/delete/{meal_id}")
-async def delete_meal(meal_id: str, user_id: str):
-    sb.table("meal_logs").delete().eq("id",meal_id).eq("user_id",user_id).execute()
+async def delete_meal(meal_id: str, current_user: str = Depends(get_current_user)):
+    sb.table("meal_logs").delete().eq("id",meal_id).eq("user_id",current_user).execute()
     return {"success":True}
 
 

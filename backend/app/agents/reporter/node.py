@@ -27,6 +27,8 @@ REPORT_PROMPT = ChatPromptTemplate.from_messages([
 [RAG 영양 근거]:
 {rag_context}
 
+RAG 근거 영역에 "현재 문서 기반 근거는 부족합니다"가 있으면 출처 기반 설명을 만들지 마세요.
+
 아래 형식으로 반드시 답하세요:
 
 **✅ 잘하고 있는 것**
@@ -96,13 +98,21 @@ async def reporter_node(state: AgentState) -> AgentState:
     target_cal = state.get("target_calories", 2000)
     target_protein = state.get("target_protein", 130)
 
-    # 4. RAG 검색
+    # 4. RAG 검색 - grounded=True일 때만 출처 기반 근거로 사용
     try:
-        from app.rag.retriever import search_nutrition_knowledge
-        docs = await search_nutrition_knowledge(state["message"])
-        rag_context = "\n".join([d.page_content for d in docs[:2]])
+        from app.rag.retriever import retrieve
+        rag_result = await retrieve(state["message"], k=4, max_docs=2)
+        rag_grounded = bool(rag_result.get("grounded") and rag_result.get("context"))
+        rag_context = rag_result["context"] if rag_grounded else (
+            "현재 문서 기반 근거는 부족합니다. "
+            "출처 기반 설명은 만들지 말고, 패턴·수치 기반의 일반적 인사이트만 제공하세요."
+        )
     except Exception:
-        rag_context = "영양 지식베이스 준비 중"
+        rag_context = (
+            "현재 문서 기반 근거는 부족합니다. "
+            "출처 기반 설명은 만들지 말고, 패턴·수치 기반의 일반적 인사이트만 제공하세요."
+        )
+        rag_grounded = False
 
     resp = await llm.ainvoke(REPORT_PROMPT.format_messages(
         pattern_analysis=pattern_text,
@@ -114,4 +124,4 @@ async def reporter_node(state: AgentState) -> AgentState:
         message=state["message"]
     ))
 
-    return {**state, "response": resp.content, "agent_used": "reporter"}
+    return {**state, "response": resp.content, "agent_used": "reporter", "rag_grounded": rag_grounded}

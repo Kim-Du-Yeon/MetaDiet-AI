@@ -33,7 +33,6 @@ class ChatRequest(BaseModel):
 
 
 class ResumeRequest(BaseModel):
-    user_id: str
     thread_id: str
     message: str
 

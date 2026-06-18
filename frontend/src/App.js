@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { supabase } from "./lib/supabaseClient";
+import { setToken } from "./api/dietApi";
+import Auth from "./components/Auth";
 import ChatInterface from "./components/chat/ChatInterface";
 import CalendarView from "./components/calendar/CalendarView";
 import Dashboard from "./components/dashboard/Dashboard";
@@ -19,6 +22,8 @@ function generateThreadId() {
 }
 
 export default function App() {
+  const [session, setSession] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("chat");
   const [todayStats, setTodayStats] = useState(null);
   const [setupDone, setSetupDone] = useState(false);
@@ -29,6 +34,25 @@ export default function App() {
   const [prevThreadId, setPrevThreadId] = useState(null);
   const [isInterrupted, setIsInterrupted] = useState(false);
 
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setToken(session?.access_token ?? null);
+      setAuthLoading(false);
+    });
+    const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session);
+      setToken(session?.access_token ?? null);
+    });
+    return () => listener.subscription.unsubscribe();
+  }, []);
+
+  if (authLoading) {
+    return null;
+  }
+  if (!session) {
+    return <Auth />;
+  }
   if (!setupDone) {
     return <Setup onComplete={() => setSetupDone(true)} />;
   }

@@ -3,9 +3,7 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ResponsiveContainer
 } from "recharts";
-
-const USER_ID = "17691249-f22f-4447-a6e4-fca7a8e57cc8";
-const BASE_URL = "http://localhost:8000";
+import { getCalendar, getInbodyHistory, getCurrentStrategy, getCaloriesHistory } from "../../api/dietApi";
 
 export default function Dashboard() {
   const [inbodyData, setInbodyData] = useState([]);
@@ -22,16 +20,12 @@ export default function Dashboard() {
     setLoading(true);
     try {
       const today = new Date().toISOString().split("T")[0];
-      const [inbodyRes, strategyRes, todayRes, calorieRes] = await Promise.all([
-        fetch(`${BASE_URL}/inbody/history?user_id=${USER_ID}`),
-        fetch(`${BASE_URL}/strategy/current?user_id=${USER_ID}`),
-        fetch(`${BASE_URL}/calendar/${today}?user_id=${USER_ID}`),
-        fetch(`${BASE_URL}/calories/history?user_id=${USER_ID}`),
+      const [inbody, strat, todayData, calorieData] = await Promise.all([
+        getInbodyHistory(),
+        getCurrentStrategy(),
+        getCalendar(today),
+        getCaloriesHistory(),
       ]);
-      const inbody = await inbodyRes.json();
-      const strat = await strategyRes.json();
-      const todayData = await todayRes.json();
-      const calorieData = await calorieRes.json();
       setInbodyData(inbody);
       setStrategy(strat);
       setTodayNutrition(todayData.total || {});

@@ -34,6 +34,7 @@ ANALYSIS_PROMPT = ChatPromptTemplate.from_messages([
 - 단백질 권장량, 칼로리 설정은 RAG의 논문/가이드라인 근거로 판단하세요
 - 하드코딩된 공식이 아닌 RAG 근거 + 체성분 변화를 종합해서 판단하세요
 - strategy_note에 RAG 근거를 반드시 인용하세요
+- RAG 근거 영역에 "현재 문서 기반 근거는 부족합니다"가 있으면 출처 기반 설명을 만들지 말고 체성분 변화와 목표만으로 판단하세요
 
 아래 JSON 형식으로만 응답하세요:
 {{
@@ -87,13 +88,21 @@ async def inbody_node(state: AgentState) -> AgentState:
         f"body fat {latest['body_fat_pct']}% {state.get('user_goal', 'diet')} calorie deficit"
     )
     try:
-        from app.rag.retriever import search_nutrition_knowledge
-        docs = await search_nutrition_knowledge(rag_query)
-        rag_context = "\n".join([d.page_content for d in docs[:3]])
-        print(f"=== inbody RAG 검색됨: {len(docs)}개 문서 ===")
+        from app.rag.retriever import retrieve
+        rag_result = await retrieve(rag_query, k=4, max_docs=3)
+        rag_grounded = bool(rag_result.get("grounded") and rag_result.get("context"))
+        rag_context = rag_result["context"] if rag_grounded else (
+            "현재 문서 기반 근거는 부족합니다. "
+            "출처 기반 설명은 만들지 말고, 인바디 변화와 목표 기반의 일반적 판단만 하세요."
+        )
+        print(f"=== inbody RAG: grounded={rag_grounded} score={rag_result.get('max_score')} ===")
     except Exception as e:
         print(f"=== inbody RAG 실패: {e} ===")
-        rag_context = "영양 지식베이스 준비 중"
+        rag_context = (
+            "현재 문서 기반 근거는 부족합니다. "
+            "출처 기반 설명은 만들지 말고, 인바디 변화와 목표 기반의 일반적 판단만 하세요."
+        )
+        rag_grounded = False
 
     # 4. AI 분석 + 새 전략 계산 (RAG 근거 기반)
     resp = await llm.ainvoke(ANALYSIS_PROMPT.format_messages(
@@ -132,4 +141,5 @@ async def inbody_node(state: AgentState) -> AgentState:
         "agent_used": "inbody",
         "target_calories": result["new_daily_calories"],
         "target_protein": result["new_protein_g"],
+        "rag_grounded": rag_grounded,
     }

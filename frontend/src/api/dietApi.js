@@ -1,14 +1,27 @@
 const BASE_URL = "http://localhost:8000";
 
+// 인증은 Authorization 헤더(Supabase JWT)가 담당한다. 아래 함수들의 `userId`
+// 매개변수는 백엔드가 user_id를 더 이상 받지 않게 된 뒤로는 사용되지 않지만,
+// 기존 호출부(ChatInterface/CalendarView 등) 시그니처를 깨지 않기 위해 유지한다.
+let _token = null;
+export function setToken(token) {
+  _token = token;
+}
+export function getToken() {
+  return _token;
+}
+function authHeaders(extra = {}) {
+  return _token ? { ...extra, Authorization: `Bearer ${_token}` } : extra;
+}
+
 export async function sendChatMessage(
   userId, message, onToken, onDone,
   pendingState = {}, messages = [], threadId = "default", mealType = null
 ) {
   const response = await fetch(`${BASE_URL}/chat`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: authHeaders({ "Content-Type": "application/json" }),
     body: JSON.stringify({
-      user_id: userId,
       message,
       thread_id: threadId,
       pending_meals: null,
@@ -44,16 +57,16 @@ export async function sendChatMessage(
 
 export async function getChatHistory(userId, threadId) {
   const res = await fetch(
-    `${BASE_URL}/chat/history/${threadId}?user_id=${userId}`
+    `${BASE_URL}/chat/history/${threadId}`,
+    { headers: authHeaders() }
   );
   return res.json();
 }
 
 export async function rollbackToCheckpoint(userId, threadId, checkpointId) {
-  // 백엔드가 query param 방식으로 받음
   const res = await fetch(
-    `${BASE_URL}/chat/rollback?user_id=${userId}&thread_id=${threadId}&checkpoint_id=${checkpointId}`,
-    { method: "POST" }
+    `${BASE_URL}/chat/rollback?thread_id=${threadId}&checkpoint_id=${checkpointId}`,
+    { method: "POST", headers: authHeaders() }
   );
   return res.json();
 }
@@ -61,8 +74,9 @@ export async function rollbackToCheckpoint(userId, threadId, checkpointId) {
 export async function uploadInbody(userId, file) {
   const formData = new FormData();
   formData.append("file", file);
-  const res = await fetch(`${BASE_URL}/inbody/upload?user_id=${userId}`, {
+  const res = await fetch(`${BASE_URL}/inbody/upload`, {
     method: "POST",
+    headers: authHeaders(),
     body: formData,
   });
   if (!res.ok) {
@@ -77,8 +91,9 @@ export async function uploadInbody(userId, file) {
 export async function uploadImage(userId, file) {
   const formData = new FormData();
   formData.append("file", file);
-  const res = await fetch(`${BASE_URL}/image/upload?user_id=${userId}`, {
+  const res = await fetch(`${BASE_URL}/image/upload`, {
     method: "POST",
+    headers: authHeaders(),
     body: formData,
   });
   if (!res.ok) {
@@ -99,27 +114,58 @@ export async function nutritionLookup(foods) {
   return res.json();
 }
 
-export async function getCalendar(userId, targetDate) {
-  const res = await fetch(`${BASE_URL}/calendar/${targetDate}?user_id=${userId}`);
+export async function getCalendar(targetDate) {
+  const res = await fetch(`${BASE_URL}/calendar/${targetDate}`, { headers: authHeaders() });
   return res.json();
 }
 
-export async function getCalendarMonth(userId, yearMonth) {
-  const res = await fetch(`${BASE_URL}/calendar/month/${yearMonth}?user_id=${userId}`);
+export async function getCalendarMonth(yearMonth) {
+  const res = await fetch(`${BASE_URL}/calendar/month/${yearMonth}`, { headers: authHeaders() });
   return res.json();
 }
 
 export async function getWeeklyReport(userId) {
-  const res = await fetch(`${BASE_URL}/report/weekly?user_id=${userId}`);
+  const res = await fetch(`${BASE_URL}/report/weekly`, { headers: authHeaders() });
+  return res.json();
+}
+
+export async function getInbodyHistory() {
+  const res = await fetch(`${BASE_URL}/inbody/history`, { headers: authHeaders() });
+  return res.json();
+}
+
+export async function getCurrentStrategy() {
+  const res = await fetch(`${BASE_URL}/strategy/current`, { headers: authHeaders() });
+  return res.json();
+}
+
+export async function getCaloriesHistory() {
+  const res = await fetch(`${BASE_URL}/calories/history`, { headers: authHeaders() });
+  return res.json();
+}
+
+export async function updateMeal(mealId, quantityG) {
+  const res = await fetch(`${BASE_URL}/meal/update`, {
+    method: "PUT",
+    headers: authHeaders({ "Content-Type": "application/json" }),
+    body: JSON.stringify({ meal_id: mealId, quantity_g: quantityG }),
+  });
+  return res.json();
+}
+
+export async function deleteMeal(mealId) {
+  const res = await fetch(`${BASE_URL}/meal/delete/${mealId}`, {
+    method: "DELETE",
+    headers: authHeaders(),
+  });
   return res.json();
 }
 
 export async function resumeChat(userId, threadId, message, onToken, onDone) {
   const response = await fetch(`${BASE_URL}/chat/resume`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: authHeaders({ "Content-Type": "application/json" }),
     body: JSON.stringify({
-      user_id: userId,
       thread_id: threadId,
       message,
     }),

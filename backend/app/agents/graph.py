@@ -60,7 +60,13 @@ async def load_state_node(state: AgentState) -> dict:
     days_since    = 999
     if latest_inbody:
         days_since = (date.today() - date.fromisoformat(latest_inbody["measured_date"])).days
+    try:
+        user_rows = sb.table("users").select("goal").eq("id", user_id).limit(1).execute().data
+    except:
+        user_rows = []
+    user_goal = (user_rows[0].get("goal") if user_rows else None) or "diet"
     return {
+        "user_goal":         user_goal,
         "today_calories":    round(sum(r.get("calories",0)  for r in meal_rows), 1),
         "today_protein":     round(sum(r.get("protein_g",0) for r in meal_rows), 1),
         "today_carbs":       round(sum(r.get("carbs_g",0)   for r in meal_rows), 1),

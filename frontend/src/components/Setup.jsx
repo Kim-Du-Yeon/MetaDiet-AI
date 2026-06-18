@@ -1,6 +1,5 @@
 import { useState } from "react";
-
-const USER_ID = "17691249-f22f-4447-a6e4-fca7a8e57cc8";
+import { getToken } from "../api/dietApi";
 
 export default function Setup({ onComplete }) {
   const [form, setForm] = useState({
@@ -21,7 +20,6 @@ export default function Setup({ onComplete }) {
     setLoading(true);
     try {
       const params = new URLSearchParams({
-        user_id: USER_ID,
         goal: form.goal,
         height_cm: form.height_cm,
         weight_kg: form.weight_kg,
@@ -30,6 +28,7 @@ export default function Setup({ onComplete }) {
       });
       const res = await fetch(`http://localhost:8000/users/setup?${params}`, {
         method: "POST",
+        headers: { Authorization: `Bearer ${getToken()}` },
       });
       const data = await res.json();
       setResult(data);

@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react";
-import { getCalendar, getCalendarMonth } from "../../api/dietApi";
+import { getCalendar, getCalendarMonth, updateMeal, deleteMeal } from "../../api/dietApi";
 
-const USER_ID = "17691249-f22f-4447-a6e4-fca7a8e57cc8";
-const BASE_URL = "http://localhost:8000";
 const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
 
 function formatLocalDate(date) {
@@ -33,7 +31,7 @@ export default function CalendarView() {
   const fetchCalendar = async (date) => {
     setLoading(true);
     try {
-      const result = await getCalendar(USER_ID, date);
+      const result = await getCalendar(date);
       setData(result);
     } catch (e) {
       console.error(e);
@@ -44,7 +42,7 @@ export default function CalendarView() {
   const fetchCalendarMonth = async (yearMonth) => {
     setMonthLoading(true);
     try {
-      const result = await getCalendarMonth(USER_ID, yearMonth);
+      const result = await getCalendarMonth(yearMonth);
       setMonthData(result);
     } catch (e) {
       console.error(e);
@@ -62,15 +60,7 @@ export default function CalendarView() {
 
   const handleEditSave = async (meal) => {
     try {
-      await fetch(`${BASE_URL}/meal/update`, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          user_id: USER_ID,
-          meal_id: meal.id,
-          quantity_g: parseFloat(editValue),
-        }),
-      });
+      await updateMeal(meal.id, parseFloat(editValue));
       setEditingId(null);
       fetchCalendar(selectedDate);
       fetchCalendarMonth(selectedMonth);
@@ -82,9 +72,7 @@ export default function CalendarView() {
   const handleDelete = async (mealId) => {
     if (!window.confirm("이 기록을 삭제하시겠습니까?")) return;
     try {
-      await fetch(`${BASE_URL}/meal/delete/${mealId}?user_id=${USER_ID}`, {
-        method: "DELETE",
-      });
+      await deleteMeal(mealId);
       fetchCalendar(selectedDate);
       fetchCalendarMonth(selectedMonth);
     } catch (e) {
