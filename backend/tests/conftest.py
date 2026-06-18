@@ -21,10 +21,13 @@ class FakeResult:
 
 class FakeQuery:
     """table().select().eq().limit().execute().data 체인을 받아주는 가짜 쿼리 빌더.
-    체인 메서드는 전부 self를 반환하고 execute()만 결과를 낸다."""
+    체인 메서드는 전부 self를 반환하고 execute()만 결과를 낸다.
+    insert()/update()는 (method, table, payload)를 FakeSupabase.calls에 기록한다."""
 
-    def __init__(self, data):
+    def __init__(self, data, table_name=None, calls=None):
         self._data = data
+        self._table_name = table_name
+        self._calls = calls if calls is not None else []
 
     def select(self, *a, **k): return self
     def eq(self, *a, **k): return self
@@ -32,9 +35,15 @@ class FakeQuery:
     def order(self, *a, **k): return self
     def gte(self, *a, **k): return self
     def lte(self, *a, **k): return self
-    def insert(self, *a, **k): return self
-    def update(self, *a, **k): return self
     def delete(self, *a, **k): return self
+
+    def insert(self, payload):
+        self._calls.append(("insert", self._table_name, payload))
+        return self
+
+    def update(self, payload):
+        self._calls.append(("update", self._table_name, payload))
+        return self
 
     def execute(self):
         return FakeResult(self._data)
@@ -42,13 +51,15 @@ class FakeQuery:
 
 class FakeSupabase:
     """table(name)별로 다른 데이터를 주는 가짜 Supabase 클라이언트.
-    사용: fake_sb.tables["meal_logs"] = [{...}] 로 테스트마다 값을 바꿔 끼운다."""
+    사용: fake_sb.tables["meal_logs"] = [{...}] 로 테스트마다 값을 바꿔 끼운다.
+    fake_sb.calls 로 insert/update 호출 인자를 검증한다."""
 
     def __init__(self, tables: dict | None = None):
         self.tables = tables or {}
+        self.calls = []
 
     def table(self, name: str) -> FakeQuery:
-        return FakeQuery(self.tables.get(name, []))
+        return FakeQuery(self.tables.get(name, []), table_name=name, calls=self.calls)
 
 
 class FakeVectorStore:

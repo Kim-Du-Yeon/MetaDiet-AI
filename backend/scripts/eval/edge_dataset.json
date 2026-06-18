@@ -2,6 +2,8 @@
   {"message": "라뚜기 먹었어",     "context": [], "pending": false, "expected": "diet_logger", "edge_type": "typo"},
   {"message": "아아 한잔 했어",    "context": [], "pending": false, "expected": "diet_logger", "edge_type": "typo"},
   {"message": "치킨 먹음",         "context": [], "pending": false, "expected": "diet_logger", "edge_type": "typo"},
+  {"message": "목표달성률 알려줘", "context": [], "pending": false, "expected": "goal_manager", "edge_type": "typo"},
+  {"message": "인바 분석해줘",     "context": [], "pending": false, "expected": "inbody",       "edge_type": "typo"},
 
   {"message": "닭가슴살 먹었어",   "context": [], "pending": false, "expected": "diet_logger", "edge_type": "missing_unit"},
   {"message": "밥 한 그릇 먹었어", "context": [], "pending": false, "expected": "diet_logger", "edge_type": "missing_unit"},
@@ -11,9 +13,12 @@
   {"message": "안녕",           "context": [], "pending": false, "expected": "strategy", "edge_type": "empty_or_irrelevant"},
   {"message": "오늘 날씨 어때?", "context": [], "pending": false, "expected": "strategy", "edge_type": "empty_or_irrelevant"},
 
-  {"message": "chicken salad 먹었어", "context": [], "pending": false, "expected": "diet_logger", "edge_type": "mixed_lang"},
-  {"message": "프로틴 shake 마셨어",  "context": [], "pending": false, "expected": "diet_logger", "edge_type": "mixed_lang"},
-  {"message": "오늘 gym 다녀왔어",    "context": [], "pending": false, "expected": "strategy",    "edge_type": "mixed_lang"},
+  {"message": "chicken salad 먹었어", "context": [], "pending": false, "expected": "diet_logger",   "edge_type": "mixed_lang"},
+  {"message": "프로틴 shake 마셨어",  "context": [], "pending": false, "expected": "diet_logger",   "edge_type": "mixed_lang"},
+  {"message": "오늘 gym 다녀왔어",    "context": [], "pending": false, "expected": "strategy",      "edge_type": "mixed_lang"},
+  {"message": "goal 얼마나 달성했어", "context": [], "pending": false, "expected": "goal_manager", "edge_type": "mixed_lang"},
+  {"message": "어제 dinner 기록 삭제해줘", "context": [], "pending": false, "expected": "edit",     "edge_type": "mixed_lang"},
+  {"message": "이번 weekly report 보여줘", "context": [], "pending": false, "expected": "reporter", "edge_type": "mixed_lang"},
 
   {
     "message": "취소해줘",
@@ -33,5 +38,6 @@
 
   {"message": "닭가슴살 200g 먹었고 단백질 더 먹어야 하나?",      "context": [], "pending": false, "expected": "diet_logger", "edge_type": "mixed_intent"},
   {"message": "식단 짜줘, 아 그리고 어제 저녁 삼겹살 기록해줘", "context": [], "pending": false, "expected": "diet_logger", "edge_type": "mixed_intent"},
-  {"message": "오늘 먹은 거 기록하고 살 빼는 전략도 알려줘",     "context": [], "pending": false, "expected": "diet_logger", "edge_type": "mixed_intent"}
+  {"message": "오늘 먹은 거 기록하고 살 빼는 전략도 알려줘",     "context": [], "pending": false, "expected": "diet_logger", "edge_type": "mixed_intent"},
+  {"message": "오늘 닭가슴살 먹었고 목표도 알려줘", "context": [], "pending": false, "expected": "diet_logger", "edge_type": "mixed_intent"}
 ]

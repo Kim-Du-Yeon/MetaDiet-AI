@@ -45,6 +45,7 @@ SUPERVISOR_PROMPT = ChatPromptTemplate.from_messages([
 
 - goal_manager: 목표 체중·기간 대비 진행 상황을 점검하려는 의도
   판단 기준: "목표까지 얼마나 남았어?", "목표 달성률 어때?", "이 속도면 목표일까지 도달해?" 같은 장기 목표 진행/속도 확인 요청
+  주의: 단순 운동 활동 보고("오늘 헬스 다녀왔어", "운동했어")는 목표 진행/속도 언급이 없으면 goal_manager가 아니라 strategy
 
 - reporter: 주간/월간 식단 리포트를 원하는 의도
 
@@ -100,6 +101,14 @@ def _heuristic_intent(message: str, has_pending: bool) -> str | None:
     # 5. 하루 전체 식단 계획 → meal_plan
     if any(k in msg for k in ["식단 짜", "식단짜", "식단 계획", "식단 추천", "하루 식단", "meal plan", "플랜"]):
         return "meal_plan"
+
+    # 6. 운동/헬스 언급만 있고 목표 진행 신호가 없으면 strategy로 안전 라우팅.
+    #    goal_manager 도입 후 LLM이 "오늘 gym 다녀왔어" 같은 단순 운동 보고를 목표 점검으로
+    #    과민 분류하는 회귀가 발견됨(edge_dataset.json) → 명확한 케이스는 LLM 이전에 차단.
+    #    위 1~5에서 이미 안 걸렸으므로 다른 의도(식사 기록 등)와 섞인 문장은 영향 없음.
+    if any(k in msg for k in ["운동", "헬스", "gym", "짐", "헬짐", "workout", "워크아웃"]) \
+            and not any(k in msg for k in ["목표", "달성", "얼마나", "남았", "진행"]):
+        return "strategy"
 
     return None
 
