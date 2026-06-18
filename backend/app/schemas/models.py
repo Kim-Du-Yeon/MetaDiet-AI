@@ -115,10 +115,6 @@ class AgentState(TypedDict):
     # LLM 추측 대신 이 값을 강제 적용 → 끼니 오분류 방지(끼니는 사용자 사실).
     forced_meal_type:      Annotated[Optional[str], keep_latest]
 
-    # 영양성분 출처("csv"|"llm_estimated"). 끼니별 source는 pending_meals 각
-    # item에 실려 다니므로(diet_logger가 채움) 이 필드는 현재 비워둔다.
-    source:                Annotated[Optional[str], keep_latest]
-
     # 장기 목표(Goal Manager Agent). load_state가 users 테이블에서 채움.
     target_weight_kg:      Annotated[Optional[float], keep_latest]
     target_date:           Annotated[Optional[str], keep_latest]

@@ -75,7 +75,7 @@ def _format_display(pending_meals: list, today_meals: list) -> str:
             continue
         lines.append(f"\n{meal_labels[mt]}")
         for m in by_meal[mt]:
-            mark = "📊" if m.get("source") == "국가표준식품성분표" else "🤖"
+            mark = "📊" if m.get("source") == "csv" else "🤖"
             lines.append(
                 f"  • {m['food_name']} {m['quantity_g']}g "
                 f"({round(m['calories'])}kcal | 탄 {round(m.get('carbs_g',0))}g | "
@@ -152,12 +152,12 @@ async def diet_logger_node(state: AgentState) -> dict:
         db_result  = await nutrition_db_tool.ainvoke({"food_name": food_name, "quantity_g": quantity_g})
         if db_result.get("found_in_db"):
             nutrition = {k: db_result[k] for k in ["calories","protein_g","carbs_g","fat_g","sodium_mg"]}
-            source    = "국가표준식품성분표"
+            source    = "csv"
         else:
             nutr_resp = await llm.ainvoke(NUTRITION_LLM_PROMPT.format_messages(
                 food_name=food_name, quantity_g=quantity_g))
             nutrition = json.loads(re.sub(r"```json|```", "", nutr_resp.content).strip())
-            source    = "LLM 추정"
+            source    = "llm_estimated"
             print(f"=== LLM 추정: {food_name} ===")
         pending_meals.append({
             "meal_type": meal_type, "food_name": food_name, "quantity_g": quantity_g,

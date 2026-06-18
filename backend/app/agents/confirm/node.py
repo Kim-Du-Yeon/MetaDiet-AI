@@ -193,14 +193,14 @@ async def confirm_node(state: AgentState) -> dict:
                 meal.update({
                     "calories": db_result["calories"], "protein_g": db_result["protein_g"],
                     "carbs_g": db_result["carbs_g"], "fat_g": db_result["fat_g"],
-                    "sodium_mg": db_result["sodium_mg"], "source": "국가표준식품성분표",
+                    "sodium_mg": db_result["sodium_mg"], "source": "csv",
                 })
             else:
                 nutr_resp = await llm.ainvoke(NUTRITION_LLM_PROMPT.format_messages(
                     food_name=meal["food_name"], quantity_g=meal["quantity_g"]
                 ))
                 nutrition = json.loads(re.sub(r"```json|```", "", nutr_resp.content).strip())
-                meal.update({**nutrition, "source": "LLM 추정"})
+                meal.update({**nutrition, "source": "llm_estimated"})
             recalculated.append(meal)
 
         display = _format_modified_display(recalculated, plan_date, new_plan["message"])
