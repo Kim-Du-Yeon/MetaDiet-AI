@@ -144,6 +144,7 @@ async def confirm_node(state: AgentState) -> dict:
                 "quantity_g": float(meal["quantity_g"]), "calories": float(meal["calories"]),
                 "protein_g": float(meal["protein_g"]), "carbs_g": float(meal.get("carbs_g",0)),
                 "fat_g": float(meal.get("fat_g",0)), "sodium_mg": float(meal.get("sodium_mg",0)),
+                "source": meal.get("source") or "llm_estimated",
             })
             if r.get("success"): saved += 1
         total_cal    = round(sum(m["calories"]        for m in pending))

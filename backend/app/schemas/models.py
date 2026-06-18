@@ -115,6 +115,10 @@ class AgentState(TypedDict):
     # LLM 추측 대신 이 값을 강제 적용 → 끼니 오분류 방지(끼니는 사용자 사실).
     forced_meal_type:      Annotated[Optional[str], keep_latest]
 
+    # 영양성분 출처("csv"|"llm_estimated"). 끼니별 source는 pending_meals 각
+    # item에 실려 다니므로(diet_logger가 채움) 이 필드는 현재 비워둔다.
+    source:                Annotated[Optional[str], keep_latest]
+
     # RAG 캐시: 그래프 1회 실행당 검색 1번만 하고 재사용.
     #   meal_plan이 채우면 validator·재생성 루프가 재사용 → 동일 페이지 중복
     #   검색 제거 + 쿼리생성 LLM 호출 절감(토큰). grounded는 RAG 근거 여부 추적.

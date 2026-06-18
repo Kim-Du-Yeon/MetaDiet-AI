@@ -2,6 +2,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState
 from app.core.config import get_settings
+from app.tools.nutrition_db import nutrition_db_tool
 import json, re
 
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0,
@@ -102,13 +103,21 @@ async def edit_node(state: AgentState) -> AgentState:
         new_quantity = edit_info.get("new_quantity_g", target_row["quantity_g"])
         new_food_name = edit_info.get("new_food_name") or target_row["food_name"]
 
-        # 새 영양성분 계산
-        nutr_resp = await llm.ainvoke(NUTRITION_PROMPT.format_messages(
-            food_name=new_food_name,
-            quantity_g=new_quantity
-        ))
-        nutr_raw = re.sub(r"```json|```", "", nutr_resp.content).strip()
-        nutrition = json.loads(nutr_raw)
+        # 영양성분 재계산: CSV 우선 조회 → 실패 시 LLM 추정 폴백 (diet_logger/confirm과 동일 패턴)
+        db_result = await nutrition_db_tool.ainvoke({
+            "food_name": new_food_name, "quantity_g": float(new_quantity)
+        })
+        if db_result.get("found_in_db"):
+            nutrition = {k: db_result[k] for k in ["calories", "protein_g", "carbs_g", "fat_g"]}
+            source = "csv"
+        else:
+            nutr_resp = await llm.ainvoke(NUTRITION_PROMPT.format_messages(
+                food_name=new_food_name,
+                quantity_g=new_quantity
+            ))
+            nutr_raw = re.sub(r"```json|```", "", nutr_resp.content).strip()
+            nutrition = json.loads(nutr_raw)
+            source = "llm_estimated"
 
         sb.table("meal_logs").update({
             "food_name": new_food_name,
@@ -117,10 +126,12 @@ async def edit_node(state: AgentState) -> AgentState:
             "protein_g": float(nutrition["protein_g"]),
             "carbs_g": float(nutrition["carbs_g"]),
             "fat_g": float(nutrition["fat_g"]),
+            "source": source,
         }).eq("id", target_row["id"]).execute()
 
+        mark = "📊 CSV" if source == "csv" else "🤖 LLM 추정"
         response = (
-            f"✅ 수정 완료!\n"
+            f"✅ 수정 완료! ({mark})\n"
             f"{target_row['meal_type']} {new_food_name} "
             f"{new_quantity}g → {nutrition['calories']}kcal / 단백질 {nutrition['protein_g']}g"
         )

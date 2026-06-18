@@ -61,6 +61,7 @@ async def save_meal_tool(
     carbs_g: float,
     fat_g: float,
     sodium_mg: float,
+    source: str = "llm_estimated",
 ) -> dict:
     """확정된 식단을 DB에 저장"""
     try:
@@ -75,6 +76,7 @@ async def save_meal_tool(
             "carbs_g": float(carbs_g),
             "fat_g": float(fat_g),
             "sodium_mg": float(sodium_mg),
+            "source": source,
         }).execute()
         return {"success": True, "food_name": food_name}
     except Exception as e:

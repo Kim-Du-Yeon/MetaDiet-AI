@@ -632,8 +632,10 @@ class MealUpdateRequest(BaseModel):
 async def update_meal(req: MealUpdateRequest, current_user: str = Depends(get_current_user)):
     from app.agents.diet_logger.node import NUTRITION_LLM_PROMPT, llm
     import re as _re, json as _json
-    row = sb.table("meal_logs").select("food_name").eq("id",req.meal_id).execute().data
+    row = sb.table("meal_logs").select("food_name,user_id").eq("id",req.meal_id).execute().data
     if not row: raise HTTPException(404, "기록을 찾을 수 없습니다.")
+    if row[0]["user_id"] != current_user:
+        raise HTTPException(403, "본인의 기록만 수정할 수 있습니다.")
     nutr_resp = await llm.ainvoke(NUTRITION_LLM_PROMPT.format_messages(food_name=row[0]["food_name"], quantity_g=req.quantity_g))
     nutrition = _json.loads(_re.sub(r"```json|```","",nutr_resp.content).strip())
     sb.table("meal_logs").update({"quantity_g":req.quantity_g,**{k:nutrition[k] for k in ["calories","protein_g","carbs_g","fat_g"]}}).eq("id",req.meal_id).execute()
@@ -642,6 +644,10 @@ async def update_meal(req: MealUpdateRequest, current_user: str = Depends(get_cu
 
 @app.delete("/meal/delete/{meal_id}")
 async def delete_meal(meal_id: str, current_user: str = Depends(get_current_user)):
+    row = sb.table("meal_logs").select("user_id").eq("id",meal_id).execute().data
+    if not row: raise HTTPException(404, "기록을 찾을 수 없습니다.")
+    if row[0]["user_id"] != current_user:
+        raise HTTPException(403, "본인의 기록만 삭제할 수 있습니다.")
     sb.table("meal_logs").delete().eq("id",meal_id).eq("user_id",current_user).execute()
     return {"success":True}
 
