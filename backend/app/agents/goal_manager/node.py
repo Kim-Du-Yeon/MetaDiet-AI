@@ -64,6 +64,32 @@ def _append(state: AgentState, text: str) -> str:
     return f"{prev}\n\n{text}".strip() if prev else text
 
 
+def _calc_goal_progress(current_weight: float, target_weight: float, start_weight: float) -> dict:
+    """시작→현재→목표 체중으로 달성률(%)과 남은 체중(kg)을 계산. target==start면 100%로 간주."""
+    total_needed = start_weight - target_weight
+    progressed   = start_weight - current_weight
+    progress_pct = round(progressed / total_needed * 100, 1) if total_needed else 100.0
+    remaining_weight = round(current_weight - target_weight, 2)
+    return {"progress_pct": progress_pct, "remaining_weight": remaining_weight}
+
+
+def _calc_weekly_rate(current_weight: float, current_date: str, prev_weight: float, prev_date: str):
+    """최근 2개 인바디 기록 간 주당 체중 변화율(kg/주). 기간이 0일 이하면 None."""
+    days_between = (date.fromisoformat(current_date) - date.fromisoformat(prev_date)).days
+    if days_between <= 0:
+        return None
+    return round((current_weight - prev_weight) / days_between * 7, 2)
+
+
+def _calc_needed_weekly_rate(remaining_weight: float, target_date_str: str, today: date = None):
+    """목표일까지 남은 기간 기준, 목표 달성에 필요한 주당 변화율(kg/주). 기한이 지났으면 None."""
+    today = today or date.today()
+    days_remaining = (date.fromisoformat(target_date_str) - today).days
+    if not days_remaining or days_remaining <= 0:
+        return None
+    return round(remaining_weight / (days_remaining / 7), 2)
+
+
 async def goal_manager_node(state: AgentState) -> dict:
     user_id = state["user_id"]
     target_weight_kg = state.get("target_weight_kg")
@@ -90,22 +116,21 @@ async def goal_manager_node(state: AgentState) -> dict:
     user_rows = sb.table("users").select("weight_kg").eq("id", user_id).limit(1).execute().data
     start_weight = (user_rows[0].get("weight_kg") if user_rows else None) or history[-1]["weight_kg"]
 
-    total_needed = start_weight - target_weight_kg
-    progressed   = start_weight - current_weight
-    progress_pct = round(progressed / total_needed * 100, 1) if total_needed else 100.0
-    remaining_weight = round(current_weight - target_weight_kg, 2)
+    progress = _calc_goal_progress(current_weight, target_weight_kg, start_weight)
+    progress_pct = progress["progress_pct"]
+    remaining_weight = progress["remaining_weight"]
 
     if len(history) >= 2:
         prev_log = history[1]
-        days_between = (date.fromisoformat(latest["measured_date"]) - date.fromisoformat(prev_log["measured_date"])).days
-        weekly_rate = round((current_weight - prev_log["weight_kg"]) / days_between * 7, 2) if days_between > 0 else None
+        weekly_rate = _calc_weekly_rate(
+            current_weight, latest["measured_date"], prev_log["weight_kg"], prev_log["measured_date"]
+        )
         muscle_change = round(current_muscle - prev_log["skeletal_muscle_kg"], 2)
     else:
         weekly_rate = None
         muscle_change = None
 
-    days_remaining = (date.fromisoformat(target_date_str) - date.today()).days
-    needed_weekly_rate = round(remaining_weight / (days_remaining / 7), 2) if days_remaining and days_remaining > 0 else None
+    needed_weekly_rate = _calc_needed_weekly_rate(remaining_weight, target_date_str)
 
     rag_query = (
         f"weight loss rate goal {goal_priority} muscle preservation calorie protein adjustment "
