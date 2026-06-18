@@ -9,7 +9,6 @@ from langchain_core.tools import tool
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from app.db.supabase_client import get_supabase
-from app.rag.retriever import search_nutrition_knowledge
 from app.core.config import get_settings
 import json, re
 
@@ -162,18 +161,11 @@ async def rag_nutrition_tool(query: str) -> str:
     출처(문서명, 페이지) 포함해서 반환.
     """
     try:
-        docs = await search_nutrition_knowledge(query)
-        if not docs:
+        from app.rag.retriever import retrieve
+        rag_result = await retrieve(query, k=4, max_docs=3)
+        if not (rag_result.get("grounded") and rag_result.get("context")):
             return "관련 영양학 근거를 찾지 못했습니다."
-
-        results = []
-        for d in docs[:3]:
-            source = d.metadata.get('source_file', d.metadata.get('source', 'Unknown'))
-            page = d.metadata.get('page', 'N/A')
-            results.append(
-                f"[출처: {source}, 페이지: {page}]\n{d.page_content}"
-            )
-        return "\n\n".join(results)
+        return rag_result["context"]
     except Exception as e:
         return f"RAG 검색 실패: {e}"
 
