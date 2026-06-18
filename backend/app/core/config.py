@@ -61,6 +61,11 @@ class Settings(BaseSettings):
     pinecone_api_key: str
     pinecone_index_name: str = "diet-agent-rag"
 
+    # 임베딩 모델 (하드코딩 회피 — 모델/차원 변경 시 여기만 수정).
+    # large는 cross-lingual(한국어 질의) 검색 정밀도가 small보다 높음.
+    embedding_model:     str = "text-embedding-3-large"
+    embedding_dimension: int = 3072
+
     # RAG 신뢰도 임계값 (dense-only 폴백 시 cosine relevance 기준).
     # 최고 score가 이 값 미만이면 grounded=False → 추측 차단. eval로 보정.
     rag_score_threshold: float = 0.35

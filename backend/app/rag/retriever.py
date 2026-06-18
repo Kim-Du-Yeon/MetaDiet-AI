@@ -4,16 +4,23 @@ rag/retriever.py
 RAG 검색의 단일 진입점. '지능'을 여기에 집중시켜 노드는 호출만 하면 되게 한다.
 
 검색 파이프라인:
-  질문 → [dense(Pinecone 임베딩) 후보] + [sparse(BM25 키워드) 후보]
+  질문 → (한국어면 영어로 번역) → [dense(Pinecone 임베딩) 후보] + [sparse(BM25 키워드) 후보]
+       → (번역이 일어났으면 원본 한국어 쿼리로도 추가 검색 → 위 결과와 RRF 재병합)
        → RRF 융합(상호보완) → FlashRank 리랭킹(로컬 cross-encoder, LLM 토큰 0)
        → top-k → 최상위 리랭크 점수로 grounded 판정
 
 견고성: 청크 캐시(BM25)나 flashrank가 없으면 자동으로 dense-only로 폴백.
         (재인덱싱 전이라도 기존 동작 유지)
+
+cross-lingual: 코퍼스가 영어 문서뿐이라 한국어 질의는 그대로 검색하면 성능이
+        떨어진다(EVALUATION.md 7장). _translate_to_english()가 진입부에서
+        한국어를 감지해 영어 쿼리로 변환 + 원본 쿼리도 함께 검색(dual query
+        expansion)해서 번역 누락을 보완한다. 영어 입력은 기존 동작과 100% 동일.
 """
-import pickle
+import pickle, re
 from pinecone import Pinecone, ServerlessSpec
-from langchain_openai import OpenAIEmbeddings
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_core.prompts import ChatPromptTemplate
 from langchain_pinecone import PineconeVectorStore
 from langchain_core.documents import Document
 from app.core.config import get_settings
@@ -21,9 +28,28 @@ from app.core.config import get_settings
 settings = get_settings()
 
 embeddings = OpenAIEmbeddings(
-    model="text-embedding-3-small",
+    model=settings.embedding_model,
     openai_api_key=settings.openai_api_key
 )
+
+_translate_llm = ChatOpenAI(model="gpt-4o-mini", temperature=0, openai_api_key=settings.openai_api_key)
+_KOREAN_RE = re.compile(r"[가-힣]")
+_TRANSLATE_PROMPT = ChatPromptTemplate.from_messages([
+    ("system", "다음 질문을 영어 학술 검색에 적합한 검색 쿼리 1줄로 번역하세요. 영어 쿼리만 출력, 다른 텍스트 금지."),
+    ("human", "{query}"),
+])
+
+
+async def _translate_to_english(query: str) -> str:
+    """한국어 포함 쿼리를 영어 검색 쿼리로 변환. 한국어가 없으면 그대로 반환."""
+    if not _KOREAN_RE.search(query or ""):
+        return query
+    try:
+        resp = await _translate_llm.ainvoke(_TRANSLATE_PROMPT.format_messages(query=query))
+        return resp.content.strip() or query
+    except Exception as e:
+        print(f"=== 쿼리 번역 실패(원본 유지): {e} ===")
+        return query
 
 _vector_store: PineconeVectorStore = None
 _bm25 = None
@@ -40,7 +66,7 @@ def get_vector_store() -> PineconeVectorStore:
         if settings.pinecone_index_name not in existing:
             pc.create_index(
                 name=settings.pinecone_index_name,
-                dimension=1536,
+                dimension=settings.embedding_dimension,
                 metric="cosine",
                 spec=ServerlessSpec(cloud="aws", region="us-east-1")
             )
@@ -131,6 +157,29 @@ def format_docs(docs: list[Document], max_docs: int = 3) -> str:
     return "\n\n".join(blocks)
 
 
+def _dense_search(store, query: str, cand_k: int):
+    """dense 후보 (+ cosine 점수: 리랭커 폴백 시 grounded 판정용)."""
+    try:
+        dense_scored = store.similarity_search_with_relevance_scores(query, k=cand_k)
+        dense_docs = [d for d, _ in dense_scored]
+        dense_max  = max([s for _, s in dense_scored if s is not None], default=0.0)
+    except Exception:
+        dense_docs, dense_max = store.similarity_search(query, k=cand_k), 0.0
+    return dense_docs, dense_max
+
+
+def _sparse_search(query: str) -> list:
+    """sparse 후보(BM25). 캐시 미가용/검색 실패면 빈 리스트(dense-only 폴백)."""
+    bm25 = _get_bm25()
+    if bm25 is None:
+        return []
+    try:
+        return bm25.invoke(query)
+    except Exception as e:
+        print(f"=== BM25 검색 실패(dense만 사용): {e} ===")
+        return []
+
+
 async def retrieve(query: str, k: int = 4, max_docs: int = 3,
                    use_hybrid: bool = True, use_rerank: bool = True) -> dict:
     """
@@ -147,34 +196,32 @@ async def retrieve(query: str, k: int = 4, max_docs: int = 3,
     store  = get_vector_store()
     cand_k = settings.rag_candidate_k
 
-    # 1) dense 후보 (+ cosine 점수: 리랭커 폴백 시 grounded 판정용)
-    try:
-        dense_scored = store.similarity_search_with_relevance_scores(query, k=cand_k)
-        dense_docs = [d for d, _ in dense_scored]
-        dense_max  = max([s for _, s in dense_scored if s is not None], default=0.0)
-    except Exception:
-        dense_docs, dense_max = store.similarity_search(query, k=cand_k), 0.0
+    # 0) 한국어 쿼리는 영어로 번역. 이미 영어면 그대로(기존 호출부는 동작 불변).
+    translated = await _translate_to_english(query)
 
-    # 2) sparse 후보(BM25). 하이브리드 비활성/미가용이면 dense만 사용
-    sparse_docs = []
-    if use_hybrid:
-        bm25 = _get_bm25()
-        if bm25 is not None:
-            try:
-                sparse_docs = bm25.invoke(query)
-            except Exception as e:
-                print(f"=== BM25 검색 실패(dense만 사용): {e} ===")
-
-    # 3) RRF 융합
+    # 1~2) dense+sparse 후보 → RRF 융합 (번역 쿼리 기준)
+    dense_docs, dense_max = _dense_search(store, translated, cand_k)
+    sparse_docs = _sparse_search(translated) if use_hybrid else []
     candidates = _rrf(dense_docs, sparse_docs)[:cand_k] if sparse_docs else dense_docs
 
-    # 4) 리랭킹 → top-k (비활성이면 후보 상위 k 그대로)
+    # 2b) Dual query expansion: 실제로 번역이 일어난 경우(원문이 한국어)에만
+    #     원본 쿼리로도 검색해서 후보를 보강(번역 누락 보완) → 두 결과를 RRF로 재병합.
+    #     _rrf는 _doc_key 기준으로 합치므로 동일 청크 중복도 여기서 자동 제거됨.
+    if translated != query:
+        dense_docs2, dense_max2 = _dense_search(store, query, cand_k)
+        sparse_docs2 = _sparse_search(query) if use_hybrid else []
+        candidates2 = _rrf(dense_docs2, sparse_docs2)[:cand_k] if sparse_docs2 else dense_docs2
+        candidates  = _rrf(candidates, candidates2)[:cand_k]
+        dense_max   = max(dense_max, dense_max2)
+
+    # 3) 리랭킹 → top-k (비활성이면 후보 상위 k 그대로). FlashRank가 영어 전용
+    #    cross-encoder라 리랭크 쿼리는 항상 translated(영어) 사용.
     if use_rerank:
-        docs, rerank_top = _rerank(query, candidates, k)
+        docs, rerank_top = _rerank(translated, candidates, k)
     else:
         docs, rerank_top = candidates[:k], None
 
-    # 5) grounded 판정(리랭크 점수 우선, 없으면 dense cosine)
+    # 4) grounded 판정(리랭크 점수 우선, 없으면 dense cosine)
     if rerank_top is not None:
         grounded   = rerank_top >= settings.rag_rerank_threshold
         max_score  = round(rerank_top, 3)
