@@ -8,6 +8,9 @@ export default function Setup({ onComplete }) {
     weight_kg: "",
     age: "",
     gender: "male",
+    target_weight_kg: "",
+    target_date: "",
+    goal_priority: "",
   });
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
@@ -26,6 +29,10 @@ export default function Setup({ onComplete }) {
         age: form.age,
         gender: form.gender,
       });
+      // 장기 목표 3개는 선택 입력 — 값이 있을 때만 전송(빈 문자열이면 백엔드 float 파싱 실패)
+      if (form.target_weight_kg) params.set("target_weight_kg", form.target_weight_kg);
+      if (form.target_date) params.set("target_date", form.target_date);
+      if (form.goal_priority) params.set("goal_priority", form.goal_priority);
       const res = await fetch(`http://localhost:8000/users/setup?${params}`, {
         method: "POST",
         headers: { Authorization: `Bearer ${getToken()}` },
@@ -146,6 +153,47 @@ export default function Setup({ onComplete }) {
             </div>
           </div>
         ))}
+
+        {/* 장기 목표 (선택) */}
+        <div style={styles.section}>
+          <label style={styles.label}>장기 목표 (선택)</label>
+          <div style={styles.inputRow}>
+            <input
+              type="number"
+              value={form.target_weight_kg}
+              onChange={(e) => setForm({ ...form, target_weight_kg: e.target.value })}
+              placeholder="목표 체중"
+              style={styles.input}
+            />
+            <span style={styles.unit}>kg</span>
+          </div>
+          <input
+            type="date"
+            value={form.target_date}
+            onChange={(e) => setForm({ ...form, target_date: e.target.value })}
+            style={{ ...styles.input, width: "100%", marginTop: "8px", boxSizing: "border-box" }}
+          />
+          <div style={{ ...styles.genderRow, marginTop: "8px" }}>
+            {[
+              { key: "speed", label: "감량속도 우선" },
+              { key: "muscle", label: "근육유지 우선" },
+              { key: "balance", label: "균형" },
+            ].map((p) => (
+              <button
+                key={p.key}
+                style={{
+                  ...styles.genderBtn,
+                  ...(form.goal_priority === p.key ? styles.genderBtnActive : {}),
+                }}
+                onClick={() =>
+                  setForm({ ...form, goal_priority: form.goal_priority === p.key ? "" : p.key })
+                }
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
+        </div>
 
         <button
           style={{ ...styles.submitBtn, opacity: loading ? 0.6 : 1 }}
