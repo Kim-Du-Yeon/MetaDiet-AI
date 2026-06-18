@@ -19,7 +19,7 @@ SUPERVISOR_PROMPT = ChatPromptTemplate.from_messages([
 [현재 확인 대기 중인 식단 제안]:
 {pending_info}
 
-아래 7가지 중 하나로만 응답하세요:
+아래 8가지 중 하나로만 응답하세요:
 
 - diet_logger: 먹은 음식을 기록하려는 의도
   판단 기준: 음식명이 포함되거나, 이전 대화에서 언급된 음식을 기록하려는 경우
@@ -43,9 +43,12 @@ SUPERVISOR_PROMPT = ChatPromptTemplate.from_messages([
 
 - inbody: 인바디 관련 의도
 
+- goal_manager: 목표 체중·기간 대비 진행 상황을 점검하려는 의도
+  판단 기준: "목표까지 얼마나 남았어?", "목표 달성률 어때?", "이 속도면 목표일까지 도달해?" 같은 장기 목표 진행/속도 확인 요청
+
 - reporter: 주간/월간 식단 리포트를 원하는 의도
 
-반드시 위 7개 단어 중 하나만 출력. 다른 텍스트 금지."""),
+반드시 위 8개 단어 중 하나만 출력. 다른 텍스트 금지."""),
     ("human", "{message}")
 ])
 
@@ -74,6 +77,9 @@ def _heuristic_intent(message: str, has_pending: bool) -> str | None:
     # 2. 인바디/리포트/피드백 — 명시적 전용 신호
     if any(k in msg for k in ["인바디", "체성분", "골격근", "체지방"]):
         return "inbody"
+
+    if any(k in msg for k in ["목표 체중", "목표 달성", "목표까지", "목표 진행", "목표 기간", "목표 설정"]):
+        return "goal_manager"
 
     if "오늘" in msg and any(k in msg for k in ["총평", "피드백", "평가", "잘한 점", "부족한 점", "개선 방향"]):
         return "strategy"
@@ -123,7 +129,7 @@ async def supervisor_node(state: AgentState) -> AgentState:
     intent = response.content.strip().lower()
 
     if intent not in ["diet_logger", "strategy", "inbody", "reporter",
-                       "meal_plan", "confirm", "edit"]:
+                       "meal_plan", "confirm", "edit", "goal_manager"]:
         intent = "strategy"
 
     return {"intent": intent}  # 리듀서 방식: 변경된 필드만 반환

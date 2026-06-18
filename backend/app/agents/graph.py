@@ -26,6 +26,7 @@ from app.agents.reporter.node import reporter_node
 from app.agents.meal_plan.node import meal_plan_node
 from app.agents.edit.node import edit_node
 from app.agents.validator.node import validator_node, route_after_validator
+from app.agents.goal_manager.node import goal_manager_node
 from app.core.config import get_settings
 from datetime import date
 
@@ -61,12 +62,16 @@ async def load_state_node(state: AgentState) -> dict:
     if latest_inbody:
         days_since = (date.today() - date.fromisoformat(latest_inbody["measured_date"])).days
     try:
-        user_rows = sb.table("users").select("goal").eq("id", user_id).limit(1).execute().data
+        user_rows = sb.table("users").select("goal,target_weight_kg,target_date,goal_priority").eq("id", user_id).limit(1).execute().data
     except:
         user_rows = []
-    user_goal = (user_rows[0].get("goal") if user_rows else None) or "diet"
+    user_row  = user_rows[0] if user_rows else {}
+    user_goal = user_row.get("goal") or "diet"
     return {
         "user_goal":         user_goal,
+        "target_weight_kg":  user_row.get("target_weight_kg"),
+        "target_date":       user_row.get("target_date"),
+        "goal_priority":     user_row.get("goal_priority"),
         "today_calories":    round(sum(r.get("calories",0)  for r in meal_rows), 1),
         "today_protein":     round(sum(r.get("protein_g",0) for r in meal_rows), 1),
         "today_carbs":       round(sum(r.get("carbs_g",0)   for r in meal_rows), 1),
@@ -134,6 +139,7 @@ def build_graph(checkpointer=None):
     graph.add_node("confirm",     confirm_node)        # HITL 전담 (interrupt_before 대상)
     graph.add_node("strategy",    strategy_node)
     graph.add_node("inbody",      inbody_node)
+    graph.add_node("goal_manager", goal_manager_node)
     graph.add_node("reporter",    reporter_node)
     # meal_plan↔validator 피드백 루프를 서브그래프 노드 1개로 캡슐화
     graph.add_node("meal_planner", build_meal_planner_subgraph())
@@ -153,6 +159,7 @@ def build_graph(checkpointer=None):
             "confirm":     "confirm",
             "strategy":    "strategy",
             "inbody":      "inbody",
+            "goal_manager": "goal_manager",
             "reporter":    "reporter",
             "meal_plan":   "meal_planner",   # intent 'meal_plan' → 서브그래프 노드
             "edit":        "edit",
@@ -176,7 +183,10 @@ def build_graph(checkpointer=None):
     # meal_planner 서브그래프(meal_plan↔validator 루프) 완료 후 → confirm(HITL interrupt)
     graph.add_edge("meal_planner", "confirm")
 
-    for node in ["strategy", "inbody", "reporter", "edit"]:
+    # inbody 완료 후 goal_manager로 자동 체이닝(목표 대비 진행 점검) → save_chat
+    graph.add_edge("inbody", "goal_manager")
+    graph.add_edge("goal_manager", "save_chat")
+    for node in ["strategy", "reporter", "edit"]:
         graph.add_edge(node, "save_chat")
     graph.add_edge("save_chat", END)
 

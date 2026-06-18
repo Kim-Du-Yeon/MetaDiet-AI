@@ -119,6 +119,11 @@ class AgentState(TypedDict):
     # item에 실려 다니므로(diet_logger가 채움) 이 필드는 현재 비워둔다.
     source:                Annotated[Optional[str], keep_latest]
 
+    # 장기 목표(Goal Manager Agent). load_state가 users 테이블에서 채움.
+    target_weight_kg:      Annotated[Optional[float], keep_latest]
+    target_date:           Annotated[Optional[str], keep_latest]
+    goal_priority:          Annotated[Optional[str], keep_latest]
+
     # RAG 캐시: 그래프 1회 실행당 검색 1번만 하고 재사용.
     #   meal_plan이 채우면 validator·재생성 루프가 재사용 → 동일 페이지 중복
     #   검색 제거 + 쿼리생성 LLM 호출 절감(토큰). grounded는 RAG 근거 여부 추적.

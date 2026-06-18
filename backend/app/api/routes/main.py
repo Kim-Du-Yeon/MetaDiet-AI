@@ -598,6 +598,9 @@ async def get_current_strategy(current_user: str = Depends(get_current_user)):
 
 @app.post("/users/setup")
 async def setup_user(goal: str, height_cm: float, weight_kg: float, age: int, gender: str,
+                      target_weight_kg: Optional[float] = None,
+                      target_date: Optional[str] = None,
+                      goal_priority: Optional[str] = None,
                       auth_id: str = Depends(get_current_auth_id)):
     """
     회원가입 직후 프로필 입력. users row가 아직 없을 수 있으므로(신규 가입자)
@@ -609,14 +612,18 @@ async def setup_user(goal: str, height_cm: float, weight_kg: float, age: int, ge
     else:              cal, prot, note = round(bmr*1.4),     round(weight_kg*1.8), f"체중 유지: {round(bmr*1.4)}kcal"
     carbs_g, fat_g = round((cal*0.5)/4), round((cal*0.25)/9)
 
+    goal_fields = {
+        "goal": goal, "height_cm": height_cm, "age": age, "weight_kg": weight_kg,
+        "target_weight_kg": target_weight_kg, "target_date": target_date,
+        "goal_priority": goal_priority,
+    }
     existing = sb.table("users").select("id").eq("auth_id", auth_id).limit(1).execute().data
     if existing:
         user_id = existing[0]["id"]
-        sb.table("users").update({"goal":goal,"height_cm":height_cm,"age":age,"weight_kg":weight_kg}).eq("id",user_id).execute()
+        sb.table("users").update(goal_fields).eq("id",user_id).execute()
     else:
         user_id = sb.table("users").insert({
-            "auth_id": auth_id, "name": "", "goal": goal,
-            "height_cm": height_cm, "age": age, "weight_kg": weight_kg,
+            "auth_id": auth_id, "name": "", **goal_fields,
         }).execute().data[0]["id"]
 
     sb.table("diet_strategies").update({"is_active":False}).eq("user_id",user_id).eq("is_active",True).execute()
