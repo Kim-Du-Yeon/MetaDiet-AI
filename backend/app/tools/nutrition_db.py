@@ -272,7 +272,6 @@ async def nutrition_db_tool(food_name: str, quantity_g: float) -> dict:
             "carbs_g":      safe_float(match.get(col_map.get("carbs"))),
             "fat_g":        safe_float(match.get(col_map.get("fat"))),
             "sodium_mg":    safe_float(match.get(col_map.get("sodium"))),
-            "source":       "국가표준식품성분표",
             "found_in_db":  True,
         }
         print(

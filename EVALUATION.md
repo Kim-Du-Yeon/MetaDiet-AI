@@ -274,50 +274,55 @@ ragas는 별도 평가 스크립트(`run_ragas_eval.py`)로 관리하며, 기본
 
 ### 결과
 
-| 구간 | 샘플 수 | faithfulness | context_recall | 기준 |
-|------|---------|-------------|---------------|------|
-| 전체(갱신 전, 2026-06 초) | 20 | 0.550 | 0.575 | ragas summary (공식) |
-| 영어 QA(갱신 전) | 10 | 0.900 | 0.950 | per-sample 로그 기반 |
-| 한국어 QA(갱신 전) | 10 | 0.200 | 0.300 | per-sample 로그 기반 |
-| `--limit 3` (EN 상위 3개) | 3 | 0.833 | 1.000 | 초기 테스트 |
+| 구간 | 샘플 수 | 시점 | faithfulness | context_recall |
+|------|---------|------|-------------|---------------|
+| 전체 | 20 | 개선 전 | 0.550 | 0.575 |
+| 전체 | 20 | **개선 후** | **0.925** | **0.825** |
+| 영어 QA | 10 | 개선 전 | 0.900 | 0.950 |
+| 영어 QA | 10 | **개선 후** | **1.000** | 0.700 |
+| 한국어 QA | 10 | 개선 전 | 0.200 | 0.300 |
+| 한국어 QA | 10 | **개선 후** | **0.850** | **0.950** |
+| `--limit 3` (EN 상위 3개) | 3 | 초기 테스트 | 0.833 | 1.000 |
 
-> context_recall의 전체 ragas summary 값(0.575)과 per-sample 기반 단순 평균(0.625) 사이에
-> 소수점 수준의 차이가 있다. ragas 내부 집계 방식·NaN 처리·정규화 차이에 의한 것으로 간주하며,
-> 공식 전체 값은 ragas summary(0.575)를 기준으로 사용한다.
+> context_recall의 전체 ragas summary 값과 per-sample 기반 단순 평균 사이에 소수점 수준의 차이가
+> 있다(개선 전 기준 0.575 vs 0.625). ragas 내부 집계 방식·NaN 처리·정규화 차이로 간주하며, 공식
+> 값은 ragas summary 기준을 사용한다. 원본 리포트: `backend/scripts/eval/ragas_report.json`
+> (개선 전/후 누적 2회 실행분).
 
-> **2026-06-19 갱신** — query translation(한→영 쿼리 변환) + dual query expansion + 임베딩
-> `text-embedding-3-large` 교체 적용 후 재측정:
->
-> | 구간 | 샘플 수 | faithfulness | context_recall |
-> |------|---------|-------------|---------------|
-> | 전체 | 20 | **0.925** | **0.825** |
-> | 영어 QA | 10 | **1.000** | **0.700**(↓0.250) |
-> | 한국어 QA | 10 | **0.850**(↑0.650) | **0.950**(↑0.650) |
->
-> 한국어는 cross-lingual gap이 거의 해소됨(오히려 이번 회차는 영어보다 recall이 높음). 영어
-> context_recall은 소폭 하락(20개 중 3개 영향) — 임베딩 교체로 `chunks.pkl`이 재생성되며
-> `SemanticChunker` 청크 경계 자체가 바뀐 영향으로 추정되나 미검증. 아래 "해석"·"포트폴리오용
-> 요약" 단락은 갱신 전(한국어 성능 저하가 핵심 한계였던 시점) 분석이라 현재 상태와 다르다.
-> 원본 리포트: `backend/scripts/eval/ragas_report.json`.
+### 개선 작업 (2026-06)
+
+한국어 cross-lingual 성능 저하를 해결하기 위해 `backend/app/rag/retriever.py`의 `retrieve()`에
+3가지를 적용했다.
+
+1. **Query translation**: 쿼리에 한글이 포함되면(`_translate_to_english()`, 유니코드 범위 검출)
+   LLM으로 영어 검색 쿼리 1줄로 변환 후 검색한다. 영어 쿼리는 그대로 통과해 추가 비용이 없다.
+2. **Dual query expansion**: 번역이 실제로 일어난 경우에만 원본 한국어 쿼리로도 추가 검색해서
+   두 결과를 기존 dense+sparse RRF 로직으로 재병합한다 — 번역 과정에서 누락될 수 있는 의미를 보완.
+3. **임베딩 모델 교체**: `text-embedding-3-small` → `text-embedding-3-large`(1536→3072차원)로
+   cross-lingual 검색 정밀도를 높였다. Pinecone 인덱스 재생성 + `chunks.pkl` 재인덱싱이 수반된다.
 
 ### 해석
 
-전체 평균(faithfulness 0.550 / context_recall 0.575)이 낮게 보이는 이유는 RAG 파이프라인 전체가
-실패해서가 아니라, **영어 PDF corpus에 한국어 질문을 직접 검색하는 cross-lingual 평가 구간**이
-포함되어 있기 때문이다.
+개선 후 한국어 cross-lingual gap은 거의 해소됐다. faithfulness 0.200→0.850,
+context_recall 0.300→0.950으로 올랐고, 이번 회차는 한국어 context_recall(0.950)이 영어(0.700)보다
+오히려 높다. Query translation이 한국어 질문을 영어 코퍼스와 같은 언어 공간에서 검색하게 만들었고,
+dual query expansion이 번역 손실을 보완했으며, 더 큰 임베딩 모델이 cross-lingual 매칭 정밀도를
+끌어올린 결과로 분석된다.
 
-- **영어 QA (faithfulness 0.900 / context_recall 0.950)**: 영어 질문 → 영어 PDF context → ragas judge의 언어 일관성이 유지되어 안정적
-- **한국어 QA (faithfulness 0.200 / context_recall 0.300)**: 한국어 query와 영어 PDF context 간 semantic mismatch로 retrieval 점수와 평가 점수가 동시에 하락
-- **핵심 한계**: "영어 PDF 기반 corpus에 한국어 질문을 직접 검색하는 구조" 자체의 제약
+다만 트레이드오프가 하나 관찰됐다: 영어 context_recall이 0.950→0.700으로 하락했다(20개 중 3개
+샘플 영향). 임베딩 모델 교체로 `chunks.pkl`이 재생성되며 `SemanticChunker`의 청크 경계 자체가
+바뀐 영향으로 추정되나, 별도 root-cause 분석은 하지 않았다. 한국어 개선분(+0.650)이 영어 하락분
+(-0.250)보다 크고 전체 평균도 0.550/0.575 → 0.925/0.825로 개선됐으므로 순효과는 긍정적이다.
 
 ### 향후 개선 방향
 
-| 방향 | 내용 |
-|------|------|
-| Query translation | 한국어 질문 → 영어 검색 쿼리 변환 후 retrieve |
-| Multilingual embedding | multilingual-e5 또는 `text-embedding-3-large`로 임베딩 교체 |
-| Dual query expansion | 한국어 + 영어 쿼리를 동시에 검색해 결과 합산 |
-| Ragas judge 보강 | 한/영 혼합 판정 지침 추가 |
+| 방향 | 상태 | 내용 |
+|------|------|------|
+| Query translation | ✅ 완료 | 한국어 질문 → 영어 검색 쿼리 변환 후 retrieve |
+| 임베딩 모델 교체 | ✅ 완료 | `text-embedding-3-large`로 교체 |
+| Dual query expansion | ✅ 완료 | 한국어 + 영어 쿼리를 동시에 검색해 결과 합산(RRF 재병합) |
+| 영어 context_recall 하락 원인 분석 | 미착수 | 청크 경계 변화 영향 추정, root-cause 미검증 |
+| Ragas judge 보강 | 미착수 | 한/영 혼합 판정 지침 추가 |
 
 ### 의존성 주의사항
 
@@ -327,7 +332,12 @@ ragas import를 위해 `langchain-community`를 0.4.1로 낮췄다.
 
 ### 포트폴리오용 요약
 
-Ragas 평가 결과 전체 평균은 faithfulness 0.55, context_recall 0.575였으나, 언어별로 분리해보면 영어 QA는 안정적인 반면 한국어 QA에서 성능 저하가 확인되었다. 이는 영어 PDF corpus에 한국어 질문을 직접 검색하는 cross-lingual retrieval 한계로 분석되며, query translation 및 multilingual embedding 개선 필요성을 정량적으로 도출했다.
+Ragas 평가에서 영어 PDF 코퍼스에 한국어로 질의하는 cross-lingual 구간의 성능 저하(faithfulness
+0.200, context_recall 0.300)를 진단한 뒤, query translation·dual query expansion·임베딩 모델
+교체(`text-embedding-3-large`)를 적용해 한국어 faithfulness 0.850, context_recall 0.950으로
+개선했다(전체 평균 0.550/0.575 → 0.925/0.825). 이를 통해 단일 언어 코퍼스 기반 RAG에서도
+번역·하이브리드 검색·임베딩 모델 선택을 조합해 cross-lingual 응답 품질을 정량적으로 끌어올릴 수
+있음을 검증했다.
 
 ### 상세 보고서
 
