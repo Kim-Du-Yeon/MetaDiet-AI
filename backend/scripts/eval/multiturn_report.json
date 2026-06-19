@@ -1,0 +1,93 @@
+{
+  "summary": {
+    "n": 3,
+    "completion_rate": 1.0,
+    "error_rate": 0.0,
+    "trace_found": {
+      "A_normal_multiturn": true,
+      "B_confirm_modify_loop_exit": true,
+      "C_error_recovery": true
+    }
+  },
+  "results": [
+    {
+      "name": "A_normal_multiturn",
+      "thread_id": "scenario_a_1781839844",
+      "turns": [
+        {
+          "message": "닭가슴살 200g 먹었어",
+          "agent_used": "diet_logger",
+          "interrupted": true,
+          "pending_meals": true,
+          "had_error": false
+        },
+        {
+          "message": "응 맞아",
+          "agent_used": "confirm",
+          "interrupted": false,
+          "pending_meals": false,
+          "had_error": false
+        }
+      ],
+      "passed": true,
+      "turn_count": 2,
+      "loop_detected": false,
+      "error": false
+    },
+    {
+      "name": "B_confirm_modify_loop_exit",
+      "thread_id": "scenario_b_1781839853",
+      "turns": [
+        {
+          "message": "닭가슴살 200g 먹었어",
+          "agent_used": "diet_logger",
+          "interrupted": true,
+          "pending_meals": true,
+          "had_error": false
+        },
+        {
+          "message": "닭가슴살 대신 고등어로 바꿔줘",
+          "agent_used": "confirm",
+          "interrupted": true,
+          "pending_meals": true,
+          "had_error": false
+        },
+        {
+          "message": "취소",
+          "agent_used": "confirm",
+          "interrupted": false,
+          "pending_meals": false,
+          "had_error": false
+        }
+      ],
+      "passed": true,
+      "turn_count": 3,
+      "loop_detected": false,
+      "error": false
+    },
+    {
+      "name": "C_error_recovery",
+      "thread_id": "scenario_c_1781839864",
+      "turns": [
+        {
+          "message": "",
+          "agent_used": "strategy",
+          "interrupted": false,
+          "pending_meals": false,
+          "had_error": false
+        },
+        {
+          "message": "오늘 칼로리 얼마나 남았어?",
+          "agent_used": "strategy",
+          "interrupted": false,
+          "pending_meals": false,
+          "had_error": false
+        }
+      ],
+      "passed": true,
+      "turn_count": 2,
+      "loop_detected": false,
+      "error": false
+    }
+  ]
+}

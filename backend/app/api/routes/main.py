@@ -192,7 +192,8 @@ async def _stream(graph, config: dict):
 async def chat(req: ChatRequest, current_user: str = Depends(get_current_user)):
     async def generate():
         graph  = get_graph()
-        config = {"configurable": {"thread_id": f"{current_user}_{req.thread_id}"}}
+        tid    = f"{current_user}_{req.thread_id}"
+        config = {"configurable": {"thread_id": tid}, "metadata": {"thread_id": tid}}
 
         snap = await graph.aget_state(config)
         sv_now = _sv(snap)
@@ -228,7 +229,8 @@ async def chat(req: ChatRequest, current_user: str = Depends(get_current_user)):
             # pending 없는 완료된 thread → 새 thread로 전환
             new_tid = str(int(time.time()))
             print(f"=== [chat] 완료된 thread → 새 thread: {new_tid} ===")
-            config = {"configurable": {"thread_id": f"{current_user}_{new_tid}"}}
+            config = {"configurable": {"thread_id": f"{current_user}_{new_tid}"},
+                      "metadata": {"thread_id": f"{current_user}_{new_tid}"}}
 
         try:
             await graph.ainvoke(_initial_state(req, current_user), config=config)
@@ -250,7 +252,8 @@ async def resume_chat(req: ResumeRequest, current_user: str = Depends(get_curren
     """
     async def generate():
         graph  = get_graph()
-        config = {"configurable": {"thread_id": f"{current_user}_{req.thread_id}"}}
+        tid    = f"{current_user}_{req.thread_id}"
+        config = {"configurable": {"thread_id": tid}, "metadata": {"thread_id": tid}}
         snap   = await graph.aget_state(config)
         if not snap or not snap.next:
             yield f"data: {json.dumps({'type':'error','content':'재개할 대화가 없습니다.'}, ensure_ascii=False)}\n\n"
@@ -382,7 +385,8 @@ async def _process_inbody(user_id: str, image_bytes: bytes) -> dict:
         "image_url": image_url,
     }).execute().data[0]
     graph  = get_graph()
-    config = {"configurable": {"thread_id": f"{user_id}_inbody"}}
+    config = {"configurable": {"thread_id": f"{user_id}_inbody"},
+              "metadata": {"thread_id": f"{user_id}_inbody"}}
     await graph.ainvoke({**_initial_state(ChatRequest(message="인바디 업로드됨. 전략을 재설정해주세요."), user_id),
                          "intent":"inbody","latest_inbody":inbody_row,"days_since_inbody":0}, config=config)
     sv = _sv(await graph.aget_state(config))
@@ -579,7 +583,8 @@ async def get_calendar(target_date: str, current_user: str = Depends(get_current
 @app.get("/report/weekly")
 async def weekly_report(current_user: str = Depends(get_current_user)):
     graph  = get_graph()
-    config = {"configurable": {"thread_id": f"{current_user}_report"}}
+    config = {"configurable": {"thread_id": f"{current_user}_report"},
+              "metadata": {"thread_id": f"{current_user}_report"}}
     await graph.ainvoke({**_initial_state(ChatRequest(message="이번 주 식단 리포트를 보여주세요."), current_user),
                          "intent":"reporter"}, config=config)
     return {"report": _sv(await graph.aget_state(config)).get("response","")}
