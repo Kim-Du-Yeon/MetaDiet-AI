@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 MetaDiet AI — a LangGraph multi-agent diet coaching system. FastAPI backend, React frontend, Supabase Postgres, Pinecone for hybrid RAG. Full architecture is documented in [ARCHITECTURE.md](ARCHITECTURE.md) (with mermaid diagrams per subsystem) and evaluation methodology in [EVALUATION.md](EVALUATION.md) — read those before making non-trivial changes to the graph, RAG pipeline, or eval scripts.
 
+**기능 완성도: ~95%** — 남은 작업은 선택적 개선("남은 선택 작업") + 상용화 인프라("다음 단계") 뿐.
+
 ## 완료된 작업
 
 | 커밋 | 내용 |
@@ -26,11 +28,21 @@ MetaDiet AI — a LangGraph multi-agent diet coaching system. FastAPI backend, R
 | `b20fa2c` | region 기반 KR/INTL RAG 프롬프트 분기 8개 노드 적용(`region_guidance.py` 공유) + 한국어 코퍼스 추가(KDRIs 2개+비만진료지침, 3396청크 재인덱싱) + `guideline2022_vol8.pdf` lang 오태깅 수정 + pytest 65개 |
 | `8832a71` | 멀티턴 평가 시나리오 D 구현(validator 피드백 루프 품질 추적, trend: improving) + LLM judge GPT-4o mini(eval 전용) + meal_plan JSON 파싱 재시도 버그 수정 + pytest 67개 |
 | `5d6a8a3` | kiwipiepy BM25 형태소 분석기 적용(`retriever.py: kiwi_tokenize()` 모듈 싱글턴, 실패 시 공백분리 폴백) + pytest 71개 + ragas 재측정(EN faithfulness/context_recall 0.95/0.90, KO 0.85/0.95 — EN recall 0.70→0.90 회복) |
+| `2f17025` | off-topic 리다이렉트 구현(9번째 intent, LLM 분류, off_topic 노드는 LLM 호출 없음) + routing eval 26/26=1.0 + pytest 73개 |
 
-## 현재 진행 중 (미완료)
+## 남은 선택 작업
 
-- **Supabase SQL 미실행**: `backend/scripts/migrations/add_region_column.sql` — 실행 전까지 `region`은 항상 기본값 `"KR"`로 폴백(try/except로 감싸져 있어 에러는 안 남).
-- **다음 작업: 상용화 인프라** — 서버 배포, React Native 전환, 결제 연동. 아직 착수 전.
+- **AsyncPostgresSaver 커넥션 풀링**: 상용화 안정성(현재는 단일 커넥션, 알려진 한계 참고).
+- **소셜 로그인(카카오/구글)**: 한국 시장 대응.
+- **푸시 알림**: 식사 리마인더.
+
+## 다음 단계: 상용화 인프라
+
+- 서버 배포(Render/Railway/AWS)
+- React Native 전환
+- 앱스토어 등록(iOS/Android)
+- 결제 시스템(구독/인앱결제)
+- 개인정보처리방침/이용약관
 
 ## 핵심 설계 결정
 
@@ -46,6 +58,7 @@ MetaDiet AI — a LangGraph multi-agent diet coaching system. FastAPI backend, R
 ## 알려진 한계/주의사항
 
 - **`AsyncPostgresSaver` 단일 커넥션**: 중단된 요청 1건이 이후 모든 체크포인터 DB 호출을 막을 수 있음 — 서버 재시작 전까지 복구 안 됨.
+- **Supabase SQL 미실행**: `backend/scripts/migrations/add_region_column.sql` — 실행 전까지 `region`은 항상 기본값 `"KR"`로 폴백(try/except로 감싸져 있어 에러는 안 남).
 - **ragas는 별도 venv 필수**: `venv_ragas`에 `ragas==0.2.15` + `langchain-community==0.4.1`(정확히 이 버전 — `langchain-experimental`은 설치하지 말 것, `>=0.4.2`를 요구해서 충돌남). 메인 `requirements.txt`엔 안 들어감.
 - **Windows: `SelectorEventLoop` 필수**: `backend/main.py` 상단의 `WindowsSelectorEventLoopPolicy` 설정을 건드리지 말 것 — 빼면 체크포인터(`psycopg` 비동기 드라이버)가 깨짐.
 - **RAG EN context_recall 일부 미해결**: kiwipiepy 적용 후 0.70→0.90으로 개선됐으나 10건 중 1건은 여전히 recall=0(이전 3건에서 줄어듦) — 근본원인 미파악.
