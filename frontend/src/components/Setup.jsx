@@ -4,6 +4,7 @@ import { getToken } from "../api/dietApi";
 export default function Setup({ onComplete }) {
   const [form, setForm] = useState({
     goal: "diet",
+    region: "KR",
     height_cm: "",
     weight_kg: "",
     age: "",
@@ -24,6 +25,7 @@ export default function Setup({ onComplete }) {
     try {
       const params = new URLSearchParams({
         goal: form.goal,
+        region: form.region,
         height_cm: form.height_cm,
         weight_kg: form.weight_kg,
         age: form.age,
@@ -109,6 +111,28 @@ export default function Setup({ onComplete }) {
               >
                 <span style={styles.goalLabel}>{val.label}</span>
                 <span style={styles.goalDesc}>{val.desc}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* 영양 기준 지역 */}
+        <div style={styles.section}>
+          <label style={styles.label}>영양 기준 지역</label>
+          <div style={styles.genderRow}>
+            {[
+              { key: "KR", label: "한국 🇰🇷 (KDRIs 기준)" },
+              { key: "INTL", label: "국제 🌍 (WHO 기준)" },
+            ].map((r) => (
+              <button
+                key={r.key}
+                style={{
+                  ...styles.genderBtn,
+                  ...(form.region === r.key ? styles.genderBtnActive : {}),
+                }}
+                onClick={() => setForm({ ...form, region: r.key })}
+              >
+                {r.label}
               </button>
             ))}
           </div>

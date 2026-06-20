@@ -120,6 +120,9 @@ class AgentState(TypedDict):
     target_date:           Annotated[Optional[str], keep_latest]
     goal_priority:          Annotated[Optional[str], keep_latest]
 
+    # 지역 기반 영양 기준 우선순위("KR"|"INTL"). load_state가 users.region에서 채움.
+    user_region:            Annotated[str, keep_latest]
+
     # RAG 캐시: 그래프 1회 실행당 검색 1번만 하고 재사용.
     #   meal_plan이 채우면 validator·재생성 루프가 재사용 → 동일 페이지 중복
     #   검색 제거 + 쿼리생성 LLM 호출 절감(토큰). grounded는 RAG 근거 여부 추적.

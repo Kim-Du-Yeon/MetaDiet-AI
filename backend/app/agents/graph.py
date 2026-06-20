@@ -62,7 +62,7 @@ async def load_state_node(state: AgentState) -> dict:
     if latest_inbody:
         days_since = (date.today() - date.fromisoformat(latest_inbody["measured_date"])).days
     try:
-        user_rows = sb.table("users").select("goal,target_weight_kg,target_date,goal_priority").eq("id", user_id).limit(1).execute().data
+        user_rows = sb.table("users").select("goal,target_weight_kg,target_date,goal_priority,region").eq("id", user_id).limit(1).execute().data
     except:
         user_rows = []
     user_row  = user_rows[0] if user_rows else {}
@@ -72,6 +72,7 @@ async def load_state_node(state: AgentState) -> dict:
         "target_weight_kg":  user_row.get("target_weight_kg"),
         "target_date":       user_row.get("target_date"),
         "goal_priority":     user_row.get("goal_priority"),
+        "user_region":       user_row.get("region") or "KR",
         "today_calories":    round(sum(r.get("calories",0)  for r in meal_rows), 1),
         "today_protein":     round(sum(r.get("protein_g",0) for r in meal_rows), 1),
         "today_carbs":       round(sum(r.get("carbs_g",0)   for r in meal_rows), 1),

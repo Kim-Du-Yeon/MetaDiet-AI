@@ -39,6 +39,14 @@ def _clean_title(filename: str) -> str:
     return re.sub(r"[-_]+", " ", stem).strip()
 
 
+_KOREAN_RE = re.compile(r"[가-힣]")
+
+
+def _detect_lang(filename: str) -> str:
+    """파일명에 한글이 포함되면 한국어 문서로 태깅(region 기반 지식 우선순위용)."""
+    return "ko" if _KOREAN_RE.search(filename) else "en"
+
+
 def _is_junk(text: str) -> bool:
     """목차·참고문헌·정크 페이지 판별(검색 노이즈 제거)."""
     t = text.strip()
@@ -80,7 +88,8 @@ def build_index(docs_dir: str, clear: bool = True):
     all_chunks = []
     for pdf_path in pdf_files:
         title = _clean_title(pdf_path.name)
-        print(f"\n로딩: {pdf_path.name}  (title='{title}')")
+        lang  = _detect_lang(pdf_path.name)
+        print(f"\n로딩: {pdf_path.name}  (title='{title}', lang='{lang}')")
         pages = PyPDFLoader(str(pdf_path)).load()
 
         # 1) 정크 페이지 필터
@@ -96,6 +105,7 @@ def build_index(docs_dir: str, clear: bool = True):
         for c in chunks:
             c.metadata["source_file"] = pdf_path.name
             c.metadata["title"] = title
+            c.metadata["lang"] = lang
         all_chunks.extend(chunks)
         print(f"  의미청크 {len(sem_chunks)} → cap 후 {len(chunks)}개")
 

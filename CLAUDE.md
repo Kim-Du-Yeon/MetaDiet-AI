@@ -6,6 +6,54 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 MetaDiet AI — a LangGraph multi-agent diet coaching system. FastAPI backend, React frontend, Supabase Postgres, Pinecone for hybrid RAG. Full architecture is documented in [ARCHITECTURE.md](ARCHITECTURE.md) (with mermaid diagrams per subsystem) and evaluation methodology in [EVALUATION.md](EVALUATION.md) — read those before making non-trivial changes to the graph, RAG pipeline, or eval scripts.
 
+## 완료된 작업
+
+| 커밋 | 내용 |
+|---|---|
+| `d0e0d4e` | 멀티유저 인증(JWT, Supabase Auth) + 회귀 버그 3개 수정(user_goal 하드코딩, edit 날짜범위, RAG 가드레일 inbody/reporter) |
+| `e533f67` | meal 소유권 검증(403/404) + edit CSV lookup + source 컬럼 영속화 |
+| `cc430e8` | RAG 가드레일 전면 통일(rag_nutrition_tool까지 grounded 게이팅 적용) |
+| `2cd47ad` | Goal Manager Agent 구현(채팅 intent + inbody 자동 체이닝) |
+| `a4722c1` | 온보딩 목표 입력 UI(target_weight/date/goal_priority) |
+| `4ee901f` | 한국어 RAG 개선(query translation + dual query expansion + text-embedding-3-large) |
+| `897adc2` | 한국어 RAG 개선 eval 리포트(KO faithfulness 0.20→0.85, context_recall 0.30→0.95) |
+| `74be150` | pytest 테스트 스위트 구축(**52** tests: unit/security/rag/integration) + goal_manager 계산 로직 순수 함수 분리 |
+| `e9fc4f0` | source 표기 통일(csv/llm_estimated) + 죽은 `AgentState.source` 필드 제거 + CLAUDE.md/EVALUATION.md 갱신 |
+| `2cd2460` | `nutrition_db.py` 죽은 source 필드 제거 + EVALUATION.md 7장 본문 재작성 |
+| `51f0277` | goal_manager 과민 분류 회귀 수정(gym/운동 발화→strategy) + 평가 데이터셋 보강(routing +5/edge +6) + Tool 호출 검증 테스트 추가(→ pytest **57**개) |
+| `8c4c348` | 멀티턴/루프 평가 구현(`run_multiturn_eval.py`, 3시나리오) + LangSmith `thread_id` metadata 명시적 전파 |
+| (이번 커밋) | region 온보딩 UI + RAG KR/INTL 프롬프트 분기(`qa.py`) + `build_rag.py` lang 메타데이터 태깅 |
+
+## 현재 진행 중 (미완료)
+
+- **Supabase SQL 미실행**: `backend/scripts/migrations/add_region_column.sql` — 실행 전까지 `region`은 항상 기본값 `"KR"`로 폴백(try/except로 감싸져 있어 에러는 안 남).
+- **Pinecone 재인덱싱 미실행**: `venv\Scripts\python.exe scripts/build_rag.py` — 실행해야 `docs/nutrition/`에 이미 들어와 있는 한국어 KDRIs PDF 2개(`01+2020+한국인+영양소+섭취기준+...pdf`, `03+2020+한국인+영양소+섭취기준+...pdf`)가 코퍼스에 반영되고 `lang` 메타데이터가 붙음.
+- **`answer_from_knowledge`의 region 분기는 eval에만 적용됨**: 실제 `/chat`을 처리하는 노드(diet_logger/meal_plan/strategy/inbody/reporter/goal_manager/validator/rag_nutrition_tool)는 `retrieve()`를 직접 호출하고 `qa.py`를 거치지 않음 — 실 채팅에 region 우선순위를 반영하려면 이 노드들에 `state["user_region"]`을 프롬프트로 흘려주는 작업이 추가로 필요.
+- **시나리오 D(validator 피드백 루프 품질 추적) 미구현**: `run_multiturn_eval.py`는 A(정상 멀티턴)/B(confirm-modify 루프 탈출)/C(에러 복구) 3개뿐 — `meal_plan↔validator` 재시도 루프가 피드백을 반영해 실제로 품질이 개선되는지 추적하는 시나리오는 없음.
+
+## 핵심 설계 결정
+
+- **JWT 2-tier**: `auth_id`(Supabase `auth.uid()`, JWT의 `sub`) vs `users.id`(내부 PK, `meal_logs`/`diet_strategies` 등의 FK) — `get_current_auth_id`/`get_current_user`로 분리(`app/core/auth.py`).
+- **`goal_priority`**: `"speed"`(감량속도 우선) / `"muscle"`(근손실 방지 우선) / `"balance"`(균형) 3값.
+- **`source` 표기**: `"csv"` / `"llm_estimated"`로 영문 통일(이전엔 diet_logger가 한글 "국가표준식품성분표"/"LLM 추정"을 따로 썼음).
+- **RAG 지역 우선순위**: `region="KR"`이면 KDRIs를 최우선 적용하고 없는 내용은 WHO 등으로 보완(충돌 시 KDRIs 채택). `region="INTL"`이면 WHO 우선, 한국 특이 식품/식문화는 KDRIs 참고. 항상 출처 명시.
+- **임베딩**: `text-embedding-3-large`, 3072차원(`app/core/config.py`의 `embedding_model`/`embedding_dimension`).
+- **BM25**: 형태소 분석기(`kiwipiepy` 등) 미적용 — 한국어 PDF가 코퍼스에 실제로 들어간 뒤 토크나이저 개선이 후속 과제.
+- **LangSmith `thread_id`**: `{user_id}_{thread_id}` 합성값을 `config["metadata"]["thread_id"]`로 명시 전파(`main.py`의 `graph.ainvoke()` 호출부 5곳) — `configurable.thread_id`만으로는 trace에 안 묻어서 별도로 넣어야 함.
+
+## 알려진 한계/주의사항
+
+- **`AsyncPostgresSaver` 단일 커넥션**: 중단된 요청 1건이 이후 모든 체크포인터 DB 호출을 막을 수 있음 — 서버 재시작 전까지 복구 안 됨.
+- **ragas는 별도 venv 필수**: `venv_ragas`에 `ragas==0.2.15` + `langchain-community==0.4.1`(정확히 이 버전 — `langchain-experimental`은 설치하지 말 것, `>=0.4.2`를 요구해서 충돌남). 메인 `requirements.txt`엔 안 들어감.
+- **`guideline2022_vol8.pdf`의 `lang` 오태깅**: 실제 내용을 확인해보니 대한비만학회 "비만 진료지침 2022(8판)" — **한국어 문서**인데 파일명이 영문이라 `build_rag.py`의 `_detect_lang()`(파일명 한글 검출 방식)이 `lang: "en"`으로 잘못 태깅함. 파일명을 한글 포함하도록 바꾸거나 재인덱싱 후 수동으로 메타데이터 보정 권장.
+- **Windows: `SelectorEventLoop` 필수**: `backend/main.py` 상단의 `WindowsSelectorEventLoopPolicy` 설정을 건드리지 말 것 — 빼면 체크포인터(`psycopg` 비동기 드라이버)가 깨짐.
+
+## 다음 세션 시작 방법
+
+```
+CLAUDE.md 읽고 현재 상태 파악한 후 [작업명] 이어서 진행해줘.
+```
+
 ## Commands
 
 **Always use the project venv at `backend/venv`** — the system/Windows-Store `python` is a stub and will fail (exit 49). There is no other interpreter to use.
@@ -36,12 +84,13 @@ Evaluation scripts (from `backend/`, see "Evaluation datasets" below for which d
 python scripts/eval/run_routing_eval.py --dataset routing_dataset.json   # or edge_dataset.json
 python scripts/eval/run_eval.py --mode dense|hybrid|full --dataset qa_dataset.json --k 4
 python scripts/eval/run_ragas_eval.py --dataset gold_dataset.json --mode full --k 4 [--limit N]
+python scripts/eval/run_multiturn_eval.py   # 멀티턴/HITL/루프 시나리오, MemorySaver+mock DB로 in-process 실행
 ```
 `run_ragas_eval.py` depends on `ragas==0.2.15`, which is **not** in `requirements.txt` — install it in a separate venv (e.g. `venv_ragas`). In that env, pin `langchain-community==0.4.1` and do **not** install `langchain-experimental`: ragas 0.2.15 imports `langchain_community.chat_models.vertexai`, which `langchain-community` removed starting 0.4.2, and `langchain-experimental` would force `langchain-community>=0.4.2` right back, recreating the conflict.
 
 Tests (from `backend/`):
 ```
-pytest                                # 52 tests in tests/{unit,security,rag,integration}/
+pytest                                # 57 tests in tests/{unit,security,rag,integration}/
 ```
 All external calls (OpenAI/Pinecone/Supabase) are mocked via `tests/conftest.py`'s `FakeSupabase`/`FakeVectorStore` + `mock_current_user`/`fake_sb` fixtures — no network or API keys needed to run it. `pytest.ini` sets `asyncio_mode = auto`. `backend/tests/images/` (sample photos for manual Vision/OCR checks) predates the suite and isn't wired into it.
 
@@ -51,13 +100,13 @@ Demo data: `python scripts/seed_data.py` (3 months synthetic) / `python scripts/
 
 ### Multi-agent graph
 
-`backend/app/agents/graph.py` builds the LangGraph `StateGraph`. Every request: `load_state` (loads today's intake/targets/latest inbody/goal fields from DB) → `supervisor` (LLM intent classification into one of 8 intents, with heuristic guardrails in `supervisor/node.py: _heuristic_intent()` for high-cost-of-error cases like confirm/edit/inbody/reporter) → routed agent → `save_chat` → END.
+`backend/app/agents/graph.py` builds the LangGraph `StateGraph`. Every request: `load_state` (loads today's intake/targets/latest inbody/goal/region fields from DB) → `supervisor` (LLM intent classification into one of 8 intents, with heuristic guardrails in `supervisor/node.py: _heuristic_intent()` for high-cost-of-error cases like confirm/edit/inbody/reporter/goal_manager) → routed agent → `save_chat` → END.
 
 Key routing invariant (`route_to_agent` in `supervisor/node.py`): if `awaiting_confirmation=True` and intent isn't one of `[confirm, edit, diet_logger, strategy]`, force-route to `confirm` so a pending meal proposal can't be abandoned mid-flow.
 
 Agents live one per directory under `backend/app/agents/<name>/node.py`: `diet_logger`, `confirm` (HITL gate), `strategy`, `meal_plan`, `validator`, `inbody`, `goal_manager`, `reporter`, `edit`, `supervisor`. `confirm` is wired with `interrupt_before=["confirm"]` — the graph pauses there until the user responds via `/chat/resume`.
 
-`inbody` auto-chains into `goal_manager` (`graph.py`: `inbody → goal_manager → save_chat`) so every InBody upload also gets a goal-progress check, in addition to `goal_manager` being directly reachable via its own chat intent. `goal_manager_node` appends to `state["response"]` rather than overwriting it (`_append()` helper) specifically so the chained case doesn't clobber `inbody`'s own analysis text.
+`inbody` auto-chains into `goal_manager` (`graph.py`: `inbody → goal_manager → save_chat`) so every InBody upload also gets a goal-progress check, in addition to `goal_manager` being directly reachable via its own chat intent. `goal_manager_node` appends to `state["response"]` rather than overwriting it (`_append()` helper) specifically so the chained case doesn't clobber `inbody`'s own analysis text. Its progress/rate math is split into pure functions (`_calc_goal_progress`/`_calc_weekly_rate`/`_calc_needed_weekly_rate`) for unit testability.
 
 ### meal_planner subgraph
 
@@ -71,19 +120,19 @@ Agents live one per directory under `backend/app/agents/<name>/node.py`: `diet_l
 - `merge_pending_meals` — `None` clears the pending proposal, otherwise replace
 - `keep_max` — monotonic counter (`validation_attempts`, survives the subgraph loop)
 
-`forced_meal_type` lets the frontend's meal-type buttons override `diet_logger`'s LLM-guessed meal type (falls back to LLM guess if absent). `rag_context`/`rag_grounded` are populated once per graph run (by `meal_plan` or whichever agent searches first) and reused by `validator` to avoid duplicate retrieval and token spend.
+`forced_meal_type` lets the frontend's meal-type buttons override `diet_logger`'s LLM-guessed meal type (falls back to LLM guess if absent). `rag_context`/`rag_grounded` are populated once per graph run (by `meal_plan` or whichever agent searches first) and reused by `validator` to avoid duplicate retrieval and token spend. `target_weight_kg`/`target_date`/`goal_priority`/`user_region` are loaded once by `load_state` from `users` and otherwise treated as read-mostly config for the rest of the run.
 
 ### RAG pipeline
 
-`backend/app/rag/retriever.py` exposes a single entry point `retrieve(query, k, use_hybrid, use_rerank)`: queries containing Hangul are auto-translated to English first (`_translate_to_english()` — regex-detected, one LLM call; pure-English queries pass through untouched, no extra cost), then Pinecone dense search + BM25 sparse search (`chunks.pkl`) fused via RRF, then FlashRank reranking. If translation actually happened, the *original* Korean query is also searched in parallel and RRF-merged with the translated results (dual query expansion, to recover anything the translation dropped). A result is `grounded` if the rerank score clears `rag_rerank_threshold` (0.15, configurable in `app/core/config.py`), falling back to cosine `rag_score_threshold` (0.35) when sparse/rerank artifacts are missing (dense-only degradation). Embedding model is `text-embedding-3-large` / 3072-dim (`app/core/config.py`'s `embedding_model`/`embedding_dimension` — not hardcoded; changing either requires deleting and recreating the Pinecone index, since dimension is fixed at index-creation time, then re-running `build_rag.py`). `backend/app/rag/qa.py: answer_from_knowledge()` is the guardrailed answerer — refuses with no fabricated answer when ungrounded, and always appends a source/page footer otherwise. Every `retrieve()` caller (8 agent nodes + `rag_nutrition_tool`) follows the same grounded-gating pattern: substitute a "근거 부족" placeholder into the prompt instead of an empty context when `grounded=False`, so the LLM doesn't fabricate citations.
+`backend/app/rag/retriever.py` exposes a single entry point `retrieve(query, k, use_hybrid, use_rerank)`: queries containing Hangul are auto-translated to English first (`_translate_to_english()` — regex-detected, one LLM call; pure-English queries pass through untouched, no extra cost), then Pinecone dense search + BM25 sparse search (`chunks.pkl`) fused via RRF, then FlashRank reranking. If translation actually happened, the *original* Korean query is also searched in parallel and RRF-merged with the translated results (dual query expansion, to recover anything the translation dropped). A result is `grounded` if the rerank score clears `rag_rerank_threshold` (0.15, configurable in `app/core/config.py`), falling back to cosine `rag_score_threshold` (0.35) when sparse/rerank artifacts are missing (dense-only degradation). Embedding model is `text-embedding-3-large` / 3072-dim (`app/core/config.py`'s `embedding_model`/`embedding_dimension` — not hardcoded; changing either requires deleting and recreating the Pinecone index, since dimension is fixed at index-creation time, then re-running `build_rag.py`). `backend/app/rag/qa.py: answer_from_knowledge()` is the guardrailed answerer — refuses with no fabricated answer when ungrounded, always appends a source/page footer otherwise, and takes a `user_region` ("KR"/"INTL") that switches which standard (KDRIs vs WHO) the LLM is told to prioritize when both appear in the retrieved context. **Note**: `answer_from_knowledge` is currently only called by eval scripts (`run_eval.py`/`run_ragas_eval.py`), not by any live `/chat` node — the region-priority prompt doesn't yet affect real user-facing answers. Every `retrieve()` caller (8 agent nodes + `rag_nutrition_tool`) follows the same grounded-gating pattern: substitute a "근거 부족" placeholder into the prompt instead of an empty context when `grounded=False`, so the LLM doesn't fabricate citations.
 
-Index is built by `backend/scripts/build_rag.py`: `PyPDFLoader` (keeps page metadata) → junk-page filter → `SemanticChunker` → hard size cap (max 1200 chars / 150 overlap) → Pinecone upsert + local `chunks.pkl` for BM25. Source PDFs live in `docs/nutrition/`.
+Index is built by `backend/scripts/build_rag.py`: `PyPDFLoader` (keeps page metadata) → junk-page filter → `SemanticChunker` → hard size cap (max 1200 chars / 150 overlap) → Pinecone upsert + local `chunks.pkl` for BM25. Each chunk also gets a `lang` metadata tag (`"ko"` if the source filename contains Hangul, else `"en"`) — filename-based, so an English-named-but-Korean-content PDF (see Known limitations) gets mistagged. Source PDFs live in `docs/nutrition/`.
 
 Nutrition *values* (calories/macros) are deliberately **not** RAG — they're deterministic CSV lookups against `docs/nutrition/식품성분표_10개정판.csv` via `app/tools/nutrition_db.py`, to avoid hallucinated numbers. RAG is reserved for explanatory nutrition knowledge/strategy advice that needs document grounding.
 
 ### Checkpointing / time travel
 
-`AsyncPostgresSaver` (Supabase Postgres) persists a state snapshot per node per `thread_id`. `/chat/history/{thread}` lists checkpoints, `/chat/rollback` restores one and lets the conversation resume from that point — used e.g. to fix a previously-confirmed meal without duplicating DB rows (`overwrite_on_confirm` flag tells `confirm` to replace rather than append).
+`AsyncPostgresSaver` (Supabase Postgres) persists a state snapshot per node per `thread_id`. `/chat/history/{thread}` lists checkpoints, `/chat/rollback` restores one and lets the conversation resume from that point — used e.g. to fix a previously-confirmed meal without duplicating DB rows (`overwrite_on_confirm` flag tells `confirm` to replace rather than append). The actual `thread_id` passed to `graph.ainvoke()`/`.aget_state()` is always `f"{user_id}_{thread_id}"`; `main.py` also passes the same composite string as `config["metadata"]["thread_id"]` so it's discoverable in LangSmith traces (verified live via `Client().list_runs()` in `run_multiturn_eval.py`).
 
 **Windows-specific**: `psycopg`'s async driver requires `SelectorEventLoop`, not the default `ProactorEventLoop`. `backend/main.py` sets `WindowsSelectorEventLoopPolicy` and runs uvicorn via `asyncio.run(server.serve(), loop_factory=lambda: asyncio.SelectorEventLoop(...))` — don't replace this with a plain `uvicorn.run()`/default loop on Windows, it breaks the checkpointer. `AsyncPostgresSaver` also holds a single connection, so a request that's interrupted mid-flight can block subsequent DB calls until the server restarts.
 
@@ -103,9 +152,9 @@ Each evaluation domain has its own dataset + script; don't conflate them (see [E
 
 | Dataset | Used by | Gold field | Measures |
 |---|---|---|---|
-| `routing_dataset.json` | `run_routing_eval.py` | `expected` (agent label) | baseline routing accuracy, 7 intents |
-| `edge_dataset.json` | `run_routing_eval.py` | `expected` + `edge_type` | routing robustness on typos/mixed intent/etc (6 edge types) |
+| `routing_dataset.json` | `run_routing_eval.py` | `expected` (agent label) | baseline routing accuracy, now 23 cases / 8 intents |
+| `edge_dataset.json` | `run_routing_eval.py` | `expected` + `edge_type` | routing robustness on typos/mixed intent/etc, now 24 cases / 6 edge types |
 | `qa_dataset.json` | `run_eval.py` | `gold_source`/`gold_page`/`gold_excerpt` | dense vs hybrid vs full RAG retrieval ablation (custom metrics, no Ragas) |
 | `gold_dataset.json` | `run_ragas_eval.py` | `gold_answer` + `language` | Ragas `faithfulness`/`context_recall`, EN/KO cross-lingual comparison |
 
-`*_report*.json` files alongside each dataset are committed eval run outputs (for reproducibility), not inputs. The RAG corpus is still English-only PDFs, but the cross-lingual gap this used to cause is largely closed: after adding query translation + dual query expansion + the embedding upgrade above, Ragas Korean scores went from faithfulness 0.200/context_recall 0.300 to **0.850/0.950** (`backend/scripts/eval/ragas_report.json`; see EVALUATION.md section 7 for detail). One open regression from that same change: English context_recall dropped 0.950→0.700 (3/10 samples), suspected to be from `chunks.pkl` re-chunking differently under the new embedding model (`SemanticChunker` boundaries depend on the embedding) — not yet root-caused.
+`*_report*.json` files alongside each dataset are committed eval run outputs (for reproducibility), not inputs. The Pinecone-indexed RAG corpus is currently still English-only (4 PDFs); two Korean KDRIs PDFs already sit in `docs/nutrition/` un-indexed pending a `build_rag.py` re-run (see "현재 진행 중" above). Even before that, the cross-lingual *query* gap (Korean questions against the English corpus) is largely closed: after adding query translation + dual query expansion + the embedding upgrade, Ragas Korean scores went from faithfulness 0.200/context_recall 0.300 to **0.850/0.950** (`backend/scripts/eval/ragas_report.json`; see EVALUATION.md section 7 for detail). One open regression from that same change: English context_recall dropped 0.950→0.700 (3/10 samples), suspected to be from `chunks.pkl` re-chunking differently under the new embedding model (`SemanticChunker` boundaries depend on the embedding) — not yet root-caused.

@@ -606,6 +606,7 @@ async def setup_user(goal: str, height_cm: float, weight_kg: float, age: int, ge
                       target_weight_kg: Optional[float] = None,
                       target_date: Optional[str] = None,
                       goal_priority: Optional[str] = None,
+                      region: str = "KR",
                       auth_id: str = Depends(get_current_auth_id)):
     """
     회원가입 직후 프로필 입력. users row가 아직 없을 수 있으므로(신규 가입자)
@@ -620,7 +621,7 @@ async def setup_user(goal: str, height_cm: float, weight_kg: float, age: int, ge
     goal_fields = {
         "goal": goal, "height_cm": height_cm, "age": age, "weight_kg": weight_kg,
         "target_weight_kg": target_weight_kg, "target_date": target_date,
-        "goal_priority": goal_priority,
+        "goal_priority": goal_priority, "region": region,
     }
     existing = sb.table("users").select("id").eq("auth_id", auth_id).limit(1).execute().data
     if existing:
