@@ -40,5 +40,9 @@
    "pending": false, "expected": "diet_logger"},
   {"message": "위에서 말한 저녁으로 기록",
    "context": [{"role": "user", "content": "저녁은 삼겹살 200g 먹었어"}],
-   "pending": false, "expected": "diet_logger"}
+   "pending": false, "expected": "diet_logger"},
+
+  {"message": "미국 대통령이 누구야?", "context": [], "pending": false, "expected": "off_topic"},
+  {"message": "오늘 날씨 어때?", "context": [], "pending": false, "expected": "off_topic"},
+  {"message": "주식 추천해줘", "context": [], "pending": false, "expected": "off_topic"}
 ]

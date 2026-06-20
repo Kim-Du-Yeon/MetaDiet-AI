@@ -27,6 +27,7 @@ from app.agents.meal_plan.node import meal_plan_node
 from app.agents.edit.node import edit_node
 from app.agents.validator.node import validator_node, route_after_validator
 from app.agents.goal_manager.node import goal_manager_node
+from app.agents.off_topic.node import off_topic_node
 from app.core.config import get_settings
 from datetime import date
 
@@ -145,6 +146,7 @@ def build_graph(checkpointer=None):
     # meal_plan↔validator 피드백 루프를 서브그래프 노드 1개로 캡슐화
     graph.add_node("meal_planner", build_meal_planner_subgraph())
     graph.add_node("edit",        edit_node)
+    graph.add_node("off_topic",   off_topic_node)
     graph.add_node("save_chat",   save_chat_node)
 
     graph.set_entry_point("load_state")
@@ -164,6 +166,7 @@ def build_graph(checkpointer=None):
             "reporter":    "reporter",
             "meal_plan":   "meal_planner",   # intent 'meal_plan' → 서브그래프 노드
             "edit":        "edit",
+            "off_topic":   "off_topic",
         }
     )
 
@@ -187,7 +190,7 @@ def build_graph(checkpointer=None):
     # inbody 완료 후 goal_manager로 자동 체이닝(목표 대비 진행 점검) → save_chat
     graph.add_edge("inbody", "goal_manager")
     graph.add_edge("goal_manager", "save_chat")
-    for node in ["strategy", "reporter", "edit"]:
+    for node in ["strategy", "reporter", "edit", "off_topic"]:
         graph.add_edge(node, "save_chat")
     graph.add_edge("save_chat", END)
 

@@ -1,6 +1,6 @@
 {
   "summary": {
-    "n": 23,
+    "n": 26,
     "intent_accuracy": 1.0,
     "route_accuracy": 1.0,
     "confusion": {}
@@ -187,6 +187,30 @@
       "expected": "diet_logger",
       "intent": "diet_logger",
       "route": "diet_logger",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "미국 대통령이 누구야?",
+      "expected": "off_topic",
+      "intent": "off_topic",
+      "route": "off_topic",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "오늘 날씨 어때?",
+      "expected": "off_topic",
+      "intent": "off_topic",
+      "route": "off_topic",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "주식 추천해줘",
+      "expected": "off_topic",
+      "intent": "off_topic",
+      "route": "off_topic",
       "intent_ok": true,
       "route_ok": true
     }

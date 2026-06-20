@@ -1,6 +1,7 @@
 import pytest
+from langchain_openai import ChatOpenAI
 
-from app.agents.supervisor.node import _heuristic_intent, route_to_agent
+from app.agents.supervisor.node import _heuristic_intent, route_to_agent, supervisor_node
 
 
 @pytest.mark.parametrize("message,expected", [
@@ -55,3 +56,17 @@ def test_route_to_agent_confirm_without_pending_falls_back_to_strategy():
         "message": "이거 아니야",
     }
     assert route_to_agent(state) == "strategy"
+
+
+async def test_supervisor_node_keeps_off_topic_llm_classification(monkeypatch):
+    class _Resp:
+        content = "off_topic"
+
+    async def fake_ainvoke(self, *a, **k):
+        return _Resp()
+
+    monkeypatch.setattr(ChatOpenAI, "ainvoke", fake_ainvoke)
+
+    result = await supervisor_node({"message": "미국 대통령이 누구야?", "messages": []})
+
+    assert result["intent"] == "off_topic"

@@ -19,7 +19,7 @@ SUPERVISOR_PROMPT = ChatPromptTemplate.from_messages([
 [현재 확인 대기 중인 식단 제안]:
 {pending_info}
 
-아래 8가지 중 하나로만 응답하세요:
+아래 9가지 중 하나로만 응답하세요:
 
 - diet_logger: 먹은 음식을 기록하려는 의도
   판단 기준: 음식명이 포함되거나, 이전 대화에서 언급된 음식을 기록하려는 경우
@@ -49,7 +49,10 @@ SUPERVISOR_PROMPT = ChatPromptTemplate.from_messages([
 
 - reporter: 주간/월간 식단 리포트를 원하는 의도
 
-반드시 위 8개 단어 중 하나만 출력. 다른 텍스트 금지."""),
+- off_topic: 식단/영양/운동/체중/인바디/목표와 무관한 질문
+  판단 기준: 위 8개 카테고리 어디에도 속하지 않는 일반 잡담/상식/시사 질문
+
+반드시 위 9개 단어 중 하나만 출력. 다른 텍스트 금지."""),
     ("human", "{message}")
 ])
 
@@ -138,7 +141,7 @@ async def supervisor_node(state: AgentState) -> AgentState:
     intent = response.content.strip().lower()
 
     if intent not in ["diet_logger", "strategy", "inbody", "reporter",
-                       "meal_plan", "confirm", "edit", "goal_manager"]:
+                       "meal_plan", "confirm", "edit", "goal_manager", "off_topic"]:
         intent = "strategy"
 
     return {"intent": intent}  # 리듀서 방식: 변경된 필드만 반환
