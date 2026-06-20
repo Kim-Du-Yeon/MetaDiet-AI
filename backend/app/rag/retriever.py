@@ -56,6 +56,25 @@ _bm25 = None
 _bm25_loaded = False          # 로드 시도 여부(실패 시 재시도 방지)
 _reranker = None
 _reranker_loaded = False
+_kiwi = None
+
+
+def _get_kiwi():
+    """Kiwi 형태소 분석기 모듈 레벨 싱글턴(매 토크나이즈 호출마다 재생성 방지)."""
+    global _kiwi
+    if _kiwi is None:
+        from kiwipiepy import Kiwi
+        _kiwi = Kiwi()
+    return _kiwi
+
+
+def kiwi_tokenize(text: str) -> list[str]:
+    """BM25용 한국어 형태소 토크나이저. 영어 텍스트도 그대로 토큰화되어 영향 최소.
+    분석 실패 시 기존 공백 분리(text.split())로 폴백."""
+    try:
+        return [t.form for t in _get_kiwi().tokenize(text)]
+    except Exception:
+        return text.split()
 
 
 def get_vector_store() -> PineconeVectorStore:
@@ -88,7 +107,7 @@ def _get_bm25():
         from langchain_community.retrievers import BM25Retriever
         with open(settings.get_chunks_path(), "rb") as f:
             chunks = pickle.load(f)
-        _bm25 = BM25Retriever.from_documents(chunks)
+        _bm25 = BM25Retriever.from_documents(chunks, preprocess_func=kiwi_tokenize)
         _bm25.k = settings.rag_candidate_k
         print(f"=== BM25 로드 완료: {len(chunks)}개 청크 ===")
     except Exception as e:
