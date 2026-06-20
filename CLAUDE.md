@@ -25,11 +25,12 @@ MetaDiet AI — a LangGraph multi-agent diet coaching system. FastAPI backend, R
 | `296ee1f` | region 온보딩 UI + RAG KR/INTL 프롬프트 분기(`qa.py`) + `build_rag.py` lang 메타데이터 태깅 |
 | `b20fa2c` | region 기반 KR/INTL RAG 프롬프트 분기 8개 노드 적용(`region_guidance.py` 공유) + 한국어 코퍼스 추가(KDRIs 2개+비만진료지침, 3396청크 재인덱싱) + `guideline2022_vol8.pdf` lang 오태깅 수정 + pytest 65개 |
 | `8832a71` | 멀티턴 평가 시나리오 D 구현(validator 피드백 루프 품질 추적, trend: improving) + LLM judge GPT-4o mini(eval 전용) + meal_plan JSON 파싱 재시도 버그 수정 + pytest 67개 |
+| `5d6a8a3` | kiwipiepy BM25 형태소 분석기 적용(`retriever.py: kiwi_tokenize()` 모듈 싱글턴, 실패 시 공백분리 폴백) + pytest 71개 + ragas 재측정(EN faithfulness/context_recall 0.95/0.90, KO 0.85/0.95 — EN recall 0.70→0.90 회복) |
 
 ## 현재 진행 중 (미완료)
 
 - **Supabase SQL 미실행**: `backend/scripts/migrations/add_region_column.sql` — 실행 전까지 `region`은 항상 기본값 `"KR"`로 폴백(try/except로 감싸져 있어 에러는 안 남).
-- **BM25 형태소 분석기(`kiwipiepy` 등) 미적용**: 한국어 코퍼스는 이제 실제로 인덱싱됐으니(3396청크) 토크나이저 개선이 다음 우선 작업.
+- **다음 작업: 상용화 인프라** — 서버 배포, React Native 전환, 결제 연동. 아직 착수 전.
 
 ## 핵심 설계 결정
 
@@ -38,7 +39,7 @@ MetaDiet AI — a LangGraph multi-agent diet coaching system. FastAPI backend, R
 - **`source` 표기**: `"csv"` / `"llm_estimated"`로 영문 통일(이전엔 diet_logger가 한글 "국가표준식품성분표"/"LLM 추정"을 따로 썼음).
 - **RAG 지역 우선순위**: `region="KR"`이면 KDRIs를 최우선 적용하고 없는 내용은 WHO 등으로 보완(충돌 시 KDRIs 채택). `region="INTL"`이면 WHO 우선, 한국 특이 식품/식문화는 KDRIs 참고. 항상 출처 명시. 가드레일 문구는 `app/rag/region_guidance.py: get_region_guidance()`로 단일화돼 `qa.py` + 실채팅 8개 노드(diet_logger/meal_plan/strategy/inbody/reporter/goal_manager/validator/rag_nutrition_tool)가 공유.
 - **임베딩**: `text-embedding-3-large`, 3072차원(`app/core/config.py`의 `embedding_model`/`embedding_dimension`).
-- **BM25**: 형태소 분석기(`kiwipiepy` 등) 미적용 — 한국어 코퍼스는 인덱싱됐으나 토크나이저 개선은 아직 미착수(다음 우선 작업).
+- **BM25**: 형태소 분석기 `kiwipiepy` 적용 완료(`retriever.py: kiwi_tokenize()`, 모듈 레벨 `Kiwi()` 싱글턴, 분석 실패 시 공백분리로 폴백) — `BM25Retriever.from_documents(..., preprocess_func=kiwi_tokenize)`.
 - **멀티턴 평가 LLM judge**: `run_multiturn_eval.py` 시나리오 D는 GPT-4o mini로 별도 judge 호출(`_judge_response_quality`) — meal_plan/validator 판단 LLM과 분리된 eval 전용이며 프로덕션 노드엔 영향 없음.
 - **LangSmith `thread_id`**: `{user_id}_{thread_id}` 합성값을 `config["metadata"]["thread_id"]`로 명시 전파(`main.py`의 `graph.ainvoke()` 호출부 5곳) — `configurable.thread_id`만으로는 trace에 안 묻어서 별도로 넣어야 함.
 
@@ -47,6 +48,7 @@ MetaDiet AI — a LangGraph multi-agent diet coaching system. FastAPI backend, R
 - **`AsyncPostgresSaver` 단일 커넥션**: 중단된 요청 1건이 이후 모든 체크포인터 DB 호출을 막을 수 있음 — 서버 재시작 전까지 복구 안 됨.
 - **ragas는 별도 venv 필수**: `venv_ragas`에 `ragas==0.2.15` + `langchain-community==0.4.1`(정확히 이 버전 — `langchain-experimental`은 설치하지 말 것, `>=0.4.2`를 요구해서 충돌남). 메인 `requirements.txt`엔 안 들어감.
 - **Windows: `SelectorEventLoop` 필수**: `backend/main.py` 상단의 `WindowsSelectorEventLoopPolicy` 설정을 건드리지 말 것 — 빼면 체크포인터(`psycopg` 비동기 드라이버)가 깨짐.
+- **RAG EN context_recall 일부 미해결**: kiwipiepy 적용 후 0.70→0.90으로 개선됐으나 10건 중 1건은 여전히 recall=0(이전 3건에서 줄어듦) — 근본원인 미파악.
 
 ## 다음 세션 시작 방법
 
@@ -90,7 +92,7 @@ python scripts/eval/run_multiturn_eval.py   # 멀티턴/HITL/루프 시나리오
 
 Tests (from `backend/`):
 ```
-pytest                                # 67 tests in tests/{unit,security,rag,integration}/
+pytest                                # 71 tests in tests/{unit,security,rag,integration}/
 ```
 All external calls (OpenAI/Pinecone/Supabase) are mocked via `tests/conftest.py`'s `FakeSupabase`/`FakeVectorStore` + `mock_current_user`/`fake_sb` fixtures — no network or API keys needed to run it. `pytest.ini` sets `asyncio_mode = auto`. `backend/tests/images/` (sample photos for manual Vision/OCR checks) predates the suite and isn't wired into it.
 
@@ -157,4 +159,4 @@ Each evaluation domain has its own dataset + script; don't conflate them (see [E
 | `qa_dataset.json` | `run_eval.py` | `gold_source`/`gold_page`/`gold_excerpt` | dense vs hybrid vs full RAG retrieval ablation (custom metrics, no Ragas) |
 | `gold_dataset.json` | `run_ragas_eval.py` | `gold_answer` + `language` | Ragas `faithfulness`/`context_recall`, EN/KO cross-lingual comparison |
 
-`*_report*.json` files alongside each dataset are committed eval run outputs (for reproducibility), not inputs. The Pinecone-indexed RAG corpus now includes 3 Korean PDFs (KDRIs 2개 + 비만진료지침) alongside the original 4 English ones — 3396 chunks total after the latest `build_rag.py` re-index; the `ragas_report.json` scores below predate this re-index and should be refreshed before citing them as current. The cross-lingual *query* gap (Korean questions against the corpus) was largely closed earlier via query translation + dual query expansion + the embedding upgrade: Ragas Korean scores went from faithfulness 0.200/context_recall 0.300 to **0.850/0.950** (`backend/scripts/eval/ragas_report.json`; see EVALUATION.md section 7 for detail). One open regression from that same change: English context_recall dropped 0.950→0.700 (3/10 samples), suspected to be from `chunks.pkl` re-chunking differently under the new embedding model (`SemanticChunker` boundaries depend on the embedding) — not yet root-caused.
+`*_report*.json` files alongside each dataset are committed eval run outputs (for reproducibility), not inputs. The Pinecone-indexed RAG corpus includes 3 Korean PDFs (KDRIs 2개 + 비만진료지침) alongside the original 4 English ones — 3396 chunks, BM25-indexed via `kiwipiepy` morphological tokenization (`retriever.py: kiwi_tokenize()`). Latest ragas scores (n=20, k=4, full; `backend/scripts/eval/ragas_report.json` latest entry): **EN faithfulness 0.95 / context_recall 0.90, KO faithfulness 0.85 / context_recall 0.95**. The cross-lingual *query* gap was closed earlier via query translation + dual query expansion + the embedding upgrade (KO went from a 0.200/0.300 baseline to current 0.85/0.95; see EVALUATION.md section 7). The previously-tracked EN context_recall regression (0.95→0.70, 3/10 zero-recall samples) improved to 0.90 (1/10 remaining) after switching the BM25 tokenizer to `kiwipiepy` — that one remaining sample's root cause isn't identified yet.
