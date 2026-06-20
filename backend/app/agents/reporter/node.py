@@ -3,6 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState
 from app.core.config import get_settings
 from app.tools.analytics import get_pattern_analysis, get_inbody_diet_correlation, get_missing_meal_alert
+from app.rag.region_guidance import get_region_guidance
 
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.3,
                  openai_api_key=get_settings().openai_api_key)
@@ -26,6 +27,9 @@ REPORT_PROMPT = ChatPromptTemplate.from_messages([
 
 [RAG 영양 근거]:
 {rag_context}
+
+[지역 기준 우선순위]:
+{region_guidance}
 
 RAG 근거 영역에 "현재 문서 기반 근거는 부족합니다"가 있으면 출처 기반 설명을 만들지 마세요.
 
@@ -121,6 +125,7 @@ async def reporter_node(state: AgentState) -> AgentState:
         target_cal=target_cal,
         target_protein=target_protein,
         rag_context=rag_context,
+        region_guidance=get_region_guidance(state.get("user_region")),
         message=state["message"]
     ))
 

@@ -14,6 +14,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from app.core.config import get_settings
 from app.rag.retriever import retrieve
+from app.rag.region_guidance import get_region_guidance
 
 # QA·평가는 토큰 절감을 위해 mini 사용 (판단형 작업이라 4o-mini로 충분)
 _llm = ChatOpenAI(
@@ -24,21 +25,6 @@ _llm = ChatOpenAI(
 
 # 근거 없을 때 반환하는 고정 문구 (가드레일 ②). eval에서 이 문자열로 거절 여부 판정.
 NO_EVIDENCE = "제공된 자료에서 근거를 찾지 못했습니다."
-
-# region 기반 지식 우선순위 — 한국 KDRIs와 WHO 등 국제 기준이 둘 다 검색됐을 때
-# 어느 쪽을 우선 채택할지 LLM에 명시적으로 지시한다(둘 다 없으면 영향 없음).
-_REGION_GUIDANCE = {
-    "KR": (
-        "한국인 영양 기준(KDRIs 2020)이 검색된 경우 이를 최우선으로 적용하고, "
-        "KDRIs에 없는 내용은 WHO 등 국제 기준으로 보완하되 출처를 명시할 것. "
-        "두 기준이 충돌하면 반드시 KDRIs를 채택하고 차이를 사용자에게 안내할 것."
-    ),
-    "INTL": (
-        "WHO 및 국제 영양 기준을 우선 적용하고, "
-        "한국 특이 식품/식문화 관련 내용은 KDRIs를 참고할 것. "
-        "출처를 항상 명시할 것."
-    ),
-}
 
 QA_PROMPT = ChatPromptTemplate.from_messages([
     ("system", """당신은 영양학 지식베이스 QA 어시스턴트입니다.
@@ -83,7 +69,7 @@ async def answer_from_knowledge(question: str, k: int = 4, user_region: str = "K
             "context":  r["context"],
         }
 
-    region_guidance = _REGION_GUIDANCE.get(user_region, _REGION_GUIDANCE["KR"])
+    region_guidance = get_region_guidance(user_region)
     resp = await _llm.ainvoke(QA_PROMPT.format_messages(
         context=r["context"], question=question, no_evidence=NO_EVIDENCE,
         region_guidance=region_guidance,

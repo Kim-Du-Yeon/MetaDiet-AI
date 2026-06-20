@@ -20,6 +20,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState
 from app.core.config import get_settings
+from app.rag.region_guidance import get_region_guidance
 import json, re
 
 # 최대 재생성 시도 횟수 - 무한 루프 방지
@@ -52,6 +53,9 @@ VALIDATOR_PROMPT = ChatPromptTemplate.from_messages([
 
 [RAG 영양학 근거]
 {rag_context}
+
+[지역 기준 우선순위]
+{region_guidance}
 
 [현재 시도 횟수]: {attempts}회 / 최대 {max_attempts}회
 
@@ -180,6 +184,7 @@ async def validator_node(state: AgentState) -> dict:
         total_fat=total_fat,
         meal_details=_format_meal_details(pending_meals),
         rag_context=rag_context,
+        region_guidance=get_region_guidance(state.get("user_region")),
         attempts=attempts,
         max_attempts=MAX_ATTEMPTS,
     ))

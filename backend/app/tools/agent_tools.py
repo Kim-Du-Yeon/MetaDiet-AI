@@ -155,17 +155,18 @@ async def check_missing_meals_tool(
 
 # ── Tool 6: RAG 영양 지식 검색 ──────────────────────────────────────
 @tool
-async def rag_nutrition_tool(query: str) -> str:
+async def rag_nutrition_tool(query: str, user_region: str = "KR") -> str:
     """
     Pinecone에서 영양학 논문/가이드라인 검색.
-    출처(문서명, 페이지) 포함해서 반환.
+    출처(문서명, 페이지) 포함해서 반환. 반환 텍스트 끝에 지역 기준 우선순위 가드레일을 덧붙인다.
     """
     try:
         from app.rag.retriever import retrieve
+        from app.rag.region_guidance import get_region_guidance
         rag_result = await retrieve(query, k=4, max_docs=3)
         if not (rag_result.get("grounded") and rag_result.get("context")):
             return "관련 영양학 근거를 찾지 못했습니다."
-        return rag_result["context"]
+        return f"{rag_result['context']}\n\n[지역 기준 우선순위] {get_region_guidance(user_region)}"
     except Exception as e:
         return f"RAG 검색 실패: {e}"
 

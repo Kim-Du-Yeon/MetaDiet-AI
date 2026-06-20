@@ -41,9 +41,17 @@ def _clean_title(filename: str) -> str:
 
 _KOREAN_RE = re.compile(r"[가-힣]")
 
+# 파일명은 영문이지만 내용은 한국어인 예외 케이스 보정용 매핑(우선 적용).
+# 매핑에 없으면 기존 한글 포함 여부 감지로 폴백.
+_FILENAME_LANG_OVERRIDES = {
+    "guideline2022_vol8.pdf": "ko",  # 대한비만학회 "비만 진료지침 2022(8판)" — 한국어 문서
+}
+
 
 def _detect_lang(filename: str) -> str:
-    """파일명에 한글이 포함되면 한국어 문서로 태깅(region 기반 지식 우선순위용)."""
+    """파일명 매핑 우선 적용 → 없으면 한글 포함 여부로 한국어 문서 판별(region 기반 지식 우선순위용)."""
+    if filename in _FILENAME_LANG_OVERRIDES:
+        return _FILENAME_LANG_OVERRIDES[filename]
     return "ko" if _KOREAN_RE.search(filename) else "en"
 
 

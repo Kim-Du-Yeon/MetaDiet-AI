@@ -8,6 +8,7 @@ from app.tools.agent_tools import (
 )
 from app.db.supabase_client import get_supabase
 from app.core.config import get_settings
+from app.rag.region_guidance import get_region_guidance
 import json, re
 
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.2, openai_api_key=get_settings().openai_api_key)
@@ -27,6 +28,9 @@ ANALYSIS_PROMPT = ChatPromptTemplate.from_messages([
 
 [RAG 영양학 근거]:
 {rag_context}
+
+[지역 기준 우선순위]:
+{region_guidance}
 
 당신의 역할:
 - 인바디 변화를 분석해서 근손실/체지방 변화를 파악하세요
@@ -109,7 +113,8 @@ async def inbody_node(state: AgentState) -> AgentState:
         goal=state.get("user_goal", "다이어트"),
         inbody_history=history_text,
         current_strategy=strategy_text,
-        rag_context=rag_context
+        rag_context=rag_context,
+        region_guidance=get_region_guidance(state.get("user_region")),
     ))
 
     raw = re.sub(r"```json|```", "", resp.content).strip()

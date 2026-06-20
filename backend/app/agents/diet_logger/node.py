@@ -15,6 +15,7 @@ from app.schemas.models import AgentState, extract_messages_context
 from app.core.config import get_settings
 from app.tools.agent_tools import get_today_meals_tool, check_missing_meals_tool, rag_nutrition_tool
 from app.tools.nutrition_db import nutrition_db_tool
+from app.rag.region_guidance import get_region_guidance
 import json, re
 
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0,
@@ -52,6 +53,8 @@ FEEDBACK_PROMPT = ChatPromptTemplate.from_messages([
 [오늘 누적]: {today_cal}kcal / 목표 {target_cal}kcal | 단백질 {today_protein}g / 목표 {target_protein}g
 [기록 음식]: {food_names}
 [RAG 근거]: {rag_context}
+
+[지역 기준 우선순위]: {region_guidance}
 
 규칙:
 - RAG 근거 있으면 출처(파일명, 페이지) 반드시 명시
@@ -200,6 +203,7 @@ async def diet_logger_node(state: AgentState) -> dict:
                 today_protein=round(sum(m["protein_g"] for m in all_combined)),
                 target_protein=state.get("target_protein", 130),
                 food_names=food_names_str, rag_context=rag_context,
+                region_guidance=get_region_guidance(state.get("user_region")),
             ))
             rag_feedback = f"\n\n💡 {feedback_resp.content.strip()}"
         except Exception as e:

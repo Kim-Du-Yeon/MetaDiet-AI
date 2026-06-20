@@ -3,6 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState, extract_messages_context
 from app.core.config import get_settings
 from app.tools.analytics import get_yesterday_summary, get_pattern_analysis
+from app.rag.region_guidance import get_region_guidance
 import json, re
 from datetime import date, timedelta
 
@@ -29,6 +30,9 @@ MEAL_PLAN_PROMPT = ChatPromptTemplate.from_messages([
 
 [영양학 근거 (RAG)]:
 {rag_context}
+
+[지역 기준 우선순위]:
+{region_guidance}
 
 [이전 검증 실패 피드백 - 있으면 반드시 반영]:
 {validation_feedback}
@@ -198,6 +202,7 @@ async def meal_plan_node(state: AgentState) -> dict:
         yesterday_context=yesterday_context,
         pattern_context=pattern_context,
         rag_context=rag_context,
+        region_guidance=get_region_guidance(state.get("user_region")),
         validation_feedback=validation_feedback if validation_feedback else "없음",
         message=state["message"]
     ))

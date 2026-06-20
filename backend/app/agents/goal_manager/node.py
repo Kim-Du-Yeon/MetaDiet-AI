@@ -17,6 +17,7 @@ from app.schemas.models import AgentState
 from app.core.config import get_settings
 from app.tools.agent_tools import get_inbody_history_tool
 from app.db.supabase_client import get_supabase
+from app.rag.region_guidance import get_region_guidance
 import json, re
 
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.2, openai_api_key=get_settings().openai_api_key)
@@ -37,6 +38,9 @@ GOAL_MANAGER_PROMPT = ChatPromptTemplate.from_messages([
 
 [RAG 영양학 근거]:
 {rag_context}
+
+[지역 기준 우선순위]:
+{region_guidance}
 
 당신의 역할:
 - goal_priority가 "speed"면 속도를, "muscle"이면 근손실 방지를, "balance"면 둘의 균형을 우선하세요
@@ -166,6 +170,7 @@ async def goal_manager_node(state: AgentState) -> dict:
         needed_rate_note="목표일까지 남은 기간 기준" if needed_weekly_rate is not None else "목표 날짜가 지났거나 오늘",
         target_calories=state.get("target_calories", 2000), target_protein=state.get("target_protein", 130),
         rag_context=rag_context,
+        region_guidance=get_region_guidance(state.get("user_region")),
     ))
 
     raw = re.sub(r"```json|```", "", resp.content).strip()

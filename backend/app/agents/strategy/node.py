@@ -3,6 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState, extract_messages_context
 from app.core.config import get_settings
 from app.tools.analytics import get_yesterday_summary, get_pattern_analysis
+from app.rag.region_guidance import get_region_guidance
 from datetime import date
 
 llm = ChatOpenAI(
@@ -25,6 +26,9 @@ STRATEGY_PROMPT = ChatPromptTemplate.from_messages([
 
 [RAG 영양학 근거]:
 {rag_context}
+
+[지역 기준 우선순위]:
+{region_guidance}
 
 중요 지침:
 - 사용자가 "오늘", "오늘 식단", "오늘 총평"을 물으면 [오늘 현재까지 섭취] 수치를 기준으로 답하세요.
@@ -139,6 +143,7 @@ async def strategy_node(state: AgentState) -> dict:
         pattern_context=pattern_context,
         recent_context=recent_context,
         rag_context=rag_context,
+        region_guidance=get_region_guidance(state.get("user_region")),
         message=state["message"]
     ))
 
