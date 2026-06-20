@@ -17,7 +17,7 @@ scripts/eval/run_multiturn_eval.py
 실행:
   D:\\AX\\diet_agent\\backend\\venv\\Scripts\\python.exe scripts/eval/run_multiturn_eval.py
 """
-import sys, os, json, asyncio, time
+import sys, os, json, asyncio, time, re
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))))
 
 from pathlib import Path
@@ -31,6 +31,7 @@ os.environ.setdefault("LANGCHAIN_PROJECT",     os.getenv("LANGSMITH_PROJECT",  "
 os.environ.setdefault("LANGCHAIN_ENDPOINT",    os.getenv("LANGSMITH_ENDPOINT", "https://api.smith.langchain.com"))
 
 import httpx
+from openai import AsyncOpenAI
 from langsmith import traceable, tracing_context, Client
 from langgraph.checkpoint.memory import MemorySaver
 
@@ -80,6 +81,8 @@ from app.api.routes.main import app
 from app.core.auth import get_current_auth_id, get_current_user
 import app.agents.graph as graph_module
 import app.rag.retriever as retriever_module
+from app.agents.meal_plan.node import meal_plan_node
+from app.agents.validator.node import validator_node
 
 REPORT_PATH = Path(__file__).parent / "multiturn_report.json"
 MAX_TURNS = 10
@@ -189,6 +192,101 @@ async def scenario_c(client) -> dict:
             "error": any(t["had_error"] for t in turns)}
 
 
+_openai_client = None
+
+
+def _get_openai_client() -> AsyncOpenAI:
+    global _openai_client
+    if _openai_client is None:
+        _openai_client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+    return _openai_client
+
+
+JUDGE_PROMPT = """당신은 식단 플래너 응답의 품질 변화를 평가하는 채점자입니다.
+[사용자 목표]: {user_goal}
+
+[기준(attempt 1) 응답]:
+{attempt_1_response}
+
+[현재(attempt {attempt}) 응답]:
+{attempt_n_response}
+
+기준 응답 대비 현재 응답이 영양 균형/구체성/목표 적합성 면에서 개선됐는지 평가하세요.
+(attempt 1은 기준 자신과 비교하므로 변화 없음에 해당하는 점수를 주세요)
+아래 JSON으로만 응답하세요(각 항목 0.0~1.0 실수):
+{{"coherence": 현재 응답 자체의 논리적 일관성/완성도,
+  "relevance": 사용자 목표에 대한 적합성,
+  "improvement": 기준 응답 대비 개선도}}
+JSON 외 텍스트 금지."""
+
+
+async def _judge_response_quality(attempt_1_response: str, attempt_n_response: str, user_goal: str, attempt: int) -> dict:
+    """OpenAI API(gpt-4o-mini)로 응답 품질을 채점 — meal_plan/validator 판단과는 독립된 별도 judge 호출."""
+    try:
+        resp = await _get_openai_client().chat.completions.create(
+            model="gpt-4o-mini", max_tokens=300,
+            messages=[{"role": "user", "content": JUDGE_PROMPT.format(
+                user_goal=user_goal, attempt_1_response=attempt_1_response,
+                attempt_n_response=attempt_n_response, attempt=attempt,
+            )}],
+        )
+        raw = re.sub(r"```json|```", "", resp.choices[0].message.content).strip()
+        scores = json.loads(raw)
+        return {k: round(float(scores[k]), 3) for k in ("coherence", "relevance", "improvement")}
+    except Exception as e:
+        print(f"=== [scenario_d] judge 호출 실패(attempt {attempt}): {e} ===")
+        return {"coherence": 0.0, "relevance": 0.0, "improvement": 0.0}
+
+
+async def _run_meal_planner_loop(initial_state: dict) -> tuple[list[dict], bool]:
+    """graph.py의 meal_planner 서브그래프(meal_plan↔validator 루프, MAX_ATTEMPTS=3)를
+    직접 함수 호출로 재현 — route_after_validator와 동일한 종료 조건(통과 또는 재시도 소진)."""
+    state = dict(initial_state)
+    attempts = []
+    while True:
+        plan_result = await meal_plan_node(state)
+        state.update(plan_result)
+        val_result = await validator_node(state)
+        state.update(val_result)
+        attempts.append({"attempt": state["validation_attempts"], "response": plan_result["response"]})
+        if val_result["validation_passed"] or not val_result.get("can_improve"):
+            return attempts, val_result["validation_passed"]
+
+
+@traceable(name="multiturn-eval-scenario-d", run_type="chain")
+async def scenario_d() -> dict:
+    """validator 피드백 루프 품질 추적: meal_plan 응답이 attempt 1→N에서 실제로 개선되는지(LLM judge)."""
+    thread_id = f"scenario_d_{int(time.time())}"
+    user_goal = "체지방 감량"
+    initial_state = {
+        "user_id": TEST_USER, "message": "3일치 식단 짜줘", "user_goal": user_goal,
+        "target_calories": 1800, "target_protein": 140, "messages": [],
+    }
+    try:
+        attempts, organically_passed = await _run_meal_planner_loop(initial_state)
+        baseline = attempts[0]["response"]
+
+        per_attempt = []
+        for a in attempts:
+            scores = await _judge_response_quality(baseline, a["response"], user_goal, a["attempt"])
+            per_attempt.append({"attempt": a["attempt"], "response_length": len(a["response"]), **scores})
+
+        diff = per_attempt[-1]["improvement"] - per_attempt[0]["improvement"]
+        trend = "improving" if diff > 0.1 else ("degrading" if diff < -0.1 else "stable")
+        last = per_attempt[-1]
+        final_score = round((last["coherence"] + last["relevance"] + last["improvement"]) / 3, 3)
+        loop_detected = len(attempts) >= 3 and not organically_passed
+        error = False
+    except Exception as e:
+        print(f"=== [scenario_d] 실행 실패: {e} ===")
+        per_attempt, trend, final_score, loop_detected, error = [], "stable", 0.0, False, True
+
+    passed = (not error) and trend in ("improving", "stable")
+    return {"name": "D_validator_feedback_loop_quality", "thread_id": thread_id,
+            "passed": passed, "turn_count": len(per_attempt), "loop_detected": loop_detected,
+            "error": error, "per_attempt": per_attempt, "trend": trend, "final_score": final_score}
+
+
 async def _find_trace(client_ls: Client, thread_id: str, retries: int = 3) -> bool:
     """LangSmith에 thread_id가 metadata로 찍힌 run이 있는지 확인 + 노드(run) 경로 출력."""
     project = os.getenv("LANGSMITH_PROJECT", "diet-agent")
@@ -216,12 +314,16 @@ async def main():
 
     transport = httpx.ASGITransport(app=app)
     async with httpx.AsyncClient(transport=transport, base_url="http://test", timeout=60) as client:
-        results = [await scenario_a(client), await scenario_b(client), await scenario_c(client)]
+        results = [await scenario_a(client), await scenario_b(client), await scenario_c(client), await scenario_d()]
 
     print("\n=== 시나리오 결과 ===")
     for r in results:
         mark = "✅" if r["passed"] else "❌"
         print(f"  {mark} {r['name']} | turns={r['turn_count']} | loop={r['loop_detected']} | error={r['error']}")
+        if r["name"] == "D_validator_feedback_loop_quality":
+            for a in r["per_attempt"]:
+                print(f"      attempt {a['attempt']}: coherence={a['coherence']} relevance={a['relevance']} improvement={a['improvement']}")
+            print(f"      trend={r['trend']} final_score={r['final_score']}")
 
     n = len(results)
     summary = {

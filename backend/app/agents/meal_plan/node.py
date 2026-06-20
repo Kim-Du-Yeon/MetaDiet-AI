@@ -72,6 +72,19 @@ JSON 외 텍스트 금지."""),
 ])
 
 
+async def _generate_plan_json(messages) -> dict:
+    """LLM이 가끔 JSON 외 텍스트를 섞어 보내 파싱이 깨지는 경우를 위해 1회만 재호출(최소 방어)."""
+    for attempt in range(2):
+        resp = await llm.ainvoke(messages)
+        raw = re.sub(r"```json|```", "", resp.content).strip()
+        try:
+            return json.loads(raw)
+        except json.JSONDecodeError:
+            if attempt == 1:
+                raise
+            print("=== meal_plan JSON 파싱 실패 → 1회 재시도 ===")
+
+
 def format_plan_for_display(plan: dict) -> str:
     meal_labels = {
         "breakfast": "🌅 아침",
@@ -192,7 +205,7 @@ async def meal_plan_node(state: AgentState) -> dict:
     else:
         print("=== meal_plan RAG: 캐시 재사용 (검증 루프, 재검색 생략) ===")
 
-    resp = await llm.ainvoke(MEAL_PLAN_PROMPT.format_messages(
+    plan = await _generate_plan_json(MEAL_PLAN_PROMPT.format_messages(
         today=today,
         tomorrow=tomorrow,
         goal=state.get("user_goal", "다이어트"),
@@ -206,9 +219,6 @@ async def meal_plan_node(state: AgentState) -> dict:
         validation_feedback=validation_feedback if validation_feedback else "없음",
         message=state["message"]
     ))
-
-    raw = re.sub(r"```json|```", "", resp.content).strip()
-    plan = json.loads(raw)
     if not rag_grounded:
         plan["message"] = (
             f"{plan.get('message', '')} "

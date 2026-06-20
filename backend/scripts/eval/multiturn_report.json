@@ -1,18 +1,19 @@
 {
   "summary": {
-    "n": 3,
+    "n": 4,
     "completion_rate": 1.0,
     "error_rate": 0.0,
     "trace_found": {
       "A_normal_multiturn": true,
       "B_confirm_modify_loop_exit": true,
-      "C_error_recovery": true
+      "C_error_recovery": true,
+      "D_validator_feedback_loop_quality": false
     }
   },
   "results": [
     {
       "name": "A_normal_multiturn",
-      "thread_id": "scenario_a_1781839844",
+      "thread_id": "scenario_a_1781969877",
       "turns": [
         {
           "message": "닭가슴살 200g 먹었어",
@@ -36,7 +37,7 @@
     },
     {
       "name": "B_confirm_modify_loop_exit",
-      "thread_id": "scenario_b_1781839853",
+      "thread_id": "scenario_b_1781969887",
       "turns": [
         {
           "message": "닭가슴살 200g 먹었어",
@@ -67,7 +68,7 @@
     },
     {
       "name": "C_error_recovery",
-      "thread_id": "scenario_c_1781839864",
+      "thread_id": "scenario_c_1781969898",
       "turns": [
         {
           "message": "",
@@ -88,6 +89,39 @@
       "turn_count": 2,
       "loop_detected": false,
       "error": false
+    },
+    {
+      "name": "D_validator_feedback_loop_quality",
+      "thread_id": "scenario_d_1781969908",
+      "passed": true,
+      "turn_count": 3,
+      "loop_detected": true,
+      "error": false,
+      "per_attempt": [
+        {
+          "attempt": 1,
+          "response_length": 557,
+          "coherence": 1.0,
+          "relevance": 1.0,
+          "improvement": 0.0
+        },
+        {
+          "attempt": 2,
+          "response_length": 548,
+          "coherence": 1.0,
+          "relevance": 1.0,
+          "improvement": 0.5
+        },
+        {
+          "attempt": 3,
+          "response_length": 538,
+          "coherence": 1.0,
+          "relevance": 1.0,
+          "improvement": 0.5
+        }
+      ],
+      "trend": "improving",
+      "final_score": 0.833
     }
   ]
 }
