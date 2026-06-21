@@ -32,8 +32,9 @@ MetaDiet AI — a LangGraph multi-agent diet coaching system. FastAPI backend, R
 | `8111eeb`~`2d279aa` | 로컬 실행 정비: 백엔드 포트 8000→8080, 프론트 `dietApi.js` BASE_URL을 `REACT_APP_API_URL` 환경변수 참조로 전환(Setup.jsx 잔존 하드코딩 포함), CORS `allow_origins`에 8080/127.0.0.1 추가, JWT 검증 ES256/RS256(JWKS) 우선 시도+HS256 레거시 폴백 |
 | `1484b7f` | mixed intent(과거 식사 기록+오늘 식단 계획 동시 요청) 처리: supervisor 휴리스틱이 diet_logger 우선 라우팅 + 응답에 "기록 후 식단 계획을 세워드릴까요?" 안내 |
 | `1233f24` | edge_dataset `empty_or_irrelevant` 골드 라벨 갱신(strategy→off_topic, off_topic intent 도입 후 stale했던 라벨 수정) → routing 26/26, edge 24/24, pytest 73 전체 1.0 |
+| `6be33b6` | confirm 노드 `unrelated` 분류 추가 — pending 중 식단과 무관한 발화(날씨 등)를 confirm으로 오분류해 임의 저장하던 버그 수정, "확정하시겠어요?" 안내로 pending 유지 + pytest 75개 |
 
-**현재 로컬 실행 가능 상태** — 위 정비로 백엔드/프론트 포트 불일치, CORS 차단, JWT 검증 실패 이슈 해소.
+**현재 로컬 실행 가능/정상 확인 완료** — 위 정비로 백엔드/프론트 포트 불일치, CORS 차단, JWT 검증 실패 이슈 해소.
 
 ## 남은 선택 작업
 
@@ -111,7 +112,7 @@ python scripts/eval/run_multiturn_eval.py   # 멀티턴/HITL/루프 시나리오
 
 Tests (from `backend/`):
 ```
-pytest                                # 71 tests in tests/{unit,security,rag,integration}/
+pytest                                # 75 tests in tests/{unit,security,rag,integration}/
 ```
 All external calls (OpenAI/Pinecone/Supabase) are mocked via `tests/conftest.py`'s `FakeSupabase`/`FakeVectorStore` + `mock_current_user`/`fake_sb` fixtures — no network or API keys needed to run it. `pytest.ini` sets `asyncio_mode = auto`. `backend/tests/images/` (sample photos for manual Vision/OCR checks) predates the suite and isn't wired into it.
 
