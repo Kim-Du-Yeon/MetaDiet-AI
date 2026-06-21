@@ -9,9 +9,11 @@ Authorization 헤더의 Supabase JWT를 직접 검증해서 user_id를 도출한
      auth_id -> users.id 매핑을 거쳐야 기존 쿼리(.eq("user_id", ...))가 그대로 동작한다.
      이 매핑이 없으면 로그인은 성공해도 모든 데이터 조회가 빈 결과를 반환한다.
 """
+import jwt
+from jwt import PyJWKClient
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from jose import jwt, JWTError
+from jose import jwt as jose_jwt, JWTError
 from app.core.config import get_settings
 from app.db.supabase_client import get_supabase
 
@@ -22,24 +24,53 @@ _UNAUTHORIZED = lambda detail: HTTPException(
     status.HTTP_401_UNAUTHORIZED, detail, headers={"WWW-Authenticate": "Bearer"}
 )
 
+_jwks_client = None
+
+
+def _get_jwks_client() -> PyJWKClient:
+    """Supabase Auth(GoTrue) JWKS 캐싱 클라이언트. ES256/RS256 신규 키 체계 검증용.
+
+    경로는 Supabase 표준인 auth/v1 하위(`{SUPABASE_URL}/.well-known/jwks.json`가
+    아니라 `{SUPABASE_URL}/auth/v1/.well-known/jwks.json`) — 프로젝트 도메인 루트가
+    아닌 GoTrue 서비스 네임스페이스에 노출된다.
+    """
+    global _jwks_client
+    if _jwks_client is None:
+        url = f"{get_settings().supabase_url}/auth/v1/.well-known/jwks.json"
+        _jwks_client = PyJWKClient(url)
+    return _jwks_client
+
 
 def get_current_auth_id(token: str = Depends(oauth2_scheme)) -> str:
     """Authorization: Bearer <supabase_jwt> 검증 후 auth.uid()(sub)를 반환.
 
     users row 존재를 요구하지 않는다 — /users/setup처럼 아직 프로필이
     없는 신규 가입자도 호출해야 하는 엔드포인트는 이 의존성을 쓴다.
+
+    Supabase 신규 프로젝트는 비대칭 키(ES256/RS256, JWKS)로 서명하고, 레거시
+    프로젝트는 공유 시크릿(HS256)으로 서명한다 — JWKS 검증을 우선 시도하고,
+    실패(키 없음/네트워크 오류/레거시 토큰)하면 기존 HS256 경로로 폴백한다.
     """
     if not token:
         raise _UNAUTHORIZED("인증 토큰이 없습니다.")
     try:
+        signing_key = _get_jwks_client().get_signing_key_from_jwt(token)
         payload = jwt.decode(
             token,
-            get_settings().supabase_jwt_secret,
-            algorithms=["HS256"],
+            signing_key.key,
+            algorithms=["ES256", "RS256"],
             audience="authenticated",
         )
-    except JWTError:
-        raise _UNAUTHORIZED("유효하지 않거나 만료된 토큰입니다.")
+    except Exception:
+        try:
+            payload = jose_jwt.decode(
+                token,
+                get_settings().supabase_jwt_secret,
+                algorithms=["HS256"],
+                audience="authenticated",
+            )
+        except JWTError:
+            raise _UNAUTHORIZED("유효하지 않거나 만료된 토큰입니다.")
 
     auth_id = payload.get("sub")
     if not auth_id:
