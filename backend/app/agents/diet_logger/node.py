@@ -216,7 +216,7 @@ async def diet_logger_node(state: AgentState) -> dict:
     from app.agents.supervisor.node import _PLAN_KW
     plan_hint = ""
     if any(k in state["message"] for k in _PLAN_KW):
-        plan_hint = "\n\n📋 기록 후 식단 계획을 세워드릴까요?"
+        plan_hint = "\n\n📋 식단 기록 완료 후 \"식단 짜줘\"라고 말씀해주세요."
 
     display_text = _format_display(pending_meals, today_meals) + missing_alert + rag_feedback + plan_hint
     print(f"=== [diet_logger] 완료 | pending={len(pending_meals)}개 ===")
