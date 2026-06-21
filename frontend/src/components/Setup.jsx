@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getToken } from "../api/dietApi";
+import { getToken, BASE_URL } from "../api/dietApi";
 
 export default function Setup({ onComplete }) {
   const [form, setForm] = useState({
@@ -35,7 +35,7 @@ export default function Setup({ onComplete }) {
       if (form.target_weight_kg) params.set("target_weight_kg", form.target_weight_kg);
       if (form.target_date) params.set("target_date", form.target_date);
       if (form.goal_priority) params.set("goal_priority", form.goal_priority);
-      const res = await fetch(`http://localhost:8000/users/setup?${params}`, {
+      const res = await fetch(`${BASE_URL}/users/setup?${params}`, {
         method: "POST",
         headers: { Authorization: `Bearer ${getToken()}` },
       });

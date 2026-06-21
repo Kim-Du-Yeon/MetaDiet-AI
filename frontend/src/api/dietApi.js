@@ -1,4 +1,4 @@
-const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+export const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 // 인증은 Authorization 헤더(Supabase JWT)가 담당한다. 아래 함수들의 `userId`
 // 매개변수는 백엔드가 user_id를 더 이상 받지 않게 된 뒤로는 사용되지 않지만,
