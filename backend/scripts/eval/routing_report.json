@@ -1,13 +1,13 @@
 {
   "summary": {
-    "n": 26,
+    "n": 24,
     "intent_accuracy": 1.0,
     "route_accuracy": 1.0,
     "confusion": {}
   },
   "rows": [
     {
-      "message": "닭가슴살 200g 먹었어",
+      "message": "라뚜기 먹었어",
       "expected": "diet_logger",
       "intent": "diet_logger",
       "route": "diet_logger",
@@ -15,7 +15,7 @@
       "route_ok": true
     },
     {
-      "message": "오늘 점심에 김치찌개랑 공기밥 먹었어",
+      "message": "아아 한잔 했어",
       "expected": "diet_logger",
       "intent": "diet_logger",
       "route": "diet_logger",
@@ -23,7 +23,7 @@
       "route_ok": true
     },
     {
-      "message": "방금 아메리카노 한 잔 마셨어",
+      "message": "치킨 먹음",
       "expected": "diet_logger",
       "intent": "diet_logger",
       "route": "diet_logger",
@@ -31,87 +31,15 @@
       "route_ok": true
     },
     {
-      "message": "내일 하루 식단 좀 짜줘",
-      "expected": "meal_plan",
-      "intent": "meal_plan",
-      "route": "meal_plan",
+      "message": "목표달성률 알려줘",
+      "expected": "goal_manager",
+      "intent": "goal_manager",
+      "route": "goal_manager",
       "intent_ok": true,
       "route_ok": true
     },
     {
-      "message": "다이어트용으로 하루치 식단 계획 세워줘",
-      "expected": "meal_plan",
-      "intent": "meal_plan",
-      "route": "meal_plan",
-      "intent_ok": true,
-      "route_ok": true
-    },
-    {
-      "message": "단백질은 하루에 얼마나 먹어야 해?",
-      "expected": "strategy",
-      "intent": "strategy",
-      "route": "strategy",
-      "intent_ok": true,
-      "route_ok": true
-    },
-    {
-      "message": "지금 칼로리 남았는데 뭐 먹으면 좋을까?",
-      "expected": "strategy",
-      "intent": "strategy",
-      "route": "strategy",
-      "intent_ok": true,
-      "route_ok": true
-    },
-    {
-      "message": "살 빼려면 탄수화물 줄이는 게 맞아?",
-      "expected": "strategy",
-      "intent": "strategy",
-      "route": "strategy",
-      "intent_ok": true,
-      "route_ok": true
-    },
-    {
-      "message": "응 확정해줘",
-      "expected": "confirm",
-      "intent": "confirm",
-      "route": "confirm",
-      "intent_ok": true,
-      "route_ok": true
-    },
-    {
-      "message": "ok 그대로 기록",
-      "expected": "confirm",
-      "intent": "confirm",
-      "route": "confirm",
-      "intent_ok": true,
-      "route_ok": true
-    },
-    {
-      "message": "점심을 치킨샐러드로 바꿔줘",
-      "expected": "confirm",
-      "intent": "confirm",
-      "route": "confirm",
-      "intent_ok": true,
-      "route_ok": true
-    },
-    {
-      "message": "아까 기록한 저녁 메뉴 삭제해줘",
-      "expected": "edit",
-      "intent": "edit",
-      "route": "edit",
-      "intent_ok": true,
-      "route_ok": true
-    },
-    {
-      "message": "어제 저장한 점심 칼로리 좀 수정해줘",
-      "expected": "edit",
-      "intent": "edit",
-      "route": "edit",
-      "intent_ok": true,
-      "route_ok": true
-    },
-    {
-      "message": "인바디 결과 분석해서 전략 업데이트 해줘",
+      "message": "인바 분석해줘",
       "expected": "inbody",
       "intent": "inbody",
       "route": "inbody",
@@ -119,63 +47,7 @@
       "route_ok": true
     },
     {
-      "message": "요즘 목표 달성률이 어느 정도 돼?",
-      "expected": "goal_manager",
-      "intent": "goal_manager",
-      "route": "goal_manager",
-      "intent_ok": true,
-      "route_ok": true
-    },
-    {
-      "message": "목표 체중을 다시 설정하고 싶어요",
-      "expected": "goal_manager",
-      "intent": "goal_manager",
-      "route": "goal_manager",
-      "intent_ok": true,
-      "route_ok": true
-    },
-    {
-      "message": "지금 감량 속도면 목표 기간 안에 도착할 수 있을까?",
-      "expected": "goal_manager",
-      "intent": "goal_manager",
-      "route": "goal_manager",
-      "intent_ok": true,
-      "route_ok": true
-    },
-    {
-      "message": "목표 체중까지 얼마나 남았어?",
-      "expected": "goal_manager",
-      "intent": "goal_manager",
-      "route": "goal_manager",
-      "intent_ok": true,
-      "route_ok": true
-    },
-    {
-      "message": "증량 목표로 바꿨는데 목표 진행 상황 알려줘",
-      "expected": "goal_manager",
-      "intent": "goal_manager",
-      "route": "goal_manager",
-      "intent_ok": true,
-      "route_ok": true
-    },
-    {
-      "message": "이번 주 식단 리포트 보여줘",
-      "expected": "reporter",
-      "intent": "reporter",
-      "route": "reporter",
-      "intent_ok": true,
-      "route_ok": true
-    },
-    {
-      "message": "최근 한 달 단백질 섭취 통계 알려줘",
-      "expected": "reporter",
-      "intent": "reporter",
-      "route": "reporter",
-      "intent_ok": true,
-      "route_ok": true
-    },
-    {
-      "message": "그거 그대로 기록해줘",
+      "message": "닭가슴살 먹었어",
       "expected": "diet_logger",
       "intent": "diet_logger",
       "route": "diet_logger",
@@ -183,7 +55,7 @@
       "route_ok": true
     },
     {
-      "message": "위에서 말한 저녁으로 기록",
+      "message": "밥 한 그릇 먹었어",
       "expected": "diet_logger",
       "intent": "diet_logger",
       "route": "diet_logger",
@@ -191,7 +63,23 @@
       "route_ok": true
     },
     {
-      "message": "미국 대통령이 누구야?",
+      "message": "프로틴 한 스쿱 마셨어",
+      "expected": "diet_logger",
+      "intent": "diet_logger",
+      "route": "diet_logger",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "",
+      "expected": "off_topic",
+      "intent": "off_topic",
+      "route": "off_topic",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "안녕",
       "expected": "off_topic",
       "intent": "off_topic",
       "route": "off_topic",
@@ -207,10 +95,106 @@
       "route_ok": true
     },
     {
-      "message": "주식 추천해줘",
-      "expected": "off_topic",
-      "intent": "off_topic",
-      "route": "off_topic",
+      "message": "chicken salad 먹었어",
+      "expected": "diet_logger",
+      "intent": "diet_logger",
+      "route": "diet_logger",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "프로틴 shake 마셨어",
+      "expected": "diet_logger",
+      "intent": "diet_logger",
+      "route": "diet_logger",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "오늘 gym 다녀왔어",
+      "expected": "strategy",
+      "intent": "strategy",
+      "route": "strategy",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "goal 얼마나 달성했어",
+      "expected": "goal_manager",
+      "intent": "goal_manager",
+      "route": "goal_manager",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "어제 dinner 기록 삭제해줘",
+      "expected": "edit",
+      "intent": "edit",
+      "route": "edit",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "이번 weekly report 보여줘",
+      "expected": "reporter",
+      "intent": "reporter",
+      "route": "reporter",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "취소해줘",
+      "expected": "confirm",
+      "intent": "confirm",
+      "route": "confirm",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "아니 됐어",
+      "expected": "confirm",
+      "intent": "confirm",
+      "route": "confirm",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "닭가슴살 말고 고등어로 바꿔줘",
+      "expected": "confirm",
+      "intent": "confirm",
+      "route": "confirm",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "닭가슴살 200g 먹었고 단백질 더 먹어야 하나?",
+      "expected": "diet_logger",
+      "intent": "diet_logger",
+      "route": "diet_logger",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "식단 짜줘, 아 그리고 어제 저녁 삼겹살 기록해줘",
+      "expected": "diet_logger",
+      "intent": "diet_logger",
+      "route": "diet_logger",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "오늘 먹은 거 기록하고 살 빼는 전략도 알려줘",
+      "expected": "diet_logger",
+      "intent": "diet_logger",
+      "route": "diet_logger",
+      "intent_ok": true,
+      "route_ok": true
+    },
+    {
+      "message": "오늘 닭가슴살 먹었고 목표도 알려줘",
+      "expected": "diet_logger",
+      "intent": "diet_logger",
+      "route": "diet_logger",
       "intent_ok": true,
       "route_ok": true
     }
