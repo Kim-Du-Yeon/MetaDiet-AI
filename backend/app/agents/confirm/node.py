@@ -38,8 +38,9 @@ CONFIRM_CLASSIFY_PROMPT = ChatPromptTemplate.from_messages([
 confirm(저장): "응","ㅇ","네","ok","저장","저장해줘","확정","맞아","좋아","그래","기록","할게" 등
 modify(수정): 특정 음식 수정/변경/추가/삭제 요청이 명확한 경우 (예: "삼겹살 150g으로", "현미밥 빼줘")
 cancel(취소): "취소","됐어","아니야","그만" 등
+unrelated(무관): 식단 확정/취소/수정과 무관한 발화 (날씨, 일반 질문, 잡담 등)
 
-판단 불명확 시 confirm. 단어 하나만 출력."""),
+식단 관련 응답인데 판단 불명확 시 confirm. 식단과 무관하면 unrelated. 단어 하나만 출력."""),
     ("human", "사용자 응답: {message}")
 ])
 
@@ -116,7 +117,7 @@ async def confirm_node(state: AgentState) -> dict:
         pending_summary=_format_pending_summary(pending), message=message,
     ))
     raw_action = classify.content.strip().lower()
-    action     = raw_action if raw_action in ("confirm","modify","cancel") else "confirm"
+    action     = raw_action if raw_action in ("confirm","modify","cancel","unrelated") else "confirm"
     print(f"=== [confirm] LLM 분류: '{raw_action}' → '{action}' ===")
 
     # ── confirm: 저장 ─────────────────────────────────────────────────
@@ -211,6 +212,13 @@ async def confirm_node(state: AgentState) -> dict:
             "pending_meals":         recalculated,
             "awaiting_confirmation": True,  # supervisor가 다음 요청도 confirm으로 라우팅
             "overwrite_on_confirm":  state.get("overwrite_on_confirm"),
+        }
+
+    # ── unrelated: 식단과 무관한 발화, pending 유지 ─────────────────
+    elif action == "unrelated":
+        return {
+            "response":   "식단 계획이 대기 중입니다. 확정하시겠어요? (네/아니요/수정)",
+            "agent_used": "confirm",
         }
 
     # ── cancel ───────────────────────────────────────────────────────
