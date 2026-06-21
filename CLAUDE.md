@@ -29,6 +29,11 @@ MetaDiet AI — a LangGraph multi-agent diet coaching system. FastAPI backend, R
 | `8832a71` | 멀티턴 평가 시나리오 D 구현(validator 피드백 루프 품질 추적, trend: improving) + LLM judge GPT-4o mini(eval 전용) + meal_plan JSON 파싱 재시도 버그 수정 + pytest 67개 |
 | `5d6a8a3` | kiwipiepy BM25 형태소 분석기 적용(`retriever.py: kiwi_tokenize()` 모듈 싱글턴, 실패 시 공백분리 폴백) + pytest 71개 + ragas 재측정(EN faithfulness/context_recall 0.95/0.90, KO 0.85/0.95 — EN recall 0.70→0.90 회복) |
 | `2f17025` | off-topic 리다이렉트 구현(9번째 intent, LLM 분류, off_topic 노드는 LLM 호출 없음) + routing eval 26/26=1.0 + pytest 73개 |
+| `8111eeb`~`2d279aa` | 로컬 실행 정비: 백엔드 포트 8000→8080, 프론트 `dietApi.js` BASE_URL을 `REACT_APP_API_URL` 환경변수 참조로 전환(Setup.jsx 잔존 하드코딩 포함), CORS `allow_origins`에 8080/127.0.0.1 추가, JWT 검증 ES256/RS256(JWKS) 우선 시도+HS256 레거시 폴백 |
+| `1484b7f` | mixed intent(과거 식사 기록+오늘 식단 계획 동시 요청) 처리: supervisor 휴리스틱이 diet_logger 우선 라우팅 + 응답에 "기록 후 식단 계획을 세워드릴까요?" 안내 |
+| `1233f24` | edge_dataset `empty_or_irrelevant` 골드 라벨 갱신(strategy→off_topic, off_topic intent 도입 후 stale했던 라벨 수정) → routing 26/26, edge 24/24, pytest 73 전체 1.0 |
+
+**현재 로컬 실행 가능 상태** — 위 정비로 백엔드/프론트 포트 불일치, CORS 차단, JWT 검증 실패 이슈 해소.
 
 ## 남은 선택 작업
 
@@ -73,19 +78,20 @@ CLAUDE.md 읽고 현재 상태 파악한 후 [작업명] 이어서 진행해줘.
 
 **Always use the project venv at `backend/venv`** — the system/Windows-Store `python` is a stub and will fail (exit 49). There is no other interpreter to use.
 
-Backend (from `backend/`):
+Backend (from `backend/`, **관리자 권한 터미널**에서 실행):
 ```
 venv\Scripts\activate
-python main.py                       # runs on :8000, reload via UVICORN_RELOAD=true
+python main.py                       # runs on :8080, reload via UVICORN_RELOAD=true
 ```
 Or without activating: `backend\venv\Scripts\python.exe <script>`.
 
 Frontend (from `frontend/`):
 ```
-npm start     # dev server
+npm start     # dev server, :3000
 npm run build
 npm test
 ```
+`frontend/.env` 필요: `REACT_APP_SUPABASE_URL`, `REACT_APP_SUPABASE_ANON_KEY`, `REACT_APP_API_URL=http://localhost:8080`.
 
 Env setup: `cp backend/.env.example backend/.env` and fill in `OPENAI_API_KEY`, `SUPABASE_URL`, `SUPABASE_SERVICE_KEY`, `SUPABASE_JWT_SECRET`, `SUPABASE_DB_URL`, `PINECONE_API_KEY`.
 
