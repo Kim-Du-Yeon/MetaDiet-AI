@@ -25,6 +25,8 @@ SUPERVISOR_PROMPT = ChatPromptTemplate.from_messages([
   판단 기준: 음식명이 포함되거나, 이전 대화에서 언급된 음식을 기록하려는 경우
   맥락 예시: 직전에 "저녁 연어 쌀밥"을 말했고 "그거로 기록해줘" → diet_logger
   맥락 예시: "위에서 말한대로", "아까 말한 저녁", "그거 기록" → diet_logger
+  맥락 예시: "어제 피자 먹었어. 오늘 식단 짜줘"처럼 과거 식사 언급 + 오늘 식단 계획 요청이
+            함께 있으면 diet_logger를 우선 처리(기록 먼저, 계획은 그 다음 안내)
 
 - strategy: 식단 조언/추천을 원하는 의도
   판단 기준: 앞으로 먹을 것에 대한 조언, 칼로리 문의, 식단 전략 요청
@@ -68,6 +70,10 @@ _INTAKE_KW = (
     "먹었", "먹음", "먹었다", "마셨", "마셨어", "마심",
     "한잔", "한 잔", "기록", "기록해줘", "저장해줘",
 )
+# 과거 시점 신호 — mixed intent("어제 ~ 먹었어 + 오늘 식단 짜줘") 판별용
+_PAST_KW = ("어제", "아까", "그제", "전에")
+# 하루 전체 식단 계획 요청 신호 — diet_logger(mixed intent)와 meal_plan 라우팅이 공유
+_PLAN_KW = ("식단 짜", "식단짜", "식단 계획", "식단 추천", "하루 식단", "meal plan", "플랜")
 
 
 def _heuristic_intent(message: str, has_pending: bool) -> str | None:
@@ -101,8 +107,14 @@ def _heuristic_intent(message: str, has_pending: bool) -> str | None:
     if any(k in msg for k in _FOOD_KW) and any(k in msg for k in _INTAKE_KW):
         return "diet_logger"
 
+    # 4.5. mixed intent: 과거 식사 언급 + 오늘 식단 계획 요청이 함께 있으면
+    #      diet_logger를 우선 처리(기록 누락 방지). 안내 문구는 diet_logger_node가 덧붙인다.
+    if any(k in msg for k in _PAST_KW) and any(k in msg for k in _INTAKE_KW) \
+            and any(k in msg for k in _PLAN_KW):
+        return "diet_logger"
+
     # 5. 하루 전체 식단 계획 → meal_plan
-    if any(k in msg for k in ["식단 짜", "식단짜", "식단 계획", "식단 추천", "하루 식단", "meal plan", "플랜"]):
+    if any(k in msg for k in _PLAN_KW):
         return "meal_plan"
 
     # 6. 운동/헬스 언급만 있고 목표 진행 신호가 없으면 strategy로 안전 라우팅.

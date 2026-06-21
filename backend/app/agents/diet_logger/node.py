@@ -211,7 +211,14 @@ async def diet_logger_node(state: AgentState) -> dict:
     else:
         rag_feedback = "\n\n💡 현재 문서 기반 근거는 부족해 출처 기반 피드백은 생략합니다."
 
-    display_text = _format_display(pending_meals, today_meals) + missing_alert + rag_feedback
+    # mixed intent("어제 ~ 먹었어 + 오늘 식단 짜줘"): supervisor가 diet_logger를 우선
+    # 라우팅했을 때, 식단 계획 요청이 묻히지 않도록 기록 응답 뒤에 안내를 덧붙인다.
+    from app.agents.supervisor.node import _PLAN_KW
+    plan_hint = ""
+    if any(k in state["message"] for k in _PLAN_KW):
+        plan_hint = "\n\n📋 기록 후 식단 계획을 세워드릴까요?"
+
+    display_text = _format_display(pending_meals, today_meals) + missing_alert + rag_feedback + plan_hint
     print(f"=== [diet_logger] 완료 | pending={len(pending_meals)}개 ===")
 
     return {
