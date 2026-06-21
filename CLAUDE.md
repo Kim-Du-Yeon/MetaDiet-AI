@@ -33,6 +33,7 @@ MetaDiet AI — a LangGraph multi-agent diet coaching system. FastAPI backend, R
 | `1484b7f` | mixed intent(과거 식사 기록+오늘 식단 계획 동시 요청) 처리: supervisor 휴리스틱이 diet_logger 우선 라우팅 + 응답에 "기록 후 식단 계획을 세워드릴까요?" 안내 |
 | `1233f24` | edge_dataset `empty_or_irrelevant` 골드 라벨 갱신(strategy→off_topic, off_topic intent 도입 후 stale했던 라벨 수정) → routing 26/26, edge 24/24, pytest 73 전체 1.0 |
 | `6be33b6` | confirm 노드 `unrelated` 분류 추가 — pending 중 식단과 무관한 발화(날씨 등)를 confirm으로 오분류해 임의 저장하던 버그 수정, "확정하시겠어요?" 안내로 pending 유지 + pytest 75개 |
+| `8773f23` | meal_plan 프롬프트에 목표 칼로리 90% 하한 + 오늘 섭취량 차감 지시 추가(칼로리 심각 미달 버그 수정), 전날 섭취 비교 문구의 부호 모순 수정(재계산 금지, 기존 계산값 그대로 사용), diet_logger mixed-intent 안내문을 "식단 짜줘" 직접 요청 유도로 변경 + pytest 76개 |
 
 **현재 로컬 실행 가능/정상 확인 완료** — 위 정비로 백엔드/프론트 포트 불일치, CORS 차단, JWT 검증 실패 이슈 해소.
 
@@ -60,6 +61,7 @@ MetaDiet AI — a LangGraph multi-agent diet coaching system. FastAPI backend, R
 - **BM25**: 형태소 분석기 `kiwipiepy` 적용 완료(`retriever.py: kiwi_tokenize()`, 모듈 레벨 `Kiwi()` 싱글턴, 분석 실패 시 공백분리로 폴백) — `BM25Retriever.from_documents(..., preprocess_func=kiwi_tokenize)`.
 - **멀티턴 평가 LLM judge**: `run_multiturn_eval.py` 시나리오 D는 GPT-4o mini로 별도 judge 호출(`_judge_response_quality`) — meal_plan/validator 판단 LLM과 분리된 eval 전용이며 프로덕션 노드엔 영향 없음.
 - **LangSmith `thread_id`**: `{user_id}_{thread_id}` 합성값을 `config["metadata"]["thread_id"]`로 명시 전파(`main.py`의 `graph.ainvoke()` 호출부 5곳) — `configurable.thread_id`만으로는 trace에 안 묻어서 별도로 넣어야 함.
+- **모니터링 구조 (개발 vs 운영)**: 개발 시엔 `run_ragas_eval.py` 등 수동 eval 스크립트로 회귀 검증. 운영 시엔 LangSmith 실시간 트레이싱(`thread_id` 전파로 요청 단위 추적) + 주기적 샘플링 평가(ragas/routing eval 재실행)로 운영 품질을 모니터링하는 구조.
 
 ## 알려진 한계/주의사항
 
@@ -112,7 +114,7 @@ python scripts/eval/run_multiturn_eval.py   # 멀티턴/HITL/루프 시나리오
 
 Tests (from `backend/`):
 ```
-pytest                                # 75 tests in tests/{unit,security,rag,integration}/
+pytest                                # 76 tests in tests/{unit,security,rag,integration}/
 ```
 All external calls (OpenAI/Pinecone/Supabase) are mocked via `tests/conftest.py`'s `FakeSupabase`/`FakeVectorStore` + `mock_current_user`/`fake_sb` fixtures — no network or API keys needed to run it. `pytest.ini` sets `asyncio_mode = auto`. `backend/tests/images/` (sample photos for manual Vision/OCR checks) predates the suite and isn't wired into it.
 
