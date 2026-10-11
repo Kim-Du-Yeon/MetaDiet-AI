@@ -121,6 +121,7 @@ def test_render_blueprint_defines_free_api_and_static_frontend_without_secrets()
     assert api["dockerfilePath"] == "./backend/Dockerfile"
     assert api["dockerContext"] == "."
     assert api["healthCheckPath"] == "/health"
+    assert api["autoDeployTrigger"] == "commit"
     api_env = {item["key"]: item for item in api["envVars"]}
     assert api_env["ENABLE_SCHEDULER"]["value"] == "true"
     assert api_env["SERVICE_TIMEZONE"]["value"] == "Asia/Seoul"
@@ -138,6 +139,7 @@ def test_render_blueprint_defines_free_api_and_static_frontend_without_secrets()
     assert frontend["runtime"] == "static"
     assert frontend["buildCommand"] == "cd frontend && npm ci && npm run build"
     assert frontend["staticPublishPath"] == "./frontend/build"
+    assert frontend["autoDeployTrigger"] == "commit"
     frontend_env = {item["key"]: item for item in frontend["envVars"]}
     assert frontend_env["REACT_APP_API_URL"]["sync"] is False
     assert frontend_env["REACT_APP_SUPABASE_URL"]["sync"] is False
