@@ -255,10 +255,9 @@ meal_plan
 
 ```text
 User query
-  → Dense retrieval(Pinecone, text-embedding-3-small)
-  → Sparse retrieval(BM25, chunks.pkl)
+  → Dense retrieval(Pinecone, Gemini embedding 3072)
+  → Sparse retrieval(Kiwi BM25, chunks.pkl)
   → RRF fusion
-  → FlashRank reranking
   → grounded threshold check
   → answer with source/page
 ```
@@ -268,11 +267,11 @@ User query
 | 요소 | 구현 |
 |---|---|
 | Vector DB | Pinecone `diet-agent-rag` |
-| Embedding | `text-embedding-3-small` |
-| Sparse search | BM25 |
+| Embedding | Gemini embedding, 3072차원 |
+| Sparse search | Kiwi 형태소 기반 BM25 |
 | Fusion | RRF |
-| Reranker | FlashRank `ms-marco-MiniLM-L-12-v2` |
-| Grounded flag | rerank score 또는 dense score threshold |
+| Reranker | 없음(FlashRank/Jev 비교 후 미채택) |
+| Grounded flag | 검색 근거와 evidence policy |
 | Citation | source_file + page metadata |
 
 ---
@@ -283,8 +282,8 @@ User query
 - PDF를 `PyPDFLoader`로 페이지 단위 로드
 - page metadata 보존
 - 목차/참고문헌/초단문 페이지 필터링
-- `SemanticChunker`로 의미 경계 기반 분할
-- 너무 큰 청크는 `RecursiveCharacterTextSplitter`로 cap
+- PyPDF/recursive를 운영 기준으로 사용
+- page/parent-child/section/recursive를 같은 평가셋에서 비교
 - `MAX_CHUNK_CHARS = 1200`
 - `CHUNK_OVERLAP = 150`
 - metadata: `source_file`, `title`, `page`
@@ -294,7 +293,7 @@ User query
 | 결정 | 이유 |
 |---|---|
 | 페이지 단위 로드 | 출처 표시와 page hit 평가를 위해 page metadata 보존 |
-| semantic chunking | 고정 길이로 문장을 자르면 영양학 설명 근거가 끊길 수 있음 |
+| recursive chunking | page 전체 문맥 잘림을 줄이고 근거 주변 검색 단위를 일정하게 유지 |
 | 1200 char cap | 너무 긴 청크는 검색 정밀도를 낮추므로 최대 크기 제한 |
 | 150 overlap | 경계에 걸친 문맥 손실 완화 |
 | 정크 페이지 제거 | 목차/참고문헌 등 검색 노이즈 감소 |
@@ -311,10 +310,10 @@ User query
 | 값 | 현재 설정 | 용도 |
 |---|---:|---|
 | `rag_score_threshold` | 0.35 | dense-only fallback 시 grounded 판정 |
-| `rag_candidate_k` | 20 | reranking 전 후보 수 |
-| `rag_rerank_threshold` | 0.15 | FlashRank rerank top score grounded 판정 |
+| `rag_candidate_k` | 20 | Hybrid 검색 후보 수 |
+| reranking | 비활성 | 품질·지연·메모리 채택 기준 미충족 |
 | retrieve `k` | 4 | 최종 검색 문서 수 |
-| `max_docs` | 3 | 응답 context에 넣을 문서 수 |
+| context budget | 6,000자 | 동일 조건 실험의 생성 문맥 예산 |
 
 **왜 threshold가 필요한가?**
 - RAG 검색 결과가 약할 때 LLM이 추측하는 것을 방지
@@ -356,20 +355,18 @@ if grounded == False:
 
 | 영역 | 모델/설정 | 이유 |
 |---|---|---|
-| Supervisor / Agent reasoning | `gpt-4o-mini` | 한국어 의도 분류와 복합 reasoning |
-| OCR / Vision | `gpt-4o-mini` | 인바디/음식 사진 이해 |
-| RAG answerer | `gpt-4o-mini` | 근거 기반 QA 비용 절감 |
-| Eval judge | `gpt-4o-mini` | 평가 자동화 비용 절감 |
-| Synthetic eval dataset 생성 | `gpt-4o-mini` | 평가 문항 생성 |
-| Embedding | `text-embedding-3-small` | 비용 대비 검색 성능 |
-| Reranker | `ms-marco-MiniLM-L-12-v2` | 로컬 cross-encoder reranking |
+| Supervisor / Agent reasoning | Gemini | 한국어 의도 분류, tool calling과 전문 Agent 위임 |
+| OCR / Vision | Gemini | 인바디/음식 사진 이해 |
+| RAG answerer | Gemini | 근거 기반 QA와 구조화 출력 |
+| Eval judge | Gemini 별도 평가 경로 | 운영 답변 모델과 평가 실행 분리 |
+| Embedding | Gemini embedding 3072 | 차원 비교 후 독립 평가 우세 구성 유지 |
+| Reranker | 없음 | FlashRank/Jev가 운영 채택 기준 미충족 |
 | Agent temperature | 0~0.3 | 수치/분류는 낮게, 식단 생성은 약간 유연하게 |
 
-**ms-marco-MiniLM-L-12-v2는 무엇인가?**
-- MS MARCO 검색 데이터셋 계열로 학습된 MiniLM 기반 cross-encoder reranking 모델
-- query와 passage를 함께 보고 관련도 score를 계산
-- Pinecone/BM25가 가져온 후보 문서 중 **정말 질문과 맞는 문서**를 다시 정렬하는 데 사용
-- LLM 호출이 아니라 로컬 reranker이므로 토큰 비용이 들지 않음
+**왜 리랭커를 제거했나?**
+- FlashRank는 최종 근거 품질을 낮추고 1GiB Pod 메모리 예산도 초과했다.
+- Jev는 근거 재정렬과 Supervisor/tool 선택에서 비교했지만 전체 지연·호출 수가 증가했다.
+- 품질 비열등성과 지연 또는 비용 20% 개선 기준을 만족하지 못해 실험 결과를 남기고 운영에서는 비활성화했다.
 
 ---
 
@@ -382,10 +379,11 @@ if grounded == False:
 
 | 지표 | 결과 |
 |---|---:|
-| 평가 케이스 수 | 18 |
+| 결정·흐름·안전 통합 평가 | 120개 계약 + 독립 흐름 8개 |
 | Intent accuracy | 1.00 |
 | Route accuracy | 1.00 |
-| Confusion | 없음 |
+| 독립 흐름 목표 달성 | 8/8 |
+| 정책 위반 / 승인 전 write | 0 / 0 |
 
 **케이스 예시**
 - "닭가슴살 200g 먹었어" → `diet_logger`
@@ -464,7 +462,7 @@ LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 
 | 문제 | 개선 |
 |---|---|
-| 단순 dense RAG | BM25 + RRF + FlashRank reranking 추가 |
+| 단순 dense RAG | Kiwi BM25 + RRF Hybrid, 부정적 리랭커 결과는 제거 |
 | 출처 없는 조언 가능성 | grounded flag와 guardrail 추가 |
 | LLM이 끼니/양 추측 | 사용자 g 입력 + meal type 선택 |
 | 식단 저장 전 오류 가능성 | confirm interrupt 추가 |
@@ -615,22 +613,20 @@ LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 
 | 현재 한계 | 다음 개선 |
 |---|---|
-| RAG 문서 수가 많지 않음 | 영양지식 PDF corpus 확장 |
+| 독립 영어 질문 1건 근거 누락 | 별도 개발셋에서 query expansion 검토 |
 | 영양성분은 CSV lookup 중심 | 브랜드/외식 메뉴 DB 확장 |
-| 실제 사용자 평가 부족 | 실제 시나리오 기반 eval set 확장 |
-| 일부 DB/RAG 호출은 node 내부에 남음 | tool-only boundary 강화 |
-| GraphRAG/Exa 미적용 | 과제 이후 외부 검색/GraphRAG 실험 |
+| 장기간 실제 사용자 평가 부족 | 제한 베타 피드백과 장기 실행 지표 축적 |
+| Render 무료 cold start 약 53초 | 상시 응답 필요 시 유료 instance 검토 |
+| react-scripts 전이 의존성 노후화 | Vite 전환을 별도 선택 작업으로 수행 |
 | 인바디 OCR 품질은 실제 이미지 의존 | OCR confidence 및 수동 보정 UI 추가 |
-| 목표가 방향성 중심임 | `target_weight_kg`, `target_date`, `goal_priority`를 장기 목표 state로 저장 |
-| 회원가입/온보딩이 MVP 수준 | 이름, 나이, 신체정보 입력 방식(직접 입력/인바디 업로드), 목표 유형과 상세 수치 설정을 포함한 초기 온보딩 플로우 추가 |
 
 **장기 목표 관리 확장**
 
-현재 MVP는 목표 방향성(다이어트/증량/유지)과 인바디 기반 전략 조정을 구현했다. 향후 확장에서는 `target_weight_kg`, `target_date`, `goal_priority`를 장기 목표 state로 저장하고, `Goal Manager Agent`가 목표 달성률, 감량 속도, 근손실 여부를 평가해 전략을 재설정하도록 확장할 수 있다.
+현재는 `target_weight_kg`, `target_date`, `goal_priority`를 장기 목표 state로 저장하고 Goal Manager Agent가 목표 진행률을 검토한다. 전략 변경은 근거 정책을 통과한 versioned proposal로 만들고 HITL 확정 뒤 적용한다.
 
 **초기 온보딩 확장**
 
-향후에는 회원가입 후 사용자 이름, 나이, 신체정보 입력 방식(직접 입력 또는 인바디 업로드), 목표 유형(다이어트/증량/유지), 목표 체중/목표 기간/우선순위를 필수로 설정하도록 하여 장기 코칭의 기준 state를 명확히 만들 수 있다.
+온보딩에는 일반 성인 적용 확인, 지역 기준, 신체정보, 활동 수준, 목표 체중·기간·우선순위가 연결돼 있다. 향후에는 실제 사용자 연구를 통해 입력 부담과 이탈률을 측정한다.
 
 **향후 개선 시나리오 예시**
 
@@ -662,24 +658,24 @@ LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 
 | 항목 | 값 |
 |---|---|
-| Routing eval cases | 18 |
+| Agent decision/safety contracts | 120 |
 | Intent accuracy | 1.00 |
 | Route accuracy | 1.00 |
-| RAG eval QA cases | 10 |
-| Dense page hit | 0.80 |
-| Full page hit | 1.00 |
-| Dense excerpt hit | 0.70 |
-| Full excerpt hit | 0.90 |
-| Full avg score | 0.978 |
-| Citation rate | 1.00 |
-| Faithfulness | 1.00 |
+| Independent Agent flows | 8/8 |
+| Policy violation / pre-HITL write | 0 / 0 |
+| Independent RAG cases | 20 |
+| Strict evidence Recall@4 | 0.85 |
+| Evidence support | 0.95 |
+| Ragas faithfulness | 1.00 |
+| Ragas context recall | 0.95 |
 | RAG candidate k | 20 |
 | Final retrieve k | 4 |
-| Max context docs | 3 |
+| Context budget | 6,000 chars |
 | Max chunk chars | 1200 |
 | Chunk overlap | 150 |
 | Dense threshold | 0.35 |
-| Rerank threshold | 0.15 |
+| Backend regression | 360 passed / 1 skipped |
+| Frontend regression | 35 passed |
 
 ---
 

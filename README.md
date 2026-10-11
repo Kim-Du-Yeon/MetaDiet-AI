@@ -1,138 +1,102 @@
 # MetaDiet AI
 
-MetaDiet AI is a personalized diet coaching system built with a LangGraph-based Multi-Agent architecture. It records meals through natural language and food photos, calculates nutrition from a structured CSV food database, provides document-grounded nutrition advice with RAG, and updates diet targets from InBody photo uploads.
+MetaDiet AI는 식사 기록, 체중·인바디 추세, 장기 목표와 영양 근거를 함께 사용하는 **LangGraph 기반 멀티에이전트 식단 코칭 서비스**입니다. 자연어와 사진 입력을 분석하되 실제 저장과 전략 변경은 사용자가 확인한 proposal만 반영합니다.
 
-## Key Features
+- 공개 베타 UI: [metadiet-web.onrender.com](https://metadiet-web.onrender.com)
+- 상세 구조: [ARCHITECTURE.md](ARCHITECTURE.md)
+- 평가 방법과 전체 원본 결과: [EVALUATION.md](EVALUATION.md)
+- 포트폴리오 핵심 결과: [PORTFOLIO_RESULTS.md](PORTFOLIO_RESULTS.md)
+- 무료 베타 운영 절차: [deploy/RENDER_BETA.md](deploy/RENDER_BETA.md)
 
-- Multi-Agent orchestration with LangGraph
-- Supervisor-based intent routing
-- Human-in-the-loop meal confirmation before DB writes
-- Meal logging from natural language and food photo recognition
-- CSV-based nutrition lookup for deterministic calorie/macronutrient calculation
-- Hybrid RAG for nutrition knowledge: Pinecone dense retrieval + BM25 + RRF + FlashRank reranking
-- Grounded generation with source/page citations and guardrails
-- InBody OCR/Vision flow for strategy updates
-- Meal plan generation with validator feedback loop
-- Checkpointing, time travel, and rollback with LangGraph checkpointer
-- Structured evaluation pipeline with reproducible datasets and LangSmith tracing
+## 구현 범위
 
-## Architecture Highlights
+- **멀티에이전트 오케스트레이션:** Gemini Supervisor가 전문 Agent와 도구를 선택하고 LangGraph가 상태 전이, 실패 피드백, 실행 예산과 종료 조건을 관리
+- **전문 Agent:** 식사 기록, 목표 관리, 전략 조언, 식단 계획·검증, 인바디 분석, 리포트, 편집, 확인/HITL
+- **Weekly Deep Agent:** 장기 상태와 최근 식사·인바디를 분석하고 읽기 전용 MCP 도구를 제한된 예산 안에서 사용
+- **HITL과 원자적 저장:** 식사·인바디·전략 proposal을 ID/version으로 고정하고 승인 전 domain write 차단, 중복 승인 멱등 처리
+- **장·단기 상태:** Supabase Postgres와 LangGraph Postgres checkpointer로 목표·전략·최근 실행·대화 복원 및 rollback 관리
+- **RAG:** PyPDF/recursive, Gemini embedding 3072차원, Pinecone dense + Kiwi BM25 + RRF Hybrid, 출처·페이지 추적과 최신 판본·충돌 정책
+- **결정적 영양 계산:** 칼로리·영양소 수치는 RAG가 아니라 국가표준식품성분표 CSV로 계산
+- **평가·관측:** Ragas, 독립 gold set, Agent/tool/HITL 평가, LangSmith trace, 비용·지연·재시도 관측
+- **Streaming UI:** 의도 분석 → Agent 위임 → 도구 실행 → 근거 검토 → 사용자 확인을 SSE 이벤트로 표시하고 연결 중단 시 재개
+- **운영:** Docker Compose, 읽기 전용 MCP, Kubernetes kind 다중 Pod 복구, Render 무료 공개 베타와 제한 부하 시험
 
-- `supervisor`: routes user intent to specialized agents
-- `diet_logger`: parses meal text and calculates nutrition
-- `confirm`: handles HITL confirm/modify/cancel
-- `strategy`: provides diet advice
-- `meal_plan`: generates daily meal plans
-- `validator`: validates meal plans and sends feedback
-- `inbody`: updates diet strategy from InBody history
-- `reporter`: creates weekly/monthly nutrition reports
-- `edit`: modifies or deletes saved meals
+## 현재 운영 구성
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for the detailed architecture and [EVALUATION.md](EVALUATION.md) for routing/RAG evaluation.
+| 영역 | 선택한 구성 | 선택 근거 |
+|---|---|---|
+| 생성·라우팅·Vision | Google Gemini | 운영 모델 공급자를 Gemini로 통일 |
+| 임베딩 | Gemini embedding, 3072차원 | 768차원은 독립 평가에서 3072 대비 낮아 운영 미채택 |
+| 파서·청킹 | PyPDF + recursive | 전체 10개 PDF의 검색 품질·안정성·문맥 잘림을 함께 비교해 유지 |
+| 검색 | Dense + BM25 + RRF Hybrid | 독립 근거 평가에서 Dense 단독보다 유리 |
+| 리랭커 | 없음 | FlashRank와 Jev가 품질·지연·메모리 채택 기준을 충족하지 못함 |
+| Vector DB | Pinecone | 4,139개 활성 Gemini 벡터 |
+| 상태·인증 | Supabase Postgres/Auth | 사용자 데이터, proposal, checkpoint와 JWT/RLS 관리 |
+| 관측·평가 | LangSmith + Ragas | 실행 trace와 답변 근거 평가를 분리 |
 
-## Tech Stack
+Jev는 Supervisor·도구 선택·RAG 재정렬에서 Gemini와 비교했지만 품질 비열등성과 20% 지연/비용 개선 기준을 충족하지 못해 운영 경로에서는 비활성화했습니다. 실패 결과도 [EVALUATION.md](EVALUATION.md)에 보존했습니다.
 
-- Frontend: React
+## 검증 결과
+
+| 범위 | 결과 |
+|---|---|
+| 백엔드 회귀 | **360 passed, 1 skipped** |
+| 프론트엔드 회귀 | **35 passed**, production build 성공 |
+| 독립 RAG 20문항 | 지정 근거 Recall@4 85%, 대체 유효 근거 포함 evidence support 95% |
+| Ragas 독립 평가 | faithfulness 1.00, context recall 0.95 |
+| Agent 독립 흐름 | 목표 달성 8/8, 정책 위반 0, 승인 전 write 0 |
+| kind rolling restart | `/health` 400/400, 실패 0, p95 5.86ms |
+| 공개 제한 부하 | health 50건·인증 조회 30건·Agent 2건 오류 0 |
+| 공개 브라우저 | 스트리밍·proposal 복원·중복 방지·401/500/연결 중단 UI 검증 |
+
+수치는 해당 gold set과 합성·제한 베타 조건의 결과이며 일반적인 임상 효과나 최대 처리량을 뜻하지 않습니다.
+
+## 기술 스택
+
+- Frontend: React, SSE
 - Backend: FastAPI, Python
-- Agent framework: LangGraph, LangChain
-- LLM/Vision: OpenAI GPT models
-- Embedding: `text-embedding-3-small`
-- Vector DB: Pinecone
-- Reranker: FlashRank `ms-marco-MiniLM-L-12-v2`
-- Database: Supabase Postgres
-- Tracing/Evaluation: LangSmith, local JSON eval reports
+- Agent: LangGraph, LangChain, Gemini tool calling
+- Data: Supabase Postgres/Auth, Pinecone, CSV nutrition DB
+- RAG: PyPDF, Kiwi BM25, RRF Hybrid, Gemini Embedding
+- Evaluation: Ragas, LangSmith, custom Agent/tool/HITL evaluators
+- Infra: Docker, Kubernetes kind, Render
 
-## Environment Variables
+## 로컬 실행
 
-Secrets are not committed. Copy `backend/.env.example` to `backend/.env` and fill in your own keys.
+비밀값은 저장소에 커밋하지 않습니다. `backend/.env.example`과 `frontend/.env.example`을 복사해 값을 입력합니다.
 
-```bash
-cp backend/.env.example backend/.env
-```
-
-Required values include:
-
-- `OPENAI_API_KEY`
-- `SUPABASE_URL`
-- `SUPABASE_SERVICE_KEY`
-- `SUPABASE_JWT_SECRET`
-- `SUPABASE_DB_URL`
-- `PINECONE_API_KEY`
-
-## Run Locally
-
-Backend:
-
-```bash
+```powershell
 cd backend
-python -m venv venv
-venv\Scripts\activate
-pip install -r requirements.txt
-python main.py
+venv\Scripts\python.exe main.py
 ```
 
-Frontend:
-
-```bash
+```powershell
 cd frontend
 npm install
 npm start
 ```
 
-## Evaluation
+기본 로컬 주소는 backend `http://localhost:8080`, frontend `http://localhost:3000`입니다.
 
-Evaluation datasets (`routing_dataset.json`, `edge_dataset.json`, `qa_dataset.json`, `gold_dataset.json`) contain input QA items used for testing.
-Result reports (`routing_report_*.json`, `ragas_report_*.json`) record eval run outputs and are committed for reproducibility.
-Detailed file classification: [EVALUATION.md](EVALUATION.md).
+## 검증 명령
 
-Evaluation datasets are separated by purpose — routing correctness, edge-case robustness, RAG retrieval quality, and cross-lingual response quality are each measured with a dedicated dataset and independent script. Performance numbers are regression and diagnostic baselines for the covered scenarios, not claims of generalized coverage.
+```powershell
+cd backend
+venv\Scripts\python.exe -m pytest --basetemp=.pytest-runtime
+```
 
-Dataset roles by evaluation domain:
-- `routing_dataset.json` / `edge_dataset.json` — routing gold-labeled datasets; `expected` field is the ground-truth agent label for each case
-- `qa_dataset.json` — RAG ablation dataset for `run_eval.py`; custom metrics (source_hit, page_hit, excerpt_hit) only, no gold_answer
-- `gold_dataset.json` — Ragas/cross-lingual RAG ground-truth dataset for `run_ragas_eval.py`; includes `gold_answer` + `language` fields for Ragas faithfulness/context_recall and EN/KO analysis
+```powershell
+cd frontend
+npm test -- --runInBand --watchAll=false
+npm run build
+```
 
-### Supervisor Routing
+Ragas는 의존성 충돌을 피하기 위해 별도 평가 환경을 사용합니다. 정확한 버전과 실행 명령은 [AGENTS.md](AGENTS.md)와 [EVALUATION.md](EVALUATION.md)를 참고합니다.
 
-- Baseline routing eval: **18/18** (intent_accuracy 1.00, route_accuracy 1.00)
-- Edge-case routing eval: **15/18 → 18/18** after adding food/intake keyword signals
-  (`_FOOD_KW` / `_INTAKE_KW`) to `_heuristic_intent()` with "log-first" policy
-- 6 edge types covered: typo, missing_unit, empty_or_irrelevant, mixed_lang, pending_flow, mixed_intent
-- Eval datasets: `routing_dataset.json` (18 cases), `edge_dataset.json` (18 cases)
-- Detail: [EDGE_EVAL_REPORT.md](backend/scripts/eval/EDGE_EVAL_REPORT.md)
+## 현재 한계
 
-### RAG (Hybrid Retrieval + Grounded QA)
-
-- Ablation dataset: `qa_dataset.json` — 10 EN QA items; dense / hybrid / full mode comparison (`run_eval.py`)
-- full mode result: source_hit 1.00 / page_hit 1.00 / excerpt_hit 0.90 / avg_score 0.978
-  (`source_hit`, `page_hit`, `excerpt_hit` are custom string-match metrics in `run_eval.py`, not Ragas metrics)
-- Cross-lingual dataset: `gold_dataset.json` — EN/KO bilingual QA 10쌍, 총 20개; Ragas faithfulness/context_recall + cross-lingual analysis (`run_ragas_eval.py`)
-- Detail: [EVALUATION.md](EVALUATION.md)
-
-### Ragas Evaluation
-
-- Framework: ragas 0.2.15 — `faithfulness` + `context_recall` on `gold_dataset.json`
-- English QA (n=10): faithfulness **0.900** / context_recall **0.950** — stable
-- Korean QA (n=10): faithfulness **0.200** / context_recall **0.300** — cross-lingual retrieval gap
-- Finding: the performance gap is driven by querying an English PDF corpus with Korean questions,
-  not by RAG pipeline failure; improvement direction is query translation or multilingual embedding
-- Note: ragas is managed via a separate evaluation script (`run_ragas_eval.py`),
-  independent of the main `requirements.txt` environment
-- Detail: [RAGAS_EVAL_REPORT.md](backend/scripts/eval/RAGAS_EVAL_REPORT.md)
-
-### LangSmith Tracing
-
-- `routing-eval` and `rag-eval` traces confirmed in the `diet-agent` LangSmith project
-- `LANGSMITH_*` env vars mapped to `LANGCHAIN_*` in all eval scripts
-- `tracing_context(enabled=True)` + `Client().flush()` applied for reliable trace delivery
-- Detail: [EVALUATION.md](EVALUATION.md)
-
-Detailed technical rationale for routing policy, RAG evaluation metrics, reranking, chunking, and validator loop design is documented in [EVALUATION.md](EVALUATION.md).
-
-## Notes
-
-- Nutrition values are calculated through CSV lookup, not RAG, to reduce hallucination.
-- RAG is used for nutrition knowledge and advice with document grounding.
-- Food photos are used to identify food names only; grams and meal type are confirmed by the user.
-- `.env`, virtual environments, local DB files, and generated caches are ignored by Git.
-
+- Render 무료 API는 휴면 후 첫 요청이 실제 측정에서 약 53초 걸렸습니다.
+- 독립 RAG 영어 질문 1건은 근거를 찾지 못했으며, 시스템은 인용을 만들지 않고 답변을 보류합니다.
+- Render 장애 이메일 알림은 workspace Dashboard에서 별도로 활성화해야 합니다.
+- `react-scripts`의 빌드 전이 의존성 취약점은 정적 런타임과 분리돼 있으며 Vite 전환을 후속 선택 작업으로 남겼습니다.
+- 의료 진단·치료 서비스가 아니며 일반 성인 체중 관리 정보에 한정합니다.
