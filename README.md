@@ -6,6 +6,7 @@ MetaDiet AI는 식사 기록, 체중·인바디 추세, 장기 목표와 영양 
 - 상세 구조: [ARCHITECTURE.md](ARCHITECTURE.md)
 - 평가 방법과 전체 원본 결과: [EVALUATION.md](EVALUATION.md)
 - 포트폴리오 핵심 결과: [PORTFOLIO_RESULTS.md](PORTFOLIO_RESULTS.md)
+- 제한 베타 종료 체크리스트: [BETA_RELEASE_CHECKLIST.md](BETA_RELEASE_CHECKLIST.md)
 - 무료 베타 운영 절차: [deploy/RENDER_BETA.md](deploy/RENDER_BETA.md)
 
 ## 구현 범위
