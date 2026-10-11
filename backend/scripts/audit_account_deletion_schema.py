@@ -59,7 +59,7 @@ def main() -> None:
                join pg_namespace n on n.oid = t.relnamespace
                where n.nspname = 'public' and t.relname = 'beta_feedback'
                  and c.contype = 'u'
-                 and pg_get_constraintdef(c.oid) like '%(user_id, client_submission_id)%'"""
+                 and pg_get_constraintdef(c.oid) ilike '%(user_id, client_submission_id)%'"""
         ).fetchone()
     feedback_fk = next(
         (

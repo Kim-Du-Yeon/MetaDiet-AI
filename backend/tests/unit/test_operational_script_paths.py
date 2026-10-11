@@ -23,3 +23,41 @@ def test_transaction_verifier_builds_strategy_from_current_policy():
 
     assert "baseline_payload(profile, None)" in script
     assert '"policy_version": "test"' not in script
+
+
+def test_beta_feedback_checker_has_bounded_public_lifecycle_and_cleanup():
+    root = Path(__file__).resolve().parents[3]
+    script = (root / "backend" / "scripts" / "check_beta_feedback.py").read_text(encoding="utf-8")
+
+    assert "timeout=180" in script
+    assert "finally:" in script
+    assert "synthetic" in script
+    assert '"comment"' not in script
+    assert '"client_submission_id"' in script
+    assert "/feedback" in script
+    assert "/users/me" in script
+
+
+def test_beta_feedback_artifact_summary_is_redacted():
+    from scripts.check_beta_feedback import redacted_summary
+
+    result = redacted_summary(
+        create_status=201,
+        replay_status=200,
+        rows_after_replay=1,
+        rows_after_delete=0,
+        create_ms=125.2,
+        replay_ms=81.4,
+    )
+
+    assert result == {
+        "status": "passed",
+        "create_http_status": 201,
+        "replay_http_status": 200,
+        "rows_after_replay": 1,
+        "rows_after_delete": 0,
+        "create_ms": 125.2,
+        "replay_ms": 81.4,
+    }
+    assert "comment" not in result
+    assert "token" not in result
