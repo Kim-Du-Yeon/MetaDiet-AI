@@ -15,6 +15,8 @@ os.environ["LANGCHAIN_TRACING_V2"] = os.getenv("LANGSMITH_TRACING", "true")
 os.environ["LANGCHAIN_API_KEY"] = os.getenv("LANGSMITH_API_KEY", "")
 os.environ["LANGCHAIN_PROJECT"] = os.getenv("LANGSMITH_PROJECT", "diet-agent")
 os.environ["LANGCHAIN_ENDPOINT"] = os.getenv("LANGSMITH_ENDPOINT", "https://api.smith.langchain.com")
+os.environ["LANGSMITH_HIDE_INPUTS"] = os.getenv("LANGSMITH_HIDE_INPUTS", "true")
+os.environ["LANGSMITH_HIDE_OUTPUTS"] = os.getenv("LANGSMITH_HIDE_OUTPUTS", "true")
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
@@ -29,11 +31,12 @@ import uvicorn
 async def combined_lifespan(application):
     # graph lifespan (체크포인터 초기화) 먼저 실행
     async with graph_lifespan(application):
-        # 스케줄러 시작
-        start_scheduler()
+        scheduler_enabled = os.getenv("ENABLE_SCHEDULER", "true").lower() == "true"
+        if scheduler_enabled:
+            start_scheduler()
         yield
-        # 스케줄러 종료
-        stop_scheduler()
+        if scheduler_enabled:
+            stop_scheduler()
 
 
 # 기존 lifespan 덮어쓰기 대신 combined로 교체
@@ -43,7 +46,7 @@ if __name__ == "__main__":
     config = uvicorn.Config(
         "main:app",
         host="0.0.0.0",
-        port=int(os.getenv("PORT", "8000")),
+        port=int(os.getenv("PORT", "8080")),
         reload=os.getenv("UVICORN_RELOAD", "false").lower() == "true",
         loop="asyncio"
     )

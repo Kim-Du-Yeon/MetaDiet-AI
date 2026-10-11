@@ -1,4 +1,5 @@
-const BASE_URL = "http://localhost:8000";
+import { consumeEventStream } from "./eventStream";
+export const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 // 인증은 Authorization 헤더(Supabase JWT)가 담당한다. 아래 함수들의 `userId`
 // 매개변수는 백엔드가 user_id를 더 이상 받지 않게 된 뒤로는 사용되지 않지만,
@@ -10,18 +11,49 @@ export function setToken(token) {
 export function getToken() {
   return _token;
 }
+function notifyAuthExpired(response) {
+  if (response.status === 401 && typeof window !== "undefined") {
+    window.dispatchEvent(new Event("metadiet:auth-expired"));
+  }
+  return response;
+}
 function authHeaders(extra = {}) {
   return _token ? { ...extra, Authorization: `Bearer ${_token}` } : extra;
 }
 
+function newStreamRunId() {
+  return window.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
+async function postEventStream(path, body, onToken, onDone, onProgress) {
+  const streamRunId = newStreamRunId();
+  let afterSeq = 0;
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    try {
+      const response = await fetch(`${BASE_URL}${path}`, {
+        method: "POST",
+        headers: authHeaders({ "Content-Type": "application/json" }),
+        body: JSON.stringify({ ...body, stream_run_id: streamRunId, after_seq: afterSeq }),
+      });
+      await consumeEventStream(response, data => {
+        if (data.type === "progress") onProgress?.(data);
+        if (data.type === "token" || data.type === "answer_delta") onToken(data.content);
+        if (data.type === "done" || data.type === "completed") onDone(data);
+      }, { afterSeq });
+      return;
+    } catch (error) {
+      afterSeq = error.lastSeq ?? afterSeq;
+      const retryable = error instanceof TypeError || error.message.includes("완전히");
+      if (attempt === 1 || !retryable) throw error;
+    }
+  }
+}
+
 export async function sendChatMessage(
   userId, message, onToken, onDone,
-  pendingState = {}, messages = [], threadId = "default", mealType = null
+  pendingState = {}, messages = [], threadId = "default", mealType = null, onProgress = null
 ) {
-  const response = await fetch(`${BASE_URL}/chat`, {
-    method: "POST",
-    headers: authHeaders({ "Content-Type": "application/json" }),
-    body: JSON.stringify({
+  await postEventStream("/chat", {
       message,
       thread_id: threadId,
       pending_meals: null,
@@ -32,27 +64,7 @@ export async function sendChatMessage(
         role: m.role,
         content: m.content,
       })),
-    }),
-  });
-
-  const reader = response.body.getReader();
-  const decoder = new TextDecoder();
-
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-
-    const text = decoder.decode(value);
-    const lines = text.split("\n").filter((l) => l.startsWith("data: "));
-
-    for (const line of lines) {
-      try {
-        const data = JSON.parse(line.replace("data: ", ""));
-        if (data.type === "token") onToken(data.content);
-        if (data.type === "done") onDone(data);
-      } catch (e) {}
-    }
-  }
+    }, onToken, onDone, onProgress);
 }
 
 export async function getChatHistory(userId, threadId) {
@@ -61,6 +73,25 @@ export async function getChatHistory(userId, threadId) {
     { headers: authHeaders() }
   );
   return res.json();
+}
+
+export async function getSessionRestore(threadId) {
+  const res = notifyAuthExpired(await fetch(`${BASE_URL}/session/restore/${encodeURIComponent(threadId)}`, {
+    headers: authHeaders(),
+  }));
+  const data = await res.json().catch(() => ({}));
+  // A brand-new conversation has no durable checkpoint or chat rows yet.
+  // Treat that expected 404 as an empty restore instead of a connection error.
+  if (res.status === 404) {
+    return {
+      messages: [],
+      pending_state: {},
+      pending_proposal: null,
+      interrupted: false,
+    };
+  }
+  if (!res.ok) throw new Error(data.detail || "이전 상태를 불러오지 못했습니다.");
+  return data;
 }
 
 export async function rollbackToCheckpoint(userId, threadId, checkpointId) {
@@ -161,30 +192,72 @@ export async function deleteMeal(mealId) {
   return res.json();
 }
 
-export async function resumeChat(userId, threadId, message, onToken, onDone) {
-  const response = await fetch(`${BASE_URL}/chat/resume`, {
-    method: "POST",
-    headers: authHeaders({ "Content-Type": "application/json" }),
-    body: JSON.stringify({
+export async function resumeChat(userId, threadId, message, onToken, onDone, decision = null, onProgress = null) {
+  await postEventStream("/chat/resume", {
       thread_id: threadId,
       message,
-    }),
+      decision,
+    }, onToken, onDone, onProgress);
+}
+
+export async function decideProposal(proposal, action) {
+  const res = await fetch(`${BASE_URL}/proposals/decision`, {
+    method: "POST", headers: authHeaders({ "Content-Type": "application/json" }),
+    body: JSON.stringify({ proposal_id: proposal.id, version: proposal.version, action }),
   });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.detail || "제안 처리 실패");
+  return data;
+}
 
-  const reader = response.body.getReader();
-  const decoder = new TextDecoder();
+export async function reviseMeasurement(proposal, payload) {
+  const res = await fetch(`${BASE_URL}/proposals/${proposal.id}/measurement`, {
+    method: "PUT", headers: authHeaders({ "Content-Type": "application/json" }),
+    body: JSON.stringify({ version: proposal.version, payload }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(typeof data.detail === "string" ? data.detail : "측정값을 확인해주세요.");
+  return data;
+}
 
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-    const text = decoder.decode(value);
-    const lines = text.split("\n").filter((l) => l.startsWith("data: "));
-    for (const line of lines) {
-      try {
-        const data = JSON.parse(line.replace("data: ", ""));
-        if (data.type === "token") onToken(data.content);
-        if (data.type === "done") onDone(data);
-      } catch (e) {}
-    }
+export async function deleteAccount() {
+  const res = await fetch(`${BASE_URL}/users/me`, {
+    method: "DELETE",
+    headers: authHeaders({ "Content-Type": "application/json" }),
+    body: JSON.stringify({ confirmation: "DELETE" }),
+  });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const detail = data.detail || {};
+    const error = new Error(
+      typeof detail === "string"
+        ? detail
+        : detail.message || "계정 삭제를 완료하지 못했습니다."
+    );
+    error.code = detail.code || "account_deletion_failed";
+    error.retryable = Boolean(detail.retryable);
+    error.status = res.status;
+    throw error;
   }
+  return data;
+}
+
+export async function submitBetaFeedback(payload) {
+  const res = notifyAuthExpired(await fetch(`${BASE_URL}/feedback`, {
+    method: "POST",
+    headers: authHeaders({ "Content-Type": "application/json" }),
+    body: JSON.stringify(payload),
+  }));
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const error = new Error(
+      typeof data.detail === "string"
+        ? data.detail
+        : "피드백을 전송하지 못했습니다. 잠시 후 다시 시도해주세요."
+    );
+    error.status = res.status;
+    error.retryable = res.status >= 500 || res.status === 429;
+    throw error;
+  }
+  return data;
 }

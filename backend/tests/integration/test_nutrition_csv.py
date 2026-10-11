@@ -19,6 +19,10 @@ def _stub_llm_steps(monkeypatch):
         return {"닭가슴살": ["닭고기", "가슴"]}.get(food_name, [food_name])
 
     monkeypatch.setattr(nutrition_db_module, "_decompose_keywords_with_llm", fake_decompose)
+    from types import SimpleNamespace
+    from unittest.mock import AsyncMock
+    monkeypatch.setattr(nutrition_db_module, "get_chat_model", lambda **kwargs:
+        SimpleNamespace(ainvoke=AsyncMock(return_value=SimpleNamespace(content="닭고기, 가슴, 생것"))))
 
 
 async def test_chicken_breast_200g_golden_value():

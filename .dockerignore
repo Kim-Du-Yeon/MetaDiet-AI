@@ -1,0 +1,17 @@
+.git
+.gitignore
+backend/.env
+backend/.env.*
+!backend/.env.example
+backend/venv
+backend/venv_ragas
+backend/artifacts
+backend/.pytest-*
+frontend
+docs/rag_experiments
+docs/agent_experiments
+**/__pycache__
+**/*.pyc
+**/*.log
+**/*.dmp
+**/node_modules

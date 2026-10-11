@@ -1,0 +1,522 @@
+[
+  {
+    "id": "carb_sources-en",
+    "case_group": "carb_sources",
+    "question": "What carbohydrate sources does WHO recommend and which ages does this cover?",
+    "language": "en",
+    "split": "heldout",
+    "gold_source": "WHO_carbohydrate_2023.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "whole grains, vegetables",
+    "gold_answer": "Whole grains, vegetables, fruits and pulses; strong recommendation for individuals aged 2 years and older.",
+    "document_sha256": "81548c804ebf031aa06a71f762c4ed72f680d4cb2caba44b011459fe5c841cd0",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_carbohydrate_2023.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "whole grains, vegetables"
+      }
+    ],
+    "applicability": "age >=2",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "carb_sources-ko",
+    "case_group": "carb_sources",
+    "question": "WHO가 권고하는 주요 탄수화물 공급원과 적용 연령은?",
+    "language": "ko",
+    "split": "heldout",
+    "gold_source": "WHO_carbohydrate_2023.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "whole grains, vegetables",
+    "gold_answer": "Whole grains, vegetables, fruits and pulses; strong recommendation for individuals aged 2 years and older.",
+    "document_sha256": "81548c804ebf031aa06a71f762c4ed72f680d4cb2caba44b011459fe5c841cd0",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_carbohydrate_2023.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "whole grains, vegetables"
+      }
+    ],
+    "applicability": "age >=2",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "adult_veg-en",
+    "case_group": "adult_veg",
+    "question": "What daily fruit and vegetable amount does WHO recommend for adults, and how strong is the recommendation?",
+    "language": "en",
+    "split": "heldout",
+    "gold_source": "WHO_carbohydrate_2023.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "at least 400 g",
+    "gold_answer": "At least 400 g vegetables and fruits per day for adults; strong recommendation.",
+    "document_sha256": "81548c804ebf031aa06a71f762c4ed72f680d4cb2caba44b011459fe5c841cd0",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_carbohydrate_2023.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "at least 400 g"
+      }
+    ],
+    "applicability": "adults",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "adult_veg-ko",
+    "case_group": "adult_veg",
+    "question": "WHO 성인의 하루 채소·과일 권고량과 권고 강도는?",
+    "language": "ko",
+    "split": "heldout",
+    "gold_source": "WHO_carbohydrate_2023.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "at least 400 g",
+    "gold_answer": "At least 400 g vegetables and fruits per day for adults; strong recommendation.",
+    "document_sha256": "81548c804ebf031aa06a71f762c4ed72f680d4cb2caba44b011459fe5c841cd0",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_carbohydrate_2023.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "at least 400 g"
+      }
+    ],
+    "applicability": "adults",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "adult_fiber-en",
+    "case_group": "adult_fiber",
+    "question": "What daily naturally occurring dietary fibre amount does WHO recommend for adults?",
+    "language": "en",
+    "split": "heldout",
+    "gold_source": "WHO_carbohydrate_2023.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "at least 25 g",
+    "gold_answer": "At least 25 g per day of naturally occurring dietary fibre as consumed in foods; strong recommendation.",
+    "document_sha256": "81548c804ebf031aa06a71f762c4ed72f680d4cb2caba44b011459fe5c841cd0",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_carbohydrate_2023.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "at least 25 g"
+      }
+    ],
+    "applicability": "adults; food-based naturally occurring fibre",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "adult_fiber-ko",
+    "case_group": "adult_fiber",
+    "question": "WHO 성인의 식품에 자연적으로 존재하는 식이섬유 하루 권고량은?",
+    "language": "ko",
+    "split": "heldout",
+    "gold_source": "WHO_carbohydrate_2023.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "at least 25 g",
+    "gold_answer": "At least 25 g per day of naturally occurring dietary fibre as consumed in foods; strong recommendation.",
+    "document_sha256": "81548c804ebf031aa06a71f762c4ed72f680d4cb2caba44b011459fe5c841cd0",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_carbohydrate_2023.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "at least 25 g"
+      }
+    ],
+    "applicability": "adults; food-based naturally occurring fibre",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "child_veg69-en",
+    "case_group": "child_veg69",
+    "question": "What fruit and vegetable amount does WHO suggest for children aged 6–9, and is it conditional?",
+    "language": "en",
+    "split": "heldout",
+    "gold_source": "WHO_carbohydrate_2023.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "at least 350 g",
+    "gold_answer": "At least 350 g vegetables and fruits per day for ages 6–9; conditional recommendation.",
+    "document_sha256": "81548c804ebf031aa06a71f762c4ed72f680d4cb2caba44b011459fe5c841cd0",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_carbohydrate_2023.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "at least 350 g"
+      }
+    ],
+    "applicability": "children 6–9; service must not offer adult weight-loss targets",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "child_veg69-ko",
+    "case_group": "child_veg69",
+    "question": "WHO 6~9세 아동의 채소·과일 섭취량과 권고 강도는?",
+    "language": "ko",
+    "split": "heldout",
+    "gold_source": "WHO_carbohydrate_2023.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "at least 350 g",
+    "gold_answer": "At least 350 g vegetables and fruits per day for ages 6–9; conditional recommendation.",
+    "document_sha256": "81548c804ebf031aa06a71f762c4ed72f680d4cb2caba44b011459fe5c841cd0",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_carbohydrate_2023.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "at least 350 g"
+      }
+    ],
+    "applicability": "children 6–9; service must not offer adult weight-loss targets",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "child_fiber69-en",
+    "case_group": "child_fiber69",
+    "question": "What daily naturally occurring fibre intake does WHO suggest for ages 6–9?",
+    "language": "en",
+    "split": "heldout",
+    "gold_source": "WHO_carbohydrate_2023.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "at least 21",
+    "gold_answer": "At least 21 g per day for ages 6–9; conditional recommendation.",
+    "document_sha256": "81548c804ebf031aa06a71f762c4ed72f680d4cb2caba44b011459fe5c841cd0",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_carbohydrate_2023.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "at least 21"
+      }
+    ],
+    "applicability": "children 6–9; food-based fibre",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "child_fiber69-ko",
+    "case_group": "child_fiber69",
+    "question": "WHO 6~9세 아동의 자연적 식이섬유 섭취 권고량은?",
+    "language": "ko",
+    "split": "heldout",
+    "gold_source": "WHO_carbohydrate_2023.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "at least 21",
+    "gold_answer": "At least 21 g per day for ages 6–9; conditional recommendation.",
+    "document_sha256": "81548c804ebf031aa06a71f762c4ed72f680d4cb2caba44b011459fe5c841cd0",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_carbohydrate_2023.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "at least 21"
+      }
+    ],
+    "applicability": "children 6–9; food-based fibre",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "sodium_adult-en",
+    "case_group": "sodium_adult",
+    "question": "What adult daily sodium limit and equivalent salt amount does WHO recommend?",
+    "language": "en",
+    "split": "heldout",
+    "gold_source": "WHO_sodium_2012.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "<2 g/day sodium",
+    "gold_answer": "Less than 2 g/day sodium, corresponding to 5 g/day salt; strong recommendation.",
+    "document_sha256": "1f42c807c29ae255b31554afafaed683d5598414a1e5cc2a4b89190c72e2f369",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_sodium_2012.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "<2 g/day sodium"
+      }
+    ],
+    "applicability": "adults; sodium is distinct from salt",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "sodium_adult-ko",
+    "case_group": "sodium_adult",
+    "question": "WHO 성인의 하루 나트륨 제한과 대응하는 소금량은?",
+    "language": "ko",
+    "split": "heldout",
+    "gold_source": "WHO_sodium_2012.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "<2 g/day sodium",
+    "gold_answer": "Less than 2 g/day sodium, corresponding to 5 g/day salt; strong recommendation.",
+    "document_sha256": "1f42c807c29ae255b31554afafaed683d5598414a1e5cc2a4b89190c72e2f369",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_sodium_2012.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "<2 g/day sodium"
+      }
+    ],
+    "applicability": "adults; sodium is distinct from salt",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "sodium_children-en",
+    "case_group": "sodium_children",
+    "question": "Should the adult sodium maximum be directly applied to children in the WHO guideline?",
+    "language": "en",
+    "split": "heldout",
+    "gold_source": "WHO_sodium_2012.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "adjusted downward",
+    "gold_answer": "No. The adult maximum should be adjusted downward according to children’s energy requirements relative to adults.",
+    "document_sha256": "1f42c807c29ae255b31554afafaed683d5598414a1e5cc2a4b89190c72e2f369",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_sodium_2012.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "adjusted downward"
+      }
+    ],
+    "applicability": "children; no arbitrary fixed subtraction",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "sodium_children-ko",
+    "case_group": "sodium_children",
+    "question": "WHO 지침의 성인 나트륨 최대량을 아동에게 그대로 적용하는가?",
+    "language": "ko",
+    "split": "heldout",
+    "gold_source": "WHO_sodium_2012.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "adjusted downward",
+    "gold_answer": "No. The adult maximum should be adjusted downward according to children’s energy requirements relative to adults.",
+    "document_sha256": "1f42c807c29ae255b31554afafaed683d5598414a1e5cc2a4b89190c72e2f369",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_sodium_2012.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "adjusted downward"
+      }
+    ],
+    "applicability": "children; no arbitrary fixed subtraction",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "sodium_exclusion-en",
+    "case_group": "sodium_exclusion",
+    "question": "Does WHO sodium guidance directly cover heart failure patients requiring a physician-supervised diet?",
+    "language": "en",
+    "split": "heldout",
+    "gold_source": "WHO_sodium_2012.pdf",
+    "gold_page": 11,
+    "gold_excerpt": "physician-supervised diets",
+    "gold_answer": "No. Populations requiring physician-supervised diets, including heart failure, were excluded from the evidence review and guideline generation. Do not derive a personal target from this general guideline.",
+    "document_sha256": "1f42c807c29ae255b31554afafaed683d5598414a1e5cc2a4b89190c72e2f369",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_sodium_2012.pdf",
+        "pdf_pages": [
+          11
+        ],
+        "core_excerpt": "physician-supervised diets"
+      }
+    ],
+    "applicability": "excluded clinical population; no personal target",
+    "expected_action": "explain_exclusion_no_personal_target"
+  },
+  {
+    "id": "sodium_exclusion-ko",
+    "case_group": "sodium_exclusion",
+    "question": "의사 감독 식사가 필요한 심부전 환자에게 WHO 일반 나트륨 권고를 바로 적용할 수 있는가?",
+    "language": "ko",
+    "split": "heldout",
+    "gold_source": "WHO_sodium_2012.pdf",
+    "gold_page": 11,
+    "gold_excerpt": "physician-supervised diets",
+    "gold_answer": "No. Populations requiring physician-supervised diets, including heart failure, were excluded from the evidence review and guideline generation. Do not derive a personal target from this general guideline.",
+    "document_sha256": "1f42c807c29ae255b31554afafaed683d5598414a1e5cc2a4b89190c72e2f369",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_sodium_2012.pdf",
+        "pdf_pages": [
+          11
+        ],
+        "core_excerpt": "physician-supervised diets"
+      }
+    ],
+    "applicability": "excluded clinical population; no personal target",
+    "expected_action": "explain_exclusion_no_personal_target"
+  },
+  {
+    "id": "fat30-en",
+    "case_group": "fat30",
+    "question": "What total-fat energy proportion does WHO suggest for adults to prevent unhealthy weight gain, and how strong is it?",
+    "language": "en",
+    "split": "heldout",
+    "gold_source": "WHO_total_fat_2023.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "30%",
+    "gold_answer": "30% of total energy intake or less for adults; conditional recommendation to reduce unhealthy weight gain risk.",
+    "document_sha256": "a9f12218be0b1720c9be4f0dee79c2dbdcbd13fb44cd3e0d751bf04b5fa63381",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_total_fat_2023.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "30%"
+      }
+    ],
+    "applicability": "adults; prevention of unhealthy weight gain, not a mandatory personalised weight-loss prescription",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "fat30-ko",
+    "case_group": "fat30",
+    "question": "건강하지 않은 체중 증가 예방을 위한 WHO 성인 총지방 에너지 비율과 권고 강도는?",
+    "language": "ko",
+    "split": "heldout",
+    "gold_source": "WHO_total_fat_2023.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "30%",
+    "gold_answer": "30% of total energy intake or less for adults; conditional recommendation to reduce unhealthy weight gain risk.",
+    "document_sha256": "a9f12218be0b1720c9be4f0dee79c2dbdcbd13fb44cd3e0d751bf04b5fa63381",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_total_fat_2023.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "30%"
+      }
+    ],
+    "applicability": "adults; prevention of unhealthy weight gain, not a mandatory personalised weight-loss prescription",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "fat_quality-en",
+    "case_group": "fat_quality",
+    "question": "What fat types and saturated/trans fat energy limits does WHO recommend?",
+    "language": "en",
+    "split": "heldout",
+    "gold_source": "WHO_total_fat_2023.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "primarily unsaturated",
+    "gold_answer": "Primarily unsaturated fatty acids; no more than 10% energy from saturated fatty acids and no more than 1% from trans-fatty acids; strong recommendation.",
+    "document_sha256": "a9f12218be0b1720c9be4f0dee79c2dbdcbd13fb44cd3e0d751bf04b5fa63381",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_total_fat_2023.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "primarily unsaturated"
+      }
+    ],
+    "applicability": "fat quality; distinguish total fat from saturated and trans fat",
+    "expected_action": "answer_with_scope_and_citation"
+  },
+  {
+    "id": "fat_quality-ko",
+    "case_group": "fat_quality",
+    "question": "WHO 지방 종류와 포화·트랜스지방 에너지 비율 권고는?",
+    "language": "ko",
+    "split": "heldout",
+    "gold_source": "WHO_total_fat_2023.pdf",
+    "gold_page": 10,
+    "gold_excerpt": "primarily unsaturated",
+    "gold_answer": "Primarily unsaturated fatty acids; no more than 10% energy from saturated fatty acids and no more than 1% from trans-fatty acids; strong recommendation.",
+    "document_sha256": "a9f12218be0b1720c9be4f0dee79c2dbdcbd13fb44cd3e0d751bf04b5fa63381",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "factual source-text review only; not clinical policy approval",
+    "acceptable_evidence": [
+      {
+        "source": "WHO_total_fat_2023.pdf",
+        "pdf_pages": [
+          10
+        ],
+        "core_excerpt": "primarily unsaturated"
+      }
+    ],
+    "applicability": "fat quality; distinguish total fat from saturated and trans fat",
+    "expected_action": "answer_with_scope_and_citation"
+  }
+]

@@ -1,0 +1,61 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    image: metadiet:local
+    env_file: backend/.env
+    environment:
+      ENABLE_SCHEDULER: "false"
+      PORT: "8080"
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 6
+      start_period: 30s
+
+  worker:
+    image: metadiet:local
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    env_file: backend/.env
+    command: ["python", "worker.py"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import pathlib; assert b'worker.py' in pathlib.Path('/proc/1/cmdline').read_bytes()"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  mcp:
+    image: metadiet:local
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY:?set GEMINI_API_KEY via --env-file backend/.env}
+      PINECONE_API_KEY: ${PINECONE_API_KEY:?set PINECONE_API_KEY via --env-file backend/.env}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-3.8-flash}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-gemini-embedding-2}
+      EMBEDDING_DIMENSION: ${EMBEDDING_DIMENSION:-3072}
+      PINECONE_INDEX_NAME: ${PINECONE_INDEX_NAME:-diet-agent-rag}
+      PINECONE_NAMESPACE: ${PINECONE_NAMESPACE:-metadiet-gemini-v1}
+      SUPABASE_URL: ""
+      SUPABASE_SERVICE_KEY: ""
+      SUPABASE_JWT_SECRET: ""
+    command: ["python", "-m", "app.mcp.server", "--transport", "streamable-http", "--host", "0.0.0.0", "--port", "8090"]
+    ports:
+      - "127.0.0.1:8090:8090"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import socket; s=socket.create_connection(('127.0.0.1',8090),3); s.close()"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 10s

@@ -32,15 +32,14 @@ os.environ.setdefault("LANGCHAIN_PROJECT",     os.getenv("LANGSMITH_PROJECT",  "
 os.environ.setdefault("LANGCHAIN_ENDPOINT",    os.getenv("LANGSMITH_ENDPOINT", "https://api.smith.langchain.com"))
 
 from langsmith import traceable, tracing_context, Client
-from langchain_openai import ChatOpenAI
+from app.core.llm import get_chat_model
 from app.core.config import get_settings
 from app.rag.retriever import retrieve
 from app.rag.qa import answer_from_knowledge, NO_EVIDENCE
 
 REPORT_PATH = Path(__file__).parent / "eval_report.json"
 
-judge = ChatOpenAI(model="gpt-4o-mini", temperature=0,
-                   openai_api_key=get_settings().openai_api_key)
+judge = get_chat_model(temperature=0, role="eval")
 
 
 def _norm(s: str) -> str:
@@ -99,7 +98,7 @@ async def eval_one(item: dict, k: int, use_hybrid: bool, use_rerank: bool) -> di
                       for s, p in retrieved)
     excerpt_hit = _excerpt_hit(item.get("gold_excerpt", ""), r["docs"])
 
-    ans = await answer_from_knowledge(q, k=k)
+    ans = await answer_from_knowledge(q, k=k, retrieval_result=r)
     refused  = _is_refusal(ans["answer"])
     citation = bool(re.search(r"\[출처", ans["answer"]))
     faith    = await faithfulness_score(q, ans["answer"], ans["context"])

@@ -1,0 +1,10 @@
+.process-trace { margin-bottom: 14px; color: #50635c; font-size: 12px; }
+.process-trace summary { width: fit-content; cursor: pointer; color: #62736d; font-weight: 650; }
+.process-trace.is-running { padding: 12px 14px; border: 1px solid #dce8e2; border-radius: 14px; background: #f6faf8; }
+.process-trace__status { margin-bottom: 10px; color: #176b4d; font-weight: 750; }
+.process-trace__list { display: grid; gap: 7px; margin: 10px 0 0; padding: 0; list-style: none; }
+.process-trace__step { display: flex; align-items: center; gap: 9px; min-height: 22px; color: #6e7e78; }
+.process-trace__step.is-active { color: #164f3b; font-weight: 700; }
+.process-trace__index { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #e7f1ec; color: #39735e; font-size: 10px; font-weight: 800; }
+.process-trace__step.is-active .process-trace__index { background: #1f7a58; color: #fff; box-shadow: 0 0 0 4px rgba(31, 122, 88, .12); }
+@media (prefers-reduced-motion: no-preference) { .process-trace__step.is-active .process-trace__index { animation: trace-pulse 1.5s ease-in-out infinite; } @keyframes trace-pulse { 50% { box-shadow: 0 0 0 7px rgba(31, 122, 88, .04); } } }

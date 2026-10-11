@@ -1,0 +1,111 @@
+{
+  "corpus_manifest_sha256": "5e5879a401229f9e7b998f375c50ad0d9a7bf7cbb087bcba39271af4c444de74",
+  "documents": 10,
+  "selected_pages": 24,
+  "gold_count": 0,
+  "quality_status": "unreviewed_execution_pilot_only",
+  "parsers": [
+    {
+      "parser": "pypdf",
+      "documents_completed": 10,
+      "documents_total": 10,
+      "text_pages": 24,
+      "text_chars": 61097,
+      "tables": 0,
+      "pictures": 0,
+      "parser_versions": [
+        "6.12.2"
+      ]
+    },
+    {
+      "parser": "pdfplumber",
+      "documents_completed": 10,
+      "documents_total": 10,
+      "text_pages": 24,
+      "text_chars": 60047,
+      "tables": 27,
+      "pictures": 13,
+      "parser_versions": [
+        "0.11.10"
+      ]
+    },
+    {
+      "parser": "docling (PDFium)",
+      "documents_completed": 10,
+      "documents_total": 10,
+      "text_pages": 24,
+      "text_chars": 71129,
+      "tables": 6,
+      "pictures": 11,
+      "parser_versions": [
+        "2.135.0"
+      ]
+    }
+  ],
+  "recipes": [
+    {
+      "chunking": "page",
+      "search_chunks": 24,
+      "parents": 0,
+      "complete_corpus": true,
+      "parser": "pypdf"
+    },
+    {
+      "chunking": "parent_child",
+      "search_chunks": 182,
+      "parents": 45,
+      "complete_corpus": true,
+      "parser": "pypdf"
+    },
+    {
+      "chunking": "section",
+      "search_chunks": 62,
+      "parents": 0,
+      "complete_corpus": true,
+      "parser": "pypdf"
+    },
+    {
+      "chunking": "page",
+      "search_chunks": 24,
+      "parents": 0,
+      "complete_corpus": true,
+      "parser": "pdfplumber"
+    },
+    {
+      "chunking": "parent_child",
+      "search_chunks": 180,
+      "parents": 44,
+      "complete_corpus": true,
+      "parser": "pdfplumber"
+    },
+    {
+      "chunking": "section",
+      "search_chunks": 62,
+      "parents": 0,
+      "complete_corpus": true,
+      "parser": "pdfplumber"
+    },
+    {
+      "chunking": "page",
+      "search_chunks": 24,
+      "parents": 0,
+      "complete_corpus": true,
+      "parser": "docling (PDFium)"
+    },
+    {
+      "chunking": "parent_child",
+      "search_chunks": 212,
+      "parents": 52,
+      "complete_corpus": true,
+      "parser": "docling (PDFium)"
+    },
+    {
+      "chunking": "section",
+      "search_chunks": 95,
+      "parents": 0,
+      "complete_corpus": true,
+      "parser": "docling (PDFium)"
+    }
+  ],
+  "native_docling_failure": "KDRI_2025_vol3.pdf: Windows native access violation; retained separately"
+}

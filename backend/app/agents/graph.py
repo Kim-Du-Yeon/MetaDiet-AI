@@ -16,6 +16,7 @@ meal_plan 검증 루프:
 from contextlib import asynccontextmanager
 from langgraph.graph import StateGraph, END
 from langgraph.checkpoint.postgres.aio import AsyncPostgresSaver
+from psycopg_pool import AsyncConnectionPool
 from app.schemas.models import AgentState
 from app.agents.supervisor.node import supervisor_node, route_to_agent
 from app.agents.diet_logger.node import diet_logger_node
@@ -29,7 +30,8 @@ from app.agents.validator.node import validator_node, route_after_validator
 from app.agents.goal_manager.node import goal_manager_node
 from app.agents.off_topic.node import off_topic_node
 from app.core.config import get_settings
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
+from app.core.service_clock import service_today
 
 _diet_agent_graph = None
 
@@ -44,7 +46,7 @@ async def load_state_node(state: AgentState) -> dict:
     from app.db.supabase_client import get_supabase
     sb     = get_supabase()
     user_id = state["user_id"]
-    today   = date.today().isoformat()
+    today   = service_today().isoformat()
     try:
         meal_rows = sb.table("meal_logs").select("calories,protein_g,carbs_g,fat_g").eq("user_id", user_id).eq("log_date", today).execute().data
     except:
@@ -61,7 +63,7 @@ async def load_state_node(state: AgentState) -> dict:
     latest_inbody = inbody_rows[0] if inbody_rows else None
     days_since    = 999
     if latest_inbody:
-        days_since = (date.today() - date.fromisoformat(latest_inbody["measured_date"])).days
+        days_since = (service_today() - date.fromisoformat(latest_inbody["measured_date"])).days
     try:
         user_rows = sb.table("users").select("goal,target_weight_kg,target_date,goal_priority,region").eq("id", user_id).limit(1).execute().data
     except:
@@ -88,6 +90,7 @@ async def load_state_node(state: AgentState) -> dict:
         "days_since_inbody": days_since,
         "validation_attempts": 0, "validation_passed": None,
         "validation_feedback": "", "can_improve": None,
+        "rag_context": "", "rag_grounded": False,
     }
 
 
@@ -95,10 +98,17 @@ async def save_chat_node(state: AgentState) -> dict:
     from app.db.supabase_client import get_supabase
     sb = get_supabase()
     try:
+        thread_id = state.get("thread_id") or "default"
+        user_created_at = datetime.now(timezone.utc)
+        assistant_created_at = user_created_at + timedelta(microseconds=1)
         sb.table("chat_history").insert([
-            {"user_id": state["user_id"], "role": "user",      "content": state["message"]},
-            {"user_id": state["user_id"], "role": "assistant",  "content": state["response"],
-             "agent_type": state.get("agent_used", "unknown")},
+            {"user_id": state["user_id"], "thread_id": thread_id,
+             "role": "user", "content": state["message"],
+             "created_at": user_created_at.isoformat()},
+            {"user_id": state["user_id"], "thread_id": thread_id,
+             "role": "assistant", "content": state["response"],
+             "agent_type": state.get("agent_used", "unknown"),
+             "created_at": assistant_created_at.isoformat()},
         ]).execute()
     except Exception as e:
         print(f"=== save_chat 오류: {e} ===")
@@ -127,12 +137,43 @@ def build_meal_planner_subgraph():
     sub.add_edge("meal_plan", "validator")
     sub.add_conditional_edges(
         "validator", route_after_validator,
-        {"meal_plan": "meal_plan", "confirm": END},   # 통과 시 서브그래프 종료
+        {"meal_plan": "meal_plan", "confirm": END, "blocked": END},
     )
     return sub.compile()
 
 
-def build_graph(checkpointer=None):
+def build_graph(checkpointer=None, *, model_driven=True):
+    if not model_driven:
+        return build_legacy_graph(checkpointer)
+    from app.agents.team import team_node
+    from app.agents.approval import approval_node
+    graph = StateGraph(AgentState)
+    graph.add_node("supervisor", team_node)
+    # Persist the proposal-producing turn before LangGraph interrupts at confirm.
+    # Otherwise a browser refresh can restore the durable proposal but not the
+    # user/assistant messages that explain what is awaiting approval.
+    graph.add_node("save_pending_chat", save_chat_node)
+    graph.add_node("confirm", approval_node)
+    graph.add_node("save_chat", save_chat_node)
+    graph.set_entry_point("supervisor")
+    def after_task(state):
+        return "save_pending_chat" if state.get("pending_proposal") and state.get("awaiting_confirmation") else "save_chat"
+    graph.add_conditional_edges(
+        "supervisor",
+        after_task,
+        {"save_pending_chat": "save_pending_chat", "save_chat": "save_chat"},
+    )
+    graph.add_edge("save_pending_chat", "confirm")
+    graph.add_conditional_edges(
+        "confirm",
+        after_task,
+        {"save_pending_chat": "save_pending_chat", "save_chat": "save_chat"},
+    )
+    graph.add_edge("save_chat", END)
+    return graph.compile(checkpointer=checkpointer, interrupt_before=["confirm"])
+
+
+def build_legacy_graph(checkpointer=None):
     graph = StateGraph(AgentState)
 
     graph.add_node("load_state",  load_state_node)
@@ -185,7 +226,11 @@ def build_graph(checkpointer=None):
                                 {"confirm": "confirm", "save_chat": "save_chat"})
 
     # meal_planner 서브그래프(meal_plan↔validator 루프) 완료 후 → confirm(HITL interrupt)
-    graph.add_edge("meal_planner", "confirm")
+    graph.add_conditional_edges(
+        "meal_planner",
+        lambda state: "confirm" if state.get("validation_passed") is True else "save_chat",
+        {"confirm": "confirm", "save_chat": "save_chat"},
+    )
 
     # inbody 완료 후 goal_manager로 자동 체이닝(목표 대비 진행 점검) → save_chat
     graph.add_edge("inbody", "goal_manager")
@@ -209,7 +254,10 @@ async def lifespan(app):
     if not db_url:
         raise RuntimeError("SUPABASE_DB_URL 미설정")
     print("=== [lifespan] AsyncPostgresSaver 초기화 중... ===")
-    async with AsyncPostgresSaver.from_conn_string(db_url) as checkpointer:
+    async with AsyncConnectionPool(db_url, min_size=1, max_size=10, timeout=15,
+                                  kwargs={"autocommit": True, "prepare_threshold": 0}, open=False) as pool:
+        await pool.open(wait=True)
+        checkpointer = AsyncPostgresSaver(pool)
         await checkpointer.setup()
         print("=== [lifespan] 체크포인터 테이블 준비 완료 ===")
         _diet_agent_graph = build_graph(checkpointer=checkpointer)

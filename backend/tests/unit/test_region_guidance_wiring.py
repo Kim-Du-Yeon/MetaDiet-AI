@@ -1,7 +1,7 @@
 import json
 
 import pytest
-from langchain_openai import ChatOpenAI
+from app.core.llm import ConfiguredChatModel
 
 import app.rag.retriever as retriever_module
 import app.tools.agent_tools as agent_tools_module
@@ -45,7 +45,7 @@ def _stub_rag_and_llm(monkeypatch):
             content = _LLM_JSON_RESPONSE
         return _Resp()
 
-    monkeypatch.setattr(ChatOpenAI, "ainvoke", fake_ainvoke)
+    monkeypatch.setattr(ConfiguredChatModel, "ainvoke", fake_ainvoke)
     return captured
 
 

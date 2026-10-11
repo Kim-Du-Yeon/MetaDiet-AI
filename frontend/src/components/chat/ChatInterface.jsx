@@ -1,5 +1,8 @@
-import { useState, useRef, useEffect } from "react";
-import { sendChatMessage, uploadImage, resumeChat, getChatHistory, rollbackToCheckpoint, nutritionLookup } from "../../api/dietApi";
+import { useState, useRef, useEffect, useCallback } from "react";
+import { sendChatMessage, uploadImage, resumeChat, getChatHistory, getSessionRestore, rollbackToCheckpoint, nutritionLookup, decideProposal, reviseMeasurement } from "../../api/dietApi";
+import ProposalCard from "./ProposalCard";
+import ProcessTrace from "./ProcessTrace";
+import "./ChatInterface.css";
 
 const USER_ID = "17691249-f22f-4447-a6e4-fca7a8e57cc8";
 
@@ -42,6 +45,11 @@ export default function ChatInterface({
 }) {
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [approval, setApproval] = useState(null);
+  const [approvalError, setApprovalError] = useState("");
+  const [progressSteps, setProgressSteps] = useState([]);
+  const [streamError, setStreamError] = useState("");
+  const [restoreStatus, setRestoreStatus] = useState("loading");
   const [pendingState, setPendingState] = useState({ pending_meals: null, awaiting_confirmation: false, plan_date: null });
   const [isRolledBack, setIsRolledBack] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
@@ -50,8 +58,47 @@ export default function ChatInterface({
   const [foodEntry, setFoodEntry] = useState(null);   // 음식 카드: { foods, grams, mealType }
   const bottomRef = useRef(null);
   const fileInputRef = useRef(null);
+  const progressRef = useRef([]);
+  const restoreStartedRef = useRef(false);
 
-  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: "smooth" }); }, [messages]);
+  const restoreSession = useCallback(async () => {
+    setRestoreStatus("loading");
+    setStreamError("");
+    try {
+      const restored = await getSessionRestore(threadId);
+      if (restored.messages?.length) {
+        setMessages(restored.messages.map((message) => ({
+          role: message.role,
+          content: message.content,
+          agentUsed: message.agent_used || null,
+          streaming: false,
+        })));
+      }
+      const restoredPending = restored.pending_state || EMPTY_PENDING_STATE;
+      setPendingState({
+        pending_meals: restoredPending.pending_meals || null,
+        awaiting_confirmation: !!restoredPending.awaiting_confirmation,
+        plan_date: restoredPending.plan_date || null,
+      });
+      setApproval(restored.pending_proposal ? { ...restored.pending_proposal, channel: "chat" } : null);
+      setIsInterrupted(!!restored.interrupted);
+      if (restored.today_calories !== undefined && restored.target_calories !== undefined) {
+        onStatsUpdate?.({ calories: restored.today_calories, target: restored.target_calories });
+      }
+      setRestoreStatus("ready");
+    } catch (_error) {
+      setRestoreStatus("error");
+      setStreamError("이전 상태를 불러오지 못했습니다. 저장된 실행을 다시 수행하지 않고 화면 상태만 다시 불러올 수 있습니다.");
+    }
+  }, [onStatsUpdate, setIsInterrupted, setMessages, threadId]);
+
+  useEffect(() => {
+    if (restoreStartedRef.current) return;
+    restoreStartedRef.current = true;
+    restoreSession();
+  }, [restoreSession]);
+
+  useEffect(() => { bottomRef.current?.scrollIntoView?.({ behavior: "smooth" }); }, [messages]);
 
   const handleToken = (token) => {
     setMessages((prev) => {
@@ -63,9 +110,10 @@ export default function ChatInterface({
   };
 
   const handleDone = (meta) => {
+    setApproval(meta.pending_proposal ? { ...meta.pending_proposal, channel: "chat" } : null);
     setMessages((prev) => {
       const updated = [...prev];
-      updated[updated.length - 1] = { ...updated[updated.length - 1], streaming: false, agentUsed: meta.agent_used };
+      updated[updated.length - 1] = { ...updated[updated.length - 1], streaming: false, agentUsed: meta.agent_used, progressSteps: progressRef.current };
       return updated;
     });
     setPendingState({ pending_meals: meta.pending_meals || null, awaiting_confirmation: meta.awaiting_confirmation || false, plan_date: meta.plan_date || null });
@@ -84,8 +132,63 @@ export default function ChatInterface({
     setIsLoading(false);
   };
 
+  const resetProgress = () => {
+    progressRef.current = [];
+    setProgressSteps([]);
+    setStreamError("");
+  };
+
+  const handleProgress = (event) => {
+    const step = { phase: event.phase || "progress", label: event.label || "처리 중", tool: event.tool };
+    const previous = progressRef.current;
+    const last = previous[previous.length - 1];
+    const next = last?.phase === step.phase && last?.label === step.label
+      ? [...previous.slice(0, -1), step]
+      : [...previous, step];
+    progressRef.current = next;
+    setProgressSteps(next);
+    setMessages((messages) => {
+      const updated = [...messages];
+      const index = updated.length - 1;
+      if (index >= 0 && updated[index].role === "assistant" && updated[index].streaming) {
+        updated[index] = { ...updated[index], progressSteps: next };
+      }
+      return updated;
+    });
+  };
+
+  const handleProposalDecision = async (action) => {
+    if (!approval || isLoading) return;
+    resetProgress();
+    setIsLoading(true);
+    setApprovalError("");
+    try {
+      if (approval.channel === "chat") {
+        setMessages(prev => [...prev, { role: "assistant", content: "", streaming: true }]);
+        await resumeChat(USER_ID, threadId, action === "confirm" ? "확정" : "취소", handleToken, handleDone,
+          { proposal_id: approval.id, version: approval.version, action }, handleProgress);
+      } else {
+        await decideProposal(approval, action);
+        setApproval(null);
+        setMessages(prev => [...prev, { role: "assistant", content: action === "confirm"
+          ? "인바디 측정값을 저장했습니다. 새 목표 전략 검토를 요청할 수 있습니다."
+          : "인바디 측정 제안을 취소했습니다.", streaming: false }]);
+      }
+    } catch (error) { setApprovalError(error.message); setStreamError(error.message); }
+    finally { setIsLoading(false); }
+  };
+
+  const handleMeasurementRevision = async (payload) => {
+    setIsLoading(true);
+    setApprovalError("");
+    try { setApproval({ ...await reviseMeasurement(approval, payload), channel: "upload" }); }
+    catch (error) { setApprovalError(error.message); }
+    finally { setIsLoading(false); }
+  };
+
   const sendMessage = async () => {
     if (!input.trim() || isLoading) return;
+    resetProgress();
     const userMsg = input.trim();
     const activeFoodEntry = foodEntry;
     const isFoodRejection = activeFoodEntry && FOOD_REJECTION_RE.test(userMsg);
@@ -112,17 +215,18 @@ export default function ChatInterface({
     setMessages((prev) => [...prev, newUserMessage, { role: "assistant", content: "", agentUsed: null, streaming: true }]);
     try {
       const contextMessages = [...messages, newUserMessage];
-      const shouldResume = !isRolledBack && (isInterrupted || pendingState.pending_meals);
+      const shouldResume = !isRolledBack && (isInterrupted || pendingState.pending_meals || approval);
       if (shouldResume) {
         setIsInterrupted(false); setIsRolledBack(false);
-        await resumeChat(USER_ID, threadId, userMsg, handleToken, handleDone);
+        await resumeChat(USER_ID, threadId, userMsg, handleToken, handleDone, null, handleProgress);
       } else {
         setIsRolledBack(false);
-        await sendChatMessage(USER_ID, userMsg, handleToken, handleDone, pendingState, contextMessages, threadId);
+        await sendChatMessage(USER_ID, userMsg, handleToken, handleDone, pendingState, contextMessages, threadId, null, handleProgress);
       }
     } catch (e) {
       console.error(e);
-      setMessages((prev) => [...prev.slice(0, -1), { role: "assistant", content: "오류가 발생했습니다.", agentUsed: null }]);
+      setStreamError(e.message || "응답을 받지 못했습니다.");
+      setMessages((prev) => [...prev.slice(0, -1), { role: "assistant", content: "응답을 끝까지 받지 못했습니다. 잠시 후 다시 요청해주세요.", agentUsed: null, progressSteps: progressRef.current }]);
       setIsLoading(false);
     }
   };
@@ -179,6 +283,7 @@ export default function ChatInterface({
     if (!foodEntry || isLoading) return;
     const foods = foodEntry.foods.map((f) => ({ name: f, quantity_g: Number(foodEntry.grams[f]) || 100 }));
     setFoodEntry(null);
+    resetProgress();
     setIsLoading(true);
     setMessages((prev) => [...prev,
       { role: "user", content: "📷 이 음식들 영양성분이 궁금해요" },
@@ -207,11 +312,12 @@ export default function ChatInterface({
     const text = parts.join(", ");
     const mealType = foodEntry.mealType;
     setFoodEntry(null);
+    resetProgress();
     setIsLoading(true);
     const newUserMessage = { role: "user", content: text };
     setMessages((prev) => [...prev, newUserMessage, { role: "assistant", content: "", agentUsed: null, streaming: true }]);
     try {
-      await sendChatMessage(USER_ID, text, handleToken, handleDone, pendingState, [...messages, newUserMessage], threadId, mealType);
+      await sendChatMessage(USER_ID, text, handleToken, handleDone, pendingState, [...messages, newUserMessage], threadId, mealType, handleProgress);
     } catch (e) {
       setMessages((prev) => [...prev.slice(0, -1), { role: "assistant", content: "오류가 발생했습니다.", agentUsed: null }]);
       setIsLoading(false);
@@ -234,8 +340,9 @@ export default function ChatInterface({
     try {
       const result = await uploadImage(USER_ID, file);
       if (result.type === "inbody") {
+          setApproval(result.proposal ? { ...result.proposal, channel: "upload" } : null);
         setMessages((prev) => { const u=[...prev]; u[u.length-1] = { role:"assistant",
-          content:`✅ 인바디 분석 완료!\n체중: ${result.weight_kg}kg | 골격근: ${result.skeletal_muscle_kg}kg | 체지방률: ${result.body_fat_pct}%\n\n${result.strategy_note}`,
+          content:`인바디 인식 결과 — 확인 대기\n체중: ${result.weight_kg}kg | 골격근: ${result.skeletal_muscle_kg}kg | 체지방률: ${result.body_fat_pct}%\n\n${result.strategy_note}`,
           agentUsed:"inbody", streaming:false }; return u; });
       } else if (result.type === "food") {
         setMessages((prev) => { const u=[...prev]; u[u.length-1] = { role:"assistant",
@@ -260,20 +367,37 @@ export default function ChatInterface({
   };
 
   return (
-    <div style={styles.container}>
+    <div className="chat-shell" style={styles.container}>
+      <header className="chat-header">
+        <div><span className="chat-header__eyebrow">MetaDiet AI</span><h1>오늘의 식단 코치</h1></div>
+        <p>내 기록과 검토된 영양 근거를 함께 반영합니다.</p>
+      </header>
       {isInterrupted && <div style={styles.interruptBanner}>⏸️ 식단 확인 대기 중 — 확정, 수정, 또는 취소를 입력해주세요</div>}
       {isRolledBack   && <div style={styles.rollbackBanner}>⏪ 롤백된 상태 — 이전 시점에서 계속 진행 중입니다</div>}
+      {restoreStatus === "loading" && <div className="chat-restore" role="status">이전 대화를 불러오는 중입니다.</div>}
+      {streamError && <div className="chat-error" role="alert"><div><strong>연결을 확인해주세요</strong><span>{streamError}</span></div>
+        {restoreStatus === "error" && <button type="button" onClick={restoreSession}>화면 상태 다시 불러오기</button>}
+      </div>}
 
-      <div style={styles.messages}>
+      <div className="chat-messages" style={styles.messages}>
         {messages.map((msg, i) => (
           <div key={i} style={{ display:"flex", justifyContent: msg.role==="user"?"flex-end":"flex-start", marginBottom:12 }}>
-            <div style={msg.role==="user" ? styles.userBubble : styles.aiBubble}>
+            <div className={msg.role === "user" ? "chat-bubble chat-bubble--user" : "chat-bubble chat-bubble--assistant"} style={msg.role==="user" ? styles.userBubble : styles.aiBubble}>
+              {msg.role === "assistant" && <ProcessTrace steps={msg.progressSteps || (msg.streaming ? progressSteps : [])} running={Boolean(msg.streaming)} />}
               <p style={{ margin:0, whiteSpace:"pre-wrap", lineHeight:1.6 }}>{msg.content}</p>
               {msg.streaming && <span style={styles.cursor}>▊</span>}
               {msg.agentUsed && !msg.streaming && <p style={styles.agentLabel}>{AGENT_LABELS[msg.agentUsed] || msg.agentUsed}</p>}
             </div>
           </div>
         ))}
+        {restoreStatus === "ready" && messages.length <= 1 && <section className="chat-starters" aria-label="빠른 시작">
+          <p>무엇을 도와드릴까요?</p>
+          <div>
+            <button type="button" onClick={() => setInput("오늘 저녁 식단을 추천해줘")}>오늘 저녁 추천받기</button>
+            <button type="button" onClick={() => setInput("오늘 먹은 기록을 요약해줘")}>오늘 기록 확인하기</button>
+            <button type="button" onClick={() => setInput("최근 체중 추세와 목표를 점검해줘")}>목표 진행 확인하기</button>
+          </div>
+        </section>}
         <div ref={bottomRef} />
       </div>
 
@@ -308,6 +432,8 @@ export default function ChatInterface({
         </div>
       )}
 
+      {approval && <ProposalCard proposal={approval} busy={isLoading} onDecision={handleProposalDecision} onRevise={handleMeasurementRevision} />}
+      {approvalError && <p role="alert" style={{ color: "#b42318", margin: 12 }}>{approvalError}</p>}
       {foodEntry && (
         <div style={styles.foodCard}>
           <div style={styles.foodCardTitle}>📷 인식된 음식 — 무엇을 할까요?</div>
@@ -371,11 +497,12 @@ export default function ChatInterface({
         </div>
       )}
 
-      <div style={styles.inputArea}>
-        <button onClick={() => fileInputRef.current?.click()} style={styles.iconBtn} disabled={isLoading} title="사진 업로드 (음식·인바디 자동 인식)">📷</button>
+      <div className="chat-composer" style={styles.inputArea}>
+        <button aria-label="사진 업로드" onClick={() => fileInputRef.current?.click()} style={styles.iconBtn} disabled={isLoading} title="사진 업로드 (음식·인바디 자동 인식)">📷</button>
         <input ref={fileInputRef} type="file" accept="image/*" style={{ display:"none" }} onChange={handleImageUpload} />
-        <button onClick={handleShowHistory} style={styles.iconBtn} title="타임 트래블">⏱️</button>
+        <button aria-label="대화 체크포인트 보기" onClick={handleShowHistory} style={styles.iconBtn} title="타임 트래블">⏱️</button>
         <input
+          aria-label="식단 코치에게 메시지 보내기"
           type="text" value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key==="Enter" && sendMessage()}
@@ -396,14 +523,14 @@ const styles = {
   interruptBanner: { backgroundColor:"#e8f5e9", color:"#2e7d32", padding:"8px 16px", fontSize:"13px", fontWeight:"500", borderBottom:"1px solid #c8e6c9", textAlign:"center" },
   rollbackBanner:  { backgroundColor:"#fff3e0", color:"#e65100", padding:"8px 16px", fontSize:"13px", fontWeight:"500", borderBottom:"1px solid #ffe0b2", textAlign:"center" },
   messages:        { flex:1, overflowY:"auto", padding:"20px" },
-  userBubble:      { backgroundColor:"#4CAF50", color:"white", padding:"10px 16px", borderRadius:"18px 18px 4px 18px", maxWidth:"70%" },
+  userBubble:      { backgroundColor:"#1f7a58", color:"white", padding:"10px 16px", borderRadius:"18px 18px 4px 18px", maxWidth:"70%" },
   aiBubble:        { backgroundColor:"white", color:"#333", padding:"10px 16px", borderRadius:"18px 18px 18px 4px", maxWidth:"70%", border:"1px solid #e0e0e0" },
   agentLabel:      { margin:"6px 0 0", fontSize:"11px", color:"#999" },
   cursor:          { display:"inline-block", animation:"blink 1s infinite" },
   inputArea:       { display:"flex", padding:"12px", backgroundColor:"white", borderTop:"1px solid #e0e0e0", gap:"8px", alignItems:"center" },
   iconBtn:         { fontSize:"20px", background:"none", border:"none", cursor:"pointer", padding:"4px" },
-  input:           { flex:1, padding:"10px 16px", borderRadius:"24px", border:"1px solid #ddd", outline:"none", fontSize:"14px", transition:"border-color 0.2s" },
-  sendBtn:         { padding:"10px 20px", backgroundColor:"#4CAF50", color:"white", border:"none", borderRadius:"24px", cursor:"pointer", fontSize:"14px" },
+  input:           { flex:1, padding:"10px 16px", borderRadius:"24px", borderWidth:"1px", borderStyle:"solid", borderColor:"#ddd", outline:"none", fontSize:"14px", transition:"border-color 0.2s" },
+  sendBtn:         { padding:"10px 20px", backgroundColor:"#1f7a58", color:"white", border:"none", borderRadius:"24px", cursor:"pointer", fontSize:"14px", fontWeight:"700" },
   historyPanel:    { backgroundColor:"white", borderTop:"1px solid #e0e0e0", maxHeight:"280px", overflowY:"auto" },
   historyHeader:   { display:"flex", justifyContent:"space-between", alignItems:"center", padding:"10px 16px", borderBottom:"1px solid #eee", fontWeight:"600", fontSize:"13px" },
   closeBtn:        { background:"none", border:"none", cursor:"pointer", fontSize:"16px", color:"#999" },
@@ -418,15 +545,15 @@ const styles = {
   foodCard:        { backgroundColor:"#fffdf5", borderTop:"1px solid #ffe0b2", padding:"12px 16px" },
   foodCardTitle:   { fontSize:"13px", fontWeight:"600", color:"#e65100", marginBottom:"10px" },
   mealBtnRow:      { display:"flex", gap:"6px", marginBottom:"12px", flexWrap:"wrap" },
-  mealBtn:         { flex:1, minWidth:"64px", padding:"8px 6px", fontSize:"13px", border:"1px solid #ddd", borderRadius:"10px", background:"white", cursor:"pointer" },
-  mealBtnActive:   { backgroundColor:"#4CAF50", color:"white", borderColor:"#4CAF50", fontWeight:"600" },
+  mealBtn:         { flex:1, minWidth:"64px", padding:"8px 6px", fontSize:"13px", borderWidth:"1px", borderStyle:"solid", borderColor:"#ddd", borderRadius:"10px", background:"white", cursor:"pointer" },
+  mealBtnActive:   { backgroundColor:"#1f7a58", color:"white", borderColor:"#1f7a58", fontWeight:"600" },
   foodList:        { maxHeight:"160px", overflowY:"auto" },
   foodRow:         { display:"flex", alignItems:"center", gap:"8px", marginBottom:"6px" },
   foodName:        { flex:1, fontSize:"13px", color:"#333" },
   gramInput:       { width:"70px", padding:"6px 8px", border:"1px solid #ddd", borderRadius:"8px", fontSize:"13px", textAlign:"right", outline:"none" },
   gramUnit:        { fontSize:"12px", color:"#999", width:"14px" },
   foodCardActions: { display:"flex", gap:"8px", marginTop:"10px" },
-  foodSubmitBtn:   { flex:1, padding:"9px", backgroundColor:"#4CAF50", color:"white", border:"none", borderRadius:"10px", cursor:"pointer", fontSize:"14px", fontWeight:"500" },
+  foodSubmitBtn:   { flex:1, padding:"9px", backgroundColor:"#1f7a58", color:"white", border:"none", borderRadius:"10px", cursor:"pointer", fontSize:"14px", fontWeight:"700" },
   foodSubmitDisabled: { backgroundColor:"#c8c8c8", cursor:"not-allowed" },
   foodCancelBtn:   { padding:"9px 16px", backgroundColor:"#f0f0f0", color:"#666", border:"none", borderRadius:"10px", cursor:"pointer", fontSize:"14px" },
 };

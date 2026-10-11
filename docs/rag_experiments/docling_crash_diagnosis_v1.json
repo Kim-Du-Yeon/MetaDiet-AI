@@ -1,0 +1,132 @@
+{
+  "date": "2026-10-10",
+  "original_process_failures": 8,
+  "original_terminal_event_locations": {
+    "python313_dll": 7,
+    "ntdll_heap_detection": 1
+  },
+  "interpretation": "Terminal fault locations are not necessarily the first corruption site; diagnostic crashes and parser faults must be separated.",
+  "python_fault": {
+    "module": "python313.dll",
+    "function": "dump_frame",
+    "source": "Python/traceback.c:907",
+    "rvas": [
+      "0x2b0b98",
+      "0x2b0bab",
+      "0x2b0baf"
+    ],
+    "version": "3.13.3",
+    "symbols": "official Python 3.13.3 core_pdb.msi",
+    "minimal_torch_on": [
+      {
+        "trial": 1,
+        "exit_code": 3221225477,
+        "seconds": 24.977004899992608,
+        "stdout": "",
+        "stderr": "Failed to find real location of C:\\Users\\bok7z\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\nD:\\AX\\diet_agent\\backend\\artifacts\\gpu-runtime\\torch\\nn\\modules\\activation.py:1431: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\cuda\\CublasHandlePool.cpp:335.)\n  return torch._native_multi_head_attention(\n"
+      },
+      {
+        "trial": 2,
+        "exit_code": 3221225477,
+        "seconds": 25.49642009998206,
+        "stdout": "",
+        "stderr": "Failed to find real location of C:\\Users\\bok7z\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\nD:\\AX\\diet_agent\\backend\\artifacts\\gpu-runtime\\torch\\nn\\modules\\activation.py:1431: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\cuda\\CublasHandlePool.cpp:335.)\n  return torch._native_multi_head_attention(\n"
+      },
+      {
+        "trial": 3,
+        "exit_code": 3221225477,
+        "seconds": 32.10425600002054,
+        "stdout": "",
+        "stderr": "Failed to find real location of C:\\Users\\bok7z\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\nD:\\AX\\diet_agent\\backend\\artifacts\\gpu-runtime\\torch\\nn\\modules\\activation.py:1431: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\cuda\\CublasHandlePool.cpp:335.)\n  return torch._native_multi_head_attention(\n"
+      }
+    ],
+    "minimal_torch_off": [
+      {
+        "trial": 1,
+        "exit_code": 0,
+        "seconds": 31.043693199986592,
+        "stdout": "completed\n",
+        "stderr": "Failed to find real location of C:\\Users\\bok7z\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\nD:\\AX\\diet_agent\\backend\\artifacts\\gpu-runtime\\torch\\nn\\modules\\activation.py:1431: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\cuda\\CublasHandlePool.cpp:335.)\n  return torch._native_multi_head_attention(\n"
+      },
+      {
+        "trial": 2,
+        "exit_code": 0,
+        "seconds": 20.69246130005922,
+        "stdout": "completed\n",
+        "stderr": "Failed to find real location of C:\\Users\\bok7z\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\nD:\\AX\\diet_agent\\backend\\artifacts\\gpu-runtime\\torch\\nn\\modules\\activation.py:1431: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\cuda\\CublasHandlePool.cpp:335.)\n  return torch._native_multi_head_attention(\n"
+      },
+      {
+        "trial": 3,
+        "exit_code": 0,
+        "seconds": 29.21561399998609,
+        "stdout": "completed\n",
+        "stderr": "Failed to find real location of C:\\Users\\bok7z\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\nD:\\AX\\diet_agent\\backend\\artifacts\\gpu-runtime\\torch\\nn\\modules\\activation.py:1431: UserWarning: Attempting to run cuBLAS, but there was no current CUDA context! Attempting to set the primary context... (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\aten\\src\\ATen\\cuda\\CublasHandlePool.cpp:335.)\n  return torch._native_multi_head_attention(\n"
+      }
+    ],
+    "on_interval_seconds": 0.001,
+    "original_interval_seconds": 90,
+    "fix": "Remove periodic dump_traceback_later; retain parent timeout and fatal handler"
+  },
+  "docling_retests": [
+    {
+      "trial": 1,
+      "unique_pages": 15,
+      "seconds": 203.92102130001877,
+      "exit_code": 0
+    },
+    {
+      "trial": 2,
+      "unique_pages": 15,
+      "seconds": 290.3066579999868,
+      "exit_code": 0
+    },
+    {
+      "trial": 3,
+      "unique_pages": 15,
+      "seconds": 208.19191009993665,
+      "exit_code": 0
+    }
+  ],
+  "native_fault": {
+    "module": "docling_parse/pdf_parsers.cp313-win_amd64.pyd",
+    "version": "7.22.2",
+    "rva": "0x7e5a97",
+    "bad_read_address": "0xffffffffffffffff",
+    "path": "DoclingThreadedPdfParser / _threaded_pdf_renderer",
+    "isolated_parse_render_event": "windows-crash-events-diagnosis.json",
+    "long_probe": [
+      {
+        "threads": 4,
+        "code": "timeout",
+        "seconds": 240.02801349991933,
+        "log": "D:\\AX\\diet_agent\\backend\\artifacts\\docling-recovery-v1\\parse-only-threads4.log"
+      },
+      {
+        "threads": 1,
+        "code": "timeout",
+        "seconds": 240.03610830008984,
+        "log": "D:\\AX\\diet_agent\\backend\\artifacts\\docling-recovery-v1\\parse-only-threads1.log"
+      }
+    ],
+    "focused_probe": [
+      {
+        "threads": 4,
+        "code": 0,
+        "seconds": 50.16825240000617
+      },
+      {
+        "threads": 1,
+        "code": 0,
+        "seconds": 52.01281569991261
+      }
+    ],
+    "limitation": "C++ initial invalid allocation/free or race not identified. Long probes reached timeout; isolated page repetition succeeded. Fault-location attribution is not a C++ source-level root-cause proof."
+  },
+  "verification": {
+    "targeted_tests_passed": 12,
+    "warnings": 1,
+    "compileall": "passed",
+    "diff_check": "passed"
+  },
+  "production_changed": false
+}

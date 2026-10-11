@@ -1,0 +1,140 @@
+{
+  "stage": "full-corpus parser/chunking development comparison completed",
+  "decision": "Keep existing PyPDF/recursive baseline; use hybrid as provisional experiment reference, no production setting changes",
+  "next": "Gemini embedding 768/1536/3072 dimension comparison on retained baseline",
+  "documents": 10,
+  "pages_processed": 1953,
+  "heldout_queried": false,
+  "config": {
+    "dataset_sha256": "eb08185afae97e32526d6c3a48003c7161c73e92c48d59227c053d5e350bc06d",
+    "embedding_model": "gemini-embedding-2",
+    "dimension": 3072,
+    "candidate_k": 20,
+    "return_k": 4,
+    "context_chars": 6000,
+    "index": "local exact cosine; no Pinecone network latency"
+  },
+  "results": [
+    {
+      "recipe": "pdfplumber-page",
+      "mode": "dense",
+      "n": 40,
+      "bundle_sha256": "a5d831f234cee3131fedb45750a21604160a4bdfe9e8348b9d239e80f6962760",
+      "samples": "artifacts\\full-recipes-v4\\pdfplumber-page-contexts.json",
+      "page_hit": 0.65,
+      "excerpt_hit": 0.625,
+      "mrr": 0.5270833333333333,
+      "context_chars": 5782.925,
+      "seconds": 0.001521439998759888,
+      "truncated": 0.8
+    },
+    {
+      "recipe": "pdfplumber-page",
+      "mode": "hybrid",
+      "n": 40,
+      "bundle_sha256": "a5d831f234cee3131fedb45750a21604160a4bdfe9e8348b9d239e80f6962760",
+      "samples": "artifacts\\full-recipes-v4\\pdfplumber-page-contexts.json",
+      "page_hit": 0.6,
+      "excerpt_hit": 0.575,
+      "mrr": 0.51875,
+      "context_chars": 5920.7,
+      "seconds": 0.013782802506466397,
+      "truncated": 0.825
+    },
+    {
+      "recipe": "pdfplumber-section",
+      "mode": "dense",
+      "n": 40,
+      "bundle_sha256": "c5fef9cbb39c43285c8f0ac673a9dd940482544d6e3ef52f2a58afbff57a364b",
+      "samples": "artifacts\\full-recipes-v4\\pdfplumber-section-contexts.json",
+      "page_hit": 0.65,
+      "excerpt_hit": 0.625,
+      "mrr": 0.5270833333333333,
+      "context_chars": 4476.275,
+      "seconds": 0.0029692749929381536,
+      "truncated": 0.0
+    },
+    {
+      "recipe": "pdfplumber-section",
+      "mode": "hybrid",
+      "n": 40,
+      "bundle_sha256": "c5fef9cbb39c43285c8f0ac673a9dd940482544d6e3ef52f2a58afbff57a364b",
+      "samples": "artifacts\\full-recipes-v4\\pdfplumber-section-contexts.json",
+      "page_hit": 0.65,
+      "excerpt_hit": 0.6,
+      "mrr": 0.5125,
+      "context_chars": 4562.55,
+      "seconds": 0.023399414989398792,
+      "truncated": 0.0
+    },
+    {
+      "recipe": "pypdf-recursive",
+      "mode": "dense",
+      "n": 40,
+      "bundle_sha256": "90be77ae965c4a8fda1a4759a998ebe181243af067707cd25c2e4d956ce71caf",
+      "samples": "artifacts\\full-recipes-v4\\pypdf-recursive-contexts.json",
+      "page_hit": 0.75,
+      "excerpt_hit": 0.675,
+      "mrr": 0.6375,
+      "context_chars": 4157.075,
+      "seconds": 0.003452969994395971,
+      "truncated": 0.0
+    },
+    {
+      "recipe": "pypdf-recursive",
+      "mode": "hybrid",
+      "n": 40,
+      "bundle_sha256": "90be77ae965c4a8fda1a4759a998ebe181243af067707cd25c2e4d956ce71caf",
+      "samples": "artifacts\\full-recipes-v4\\pypdf-recursive-contexts.json",
+      "page_hit": 0.8,
+      "excerpt_hit": 0.75,
+      "mrr": 0.5729166666666667,
+      "context_chars": 4296.2,
+      "seconds": 0.033332492492627354,
+      "truncated": 0.0
+    }
+  ],
+  "errors": [
+    "Docling full conversion rejected",
+    "PDFPlumber lost edge cells and out-of-page bboxes repaired",
+    "Gemini embedding 503 recovered with one resumed stage retry"
+  ],
+  "limitations": [
+    "Development 40 questions/20 fact groups only",
+    "Small table audit; no clinical approval",
+    "No OCR or figure-content interpretation",
+    "Local exact retrieval timing excludes provider/network",
+    "No new Ragas answer scores; metrics differ from prior experiment protocol"
+  ],
+  "verification": {
+    "backend_passed": 183,
+    "skipped": 1,
+    "existing_warnings": 3
+  },
+  "artifacts": {
+    "parse-report.json": {
+      "path": "backend/artifacts/full-recipes-v4/parse-report.json",
+      "sha256": "7000835a8ddbbf548ccb8d815ee76d8383f2143575d782d86e7ee5568c7ca454"
+    },
+    "retrieval-report.json": {
+      "path": "backend/artifacts/full-recipes-v4/retrieval-report.json",
+      "sha256": "de784611b72bdbaaa6170e63f26842049ba3be2040505497ac1e408ef46c5594"
+    },
+    "paired-comparison.json": {
+      "path": "backend/artifacts/full-recipes-v4/paired-comparison.json",
+      "sha256": "35b7173363313f7f21f4b83d2179111ee66d48b2238f4d5e35882920a3cba7cd"
+    },
+    "preservation-report.json": {
+      "path": "backend/artifacts/full-recipes-v4/preservation-report.json",
+      "sha256": "500697001f9e423b4015d490a315d3ae9390036a3a13cb47d9bde3de02e44c0a"
+    },
+    "versions.json": {
+      "path": "backend/artifacts/full-recipes-v4/versions.json",
+      "sha256": "7d56eba40e0029e933a9c80aac3d542602961d69a9985110db59e435b9bd7b1f"
+    },
+    "analyze_paired.py": {
+      "path": "backend/artifacts/full-recipes-v4/analyze_paired.py",
+      "sha256": "82a0bb76351f915b563acb8748854ec20ba6f4c042a4edde0daf897e1b6c755a"
+    }
+  }
+}

@@ -9,28 +9,54 @@ HITL 흐름:
   /chat/resume   → aupdate_state({"message": user_input}) + ainvoke(None)
                  → confirm 실행 → 저장/수정/취소
 """
-from fastapi import FastAPI, UploadFile, File, HTTPException, Depends
+from fastapi import FastAPI, UploadFile, File, HTTPException, Depends, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from app.agents.graph import get_graph, lifespan
 from app.ocr.inbody_ocr import extract_inbody_from_image
 from app.db.supabase_client import get_supabase
-from app.core.auth import get_current_user, get_current_auth_id
+from app.core.auth import (
+    AuthContext,
+    get_active_auth_id,
+    get_current_user,
+    get_current_auth_id,
+    get_recent_auth_context,
+)
 from app.schemas.models import InbodyUploadResponse, ResumeRequest
-from pydantic import BaseModel
-from typing import Optional
+from pydantic import BaseModel, ConfigDict, Field, field_validator
+from typing import Optional, Literal
+from uuid import uuid4, UUID
+from app.schemas.proposals import ProposalDecision, MeasurementProposal, MeasurementRevision
+from app.db.proposals import ProposalRepository, ProposalConflict
+from app.db.feedback import FeedbackInput, FeedbackRepository, FeedbackStorageUnavailable
+from app.db.thread_lock import serialized_stream, conversation_lock
+from app.agents.execution_stream import (
+    ExecutionEventJournal, find_journal, get_or_create_journal, progress_for_runtime_event,
+    reset_event_sink, set_event_sink,
+)
 from datetime import date
+from app.core.service_clock import service_today
+from app.core.cors import allowed_origins
 import calendar
-import json, asyncio, time
+import hashlib
+import json, asyncio, time, logging
+
+logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Diet Agent API", version="1.0.0", lifespan=lifespan)
 sb  = get_supabase()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=allowed_origins(),
     allow_credentials=True, allow_methods=["*"], allow_headers=["*"],
 )
+
+
+def _trace_thread_id(user_id: str, thread_id: str) -> str:
+    """Stable pseudonymous trace grouping; never send the internal user UUID."""
+    digest = hashlib.sha256(f"{user_id}:{thread_id}".encode("utf-8")).hexdigest()
+    return f"thread-{digest[:24]}"
 
 
 class ChatRequest(BaseModel):
@@ -41,6 +67,38 @@ class ChatRequest(BaseModel):
     plan_date: Optional[str] = None
     messages: list = []
     meal_type: Optional[str] = None   # 사용자가 버튼으로 고른 끼니(있으면 강제 적용)
+    requested_action: Optional[Literal["record_only", "meal_plan", "goal", "evidence", "weekly_review"]] = None
+    tool_policy: Optional[list[Literal["read_profile", "read_intake", "read_measurements", "assess_goal_progress", "search_foods",
+        "nutrition_lookup", "search_evidence", "propose_meal", "propose_strategy", "read_recent_intake", "propose_meal_change"]]] = None
+    stream_run_id: Optional[str] = None
+    after_seq: int = 0
+
+
+class AccountDeleteRequest(BaseModel):
+    confirmation: Literal["DELETE"]
+
+
+class FeedbackRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    rating: int = Field(ge=1, le=5, strict=True)
+    category: Literal["general", "answer_quality", "evidence", "usability", "bug"]
+    comment: str | None = Field(default=None, max_length=1000)
+    client_submission_id: UUID
+
+    @field_validator("comment")
+    @classmethod
+    def normalize_comment(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        normalized = value.strip()
+        return normalized or None
+
+
+class FeedbackResponse(BaseModel):
+    id: str
+    status: Literal["stored"] = "stored"
+    created: bool
 
 
 def _is_empty_ocr_value(value) -> bool:
@@ -49,12 +107,12 @@ def _is_empty_ocr_value(value) -> bool:
 
 def _safe_inbody_date(value) -> str:
     if _is_empty_ocr_value(value):
-        return date.today().isoformat()
+        return service_today().isoformat()
     text = str(value).strip()
     try:
         return date.fromisoformat(text[:10]).isoformat()
     except ValueError:
-        return date.today().isoformat()
+        return service_today().isoformat()
 
 
 def _safe_float(value, default=None):
@@ -129,20 +187,24 @@ def _repair_implausible_inbody(user_id: str, inbody_data: dict, measured_date: s
 
     repaired = _estimate_next_inbody_from_history(valid_history, measured_date)
     if repaired:
-        print(f"=== [inbody_ocr] implausible OCR repaired | raw={inbody_data} | repaired={repaired} ===")
+        print("=== [inbody_ocr] implausible OCR repaired | values_redacted ===")
         return {**inbody_data, **repaired}
     return inbody_data
 
 
-def _initial_state(req: ChatRequest, user_id: str) -> dict:
+def _initial_state(req: ChatRequest, user_id: str, run_id: str | None = None) -> dict:
     return {
+        "thread_id": req.thread_id, "run_id": run_id or str(uuid4()),
+        "requested_action": req.requested_action, "tool_policy": req.tool_policy,
+        "pending_proposal": None, "proposal_decision": None, "proposal_result": None,
+        "execution_usage": {}, "execution_status": "running", "execution_error": None, "agent_events": [],
         "user_id": user_id, "message": req.message,
         "intent": "", "response": "", "messages": req.messages[-10:] if req.messages else [],
         "agent_used": "", "today_calories": 0.0, "today_protein": 0.0,
         "today_carbs": 0.0, "today_fat": 0.0, "target_calories": 0.0,
         "target_protein": 0.0, "target_carbs": 0.0, "target_fat": 0.0,
         "strategy_note": "", "latest_inbody": None, "days_since_inbody": 999,
-        "today_date": date.today().isoformat(), "pending_meals": None,
+        "today_date": service_today().isoformat(), "pending_meals": None,
         "awaiting_confirmation": False, "plan_date": None,
         "overwrite_on_confirm": False,
         "forced_meal_type": req.meal_type,
@@ -158,10 +220,86 @@ def _sv(snap) -> dict:
     return {}
 
 
-async def _stream(graph, config: dict):
+def _sse(event: dict) -> str:
+    return f"id: {event.get('seq', '')}\ndata: {json.dumps(event, ensure_ascii=False)}\n\n"
+
+
+async def _invoke_with_progress(graph, graph_input, config: dict, journal: ExecutionEventJournal):
+    async def sink(kind: str, payload: dict):
+        progress = progress_for_runtime_event(kind, **payload)
+        if progress:
+            previous = journal.events[-1] if journal.events else None
+            if not previous or (previous.get("phase"), previous.get("tool"), previous.get("agent")) != (
+                    progress.get("phase"), progress.get("tool"), progress.get("agent")):
+                await journal.publish("progress", progress)
+
+    token = set_event_sink(sink)
+    try:
+        await graph.ainvoke(graph_input, config=config)
+        await graph.aupdate_state(config, {"execution_status": "completed", "execution_error": None})
+    except Exception:
+        try:
+            await graph.aupdate_state(config, {"execution_status": "failed", "execution_error": "execution_failed"})
+        finally:
+            await journal.publish("failed", {"content": "대화 실행에 실패했습니다. 잠시 후 다시 시도해주세요."})
+        raise
+    finally:
+        reset_event_sink(token)
+        await journal.finish()
+
+
+async def _run_and_stream(graph, graph_input, config: dict, run_id: str, after_seq: int = 0):
+    scope = config.get("configurable", {}).get("thread_id", "")
+    journal, created = get_or_create_journal(run_id, scope)
+    if created:
+        journal.task = asyncio.create_task(_invoke_with_progress(graph, graph_input, config, journal))
+    task = journal.task
+    try:
+        async for event in journal.subscribe(after_seq=after_seq):
+            yield _sse(event)
+        if task is not None:
+            await task
+    except asyncio.CancelledError:
+        # The execution owns its DB idempotency key and must finish even if the browser disconnects.
+        if task is not None:
+            await asyncio.shield(task)
+        raise
+    finally:
+        # GeneratorExit (client disconnect) must not cancel an in-flight proposal/idempotency transaction.
+        if task is not None and not task.done():
+            await asyncio.shield(task)
+
+
+async def _replay_progress(config: dict, run_id: str, after_seq: int = 0):
+    scope = config.get("configurable", {}).get("thread_id", "")
+    journal = find_journal(run_id, scope)
+    if journal is None:
+        return
+    async for event in journal.subscribe(after_seq=after_seq):
+        yield _sse(event)
+
+
+async def _follow_or_resume_run(graph, config: dict, run_id: str, after_seq: int = 0):
+    """Follow a local run, or resume its durable LangGraph checkpoint on a new Pod."""
+    scope = config.get("configurable", {}).get("thread_id", "")
+    journal = find_journal(run_id, scope)
+    if journal is not None:
+        async for event in journal.subscribe(after_seq=after_seq):
+            yield _sse(event)
+        return
+    async for chunk in _run_and_stream(graph, None, config, run_id, after_seq):
+        yield chunk
+
+
+async def _stream(graph, config: dict, run_id: str, after_seq: int = 0):
     snap           = await graph.aget_state(config)
     is_interrupted = bool(snap.next) if snap else False
     sv             = _sv(snap)
+    if sv.get("execution_status") == "failed":
+        if after_seq < 100000:
+            yield _sse({"type": "failed", "content": "대화 실행에 실패했습니다. 잠시 후 다시 시도해주세요.",
+                        "run_id": run_id, "seq": 100000})
+        return
 
     # response 읽기 우선순위:
     # 1. interrupt_before에 걸린 경우 → state["response"]에 직전 노드 결과 있음
@@ -175,8 +313,10 @@ async def _stream(graph, config: dict):
     if not response_text:
         print(f"=== [stream] response 없음 | interrupted={is_interrupted} | next={getattr(snap,'next',None)} ===")
 
-    for word in response_text.split(" "):
-        yield f"data: {json.dumps({'type':'token','content':word+' '}, ensure_ascii=False)}\n\n"
+    for index, word in enumerate(response_text.split(" "), start=1001):
+        if index <= after_seq:
+            continue
+        yield _sse({"type": "answer_delta", "content": word + " ", "run_id": run_id, "seq": index})
         await asyncio.sleep(0.03)
 
     # 저장 완료(pending=None, not interrupted)이면 새 thread_id 발급
@@ -184,45 +324,79 @@ async def _stream(graph, config: dict):
     # 저장 완료(pending=None, not interrupted)이면 새 thread_id 발급
     # 이전 thread_id는 done 이벤트의 prev_thread_id로 프론트에 전달
     current_tid = config["configurable"]["thread_id"].split("_",1)[-1]
-    new_tid = str(int(time.time())) if (not pending and not is_interrupted) else current_tid
-    yield f"data: {json.dumps({'type':'done','agent_used':sv.get('agent_used',''),'today_calories':sv.get('today_calories',0),'target_calories':sv.get('target_calories',0),'pending_meals':pending,'awaiting_confirmation':sv.get('awaiting_confirmation',False),'plan_date':sv.get('plan_date'),'thread_id':new_tid,'prev_thread_id':current_tid if new_tid != current_tid else None,'interrupted':is_interrupted}, ensure_ascii=False)}\n\n"
+    new_tid = current_tid
+    stats = await _public_stats(sv.get("user_id"))
+    if after_seq < 100000:
+        yield _sse({'type':'completed','agent_used':sv.get('agent_used',''),**stats,'pending_meals':pending,
+            'pending_proposal':sv.get('pending_proposal'),'run_id':run_id,'seq':100000,
+            'execution_usage':sv.get('execution_usage'),'awaiting_confirmation':sv.get('awaiting_confirmation',False),
+            'plan_date':sv.get('plan_date'),'thread_id':new_tid,'prev_thread_id':None,'interrupted':is_interrupted})
+
+
+async def _public_stats(user_id):
+    if not user_id:
+        return {}
+    def read():
+        meals = sb.table("meal_logs").select("calories").eq("user_id", user_id).eq("log_date", service_today().isoformat()).execute().data
+        strategy = sb.table("diet_strategies").select("daily_calories").eq("user_id", user_id).eq("is_active", True).limit(1).execute().data
+        return {"today_calories": sum(float(m["calories"]) for m in meals), "target_calories": strategy[0]["daily_calories"]} if strategy else {}
+    try:
+        return await asyncio.to_thread(read)
+    except Exception:
+        return {}  # Unavailable is not zero; retain the UI's last known values.
 
 
 @app.post("/chat")
 async def chat(req: ChatRequest, current_user: str = Depends(get_current_user)):
     async def generate():
         graph  = get_graph()
+        stream_run_id = req.stream_run_id or str(uuid4())
         tid    = f"{current_user}_{req.thread_id}"
-        config = {"configurable": {"thread_id": tid}, "metadata": {"thread_id": tid}}
+        config = {"configurable": {"thread_id": tid},
+                  "metadata": {"thread_id": _trace_thread_id(current_user, req.thread_id),
+                               "stream_run_id": stream_run_id}}
 
         snap = await graph.aget_state(config)
         sv_now = _sv(snap)
-        has_pending = bool(sv_now.get("pending_meals"))
+        if req.stream_run_id and sv_now.get("run_id") == stream_run_id:
+            progress_stream = (_follow_or_resume_run(graph, config, stream_run_id, req.after_seq)
+                               if sv_now.get("execution_status") == "running"
+                               else _replay_progress(config, stream_run_id, req.after_seq))
+            async for chunk in progress_stream:
+                yield chunk
+            async for chunk in _stream(graph, config, stream_run_id, req.after_seq):
+                yield chunk
+            return
+        has_pending = bool(sv_now.get("pending_proposal") or sv_now.get("pending_meals"))
 
         print(f"=== [chat] thread={req.thread_id} | next={snap.next if snap else None} | pending={has_pending} ===")
 
         if has_pending:
-            print(f"=== [chat] pending 감지 | next={snap.next if snap else ()} | message='{req.message}' ===")
+            print(f"=== [chat] pending 감지 | next={snap.next if snap else ()} | message_redacted ===")
             try:
                 if snap and snap.next:
                     # next=('confirm',): interrupt 상태 → message 업데이트 후 ainvoke(None)
-                    await graph.aupdate_state(config, {"message": req.message})
-                    await graph.ainvoke(None, config=config)
+                    await graph.aupdate_state(config, {"message": req.message, "run_id": stream_run_id,
+                                                       "execution_status": "running"})
+                    async for chunk in _run_and_stream(graph, None, config, stream_run_id, req.after_seq):
+                        yield chunk
                 else:
                     # next=(): 롤백 후 완료 상태
                     # as_node="confirm"으로 confirm 직전 상태로 만들고 ainvoke(None)
                     await graph.aupdate_state(
-                        config, {"message": req.message}, as_node="confirm"
+                        config, {"message": req.message, "proposal_decision": None, "run_id": stream_run_id,
+                                 "execution_status": "running"}, as_node="supervisor"
                     )
-                    await graph.ainvoke(None, config=config)
+                    async for chunk in _run_and_stream(graph, None, config, stream_run_id, req.after_seq):
+                        yield chunk
                 after = await graph.aget_state(config)
                 after_sv = _sv(after)
-                print(f"=== [chat] 처리 후 | response='{str(after_sv.get('response',''))[:50]}' | next={after.next if after else None} ===")
+                print(f"=== [chat] 처리 후 | response_redacted | next={after.next if after else None} ===")
             except Exception as e:
-                print(f"=== [chat] 오류: {e} ===")
-                yield f"data: {json.dumps({'type':'error','content':str(e)}, ensure_ascii=False)}\n\n"
+                print(f"=== [chat] 오류 유형: {type(e).__name__} ===")
+                yield f"data: {json.dumps({'type':'error','content':'요청 처리 중 오류가 발생했습니다.'}, ensure_ascii=False)}\n\n"
                 return
-            async for chunk in _stream(graph, config):
+            async for chunk in _stream(graph, config, stream_run_id, req.after_seq):
                 yield chunk
             return
         elif snap and snap.next:
@@ -230,17 +404,20 @@ async def chat(req: ChatRequest, current_user: str = Depends(get_current_user)):
             new_tid = str(int(time.time()))
             print(f"=== [chat] 완료된 thread → 새 thread: {new_tid} ===")
             config = {"configurable": {"thread_id": f"{current_user}_{new_tid}"},
-                      "metadata": {"thread_id": f"{current_user}_{new_tid}"}}
+                      "metadata": {"thread_id": _trace_thread_id(current_user, new_tid),
+                                   "stream_run_id": stream_run_id}}
 
         try:
-            await graph.ainvoke(_initial_state(req, current_user), config=config)
+            async for chunk in _run_and_stream(
+                    graph, _initial_state(req, current_user, stream_run_id), config, stream_run_id, req.after_seq):
+                yield chunk
         except Exception as e:
-            print(f"=== [chat] 오류: {e} ===")
-            yield f"data: {json.dumps({'type':'error','content':str(e)}, ensure_ascii=False)}\n\n"
+            print(f"=== [chat] 오류 유형: {type(e).__name__} ===")
+            yield f"data: {json.dumps({'type':'error','content':'요청 처리 중 오류가 발생했습니다.'}, ensure_ascii=False)}\n\n"
             return
-        async for chunk in _stream(graph, config):
+        async for chunk in _stream(graph, config, stream_run_id, req.after_seq):
             yield chunk
-    return StreamingResponse(generate(), media_type="text/event-stream")
+    return StreamingResponse(serialized_stream(generate, current_user, req.thread_id), media_type="text/event-stream")
 
 
 @app.post("/chat/resume")
@@ -252,32 +429,56 @@ async def resume_chat(req: ResumeRequest, current_user: str = Depends(get_curren
     """
     async def generate():
         graph  = get_graph()
+        stream_run_id = req.stream_run_id or str(uuid4())
         tid    = f"{current_user}_{req.thread_id}"
-        config = {"configurable": {"thread_id": tid}, "metadata": {"thread_id": tid}}
+        config = {"configurable": {"thread_id": tid},
+                  "metadata": {"thread_id": _trace_thread_id(current_user, req.thread_id),
+                               "stream_run_id": stream_run_id}}
         snap   = await graph.aget_state(config)
+        existing = _sv(snap)
+        if req.stream_run_id and existing.get("run_id") == stream_run_id:
+            progress_stream = (_follow_or_resume_run(graph, config, stream_run_id, req.after_seq)
+                               if existing.get("execution_status") == "running"
+                               else _replay_progress(config, stream_run_id, req.after_seq))
+            async for chunk in progress_stream:
+                yield chunk
+            async for chunk in _stream(graph, config, stream_run_id, req.after_seq):
+                yield chunk
+            return
         if not snap or not snap.next:
             yield f"data: {json.dumps({'type':'error','content':'재개할 대화가 없습니다.'}, ensure_ascii=False)}\n\n"
             return
         sv = _sv(snap)
-        if not sv.get("pending_meals"):
+        if not (sv.get("pending_proposal") or sv.get("pending_meals")):
             response_text = "확인 대기 중인 식단이 없어요. 사진 인식 결과가 아니라면 다시 사진을 올리거나, 음식명과 양을 직접 입력해주세요."
-            for word in response_text.split(" "):
-                yield f"data: {json.dumps({'type':'token','content':word+' '}, ensure_ascii=False)}\n\n"
+            for index, word in enumerate(response_text.split(" "), start=1001):
+                if index <= req.after_seq:
+                    continue
+                yield _sse({"type": "answer_delta", "content": word + " ",
+                            "run_id": stream_run_id, "seq": index})
                 await asyncio.sleep(0.03)
             new_tid = str(int(time.time()))
-            yield f"data: {json.dumps({'type':'done','agent_used':'','today_calories':sv.get('today_calories',0),'target_calories':sv.get('target_calories',0),'pending_meals':None,'awaiting_confirmation':False,'plan_date':None,'thread_id':new_tid,'prev_thread_id':req.thread_id,'interrupted':False}, ensure_ascii=False)}\n\n"
+            if req.after_seq < 100000:
+                yield _sse({'type':'completed','agent_used':'','today_calories':sv.get('today_calories',0),
+                    'target_calories':sv.get('target_calories',0),'pending_meals':None,
+                    'awaiting_confirmation':False,'plan_date':None,'thread_id':new_tid,
+                    'prev_thread_id':req.thread_id,'interrupted':False,
+                    'run_id':stream_run_id,'seq':100000})
             return
-        print(f"=== [resume] message='{req.message}' | next={snap.next} ===")
+        print(f"=== [resume] message_redacted | next={snap.next} ===")
         try:
-            await graph.aupdate_state(config, {"message": req.message})
-            await graph.ainvoke(None, config=config)
+            decision = req.decision.model_dump(mode="json") if req.decision else None
+            await graph.aupdate_state(config, {"message": req.message, "proposal_decision": decision,
+                                                "run_id": stream_run_id, "execution_status": "running"})
+            async for chunk in _run_and_stream(graph, None, config, stream_run_id, req.after_seq):
+                yield chunk
         except Exception as e:
-            print(f"=== [resume] 오류: {e} ===")
-            yield f"data: {json.dumps({'type':'error','content':str(e)}, ensure_ascii=False)}\n\n"
+            print(f"=== [resume] 오류 유형: {type(e).__name__} ===")
+            yield f"data: {json.dumps({'type':'error','content':'요청 처리 중 오류가 발생했습니다.'}, ensure_ascii=False)}\n\n"
             return
-        async for chunk in _stream(graph, config):
+        async for chunk in _stream(graph, config, stream_run_id, req.after_seq):
             yield chunk
-    return StreamingResponse(generate(), media_type="text/event-stream")
+    return StreamingResponse(serialized_stream(generate, current_user, req.thread_id), media_type="text/event-stream")
 
 
 @app.get("/chat/history/{thread_id}")
@@ -312,8 +513,65 @@ async def get_chat_history(thread_id: str, current_user: str = Depends(get_curre
     }
 
 
+@app.get("/session/restore/{thread_id}")
+async def restore_session(thread_id: str, current_user: str = Depends(get_current_user)):
+    """Restore persisted UI state without invoking the graph or any model/tool."""
+    graph = get_graph()
+    config = {"configurable": {"thread_id": f"{current_user}_{thread_id}"}}
+    snap = await graph.aget_state(config)
+    sv = _sv(snap)
+
+    proposal = None
+    pending = sv.get("pending_proposal")
+    if pending and pending.get("id"):
+        try:
+            candidate = await ProposalRepository().get(current_user, pending["id"])
+            if candidate.get("status") == "pending":
+                proposal = candidate
+        except (ProposalConflict, KeyError, TypeError):
+            proposal = None
+
+    def read_messages():
+        rows = (sb.table("chat_history")
+                .select("role,content,agent_type,created_at")
+                .eq("user_id", current_user)
+                .eq("thread_id", thread_id)
+                .order("created_at", desc=True)
+                .order("role", desc=False)
+                .limit(20).execute().data)
+        return list(reversed([{
+            "role": row.get("role"),
+            "content": str(row.get("content", ""))[:12000],
+            "agent_used": row.get("agent_type"),
+        } for row in rows if row.get("role") in {"user", "assistant"} and row.get("content")]))
+
+    try:
+        messages = await asyncio.to_thread(read_messages)
+    except Exception:
+        messages = []
+    stats = await _public_stats(current_user)
+    active_pending = proposal is not None
+    return {
+        "thread_id": thread_id,
+        "messages": messages,
+        "pending_proposal": proposal,
+        "pending_state": {
+            "pending_meals": sv.get("pending_meals") if active_pending else None,
+            "awaiting_confirmation": bool(sv.get("awaiting_confirmation")) if active_pending else False,
+            "plan_date": sv.get("plan_date") if active_pending else None,
+        },
+        "interrupted": bool(snap and snap.next and active_pending),
+        **stats,
+    }
+
+
 @app.post("/chat/rollback")
 async def rollback_to_checkpoint(thread_id: str, checkpoint_id: str, current_user: str = Depends(get_current_user)):
+    async with conversation_lock(current_user, thread_id):
+        return await _rollback_to_checkpoint(thread_id, checkpoint_id, current_user)
+
+
+async def _rollback_to_checkpoint(thread_id: str, checkpoint_id: str, current_user: str):
     """
     특정 체크포인트로 state 롤백 (타임 트래블).
     LangGraph update_state로 해당 checkpoint의 state를 현재 thread에 덮어씀.
@@ -332,6 +590,14 @@ async def rollback_to_checkpoint(thread_id: str, checkpoint_id: str, current_use
     # 현재 thread를 해당 checkpoint state로 덮어씀
     # as_node=None: 현재 위치 유지하며 state 값만 패치
     target_config = {"configurable": {"thread_id": f"{current_user}_{thread_id}"}}
+    if sv.get("pending_proposal"):
+        proposal = await ProposalRepository().get(current_user, sv["pending_proposal"]["id"])
+        if proposal["status"] != "pending":
+            sv = {**sv, "pending_proposal": None, "pending_meals": None, "awaiting_confirmation": False}
+    present = _sv(await graph.aget_state(target_config))
+    counters = ("model_calls", "tool_calls", "elapsed_seconds", "validation_attempts", "replans")
+    sv = {**sv, "execution_usage": {key: max((sv.get("execution_usage") or {}).get(key, 0),
+        (present.get("execution_usage") or {}).get(key, 0)) for key in counters}}
     rollback_state = {**sv, "overwrite_on_confirm": bool(sv.get("pending_meals"))}
     await graph.aupdate_state(target_config, rollback_state)
 
@@ -339,7 +605,7 @@ async def rollback_to_checkpoint(thread_id: str, checkpoint_id: str, current_use
     current = await graph.aget_state(target_config)
     cv = _sv(current)
 
-    print(f"=== [rollback] step={snap.metadata.get('step')} | agent={cv.get('agent_used')} | message='{cv.get('message','')}' ===")
+    print(f"=== [rollback] step={snap.metadata.get('step')} | agent={cv.get('agent_used')} | message_redacted ===")
 
     # 롤백 후 next=() 상태이므로 프론트는 /chat으로 새 요청 필요
     # (pending_meals 있어도 resume 아닌 /chat으로 보내야 supervisor→confirm 경로 실행)
@@ -365,39 +631,61 @@ async def _process_inbody(user_id: str, image_bytes: bytes) -> dict:
     반환: type='inbody' + 추출 수치 + 전략 노트.
     """
     inbody_data = await extract_inbody_from_image(image_bytes)   # 인바디 아니면 ValueError
-    measured_date = date.today().isoformat()
-    inbody_data = _repair_implausible_inbody(user_id, inbody_data, measured_date)
+    measured_date = inbody_data.get("measured_date")
+    if not measured_date:
+        raise HTTPException(422, "측정일을 인식하지 못했습니다. 날짜를 확인해 다시 입력해주세요.")
     weight_kg = _safe_float(inbody_data.get("weight_kg"))
     skeletal_muscle_kg = _safe_float(inbody_data.get("skeletal_muscle_kg"))
     body_fat_pct = _safe_float(inbody_data.get("body_fat_pct"))
     if weight_kg is None or skeletal_muscle_kg is None or body_fat_pct is None:
         raise HTTPException(status_code=400, detail="인바디 필수 수치(체중, 골격근량, 체지방률)를 인식하지 못했습니다. 이미지를 다시 업로드해주세요.")
 
-    file_path = f"inbody/{user_id}/{date.today().isoformat()}_{int(time.time())}.jpg"
-    sb.storage.from_("inbody-images").upload(file_path, image_bytes)
-    image_url  = sb.storage.from_("inbody-images").get_public_url(file_path)
-    inbody_row = sb.table("inbody_logs").insert({
-        "user_id": user_id, "measured_date": measured_date,
+    payload = MeasurementProposal(**{
+        "measured_date": measured_date,
         "weight_kg": weight_kg, "skeletal_muscle_kg": skeletal_muscle_kg,
-        "body_fat_kg": _safe_float(inbody_data.get("body_fat_kg"), 0), "body_fat_pct": body_fat_pct,
+        "body_fat_kg": _safe_float(inbody_data.get("body_fat_kg")), "body_fat_pct": body_fat_pct,
         "bmi": _safe_float(inbody_data.get("bmi")), "bmr_kcal": _safe_float(inbody_data.get("bmr_kcal")),
         "protein_kg": _safe_float(inbody_data.get("protein_kg")), "mineral_kg": _safe_float(inbody_data.get("mineral_kg")),
-        "image_url": image_url,
-    }).execute().data[0]
-    graph  = get_graph()
-    config = {"configurable": {"thread_id": f"{user_id}_inbody"},
-              "metadata": {"thread_id": f"{user_id}_inbody"}}
-    await graph.ainvoke({**_initial_state(ChatRequest(message="인바디 업로드됨. 전략을 재설정해주세요."), user_id),
-                         "intent":"inbody","latest_inbody":inbody_row,"days_since_inbody":0}, config=config)
-    sv = _sv(await graph.aget_state(config))
+    }).model_dump(mode="json")
+    proposal = await ProposalRepository().create(user_id, "inbody-upload", payload, str(uuid4()))
     return {
         "type": "inbody",
         "measured_date": measured_date,
         "weight_kg": weight_kg, "skeletal_muscle_kg": skeletal_muscle_kg,
         "body_fat_kg": _safe_float(inbody_data.get("body_fat_kg"), 0), "body_fat_pct": body_fat_pct,
         "bmi": _safe_float(inbody_data.get("bmi")), "bmr_kcal": _safe_float(inbody_data.get("bmr_kcal")),
-        "strategy_updated": True, "strategy_note": sv.get("response",""),
+        "strategy_updated": False, "strategy_note": "측정일과 수치를 확인해주세요. 확인 전에는 측정값이나 전략을 저장하지 않습니다.",
+        "proposal": proposal,
     }
+
+
+@app.get("/proposals/{proposal_id}")
+async def get_proposal(proposal_id: UUID, current_user: str = Depends(get_current_user)):
+    try:
+        return await ProposalRepository().get(current_user, str(proposal_id))
+    except ProposalConflict as exc:
+        raise HTTPException(404, str(exc)) from exc
+
+
+@app.post("/proposals/decision")
+async def decide_proposal(req: ProposalDecision, current_user: str = Depends(get_current_user)):
+    try:
+        return await ProposalRepository().resolve(current_user, str(req.proposal_id), req.version, req.action)
+    except ProposalConflict as exc:
+        raise HTTPException(409, str(exc)) from exc
+
+
+@app.put("/proposals/{proposal_id}/measurement")
+async def revise_measurement(proposal_id: UUID, req: MeasurementRevision, current_user: str = Depends(get_current_user)):
+    repository = ProposalRepository()
+    try:
+        old = await repository.get(current_user, str(proposal_id))
+        if old["kind"] != "measurement":
+            raise ProposalConflict("인바디 측정 제안만 수정할 수 있습니다.")
+        return await repository.create(current_user, old["thread_id"], req.payload.model_dump(mode="json"),
+            str(uuid4()), replaces=(str(proposal_id), req.version))
+    except ProposalConflict as exc:
+        raise HTTPException(409, str(exc)) from exc
 
 
 async def _process_food(image_bytes: bytes) -> dict:
@@ -580,14 +868,89 @@ async def get_calendar(target_date: str, current_user: str = Depends(get_current
     return {"date": target_date, "meals": rows, "total": total}
 
 
+@app.post("/feedback", response_model=FeedbackResponse)
+async def submit_feedback(
+    req: FeedbackRequest,
+    response: Response,
+    current_user: str = Depends(get_current_user),
+):
+    """Store privacy-minimal beta feedback without tracing its comment body."""
+    submission = FeedbackInput(
+        rating=req.rating,
+        category=req.category,
+        comment=req.comment,
+        client_submission_id=req.client_submission_id,
+    )
+    try:
+        row, created = await FeedbackRepository().create(current_user, submission)
+    except FeedbackStorageUnavailable as exc:
+        logger.error(
+            "feedback_storage_unavailable",
+            extra={"error_type": type(exc).__name__},
+        )
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="피드백 저장 서비스를 잠시 사용할 수 없습니다.",
+        ) from None
+    response.status_code = status.HTTP_201_CREATED if created else status.HTTP_200_OK
+    logger.info(
+        "feedback_stored",
+        extra={
+            "feedback_id": row["id"],
+            "category": req.category,
+            "rating": req.rating,
+            "created": created,
+        },
+    )
+    return FeedbackResponse(id=row["id"], created=created)
+
+
+@app.delete("/users/me")
+async def delete_account(req: AccountDeleteRequest,
+                         auth: AuthContext = Depends(get_recent_auth_context)):
+    """Irreversibly delete app data and the authenticated Supabase identity."""
+    from app.db.account_deletion import (
+        AccountDeletionPartialFailure,
+        AccountDeletionService,
+        InvalidAuthSession,
+    )
+
+    try:
+        return await AccountDeletionService().delete(auth.auth_id, auth.session_id)
+    except InvalidAuthSession as exc:
+        raise HTTPException(status_code=401, detail={
+            "code": "recent_authentication_required",
+            "message": "세션이 만료되었습니다. 다시 로그인해주세요.",
+            "retryable": True,
+        }) from exc
+    except AccountDeletionPartialFailure as exc:
+        raise HTTPException(status_code=503, detail={
+            "code": "auth_deletion_pending",
+            "message": "서비스 데이터는 삭제됐지만 인증 계정 삭제를 재시도해야 합니다.",
+            "retryable": True,
+        }) from exc
+    except (ConnectionError, TimeoutError) as exc:
+        raise HTTPException(status_code=503, detail={
+            "code": "account_deletion_unavailable",
+            "message": "계정 삭제를 완료하지 못했습니다. 잠시 후 다시 시도해주세요.",
+            "retryable": True,
+        }) from exc
+
+
 @app.get("/report/weekly")
 async def weekly_report(current_user: str = Depends(get_current_user)):
     graph  = get_graph()
     config = {"configurable": {"thread_id": f"{current_user}_report"},
-              "metadata": {"thread_id": f"{current_user}_report"}}
-    await graph.ainvoke({**_initial_state(ChatRequest(message="이번 주 식단 리포트를 보여주세요."), current_user),
-                         "intent":"reporter"}, config=config)
-    return {"report": _sv(await graph.aget_state(config)).get("response","")}
+              "metadata": {"thread_id": _trace_thread_id(current_user, "report")}}
+    readonly = ["read_profile", "read_intake", "read_recent_intake", "read_measurements",
+                "assess_goal_progress", "search_evidence"]
+    async with conversation_lock(current_user, "report"):
+        await graph.ainvoke(_initial_state(ChatRequest(message="이번 주 식단 리포트를 보여주세요.",
+                                                       requested_action="weekly_review",
+                                                       tool_policy=readonly), current_user), config=config)
+    state = _sv(await graph.aget_state(config))
+    return {"report": state.get("response", ""), "pending_proposal": state.get("pending_proposal"),
+            "awaiting_confirmation": state.get("awaiting_confirmation", False)}
 
 
 @app.get("/inbody/history")
@@ -601,40 +964,55 @@ async def get_current_strategy(current_user: str = Depends(get_current_user)):
     return rows[0] if rows else {}
 
 
+from app.core.energy_policy import EnergyInputs, estimate_maintenance
+from app.core.onboarding import OnboardingRequest
+
+
+@app.post('/users/onboarding')
+async def complete_onboarding(req: OnboardingRequest, auth_id: str = Depends(get_active_auth_id)):
+    from app.core.onboarding import save_onboarding
+    try:
+        return await save_onboarding(req,auth_id)
+    except (ValueError,ProposalConflict) as exc:
+        raise HTTPException(status_code=422,detail=str(exc)) from exc
+
+
+@app.get('/users/onboarding')
+async def get_onboarding(auth_id: str = Depends(get_active_auth_id)):
+    from app.core.onboarding import onboarding_status
+    return await onboarding_status(auth_id)
+
+
+@app.post("/users/energy-preview")
+async def preview_energy(req: EnergyInputs, auth_id: str = Depends(get_active_auth_id)):
+    """Authenticated, read-only estimate. No profile or strategy is modified."""
+    try:
+        return estimate_maintenance(req)
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+
+
 @app.post("/users/setup")
 async def setup_user(goal: str, height_cm: float, weight_kg: float, age: int, gender: str,
                       target_weight_kg: Optional[float] = None,
                       target_date: Optional[str] = None,
                       goal_priority: Optional[str] = None,
                       region: str = "KR",
-                      auth_id: str = Depends(get_current_auth_id)):
+                      auth_id: str = Depends(get_active_auth_id)):
     """
-    회원가입 직후 프로필 입력. users row가 아직 없을 수 있으므로(신규 가입자)
-    get_current_user 대신 get_current_auth_id를 쓰고, 여기서 upsert 처리한다.
+    레거시 조회 호환 경로. 프로필·초기 전략 저장은 /users/onboarding에서 처리한다.
     """
-    bmr = (88.362+13.397*weight_kg+4.799*height_cm-5.677*age) if gender=="male" else (447.593+9.247*weight_kg+3.098*height_cm-4.330*age)
-    if goal=="diet":   cal, prot, note = round(bmr*1.4-400), round(weight_kg*2.0), f"체중 감량: {round(bmr*1.4-400)}kcal"
-    elif goal=="bulk": cal, prot, note = round(bmr*1.4+400), round(weight_kg*2.2), f"근육 증량: {round(bmr*1.4+400)}kcal"
-    else:              cal, prot, note = round(bmr*1.4),     round(weight_kg*1.8), f"체중 유지: {round(bmr*1.4)}kcal"
-    carbs_g, fat_g = round((cal*0.5)/4), round((cal*0.25)/9)
-
-    goal_fields = {
-        "goal": goal, "height_cm": height_cm, "age": age, "weight_kg": weight_kg,
-        "target_weight_kg": target_weight_kg, "target_date": target_date,
-        "goal_priority": goal_priority, "region": region,
-    }
     existing = sb.table("users").select("id").eq("auth_id", auth_id).limit(1).execute().data
     if existing:
         user_id = existing[0]["id"]
-        sb.table("users").update(goal_fields).eq("id",user_id).execute()
+        # Repeated onboarding must not replace a confirmed strategy outside HITL.
+        current = sb.table("diet_strategies").select("*").eq("user_id",user_id).eq("is_active",True).order("created_at",desc=True).limit(1).execute().data
+        if current:
+            return {**current[0], "strategy_change_requires_confirmation": True,
+                    "message": "기존 전략을 유지합니다. 프로필 변경은 /users/onboarding에서 확인해주세요."}
+        raise HTTPException(status_code=409, detail="현재 전략이 없습니다. 검토된 초기 계획 설정이 필요합니다.")
     else:
-        user_id = sb.table("users").insert({
-            "auth_id": auth_id, "name": "", **goal_fields,
-        }).execute().data[0]["id"]
-
-    sb.table("diet_strategies").update({"is_active":False}).eq("user_id",user_id).eq("is_active",True).execute()
-    sb.table("diet_strategies").insert({"user_id":user_id,"daily_calories":cal,"protein_g":prot,"carbs_g":carbs_g,"fat_g":fat_g,"strategy_note":note,"triggered_by":"initial","is_active":True}).execute()
-    return {"daily_calories":cal,"protein_g":prot,"carbs_g":carbs_g,"fat_g":fat_g,"bmr":round(bmr),"strategy_note":note}
+        raise HTTPException(status_code=409,detail="활동 수준과 적용대상을 확인하는 /users/onboarding을 사용해주세요.")
 
 
 class MealUpdateRequest(BaseModel):

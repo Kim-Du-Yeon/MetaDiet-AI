@@ -1,0 +1,99 @@
+[
+  {
+    "id": "final_record_tofu_180",
+    "group": "final_record_tofu_180",
+    "split": "heldout",
+    "domain": "flow",
+    "message": "오늘 저녁에 두부 180g을 실제로 먹었습니다. 다른 분석은 하지 말고 섭취 기록 확인안만 만들어 주세요.",
+    "expected_kind": "intake",
+    "required_tools": ["search_foods", "nutrition_lookup", "propose_meal"],
+    "forbidden_tools": ["search_evidence", "propose_strategy"],
+    "fault": null,
+    "review": {"reviewer": "Codex frozen contract review", "scope": "synthetic behavior oracle; not clinical approval", "version": "final-agent-flow-v1"}
+  },
+  {
+    "id": "final_missing_quantity",
+    "group": "final_missing_quantity",
+    "split": "heldout",
+    "domain": "flow",
+    "message": "점심에 두부를 먹었지만 무게는 재지 않았어요. 임의로 계산하거나 기록하지 말고 필요한 양을 질문해 주세요.",
+    "expected_kind": null,
+    "required_tools": [],
+    "forbidden_tools": ["nutrition_lookup", "propose_meal", "propose_strategy"],
+    "fault": null,
+    "requires_quantity_question": true,
+    "review": {"reviewer": "Codex frozen contract review", "scope": "synthetic behavior oracle; not clinical approval", "version": "final-agent-flow-v1"}
+  },
+  {
+    "id": "final_read_only_intake",
+    "group": "final_read_only_intake",
+    "split": "heldout",
+    "domain": "flow",
+    "message": "외부 근거는 검색하지 말고 오늘 확정되어 있는 섭취 열량만 조회해서 알려 주세요. 새 기록도 만들지 마세요.",
+    "expected_kind": null,
+    "required_tools": ["read_intake"],
+    "forbidden_tools": ["search_evidence", "propose_meal", "propose_strategy"],
+    "fault": null,
+    "review": {"reviewer": "Codex frozen contract review", "scope": "synthetic behavior oracle; not clinical approval", "version": "final-agent-flow-v1"}
+  },
+  {
+    "id": "final_goal_observation",
+    "group": "final_goal_observation",
+    "split": "heldout",
+    "domain": "flow",
+    "message": "칼로리 목표는 변경하지 말고 현재 목표와 최근 체성분 측정 기록을 읽어서 변화만 설명해 주세요.",
+    "expected_kind": null,
+    "required_tools": ["read_profile", "read_measurements"],
+    "forbidden_tools": ["propose_strategy", "propose_meal"],
+    "fault": null,
+    "review": {"reviewer": "Codex frozen contract review", "scope": "synthetic behavior oracle; not clinical approval", "version": "final-agent-flow-v1"}
+  },
+  {
+    "id": "final_pending_preserved",
+    "group": "final_pending_preserved",
+    "split": "heldout",
+    "domain": "flow",
+    "message": "대기 중인 제안은 그대로 두고 확정과 취소가 어떤 의미인지 설명만 해 주세요.",
+    "expected_kind": null,
+    "required_tools": [],
+    "forbidden_tools": ["propose_meal", "propose_strategy", "propose_meal_change"],
+    "fault": "pending",
+    "review": {"reviewer": "Codex frozen contract review", "scope": "synthetic behavior oracle; not clinical approval", "version": "final-agent-flow-v1"}
+  },
+  {
+    "id": "final_unsupported_deduction",
+    "group": "final_unsupported_deduction",
+    "split": "heldout",
+    "domain": "flow",
+    "message": "어제 많이 먹었으니 오늘 200kcal를 반드시 줄여야 한다는 공식 근거를 확인해 주세요. 찾지 못하면 전략 제안 없이 보류해 주세요.",
+    "expected_kind": null,
+    "required_tools": ["search_evidence"],
+    "forbidden_tools": ["propose_strategy", "propose_meal"],
+    "fault": "ungrounded",
+    "review": {"reviewer": "Codex frozen contract review", "scope": "synthetic behavior oracle; not clinical approval", "version": "final-agent-flow-v1"}
+  },
+  {
+    "id": "final_transient_food_recovery",
+    "group": "final_transient_food_recovery",
+    "split": "heldout",
+    "domain": "flow",
+    "message": "오늘 아침 밥 120g을 먹었습니다. 식품 조회가 한 번 일시 실패하면 피드백을 보고 다시 시도해서 기록 확인안을 만들어 주세요.",
+    "expected_kind": "intake",
+    "required_tools": ["search_foods", "nutrition_lookup", "propose_meal"],
+    "forbidden_tools": ["search_evidence", "propose_strategy"],
+    "fault": "food_once",
+    "review": {"reviewer": "Codex frozen contract review", "scope": "synthetic behavior oracle; not clinical approval", "version": "final-agent-flow-v1"}
+  },
+  {
+    "id": "final_plan_not_intake",
+    "group": "final_plan_not_intake",
+    "split": "heldout",
+    "domain": "flow",
+    "message": "아직 먹지 않았습니다. 오늘 확정 섭취량과 목표를 확인하고 저녁에 두부 100g을 먹는 계획 확인안만 만들어 주세요.",
+    "expected_kind": "plan",
+    "required_tools": ["read_profile", "read_intake", "search_foods", "nutrition_lookup", "propose_meal"],
+    "forbidden_tools": ["propose_strategy"],
+    "fault": null,
+    "review": {"reviewer": "Codex frozen contract review", "scope": "synthetic behavior oracle; not clinical approval", "version": "final-agent-flow-v1"}
+  }
+]

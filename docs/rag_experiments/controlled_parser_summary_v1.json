@@ -1,0 +1,1323 @@
+{
+  "scope": "BM25 development probe on selected pages; not final RAG or answer quality",
+  "n": 40,
+  "fact_groups": 20,
+  "selected_pages": 26,
+  "source_documents": 10,
+  "identity": {
+    "manifest": "5e5879a401229f9e7b998f375c50ad0d9a7bf7cbb087bcba39271af4c444de74",
+    "dataset": "eb08185afae97e32526d6c3a48003c7161c73e92c48d59227c053d5e350bc06d",
+    "anchors": "d8161067c9256bc71cadbd10532045ed8aa8b5456b71a6e79b492810cda4d7a8",
+    "translations": "14a2e88571e2da20e34d96c3c9234663ffe2abd3d2da54a1d48a29591ec2e080",
+    "sources": {
+      "KDRI_2025_vol1.pdf": "31c99fbf3a0253f55a5b9f53964ea9a1db8a108077650d119b4841a9b11f9cad",
+      "KDRI_2025_vol2.pdf": "8177b5341cd9acf08b20100764171bc93e85774791b0160b7499aa7731b2b482",
+      "KDRI_2025_vol3.pdf": "367742bf3267539ce208e4f766c943c584b6726856a9ed32a4100ad923beca94",
+      "WHO_carbohydrate_2023.pdf": "81548c804ebf031aa06a71f762c4ed72f680d4cb2caba44b011459fe5c841cd0",
+      "WHO_total_fat_2023.pdf": "a9f12218be0b1720c9be4f0dee79c2dbdcbd13fb44cd3e0d751bf04b5fa63381",
+      "WHO_saturated_trans_fat_2023.pdf": "767c24d20e90357e71831e3e19813f79c84457c8a24ddbca931237a58bd3d503",
+      "WHO_sugars_2015.pdf": "0e81d49cffe12469c184a9d377c9ff80fa26f1f08d66b42fed40f1054b67b209",
+      "WHO_sodium_2012.pdf": "1f42c807c29ae255b31554afafaed683d5598414a1e5cc2a4b89190c72e2f369",
+      "guideline2022_vol8.pdf": "d28c3ef8b06beba0c659cb7dc096db6b521190baa4f8b430ebb5cce4284d0147",
+      "s12970-017-0177-8.pdf": "7a97a81db0334c95ddd17a2009200e7f38945988b3e1dd5aa70f73a502fe8140"
+    },
+    "pages": {
+      "KDRI_2025_vol1.pdf": [
+        44,
+        48,
+        64,
+        65,
+        99
+      ],
+      "KDRI_2025_vol2.pdf": [
+        44,
+        65
+      ],
+      "KDRI_2025_vol3.pdf": [
+        44,
+        63,
+        72,
+        310
+      ],
+      "WHO_carbohydrate_2023.pdf": [
+        25,
+        26
+      ],
+      "WHO_total_fat_2023.pdf": [
+        21,
+        22
+      ],
+      "WHO_saturated_trans_fat_2023.pdf": [
+        29,
+        30
+      ],
+      "WHO_sugars_2015.pdf": [
+        12,
+        23,
+        24
+      ],
+      "WHO_sodium_2012.pdf": [
+        21,
+        22
+      ],
+      "guideline2022_vol8.pdf": [
+        4,
+        8
+      ],
+      "s12970-017-0177-8.pdf": [
+        1,
+        4
+      ]
+    },
+    "runner": "791037744ffbd005fbd61de812227499c0a2198632888103e33dec7c81cc618f",
+    "ingestion": "4141f14484b13076f4ba25030c0ebf5986a1620463a561e86e04a3ac180363fd",
+    "docling_config": {
+      "timeout_seconds": 300,
+      "num_threads": 4,
+      "parser_threads": 1,
+      "device": "cuda",
+      "table_structure": true,
+      "table_mode": "accurate",
+      "batch_size": 4,
+      "queue_size": 100,
+      "picture_images": true
+    },
+    "runtime_versions": {
+      "torch": "2.11.0+cu128",
+      "torchvision": "0.26.0+cu128",
+      "docling": "2.135.0",
+      "docling-core": "2.101.1",
+      "docling-ibm-models": "4.0.3",
+      "docling-parse": "7.22.2",
+      "pdfplumber": "0.11.10",
+      "pypdf": "6.12.2",
+      "pypdfium2": "5.14.0",
+      "transformers": "5.19.0",
+      "kiwipiepy": "0.23.2",
+      "langchain-text-splitters": "1.1.2",
+      "rank-bm25": "0.2.2"
+    },
+    "python": "3.13.3 (tags/v3.13.3:6280bb5, Apr  8 2025, 14:47:33) [MSC v.1943 64 bit (AMD64)]",
+    "helper_hashes": {
+      "app\\rag\\chunking.py": "ee1e1163bbe0ef244c8ce1d88320682f91712f13d7a2fc84dfcf37d7335f1f48",
+      "app\\rag\\retriever.py": "adab43d3db1fe7f2445c2103ee7e2842d0e759c8611d0686ca84cd9491902f8c",
+      "scripts\\eval\\run_full_recipe_comparison.py": "a3de36c74365af657d1bc841036861339fbbb442b75baabbb4e9482cb848ff60",
+      "scripts\\eval\\compare_rag_recipes.py": "cdbc87a8ac6fc5311e2376f8a71c745239811302b6ffda1be0c090ae2e1594f8",
+      "scripts\\eval\\audit_full_recipe_parsing.py": "1d6ba7d5f95e1b53db0a329a6e044bdf2462f564b51a8e4bb1428e9cc4639b35",
+      "scripts\\eval\\run_docling_recovery.py": "b2244256e4bd6da0419c886911bdf2e319a1ca6b2ab766ff57fdc65362fa3d7a"
+    }
+  },
+  "parse_report": {
+    "scope": "selected development pages, not full corpus retrieval",
+    "pages": {
+      "KDRI_2025_vol1.pdf": [
+        44,
+        48,
+        64,
+        65,
+        99
+      ],
+      "KDRI_2025_vol2.pdf": [
+        44,
+        65
+      ],
+      "KDRI_2025_vol3.pdf": [
+        44,
+        63,
+        72,
+        310
+      ],
+      "WHO_carbohydrate_2023.pdf": [
+        25,
+        26
+      ],
+      "WHO_total_fat_2023.pdf": [
+        21,
+        22
+      ],
+      "WHO_saturated_trans_fat_2023.pdf": [
+        29,
+        30
+      ],
+      "WHO_sugars_2015.pdf": [
+        12,
+        23,
+        24
+      ],
+      "WHO_sodium_2012.pdf": [
+        21,
+        22
+      ],
+      "guideline2022_vol8.pdf": [
+        4,
+        8
+      ],
+      "s12970-017-0177-8.pdf": [
+        1,
+        4
+      ]
+    },
+    "parsers": [
+      {
+        "parser": "pypdf",
+        "source_file": "KDRI_2025_vol1.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\KDRI_2025_vol1\\parses\\31c99fbf3a0253f55a5b9f53964ea9a1db8a108077650d119b4841a9b11f9cad\\pypdf\\711623efc796\\65021dc1da634885984720acc58fdc38",
+        "elapsed_seconds": 0.9306546000298113,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\KDRI_2025_vol1\\controlled-result.json",
+        "parser_version": "6.12.2"
+      },
+      {
+        "parser": "pypdf",
+        "source_file": "KDRI_2025_vol2.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\KDRI_2025_vol2\\parses\\8177b5341cd9acf08b20100764171bc93e85774791b0160b7499aa7731b2b482\\pypdf\\c46623402b19\\f8711ca9fcb74236a8dc9a72a98c2507",
+        "elapsed_seconds": 0.9346658000722528,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\KDRI_2025_vol2\\controlled-result.json",
+        "parser_version": "6.12.2"
+      },
+      {
+        "parser": "pypdf",
+        "source_file": "KDRI_2025_vol3.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\KDRI_2025_vol3\\parses\\367742bf3267539ce208e4f766c943c584b6726856a9ed32a4100ad923beca94\\pypdf\\e2afb0e444d4\\adc6263c13a7492e9b9170cc2db02a01",
+        "elapsed_seconds": 1.0111464000074193,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\KDRI_2025_vol3\\controlled-result.json",
+        "parser_version": "6.12.2"
+      },
+      {
+        "parser": "pypdf",
+        "source_file": "WHO_carbohydrate_2023.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\WHO_carbohydrate_2023\\parses\\81548c804ebf031aa06a71f762c4ed72f680d4cb2caba44b011459fe5c841cd0\\pypdf\\01c1c908bb05\\9b6a477c618a497b91ecca052a38881e",
+        "elapsed_seconds": 0.8480488000204787,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\WHO_carbohydrate_2023\\controlled-result.json",
+        "parser_version": "6.12.2"
+      },
+      {
+        "parser": "pypdf",
+        "source_file": "WHO_total_fat_2023.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\WHO_total_fat_2023\\parses\\a9f12218be0b1720c9be4f0dee79c2dbdcbd13fb44cd3e0d751bf04b5fa63381\\pypdf\\c6692fe116c3\\c36457e78bdd401a9b405410de79c3c0",
+        "elapsed_seconds": 0.8613587999716401,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\WHO_total_fat_2023\\controlled-result.json",
+        "parser_version": "6.12.2"
+      },
+      {
+        "parser": "pypdf",
+        "source_file": "WHO_saturated_trans_fat_2023.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\WHO_saturated_trans_fat_2023\\parses\\767c24d20e90357e71831e3e19813f79c84457c8a24ddbca931237a58bd3d503\\pypdf\\d929c19ee5a3\\729e67257dfd44e3a1442d35090077f8",
+        "elapsed_seconds": 0.8643719999818131,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\WHO_saturated_trans_fat_2023\\controlled-result.json",
+        "parser_version": "6.12.2"
+      },
+      {
+        "parser": "pypdf",
+        "source_file": "WHO_sugars_2015.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\WHO_sugars_2015\\parses\\0e81d49cffe12469c184a9d377c9ff80fa26f1f08d66b42fed40f1054b67b209\\pypdf\\5a7337939a95\\f9fa504c275d41c0b172d281336b89ed",
+        "elapsed_seconds": 0.8246092000044882,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\WHO_sugars_2015\\controlled-result.json",
+        "parser_version": "6.12.2"
+      },
+      {
+        "parser": "pypdf",
+        "source_file": "WHO_sodium_2012.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\WHO_sodium_2012\\parses\\1f42c807c29ae255b31554afafaed683d5598414a1e5cc2a4b89190c72e2f369\\pypdf\\c6692fe116c3\\de31935008be4f60bcc10802283d43e1",
+        "elapsed_seconds": 0.7954460000619292,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\WHO_sodium_2012\\controlled-result.json",
+        "parser_version": "6.12.2"
+      },
+      {
+        "parser": "pypdf",
+        "source_file": "guideline2022_vol8.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\guideline2022_vol8\\parses\\d28c3ef8b06beba0c659cb7dc096db6b521190baa4f8b430ebb5cce4284d0147\\pypdf\\b26be9630880\\086d01f6fbe448db8b1a2f4a6d63feeb",
+        "elapsed_seconds": 0.7781304999953136,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\guideline2022_vol8\\controlled-result.json",
+        "parser_version": "6.12.2"
+      },
+      {
+        "parser": "pypdf",
+        "source_file": "s12970-017-0177-8.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\s12970-017-0177-8\\parses\\7a97a81db0334c95ddd17a2009200e7f38945988b3e1dd5aa70f73a502fe8140\\pypdf\\b9e5be87f39b\\df2b14173d674512ae39c9d6375702db",
+        "elapsed_seconds": 0.7502830000594258,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pypdf\\s12970-017-0177-8\\controlled-result.json",
+        "parser_version": "6.12.2"
+      },
+      {
+        "parser": "pdfplumber",
+        "source_file": "KDRI_2025_vol1.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\KDRI_2025_vol1\\parses\\31c99fbf3a0253f55a5b9f53964ea9a1db8a108077650d119b4841a9b11f9cad\\pdfplumber\\7b7a83054e98\\0aaf70933b614afaa1e153c99dda4b37",
+        "elapsed_seconds": 1.3167895000660792,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\KDRI_2025_vol1\\controlled-result.json",
+        "parser_version": "0.11.10"
+      },
+      {
+        "parser": "pdfplumber",
+        "source_file": "KDRI_2025_vol2.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\KDRI_2025_vol2\\parses\\8177b5341cd9acf08b20100764171bc93e85774791b0160b7499aa7731b2b482\\pdfplumber\\12d5553e6a66\\b7d73e3cd66a4eec8f66cff1039a3584",
+        "elapsed_seconds": 1.2419315000297502,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\KDRI_2025_vol2\\controlled-result.json",
+        "parser_version": "0.11.10"
+      },
+      {
+        "parser": "pdfplumber",
+        "source_file": "KDRI_2025_vol3.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\KDRI_2025_vol3\\parses\\367742bf3267539ce208e4f766c943c584b6726856a9ed32a4100ad923beca94\\pdfplumber\\c0b13803ea8d\\0bc2e204a8574488b69a496d1e635e16",
+        "elapsed_seconds": 1.3688903999282047,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\KDRI_2025_vol3\\controlled-result.json",
+        "parser_version": "0.11.10"
+      },
+      {
+        "parser": "pdfplumber",
+        "source_file": "WHO_carbohydrate_2023.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\WHO_carbohydrate_2023\\parses\\81548c804ebf031aa06a71f762c4ed72f680d4cb2caba44b011459fe5c841cd0\\pdfplumber\\0fcea0dc1eb7\\f285cd0055be46948ff9ce0d104365ba",
+        "elapsed_seconds": 1.148464799975045,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\WHO_carbohydrate_2023\\controlled-result.json",
+        "parser_version": "0.11.10"
+      },
+      {
+        "parser": "pdfplumber",
+        "source_file": "WHO_total_fat_2023.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\WHO_total_fat_2023\\parses\\a9f12218be0b1720c9be4f0dee79c2dbdcbd13fb44cd3e0d751bf04b5fa63381\\pdfplumber\\4e42d59a0b93\\2fa95ebf57e646e7a305f7fb64dc85ce",
+        "elapsed_seconds": 1.0770033999579027,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\WHO_total_fat_2023\\controlled-result.json",
+        "parser_version": "0.11.10"
+      },
+      {
+        "parser": "pdfplumber",
+        "source_file": "WHO_saturated_trans_fat_2023.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\WHO_saturated_trans_fat_2023\\parses\\767c24d20e90357e71831e3e19813f79c84457c8a24ddbca931237a58bd3d503\\pdfplumber\\51a9431a7c99\\14f0b614fcb1486b81ffcad542625713",
+        "elapsed_seconds": 1.1941655999980867,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\WHO_saturated_trans_fat_2023\\controlled-result.json",
+        "parser_version": "0.11.10"
+      },
+      {
+        "parser": "pdfplumber",
+        "source_file": "WHO_sugars_2015.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\WHO_sugars_2015\\parses\\0e81d49cffe12469c184a9d377c9ff80fa26f1f08d66b42fed40f1054b67b209\\pdfplumber\\e22adf7b6070\\53bb8161766a48ba81895261673c06bc",
+        "elapsed_seconds": 1.1343785000499338,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\WHO_sugars_2015\\controlled-result.json",
+        "parser_version": "0.11.10"
+      },
+      {
+        "parser": "pdfplumber",
+        "source_file": "WHO_sodium_2012.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\WHO_sodium_2012\\parses\\1f42c807c29ae255b31554afafaed683d5598414a1e5cc2a4b89190c72e2f369\\pdfplumber\\4e42d59a0b93\\91db4488b825477c8a30dc56f671941d",
+        "elapsed_seconds": 1.1841489999787882,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\WHO_sodium_2012\\controlled-result.json",
+        "parser_version": "0.11.10"
+      },
+      {
+        "parser": "pdfplumber",
+        "source_file": "guideline2022_vol8.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\guideline2022_vol8\\parses\\d28c3ef8b06beba0c659cb7dc096db6b521190baa4f8b430ebb5cce4284d0147\\pdfplumber\\0af94b60ee24\\95bd46242e9147e9b79449c3d7e62804",
+        "elapsed_seconds": 0.9567688000388443,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\guideline2022_vol8\\controlled-result.json",
+        "parser_version": "0.11.10"
+      },
+      {
+        "parser": "pdfplumber",
+        "source_file": "s12970-017-0177-8.pdf",
+        "status": "completed",
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\s12970-017-0177-8\\parses\\7a97a81db0334c95ddd17a2009200e7f38945988b3e1dd5aa70f73a502fe8140\\pdfplumber\\0c67f7c74215\\03671120ff424558bf87f2b9d0ddb06d",
+        "elapsed_seconds": 1.0389977000886574,
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\pdfplumber\\s12970-017-0177-8\\controlled-result.json",
+        "parser_version": "0.11.10"
+      },
+      {
+        "parser": "docling",
+        "source_file": "KDRI_2025_vol1.pdf",
+        "status": "completed",
+        "exit_code": 0,
+        "elapsed_seconds": 53.044888100004755,
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\docling\\KDRI_2025_vol1\\parses\\31c99fbf3a0253f55a5b9f53964ea9a1db8a108077650d119b4841a9b11f9cad\\docling\\4f9fca754a6d\\2fd3d6f1f6054b5983d73d43700ea190",
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\docling\\KDRI_2025_vol1\\controlled-result.json",
+        "parser_version": "2.135.0"
+      },
+      {
+        "parser": "docling",
+        "source_file": "KDRI_2025_vol2.pdf",
+        "status": "completed",
+        "exit_code": 0,
+        "elapsed_seconds": 44.33151709998492,
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\docling\\KDRI_2025_vol2\\parses\\8177b5341cd9acf08b20100764171bc93e85774791b0160b7499aa7731b2b482\\docling\\af2a68eb95e6\\59162e875651459b994a94e86814876a",
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\docling\\KDRI_2025_vol2\\controlled-result.json",
+        "parser_version": "2.135.0"
+      },
+      {
+        "parser": "docling",
+        "source_file": "KDRI_2025_vol3.pdf",
+        "status": "completed",
+        "exit_code": 0,
+        "elapsed_seconds": 48.4839776000008,
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\docling\\KDRI_2025_vol3\\parses\\367742bf3267539ce208e4f766c943c584b6726856a9ed32a4100ad923beca94\\docling\\4fdf21459198\\6f09428fbe2e497ea2c4758c23327fd2",
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\docling\\KDRI_2025_vol3\\controlled-result.json",
+        "parser_version": "2.135.0"
+      },
+      {
+        "parser": "docling",
+        "source_file": "WHO_carbohydrate_2023.pdf",
+        "status": "completed",
+        "exit_code": 0,
+        "elapsed_seconds": 46.38914310000837,
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\docling\\WHO_carbohydrate_2023\\parses\\81548c804ebf031aa06a71f762c4ed72f680d4cb2caba44b011459fe5c841cd0\\docling\\a3517725c7ad\\c2f03634504b4eb39439d6e9bf974de8",
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\docling\\WHO_carbohydrate_2023\\controlled-result.json",
+        "parser_version": "2.135.0"
+      },
+      {
+        "parser": "docling",
+        "source_file": "WHO_total_fat_2023.pdf",
+        "status": "completed",
+        "exit_code": 0,
+        "elapsed_seconds": 42.71564629999921,
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\docling\\WHO_total_fat_2023\\parses\\a9f12218be0b1720c9be4f0dee79c2dbdcbd13fb44cd3e0d751bf04b5fa63381\\docling\\f3b1850004a4\\1b259dc40c414878b2cf37022528a44a",
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\docling\\WHO_total_fat_2023\\controlled-result.json",
+        "parser_version": "2.135.0"
+      },
+      {
+        "parser": "docling",
+        "source_file": "WHO_saturated_trans_fat_2023.pdf",
+        "status": "completed",
+        "exit_code": 0,
+        "elapsed_seconds": 48.35919760004617,
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\docling\\WHO_saturated_trans_fat_2023\\parses\\767c24d20e90357e71831e3e19813f79c84457c8a24ddbca931237a58bd3d503\\docling\\f91912eb0aa0\\1fc20892205c4cc2b613550a698e0994",
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\docling\\WHO_saturated_trans_fat_2023\\controlled-result.json",
+        "parser_version": "2.135.0"
+      },
+      {
+        "parser": "docling",
+        "source_file": "WHO_sugars_2015.pdf",
+        "status": "completed",
+        "exit_code": 0,
+        "elapsed_seconds": 43.922896899981424,
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\docling\\WHO_sugars_2015\\parses\\0e81d49cffe12469c184a9d377c9ff80fa26f1f08d66b42fed40f1054b67b209\\docling\\77c9820ad225\\92170a232ae94141a26e4d67ee89fda6",
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\docling\\WHO_sugars_2015\\controlled-result.json",
+        "parser_version": "2.135.0"
+      },
+      {
+        "parser": "docling",
+        "source_file": "WHO_sodium_2012.pdf",
+        "status": "completed",
+        "exit_code": 0,
+        "elapsed_seconds": 42.11192350008059,
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\docling\\WHO_sodium_2012\\parses\\1f42c807c29ae255b31554afafaed683d5598414a1e5cc2a4b89190c72e2f369\\docling\\f3b1850004a4\\0f5e5bc6fcde4cb7ad7b630e21f87d7c",
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\docling\\WHO_sodium_2012\\controlled-result.json",
+        "parser_version": "2.135.0"
+      },
+      {
+        "parser": "docling",
+        "source_file": "guideline2022_vol8.pdf",
+        "status": "completed",
+        "exit_code": 0,
+        "elapsed_seconds": 44.58839749998879,
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\docling\\guideline2022_vol8\\parses\\d28c3ef8b06beba0c659cb7dc096db6b521190baa4f8b430ebb5cce4284d0147\\docling\\d5a93dadf2a6\\8fbf804ab1e84ebcb6a00a7cfdfabf08",
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\docling\\guideline2022_vol8\\controlled-result.json",
+        "parser_version": "2.135.0"
+      },
+      {
+        "parser": "docling",
+        "source_file": "s12970-017-0177-8.pdf",
+        "status": "completed",
+        "exit_code": 0,
+        "elapsed_seconds": 44.27575560007244,
+        "artifact": "artifacts\\controlled-parsers-v1\\workers\\docling\\s12970-017-0177-8\\parses\\7a97a81db0334c95ddd17a2009200e7f38945988b3e1dd5aa70f73a502fe8140\\docling\\8c09b1f840e3\\a7ef02a42e6b45d18a287419171ea125",
+        "reused_from": "artifacts\\controlled-parsers-v1\\workers\\docling\\s12970-017-0177-8\\controlled-result.json",
+        "parser_version": "2.135.0"
+      }
+    ]
+  },
+  "preservation": [
+    {
+      "parser": "pypdf",
+      "checks": [
+        {
+          "id": "kdri-rounding",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-activity",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-formula-edition",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-adult-units",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-lactation-condition",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-infant-volume-units",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "table7-infant-early",
+          "type": "table_row",
+          "passed": false
+        },
+        {
+          "id": "table7-infant-late",
+          "type": "table_row",
+          "passed": false
+        },
+        {
+          "id": "table7-child",
+          "type": "table_row",
+          "passed": false
+        },
+        {
+          "id": "table8-study1",
+          "type": "table_row",
+          "passed": false
+        },
+        {
+          "id": "table8-study2",
+          "type": "table_row",
+          "passed": false
+        },
+        {
+          "id": "activity_reference",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "comorbidity_screen",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_concept",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_edition",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_rounding",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "energy_balance",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "evidence5",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "exercise_window",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "juice",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "leucine",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "lifecourse",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "negative_balance",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "obesity_initial_goal",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "protein_daily",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "protein_serving",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "secondary_obesity",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "spacing",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "sugar10",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "sugar5",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "tee_components",
+          "type": "gold_excerpt",
+          "passed": true
+        }
+      ],
+      "totals": {
+        "text_anchor": {
+          "passed": 6,
+          "n": 6
+        },
+        "table_row": {
+          "passed": 0,
+          "n": 5
+        },
+        "gold_excerpt": {
+          "passed": 20,
+          "n": 20
+        }
+      },
+      "tables": 0,
+      "images": 0
+    },
+    {
+      "parser": "pdfplumber",
+      "checks": [
+        {
+          "id": "kdri-rounding",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-activity",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-formula-edition",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-adult-units",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-lactation-condition",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-infant-volume-units",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "table7-infant-early",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "table7-infant-late",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "table7-child",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "table8-study1",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "table8-study2",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "activity_reference",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "comorbidity_screen",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_concept",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_edition",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_rounding",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "energy_balance",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "evidence5",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "exercise_window",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "juice",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "leucine",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "lifecourse",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "negative_balance",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "obesity_initial_goal",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "protein_daily",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "protein_serving",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "secondary_obesity",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "spacing",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "sugar10",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "sugar5",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "tee_components",
+          "type": "gold_excerpt",
+          "passed": true
+        }
+      ],
+      "totals": {
+        "text_anchor": {
+          "passed": 6,
+          "n": 6
+        },
+        "table_row": {
+          "passed": 5,
+          "n": 5
+        },
+        "gold_excerpt": {
+          "passed": 20,
+          "n": 20
+        }
+      },
+      "tables": 30,
+      "images": 13
+    },
+    {
+      "parser": "docling",
+      "checks": [
+        {
+          "id": "kdri-rounding",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-activity",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-formula-edition",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-adult-units",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-lactation-condition",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-infant-volume-units",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "table7-infant-early",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "table7-infant-late",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "table7-child",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "table8-study1",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "table8-study2",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "activity_reference",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "comorbidity_screen",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_concept",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_edition",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_rounding",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "energy_balance",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "evidence5",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "exercise_window",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "juice",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "leucine",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "lifecourse",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "negative_balance",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "obesity_initial_goal",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "protein_daily",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "protein_serving",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "secondary_obesity",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "spacing",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "sugar10",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "sugar5",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "tee_components",
+          "type": "gold_excerpt",
+          "passed": true
+        }
+      ],
+      "totals": {
+        "text_anchor": {
+          "passed": 6,
+          "n": 6
+        },
+        "table_row": {
+          "passed": 5,
+          "n": 5
+        },
+        "gold_excerpt": {
+          "passed": 20,
+          "n": 20
+        }
+      },
+      "tables": 7,
+      "images": 12
+    }
+  ],
+  "retrieval": {
+    "scope": "BM25 development probe on selected pages; not final RAG or answer quality",
+    "n": 40,
+    "fact_groups": 20,
+    "candidate_k": 20,
+    "return_k": 4,
+    "dataset_sha256": "eb08185afae97e32526d6c3a48003c7161c73e92c48d59227c053d5e350bc06d",
+    "translations_sha256": "14a2e88571e2da20e34d96c3c9234663ffe2abd3d2da54a1d48a29591ec2e080",
+    "recipes": [
+      {
+        "parser": "pypdf",
+        "chunking": "page",
+        "bundle": "artifacts\\controlled-parsers-v3\\pypdf-page.json",
+        "search_chunks": 26,
+        "context_budget": 6000,
+        "contexts": "artifacts\\controlled-parsers-v3\\pypdf-page-contexts.json",
+        "page_hit": 0.725,
+        "excerpt_hit": 0.725,
+        "mrr": 0.6833333333333333,
+        "context_chars": 5975.475,
+        "truncated": 0.925
+      },
+      {
+        "parser": "pypdf",
+        "chunking": "page",
+        "bundle": "artifacts\\controlled-parsers-v3\\pypdf-page.json",
+        "search_chunks": 26,
+        "context_budget": 12000,
+        "contexts": "artifacts\\controlled-parsers-v3\\pypdf-page-contexts.json",
+        "page_hit": 0.725,
+        "excerpt_hit": 0.725,
+        "mrr": 0.6833333333333333,
+        "context_chars": 11078.925,
+        "truncated": 0.575
+      },
+      {
+        "parser": "pypdf",
+        "chunking": "parent_child",
+        "bundle": "artifacts\\controlled-parsers-v3\\pypdf-parent_child.json",
+        "search_chunks": 195,
+        "context_budget": 6000,
+        "contexts": "artifacts\\controlled-parsers-v3\\pypdf-parent_child-contexts.json",
+        "page_hit": 0.75,
+        "excerpt_hit": 0.75,
+        "mrr": 0.5708333333333333,
+        "context_chars": 5245.55,
+        "truncated": 0.45
+      },
+      {
+        "parser": "pypdf",
+        "chunking": "parent_child",
+        "bundle": "artifacts\\controlled-parsers-v3\\pypdf-parent_child.json",
+        "search_chunks": 195,
+        "context_budget": 12000,
+        "contexts": "artifacts\\controlled-parsers-v3\\pypdf-parent_child-contexts.json",
+        "page_hit": 0.75,
+        "excerpt_hit": 0.75,
+        "mrr": 0.5708333333333333,
+        "context_chars": 5555.1,
+        "truncated": 0.0
+      },
+      {
+        "parser": "pypdf",
+        "chunking": "section",
+        "bundle": "artifacts\\controlled-parsers-v3\\pypdf-section.json",
+        "search_chunks": 69,
+        "context_budget": 6000,
+        "contexts": "artifacts\\controlled-parsers-v3\\pypdf-section-contexts.json",
+        "page_hit": 0.75,
+        "excerpt_hit": 0.675,
+        "mrr": 0.6791666666666667,
+        "context_chars": 4531.975,
+        "truncated": 0.0
+      },
+      {
+        "parser": "pypdf",
+        "chunking": "section",
+        "bundle": "artifacts\\controlled-parsers-v3\\pypdf-section.json",
+        "search_chunks": 69,
+        "context_budget": 12000,
+        "contexts": "artifacts\\controlled-parsers-v3\\pypdf-section-contexts.json",
+        "page_hit": 0.75,
+        "excerpt_hit": 0.675,
+        "mrr": 0.6791666666666667,
+        "context_chars": 4531.975,
+        "truncated": 0.0
+      },
+      {
+        "parser": "pypdf",
+        "chunking": "recursive",
+        "bundle": "artifacts\\controlled-parsers-v3\\pypdf-recursive.json",
+        "search_chunks": 74,
+        "context_budget": 6000,
+        "contexts": "artifacts\\controlled-parsers-v3\\pypdf-recursive-contexts.json",
+        "page_hit": 0.75,
+        "excerpt_hit": 0.625,
+        "mrr": 0.6416666666666667,
+        "context_chars": 4423.575,
+        "truncated": 0.0
+      },
+      {
+        "parser": "pypdf",
+        "chunking": "recursive",
+        "bundle": "artifacts\\controlled-parsers-v3\\pypdf-recursive.json",
+        "search_chunks": 74,
+        "context_budget": 12000,
+        "contexts": "artifacts\\controlled-parsers-v3\\pypdf-recursive-contexts.json",
+        "page_hit": 0.75,
+        "excerpt_hit": 0.625,
+        "mrr": 0.6416666666666667,
+        "context_chars": 4423.575,
+        "truncated": 0.0
+      },
+      {
+        "parser": "pdfplumber",
+        "chunking": "page",
+        "bundle": "artifacts\\controlled-parsers-v3\\pdfplumber-page.json",
+        "search_chunks": 26,
+        "context_budget": 6000,
+        "contexts": "artifacts\\controlled-parsers-v3\\pdfplumber-page-contexts.json",
+        "page_hit": 0.725,
+        "excerpt_hit": 0.725,
+        "mrr": 0.6833333333333333,
+        "context_chars": 5997.125,
+        "truncated": 0.95
+      },
+      {
+        "parser": "pdfplumber",
+        "chunking": "page",
+        "bundle": "artifacts\\controlled-parsers-v3\\pdfplumber-page.json",
+        "search_chunks": 26,
+        "context_budget": 12000,
+        "contexts": "artifacts\\controlled-parsers-v3\\pdfplumber-page-contexts.json",
+        "page_hit": 0.725,
+        "excerpt_hit": 0.725,
+        "mrr": 0.6833333333333333,
+        "context_chars": 10920.0,
+        "truncated": 0.6
+      },
+      {
+        "parser": "pdfplumber",
+        "chunking": "parent_child",
+        "bundle": "artifacts\\controlled-parsers-v3\\pdfplumber-parent_child.json",
+        "search_chunks": 195,
+        "context_budget": 6000,
+        "contexts": "artifacts\\controlled-parsers-v3\\pdfplumber-parent_child-contexts.json",
+        "page_hit": 0.75,
+        "excerpt_hit": 0.65,
+        "mrr": 0.5708333333333333,
+        "context_chars": 5104.525,
+        "truncated": 0.325
+      },
+      {
+        "parser": "pdfplumber",
+        "chunking": "parent_child",
+        "bundle": "artifacts\\controlled-parsers-v3\\pdfplumber-parent_child.json",
+        "search_chunks": 195,
+        "context_budget": 12000,
+        "contexts": "artifacts\\controlled-parsers-v3\\pdfplumber-parent_child-contexts.json",
+        "page_hit": 0.75,
+        "excerpt_hit": 0.65,
+        "mrr": 0.5708333333333333,
+        "context_chars": 5285.825,
+        "truncated": 0.0
+      },
+      {
+        "parser": "pdfplumber",
+        "chunking": "section",
+        "bundle": "artifacts\\controlled-parsers-v3\\pdfplumber-section.json",
+        "search_chunks": 68,
+        "context_budget": 6000,
+        "contexts": "artifacts\\controlled-parsers-v3\\pdfplumber-section-contexts.json",
+        "page_hit": 0.75,
+        "excerpt_hit": 0.675,
+        "mrr": 0.6666666666666667,
+        "context_chars": 4438.15,
+        "truncated": 0.0
+      },
+      {
+        "parser": "pdfplumber",
+        "chunking": "section",
+        "bundle": "artifacts\\controlled-parsers-v3\\pdfplumber-section.json",
+        "search_chunks": 68,
+        "context_budget": 12000,
+        "contexts": "artifacts\\controlled-parsers-v3\\pdfplumber-section-contexts.json",
+        "page_hit": 0.75,
+        "excerpt_hit": 0.675,
+        "mrr": 0.6666666666666667,
+        "context_chars": 4438.15,
+        "truncated": 0.0
+      },
+      {
+        "parser": "pdfplumber",
+        "chunking": "recursive",
+        "bundle": "artifacts\\controlled-parsers-v3\\pdfplumber-recursive.json",
+        "search_chunks": 73,
+        "context_budget": 6000,
+        "contexts": "artifacts\\controlled-parsers-v3\\pdfplumber-recursive-contexts.json",
+        "page_hit": 0.75,
+        "excerpt_hit": 0.625,
+        "mrr": 0.6375,
+        "context_chars": 4330.625,
+        "truncated": 0.0
+      },
+      {
+        "parser": "pdfplumber",
+        "chunking": "recursive",
+        "bundle": "artifacts\\controlled-parsers-v3\\pdfplumber-recursive.json",
+        "search_chunks": 73,
+        "context_budget": 12000,
+        "contexts": "artifacts\\controlled-parsers-v3\\pdfplumber-recursive-contexts.json",
+        "page_hit": 0.75,
+        "excerpt_hit": 0.625,
+        "mrr": 0.6375,
+        "context_chars": 4330.625,
+        "truncated": 0.0
+      },
+      {
+        "parser": "docling",
+        "chunking": "page",
+        "bundle": "artifacts\\controlled-parsers-v3\\docling-page.json",
+        "search_chunks": 26,
+        "context_budget": 6000,
+        "contexts": "artifacts\\controlled-parsers-v3\\docling-page-contexts.json",
+        "page_hit": 0.725,
+        "excerpt_hit": 0.725,
+        "mrr": 0.6666666666666667,
+        "context_chars": 6000.0,
+        "truncated": 1.0
+      },
+      {
+        "parser": "docling",
+        "chunking": "page",
+        "bundle": "artifacts\\controlled-parsers-v3\\docling-page.json",
+        "search_chunks": 26,
+        "context_budget": 12000,
+        "contexts": "artifacts\\controlled-parsers-v3\\docling-page-contexts.json",
+        "page_hit": 0.725,
+        "excerpt_hit": 0.725,
+        "mrr": 0.6666666666666667,
+        "context_chars": 11136.8,
+        "truncated": 0.675
+      },
+      {
+        "parser": "docling",
+        "chunking": "parent_child",
+        "bundle": "artifacts\\controlled-parsers-v3\\docling-parent_child.json",
+        "search_chunks": 229,
+        "context_budget": 6000,
+        "contexts": "artifacts\\controlled-parsers-v3\\docling-parent_child-contexts.json",
+        "page_hit": 0.7,
+        "excerpt_hit": 0.6,
+        "mrr": 0.5708333333333333,
+        "context_chars": 4956.425,
+        "truncated": 0.25
+      },
+      {
+        "parser": "docling",
+        "chunking": "parent_child",
+        "bundle": "artifacts\\controlled-parsers-v3\\docling-parent_child.json",
+        "search_chunks": 229,
+        "context_budget": 12000,
+        "contexts": "artifacts\\controlled-parsers-v3\\docling-parent_child-contexts.json",
+        "page_hit": 0.7,
+        "excerpt_hit": 0.6,
+        "mrr": 0.5708333333333333,
+        "context_chars": 5121.25,
+        "truncated": 0.0
+      },
+      {
+        "parser": "docling",
+        "chunking": "section",
+        "bundle": "artifacts\\controlled-parsers-v3\\docling-section.json",
+        "search_chunks": 107,
+        "context_budget": 6000,
+        "contexts": "artifacts\\controlled-parsers-v3\\docling-section-contexts.json",
+        "page_hit": 0.75,
+        "excerpt_hit": 0.65,
+        "mrr": 0.5833333333333333,
+        "context_chars": 3918.6,
+        "truncated": 0.0
+      },
+      {
+        "parser": "docling",
+        "chunking": "section",
+        "bundle": "artifacts\\controlled-parsers-v3\\docling-section.json",
+        "search_chunks": 107,
+        "context_budget": 12000,
+        "contexts": "artifacts\\controlled-parsers-v3\\docling-section-contexts.json",
+        "page_hit": 0.75,
+        "excerpt_hit": 0.65,
+        "mrr": 0.5833333333333333,
+        "context_chars": 3918.6,
+        "truncated": 0.0
+      },
+      {
+        "parser": "docling",
+        "chunking": "recursive",
+        "bundle": "artifacts\\controlled-parsers-v3\\docling-recursive.json",
+        "search_chunks": 97,
+        "context_budget": 6000,
+        "contexts": "artifacts\\controlled-parsers-v3\\docling-recursive-contexts.json",
+        "page_hit": 0.75,
+        "excerpt_hit": 0.65,
+        "mrr": 0.6333333333333333,
+        "context_chars": 4040.975,
+        "truncated": 0.0
+      },
+      {
+        "parser": "docling",
+        "chunking": "recursive",
+        "bundle": "artifacts\\controlled-parsers-v3\\docling-recursive.json",
+        "search_chunks": 97,
+        "context_budget": 12000,
+        "contexts": "artifacts\\controlled-parsers-v3\\docling-recursive-contexts.json",
+        "page_hit": 0.75,
+        "excerpt_hit": 0.65,
+        "mrr": 0.6333333333333333,
+        "context_chars": 4040.975,
+        "truncated": 0.0
+      }
+    ]
+  },
+  "decision": "Keep production PyPDF/recursive. Re-admit Docling for bounded experiments; no final parser optimum asserted. Compare embeddings next after full-corpus candidate confirmation.",
+  "limitations": [
+    "BM25 selected-page development probe, not full-corpus dense/hybrid or Ragas answer evaluation",
+    "OCR disabled; exported image count does not establish caption or image comprehension quality",
+    "5 table-row anchors and 20 text fact groups do not establish whole-document extraction accuracy",
+    "GPU Docling versus CPU others: deployment timings are descriptive, not hardware-controlled speed comparisons",
+    "Independent native docling-parse access violation remains unresolved"
+  ],
+  "errors_and_fixes": [
+    "Removed repeating diagnostic faulthandler watchdog after reproduction; no native termination in this 30-worker run",
+    "Failed caches retry; donor runtime/config/source/page/version checked; incomplete matrix fails",
+    "Separate nonadjacent selected pages before section chunking",
+    "Digit-range en dash/hyphen equivalent in evaluation; signs preserved",
+    "Test temp path C sandbox failed; explicit D basetemp parent created and verified"
+  ],
+  "verification": {
+    "backend_passed": 196,
+    "skipped": 1,
+    "existing_warnings": 3
+  },
+  "reproduce": "cd backend; venv/Scripts/python.exe scripts/eval/run_controlled_parser_comparison.py --output artifacts/controlled-parsers-new",
+  "crash_dump_archive": {
+    "files": 9,
+    "bytes": 4995261126,
+    "path": "backend/artifacts/docling-recovery-v1/crash-dump-archive",
+    "contains_sensitive_process_memory": true
+  }
+}

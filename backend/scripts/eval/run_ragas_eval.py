@@ -22,6 +22,9 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 BACKEND_DIR = Path(__file__).resolve().parents[2]
+compatibility_runtime = BACKEND_DIR / "artifacts/ragas-runtime"
+if compatibility_runtime.is_dir():
+    sys.path.insert(0, str(compatibility_runtime))
 load_dotenv(BACKEND_DIR / ".env")
 os.environ.setdefault("LANGCHAIN_TRACING_V2", os.getenv("LANGSMITH_TRACING",  "true"))
 os.environ.setdefault("LANGCHAIN_API_KEY",     os.getenv("LANGSMITH_API_KEY",  ""))
@@ -29,10 +32,12 @@ os.environ.setdefault("LANGCHAIN_PROJECT",     os.getenv("LANGSMITH_PROJECT",  "
 os.environ.setdefault("LANGCHAIN_ENDPOINT",    os.getenv("LANGSMITH_ENDPOINT", "https://api.smith.langchain.com"))
 
 from langsmith import traceable, tracing_context, Client
-from langchain_openai import ChatOpenAI
+from app.core.llm import get_evaluation_model
 from ragas import EvaluationDataset, evaluate
 from ragas.metrics import faithfulness, context_recall
 from ragas.llms import LangchainLLMWrapper
+from ragas.embeddings import LangchainEmbeddingsWrapper
+from app.rag.retriever import embeddings
 from app.core.config import get_settings
 from app.rag.retriever import retrieve
 from app.rag.qa import answer_from_knowledge
@@ -73,16 +78,16 @@ def _mean_metric(value) -> float | None:
         return None
 
 
-def _sample_score(row, key: str) -> float:
+def _sample_score(row, key: str) -> float | None:
     """DataFrame row에서 per-sample 점수를 안전하게 추출한다."""
     val = row.get(key)
     if val is None:
-        return 0.0
+        return None
     try:
         v = float(val)
-        return 0.0 if math.isnan(v) else round(v, 4)
+        return None if not math.isfinite(v) else round(v, 4)
     except (TypeError, ValueError):
-        return 0.0
+        return None
 
 
 @traceable(
@@ -94,17 +99,16 @@ def _sample_score(row, key: str) -> float:
 async def build_samples(data: list, k: int, use_hybrid: bool, use_rerank: bool) -> list:
     """retrieve() + answer_from_knowledge()로 ragas SingleTurnSample 리스트 생성.
 
-    주의: answer_from_knowledge()는 내부적으로 full mode retrieve를 사용한다.
-    retrieved_contexts는 --mode 인자에 따른 retrieve() 결과를 사용한다.
+    생성과 채점에 같은 검색 결과를 사용하여 검색 모드 간 비교를 보존한다.
     """
     samples = []
     for i, item in enumerate(data, 1):
         q = item["question"]
         r = await retrieve(q, k=k, use_hybrid=use_hybrid, use_rerank=use_rerank)
-        ans = await answer_from_knowledge(q, k=k)
+        ans = await answer_from_knowledge(q, k=k, retrieval_result=r)
         samples.append(SingleTurnSample(
             user_input=q,
-            retrieved_contexts=[d.page_content for d in r["docs"]],
+            retrieved_contexts=[ans["context"]] if ans["context"] else [],
             response=ans["answer"],
             reference=item["gold_answer"],
         ))
@@ -150,11 +154,7 @@ if __name__ == "__main__":
 
     # Phase 2: ragas 평가 — 동기 호출 (자체 이벤트 루프 사용, asyncio.run 중첩 방지)
     judge_llm = LangchainLLMWrapper(
-        ChatOpenAI(
-            model="gpt-4o-mini",
-            temperature=0,
-            openai_api_key=get_settings().openai_api_key,
-        )
+        get_evaluation_model()
     )
 
     print("\n=== ragas 지표 계산 중 (faithfulness / context_recall) ===")
@@ -162,6 +162,8 @@ if __name__ == "__main__":
         EvaluationDataset(samples=samples),
         metrics=[faithfulness, context_recall],
         llm=judge_llm,
+        embeddings=LangchainEmbeddingsWrapper(embeddings),
+        raise_exceptions=True,
     )
 
     # Phase 3: 결과 추출 — list / scalar 모두 처리
@@ -175,6 +177,9 @@ if __name__ == "__main__":
         "n":              len(samples),
         "faithfulness":   faith_score,
         "context_recall": recall_score,
+        "generation_model": get_settings().gemini_model,
+        "judge_model": get_settings().gemini_eval_model,
+        "embedding_model": get_settings().embedding_model,
     }
 
     print("\n=== ragas 요약 ===")
@@ -193,8 +198,8 @@ if __name__ == "__main__":
             })
         print("\n=== per-sample 점수 ===")
         for row in rows:
-            print(f"  faith={row['faithfulness']:.3f}  "
-                  f"recall={row['context_recall']:.3f}  | {row['question']}")
+            print(f"  faith={row['faithfulness']}  "
+                  f"recall={row['context_recall']}  | {row['question']}")
     except Exception as e:
         print(f"(per-sample 출력 생략: {e})")
 

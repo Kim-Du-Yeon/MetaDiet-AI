@@ -13,17 +13,14 @@ ocr/inbody_ocr.py
            "근손실 없이 체지방만 줄었는가"를 판단하는 근거로 활용
 
 구현 방식:
-  GPT-4o-mini Vision을 사용 (별도 Vision 전용 기능이 아니라
+  Gemini Vision을 사용 (별도 Vision 전용 기능이 아니라
   인바디 "데이터 파싱"에만 Vision 사용 - 식단 인식과 구분)
   → tesseract OCR 대비 한국어 인바디 용지 인식률 월등히 높음
 """
-import base64
 import re
 import json
-from openai import AsyncOpenAI
-from app.core.config import get_settings
+from app.ocr.vision import read_image
 
-client = AsyncOpenAI(api_key=get_settings().openai_api_key)
 
 INBODY_EXTRACT_PROMPT = """
 이 이미지는 InBody 체성분 분석 결과지입니다.
@@ -62,30 +59,9 @@ async def extract_inbody_from_image(image_bytes: bytes) -> dict:
     """
     인바디 이미지 bytes → 파싱된 체성분 dict 반환
     """
-    b64 = base64.b64encode(image_bytes).decode("utf-8")
+    response = await read_image(image_bytes, INBODY_EXTRACT_PROMPT, max_tokens=2048)
 
-    response = await client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {
-                "role": "user",
-                "content": [
-                    {"type": "text", "text": INBODY_EXTRACT_PROMPT},
-                    {
-                        "type": "image_url",
-                        "image_url": {
-                            "url": f"data:image/jpeg;base64,{b64}",
-                            "detail": "high"
-                        }
-                    }
-                ]
-            }
-        ],
-        max_tokens=500,
-        temperature=0,   # 수치 추출은 창의성 불필요 → 0
-    )
-
-    raw = response.choices[0].message.content.strip()
+    raw = response.strip()
 
     # JSON 펜스 제거 후 파싱
     raw = re.sub(r"```json|```", "", raw).strip()

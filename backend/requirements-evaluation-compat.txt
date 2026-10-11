@@ -1,0 +1,4 @@
+# Install only with the project interpreter into artifacts/ragas-runtime:
+# python -m pip install --no-deps --target artifacts/ragas-runtime -r requirements-evaluation-compat.txt
+# Main API environment remains unchanged; ragas 0.2.15 requires the removed vertexai module.
+langchain-community==0.4.1

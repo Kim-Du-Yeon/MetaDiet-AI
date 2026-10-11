@@ -14,6 +14,17 @@ from app.api.routes.main import app
 from app.core.auth import get_current_auth_id, get_current_user
 
 
+@pytest.fixture(autouse=True)
+def block_live_gemini(monkeypatch):
+    """Unit/regression tests must explicitly replace the model boundary."""
+    import app.core.llm as llm_module
+
+    def blocked(*args, **kwargs):
+        raise AssertionError("Live Gemini calls are disabled in the regression suite")
+
+    monkeypatch.setattr(llm_module, "ChatGoogleGenerativeAI", blocked)
+
+
 class FakeResult:
     def __init__(self, data):
         self.data = data

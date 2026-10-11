@@ -1,0 +1,199 @@
+{
+  "scope": "development40,20factgroups; single-run shadow; no production adoption",
+  "retrieval": [
+    {
+      "recipe": "pypdf-recursive",
+      "mode": "dense",
+      "n": 40,
+      "page_hit": 0.75,
+      "excerpt_hit": 0.675,
+      "mrr": 0.6375,
+      "truncated": 0.0,
+      "local_p95_ms": 5.462969961808993
+    },
+    {
+      "recipe": "pypdf-recursive",
+      "mode": "bm25",
+      "n": 40,
+      "page_hit": 0.275,
+      "excerpt_hit": 0.25,
+      "mrr": 0.17083333333333334,
+      "truncated": 0.0,
+      "local_p95_ms": 43.7155800347682
+    },
+    {
+      "recipe": "pypdf-recursive",
+      "mode": "hybrid",
+      "n": 40,
+      "page_hit": 0.8,
+      "excerpt_hit": 0.75,
+      "mrr": 0.5604166666666667,
+      "truncated": 0.0,
+      "local_p95_ms": 43.04203002247959
+    },
+    {
+      "recipe": "docling-page",
+      "mode": "dense",
+      "n": 40,
+      "page_hit": 0.525,
+      "excerpt_hit": 0.5,
+      "mrr": 0.4645833333333333,
+      "truncated": 0.9,
+      "local_p95_ms": 3.346974973101168
+    },
+    {
+      "recipe": "docling-page",
+      "mode": "bm25",
+      "n": 40,
+      "page_hit": 0.4,
+      "excerpt_hit": 0.4,
+      "mrr": 0.2958333333333333,
+      "truncated": 0.975,
+      "local_p95_ms": 22.500019939616323
+    },
+    {
+      "recipe": "docling-page",
+      "mode": "hybrid",
+      "n": 40,
+      "page_hit": 0.6,
+      "excerpt_hit": 0.575,
+      "mrr": 0.5291666666666667,
+      "truncated": 0.95,
+      "local_p95_ms": 23.010719957528632
+    }
+  ],
+  "identity": {
+    "dataset": "eb08185afae97e32526d6c3a48003c7161c73e92c48d59227c053d5e350bc06d",
+    "translations": "14a2e88571e2da20e34d96c3c9234663ffe2abd3d2da54a1d48a29591ec2e080",
+    "dimension": 3072,
+    "source_identity": "b82fbf1189fdfbf186d4809b28ee5b0b60feafdaf8b9357fbf268fb3af9ec1ab",
+    "vector_identity": "4c3960162077b51dc0303a8735cb087d35bede5f2045218c32564b8af93ce945",
+    "bundles": {
+      "pypdf-recursive": "61f1ad819fe5feee7f5dc730b9721aaf861a2279919f0e457ab10c072284a1a9",
+      "docling-page": "365b096033ba88c71751f06f395bb509724ec65a4936d3248075129045d0d4a4"
+    },
+    "matrices": {
+      "pypdf-recursive": "052fffead335a81e97ae2cb3cffb6463371d9830c4d3c0bde3db8d70698274dc",
+      "docling-page": "14c68c4736aa0e750628c041dcf38134c970824cfaa8928c8ab1dac6a6f91983"
+    },
+    "query_vectors": "52cca3fc4b4e06fe90e45654fd2f99552c5efaaa7f2460775d78dc218a653a8a",
+    "code": {
+      "compare_search_modes.py": "6dc65c35239d14d9289c8419c9c6a505786856fc4b8809b2459c61ec8f04f7b0",
+      "chunking.py": "ee1e1163bbe0ef244c8ce1d88320682f91712f13d7a2fc84dfcf37d7335f1f48",
+      "retriever.py": "adab43d3db1fe7f2445c2103ee7e2842d0e759c8611d0686ca84cd9491902f8c",
+      "run_full_recipe_comparison.py": "a3de36c74365af657d1bc841036861339fbbb442b75baabbb4e9482cb848ff60"
+    },
+    "candidate_k": 20,
+    "return_k": 4,
+    "context_chars": 6000,
+    "rrf_constant": 60
+  },
+  "answers": {
+    "pypdf-recursive-hybrid-none": {
+      "n": 40,
+      "abstained": 4,
+      "metrics": {
+        "faithfulness": {
+          "mean": 0.996875,
+          "valid": 40,
+          "total": 40,
+          "failed": 0,
+          "not_scoreable": 0
+        },
+        "context_recall": {
+          "mean": 0.775,
+          "valid": 40,
+          "total": 40,
+          "failed": 0,
+          "not_scoreable": 0
+        }
+      },
+      "judge_model": "gemini-3.1-pro-preview",
+      "source_sha256": "468f71ca1f57c4bb49c1ca0c5ab2faa27a5846d07a6611bfb5e51483103c3f5c"
+    },
+    "docling-page-hybrid-none": {
+      "n": 40,
+      "abstained": 11,
+      "metrics": {
+        "faithfulness": {
+          "mean": 0.9642857142857142,
+          "valid": 40,
+          "total": 40,
+          "failed": 0,
+          "not_scoreable": 0
+        },
+        "context_recall": {
+          "mean": 0.6,
+          "valid": 40,
+          "total": 40,
+          "failed": 0,
+          "not_scoreable": 0
+        }
+      },
+      "judge_model": "gemini-3.1-pro-preview",
+      "source_sha256": "e3af6e0222f693922631aec80cfc0e093a03f1b0ee91be0354f716ae4a4e508b"
+    },
+    "pypdf-recursive-hybrid-jev": {
+      "n": 40,
+      "abstained": 2,
+      "metrics": {
+        "faithfulness": {
+          "mean": 0.96875,
+          "valid": 40,
+          "total": 40,
+          "failed": 0,
+          "not_scoreable": 0
+        },
+        "context_recall": {
+          "mean": 0.8125,
+          "valid": 40,
+          "total": 40,
+          "failed": 0,
+          "not_scoreable": 0
+        }
+      },
+      "judge_model": "gemini-3.1-pro-preview",
+      "source_sha256": "e64675321abb0d98e3fb753ae39f289077e0060ee42eba6a194b9392c1a53d8a"
+    }
+  },
+  "paired": {
+    "faithfulness": {
+      "mean_difference": -0.028125,
+      "ci95": [
+        -0.084375,
+        0.00625
+      ],
+      "unit": "fact group, paired bootstrap, 2000 draws"
+    },
+    "context_recall": {
+      "mean_difference": 0.0375,
+      "ci95": [
+        -0.125,
+        0.2
+      ],
+      "unit": "fact group, paired bootstrap, 2000 draws"
+    }
+  },
+  "jev": {
+    "n": 40,
+    "fallbacks": 0,
+    "model_calls": 800,
+    "page_hit": 0.8,
+    "excerpt_hit": 0.8,
+    "mrr": 0.65,
+    "seconds": 7.550634544991771,
+    "p95_seconds": 8.044587664993013,
+    "usage": {
+      "input_tokens": 655031,
+      "output_tokens": 29600
+    },
+    "excerpt_difference": {
+      "mean_difference": 0.05,
+      "ci95": [
+        -0.05,
+        0.15
+      ],
+      "unit": "fact group, paired bootstrap, 2000 draws"
+    }
+  }
+}

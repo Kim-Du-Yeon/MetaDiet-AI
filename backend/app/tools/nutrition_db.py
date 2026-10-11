@@ -25,7 +25,7 @@ import json
 import re
 from functools import lru_cache
 from langchain_core.tools import tool
-from langchain_openai import ChatOpenAI
+from app.core.llm import get_chat_model
 from app.core.config import get_settings
 
 # 전역 캐시 (서버 생애주기 중 최초 1회만 초기화)
@@ -72,11 +72,7 @@ async def _get_column_mapping() -> dict:
     if df.empty:
         return {}
 
-    llm = ChatOpenAI(
-        model="gpt-4o-mini",
-        temperature=0,
-        openai_api_key=get_settings().openai_api_key
-    )
+    llm = get_chat_model(temperature=0)
 
     # 앞 40개 컬럼 전달 (strip 정규화된 상태)
     columns = list(df.columns[:40])
@@ -118,11 +114,7 @@ async def _decompose_keywords_with_llm(food_name: str) -> list[str]:
         "오트밀"   → ["오트밀"]
         "연어"     → ["연어"]
     """
-    llm = ChatOpenAI(
-        model="gpt-4o-mini",
-        temperature=0,
-        openai_api_key=get_settings().openai_api_key
-    )
+    llm = get_chat_model(temperature=0)
 
     resp = await llm.ainvoke(
         f"""국가표준식품성분표의 식품명은 "주재료, 세부분류, 조리법" 형태로 저장됩니다.
@@ -192,11 +184,7 @@ async def _find_best_match_with_llm(
     # ── 2단계: 후보 여러 개면 LLM이 최적 선택 ──────────────────────
     candidate_names = candidates[food_col].head(20).tolist()
 
-    llm = ChatOpenAI(
-        model="gpt-4o-mini",
-        temperature=0,
-        openai_api_key=get_settings().openai_api_key
-    )
+    llm = get_chat_model(temperature=0)
 
     resp = await llm.ainvoke(
         f"""사용자가 입력한 음식: "{food_name}"

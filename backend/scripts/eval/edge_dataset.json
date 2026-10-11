@@ -9,9 +9,9 @@
   {"message": "밥 한 그릇 먹었어", "context": [], "pending": false, "expected": "diet_logger", "edge_type": "missing_unit"},
   {"message": "프로틴 한 스쿱 마셨어", "context": [], "pending": false, "expected": "diet_logger", "edge_type": "missing_unit"},
 
-  {"message": "",               "context": [], "pending": false, "expected": "strategy", "edge_type": "empty_or_irrelevant"},
-  {"message": "안녕",           "context": [], "pending": false, "expected": "strategy", "edge_type": "empty_or_irrelevant"},
-  {"message": "오늘 날씨 어때?", "context": [], "pending": false, "expected": "strategy", "edge_type": "empty_or_irrelevant"},
+  {"message": "",               "context": [], "pending": false, "expected": "off_topic", "edge_type": "empty_or_irrelevant"},
+  {"message": "안녕",           "context": [], "pending": false, "expected": "off_topic", "edge_type": "empty_or_irrelevant"},
+  {"message": "오늘 날씨 어때?", "context": [], "pending": false, "expected": "off_topic", "edge_type": "empty_or_irrelevant"},
 
   {"message": "chicken salad 먹었어", "context": [], "pending": false, "expected": "diet_logger",   "edge_type": "mixed_lang"},
   {"message": "프로틴 shake 마셨어",  "context": [], "pending": false, "expected": "diet_logger",   "edge_type": "mixed_lang"},

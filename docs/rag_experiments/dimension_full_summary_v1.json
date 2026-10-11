@@ -1,0 +1,467 @@
+{
+  "scope": "retrieval-only, 40 development and 20 sealed heldout questions; not Ragas answer/service quality",
+  "selection": "pypdf-recursive-768 selected on development, did not pass heldout excerpt non-inferiority point criterion; production3072 retained",
+  "dimensions": [
+    768,
+    1536,
+    3072
+  ],
+  "projection": "API-verified Embedding2 MRL prefix, not different models",
+  "split_reports": {
+    "development": {
+      "report_sha256": "dad2c2fe76037249da42587b7f9c3cf297acdc0378ae2abe71b2df6e235db748",
+      "rows": [
+        {
+          "recipe": "pypdf-recursive",
+          "dimension": 768,
+          "n_unique": 40,
+          "fact_groups": 20,
+          "n_runs": 120,
+          "vectors": 4141,
+          "matrix_bytes": 12721152,
+          "page_hit": 0.775,
+          "excerpt_hit": 0.7,
+          "mrr": 0.64375,
+          "context_chars": 4232.175,
+          "truncated": 0.0,
+          "local_p50_ms": 1.9629999878816307,
+          "local_p95_ms": 2.880835038376972
+        },
+        {
+          "recipe": "pypdf-recursive",
+          "dimension": 1536,
+          "n_unique": 40,
+          "fact_groups": 20,
+          "n_runs": 120,
+          "vectors": 4141,
+          "matrix_bytes": 25442304,
+          "page_hit": 0.75,
+          "excerpt_hit": 0.675,
+          "mrr": 0.65,
+          "context_chars": 4227.8,
+          "truncated": 0.0,
+          "local_p50_ms": 2.3859000066295266,
+          "local_p95_ms": 3.034465032396838
+        },
+        {
+          "recipe": "pypdf-recursive",
+          "dimension": 3072,
+          "n_unique": 40,
+          "fact_groups": 20,
+          "n_runs": 120,
+          "vectors": 4141,
+          "matrix_bytes": 50884608,
+          "page_hit": 0.75,
+          "excerpt_hit": 0.675,
+          "mrr": 0.6375,
+          "context_chars": 4157.925,
+          "truncated": 0.0,
+          "local_p50_ms": 3.5677500418387353,
+          "local_p95_ms": 5.363494978519157
+        },
+        {
+          "recipe": "docling-page",
+          "dimension": 768,
+          "n_unique": 40,
+          "fact_groups": 20,
+          "n_runs": 120,
+          "vectors": 1923,
+          "matrix_bytes": 5907456,
+          "page_hit": 0.6,
+          "excerpt_hit": 0.575,
+          "mrr": 0.4875,
+          "context_chars": 5770.9,
+          "truncated": 0.825,
+          "local_p50_ms": 0.6939500453881919,
+          "local_p95_ms": 1.25061497092247
+        },
+        {
+          "recipe": "docling-page",
+          "dimension": 1536,
+          "n_unique": 40,
+          "fact_groups": 20,
+          "n_runs": 120,
+          "vectors": 1923,
+          "matrix_bytes": 11814912,
+          "page_hit": 0.525,
+          "excerpt_hit": 0.5,
+          "mrr": 0.46458333333333335,
+          "context_chars": 5868.075,
+          "truncated": 0.9,
+          "local_p50_ms": 1.2483999598771334,
+          "local_p95_ms": 1.8296650436241177
+        },
+        {
+          "recipe": "docling-page",
+          "dimension": 3072,
+          "n_unique": 40,
+          "fact_groups": 20,
+          "n_runs": 120,
+          "vectors": 1923,
+          "matrix_bytes": 23629824,
+          "page_hit": 0.525,
+          "excerpt_hit": 0.5,
+          "mrr": 0.46458333333333335,
+          "context_chars": 5886.95,
+          "truncated": 0.9,
+          "local_p50_ms": 1.765000051818788,
+          "local_p95_ms": 2.4718799628317356
+        }
+      ]
+    },
+    "heldout": {
+      "report_sha256": "b8fa1acf82a3cb5be647c54a6bd603c157aee30cdca00add894b354bf5e22d7a",
+      "rows": [
+        {
+          "recipe": "pypdf-recursive",
+          "dimension": 768,
+          "n_unique": 20,
+          "fact_groups": 10,
+          "n_runs": 60,
+          "vectors": 4141,
+          "matrix_bytes": 12721152,
+          "page_hit": 0.7,
+          "excerpt_hit": 0.7,
+          "mrr": 0.4125,
+          "context_chars": 3834.5,
+          "truncated": 0.0,
+          "local_p50_ms": 1.4964999863877892,
+          "local_p95_ms": 2.586569968843832
+        },
+        {
+          "recipe": "pypdf-recursive",
+          "dimension": 1536,
+          "n_unique": 20,
+          "fact_groups": 10,
+          "n_runs": 60,
+          "vectors": 4141,
+          "matrix_bytes": 25442304,
+          "page_hit": 0.75,
+          "excerpt_hit": 0.75,
+          "mrr": 0.4666666666666667,
+          "context_chars": 3786.6,
+          "truncated": 0.0,
+          "local_p50_ms": 2.0773999858647585,
+          "local_p95_ms": 2.9892850143369283
+        },
+        {
+          "recipe": "pypdf-recursive",
+          "dimension": 3072,
+          "n_unique": 20,
+          "fact_groups": 10,
+          "n_runs": 60,
+          "vectors": 4141,
+          "matrix_bytes": 50884608,
+          "page_hit": 0.75,
+          "excerpt_hit": 0.75,
+          "mrr": 0.44166666666666665,
+          "context_chars": 3889.1,
+          "truncated": 0.0,
+          "local_p50_ms": 3.376250038854778,
+          "local_p95_ms": 4.8239349271170795
+        },
+        {
+          "recipe": "docling-page",
+          "dimension": 768,
+          "n_unique": 20,
+          "fact_groups": 10,
+          "n_runs": 60,
+          "vectors": 1923,
+          "matrix_bytes": 5907456,
+          "page_hit": 0.65,
+          "excerpt_hit": 0.65,
+          "mrr": 0.475,
+          "context_chars": 5898.7,
+          "truncated": 0.9,
+          "local_p50_ms": 1.0357499704696238,
+          "local_p95_ms": 1.5914899995550504
+        },
+        {
+          "recipe": "docling-page",
+          "dimension": 1536,
+          "n_unique": 20,
+          "fact_groups": 10,
+          "n_runs": 60,
+          "vectors": 1923,
+          "matrix_bytes": 11814912,
+          "page_hit": 0.65,
+          "excerpt_hit": 0.65,
+          "mrr": 0.5,
+          "context_chars": 5831.65,
+          "truncated": 0.8,
+          "local_p50_ms": 1.2949500232934952,
+          "local_p95_ms": 1.7768049845471976
+        },
+        {
+          "recipe": "docling-page",
+          "dimension": 3072,
+          "n_unique": 20,
+          "fact_groups": 10,
+          "n_runs": 60,
+          "vectors": 1923,
+          "matrix_bytes": 23629824,
+          "page_hit": 0.7,
+          "excerpt_hit": 0.7,
+          "mrr": 0.525,
+          "context_chars": 5852.0,
+          "truncated": 0.85,
+          "local_p50_ms": 1.816099975258112,
+          "local_p95_ms": 2.7605300070717926
+        }
+      ]
+    }
+  },
+  "comparisons": {
+    "development": {
+      "pypdf-recursive-768": {
+        "excerpt_difference_vs_baseline": {
+          "mean_difference": 0.025,
+          "ci95": [
+            0.0,
+            0.075
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "languages": {
+          "en": {
+            "n": 20,
+            "excerpt_hit": 0.65
+          },
+          "ko": {
+            "n": 20,
+            "excerpt_hit": 0.75
+          }
+        }
+      },
+      "pypdf-recursive-1536": {
+        "excerpt_difference_vs_baseline": {
+          "mean_difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "languages": {
+          "en": {
+            "n": 20,
+            "excerpt_hit": 0.65
+          },
+          "ko": {
+            "n": 20,
+            "excerpt_hit": 0.7
+          }
+        }
+      },
+      "pypdf-recursive-3072": {
+        "excerpt_difference_vs_baseline": {
+          "mean_difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "languages": {
+          "en": {
+            "n": 20,
+            "excerpt_hit": 0.65
+          },
+          "ko": {
+            "n": 20,
+            "excerpt_hit": 0.7
+          }
+        }
+      },
+      "docling-page-768": {
+        "excerpt_difference_vs_baseline": {
+          "mean_difference": -0.1,
+          "ci95": [
+            -0.325,
+            0.1
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "languages": {
+          "en": {
+            "n": 20,
+            "excerpt_hit": 0.55
+          },
+          "ko": {
+            "n": 20,
+            "excerpt_hit": 0.6
+          }
+        }
+      },
+      "docling-page-1536": {
+        "excerpt_difference_vs_baseline": {
+          "mean_difference": -0.175,
+          "ci95": [
+            -0.425,
+            0.05
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "languages": {
+          "en": {
+            "n": 20,
+            "excerpt_hit": 0.5
+          },
+          "ko": {
+            "n": 20,
+            "excerpt_hit": 0.5
+          }
+        }
+      },
+      "docling-page-3072": {
+        "excerpt_difference_vs_baseline": {
+          "mean_difference": -0.175,
+          "ci95": [
+            -0.425,
+            0.05
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "languages": {
+          "en": {
+            "n": 20,
+            "excerpt_hit": 0.5
+          },
+          "ko": {
+            "n": 20,
+            "excerpt_hit": 0.5
+          }
+        }
+      }
+    },
+    "heldout": {
+      "pypdf-recursive-768": {
+        "excerpt_difference_vs_baseline": {
+          "mean_difference": -0.05,
+          "ci95": [
+            -0.15,
+            0.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "languages": {
+          "en": {
+            "n": 10,
+            "excerpt_hit": 0.6
+          },
+          "ko": {
+            "n": 10,
+            "excerpt_hit": 0.8
+          }
+        }
+      },
+      "pypdf-recursive-1536": {
+        "excerpt_difference_vs_baseline": {
+          "mean_difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "languages": {
+          "en": {
+            "n": 10,
+            "excerpt_hit": 0.7
+          },
+          "ko": {
+            "n": 10,
+            "excerpt_hit": 0.8
+          }
+        }
+      },
+      "pypdf-recursive-3072": {
+        "excerpt_difference_vs_baseline": {
+          "mean_difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "languages": {
+          "en": {
+            "n": 10,
+            "excerpt_hit": 0.7
+          },
+          "ko": {
+            "n": 10,
+            "excerpt_hit": 0.8
+          }
+        }
+      },
+      "docling-page-768": {
+        "excerpt_difference_vs_baseline": {
+          "mean_difference": -0.1,
+          "ci95": [
+            -0.4,
+            0.25
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "languages": {
+          "en": {
+            "n": 10,
+            "excerpt_hit": 0.7
+          },
+          "ko": {
+            "n": 10,
+            "excerpt_hit": 0.6
+          }
+        }
+      },
+      "docling-page-1536": {
+        "excerpt_difference_vs_baseline": {
+          "mean_difference": -0.1,
+          "ci95": [
+            -0.4,
+            0.25
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "languages": {
+          "en": {
+            "n": 10,
+            "excerpt_hit": 0.7
+          },
+          "ko": {
+            "n": 10,
+            "excerpt_hit": 0.6
+          }
+        }
+      },
+      "docling-page-3072": {
+        "excerpt_difference_vs_baseline": {
+          "mean_difference": -0.05,
+          "ci95": [
+            -0.35,
+            0.3
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "languages": {
+          "en": {
+            "n": 10,
+            "excerpt_hit": 0.7
+          },
+          "ko": {
+            "n": 10,
+            "excerpt_hit": 0.7
+          }
+        }
+      }
+    }
+  },
+  "limits": [
+    "3 repeats measure timing; unique sample size remains40/20, groups20/10",
+    "exact cosine local timing excludes query API, Pinecone, generation and end-to-end latency",
+    "1536 heldout observation cannot be reused as an independent confirmation after selecting1536",
+    "vector bytes exclude Python/Pinecone overhead; embedding API token bill not measured",
+    "Docling/page was sparse-screening challenger, not exhaustive dense search over all12 recipes"
+  ]
+}

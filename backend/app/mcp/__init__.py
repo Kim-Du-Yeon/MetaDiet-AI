@@ -1,0 +1,1 @@
+"""MetaDiet MCP integrations."""

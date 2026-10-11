@@ -17,9 +17,13 @@ cross-lingual: 코퍼스가 영어 문서뿐이라 한국어 질의는 그대로
         한국어를 감지해 영어 쿼리로 변환 + 원본 쿼리도 함께 검색(dual query
         expansion)해서 번역 누락을 보완한다. 영어 입력은 기존 동작과 100% 동일.
 """
-import pickle, re
+import pickle, re, json, asyncio
+import hashlib
+from threading import RLock
+from pathlib import Path
 from pinecone import Pinecone, ServerlessSpec
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from app.core.llm import get_chat_model
+from app.core.embeddings import GeminiEmbeddings
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_pinecone import PineconeVectorStore
 from langchain_core.documents import Document
@@ -27,12 +31,9 @@ from app.core.config import get_settings
 
 settings = get_settings()
 
-embeddings = OpenAIEmbeddings(
-    model=settings.embedding_model,
-    openai_api_key=settings.openai_api_key
-)
+embeddings = GeminiEmbeddings()
 
-_translate_llm = ChatOpenAI(model="gpt-4o-mini", temperature=0, openai_api_key=settings.openai_api_key)
+_translate_llm = get_chat_model(temperature=0)
 _KOREAN_RE = re.compile(r"[가-힣]")
 _TRANSLATE_PROMPT = ChatPromptTemplate.from_messages([
     ("system", "다음 질문을 영어 학술 검색에 적합한 검색 쿼리 1줄로 번역하세요. 영어 쿼리만 출력, 다른 텍스트 금지."),
@@ -57,6 +58,7 @@ _bm25_loaded = False          # 로드 시도 여부(실패 시 재시도 방지
 _reranker = None
 _reranker_loaded = False
 _kiwi = None
+_initialization_lock = RLock()
 
 
 def _get_kiwi():
@@ -77,12 +79,37 @@ def kiwi_tokenize(text: str) -> list[str]:
         return text.split()
 
 
-def get_vector_store() -> PineconeVectorStore:
+def get_vector_store(*, for_build: bool = False) -> PineconeVectorStore:
+    with _initialization_lock:
+        return _load_vector_store(for_build=for_build)
+
+
+def _load_vector_store(*, for_build: bool = False) -> PineconeVectorStore:
     global _vector_store
+    if not for_build:
+        manifest_path = Path(settings.get_chunks_path()).with_name("activation.json")
+        if not manifest_path.is_file():
+            raise ValueError("Gemini RAG build is not activated; rebuild and select activation.json settings")
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        expected = {"namespace": settings.pinecone_namespace,
+                    "embedding_model": settings.embedding_model,
+                    "embedding_dimension": settings.embedding_dimension}
+        if any(manifest.get(key) != value for key, value in expected.items()):
+            raise ValueError("RAG manifest does not match the configured Gemini embedding build")
     if _vector_store is None:
+        if not settings.pinecone_namespace.startswith("metadiet-gemini-"):
+            raise ValueError("Select a rebuilt metadiet-gemini- namespace; legacy vectors are incompatible")
         pc = Pinecone(api_key=settings.pinecone_api_key)
         existing = [i.name for i in pc.list_indexes()]
+        if settings.pinecone_index_name in existing:
+            description = pc.describe_index(settings.pinecone_index_name)
+            if description.dimension != settings.embedding_dimension:
+                raise ValueError("Pinecone dimension mismatch; use a separate compatible index")
         if settings.pinecone_index_name not in existing:
+            if not for_build:
+                raise RuntimeError(
+                    "Configured Pinecone index does not exist; runtime retrieval is read-only"
+                )
             pc.create_index(
                 name=settings.pinecone_index_name,
                 dimension=settings.embedding_dimension,
@@ -93,11 +120,17 @@ def get_vector_store() -> PineconeVectorStore:
             index_name=settings.pinecone_index_name,
             embedding=embeddings,
             pinecone_api_key=settings.pinecone_api_key,
+            namespace=settings.pinecone_namespace or None,
         )
     return _vector_store
 
 
 def _get_bm25():
+    with _initialization_lock:
+        return _load_bm25()
+
+
+def _load_bm25():
     """청크 캐시(chunks.pkl)에서 BM25 sparse 검색기 lazy 로드. 없으면 None(폴백)."""
     global _bm25, _bm25_loaded
     if _bm25_loaded:
@@ -107,6 +140,10 @@ def _get_bm25():
         from langchain_community.retrievers import BM25Retriever
         with open(settings.get_chunks_path(), "rb") as f:
             chunks = pickle.load(f)
+        if any(c.metadata.get("embedding_model") != settings.embedding_model
+               or c.metadata.get("embedding_dimension") != settings.embedding_dimension
+               for c in chunks):
+            raise ValueError("BM25 corpus belongs to a different embedding build")
         _bm25 = BM25Retriever.from_documents(chunks, preprocess_func=kiwi_tokenize)
         _bm25.k = settings.rag_candidate_k
         print(f"=== BM25 로드 완료: {len(chunks)}개 청크 ===")
@@ -117,6 +154,11 @@ def _get_bm25():
 
 
 def _get_reranker():
+    with _initialization_lock:
+        return _load_reranker()
+
+
+def _load_reranker():
     """FlashRank 로컬 리랭커 lazy 초기화. 없으면 None(폴백)."""
     global _reranker, _reranker_loaded
     if _reranker_loaded:
@@ -133,9 +175,13 @@ def _get_reranker():
 
 
 def _doc_key(d: Document) -> str:
-    """RRF 융합 시 중복 제거용 키(문서+페이지+본문 앞부분)."""
+    """RRF identity normalizes Pinecone numeric pages and hashes the full text."""
     src = d.metadata.get("source_file", d.metadata.get("source", ""))
-    return f"{src}|{d.metadata.get('page','')}|{d.page_content[:60]}"
+    page = d.metadata.get("page", "")
+    if isinstance(page, float) and page.is_integer():
+        page = int(page)
+    digest = hashlib.sha256(d.page_content.encode("utf8")).hexdigest()
+    return f"{src}|{page}|{digest}"
 
 
 def _rrf(dense: list, sparse: list, c: int = 60) -> list:
@@ -163,17 +209,30 @@ def _rerank(query: str, docs: list, top_k: int):
     return out, top_score
 
 
-def format_docs(docs: list[Document], max_docs: int = 3) -> str:
+def _format_context(docs: list[Document], max_docs: int, max_chars: int):
+    if max_docs < 1 or max_chars < 1:
+        raise ValueError("Context limits must be positive")
+    blocks, included, used = [], [], 0
+    for doc in docs[:max_docs]:
+        source = doc.metadata.get("source_file", doc.metadata.get("source", "Unknown"))
+        header = f"[출처: {source}, 페이지: {doc.metadata.get('page', 'N/A')}]\n"
+        separator = 2 if blocks else 0
+        remaining = max_chars - used - separator
+        if remaining <= len(header):
+            break
+        block = header + doc.page_content[:remaining - len(header)]
+        blocks.append(block)
+        included.append(doc)
+        used += separator + len(block)
+    return "\n\n".join(blocks), included
+
+
+def format_docs(docs: list[Document], max_docs: int = 4, *, max_chars: int = 6000) -> str:
     """
     Document 리스트를 출처(파일명·페이지) 포함 컨텍스트 문자열로 변환.
     각 노드에 흩어져 있던 동일 포맷 로직을 한 곳으로 통합(DRY).
     """
-    blocks = []
-    for d in docs[:max_docs]:
-        src  = d.metadata.get("source_file", d.metadata.get("source", "Unknown"))
-        page = d.metadata.get("page", "N/A")
-        blocks.append(f"[출처: {src}, 페이지: {page}]\n{d.page_content}")
-    return "\n\n".join(blocks)
+    return _format_context(docs, max_docs, max_chars)[0]
 
 
 def _dense_search(store, query: str, cand_k: int):
@@ -187,24 +246,30 @@ def _dense_search(store, query: str, cand_k: int):
     return dense_docs, dense_max
 
 
-def _sparse_search(query: str) -> list:
+def _sparse_search(query: str, *, strict: bool = False) -> list:
     """sparse 후보(BM25). 캐시 미가용/검색 실패면 빈 리스트(dense-only 폴백)."""
     bm25 = _get_bm25()
     if bm25 is None:
+        if strict:
+            raise RuntimeError("BM25 unavailable")
         return []
     try:
         return bm25.invoke(query)
     except Exception as e:
+        if strict:
+            raise
         print(f"=== BM25 검색 실패(dense만 사용): {e} ===")
         return []
 
 
-async def retrieve(query: str, k: int = 4, max_docs: int = 3,
-                   use_hybrid: bool = True, use_rerank: bool = True) -> dict:
+async def retrieve(query: str, k: int = 4, max_docs: int = 4,
+                   use_hybrid: bool = True, use_rerank: bool | None = None,
+                   strict_components: bool = False) -> dict:
     """
     하이브리드 검색 + 리랭킹 + 신뢰도 판정을 한 번에 수행하는 단일 진입점.
 
-    use_hybrid / use_rerank: eval 비교(ablation)용 스위치. 기본 둘 다 True.
+    use_hybrid / use_rerank: eval 비교(ablation)용 스위치. 리랭커를 명시하지
+    않으면 최종 평가로 선정한 ``RAG_USE_RERANK`` 운영 설정을 사용한다.
 
     반환 dict:
       context   : 출처·페이지 인용 포함 컨텍스트. grounded=False면 "".
@@ -212,23 +277,29 @@ async def retrieve(query: str, k: int = 4, max_docs: int = 3,
       max_score : 최상위 점수(리랭크 우선, 폴백 시 cosine).
       docs      : 최종 top-k Document 리스트.
     """
-    store  = get_vector_store()
+    use_rerank = settings.rag_use_rerank if use_rerank is None else use_rerank
+    store  = await asyncio.to_thread(get_vector_store)
     cand_k = settings.rag_candidate_k
+    if strict_components:
+        if use_hybrid and await asyncio.to_thread(_get_bm25) is None:
+            raise RuntimeError("BM25 unavailable")
+        if use_rerank and await asyncio.to_thread(_get_reranker) is None:
+            raise RuntimeError("Reranker unavailable")
 
     # 0) 한국어 쿼리는 영어로 번역. 이미 영어면 그대로(기존 호출부는 동작 불변).
     translated = await _translate_to_english(query)
 
     # 1~2) dense+sparse 후보 → RRF 융합 (번역 쿼리 기준)
-    dense_docs, dense_max = _dense_search(store, translated, cand_k)
-    sparse_docs = _sparse_search(translated) if use_hybrid else []
+    dense_docs, dense_max = await asyncio.to_thread(_dense_search, store, translated, cand_k)
+    sparse_docs = await asyncio.to_thread(_sparse_search, translated, strict=strict_components) if use_hybrid else []
     candidates = _rrf(dense_docs, sparse_docs)[:cand_k] if sparse_docs else dense_docs
 
     # 2b) Dual query expansion: 실제로 번역이 일어난 경우(원문이 한국어)에만
     #     원본 쿼리로도 검색해서 후보를 보강(번역 누락 보완) → 두 결과를 RRF로 재병합.
     #     _rrf는 _doc_key 기준으로 합치므로 동일 청크 중복도 여기서 자동 제거됨.
     if translated != query:
-        dense_docs2, dense_max2 = _dense_search(store, query, cand_k)
-        sparse_docs2 = _sparse_search(query) if use_hybrid else []
+        dense_docs2, dense_max2 = await asyncio.to_thread(_dense_search, store, query, cand_k)
+        sparse_docs2 = await asyncio.to_thread(_sparse_search, query, strict=strict_components) if use_hybrid else []
         candidates2 = _rrf(dense_docs2, sparse_docs2)[:cand_k] if sparse_docs2 else dense_docs2
         candidates  = _rrf(candidates, candidates2)[:cand_k]
         dense_max   = max(dense_max, dense_max2)
@@ -236,11 +307,15 @@ async def retrieve(query: str, k: int = 4, max_docs: int = 3,
     # 3) 리랭킹 → top-k (비활성이면 후보 상위 k 그대로). FlashRank가 영어 전용
     #    cross-encoder라 리랭크 쿼리는 항상 translated(영어) 사용.
     if use_rerank:
-        docs, rerank_top = _rerank(translated, candidates, k)
+        docs, rerank_top = await asyncio.to_thread(_rerank, translated, candidates, k)
     else:
         docs, rerank_top = candidates[:k], None
 
     # 4) grounded 판정(리랭크 점수 우선, 없으면 dense cosine)
+    for doc in docs:
+        page = doc.metadata.get("page")
+        if isinstance(page, float) and page.is_integer():
+            doc.metadata["page"] = int(page)
     if rerank_top is not None:
         grounded   = rerank_top >= settings.rag_rerank_threshold
         max_score  = round(rerank_top, 3)
@@ -248,8 +323,10 @@ async def retrieve(query: str, k: int = 4, max_docs: int = 3,
         grounded   = dense_max >= settings.rag_score_threshold
         max_score  = round(dense_max, 3)
 
+    context, context_docs = _format_context(docs, max_docs, 6000) if grounded else ("", [])
     return {
-        "context":   format_docs(docs, max_docs) if grounded else "",
+        "context":   context,
+        "context_docs": context_docs,
         "grounded":  grounded,
         "max_score": max_score,
         "docs":      docs,

@@ -17,7 +17,7 @@ confirm/node.py
 
 Tools: save_meal_tool, rag_nutrition_tool (수정 시 영양 재계산용)
 """
-from langchain_openai import ChatOpenAI
+from app.core.llm import get_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState
 from app.core.config import get_settings
@@ -25,8 +25,7 @@ from app.tools.agent_tools import save_meal_tool
 from app.tools.nutrition_db import nutrition_db_tool
 import json, re
 
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0,
-                 openai_api_key=get_settings().openai_api_key)
+llm = get_chat_model(temperature=0)
 
 CONFIRM_CLASSIFY_PROMPT = ChatPromptTemplate.from_messages([
     ("system", """사용자가 아래 식단 확인 화면을 보고 응답했습니다.
@@ -38,8 +37,9 @@ CONFIRM_CLASSIFY_PROMPT = ChatPromptTemplate.from_messages([
 confirm(저장): "응","ㅇ","네","ok","저장","저장해줘","확정","맞아","좋아","그래","기록","할게" 등
 modify(수정): 특정 음식 수정/변경/추가/삭제 요청이 명확한 경우 (예: "삼겹살 150g으로", "현미밥 빼줘")
 cancel(취소): "취소","됐어","아니야","그만" 등
+unrelated(무관): 식단 확정/취소/수정과 무관한 발화 (날씨, 일반 질문, 잡담 등)
 
-판단 불명확 시 confirm. 단어 하나만 출력."""),
+식단 관련 응답인데 판단 불명확 시 confirm. 식단과 무관하면 unrelated. 단어 하나만 출력."""),
     ("human", "사용자 응답: {message}")
 ])
 
@@ -101,7 +101,7 @@ async def confirm_node(state: AgentState) -> dict:
     plan_date = state.get("plan_date") or state.get("today_date", "")
     message   = state.get("message", "")
 
-    print(f"=== [confirm] 진입 | pending={len(pending)}개 | message='{message}' ===")
+    print(f"=== [confirm] 진입 | pending={len(pending)}개 | message_redacted ===")
 
     if not pending:
         return {
@@ -116,7 +116,7 @@ async def confirm_node(state: AgentState) -> dict:
         pending_summary=_format_pending_summary(pending), message=message,
     ))
     raw_action = classify.content.strip().lower()
-    action     = raw_action if raw_action in ("confirm","modify","cancel") else "confirm"
+    action     = raw_action if raw_action in ("confirm","modify","cancel","unrelated") else "unrelated"
     print(f"=== [confirm] LLM 분류: '{raw_action}' → '{action}' ===")
 
     # ── confirm: 저장 ─────────────────────────────────────────────────
@@ -134,7 +134,7 @@ async def confirm_node(state: AgentState) -> dict:
                     sb.table("meal_logs").delete()                  .eq("user_id", user_id)                  .eq("log_date", plan_date)                  .eq("meal_type", mt)                  .execute()
                     print(f"=== [confirm] 기존 {mt} 기록 삭제 ({plan_date}) ===")
             except Exception as e:
-                print(f"=== [confirm] 기존 기록 삭제 실패: {e} ===")
+                print(f"=== [confirm] 기존 기록 삭제 실패 유형: {type(e).__name__} ===")
 
         saved = 0
         for meal in pending:
@@ -163,7 +163,7 @@ async def confirm_node(state: AgentState) -> dict:
             today_fat = round(sum(r.get("fat_g", 0) for r in today_rows))
             today_summary = f"\n\n📈 **오늘 누적 합계**: {today_cal}kcal | 탄 {today_carbs}g | 단 {today_prot}g | 지 {today_fat}g"
         except Exception as e:
-            print(f"=== [confirm] 오늘 누적 합계 조회 실패: {e} ===")
+            print(f"=== [confirm] 오늘 누적 합계 조회 실패 유형: {type(e).__name__} ===")
             today_summary = ""
 
         print(f"=== [confirm] 저장 완료: {saved}/{len(pending)}개 ===")
@@ -211,6 +211,13 @@ async def confirm_node(state: AgentState) -> dict:
             "pending_meals":         recalculated,
             "awaiting_confirmation": True,  # supervisor가 다음 요청도 confirm으로 라우팅
             "overwrite_on_confirm":  state.get("overwrite_on_confirm"),
+        }
+
+    # ── unrelated: 식단과 무관한 발화, pending 유지 ─────────────────
+    elif action == "unrelated":
+        return {
+            "response":   "식단 계획이 대기 중입니다. 확정하시겠어요? (네/아니요/수정)",
+            "agent_used": "confirm",
         }
 
     # ── cancel ───────────────────────────────────────────────────────
