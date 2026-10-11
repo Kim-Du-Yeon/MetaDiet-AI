@@ -30,6 +30,14 @@ test("HTTP failure is surfaced before reading body", async () => {
   await expect(consumeEventStream({ ok: false, status: 401 }, () => {})).rejects.toThrow("401");
 });
 
+test("HTTP 401 announces an expired authentication session", async () => {
+  const listener = jest.fn();
+  window.addEventListener("metadiet:auth-expired", listener);
+  await expect(consumeEventStream({ ok: false, status: 401 }, () => {})).rejects.toThrow("401");
+  expect(listener).toHaveBeenCalledTimes(1);
+  window.removeEventListener("metadiet:auth-expired", listener);
+});
+
 test("duplicate or replayed sequence numbers are ignored", async () => {
   const events = [];
   const lastSeq = await consumeEventStream(response(

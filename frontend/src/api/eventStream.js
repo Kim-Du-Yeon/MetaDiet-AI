@@ -1,6 +1,11 @@
 /** Decode SSE across arbitrary UTF-8 and frame boundaries. */
 export async function consumeEventStream(response, onEvent, { afterSeq = 0 } = {}) {
-  if (!response.ok) throw new Error(`요청 실패 (${response.status})`);
+  if (!response.ok) {
+    if (response.status === 401 && typeof window !== "undefined") {
+      window.dispatchEvent(new Event("metadiet:auth-expired"));
+    }
+    throw new Error(`요청 실패 (${response.status})`);
+  }
   if (!response.body) throw new Error("스트리밍 응답이 없습니다.");
   const reader = response.body.getReader();
   const decoder = new TextDecoder();

@@ -54,7 +54,16 @@ export default function App() {
       setSession(session);
       setToken(session?.access_token ?? null);
     });
-    return () => listener.subscription.unsubscribe();
+    const handleAuthExpired = async () => {
+      setToken(null);
+      await supabase.auth.signOut();
+      setSession(null);
+    };
+    window.addEventListener("metadiet:auth-expired", handleAuthExpired);
+    return () => {
+      listener.subscription.unsubscribe();
+      window.removeEventListener("metadiet:auth-expired", handleAuthExpired);
+    };
   }, []);
 
   if (authLoading) {

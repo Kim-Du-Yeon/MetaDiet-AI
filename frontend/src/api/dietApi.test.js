@@ -87,3 +87,18 @@ test("getSessionRestore treats a missing first session as an empty state", async
     interrupted: false,
   });
 });
+
+test("getSessionRestore announces an expired authentication session", async () => {
+  global.fetch = jest.fn().mockResolvedValue({
+    ok: false,
+    status: 401,
+    json: async () => ({ detail: "expired" }),
+  });
+  const listener = jest.fn();
+  window.addEventListener("metadiet:auth-expired", listener);
+
+  await expect(getSessionRestore("expired-thread")).rejects.toThrow("expired");
+  expect(listener).toHaveBeenCalledTimes(1);
+
+  window.removeEventListener("metadiet:auth-expired", listener);
+});

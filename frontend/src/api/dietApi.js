@@ -11,6 +11,12 @@ export function setToken(token) {
 export function getToken() {
   return _token;
 }
+function notifyAuthExpired(response) {
+  if (response.status === 401 && typeof window !== "undefined") {
+    window.dispatchEvent(new Event("metadiet:auth-expired"));
+  }
+  return response;
+}
 function authHeaders(extra = {}) {
   return _token ? { ...extra, Authorization: `Bearer ${_token}` } : extra;
 }
@@ -70,9 +76,9 @@ export async function getChatHistory(userId, threadId) {
 }
 
 export async function getSessionRestore(threadId) {
-  const res = await fetch(`${BASE_URL}/session/restore/${encodeURIComponent(threadId)}`, {
+  const res = notifyAuthExpired(await fetch(`${BASE_URL}/session/restore/${encodeURIComponent(threadId)}`, {
     headers: authHeaders(),
-  });
+  }));
   const data = await res.json().catch(() => ({}));
   // A brand-new conversation has no durable checkpoint or chat rows yet.
   // Treat that expected 404 as an empty restore instead of a connection error.
