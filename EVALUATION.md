@@ -1127,3 +1127,12 @@ KDRI 2025 유지 에너지를 기준으로 대한비만학회 2022 식사치료�
 - 같은 섭취 proposal을 두 번 확정해도 meal row는 1개였다. 초기 전략과 식사 proposal 상태는 모두 confirmed였고 합성 Auth 사용자는 시험 종료 후 삭제했다. LangSmith 최신 trace의 Supervisor와 Gemini 호출도 success였다.
 - 제한 부하는 health 50건/동시 10, 인증 조회 30건/동시 5, 실제 Agent SSE 2건/동시 2로 고정했다. 오류는 모두 0건이었다. health p50/p95는 229.7/638.5ms, 인증 조회 p50/p95는 807.2/2,068.8ms였다. 두 Agent의 첫 이벤트는 4,317.4/4,450.3ms, 둘을 동시에 완료한 wall time은 32.48초였다.
 - 시험 직후 `/health`도 정상이고 합성 Auth 사용자는 삭제됐다. 이 결과는 제한 베타의 작은 warm-load 표본이며 최대 처리량이나 15분 휴면 뒤 cold start를 대표하지 않는다. 원본은 git-ignored `backend/artifacts/render-beta-smoke-v1.json`과 `render-beta-load-v1.json`, 재현 스크립트는 `backend/scripts/check_render_beta.py`와 `check_render_load.py`다.
+
+## 44. Render 공개 웹 UI 생명주기 검증 (2026-10-11)
+
+- 별도 Playwright Chromium에서 `https://metadiet-web.onrender.com`을 열고 합성 이메일 사용자를 로그인시켰다. 일반 성인 감량 프로필 입력, 2,325 kcal 초기 전략 proposal 검토, 근거 카드 확인과 HITL 확정을 실제 UI로 완료했다.
+- 채팅에서 “사과 100g 기록만”을 전송하자 요청 의도 분석 → 식사 Agent 위임 → 음식 검색의 실제 진행 상태가 표시됐다. 완료 뒤 답변과 52 kcal 섭취 proposal이 나타났고 확정 전 상단 섭취량은 0 kcal였다.
+- proposal 확정 전에 브라우저를 새로고침했다. 복원 중 상태를 거쳐 사용자 메시지, Assistant 답변, 동일 v1 proposal 카드가 복원됐고 Agent 실행은 다시 시작되지 않았다. 복원된 카드를 확정한 뒤 오늘 섭취량은 정확히 52 kcal로 한 번 증가했다.
+- viewport를 390×844로 바꿔 채팅·탭·고정 입력창·설정 화면의 접근 가능한 DOM 구조를 확인했다. 전체 흐름의 브라우저 console error와 warning은 0건이었다.
+- 설정 화면에서 현재 비밀번호 재인증과 `DELETE` 확인값으로 계정을 삭제했다. 로그인 화면으로 돌아왔고 직접 확인한 Auth 사용자는 삭제, 내부 `users` 행은 0건이었다. 임시 자격증명 파일과 Playwright 세션도 제거했다.
+- 이 검증은 핵심 성공 경로와 새로고침 복원을 다룬다. 네트워크 오프라인·API 5xx의 공개 오류 화면, 다양한 실제 모바일 브라우저의 시각 회귀, 무료 인스턴스 cold start는 별도 운영 점검 범위다.
