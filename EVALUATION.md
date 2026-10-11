@@ -1173,4 +1173,5 @@ KDRI 2025 유지 에너지를 기준으로 대한비만학회 2022 식사치료�
 - 세션 복원 401은 `metadiet:auth-expired` 경계를 통해 Supabase 세션과 앱 토큰을 정리하고 로그인 화면으로 복귀했다. 검증용 합성 Auth 사용자는 종료 후 삭제했고 자격증명 파일도 제거했다.
 - 첫 로컬 브라우저 실행은 build에 `http://localhost:8080`이 포함돼 CORS 실패했고, 공개 API URL로 재빌드한 뒤에도 API가 실제 배포 origin만 허용해 로컬 origin을 차단했다. 운영 CORS를 넓히지 않고 검증 대상 응답만 route로 대체했다. 첫 route 명령은 Windows 인자 escaping으로 JSON 따옴표가 손실됐고, 구조화 응답을 담은 임시 Playwright 파일로 교체해 의도한 실패를 정확히 재현했다.
 - GitHub App 연결 후 커밋 `4e1a8f4`를 push했지만 새 Render deploy는 생성되지 않았고 공개 사이트는 이전 `main.5e73512f.js`를 계속 제공했다. 기존 서비스가 공개 URL clone 방식의 Git credential을 유지하는 것으로 판단한다. 새 인증 만료 처리는 로컬 build에서 검증됐지만 서비스의 Git credential을 다시 연결하거나 latest commit을 수동 배포하기 전에는 공개 사이트에 반영되지 않는다.
+- 이후 Git credential 연결이 전파된 뒤 커밋 `5f86bac` push에서 자동 배포가 동작했다. 공개 번들은 `main.60831615.js`로 바뀌어 인증 만료 수정이 반영됐고, 실제 Chromium의 로그인 화면과 정책 링크는 console error·warning 0건이었다. 따라서 앞선 미배포 상태는 최종 장애가 아니라 기존 서비스 연결 전파 중 관측한 중간 상태로 판정한다.
 - Render 공식 운영 설정에 따라 workspace email 알림을 `Only failure notifications`로 두면 deploy/build 실패, unhealthy service, Blueprint sync 실패를 받을 수 있다. 실제 Dashboard 값은 인증된 UI에서 확인해야 하며 현재 코드 검증만으로 알림 활성화를 주장하지 않는다.
