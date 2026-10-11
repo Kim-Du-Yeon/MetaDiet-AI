@@ -1188,3 +1188,13 @@ KDRI 2025 유지 에너지를 기준으로 대한비만학회 2022 식사치료�
 - 공개 Render API에서 합성 계정으로 첫 제출 HTTP 201, 같은 UUID 재전송 HTTP 200을 받았다. 재전송 뒤 DB 행은 1개였고 공개 계정 삭제 뒤 0개였다. 측정 시간은 최초 2,388.0ms, 재전송 1,307.5ms로 단일 warm 표본이며 일반 성능 분포로 확대하지 않는다.
 - 수명주기 artifact는 상태·행 수·시간·정리 상태만 기록한다. 댓글·토큰·사용자 식별자는 저장하지 않았으며 합성 계정은 공개 삭제 API로 정리됐다.
 - 최종 회귀는 backend **376 passed, 1 skipped**, frontend **41 passed**, production build 성공이다. 프론트 번들에서 `beta-feedback-title` 식별자를 확인해 자동 배포 반영도 확인했다.
+
+## 51. 공개 베타 피드백 브라우저 E2E·실패 복구 (2026-10-11)
+
+- 공개 Render 사이트에서 별도 합성 계정으로 로그인하고 설정 화면의 피드백 카드를 실제 Chromium으로 검증했다. 만족도 4점, 답변 품질 분류와 합성 의견을 제출하자 성공 안내가 표시되고 입력값이 초기화됐다.
+- `/feedback` 요청에 HTTP 503을 주입한 실패 경로에서는 오류 안내를 표시하면서 만족도 5점, 버그 분류와 의견을 그대로 유지했다. 사용자는 내용을 다시 입력하지 않고 재시도할 수 있다. 이때 console error 1건은 의도적으로 주입한 503 응답이었다.
+- 390×844 viewport에서 카드·라디오 그룹·분류·의견·전송 버튼을 확인했다. DOM 기준 `scrollWidth=clientWidth=390`이고 viewport 밖으로 벗어난 요소는 0개여서 실제 가로 overflow는 없었다. 시각 근거는 로컬 `output/playwright/beta-feedback-mobile.png`에 남겼다.
+- 계정 삭제 비밀번호가 HTML form 밖에 있어 Chromium이 `[DOM] Password field is not contained in a form`을 기록했다. 삭제 입력과 버튼을 submit form으로 묶고 회귀 테스트를 추가했다. 이 수정은 Enter 제출과 비밀번호 관리자·접근성 도구의 문맥 인식도 개선한다.
+- 첫 실패 주입 명령은 Windows/bash 인용이 중첩돼 `unexpected EOF`가 발생했고 실제 API 요청이 한 번 실행됐다. route 코드를 임시 스크립트로 분리한 뒤 Playwright가 요구하는 `async (page) => { ... }` 함수 형식으로 고쳐 정확한 503을 재현했다. 검증 계정은 공개 삭제 흐름으로 제거했고 DB 재조회 결과 합성 사용자와 연결 피드백은 모두 0건이었다.
+- Codex CUA는 `failed to write kernel assets: 지정된 경로를 찾을 수 없습니다. (os error 3)`로 초기화되지 않아 공식 Playwright CLI로 전환했다. 이는 서비스 결함이 아니라 로컬 자동화 런타임 결함이며, 공개 UI 성공·실패·모바일 결과에는 영향을 주지 않았다.
+- 폼 수정 뒤 전체 프론트 회귀는 **42 passed**, production build는 `main.d694964f.js`로 성공했다.

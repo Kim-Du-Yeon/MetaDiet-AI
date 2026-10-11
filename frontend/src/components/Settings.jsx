@@ -111,48 +111,50 @@ export default function Settings({ session, onDeleted }) {
           이 작업은 되돌릴 수 없습니다.
         </p>
 
-        {!supportsPasswordReauth && (
-          <p className="settings-notice" role="status">
-            현재 로그인 방식의 재인증은 아직 지원하지 않습니다.
-          </p>
-        )}
+        <form onSubmit={(event) => { event.preventDefault(); handleDelete(); }}>
+          {!supportsPasswordReauth && (
+            <p className="settings-notice" role="status">
+              현재 로그인 방식의 재인증은 아직 지원하지 않습니다.
+            </p>
+          )}
 
-        <label className="settings-label" htmlFor="delete-password">현재 비밀번호</label>
-        <input
-          id="delete-password"
-          className="settings-input"
-          type="password"
-          autoComplete="current-password"
-          value={password}
-          onChange={(event) => setPassword(event.target.value)}
-          disabled={!supportsPasswordReauth || loading || authDeletionPending}
-        />
+          <label className="settings-label" htmlFor="delete-password">현재 비밀번호</label>
+          <input
+            id="delete-password"
+            className="settings-input"
+            type="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            disabled={!supportsPasswordReauth || loading || authDeletionPending}
+          />
 
-        <label className="settings-label" htmlFor="delete-confirmation">삭제 확인</label>
-        <input
-          id="delete-confirmation"
-          className="settings-input"
-          value={confirmation}
-          onChange={(event) => setConfirmation(event.target.value)}
-          placeholder="DELETE 입력"
-          disabled={!supportsPasswordReauth || loading || authDeletionPending}
-        />
+          <label className="settings-label" htmlFor="delete-confirmation">삭제 확인</label>
+          <input
+            id="delete-confirmation"
+            className="settings-input"
+            value={confirmation}
+            onChange={(event) => setConfirmation(event.target.value)}
+            placeholder="DELETE 입력"
+            disabled={!supportsPasswordReauth || loading || authDeletionPending}
+          />
 
-        {message && <p className="settings-message" role="status">{message}</p>}
+          {message && <p className="settings-message" role="status">{message}</p>}
 
-        {authDeletionPending ? (
-          <button className="settings-delete-button" onClick={retryAuthDeletion} disabled={loading}>
-            {loading ? "재시도 중..." : "인증 계정 삭제 재시도"}
-          </button>
-        ) : (
-          <button
-            className="settings-delete-button"
-            onClick={handleDelete}
-            disabled={!supportsPasswordReauth || loading}
-          >
-            {loading ? "삭제 중..." : "계정 영구 삭제"}
-          </button>
-        )}
+          {authDeletionPending ? (
+            <button type="button" className="settings-delete-button" onClick={retryAuthDeletion} disabled={loading}>
+              {loading ? "재시도 중..." : "인증 계정 삭제 재시도"}
+            </button>
+          ) : (
+            <button
+              type="submit"
+              className="settings-delete-button"
+              disabled={!supportsPasswordReauth || loading}
+            >
+              {loading ? "삭제 중..." : "계정 영구 삭제"}
+            </button>
+          )}
+        </form>
       </section>
     </main>
   );

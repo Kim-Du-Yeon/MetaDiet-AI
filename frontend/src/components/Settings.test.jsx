@@ -33,6 +33,14 @@ test("requires password and DELETE before account deletion", async () => {
   expect(deleteAccount).not.toHaveBeenCalled();
 });
 
+test("account deletion password belongs to a submit form", () => {
+  render(<Settings session={{ user: { email: "member@example.com" } }} onDeleted={jest.fn()} />);
+
+  const form = screen.getByLabelText("현재 비밀번호").closest("form");
+  expect(form).not.toBeNull();
+  expect(form.querySelector('button[type="submit"]')?.textContent).toBe("계정 영구 삭제");
+});
+
 test("reauthenticates, switches to fresh token, deletes and clears local session", async () => {
   window.localStorage.setItem("sb-project-auth-token", "synthetic-session");
   const onDeleted = jest.fn();
