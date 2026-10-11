@@ -33,24 +33,24 @@
 - Create: `PORTFOLIO_CASE_STUDY.md`
 - Modify: `README.md`
 
-- [ ] 문제, 구조, 실험, 실패 분석, 결과, 한계를 검증 수치와 함께 작성한다.
-- [ ] README에서 사례 문서와 `beta-v1.1.0` 릴리스를 연결한다.
-- [ ] Markdown 링크 존재 여부와 오래된 테스트 수치를 검사한다.
+- [x] 문제, 구조, 실험, 실패 분석, 결과, 한계를 검증 수치와 함께 작성한다.
+- [x] README에서 사례 문서와 `beta-v1.1.0` 릴리스를 연결한다.
+- [x] Markdown 링크 존재 여부와 오래된 테스트 수치를 검사한다.
 
 ### Task 2: 발표 구성안 최신화
 
 **Files:**
 - Modify: `PPT_OUTLINE.md`
 
-- [ ] 운영 리랭커가 없다는 결론과 최종 RAG 지표를 반영한다.
-- [ ] LangSmith 환경변수와 현재 Gemini 전용 구성을 반영한다.
-- [ ] 과거 GPT/OpenAI 운영 설명과 reranking 우위 표현이 없는지 검색한다.
+- [x] 운영 리랭커가 없다는 결론과 최종 RAG 지표를 반영한다.
+- [x] LangSmith 환경변수와 현재 Gemini 전용 구성을 반영한다.
+- [x] 과거 GPT/OpenAI 운영 설명과 reranking 우위 표현이 없는지 검색한다.
 
 ### Task 3: 검증과 GitHub 반영
 
 **Files:**
 - Verify: repository documentation and existing test suites
 
-- [ ] `git diff --check`와 문서 링크 검사를 통과한다.
-- [ ] 백엔드 376 passed/1 skipped, 프론트 42 passed, production build를 직렬 실행한다.
-- [ ] 변경을 커밋·푸시하고 `main` 대상 PR을 생성한다.
+- [x] `git diff --check`와 문서 링크 검사를 통과한다.
+- [x] 백엔드 376 passed/1 skipped, 프론트 42 passed, production build를 직렬 실행한다.
+- [x] 변경을 커밋·푸시하고 `main` 대상 PR을 생성한다.
