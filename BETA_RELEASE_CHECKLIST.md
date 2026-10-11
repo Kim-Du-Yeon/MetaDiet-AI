@@ -20,9 +20,9 @@
 | 제한 부하·복구 | 완료 | 공개 제한 부하 오류 0건, kind Pod 재시작·중복 저장 방지 |
 | 개인정보·베타 안내 | 완료 | 로그인 전·계정 설정에서 공개, 계정 삭제 검증 |
 | 자동 배포 | 완료 | API·Web `autoDeployTrigger: commit`, GitHub provider 재연결 및 배포 확인 |
-| 장애 이메일 알림 | **수동 확인 필요** | Render Workspace의 Notifications는 인증된 Dashboard에서 최종 상태 확인 필요 |
+| 장애 이메일 알림 | 완료 | Render Notifications에서 Email + Only failure notifications, 서비스별 override 없음 확인 |
 
-출시 차단 코드 결함은 확인되지 않았다. 무료 베타 공개를 유지할 수 있으며, 장애 이메일 알림 상태만 운영자 수동 확인 항목으로 남는다.
+출시 차단 코드 결함은 확인되지 않았다. 무료 베타 공개를 유지할 수 있으며, 필수 운영 확인을 모두 완료했다.
 
 ## 2. 성능과 안정성 기준선
 
@@ -41,19 +41,19 @@
 
 ## 3. 최종 운영 확인
 
-Render Dashboard에서 다음 한 항목을 확인한다.
+Render Dashboard에서 다음 항목을 확인했다.
 
 - Workspace → Integrations 또는 Notifications
 - Destination: Email
 - Default Service Notifications: 실패 알림 활성화
 - `metadiet-api`, `metadiet-web`에 알림을 끄는 override가 없는지 확인
 
-확인 전에도 서비스는 동작하지만 배포 실패나 unhealthy 상태를 이메일로 놓칠 수 있다. 확인 결과와 날짜는 아래에 기록한다.
+서비스별 Notification Overrides 영역은 표시되지 않았으며, 별도 예외가 없는 workspace 기본 설정으로 확인했다.
 
 ```text
-Render 장애 이메일 알림 확인: 미확인
-확인 일시:
-확인자:
+Render 장애 이메일 알림 확인: 완료
+확인 일시: 2026-10-11 (Asia/Seoul)
+확인 방법: 인증된 Render Dashboard 캡처에서 Email + Only failure notifications 및 override 없음 확인
 ```
 
 ## 4. 재현 명령
@@ -92,4 +92,4 @@ backend\venv\Scripts\python.exe backend\scripts\check_render_load.py `
 - `react-scripts` 전이 개발 의존성은 Vite 전환으로 후속 정리할 수 있다.
 - 앱스토어, 결제, React Native 전환은 이번 제한 베타 범위에서 제외한다.
 
-Render 알림 상태가 확인되면 기준 커밋을 기록하고 제한 베타 완료 태그를 생성한다. 그 전에는 현재 공개 배포를 베타 운영 상태로 유지한다.
+이 문서가 반영된 기준 커밋을 검증한 뒤 제한 베타 완료 태그를 생성한다.

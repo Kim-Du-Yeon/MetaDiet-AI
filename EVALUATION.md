@@ -1154,6 +1154,7 @@ KDRI 2025 유지 에너지를 기준으로 대한비만학회 2022 식사치료�
 - `render.yaml` 변경 뒤에도 공개 번들이 바뀌지 않았고 Blueprint Manual Sync도 새 실행을 만들지 않았다. 이후 서비스 수동 배포 로그의 `we don't have access to your repo, but we'll try to clone it anyway`로 Render가 공개 URL clone은 가능하지만 연결된 GitHub provider 권한/webhook은 갖지 못한 것이 확인됐다. 자동 배포는 연결된 Git provider가 필요하므로, GitHub App의 저장소 접근을 다시 승인하거나 deploy hook을 구성하기 전까지 서비스별 수동 배포가 필요하다.
 - 인앱 브라우저 자동화는 Codex CUA 초기화 단계에서 `failed to write kernel assets: 지정된 경로를 찾을 수 없습니다`로 두 번 실패했다. 서비스나 Render 오류가 아니며 로컬 Playwright를 사용한 정책 UI 검증으로 우회했다. Dashboard 인증 세션이 필요한 Manual Sync는 이 우회로 실행할 수 없다.
 - 2026-10-11 최종 운영 점검에서도 같은 CUA 초기화 오류가 재현됐다. 한 차례 kernel reset 후에도 동일했으므로 반복 조작을 중단했다. 공개 `/health`는 HTTP 200, 719.4ms였고 코드·배포 장애는 아니었다. Dashboard에서만 확인할 수 있는 workspace 장애 이메일 알림 상태는 사용자 UI 확인 항목으로 남긴다.
+- 인증된 Render Notifications 화면을 사용자가 직접 확인해 `Notification Destination=Email`, `Default Service Notifications=Only failure notifications`를 확인했다. 화면 아래에 Notification Overrides나 서비스 목록이 없어 서비스별 예외가 없는 workspace 기본 적용 상태로 판정했다.
 
 ## 47. 공개 정책 UI 배포·프론트 의존성 감사 (2026-10-11)
 
