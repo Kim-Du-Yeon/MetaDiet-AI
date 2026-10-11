@@ -46,6 +46,34 @@ def main() -> None:
                  and ccu.table_name = 'users' and ccu.column_name = 'id'
                order by tc.table_name"""
         ).fetchall()
+        feedback_table = connection.execute(
+            """select c.relrowsecurity
+               from pg_class c
+               join pg_namespace n on n.oid = c.relnamespace
+               where n.nspname = 'public' and c.relname = 'beta_feedback'"""
+        ).fetchone()
+        feedback_unique = connection.execute(
+            """select 1
+               from pg_constraint c
+               join pg_class t on t.oid = c.conrelid
+               join pg_namespace n on n.oid = t.relnamespace
+               where n.nspname = 'public' and t.relname = 'beta_feedback'
+                 and c.contype = 'u'
+                 and pg_get_constraintdef(c.oid) like '%(user_id, client_submission_id)%'"""
+        ).fetchone()
+    feedback_fk = next(
+        (
+            row for row in user_fks
+            if row[0] == "beta_feedback" and row[1] == "user_id" and row[2] == "CASCADE"
+        ),
+        None,
+    )
+    if not feedback_table or not feedback_table[0]:
+        raise RuntimeError("beta_feedback table is missing or RLS is disabled")
+    if not feedback_fk:
+        raise RuntimeError("beta_feedback.user_id must cascade when users.id is deleted")
+    if not feedback_unique:
+        raise RuntimeError("beta_feedback idempotency constraint is missing")
     print(json.dumps({
         "checkpoint_tables": [{"table": row[0], "columns": row[1]} for row in checkpoint_columns],
         "users_columns": [
@@ -55,6 +83,11 @@ def main() -> None:
         "user_foreign_keys": [
             {"table": row[0], "column": row[1], "delete_rule": row[2]} for row in user_fks
         ],
+        "beta_feedback": {
+            "rls_enabled": bool(feedback_table[0]),
+            "user_delete_cascade": True,
+            "idempotency_unique": True,
+        },
     }, ensure_ascii=False))
 
 
