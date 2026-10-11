@@ -1165,3 +1165,12 @@ KDRI 2025 유지 에너지를 기준으로 대한비만학회 2022 식사치료�
 - SSE와 세션 복원 API가 401을 받으면 공통 `metadiet:auth-expired` 이벤트를 발생시키고, 앱 루트가 토큰을 지운 뒤 Supabase 세션을 종료해 로그인 화면으로 복귀하도록 수정했다. 복원 404는 새 대화의 정상 빈 상태로 계속 취급한다.
 - 401 이벤트 발생, 앱의 로그인 화면 복귀, 스트림 중단, 복원 실패를 회귀 테스트로 분리했다. 검증은 frontend **35 passed**, production build 성공이다.
 - 첫 Jest 실행은 Codex 샌드박스 임시 디렉터리에서 Node `realpath`가 `EPERM`을 반환해 실패했고, 프로젝트 내부 임시 경로에서도 동일했다. 제한 밖의 동일 명령으로 재실행해 코드 결과와 실행 환경 문제를 분리했다.
+
+## 49. 실제 브라우저 오류 주입·배포 연결 확인 (2026-10-11)
+
+- production React build를 실제 Chromium에서 열고 네트워크 경계만 Playwright route로 대체했다. 세션 복원 500은 완료된 실행을 다시 호출하지 않고 오류 alert와 “화면 상태 다시 불러오기” 버튼을 표시했다.
+- SSE가 progress 1개 뒤 completed 없이 종료되는 응답을 주입했다. 클라이언트는 같은 실행 ID/마지막 sequence로 한 번 재시도한 뒤 “응답을 끝까지 받지 못했습니다”를 표시했고, 수신한 검토 과정 1단계와 입력창을 유지했다.
+- 세션 복원 401은 `metadiet:auth-expired` 경계를 통해 Supabase 세션과 앱 토큰을 정리하고 로그인 화면으로 복귀했다. 검증용 합성 Auth 사용자는 종료 후 삭제했고 자격증명 파일도 제거했다.
+- 첫 로컬 브라우저 실행은 build에 `http://localhost:8080`이 포함돼 CORS 실패했고, 공개 API URL로 재빌드한 뒤에도 API가 실제 배포 origin만 허용해 로컬 origin을 차단했다. 운영 CORS를 넓히지 않고 검증 대상 응답만 route로 대체했다. 첫 route 명령은 Windows 인자 escaping으로 JSON 따옴표가 손실됐고, 구조화 응답을 담은 임시 Playwright 파일로 교체해 의도한 실패를 정확히 재현했다.
+- GitHub App 연결 후 커밋 `4e1a8f4`를 push했지만 새 Render deploy는 생성되지 않았고 공개 사이트는 이전 `main.5e73512f.js`를 계속 제공했다. 기존 서비스가 공개 URL clone 방식의 Git credential을 유지하는 것으로 판단한다. 새 인증 만료 처리는 로컬 build에서 검증됐지만 서비스의 Git credential을 다시 연결하거나 latest commit을 수동 배포하기 전에는 공개 사이트에 반영되지 않는다.
+- Render 공식 운영 설정에 따라 workspace email 알림을 `Only failure notifications`로 두면 deploy/build 실패, unhealthy service, Blueprint sync 실패를 받을 수 있다. 실제 Dashboard 값은 인증된 UI에서 확인해야 하며 현재 코드 검증만으로 알림 활성화를 주장하지 않는다.

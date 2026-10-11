@@ -41,6 +41,8 @@ API 서비스의 비밀 환경변수:
 5. 정적 사이트에서 회원가입·온보딩·채팅 스트리밍·HITL 확정·새로고침 복원·회원 탈퇴를 실행한다.
 6. LangSmith `metadiet-beta` 프로젝트에서 같은 요청의 Supervisor 위임, 도구 호출, 재시도와 완료 trace를 확인한다.
 
+기존 서비스를 공개 Git URL clone으로 만든 경우 GitHub App을 설치한 것만으로 해당 서비스의 webhook이 연결되지 않을 수 있다. 서비스의 **Settings → Build & Deploy → Git Credentials**에서 연결된 GitHub credential을 선택하고 **Auto-Deploy = On Commit**인지 확인한다. 새 커밋 뒤 deploy가 생성되지 않으면 서비스별 **Manual Deploy → Deploy latest commit**으로 먼저 배포하고, deploy 로그에서 저장소 접근 경고가 사라졌는지 확인한다.
+
 ## 3. 배포 후 필수 확인
 
 ```powershell
@@ -53,7 +55,17 @@ Invoke-RestMethod https://<api-host>/health
 - SSE가 중간에 끊기면 같은 run ID로 재접속하고 완료된 실행은 다시 수행하지 않아야 한다.
 - 계정 삭제 뒤 이전 JWT로 보호 API를 호출하면 401이어야 한다.
 
-## 4. 무료 플랜 한계
+## 4. 장애 알림
+
+Render Dashboard의 **Workspace → Integrations → Notifications**에서 다음을 설정한다.
+
+- Notification Destination: `Email`
+- Default Service Notifications: `Only failure notifications`
+- `metadiet-api`와 `metadiet-web`에 `None` override가 없는지 확인
+
+이 설정은 build/deploy 실패, 실행 중 service unhealthy, Blueprint sync 실패를 이메일로 알린다. API는 `render.yaml`의 `healthCheckPath: /health`로 상태를 판정한다. 무료 베타에서는 Render 내부 장애 알림을 기본으로 사용하고, 외부 사용자가 실제로 접근 가능한지 확인하는 별도 uptime probe는 후속 선택 작업으로 둔다.
+
+## 5. 무료 플랜 한계
 
 - 무료 API는 15분 동안 요청이 없으면 sleep할 수 있어 첫 요청이 느릴 수 있다.
 - 단일 API 인스턴스이므로 로컬 kind에서 검증한 다중 Pod 교차 복구를 그대로 재현하지는 않는다. 체크포인트·HITL·중복 저장 방지는 그대로 유지한다.
@@ -62,7 +74,7 @@ Invoke-RestMethod https://<api-host>/health
 
 실제 제한 베타 부하 시험은 공개 URL에서 실행하고 p50/p95, 오류율, cold start, Gemini/Pinecone/Supabase 외부 호출 실패율을 별도 artifact로 남긴다.
 
-## 5. 공개 E2E와 제한 부하 재현
+## 6. 공개 E2E와 제한 부하 재현
 
 로컬 `backend/.env`의 서비스 키를 사용하며, 합성 사용자와 데이터는 각 스크립트의 `finally` 경로에서 삭제한다. 비밀값은 출력이나 artifact에 기록하지 않는다.
 
