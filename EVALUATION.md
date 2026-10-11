@@ -1149,7 +1149,7 @@ KDRI 2025 유지 에너지를 기준으로 대한비만학회 2022 식사치료�
 
 - 공개 API를 충분히 사용하지 않은 상태에서 `/health` 첫 요청을 측정했다. HTTP 200까지 **53,022.0ms**가 걸렸고, 직후 warm 요청 5건은 209.3~620.1ms, 평균 303.0ms였다. 무료 인스턴스의 약 50초 이상 기동 지연이 실제로 재현됐으므로 베타 안내에 첫 응답 지연 가능성을 명시한 근거로 사용한다.
 - 공개 정적 사이트는 GitHub에 새 커밋이 푸시된 뒤에도 이전 번들 `main.f6584129.js`를 계속 제공했다. Blueprint의 기존 서비스는 자동 배포 설정을 생략하면 현재 값을 유지하므로 `render.yaml`의 API·웹 서비스에 `autoDeployTrigger: commit`을 명시하고 매니페스트 테스트로 고정했다.
-- `render.yaml` 변경 뒤에도 공개 번들이 바뀌지 않아 Blueprint Auto Sync도 꺼진 상태로 진단했다. 현재 Dashboard에서 한 번 Manual Sync가 필요하며, 그 동작이 새 설정을 반영하면 이후 연결 브랜치의 커밋마다 자동 배포돼야 한다.
+- `render.yaml` 변경 뒤에도 공개 번들이 바뀌지 않았고 Blueprint Manual Sync도 새 실행을 만들지 않았다. 이후 서비스 수동 배포 로그의 `we don't have access to your repo, but we'll try to clone it anyway`로 Render가 공개 URL clone은 가능하지만 연결된 GitHub provider 권한/webhook은 갖지 못한 것이 확인됐다. 자동 배포는 연결된 Git provider가 필요하므로, GitHub App의 저장소 접근을 다시 승인하거나 deploy hook을 구성하기 전까지 서비스별 수동 배포가 필요하다.
 - 인앱 브라우저 자동화는 Codex CUA 초기화 단계에서 `failed to write kernel assets: 지정된 경로를 찾을 수 없습니다`로 두 번 실패했다. 서비스나 Render 오류가 아니며 로컬 Playwright를 사용한 정책 UI 검증으로 우회했다. Dashboard 인증 세션이 필요한 Manual Sync는 이 우회로 실행할 수 없다.
 
 ## 47. 공개 정책 UI 배포·프론트 의존성 감사 (2026-10-11)
