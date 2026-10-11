@@ -5,7 +5,7 @@ config.py
 하드코딩 없이 .env 파일에서 모든 설정값을 읽어옵니다.
 
 필수 환경변수 (.env에 추가 필요):
-  OPENAI_API_KEY
+  GEMINI_API_KEY
   SUPABASE_URL
   SUPABASE_SERVICE_KEY
   SUPABASE_JWT_SECRET
@@ -53,7 +53,24 @@ def _default_chunks_path() -> str:
 
 
 class Settings(BaseSettings):
-    openai_api_key: str
+    typesafe_api_key: str = ""
+    jev_model: str = "jev-1.13.0"
+    gemini_api_key: str = ""
+    gemini_model: str = "gemini-3.8-flash"
+    gemini_vision_model: str = "gemini-3.8-flash"
+    gemini_eval_model: str = "gemini-3.8-flash"
+    model_timeout_seconds: float = 30
+    eval_model_timeout_seconds: float = 90
+    model_max_retries: int = 0
+    agent_max_model_calls: int = 12
+    agent_max_tool_calls: int = 20
+    agent_max_replans: int = 2
+    agent_max_validation_attempts: int = 3
+    agent_timeout_seconds: float = 120
+    deep_agent_max_model_calls: int = 20
+    deep_agent_max_tool_calls: int = 30
+    deep_agent_timeout_seconds: float = 180
+    pinecone_namespace: str = "metadiet-gemini-v1"
     supabase_url: str
     supabase_service_key: str
     supabase_jwt_secret: str
@@ -63,7 +80,7 @@ class Settings(BaseSettings):
 
     # 임베딩 모델 (하드코딩 회피 — 모델/차원 변경 시 여기만 수정).
     # large는 cross-lingual(한국어 질의) 검색 정밀도가 small보다 높음.
-    embedding_model:     str = "text-embedding-3-large"
+    embedding_model:     str = "gemini-embedding-2"
     embedding_dimension: int = 3072
 
     # RAG 신뢰도 임계값 (dense-only 폴백 시 cosine relevance 기준).
@@ -72,6 +89,7 @@ class Settings(BaseSettings):
 
     # 하이브리드 검색 + 리랭킹 파라미터 (모두 eval로 보정하는 튜닝값, 하드코딩 회피)
     rag_candidate_k:      int   = 20      # 리랭킹 전 dense+sparse 후보 수
+    rag_use_rerank:       bool  = False   # 최종 평가 채택값: Hybrid + 리랭커 없음
     rag_rerank_threshold: float = 0.15    # 리랭크 최고 점수 임계값(grounded 판정)
     rag_rerank_model:     str   = "ms-marco-MiniLM-L-12-v2"  # FlashRank 로컬 모델
     rag_chunks_path:      str   = ""      # 비우면 _default_chunks_path 사용
@@ -90,6 +108,7 @@ class Settings(BaseSettings):
     langsmith_api_key: str = ""
     langsmith_project: str = "diet-agent"
     environment: str = "development"
+    service_timezone: str = "Asia/Seoul"
 
     class Config:
         env_file = ".env"

@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from typing import Optional, List
 from typing_extensions import TypedDict, Annotated
 from langgraph.graph.message import add_messages
+from app.schemas.proposals import ProposalDecision
 
 
 def merge_pending_meals(existing, new):
@@ -35,6 +36,9 @@ class ChatRequest(BaseModel):
 class ResumeRequest(BaseModel):
     thread_id: str
     message: str
+    decision: Optional[ProposalDecision] = None
+    stream_run_id: Optional[str] = None
+    after_seq: int = 0
 
 
 class InbodyUploadResponse(BaseModel):
@@ -47,6 +51,7 @@ class InbodyUploadResponse(BaseModel):
     bmr_kcal: Optional[float]
     strategy_updated: bool
     strategy_note: Optional[str]
+    proposal: Optional[dict] = None
 
 
 class MealLogResponse(BaseModel):
@@ -77,6 +82,17 @@ class DailyNutritionSummary(BaseModel):
 class AgentState(TypedDict):
     user_id:   str
     user_goal: str
+    thread_id: Annotated[str, keep_latest]
+    run_id: Annotated[str, keep_latest]
+    requested_action: Annotated[Optional[str], keep_latest]
+    tool_policy: Annotated[Optional[list], keep_latest]
+    pending_proposal: Annotated[Optional[dict], keep_latest]
+    proposal_decision: Annotated[Optional[dict], keep_latest]
+    proposal_result: Annotated[Optional[dict], keep_latest]
+    execution_usage: Annotated[dict, keep_latest]
+    execution_status: Annotated[str, keep_latest]
+    execution_error: Annotated[Optional[str], keep_latest]
+    agent_events: Annotated[list, keep_latest]
 
     # ── message에 keep_latest 리듀서 추가 ────────────────────────────
     # 이유: /chat/resume에서 aupdate_state({"message": resume_msg})로
@@ -130,7 +146,7 @@ class AgentState(TypedDict):
     rag_grounded: Annotated[Optional[bool], keep_latest]
 
     # 검증 루프
-    validation_attempts:  Annotated[Optional[int], keep_max]
+    validation_attempts:  Annotated[Optional[int], keep_latest]
     validation_passed:    Annotated[Optional[bool], keep_latest]
     validation_feedback:  Annotated[Optional[str], keep_latest]
     can_improve:          Annotated[Optional[bool], keep_latest]

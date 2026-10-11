@@ -1,4 +1,4 @@
-from langchain_openai import ChatOpenAI
+from app.core.llm import get_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState
 from app.tools.agent_tools import (
@@ -11,7 +11,7 @@ from app.core.config import get_settings
 from app.rag.region_guidance import get_region_guidance
 import json, re
 
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.2, openai_api_key=get_settings().openai_api_key)
+llm = get_chat_model(temperature=0.2)
 sb = get_supabase()
 
 ANALYSIS_PROMPT = ChatPromptTemplate.from_messages([

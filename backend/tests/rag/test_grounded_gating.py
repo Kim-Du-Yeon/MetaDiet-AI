@@ -1,6 +1,6 @@
 import pytest
 from langchain_core.documents import Document
-from langchain_openai import ChatOpenAI
+from app.core.llm import ConfiguredChatModel
 
 import app.rag.retriever as retriever_module
 from tests.conftest import FakeVectorStore
@@ -44,13 +44,28 @@ async def test_english_query_no_translation_llm_call(monkeypatch):
         calls.append(1)
         raise AssertionError("영어 입력인데 번역 LLM이 호출됨")
 
-    monkeypatch.setattr(ChatOpenAI, "ainvoke", fake_ainvoke)
+    monkeypatch.setattr(ConfiguredChatModel, "ainvoke", fake_ainvoke)
     store = FakeVectorStore([(_doc(), 0.9)])
     monkeypatch.setattr(retriever_module, "get_vector_store", lambda: store)
 
     await retriever_module.retrieve("protein intake recommendation", k=4)
 
     assert len(calls) == 0
+
+
+async def test_runtime_default_skips_reranker_when_disabled_in_settings(monkeypatch):
+    store = FakeVectorStore([(_doc("relevant content here"), 0.9)])
+    monkeypatch.setattr(retriever_module, "get_vector_store", lambda: store)
+    monkeypatch.setattr(retriever_module.settings, "rag_use_rerank", False, raising=False)
+
+    def unexpected_rerank(*args, **kwargs):
+        raise AssertionError("운영 기본값에서 비활성 리랭커가 호출됨")
+
+    monkeypatch.setattr(retriever_module, "_rerank", unexpected_rerank)
+
+    result = await retriever_module.retrieve("protein intake recommendation", k=4)
+
+    assert result["grounded"] is True
 
 
 async def test_korean_query_calls_translation_llm_once(monkeypatch):
@@ -63,7 +78,7 @@ async def test_korean_query_calls_translation_llm_once(monkeypatch):
         calls.append(1)
         return _FakeResp()
 
-    monkeypatch.setattr(ChatOpenAI, "ainvoke", fake_ainvoke)
+    monkeypatch.setattr(ConfiguredChatModel, "ainvoke", fake_ainvoke)
     store = FakeVectorStore([(_doc(), 0.9)])
     monkeypatch.setattr(retriever_module, "get_vector_store", lambda: store)
 

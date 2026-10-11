@@ -1,12 +1,12 @@
-from langchain_openai import ChatOpenAI
+from app.core.llm import get_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState
 from app.core.config import get_settings
 from app.tools.nutrition_db import nutrition_db_tool
+from app.core.service_clock import service_today
 import json, re
 
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0,
-                 openai_api_key=get_settings().openai_api_key)
+llm = get_chat_model(temperature=0)
 
 EDIT_PARSE_PROMPT = ChatPromptTemplate.from_messages([
     ("system", """사용자가 기록된 식단을 수정하려고 합니다.
@@ -49,13 +49,12 @@ def _resolve_target_date(message: str, today) -> str:
 
 async def edit_node(state: AgentState) -> AgentState:
     from app.db.supabase_client import get_supabase
-    from datetime import date
     sb = get_supabase()
     user_id = state["user_id"]
     message = state["message"]
 
     # 메시지의 상대 날짜("어제"/"그제") 해석 후 해당 날짜 식단 조회
-    target_date = _resolve_target_date(message, date.today())
+    target_date = _resolve_target_date(message, service_today())
     rows = sb.table("meal_logs").select("*").eq(
         "user_id", user_id).eq("log_date", target_date).execute().data
 

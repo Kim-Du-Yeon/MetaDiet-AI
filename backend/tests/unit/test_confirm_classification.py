@@ -1,5 +1,5 @@
 import pytest
-from langchain_openai import ChatOpenAI
+from app.core.llm import ConfiguredChatModel
 
 import app.agents.confirm.node as confirm_module
 import app.db.supabase_client as supabase_client_module
@@ -17,11 +17,12 @@ def _pending():
               "calories": 330, "protein_g": 62, "carbs_g": 0, "fat_g": 7, "sodium_mg": 80}]
 
 
-async def test_unrelated_utterance_keeps_pending_and_does_not_save(monkeypatch):
+@pytest.mark.parametrize("classification", ["unrelated", "invalid-json", "", "probably confirm"])
+async def test_unrelated_utterance_keeps_pending_and_does_not_save(monkeypatch, classification):
     async def fake_ainvoke(self, messages, *a, **k):
-        return _Resp("unrelated")
+        return _Resp(classification)
 
-    monkeypatch.setattr(ChatOpenAI, "ainvoke", fake_ainvoke)
+    monkeypatch.setattr(ConfiguredChatModel, "ainvoke", fake_ainvoke)
 
     state = {
         "user_id": "u1", "pending_meals": _pending(), "plan_date": "2026-06-21",
@@ -38,7 +39,7 @@ async def test_confirm_utterance_still_saves(monkeypatch):
     async def fake_ainvoke(self, messages, *a, **k):
         return _Resp("confirm")
 
-    monkeypatch.setattr(ChatOpenAI, "ainvoke", fake_ainvoke)
+    monkeypatch.setattr(ConfiguredChatModel, "ainvoke", fake_ainvoke)
 
     fake_sb = FakeSupabase()
     monkeypatch.setattr(supabase_client_module, "get_supabase", lambda: fake_sb)

@@ -10,9 +10,9 @@ scripts/eval/run_multiturn_eval.py
     이후 import되는 모든 모듈(main.py/agent_tools.py/goal_manager 등)의
     module-level `sb = get_supabase()`까지 한 번에 가짜로 대체
   - Pinecone 벡터스토어: 빈 결과로 폴백(grounded=False, 정상 동작 경로)
-  - LLM(gpt-4o-mini)만 실제로 호출 — 라우팅/분류/루프의 실제 동작을 검증하려면
+  - LLM(configured Gemini model)만 실제로 호출 — 라우팅/분류/루프의 실제 동작을 검증하려면
     이 판단만큼은 mock할 수 없음(가짜 응답을 쓰면 "시스템이 맞게 판단하는지"를
-    더 이상 검증하지 못하게 됨). 비용은 gpt-4o-mini 기준 미미함.
+    더 이상 검증하지 못하게 됨). 비용은 configured Gemini model 기준 미미함.
 
 실행:
   D:\\AX\\diet_agent\\backend\\venv\\Scripts\\python.exe scripts/eval/run_multiturn_eval.py
@@ -31,7 +31,7 @@ os.environ.setdefault("LANGCHAIN_PROJECT",     os.getenv("LANGSMITH_PROJECT",  "
 os.environ.setdefault("LANGCHAIN_ENDPOINT",    os.getenv("LANGSMITH_ENDPOINT", "https://api.smith.langchain.com"))
 
 import httpx
-from openai import AsyncOpenAI
+from app.core.llm import get_chat_model
 from langsmith import traceable, tracing_context, Client
 from langgraph.checkpoint.memory import MemorySaver
 
@@ -192,16 +192,6 @@ async def scenario_c(client) -> dict:
             "error": any(t["had_error"] for t in turns)}
 
 
-_openai_client = None
-
-
-def _get_openai_client() -> AsyncOpenAI:
-    global _openai_client
-    if _openai_client is None:
-        _openai_client = AsyncOpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-    return _openai_client
-
-
 JUDGE_PROMPT = """당신은 식단 플래너 응답의 품질 변화를 평가하는 채점자입니다.
 [사용자 목표]: {user_goal}
 
@@ -221,16 +211,15 @@ JSON 외 텍스트 금지."""
 
 
 async def _judge_response_quality(attempt_1_response: str, attempt_n_response: str, user_goal: str, attempt: int) -> dict:
-    """OpenAI API(gpt-4o-mini)로 응답 품질을 채점 — meal_plan/validator 판단과는 독립된 별도 judge 호출."""
+    """별도 Gemini 평가 호출. 같은 모델 계열의 judge 편향은 수동 검토로 보완한다."""
     try:
-        resp = await _get_openai_client().chat.completions.create(
-            model="gpt-4o-mini", max_tokens=300,
-            messages=[{"role": "user", "content": JUDGE_PROMPT.format(
+        resp = await get_chat_model(role="eval", max_tokens=1024).ainvoke(
+            [{"role": "user", "content": JUDGE_PROMPT.format(
                 user_goal=user_goal, attempt_1_response=attempt_1_response,
                 attempt_n_response=attempt_n_response, attempt=attempt,
             )}],
         )
-        raw = re.sub(r"```json|```", "", resp.choices[0].message.content).strip()
+        raw = re.sub(r"```json|```", "", resp.content).strip()
         scores = json.loads(raw)
         return {k: round(float(scores[k]), 3) for k in ("coherence", "relevance", "improvement")}
     except Exception as e:
@@ -296,7 +285,10 @@ async def _find_trace(client_ls: Client, thread_id: str, retries: int = 3) -> bo
         except Exception as e:
             print(f"=== LangSmith 조회 실패: {e} ===")
             return False
-        matched = [r for r in runs if (r.extra or {}).get("metadata", {}).get("thread_id") == thread_id]
+        from app.api.routes.main import _trace_thread_id
+        user_id, public_thread = thread_id.split("_", 1)
+        trace_id = _trace_thread_id(user_id, public_thread)
+        matched = [r for r in runs if (r.extra or {}).get("metadata", {}).get("thread_id") == trace_id]
         if matched:
             print(f"  thread_id={thread_id} -> {len(matched)}개 run:")
             for r in sorted(matched, key=lambda x: x.start_time):

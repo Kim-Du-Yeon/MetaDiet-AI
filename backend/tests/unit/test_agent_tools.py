@@ -47,25 +47,16 @@ async def test_get_active_strategy_tool_empty_returns_empty_dict(fake_agent_tool
     assert result == {}
 
 
-async def test_update_strategy_tool_upserts_correct_payload(fake_agent_tools_sb):
+async def test_legacy_strategy_tool_cannot_bypass_proposal_policy(fake_agent_tools_sb):
     result = await update_strategy_tool.ainvoke({
         "user_id": "u1", "daily_calories": 1900, "protein_g": 150,
         "carbs_g": 200, "fat_g": 60, "strategy_note": "근손실 방지 우선",
         "triggered_by": "inbody_update", "inbody_log_id": "log1",
     })
 
-    assert result["success"] is True
-    methods = [c[0] for c in fake_agent_tools_sb.calls]
-    assert methods == ["update", "insert"]  # 기존 비활성화 -> 신규 삽입 순서
-
-    deactivate_payload = fake_agent_tools_sb.calls[0][2]
-    assert deactivate_payload == {"is_active": False}
-
-    insert_payload = fake_agent_tools_sb.calls[1][2]
-    assert insert_payload["user_id"] == "u1"
-    assert insert_payload["daily_calories"] == 1900
-    assert insert_payload["triggered_by"] == "inbody_update"
-    assert insert_payload["is_active"] is True
+    assert result['success'] is False
+    assert result['error']=='proposal_approval_required'
+    assert fake_agent_tools_sb.calls==[]
 
 
 _COLUMN_MAPPING = {
@@ -83,6 +74,10 @@ def _stub_nutrition_llm(monkeypatch):
         return {"닭가슴살": ["닭고기", "가슴"]}.get(food_name, [food_name])
 
     monkeypatch.setattr(nutrition_db_module, "_decompose_keywords_with_llm", fake_decompose)
+    from types import SimpleNamespace
+    from unittest.mock import AsyncMock
+    monkeypatch.setattr(nutrition_db_module, "get_chat_model", lambda **kwargs:
+        SimpleNamespace(ainvoke=AsyncMock(return_value=SimpleNamespace(content="닭고기, 가슴, 생것"))))
 
 
 async def test_nutrition_db_tool_csv_lookup_golden_value(_stub_nutrition_llm):

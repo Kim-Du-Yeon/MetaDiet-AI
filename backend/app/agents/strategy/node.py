@@ -1,16 +1,13 @@
-from langchain_openai import ChatOpenAI
+from app.core.llm import get_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState, extract_messages_context
 from app.core.config import get_settings
 from app.tools.analytics import get_yesterday_summary, get_pattern_analysis
 from app.rag.region_guidance import get_region_guidance
+from app.core.service_clock import service_today
 from datetime import date
 
-llm = ChatOpenAI(
-    model="gpt-4o-mini",
-    temperature=0.3,
-    openai_api_key=get_settings().openai_api_key
-)
+llm = get_chat_model(temperature=0.3)
 
 STRATEGY_PROMPT = ChatPromptTemplate.from_messages([
     ("system", """당신은 영양학 전문 식단 코치입니다.
@@ -54,7 +51,7 @@ async def strategy_node(state: AgentState) -> dict:
     today_cal = state.get("today_calories", 0)
     today_protein = state.get("today_protein", 0)
     try:
-        today = date.today().isoformat()
+        today = service_today().isoformat()
         meal_rows = sb.table("meal_logs").select(
             "calories,protein_g,carbs_g,fat_g"
         ).eq("user_id", user_id).eq("log_date", today).execute().data
@@ -69,7 +66,7 @@ async def strategy_node(state: AgentState) -> dict:
             target_cal = strategy_rows[0].get("daily_calories", target_cal)
             target_protein = strategy_rows[0].get("protein_g", target_protein)
     except Exception as e:
-        print(f"=== [strategy] 최신 오늘 합계 조회 실패: {e} ===")
+        print(f"=== [strategy] 최신 오늘 합계 조회 실패 유형: {type(e).__name__} ===")
 
     remaining_cal = round(target_cal - today_cal)
 
@@ -123,9 +120,9 @@ async def strategy_node(state: AgentState) -> dict:
                 "현재 문서 기반 근거는 부족합니다. "
                 "출처 기반 조언은 생성하지 말고, 사용자 기록과 목표 기반의 일반 안내만 하세요."
             )
-        print(f"=== strategy RAG 쿼리: {rag_query} | grounded={rag_grounded} score={rag_result.get('max_score')} ===")
+        print(f"=== strategy RAG: query_redacted grounded={rag_grounded} score={rag_result.get('max_score')} ===")
     except Exception as e:
-        print(f"=== strategy RAG 실패: {e} ===")
+        print(f"=== strategy RAG 실패 유형: {type(e).__name__} ===")
         rag_context = (
             "현재 문서 기반 근거는 부족합니다. "
             "출처 기반 조언은 생성하지 말고, 사용자 기록과 목표 기반의 일반 안내만 하세요."

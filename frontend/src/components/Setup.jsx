@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { getToken, BASE_URL } from "../api/dietApi";
+import { useState, useEffect } from "react";
+import { getToken, BASE_URL, decideProposal } from "../api/dietApi";
+import ProposalCard from './chat/ProposalCard';
 
 export default function Setup({ onComplete }) {
   const [form, setForm] = useState({
@@ -9,42 +10,72 @@ export default function Setup({ onComplete }) {
     weight_kg: "",
     age: "",
     gender: "male",
+    activity: "",
+    general_adult_confirmed: false,
     target_weight_kg: "",
     target_date: "",
     goal_priority: "",
   });
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [result, setResult] = useState(null);
+  const [error, setError] = useState('');
+
+  useEffect(()=>{
+    let active=true;
+    fetch(`${BASE_URL}/users/onboarding`,{headers:{Authorization:`Bearer ${getToken()}`}})
+      .then(async res=>{if(!res.ok) throw new Error('기존 설정 조회에 실패했습니다.'); return res.json();})
+      .then(data=>{if(active){if(data.pending_proposal) setResult(data);
+        else if(data.current_strategy) onComplete();}})
+      .catch(e=>{if(active) setError(e.message);})
+      .finally(()=>{if(active) setLoading(false);});
+    return ()=>{active=false;};
+  },[onComplete]);
 
   const handleSubmit = async () => {
-    if (!form.height_cm || !form.weight_kg || !form.age) {
+    if (!form.height_cm || !form.weight_kg || !form.age || !form.activity || !form.general_adult_confirmed) {
       alert("모든 항목을 입력해주세요.");
       return;
     }
     setLoading(true);
+    setError('');
     try {
-      const params = new URLSearchParams({
+      const body = {
         goal: form.goal,
         region: form.region,
-        height_cm: form.height_cm,
-        weight_kg: form.weight_kg,
-        age: form.age,
-        gender: form.gender,
-      });
+        height_cm: Number(form.height_cm),
+        weight_kg: Number(form.weight_kg),
+        age: Number(form.age),
+        sex: form.gender, activity: form.activity,
+        general_adult_confirmed: form.general_adult_confirmed,
+      };
       // 장기 목표 3개는 선택 입력 — 값이 있을 때만 전송(빈 문자열이면 백엔드 float 파싱 실패)
-      if (form.target_weight_kg) params.set("target_weight_kg", form.target_weight_kg);
-      if (form.target_date) params.set("target_date", form.target_date);
-      if (form.goal_priority) params.set("goal_priority", form.goal_priority);
-      const res = await fetch(`${BASE_URL}/users/setup?${params}`, {
+      if (form.target_weight_kg) body.target_weight_kg=Number(form.target_weight_kg);
+      if (form.target_date) body.target_date=form.target_date;
+      if (form.goal_priority) body.goal_priority=form.goal_priority;
+      const res = await fetch(`${BASE_URL}/users/onboarding`, {
         method: "POST",
-        headers: { Authorization: `Bearer ${getToken()}` },
+        headers: { Authorization: `Bearer ${getToken()}`, 'Content-Type':'application/json' },
+        body: JSON.stringify(body),
       });
       const data = await res.json();
+      if(!res.ok) throw new Error(typeof data.detail==='string'?data.detail:'입력값과 적용대상을 확인해주세요.');
       setResult(data);
     } catch (e) {
-      alert("오류가 발생했습니다.");
+      setError(e.message || '초기 제안 생성에 실패했습니다. 다시 시도해주세요.');
     }
     setLoading(false);
+  };
+
+  const handleDecision=async action=>{
+    setLoading(true); setError('');
+    try {
+      const decision=await decideProposal(result.pending_proposal,action);
+      if(action==='confirm' && decision.status==='confirmed') onComplete();
+      else if(action==='cancel' && result.current_strategy) onComplete();
+      else if(action==='cancel') setResult(null);
+      else throw new Error('확정 상태를 확인하지 못했습니다. 다시 시도해주세요.');
+    }catch(e){setError(e.message);}
+    finally{setLoading(false);}
   };
 
   const GOAL_LABELS = {
@@ -52,6 +83,16 @@ export default function Setup({ onComplete }) {
     bulk: { label: "증량 💪", desc: "근육량 증가" },
     maintain: { label: "유지 ⚖️", desc: "현재 체형 유지" },
   };
+
+  if(result?.pending_proposal) return <div style={styles.container}><div style={styles.card}>
+    <h2 style={styles.title}>초기 전략 제안</h2>
+    <p>{result.message}</p>
+    {result.current_strategy && <p>확정 전에는 기존 전략이 유지됩니다.</p>}
+    {error && <p role="alert">{error}</p>}
+    <ProposalCard proposal={result.pending_proposal} busy={loading} onDecision={handleDecision}/>
+    <button disabled={loading} onClick={()=>{setResult(null);setError('');}}>입력을 수정해 다시 제안</button>
+    {result.current_strategy && <button disabled={loading} onClick={()=>handleDecision('cancel')}>기존 전략으로 계속</button>}
+  </div></div>;
 
   if (result) {
     return (
@@ -95,6 +136,7 @@ export default function Setup({ onComplete }) {
       <div style={styles.card}>
         <h2 style={styles.title}>🥗 식단 목표 설정</h2>
         <p style={styles.subtitle}>정확한 전략을 위해 기본 정보를 입력해주세요</p>
+        {error && <p role="alert">{error}</p>}
 
         {/* 목표 선택 */}
         <div style={styles.section}>
@@ -122,7 +164,6 @@ export default function Setup({ onComplete }) {
           <div style={styles.genderRow}>
             {[
               { key: "KR", label: "한국 🇰🇷 (KDRIs 기준)" },
-              { key: "INTL", label: "국제 🌍 (WHO 기준)" },
             ].map((r) => (
               <button
                 key={r.key}
@@ -164,9 +205,10 @@ export default function Setup({ onComplete }) {
           { key: "weight_kg", label: "체중", unit: "kg", placeholder: "70" },
         ].map((field) => (
           <div key={field.key} style={styles.section}>
-            <label style={styles.label}>{field.label}</label>
+            <label htmlFor={`setup-${field.key}`} style={styles.label}>{field.label}</label>
             <div style={styles.inputRow}>
               <input
+                id={`setup-${field.key}`}
                 type="number"
                 value={form[field.key]}
                 onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
@@ -178,6 +220,18 @@ export default function Setup({ onComplete }) {
           </div>
         ))}
 
+        <div style={styles.section}>
+          <label htmlFor="setup-activity" style={styles.label}>활동 수준</label>
+          <select id="setup-activity" value={form.activity} onChange={e=>setForm({...form,activity:e.target.value})}>
+            <option value="">선택해주세요</option>
+            <option value="sedentary">비활동적</option><option value="low_active">저활동적</option>
+            <option value="active">활동적</option><option value="very_active">매우 활동적</option>
+          </select>
+          <p>운동 시간뿐 아니라 일·이동 등 하루 전체 활동을 고려해주세요.</p>
+          <label><input type="checkbox" checked={form.general_adult_confirmed}
+            onChange={e=>setForm({...form,general_adult_confirmed:e.target.checked})}/>
+            일반 성인 적용: 19~64세이며 임신·수유, 질환별 영양관리·섭식장애 등 특별한 관리가 필요한 상황이 아닙니다.</label>
+        </div>
         {/* 장기 목표 (선택) */}
         <div style={styles.section}>
           <label style={styles.label}>장기 목표 (선택)</label>
@@ -232,30 +286,30 @@ export default function Setup({ onComplete }) {
 }
 
 const styles = {
-  container: { minHeight: "100vh", backgroundColor: "#f8f9fa", display: "flex", alignItems: "center", justifyContent: "center", padding: "20px" },
-  card: { backgroundColor: "white", borderRadius: "16px", padding: "32px", width: "100%", maxWidth: "420px", boxShadow: "0 4px 20px rgba(0,0,0,0.08)" },
-  title: { fontSize: "22px", fontWeight: "700", marginBottom: "8px", textAlign: "center" },
-  subtitle: { fontSize: "14px", color: "#999", textAlign: "center", marginBottom: "24px" },
+  container: { minHeight: "100vh", background:"radial-gradient(circle at 50% -20%, #e8f4ee 0, #f6f9f7 42%, #f6f9f7 100%)", display: "flex", alignItems: "center", justifyContent: "center", padding: "20px" },
+  card: { backgroundColor: "rgba(255,255,255,.95)", border:"1px solid #dde8e2", borderRadius: "24px", padding: "32px", width: "100%", maxWidth: "460px", boxShadow: "0 18px 50px rgba(26,67,51,.1)" },
+  title: { fontFamily:"Georgia, 'Times New Roman', serif", color:"#22332d", fontSize: "26px", fontWeight: "600", marginBottom: "8px", textAlign: "center" },
+  subtitle: { fontSize: "14px", color: "#6a7a73", textAlign: "center", marginBottom: "24px" },
   section: { marginBottom: "20px" },
   label: { display: "block", fontSize: "13px", fontWeight: "600", color: "#555", marginBottom: "8px" },
   goalGrid: { display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "8px" },
-  goalBtn: { padding: "12px 8px", borderRadius: "10px", border: "1.5px solid #e0e0e0", background: "white", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" },
-  goalBtnActive: { borderColor: "#4CAF50", background: "#f0faf0" },
+  goalBtn: { padding: "12px 8px", borderRadius: "10px", borderWidth: "1.5px", borderStyle: "solid", borderColor: "#e0e0e0", background: "white", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", gap: "4px" },
+  goalBtnActive: { borderColor: "#1f7a58", background: "#f0f7f3" },
   goalLabel: { fontSize: "13px", fontWeight: "600" },
   goalDesc: { fontSize: "11px", color: "#999" },
   genderRow: { display: "flex", gap: "8px" },
-  genderBtn: { flex: 1, padding: "10px", borderRadius: "10px", border: "1.5px solid #e0e0e0", background: "white", cursor: "pointer", fontSize: "14px" },
-  genderBtnActive: { borderColor: "#4CAF50", background: "#f0faf0", fontWeight: "600" },
+  genderBtn: { flex: 1, padding: "10px", borderRadius: "10px", borderWidth: "1.5px", borderStyle: "solid", borderColor: "#e0e0e0", background: "white", cursor: "pointer", fontSize: "14px" },
+  genderBtnActive: { borderColor: "#1f7a58", background: "#f0f7f3", fontWeight: "600" },
   inputRow: { display: "flex", alignItems: "center", gap: "8px" },
   input: { flex: 1, padding: "10px 14px", borderRadius: "10px", border: "1.5px solid #e0e0e0", fontSize: "16px", outline: "none" },
   unit: { fontSize: "14px", color: "#999", width: "24px" },
-  submitBtn: { width: "100%", padding: "14px", backgroundColor: "#4CAF50", color: "white", border: "none", borderRadius: "12px", fontSize: "16px", fontWeight: "600", cursor: "pointer", marginTop: "8px" },
+  submitBtn: { width: "100%", padding: "14px", backgroundColor: "#1f7a58", color: "white", border: "none", borderRadius: "12px", fontSize: "16px", fontWeight: "700", cursor: "pointer", marginTop: "8px" },
   successIcon: { fontSize: "40px", textAlign: "center", marginBottom: "12px" },
   strategyGrid: { display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "8px", margin: "20px 0" },
   strategyItem: { backgroundColor: "#f8f9fa", borderRadius: "10px", padding: "12px 8px", textAlign: "center", display: "flex", flexDirection: "column" },
   strategyLabel: { fontSize: "11px", color: "#999", marginBottom: "4px" },
-  strategyValue: { fontSize: "20px", fontWeight: "700", color: "#4CAF50" },
+  strategyValue: { fontSize: "20px", fontWeight: "700", color: "#1f7a58" },
   strategyUnit: { fontSize: "11px", color: "#999" },
   note: { fontSize: "13px", color: "#666", textAlign: "center", margin: "16px 0" },
-  startBtn: { width: "100%", padding: "14px", backgroundColor: "#4CAF50", color: "white", border: "none", borderRadius: "12px", fontSize: "16px", fontWeight: "600", cursor: "pointer" },
+  startBtn: { width: "100%", padding: "14px", backgroundColor: "#1f7a58", color: "white", border: "none", borderRadius: "12px", fontSize: "16px", fontWeight: "700", cursor: "pointer" },
 };

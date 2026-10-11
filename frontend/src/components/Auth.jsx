@@ -1,106 +1,54 @@
 import { useState } from "react";
 import { supabase } from "../lib/supabaseClient";
+import "./Auth.css";
 
 export default function Auth() {
-  const [mode, setMode] = useState("login"); // "login" | "signup"
+  const [mode, setMode] = useState("login");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event?.preventDefault();
     if (!email || !password) {
       setMessage("이메일과 비밀번호를 입력해주세요.");
       return;
     }
     setLoading(true);
     setMessage("");
-    const { error } =
-      mode === "login"
-        ? await supabase.auth.signInWithPassword({ email, password })
-        : await supabase.auth.signUp({ email, password });
-    if (error) {
-      setMessage(error.message);
-    } else if (mode === "signup") {
-      setMessage("가입 확인 메일을 확인해주세요.");
-    }
+    const { error } = mode === "login"
+      ? await supabase.auth.signInWithPassword({ email, password })
+      : await supabase.auth.signUp({ email, password });
+    if (error) setMessage(error.message);
+    else if (mode === "signup") setMessage("가입 확인 메일을 확인해주세요.");
     setLoading(false);
   };
 
-  return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <h2 style={styles.title}>🥗 MetaDiet AI</h2>
-        <p style={styles.subtitle}>로그인하고 식단 코칭을 시작하세요</p>
+  const selectMode = (nextMode) => {
+    setMode(nextMode);
+    setMessage("");
+  };
 
-        <div style={styles.tabRow}>
-          {[
-            { key: "login", label: "로그인" },
-            { key: "signup", label: "회원가입" },
-          ].map((t) => (
-            <button
-              key={t.key}
-              style={{
-                ...styles.tabBtn,
-                ...(mode === t.key ? styles.tabBtnActive : {}),
-              }}
-              onClick={() => {
-                setMode(t.key);
-                setMessage("");
-              }}
-            >
-              {t.label}
-            </button>
-          ))}
-        </div>
-
-        <div style={styles.section}>
-          <label style={styles.label}>이메일</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="you@example.com"
-            style={styles.input}
-          />
-        </div>
-
-        <div style={styles.section}>
-          <label style={styles.label}>비밀번호</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="********"
-            style={styles.input}
-          />
-        </div>
-
-        {message && <p style={styles.message}>{message}</p>}
-
-        <button
-          style={{ ...styles.submitBtn, opacity: loading ? 0.6 : 1 }}
-          onClick={handleSubmit}
-          disabled={loading}
-        >
-          {loading ? "처리 중..." : mode === "login" ? "로그인" : "가입하기"}
-        </button>
+  return <main className="auth-page">
+    <form className="auth-card" aria-label={mode === "login" ? "계정 로그인" : "계정 만들기"} onSubmit={handleSubmit}>
+      <header className="auth-header">
+        <span className="auth-eyebrow">MetaDiet AI</span>
+        <h1>{mode === "login" ? "다시 만나서 반가워요" : "식단 코칭 시작하기"}</h1>
+        <p>내 기록과 검토된 영양 근거를 바탕으로 계획을 관리합니다.</p>
+      </header>
+      <div className="auth-tabs" role="tablist" aria-label="계정 방식">
+        <button type="button" role="tab" aria-selected={mode === "login"} onClick={() => selectMode("login")}>로그인</button>
+        <button type="button" role="tab" aria-selected={mode === "signup"} onClick={() => selectMode("signup")}>회원가입</button>
       </div>
-    </div>
-  );
+      <label className="auth-field" htmlFor="auth-email"><span>이메일</span>
+        <input id="auth-email" type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="you@example.com" />
+      </label>
+      <label className="auth-field" htmlFor="auth-password"><span>비밀번호</span>
+        <input id="auth-password" type="password" autoComplete={mode === "login" ? "current-password" : "new-password"} value={password} onChange={(event) => setPassword(event.target.value)} placeholder="8자 이상 입력" />
+      </label>
+      {message && <p className="auth-message" role="alert">{message}</p>}
+      <button className="auth-submit" type="submit" disabled={loading}>{loading ? "처리 중…" : mode === "login" ? "로그인" : "가입하기"}</button>
+    </form>
+  </main>;
 }
-
-const styles = {
-  container: { minHeight: "100vh", backgroundColor: "#f8f9fa", display: "flex", alignItems: "center", justifyContent: "center", padding: "20px" },
-  card: { backgroundColor: "white", borderRadius: "16px", padding: "32px", width: "100%", maxWidth: "420px", boxShadow: "0 4px 20px rgba(0,0,0,0.08)" },
-  title: { fontSize: "22px", fontWeight: "700", marginBottom: "8px", textAlign: "center" },
-  subtitle: { fontSize: "14px", color: "#999", textAlign: "center", marginBottom: "24px" },
-  tabRow: { display: "flex", gap: "8px", marginBottom: "20px" },
-  tabBtn: { flex: 1, padding: "10px", borderRadius: "10px", border: "1.5px solid #e0e0e0", background: "white", cursor: "pointer", fontSize: "14px", fontWeight: "600", color: "#999" },
-  tabBtnActive: { borderColor: "#4CAF50", background: "#f0faf0", color: "#333" },
-  section: { marginBottom: "20px" },
-  label: { display: "block", fontSize: "13px", fontWeight: "600", color: "#555", marginBottom: "8px" },
-  input: { width: "100%", padding: "10px 14px", borderRadius: "10px", border: "1.5px solid #e0e0e0", fontSize: "16px", outline: "none", boxSizing: "border-box" },
-  message: { fontSize: "13px", color: "#e05050", textAlign: "center", margin: "0 0 16px" },
-  submitBtn: { width: "100%", padding: "14px", backgroundColor: "#4CAF50", color: "white", border: "none", borderRadius: "12px", fontSize: "16px", fontWeight: "600", cursor: "pointer" },
-};

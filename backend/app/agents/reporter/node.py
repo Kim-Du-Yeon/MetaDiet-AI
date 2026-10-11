@@ -1,12 +1,11 @@
-from langchain_openai import ChatOpenAI
+from app.core.llm import get_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState
 from app.core.config import get_settings
 from app.tools.analytics import get_pattern_analysis, get_inbody_diet_correlation, get_missing_meal_alert
 from app.rag.region_guidance import get_region_guidance
 
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.3,
-                 openai_api_key=get_settings().openai_api_key)
+llm = get_chat_model(temperature=0.3)
 
 REPORT_PROMPT = ChatPromptTemplate.from_messages([
     ("system", """당신은 데이터 분석 기반 식단 코치입니다.

@@ -1,13 +1,9 @@
-from langchain_openai import ChatOpenAI
+from app.core.llm import get_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState, extract_messages_context
 from app.core.config import get_settings
 
-llm = ChatOpenAI(
-    model="gpt-4o-mini",
-    temperature=0,
-    openai_api_key=get_settings().openai_api_key
-)
+llm = get_chat_model(temperature=0)
 
 SUPERVISOR_PROMPT = ChatPromptTemplate.from_messages([
     ("system", """당신은 식단 AI Agent의 Supervisor입니다.
@@ -140,7 +136,7 @@ async def supervisor_node(state: AgentState) -> AgentState:
 
     heuristic = _heuristic_intent(state.get("message", ""), bool(pending))
     if heuristic:
-        print(f"=== [supervisor] 휴리스틱 라우팅: {heuristic} | message='{state.get('message','')}' ===")
+        print(f"=== [supervisor] 휴리스틱 라우팅: {heuristic} | message_redacted ===")
         return {"intent": heuristic}
 
     response = await llm.ainvoke(

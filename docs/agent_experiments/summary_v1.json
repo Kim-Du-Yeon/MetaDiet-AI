@@ -1,0 +1,636 @@
+{
+  "scope": "Synthetic decisions and IO-fixture flows; no production adoption",
+  "decision_repeats": 3,
+  "flow_repeats": 1,
+  "heldout_note": "Decision v2 untouched; flow v3 is repair regression after v2 heldout failure, not independent final test",
+  "safety": {
+    "scripted_contracts": 20,
+    "passed": 20
+  },
+  "tests": {
+    "passed": 220,
+    "skipped": 1,
+    "warnings": 3
+  },
+  "adoption": "Gemini remains default. Jev stays experimental; p95/cost gate not demonstrated.",
+  "repairs": {
+    "validator_csv_evidence": "Fixed and live plan rechecked",
+    "gemini_504": "Verified in LangSmith; one bounded retry passed; first failure preserved",
+    "jev_invalid_response": "Original raw response absent; exact field unknown. Separate captured synthetic probe passed; not a same-request reproduction",
+    "jev_tools_recovery": "Additional Jev calls plus an unoffered Gemini tool request exhausted shared budget; blocked without writes. Experimental configuration rejected, budget not raised"
+  },
+  "reports": {
+    "agent-decision-dev-v2": {
+      "summary": {
+        "supervisor/gemini": {
+          "n": 30,
+          "completed": 30,
+          "failed": 0,
+          "goal_rate": 1.0,
+          "p50_seconds": 3.681280000018887,
+          "p95_seconds": 6.695300045027397,
+          "model_calls": 30,
+          "fallbacks": 0,
+          "policy_violations": 0
+        },
+        "tools/gemini": {
+          "n": 30,
+          "completed": 30,
+          "failed": 0,
+          "goal_rate": 1.0,
+          "p50_seconds": 3.6328184500453062,
+          "p95_seconds": 6.157862469996325,
+          "model_calls": 30,
+          "fallbacks": 0,
+          "policy_violations": 0
+        },
+        "supervisor/jev": {
+          "n": 30,
+          "completed": 30,
+          "failed": 0,
+          "goal_rate": 1.0,
+          "p50_seconds": 4.319384950038511,
+          "p95_seconds": 6.635256754985311,
+          "model_calls": 60,
+          "fallbacks": 30,
+          "policy_violations": 0,
+          "jev_raw_selection_rate": 0.3,
+          "jev_enforced_count": 0,
+          "confidence_bins": {
+            "0-0.5": {
+              "n": 24,
+              "selection_errors": 18
+            },
+            "0.5-0.7": {
+              "n": 3,
+              "selection_errors": 3
+            },
+            "0.7-0.9": {
+              "n": 3,
+              "selection_errors": 0
+            },
+            "0.9-1.01": {
+              "n": 0,
+              "selection_errors": 0
+            }
+          }
+        },
+        "tools/jev": {
+          "n": 30,
+          "completed": 30,
+          "failed": 0,
+          "goal_rate": 1.0,
+          "p50_seconds": 4.140877450001426,
+          "p95_seconds": 5.47918957499205,
+          "model_calls": 60,
+          "fallbacks": 6,
+          "policy_violations": 0,
+          "jev_raw_selection_rate": 1.0,
+          "jev_enforced_count": 24,
+          "confidence_bins": {
+            "0-0.5": {
+              "n": 3,
+              "selection_errors": 0
+            },
+            "0.5-0.7": {
+              "n": 0,
+              "selection_errors": 0
+            },
+            "0.7-0.9": {
+              "n": 3,
+              "selection_errors": 0
+            },
+            "0.9-1.01": {
+              "n": 24,
+              "selection_errors": 0
+            }
+          }
+        }
+      },
+      "usage": {
+        "gemini_input_tokens": 60036,
+        "gemini_output_tokens": 17320,
+        "gemini_total_tokens": 77356,
+        "jev_input_tokens": 29553,
+        "jev_output_tokens": 4029
+      },
+      "source_identity": {
+        "dataset_sha": "1cd2639ba193f9c7fd68d56fa62d351376a2c4ef442d998949d56c0c9b6e0bcf",
+        "model": "gemini-3.8-flash",
+        "jev_model": "jev-1.13.0",
+        "confidence_threshold": 0.9,
+        "domain": "decision",
+        "split": "dev",
+        "repeats": 3,
+        "fixture_date": "2026-10-10",
+        "limits": {
+          "models": 12,
+          "tools": 20,
+          "time": 120.0
+        },
+        "codes": {
+          "scripts/eval/run_agent_comparison.py": "930768413ed7fe7961812b4703058f6014702b6ba7f48868e452f1347629ee9d",
+          "scripts/eval/agent_evaluation.py": "d1c43ef6016d3f1e081e5ebe0e727cbc54a7c4481dab6c98039d2502c7d89246",
+          "app/agents/team.py": "b8e20e361cfc29f9e2b25c1558d54489eb3932ce226916ea733dcab9af447e03",
+          "app/agents/runtime.py": "5a3acb1252db6875027b19a7414cac457ef29c7c5f9f42acd36f49374caaa87b",
+          "app/core/jev.py": "36bcf6a184e4873ed8f87e700255f1eadc5dc796f6ce8cb3f4109686f8ea1f66",
+          "app/core/llm.py": "90e3ba3df4411d13a285f5a7fb9c6f086c362573cfe2e1472f4b865f3626d8af"
+        }
+      },
+      "paired_goal_differences": {
+        "tools/jev": {
+          "mean_difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "supervisor/jev": {
+          "mean_difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        }
+      }
+    },
+    "agent-decision-heldout-v2": {
+      "summary": {
+        "supervisor/gemini": {
+          "n": 15,
+          "completed": 15,
+          "failed": 0,
+          "goal_rate": 1.0,
+          "p50_seconds": 4.067015500040725,
+          "p95_seconds": 6.014467079984024,
+          "model_calls": 15,
+          "fallbacks": 0,
+          "policy_violations": 0
+        },
+        "tools/gemini": {
+          "n": 15,
+          "completed": 15,
+          "failed": 0,
+          "goal_rate": 1.0,
+          "p50_seconds": 3.6756191999884322,
+          "p95_seconds": 4.81810397002846,
+          "model_calls": 15,
+          "fallbacks": 0,
+          "policy_violations": 0
+        },
+        "supervisor/jev": {
+          "n": 15,
+          "completed": 15,
+          "failed": 0,
+          "goal_rate": 1.0,
+          "p50_seconds": 4.079873300041072,
+          "p95_seconds": 6.902349470020272,
+          "model_calls": 30,
+          "fallbacks": 15,
+          "policy_violations": 0,
+          "jev_raw_selection_rate": 0.6,
+          "jev_enforced_count": 0,
+          "confidence_bins": {
+            "0-0.5": {
+              "n": 0,
+              "selection_errors": 0
+            },
+            "0.5-0.7": {
+              "n": 3,
+              "selection_errors": 2
+            },
+            "0.7-0.9": {
+              "n": 12,
+              "selection_errors": 4
+            },
+            "0.9-1.01": {
+              "n": 0,
+              "selection_errors": 0
+            }
+          }
+        },
+        "tools/jev": {
+          "n": 15,
+          "completed": 15,
+          "failed": 0,
+          "goal_rate": 1.0,
+          "p50_seconds": 4.277435600059107,
+          "p95_seconds": 5.157409840042236,
+          "model_calls": 30,
+          "fallbacks": 2,
+          "policy_violations": 0,
+          "jev_raw_selection_rate": 1.0,
+          "jev_enforced_count": 13,
+          "confidence_bins": {
+            "0-0.5": {
+              "n": 0,
+              "selection_errors": 0
+            },
+            "0.5-0.7": {
+              "n": 0,
+              "selection_errors": 0
+            },
+            "0.7-0.9": {
+              "n": 2,
+              "selection_errors": 0
+            },
+            "0.9-1.01": {
+              "n": 13,
+              "selection_errors": 0
+            }
+          }
+        }
+      },
+      "usage": {
+        "gemini_input_tokens": 29789,
+        "gemini_output_tokens": 9772,
+        "gemini_total_tokens": 39561,
+        "jev_input_tokens": 15123,
+        "jev_output_tokens": 2022
+      },
+      "source_identity": {
+        "dataset_sha": "1cd2639ba193f9c7fd68d56fa62d351376a2c4ef442d998949d56c0c9b6e0bcf",
+        "model": "gemini-3.8-flash",
+        "jev_model": "jev-1.13.0",
+        "confidence_threshold": 0.9,
+        "domain": "decision",
+        "split": "heldout",
+        "repeats": 3,
+        "fixture_date": "2026-10-10",
+        "limits": {
+          "models": 12,
+          "tools": 20,
+          "time": 120.0
+        },
+        "codes": {
+          "scripts/eval/run_agent_comparison.py": "930768413ed7fe7961812b4703058f6014702b6ba7f48868e452f1347629ee9d",
+          "scripts/eval/agent_evaluation.py": "d1c43ef6016d3f1e081e5ebe0e727cbc54a7c4481dab6c98039d2502c7d89246",
+          "app/agents/team.py": "b8e20e361cfc29f9e2b25c1558d54489eb3932ce226916ea733dcab9af447e03",
+          "app/agents/runtime.py": "5a3acb1252db6875027b19a7414cac457ef29c7c5f9f42acd36f49374caaa87b",
+          "app/core/jev.py": "36bcf6a184e4873ed8f87e700255f1eadc5dc796f6ce8cb3f4109686f8ea1f66",
+          "app/core/llm.py": "90e3ba3df4411d13a285f5a7fb9c6f086c362573cfe2e1472f4b865f3626d8af"
+        }
+      },
+      "paired_goal_differences": {
+        "tools/jev": {
+          "mean_difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "supervisor/jev": {
+          "mean_difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        }
+      }
+    },
+    "agent-flow-dev-v2": {
+      "summary": {
+        "flow/gemini": {
+          "n": 8,
+          "completed": 8,
+          "failed": 0,
+          "goal_rate": 1.0,
+          "p50_seconds": 16.642772200051695,
+          "p95_seconds": 24.92461992007447,
+          "model_calls": 35,
+          "fallbacks": 0,
+          "policy_violations": 0
+        },
+        "flow/jev_supervisor": {
+          "n": 8,
+          "completed": 8,
+          "failed": 0,
+          "goal_rate": 1.0,
+          "p50_seconds": 21.12741165002808,
+          "p95_seconds": 24.484716900013154,
+          "model_calls": 42,
+          "fallbacks": 6,
+          "policy_violations": 0
+        },
+        "flow/jev_tools": {
+          "n": 8,
+          "completed": 8,
+          "failed": 0,
+          "goal_rate": 1.0,
+          "p50_seconds": 15.643298299924936,
+          "p95_seconds": 29.04707832498825,
+          "model_calls": 52,
+          "fallbacks": 12,
+          "policy_violations": 0
+        }
+      },
+      "usage": {
+        "gemini_input_tokens": 91371,
+        "gemini_output_tokens": 24160,
+        "gemini_total_tokens": 115531,
+        "jev_input_tokens": 18272,
+        "jev_output_tokens": 2144
+      },
+      "source_identity": {
+        "dataset_sha": "1cd2639ba193f9c7fd68d56fa62d351376a2c4ef442d998949d56c0c9b6e0bcf",
+        "model": "gemini-3.8-flash",
+        "jev_model": "jev-1.13.0",
+        "confidence_threshold": 0.9,
+        "domain": "flow",
+        "split": "dev",
+        "repeats": 1,
+        "fixture_date": "2026-10-10",
+        "limits": {
+          "models": 12,
+          "tools": 20,
+          "time": 120.0
+        },
+        "codes": {
+          "scripts/eval/run_agent_comparison.py": "930768413ed7fe7961812b4703058f6014702b6ba7f48868e452f1347629ee9d",
+          "scripts/eval/agent_evaluation.py": "d1c43ef6016d3f1e081e5ebe0e727cbc54a7c4481dab6c98039d2502c7d89246",
+          "app/agents/team.py": "b8e20e361cfc29f9e2b25c1558d54489eb3932ce226916ea733dcab9af447e03",
+          "app/agents/runtime.py": "5a3acb1252db6875027b19a7414cac457ef29c7c5f9f42acd36f49374caaa87b",
+          "app/core/jev.py": "36bcf6a184e4873ed8f87e700255f1eadc5dc796f6ce8cb3f4109686f8ea1f66",
+          "app/core/llm.py": "90e3ba3df4411d13a285f5a7fb9c6f086c362573cfe2e1472f4b865f3626d8af"
+        }
+      },
+      "paired_goal_differences": {
+        "flow/jev_supervisor": {
+          "mean_difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "flow/jev_tools": {
+          "mean_difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        }
+      }
+    },
+    "agent-flow-heldout-v2": {
+      "summary": {
+        "flow/gemini": {
+          "n": 2,
+          "completed": 2,
+          "failed": 0,
+          "goal_rate": 0.5,
+          "p50_seconds": 34.35865870001726,
+          "p95_seconds": 48.91710775005631,
+          "model_calls": 18,
+          "fallbacks": 0,
+          "policy_violations": 0
+        },
+        "flow/jev_supervisor": {
+          "n": 2,
+          "completed": 2,
+          "failed": 0,
+          "goal_rate": 0.5,
+          "p50_seconds": 36.369402849988546,
+          "p95_seconds": 45.678582954971354,
+          "model_calls": 19,
+          "fallbacks": 2,
+          "policy_violations": 0
+        },
+        "flow/jev_tools": {
+          "n": 2,
+          "completed": 2,
+          "failed": 0,
+          "goal_rate": 1.0,
+          "p50_seconds": 31.671097050013486,
+          "p95_seconds": 40.16196556507493,
+          "model_calls": 21,
+          "fallbacks": 8,
+          "policy_violations": 0
+        }
+      },
+      "usage": {
+        "gemini_input_tokens": 65294,
+        "gemini_output_tokens": 14450,
+        "gemini_total_tokens": 79744,
+        "jev_input_tokens": 8099,
+        "jev_output_tokens": 915
+      },
+      "source_identity": {
+        "dataset_sha": "1cd2639ba193f9c7fd68d56fa62d351376a2c4ef442d998949d56c0c9b6e0bcf",
+        "model": "gemini-3.8-flash",
+        "jev_model": "jev-1.13.0",
+        "confidence_threshold": 0.9,
+        "domain": "flow",
+        "split": "heldout",
+        "repeats": 1,
+        "fixture_date": "2026-10-10",
+        "limits": {
+          "models": 12,
+          "tools": 20,
+          "time": 120.0
+        },
+        "codes": {
+          "scripts/eval/run_agent_comparison.py": "930768413ed7fe7961812b4703058f6014702b6ba7f48868e452f1347629ee9d",
+          "scripts/eval/agent_evaluation.py": "d1c43ef6016d3f1e081e5ebe0e727cbc54a7c4481dab6c98039d2502c7d89246",
+          "app/agents/team.py": "b8e20e361cfc29f9e2b25c1558d54489eb3932ce226916ea733dcab9af447e03",
+          "app/agents/runtime.py": "5a3acb1252db6875027b19a7414cac457ef29c7c5f9f42acd36f49374caaa87b",
+          "app/core/jev.py": "36bcf6a184e4873ed8f87e700255f1eadc5dc796f6ce8cb3f4109686f8ea1f66",
+          "app/core/llm.py": "90e3ba3df4411d13a285f5a7fb9c6f086c362573cfe2e1472f4b865f3626d8af"
+        }
+      },
+      "paired_goal_differences": {
+        "flow/jev_tools": {
+          "mean_difference": 0.5,
+          "ci95": [
+            0.0,
+            1.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "flow/jev_supervisor": {
+          "mean_difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        }
+      }
+    },
+    "agent-flow-dev-v3": {
+      "summary": {
+        "flow/gemini": {
+          "n": 8,
+          "completed": 8,
+          "failed": 0,
+          "goal_rate": 1.0,
+          "p50_seconds": 16.122133950004354,
+          "p95_seconds": 21.197934039938264,
+          "model_calls": 33,
+          "fallbacks": 0,
+          "policy_violations": 0
+        },
+        "flow/jev_supervisor": {
+          "n": 8,
+          "completed": 8,
+          "failed": 0,
+          "goal_rate": 1.0,
+          "p50_seconds": 14.958783650014084,
+          "p95_seconds": 23.71811255497159,
+          "model_calls": 41,
+          "fallbacks": 6,
+          "policy_violations": 0
+        },
+        "flow/jev_tools": {
+          "n": 8,
+          "completed": 8,
+          "failed": 0,
+          "goal_rate": 0.875,
+          "p50_seconds": 16.535281100077555,
+          "p95_seconds": 21.789670204994035,
+          "model_calls": 52,
+          "fallbacks": 14,
+          "policy_violations": 0
+        }
+      },
+      "usage": {
+        "gemini_input_tokens": 88088,
+        "gemini_output_tokens": 22291,
+        "gemini_total_tokens": 110379,
+        "jev_input_tokens": 18441,
+        "jev_output_tokens": 2192
+      },
+      "source_identity": {
+        "dataset_sha": "1cd2639ba193f9c7fd68d56fa62d351376a2c4ef442d998949d56c0c9b6e0bcf",
+        "model": "gemini-3.8-flash",
+        "jev_model": "jev-1.13.0",
+        "confidence_threshold": 0.9,
+        "domain": "flow",
+        "split": "dev",
+        "repeats": 1,
+        "fixture_date": "2026-10-10",
+        "limits": {
+          "models": 12,
+          "tools": 20,
+          "time": 120.0
+        },
+        "codes": {
+          "scripts/eval/run_agent_comparison.py": "930768413ed7fe7961812b4703058f6014702b6ba7f48868e452f1347629ee9d",
+          "scripts/eval/agent_evaluation.py": "d1c43ef6016d3f1e081e5ebe0e727cbc54a7c4481dab6c98039d2502c7d89246",
+          "app/agents/team.py": "6724c73821dc3e022816f93e96fd6f031cb71ecf410b49fb218d44781cb143aa",
+          "app/agents/runtime.py": "5a3acb1252db6875027b19a7414cac457ef29c7c5f9f42acd36f49374caaa87b",
+          "app/core/jev.py": "36bcf6a184e4873ed8f87e700255f1eadc5dc796f6ce8cb3f4109686f8ea1f66",
+          "app/core/llm.py": "90e3ba3df4411d13a285f5a7fb9c6f086c362573cfe2e1472f4b865f3626d8af"
+        }
+      },
+      "paired_goal_differences": {
+        "flow/jev_tools": {
+          "mean_difference": -0.125,
+          "ci95": [
+            -0.375,
+            0.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "flow/jev_supervisor": {
+          "mean_difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        }
+      }
+    },
+    "agent-flow-heldout-v3": {
+      "summary": {
+        "flow/gemini": {
+          "n": 2,
+          "completed": 2,
+          "failed": 0,
+          "goal_rate": 1.0,
+          "p50_seconds": 25.759298250020947,
+          "p95_seconds": 31.040572275075828,
+          "model_calls": 15,
+          "fallbacks": 0,
+          "policy_violations": 0
+        },
+        "flow/jev_supervisor": {
+          "n": 2,
+          "completed": 2,
+          "failed": 0,
+          "goal_rate": 1.0,
+          "p50_seconds": 23.978299550071824,
+          "p95_seconds": 26.624043995066312,
+          "model_calls": 15,
+          "fallbacks": 2,
+          "policy_violations": 0
+        },
+        "flow/jev_tools": {
+          "n": 2,
+          "completed": 2,
+          "failed": 0,
+          "goal_rate": 0.5,
+          "p50_seconds": 34.97521249996498,
+          "p95_seconds": 37.82699758997187,
+          "model_calls": 15,
+          "fallbacks": 3,
+          "policy_violations": 0
+        }
+      },
+      "usage": {
+        "gemini_input_tokens": 40657,
+        "gemini_output_tokens": 8324,
+        "gemini_total_tokens": 48981,
+        "jev_input_tokens": 4736,
+        "jev_output_tokens": 510
+      },
+      "source_identity": {
+        "dataset_sha": "1cd2639ba193f9c7fd68d56fa62d351376a2c4ef442d998949d56c0c9b6e0bcf",
+        "model": "gemini-3.8-flash",
+        "jev_model": "jev-1.13.0",
+        "confidence_threshold": 0.9,
+        "domain": "flow",
+        "split": "heldout",
+        "repeats": 1,
+        "fixture_date": "2026-10-10",
+        "limits": {
+          "models": 12,
+          "tools": 20,
+          "time": 120.0
+        },
+        "codes": {
+          "scripts/eval/run_agent_comparison.py": "930768413ed7fe7961812b4703058f6014702b6ba7f48868e452f1347629ee9d",
+          "scripts/eval/agent_evaluation.py": "d1c43ef6016d3f1e081e5ebe0e727cbc54a7c4481dab6c98039d2502c7d89246",
+          "app/agents/team.py": "6724c73821dc3e022816f93e96fd6f031cb71ecf410b49fb218d44781cb143aa",
+          "app/agents/runtime.py": "5a3acb1252db6875027b19a7414cac457ef29c7c5f9f42acd36f49374caaa87b",
+          "app/core/jev.py": "36bcf6a184e4873ed8f87e700255f1eadc5dc796f6ce8cb3f4109686f8ea1f66",
+          "app/core/llm.py": "90e3ba3df4411d13a285f5a7fb9c6f086c362573cfe2e1472f4b865f3626d8af"
+        }
+      },
+      "paired_goal_differences": {
+        "flow/jev_tools": {
+          "mean_difference": -0.5,
+          "ci95": [
+            -1.0,
+            0.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        },
+        "flow/jev_supervisor": {
+          "mean_difference": 0.0,
+          "ci95": [
+            0.0,
+            0.0
+          ],
+          "unit": "fact group, paired bootstrap, 2000 draws"
+        }
+      }
+    }
+  }
+}

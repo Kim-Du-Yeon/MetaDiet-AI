@@ -22,15 +22,14 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(
 from pathlib import Path
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_openai import ChatOpenAI
+from app.core.llm import get_chat_model
 from app.core.config import get_settings
 
 OUT_PATH  = Path(__file__).parent / "qa_dataset.json"
 DOCS_DIR  = Path(__file__).resolve().parents[3] / "docs" / "nutrition"
 MIN_CHARS = 350   # 이보다 짧은 청크는 QA 후보에서 제외 (정크 회피)
 
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.3,
-                 openai_api_key=get_settings().openai_api_key)
+llm = get_chat_model(temperature=0.3, role="eval")
 
 
 def load_candidate_chunks() -> list:

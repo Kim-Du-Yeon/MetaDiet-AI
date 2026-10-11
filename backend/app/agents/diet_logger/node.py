@@ -9,17 +9,17 @@ diet_logger/node.py
   다음 요청에서 supervisor가 pending_meals 감지 → confirm 라우팅
   interrupt_before=["confirm"] → 사용자 확인 대기 → resume → confirm_node 실행
 """
-from langchain_openai import ChatOpenAI
+from app.core.llm import get_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState, extract_messages_context
 from app.core.config import get_settings
 from app.tools.agent_tools import get_today_meals_tool, check_missing_meals_tool, rag_nutrition_tool
 from app.tools.nutrition_db import nutrition_db_tool
 from app.rag.region_guidance import get_region_guidance
+from app.core.service_clock import service_today
 import json, re
 
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0,
-                 openai_api_key=get_settings().openai_api_key)
+llm = get_chat_model(temperature=0)
 
 PARSE_PROMPT = ChatPromptTemplate.from_messages([
     ("system", """사용자가 먹은 음식을 파싱해서 JSON 배열로만 응답하세요.
@@ -126,9 +126,8 @@ def _filter_current_message_items(items: list, message: str) -> list:
 
 async def diet_logger_node(state: AgentState) -> dict:
     """파싱 + 영양계산 + RAG피드백 → pending_meals 저장"""
-    from datetime import date
     user_id = state["user_id"]
-    today   = date.today().isoformat()
+    today   = service_today().isoformat()
 
     today_data     = await get_today_meals_tool.ainvoke({"user_id": user_id})
     logged_meals   = today_data["logged_meal_types"]
@@ -161,7 +160,7 @@ async def diet_logger_node(state: AgentState) -> dict:
                 food_name=food_name, quantity_g=quantity_g))
             nutrition = json.loads(re.sub(r"```json|```", "", nutr_resp.content).strip())
             source    = "llm_estimated"
-            print(f"=== LLM 추정: {food_name} ===")
+            print("=== LLM 영양 추정 사용 | food_redacted ===")
         pending_meals.append({
             "meal_type": meal_type, "food_name": food_name, "quantity_g": quantity_g,
             "calories":  float(nutrition["calories"]),  "protein_g": float(nutrition["protein_g"]),
@@ -180,7 +179,7 @@ async def diet_logger_node(state: AgentState) -> dict:
         rag_context = rag_result["context"] if rag_grounded else ""
         print(f"=== [diet_logger] RAG grounded={rag_grounded} score={rag_result.get('max_score')} ===")
     except Exception as e:
-        print(f"=== [diet_logger] RAG 검색 오류: {e} ===")
+        print(f"=== [diet_logger] RAG 검색 오류 유형: {type(e).__name__} ===")
 
     missing_alert = ""
     try:
@@ -191,7 +190,7 @@ async def diet_logger_node(state: AgentState) -> dict:
         if missing_result.get("has_missing") and missing_result.get("missing_meals"):
             missing_alert = f"\n\n⚠️ **알림**: {', '.join(missing_result['missing_meals'])} 식사 기록이 없습니다."
     except Exception as e:
-        print(f"=== 누락 감지 오류: {e} ===")
+        print(f"=== 누락 감지 오류 유형: {type(e).__name__} ===")
 
     rag_feedback = ""
     if rag_grounded:
@@ -207,7 +206,7 @@ async def diet_logger_node(state: AgentState) -> dict:
             ))
             rag_feedback = f"\n\n💡 {feedback_resp.content.strip()}"
         except Exception as e:
-            print(f"=== 피드백 생성 오류: {e} ===")
+            print(f"=== 피드백 생성 오류 유형: {type(e).__name__} ===")
     else:
         rag_feedback = "\n\n💡 현재 문서 기반 근거는 부족해 출처 기반 피드백은 생략합니다."
 

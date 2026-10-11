@@ -1,7 +1,7 @@
 import json
 
 import pytest
-from langchain_openai import ChatOpenAI
+from app.core.llm import ConfiguredChatModel
 
 import app.agents.meal_plan.node as meal_plan_module
 import app.db.supabase_client as supabase_client_module
@@ -43,7 +43,7 @@ def _stub_meal_plan_deps(monkeypatch):
         r.content = content
         return r
 
-    monkeypatch.setattr(ChatOpenAI, "ainvoke", fake_ainvoke)
+    monkeypatch.setattr(ConfiguredChatModel, "ainvoke", fake_ainvoke)
     return captured
 
 

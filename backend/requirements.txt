@@ -28,20 +28,24 @@ httptools==0.8.0
 httpx==0.28.1
 httpx-sse==0.4.3
 hyperframe==6.1.0
-idna==3.16
+idna==3.20
 jiter==0.15.0
 jsonpatch==1.33
 jsonpointer==3.1.1
 langchain==1.3.2
 langchain-classic==1.0.7
 langchain-community==0.4.2
-langchain-core==1.4.0
-langchain-openai==1.2.2
+langchain-core==1.6.8
+langchain-google-genai==4.4.0
+google-genai==2.29.0
 langchain-pinecone==0.2.13
-langchain-protocol==0.0.15
+langchain-protocol==0.0.19
 langchain-text-splitters==1.1.2
 langgraph==1.2.2
 langgraph-checkpoint==4.1.1
+langgraph-checkpoint-postgres==3.1.0
+psycopg[binary]==3.3.4
+psycopg-pool==3.3.1
 langgraph-prebuilt==1.1.0
 langgraph-sdk==0.3.15
 langsmith==0.8.6
@@ -50,7 +54,6 @@ mdurl==0.1.2
 mmh3==5.2.1
 multidict==6.7.1
 numpy==2.4.6
-openai==2.38.0
 orjson==3.11.9
 ormsgpack==1.12.2
 packaging==24.2
@@ -130,3 +133,4 @@ pytest-asyncio==1.4.0
 # 멀티턴 평가 시나리오 D LLM judge (Anthropic API, scripts/eval/run_multiturn_eval.py)
 anthropic==0.111.0
 docstring-parser==0.18.0
+mcp==2.3.0

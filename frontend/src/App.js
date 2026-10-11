@@ -6,6 +6,7 @@ import ChatInterface from "./components/chat/ChatInterface";
 import CalendarView from "./components/calendar/CalendarView";
 import Dashboard from "./components/dashboard/Dashboard";
 import Setup from "./components/Setup";
+import Settings from "./components/Settings";
 import "./App.css";
 
 const INITIAL_MESSAGES = [
@@ -34,6 +35,15 @@ export default function App() {
   const [prevThreadId, setPrevThreadId] = useState(null);
   const [isInterrupted, setIsInterrupted] = useState(false);
 
+  const handleAccountDeleted = () => {
+    setToken(null);
+    setSession(null);
+    setSetupDone(false);
+    setMessages(INITIAL_MESSAGES);
+    setTodayStats(null);
+    setActiveTab("chat");
+  };
+
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
@@ -48,7 +58,10 @@ export default function App() {
   }, []);
 
   if (authLoading) {
-    return null;
+    return <main className="app-loading" role="status" aria-live="polite">
+      <span className="app-loading__eyebrow">MetaDiet AI</span>
+      <strong>안전하게 세션을 확인하는 중입니다.</strong>
+    </main>;
   }
   if (!session) {
     return <Auth />;
@@ -98,6 +111,12 @@ export default function App() {
         >
           📊 대시보드
         </button>
+        <button
+          className={activeTab === "settings" ? "tab active" : "tab"}
+          onClick={() => setActiveTab("settings")}
+        >
+          ⚙️ 설정
+        </button>
       </div>
 
       <div className="content">
@@ -116,6 +135,9 @@ export default function App() {
         )}
         {activeTab === "calendar" && <CalendarView />}
         {activeTab === "dashboard" && <Dashboard />}
+        {activeTab === "settings" && (
+          <Settings session={session} onDeleted={handleAccountDeleted} />
+        )}
       </div>
     </div>
   );

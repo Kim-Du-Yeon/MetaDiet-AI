@@ -7,6 +7,7 @@ DB에 쌓인 데이터를 패턴으로 전환하는 로직.
 """
 from datetime import date, timedelta
 from app.db.supabase_client import get_supabase
+from app.core.service_clock import service_today
 
 sb = get_supabase()
 
@@ -16,7 +17,7 @@ async def get_yesterday_summary(user_id: str) -> dict:
     어제 식단 요약 - 오늘 전략 조정의 근거
     초과했으면 오늘 얼마나 줄여야 하는지 계산
     """
-    yesterday = (date.today() - timedelta(days=1)).isoformat()
+    yesterday = (service_today() - timedelta(days=1)).isoformat()
     rows = sb.table("meal_logs").select(
         "calories, protein_g, carbs_g, fat_g"
     ).eq("user_id", user_id).eq("log_date", yesterday).execute().data
@@ -57,7 +58,7 @@ async def get_pattern_analysis(user_id: str, days: int = 30) -> dict:
     - 단백질 달성률
     - 목표 체중 도달 예상 기간
     """
-    start = (date.today() - timedelta(days=days)).isoformat()
+    start = (service_today() - timedelta(days=days)).isoformat()
     rows = sb.table("meal_logs").select(
         "log_date, calories, protein_g, carbs_g, fat_g"
     ).eq("user_id", user_id).gte("log_date", start).execute().data
@@ -218,7 +219,8 @@ async def get_missing_meal_alert(user_id: str) -> dict:
     from datetime import datetime
     now = datetime.now()
     hour = now.hour
-    today = date.today().isoformat()
+    today_value = service_today()
+    today = today_value.isoformat()
 
     # 오늘 기록된 끼니
     rows = sb.table("meal_logs").select("meal_type").eq(
@@ -233,8 +235,9 @@ async def get_missing_meal_alert(user_id: str) -> dict:
         missing.append("점심")
 
     # 이번달 누락 횟수
-    month_start = date.today().replace(day=1).isoformat()
-    all_days = (date.today() - date.today().replace(day=1)).days + 1
+    month_start_value = today_value.replace(day=1)
+    month_start = month_start_value.isoformat()
+    all_days = (today_value - month_start_value).days + 1
 
     month_rows = sb.table("meal_logs").select(
         "log_date, meal_type"
@@ -250,7 +253,7 @@ async def get_missing_meal_alert(user_id: str) -> dict:
     # 누락 횟수: 하루에 아침/점심/저녁 중 하나라도 없으면 누락 1회
     missing_days = 0
     for i in range(all_days):
-        check_date = (date.today().replace(day=1) + __import__('datetime').timedelta(days=i)).isoformat()
+        check_date = (month_start_value + timedelta(days=i)).isoformat()
         if check_date > today:
             break
         day_logs = logged_by_date.get(check_date, set())

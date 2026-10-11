@@ -9,10 +9,10 @@ def _doc(tail, source, page):
     return Document(page_content=_PREFIX + tail, metadata={"source_file": source, "page": page})
 
 
-def test_doc_key_same_source_page_prefix_same_key():
+def test_doc_key_same_prefix_different_evidence_has_different_key():
     d1 = _doc(" tail one", "a.pdf", 3)
     d2 = _doc(" tail two but different ending entirely", "a.pdf", 3)
-    assert _doc_key(d1) == _doc_key(d2)
+    assert _doc_key(d1) != _doc_key(d2)
 
 
 def test_doc_key_different_page_different_key():

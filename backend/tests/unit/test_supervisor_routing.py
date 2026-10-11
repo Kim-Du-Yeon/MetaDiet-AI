@@ -1,5 +1,5 @@
 import pytest
-from langchain_openai import ChatOpenAI
+from app.core.llm import ConfiguredChatModel
 
 from app.agents.supervisor.node import _heuristic_intent, route_to_agent, supervisor_node
 
@@ -65,7 +65,7 @@ async def test_supervisor_node_keeps_off_topic_llm_classification(monkeypatch):
     async def fake_ainvoke(self, *a, **k):
         return _Resp()
 
-    monkeypatch.setattr(ChatOpenAI, "ainvoke", fake_ainvoke)
+    monkeypatch.setattr(ConfiguredChatModel, "ainvoke", fake_ainvoke)
 
     result = await supervisor_node({"message": "미국 대통령이 누구야?", "messages": []})
 

@@ -1,0 +1,26 @@
+{
+  "scope": "120 inventory; not a claim of completed independent service evaluation",
+  "sources": [
+    {
+      "domain": "rag_dev",
+      "path": "docs/rag_experiments/gold_core40_v2.json",
+      "sha256": "eb08185afae97e32526d6c3a48003c7161c73e92c48d59227c053d5e350bc06d",
+      "n": 40
+    },
+    {
+      "domain": "rag_heldout",
+      "path": "docs/rag_experiments/gold_heldout20_v1.json",
+      "sha256": "78028e1392cc15cc42a46c45060b27dc678cfc5ac0a059c74c301839cce6b80c",
+      "n": 20
+    },
+    {
+      "domain": "agent",
+      "path": "docs/agent_experiments/gold_agent60_v2.json",
+      "sha256": "1cd2639ba193f9c7fd68d56fa62d351376a2c4ef442d998949d56c0c9b6e0bcf",
+      "n": 60
+    }
+  ],
+  "n": 120,
+  "rag_heldout_previously_used_for_dimension_eval": true,
+  "agent_safety_scope": "20 scripted runtime boundary replays; clinical/OCR/real DB confirmation tests are separate"
+}

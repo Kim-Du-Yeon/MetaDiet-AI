@@ -6,10 +6,11 @@ diet_logger, confirm, edit 등 각 Agent가 필요한 Tool만 호출.
 """
 from datetime import date, timedelta
 from langchain_core.tools import tool
-from langchain_openai import ChatOpenAI
+from app.core.llm import get_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from app.db.supabase_client import get_supabase
 from app.core.config import get_settings
+from app.core.service_clock import service_today
 import json, re
 
 sb = get_supabase()
@@ -22,7 +23,7 @@ async def get_today_meals_tool(user_id: str) -> dict:
     try:
         rows = sb.table("meal_logs").select("*").eq(
             "user_id", user_id
-        ).eq("log_date", date.today().isoformat()).execute().data
+        ).eq("log_date", service_today().isoformat()).execute().data
 
         logged_meal_types = list(set(r["meal_type"] for r in rows))
         today_meals = [{
@@ -197,26 +198,8 @@ async def update_strategy_tool(
     triggered_by: str,
     inbody_log_id: str = None,
 ) -> dict:
-    """식단 전략 업데이트 (기존 비활성화 후 새 전략 저장)"""
-    try:
-        sb.table("diet_strategies").update(
-            {"is_active": False}
-        ).eq("user_id", user_id).eq("is_active", True).execute()
-
-        sb.table("diet_strategies").insert({
-            "user_id": user_id,
-            "daily_calories": daily_calories,
-            "protein_g": protein_g,
-            "carbs_g": carbs_g,
-            "fat_g": fat_g,
-            "strategy_note": strategy_note,
-            "triggered_by": triggered_by,
-            "inbody_log_id": inbody_log_id,
-            "is_active": True,
-        }).execute()
-        return {"success": True}
-    except Exception as e:
-        return {"success": False, "error": str(e)}
+    """구형 직접 저장은 차단. 전략 제안·근거 검증·사용자 확정 경로를 사용하세요."""
+    return {"success": False, "error": "proposal_approval_required"}
 
 
 # ── Tool 9: 어제 요약 ───────────────────────────────────────────────

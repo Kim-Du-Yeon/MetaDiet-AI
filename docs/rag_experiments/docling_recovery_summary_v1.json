@@ -1,0 +1,575 @@
+{
+  "documents": [
+    {
+      "source": "KDRI_2025_vol1.pdf",
+      "pages": 393,
+      "seconds": 559.8325600000098,
+      "attempts": [
+        {
+          "status": "completed",
+          "exit_code": 0,
+          "seconds": 559.8325600000098
+        }
+      ],
+      "config_profiles": [
+        {
+          "picture_images": true,
+          "queue_size": 100,
+          "num_threads": 4,
+          "device": "cuda",
+          "batch_size": 4,
+          "table_mode": "accurate",
+          "timeout_seconds": 300,
+          "table_structure": true
+        }
+      ],
+      "backends": [
+        "docling_parse"
+      ],
+      "tables": 210,
+      "images": 100,
+      "text_pages": 389
+    },
+    {
+      "source": "KDRI_2025_vol2.pdf",
+      "pages": 569,
+      "seconds": 802.3405068999855,
+      "attempts": [
+        {
+          "status": "failed",
+          "exit_code": 3221226356,
+          "seconds": 377.22497590002604
+        },
+        {
+          "status": "failed",
+          "exit_code": 3221225477,
+          "seconds": 190.5389175999444
+        },
+        {
+          "status": "failed",
+          "exit_code": 3221225477,
+          "seconds": 97.03939980000723
+        },
+        {
+          "status": "completed",
+          "exit_code": 0,
+          "seconds": 137.53721360000782
+        }
+      ],
+      "config_profiles": [
+        {
+          "picture_images": true,
+          "queue_size": 100,
+          "num_threads": 4,
+          "device": "cuda",
+          "batch_size": 4,
+          "table_mode": "accurate",
+          "timeout_seconds": 300,
+          "table_structure": true
+        }
+      ],
+      "backends": [
+        "docling_parse"
+      ],
+      "tables": 256,
+      "images": 155,
+      "text_pages": 567
+    },
+    {
+      "source": "KDRI_2025_vol3.pdf",
+      "pages": 535,
+      "seconds": 1005.5569760000799,
+      "attempts": [
+        {
+          "status": "failed",
+          "exit_code": 3221225477,
+          "seconds": 546.9930133000016
+        },
+        {
+          "status": "failed",
+          "exit_code": 3221225477,
+          "seconds": 97.37796180008445
+        },
+        {
+          "status": "failed",
+          "exit_code": 3221225477,
+          "seconds": 97.56022880005185
+        },
+        {
+          "status": "failed",
+          "exit_code": 3221225477,
+          "seconds": 187.21424559992738
+        },
+        {
+          "status": "completed",
+          "exit_code": 0,
+          "seconds": 76.41152650001459
+        }
+      ],
+      "config_profiles": [
+        {
+          "picture_images": true,
+          "queue_size": 100,
+          "num_threads": 4,
+          "device": "cuda",
+          "batch_size": 4,
+          "table_mode": "accurate",
+          "timeout_seconds": 300,
+          "table_structure": true
+        },
+        {
+          "picture_images": true,
+          "queue_size": 100,
+          "num_threads": 4,
+          "device": "cuda",
+          "batch_size": 4,
+          "table_mode": "accurate",
+          "timeout_seconds": 300,
+          "table_structure": true,
+          "parser_threads": 1
+        },
+        {
+          "picture_images": true,
+          "queue_size": 100,
+          "num_threads": 4,
+          "device": "cuda",
+          "batch_size": 4,
+          "table_mode": "accurate",
+          "timeout_seconds": 300,
+          "table_structure": true,
+          "parser_threads": null
+        }
+      ],
+      "backends": [
+        "docling_parse",
+        "pdfium"
+      ],
+      "tables": 267,
+      "images": 232,
+      "text_pages": 530
+    },
+    {
+      "source": "WHO_carbohydrate_2023.pdf",
+      "pages": 100,
+      "seconds": 147.07081439998,
+      "attempts": [
+        {
+          "status": "failed",
+          "exit_code": 3221225477,
+          "seconds": 96.85064259998035
+        },
+        {
+          "status": "completed",
+          "exit_code": 0,
+          "seconds": 50.22017179999966
+        }
+      ],
+      "config_profiles": [
+        {
+          "picture_images": true,
+          "queue_size": 100,
+          "num_threads": 4,
+          "device": "cuda",
+          "batch_size": 4,
+          "table_mode": "accurate",
+          "timeout_seconds": 300,
+          "table_structure": true,
+          "parser_threads": null
+        }
+      ],
+      "backends": [
+        "pdfium"
+      ],
+      "tables": 39,
+      "images": 6,
+      "text_pages": 96
+    },
+    {
+      "source": "WHO_total_fat_2023.pdf",
+      "pages": 66,
+      "seconds": 50.206554399919696,
+      "attempts": [
+        {
+          "status": "completed",
+          "exit_code": 0,
+          "seconds": 50.206554399919696
+        }
+      ],
+      "config_profiles": [
+        {
+          "picture_images": true,
+          "queue_size": 100,
+          "num_threads": 4,
+          "device": "cuda",
+          "batch_size": 4,
+          "table_mode": "accurate",
+          "timeout_seconds": 300,
+          "table_structure": true,
+          "parser_threads": null
+        }
+      ],
+      "backends": [
+        "pdfium"
+      ],
+      "tables": 13,
+      "images": 3,
+      "text_pages": 62
+    },
+    {
+      "source": "WHO_saturated_trans_fat_2023.pdf",
+      "pages": 134,
+      "seconds": 117.37832990009338,
+      "attempts": [
+        {
+          "status": "completed",
+          "exit_code": 0,
+          "seconds": 117.37832990009338
+        }
+      ],
+      "config_profiles": [
+        {
+          "picture_images": true,
+          "queue_size": 100,
+          "num_threads": 4,
+          "device": "cuda",
+          "batch_size": 4,
+          "table_mode": "accurate",
+          "timeout_seconds": 300,
+          "table_structure": true,
+          "parser_threads": null
+        }
+      ],
+      "backends": [
+        "pdfium"
+      ],
+      "tables": 49,
+      "images": 8,
+      "text_pages": 131
+    },
+    {
+      "source": "WHO_sugars_2015.pdf",
+      "pages": 59,
+      "seconds": 44.38739869999699,
+      "attempts": [
+        {
+          "status": "completed",
+          "exit_code": 0,
+          "seconds": 44.38739869999699
+        }
+      ],
+      "config_profiles": [
+        {
+          "picture_images": true,
+          "queue_size": 100,
+          "num_threads": 4,
+          "device": "cuda",
+          "batch_size": 4,
+          "table_mode": "accurate",
+          "timeout_seconds": 300,
+          "table_structure": true,
+          "parser_threads": null
+        }
+      ],
+      "backends": [
+        "pdfium"
+      ],
+      "tables": 6,
+      "images": 8,
+      "text_pages": 56
+    },
+    {
+      "source": "WHO_sodium_2012.pdf",
+      "pages": 56,
+      "seconds": 48.81118420010898,
+      "attempts": [
+        {
+          "status": "completed",
+          "exit_code": 0,
+          "seconds": 48.81118420010898
+        }
+      ],
+      "config_profiles": [
+        {
+          "picture_images": true,
+          "queue_size": 100,
+          "num_threads": 4,
+          "device": "cuda",
+          "batch_size": 4,
+          "table_mode": "accurate",
+          "timeout_seconds": 300,
+          "table_structure": true,
+          "parser_threads": null
+        }
+      ],
+      "backends": [
+        "pdfium"
+      ],
+      "tables": 9,
+      "images": 7,
+      "text_pages": 53
+    },
+    {
+      "source": "guideline2022_vol8.pdf",
+      "pages": 16,
+      "seconds": 36.375522800022736,
+      "attempts": [
+        {
+          "status": "completed",
+          "exit_code": 0,
+          "seconds": 36.375522800022736
+        }
+      ],
+      "config_profiles": [
+        {
+          "picture_images": true,
+          "queue_size": 100,
+          "num_threads": 4,
+          "device": "cuda",
+          "batch_size": 4,
+          "table_mode": "accurate",
+          "timeout_seconds": 300,
+          "table_structure": true,
+          "parser_threads": null
+        }
+      ],
+      "backends": [
+        "pdfium"
+      ],
+      "tables": 16,
+      "images": 8,
+      "text_pages": 16
+    },
+    {
+      "source": "s12970-017-0177-8.pdf",
+      "pages": 25,
+      "seconds": 31.121022899984382,
+      "attempts": [
+        {
+          "status": "completed",
+          "exit_code": 0,
+          "seconds": 31.121022899984382
+        }
+      ],
+      "config_profiles": [
+        {
+          "picture_images": true,
+          "queue_size": 100,
+          "num_threads": 4,
+          "device": "cuda",
+          "batch_size": 4,
+          "table_mode": "accurate",
+          "timeout_seconds": 300,
+          "table_structure": true,
+          "parser_threads": null
+        }
+      ],
+      "backends": [
+        "pdfium"
+      ],
+      "tables": 0,
+      "images": 3,
+      "text_pages": 25
+    }
+  ],
+  "uniform_config": false,
+  "scope": "Full Docling recovery corpus, not a single-configuration speed benchmark",
+  "total_pages": 1953,
+  "total_seconds": 2843.0808702001814,
+  "search_chunks": 1925,
+  "checks": [
+    {
+      "id": "kdri-rounding",
+      "type": "text_anchor",
+      "passed": true
+    },
+    {
+      "id": "kdri-activity",
+      "type": "text_anchor",
+      "passed": true
+    },
+    {
+      "id": "kdri-formula-edition",
+      "type": "text_anchor",
+      "passed": true
+    },
+    {
+      "id": "kdri-adult-units",
+      "type": "text_anchor",
+      "passed": true
+    },
+    {
+      "id": "kdri-lactation-condition",
+      "type": "text_anchor",
+      "passed": true
+    },
+    {
+      "id": "kdri-infant-volume-units",
+      "type": "text_anchor",
+      "passed": true
+    },
+    {
+      "id": "table7-infant-early",
+      "type": "table_row",
+      "passed": true
+    },
+    {
+      "id": "table7-infant-late",
+      "type": "table_row",
+      "passed": true
+    },
+    {
+      "id": "table7-child",
+      "type": "table_row",
+      "passed": true
+    },
+    {
+      "id": "table8-study1",
+      "type": "table_row",
+      "passed": true
+    },
+    {
+      "id": "table8-study2",
+      "type": "table_row",
+      "passed": true
+    },
+    {
+      "id": "sugar10",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "sugar5",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "juice",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "lifecourse",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "evidence5",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "protein_daily",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "protein_serving",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "leucine",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "spacing",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "exercise_window",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "tee_components",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "energy_balance",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "negative_balance",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "eer_concept",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "eer_edition",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "eer_rounding",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "activity_reference",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "obesity_initial_goal",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "secondary_obesity",
+      "type": "gold_excerpt",
+      "passed": true
+    },
+    {
+      "id": "comorbidity_screen",
+      "type": "gold_excerpt",
+      "passed": true
+    }
+  ],
+  "totals": {
+    "text_anchor": {
+      "passed": 6,
+      "n": 6
+    },
+    "table_row": {
+      "passed": 5,
+      "n": 5
+    },
+    "gold_excerpt": {
+      "passed": 20,
+      "n": 20
+    }
+  },
+  "cpu_gpu_sample": {
+    "gpu": "RTX 3070 Laptop 8GB",
+    "cpu_seconds": 73.6652964000823,
+    "gpu_seconds": 34.846575299976394,
+    "repeats": 1,
+    "pages": [
+      10,
+      64,
+      65
+    ],
+    "scope": "same-version end-to-end three-page sample",
+    "runtime_versions": {
+      "torch": "2.11.0+cu128",
+      "torchvision": "0.26.0+cu128",
+      "docling": "2.135.0",
+      "docling-core": "2.101.1",
+      "docling-ibm-models": "4.0.3",
+      "docling-parse": "7.22.2",
+      "pypdfium2": "5.14.0",
+      "transformers": "5.19.0"
+    },
+    "source_sha256": "31c99fbf3a0253f55a5b9f53964ea9a1db8a108077650d119b4841a9b11f9cad"
+  },
+  "failed_attempts": 8,
+  "operational_ruling": "Keep existing PyPDF/recursive; recovered corpus uses mixed Docling backend/config and has no new retrieval or answer-quality score"
+}

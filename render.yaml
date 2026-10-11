@@ -1,0 +1,45 @@
+services:
+  - type: web
+    name: metadiet-api
+    runtime: docker
+    plan: free
+    region: singapore
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - {key: ENABLE_SCHEDULER, value: "true"}
+      - {key: SERVICE_TIMEZONE, value: Asia/Seoul}
+      - {key: ENVIRONMENT, value: beta}
+      - {key: RAG_USE_RERANK, value: "false"}
+      - {key: RAG_CHUNKS_PATH, value: /app/app/rag/chunks.pkl}
+      - {key: PINECONE_INDEX_NAME, value: diet-agent-rag}
+      - {key: PINECONE_NAMESPACE, value: metadiet-gemini-1157903c493dbb5d759f}
+      - {key: EMBEDDING_MODEL, value: gemini-embedding-2}
+      - {key: EMBEDDING_DIMENSION, value: "3072"}
+      - {key: GEMINI_MODEL, value: gemini-3.8-flash}
+      - {key: GEMINI_VISION_MODEL, value: gemini-3.8-flash}
+      - {key: LANGSMITH_TRACING, value: "true"}
+      - {key: LANGSMITH_HIDE_INPUTS, value: "true"}
+      - {key: LANGSMITH_HIDE_OUTPUTS, value: "true"}
+      - {key: LANGSMITH_PROJECT, value: metadiet-beta}
+      - {key: GEMINI_API_KEY, sync: false}
+      - {key: SUPABASE_URL, sync: false}
+      - {key: SUPABASE_SERVICE_KEY, sync: false}
+      - {key: SUPABASE_JWT_SECRET, sync: false}
+      - {key: SUPABASE_DB_URL, sync: false}
+      - {key: PINECONE_API_KEY, sync: false}
+      - {key: LANGSMITH_API_KEY, sync: false}
+      - {key: CORS_ORIGINS, sync: false}
+
+  - type: web
+    name: metadiet-web
+    runtime: static
+    buildCommand: cd frontend && npm ci && npm run build
+    staticPublishPath: ./frontend/build
+    envVars:
+      - {key: REACT_APP_API_URL, sync: false}
+      - {key: REACT_APP_SUPABASE_URL, sync: false}
+      - {key: REACT_APP_SUPABASE_ANON_KEY, sync: false}
+    routes:
+      - {type: rewrite, source: /*, destination: /index.html}

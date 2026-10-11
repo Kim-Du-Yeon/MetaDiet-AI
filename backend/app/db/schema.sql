@@ -78,6 +78,7 @@ CREATE TABLE diet_strategies (
 CREATE TABLE chat_history (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    thread_id TEXT NOT NULL DEFAULT 'default',
     role TEXT CHECK (role IN ('user','assistant')),
     content TEXT NOT NULL,
     agent_type TEXT,              -- 어떤 Sub-Agent가 응답했는지 기록
@@ -89,6 +90,7 @@ CREATE INDEX idx_meal_logs_user_date ON meal_logs(user_id, log_date);
 CREATE INDEX idx_inbody_logs_user ON inbody_logs(user_id, measured_date DESC);
 CREATE INDEX idx_diet_strategies_active ON diet_strategies(user_id, is_active);
 CREATE INDEX idx_chat_history_user ON chat_history(user_id, created_at DESC);
+CREATE INDEX idx_chat_history_user_thread ON chat_history(user_id, thread_id, created_at DESC);
 
 -- RLS (Row Level Security) - 본인 데이터만 접근
 ALTER TABLE users ENABLE ROW LEVEL SECURITY;

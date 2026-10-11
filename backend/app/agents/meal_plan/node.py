@@ -1,14 +1,14 @@
-from langchain_openai import ChatOpenAI
+from app.core.llm import get_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState, extract_messages_context
 from app.core.config import get_settings
 from app.tools.analytics import get_yesterday_summary, get_pattern_analysis
 from app.rag.region_guidance import get_region_guidance
+from app.core.service_clock import service_today
 import json, re
 from datetime import date, timedelta
 
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.3,
-                 openai_api_key=get_settings().openai_api_key)
+llm = get_chat_model(temperature=0.3)
 
 MEAL_PLAN_PROMPT = ChatPromptTemplate.from_messages([
     ("system", """당신은 영양학 전문 식단 플래너입니다.
@@ -124,8 +124,9 @@ async def meal_plan_node(state: AgentState) -> dict:
     sb = get_supabase()
     user_id = state["user_id"]
 
-    today = date.today().isoformat()
-    tomorrow = (date.today() + timedelta(days=1)).isoformat()
+    today_value = service_today()
+    today = today_value.isoformat()
+    tomorrow = (today_value + timedelta(days=1)).isoformat()
 
     # 오늘 식단 현황
     rows = sb.table("meal_logs").select("*").eq(
@@ -198,9 +199,9 @@ async def meal_plan_node(state: AgentState) -> dict:
                 "현재 문서 기반 근거는 부족합니다. "
                 "출처 기반 설명은 생성하지 말고, 사용자 목표와 기록 기반으로만 식단을 제안하세요."
             )
-            print(f"=== meal_plan RAG: query='{rag_query}' grounded={rag_grounded} score={result['max_score']} ===")
+            print(f"=== meal_plan RAG: query_redacted grounded={rag_grounded} score={result['max_score']} ===")
         except Exception as e:
-            print(f"=== meal_plan RAG 실패: {e} ===")
+            print(f"=== meal_plan RAG 실패 유형: {type(e).__name__} ===")
             rag_context, rag_grounded = (
                 "현재 문서 기반 근거는 부족합니다. "
                 "출처 기반 설명은 생성하지 말고, 사용자 목표와 기록 기반으로만 식단을 제안하세요."

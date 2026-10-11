@@ -1,7 +1,7 @@
 """
 ocr/food_vision.py
 
-음식 사진 → 음식명 리스트 추출 (GPT-4o-mini Vision).
+음식 사진 → 음식명 리스트 추출 (Gemini Vision).
 
 설계 원칙 (inbody_ocr와 동일 철학):
   - Vision을 '데이터 파싱'에만 사용. AI가 식단을 멋대로 자동 기록하는 게 아니라
@@ -13,13 +13,10 @@ ocr/food_vision.py
   - 기존: 음식을 일일이 타이핑/검색
   - 이 앱: 사진 한 장 → 음식명 자동 인식 → 확인만 하면 기존 RAG·검증 파이프라인으로
 """
-import base64
 import re
 import json
-from openai import AsyncOpenAI
-from app.core.config import get_settings
+from app.ocr.vision import read_image
 
-client = AsyncOpenAI(api_key=get_settings().openai_api_key)
 
 FOOD_IDENTIFY_PROMPT = """이 사진에 보이는 '음식'의 이름만 한국어로 나열하세요.
 규칙:
@@ -33,22 +30,8 @@ JSON 배열로만 응답: ["음식1","음식2"]
 
 async def identify_foods_from_image(image_bytes: bytes) -> list[str]:
     """음식 사진 bytes → 음식명 리스트. 인식 실패 시 빈 리스트."""
-    b64 = base64.b64encode(image_bytes).decode("utf-8")
-    resp = await client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{
-            "role": "user",
-            "content": [
-                {"type": "text", "text": FOOD_IDENTIFY_PROMPT},
-                {"type": "image_url",
-                 "image_url": {"url": f"data:image/jpeg;base64,{b64}",
-                               "detail": "low"}},   # 음식 식별엔 low로 충분(토큰 절감)
-            ],
-        }],
-        max_tokens=200,
-        temperature=0,
-    )
-    raw = re.sub(r"```json|```", "", resp.choices[0].message.content.strip()).strip()
+    resp = await read_image(image_bytes, FOOD_IDENTIFY_PROMPT, max_tokens=512)
+    raw = re.sub(r"```json|```", "", resp.strip()).strip()
     try:
         foods = json.loads(raw)
     except json.JSONDecodeError:

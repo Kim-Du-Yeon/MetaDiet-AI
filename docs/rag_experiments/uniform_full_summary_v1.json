@@ -1,0 +1,913 @@
+{
+  "scope": "uniform full corpus development comparison; BM25 only, not final answer quality",
+  "n": 40,
+  "fact_groups": 20,
+  "pages": 1953,
+  "sources": 10,
+  "recipes": [
+    {
+      "parser": "pypdf",
+      "chunking": "page",
+      "search_chunks": 1932,
+      "context_budget": 6000,
+      "page_hit": 0.325,
+      "excerpt_hit": 0.325,
+      "mrr": 0.25,
+      "context_chars": 5995.9,
+      "truncated": 0.975
+    },
+    {
+      "parser": "pypdf",
+      "chunking": "page",
+      "search_chunks": 1932,
+      "context_budget": 12000,
+      "page_hit": 0.425,
+      "excerpt_hit": 0.425,
+      "mrr": 0.27708333333333335,
+      "context_chars": 10112.275,
+      "truncated": 0.375
+    },
+    {
+      "parser": "pypdf",
+      "chunking": "parent_child",
+      "search_chunks": 10990,
+      "context_budget": 6000,
+      "page_hit": 0.375,
+      "excerpt_hit": 0.375,
+      "mrr": 0.24166666666666664,
+      "context_chars": 5445.675,
+      "truncated": 0.45
+    },
+    {
+      "parser": "pypdf",
+      "chunking": "parent_child",
+      "search_chunks": 10990,
+      "context_budget": 12000,
+      "page_hit": 0.375,
+      "excerpt_hit": 0.375,
+      "mrr": 0.24166666666666664,
+      "context_chars": 5843.175,
+      "truncated": 0.0
+    },
+    {
+      "parser": "pypdf",
+      "chunking": "section",
+      "search_chunks": 3828,
+      "context_budget": 6000,
+      "page_hit": 0.35,
+      "excerpt_hit": 0.3,
+      "mrr": 0.225,
+      "context_chars": 4528.925,
+      "truncated": 0.0
+    },
+    {
+      "parser": "pypdf",
+      "chunking": "section",
+      "search_chunks": 3828,
+      "context_budget": 12000,
+      "page_hit": 0.35,
+      "excerpt_hit": 0.3,
+      "mrr": 0.225,
+      "context_chars": 4528.925,
+      "truncated": 0.0
+    },
+    {
+      "parser": "pypdf",
+      "chunking": "recursive",
+      "search_chunks": 4141,
+      "context_budget": 6000,
+      "page_hit": 0.275,
+      "excerpt_hit": 0.25,
+      "mrr": 0.17083333333333334,
+      "context_chars": 4334.75,
+      "truncated": 0.0
+    },
+    {
+      "parser": "pypdf",
+      "chunking": "recursive",
+      "search_chunks": 4141,
+      "context_budget": 12000,
+      "page_hit": 0.275,
+      "excerpt_hit": 0.25,
+      "mrr": 0.17083333333333334,
+      "context_chars": 4334.75,
+      "truncated": 0.0
+    },
+    {
+      "parser": "pdfplumber",
+      "chunking": "page",
+      "search_chunks": 1932,
+      "context_budget": 6000,
+      "page_hit": 0.325,
+      "excerpt_hit": 0.325,
+      "mrr": 0.23958333333333334,
+      "context_chars": 6000.0,
+      "truncated": 1.0
+    },
+    {
+      "parser": "pdfplumber",
+      "chunking": "page",
+      "search_chunks": 1932,
+      "context_budget": 12000,
+      "page_hit": 0.4,
+      "excerpt_hit": 0.4,
+      "mrr": 0.26041666666666663,
+      "context_chars": 9505.825,
+      "truncated": 0.3
+    },
+    {
+      "parser": "pdfplumber",
+      "chunking": "parent_child",
+      "search_chunks": 10926,
+      "context_budget": 6000,
+      "page_hit": 0.4,
+      "excerpt_hit": 0.325,
+      "mrr": 0.21041666666666664,
+      "context_chars": 5557.75,
+      "truncated": 0.525
+    },
+    {
+      "parser": "pdfplumber",
+      "chunking": "parent_child",
+      "search_chunks": 10926,
+      "context_budget": 12000,
+      "page_hit": 0.4,
+      "excerpt_hit": 0.35,
+      "mrr": 0.21041666666666664,
+      "context_chars": 6045.65,
+      "truncated": 0.0
+    },
+    {
+      "parser": "pdfplumber",
+      "chunking": "section",
+      "search_chunks": 3729,
+      "context_budget": 6000,
+      "page_hit": 0.325,
+      "excerpt_hit": 0.25,
+      "mrr": 0.19583333333333333,
+      "context_chars": 4540.15,
+      "truncated": 0.05
+    },
+    {
+      "parser": "pdfplumber",
+      "chunking": "section",
+      "search_chunks": 3729,
+      "context_budget": 12000,
+      "page_hit": 0.325,
+      "excerpt_hit": 0.25,
+      "mrr": 0.19583333333333333,
+      "context_chars": 4602.525,
+      "truncated": 0.0
+    },
+    {
+      "parser": "pdfplumber",
+      "chunking": "recursive",
+      "search_chunks": 4297,
+      "context_budget": 6000,
+      "page_hit": 0.275,
+      "excerpt_hit": 0.2,
+      "mrr": 0.175,
+      "context_chars": 4298.0,
+      "truncated": 0.0
+    },
+    {
+      "parser": "pdfplumber",
+      "chunking": "recursive",
+      "search_chunks": 4297,
+      "context_budget": 12000,
+      "page_hit": 0.275,
+      "excerpt_hit": 0.2,
+      "mrr": 0.175,
+      "context_chars": 4298.0,
+      "truncated": 0.0
+    },
+    {
+      "parser": "docling",
+      "chunking": "page",
+      "search_chunks": 1923,
+      "context_budget": 6000,
+      "page_hit": 0.4,
+      "excerpt_hit": 0.4,
+      "mrr": 0.29583333333333334,
+      "context_chars": 5986.425,
+      "truncated": 0.975
+    },
+    {
+      "parser": "docling",
+      "chunking": "page",
+      "search_chunks": 1923,
+      "context_budget": 12000,
+      "page_hit": 0.475,
+      "excerpt_hit": 0.475,
+      "mrr": 0.31666666666666665,
+      "context_chars": 10591.625,
+      "truncated": 0.5
+    },
+    {
+      "parser": "docling",
+      "chunking": "parent_child",
+      "search_chunks": 17496,
+      "context_budget": 6000,
+      "page_hit": 0.4,
+      "excerpt_hit": 0.375,
+      "mrr": 0.25625,
+      "context_chars": 5736.0,
+      "truncated": 0.65
+    },
+    {
+      "parser": "docling",
+      "chunking": "parent_child",
+      "search_chunks": 17496,
+      "context_budget": 12000,
+      "page_hit": 0.4,
+      "excerpt_hit": 0.375,
+      "mrr": 0.25625,
+      "context_chars": 6329.4,
+      "truncated": 0.0
+    },
+    {
+      "parser": "docling",
+      "chunking": "section",
+      "search_chunks": 5365,
+      "context_budget": 6000,
+      "page_hit": 0.45,
+      "excerpt_hit": 0.375,
+      "mrr": 0.27083333333333337,
+      "context_chars": 3801.075,
+      "truncated": 0.075
+    },
+    {
+      "parser": "docling",
+      "chunking": "section",
+      "search_chunks": 5365,
+      "context_budget": 12000,
+      "page_hit": 0.45,
+      "excerpt_hit": 0.375,
+      "mrr": 0.27083333333333337,
+      "context_chars": 4125.65,
+      "truncated": 0.05
+    },
+    {
+      "parser": "docling",
+      "chunking": "recursive",
+      "search_chunks": 7300,
+      "context_budget": 6000,
+      "page_hit": 0.425,
+      "excerpt_hit": 0.325,
+      "mrr": 0.2833333333333333,
+      "context_chars": 3785.0,
+      "truncated": 0.0
+    },
+    {
+      "parser": "docling",
+      "chunking": "recursive",
+      "search_chunks": 7300,
+      "context_budget": 12000,
+      "page_hit": 0.425,
+      "excerpt_hit": 0.325,
+      "mrr": 0.2833333333333333,
+      "context_chars": 3785.0,
+      "truncated": 0.0
+    }
+  ],
+  "preservation": [
+    {
+      "parser": "pypdf",
+      "checks": [
+        {
+          "id": "kdri-rounding",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-activity",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-formula-edition",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-adult-units",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-lactation-condition",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-infant-volume-units",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "table7-infant-early",
+          "type": "table_row",
+          "passed": false
+        },
+        {
+          "id": "table7-infant-late",
+          "type": "table_row",
+          "passed": false
+        },
+        {
+          "id": "table7-child",
+          "type": "table_row",
+          "passed": false
+        },
+        {
+          "id": "table8-study1",
+          "type": "table_row",
+          "passed": false
+        },
+        {
+          "id": "table8-study2",
+          "type": "table_row",
+          "passed": false
+        },
+        {
+          "id": "activity_reference",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "comorbidity_screen",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_concept",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_edition",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_rounding",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "energy_balance",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "evidence5",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "exercise_window",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "juice",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "leucine",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "lifecourse",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "negative_balance",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "obesity_initial_goal",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "protein_daily",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "protein_serving",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "secondary_obesity",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "spacing",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "sugar10",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "sugar5",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "tee_components",
+          "type": "gold_excerpt",
+          "passed": true
+        }
+      ],
+      "totals": {
+        "text_anchor": {
+          "passed": 6,
+          "n": 6
+        },
+        "table_row": {
+          "passed": 0,
+          "n": 5
+        },
+        "gold_excerpt": {
+          "passed": 20,
+          "n": 20
+        }
+      },
+      "tables": 0,
+      "images": 0
+    },
+    {
+      "parser": "pdfplumber",
+      "checks": [
+        {
+          "id": "kdri-rounding",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-activity",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-formula-edition",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-adult-units",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-lactation-condition",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-infant-volume-units",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "table7-infant-early",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "table7-infant-late",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "table7-child",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "table8-study1",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "table8-study2",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "activity_reference",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "comorbidity_screen",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_concept",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_edition",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_rounding",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "energy_balance",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "evidence5",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "exercise_window",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "juice",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "leucine",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "lifecourse",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "negative_balance",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "obesity_initial_goal",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "protein_daily",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "protein_serving",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "secondary_obesity",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "spacing",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "sugar10",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "sugar5",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "tee_components",
+          "type": "gold_excerpt",
+          "passed": true
+        }
+      ],
+      "totals": {
+        "text_anchor": {
+          "passed": 6,
+          "n": 6
+        },
+        "table_row": {
+          "passed": 5,
+          "n": 5
+        },
+        "gold_excerpt": {
+          "passed": 20,
+          "n": 20
+        }
+      },
+      "tables": 1307,
+      "images": 18220
+    },
+    {
+      "parser": "docling",
+      "checks": [
+        {
+          "id": "kdri-rounding",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-activity",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-formula-edition",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-adult-units",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-lactation-condition",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "kdri-infant-volume-units",
+          "type": "text_anchor",
+          "passed": true
+        },
+        {
+          "id": "table7-infant-early",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "table7-infant-late",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "table7-child",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "table8-study1",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "table8-study2",
+          "type": "table_row",
+          "passed": true
+        },
+        {
+          "id": "activity_reference",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "comorbidity_screen",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_concept",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_edition",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "eer_rounding",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "energy_balance",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "evidence5",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "exercise_window",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "juice",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "leucine",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "lifecourse",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "negative_balance",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "obesity_initial_goal",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "protein_daily",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "protein_serving",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "secondary_obesity",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "spacing",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "sugar10",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "sugar5",
+          "type": "gold_excerpt",
+          "passed": true
+        },
+        {
+          "id": "tee_components",
+          "type": "gold_excerpt",
+          "passed": true
+        }
+      ],
+      "totals": {
+        "text_anchor": {
+          "passed": 6,
+          "n": 6
+        },
+        "table_row": {
+          "passed": 5,
+          "n": 5
+        },
+        "gold_excerpt": {
+          "passed": 20,
+          "n": 20
+        }
+      },
+      "tables": 861,
+      "images": 510
+    }
+  ],
+  "execution": {
+    "source_count": 10,
+    "pages_per_parser": 1953,
+    "receipts": 30,
+    "parsers": {
+      "pypdf": {
+        "documents": 10,
+        "completed": 10,
+        "elapsed_seconds": 50.41946759982966
+      },
+      "pdfplumber": {
+        "documents": 10,
+        "completed": 10,
+        "elapsed_seconds": 147.75213919999078
+      },
+      "docling": {
+        "documents": 10,
+        "completed": 10,
+        "elapsed_seconds": 2352.6797995001543
+      }
+    },
+    "warnings": [
+      {
+        "source": "KDRI_2025_vol1",
+        "table_drop_warning_count": 9,
+        "table_drop_lines": [
+          "WARNING:MatchingPostProcessor:1 of 199 pdf cells matched neither a row nor a column band of the 27x7 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:2 of 154 pdf cells matched neither a row nor a column band of the 27x6 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:2 of 74 pdf cells matched neither a row nor a column band of the 13x7 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:1 of 50 pdf cells matched neither a row nor a column band of the 9x7 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:1 of 40 pdf cells matched neither a row nor a column band of the 7x7 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:1 of 410 pdf cells matched neither a row nor a column band of the 48x15 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:1 of 195 pdf cells matched neither a row nor a column band of the 27x7 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:1 of 411 pdf cells matched neither a row nor a column band of the 50x16 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:2 of 298 pdf cells matched neither a row nor a column band of the 63x10 grid and were dropped from the table"
+        ],
+        "access_violation_messages": 0
+      },
+      {
+        "source": "KDRI_2025_vol2",
+        "table_drop_warning_count": 6,
+        "table_drop_lines": [
+          "WARNING:MatchingPostProcessor:1 of 199 pdf cells matched neither a row nor a column band of the 27x7 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:1 of 219 pdf cells matched neither a row nor a column band of the 12x17 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:1 of 410 pdf cells matched neither a row nor a column band of the 48x15 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:1 of 195 pdf cells matched neither a row nor a column band of the 27x7 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:2 of 411 pdf cells matched neither a row nor a column band of the 52x17 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:2 of 298 pdf cells matched neither a row nor a column band of the 63x10 grid and were dropped from the table"
+        ],
+        "access_violation_messages": 0
+      },
+      {
+        "source": "KDRI_2025_vol3",
+        "table_drop_warning_count": 7,
+        "table_drop_lines": [
+          "WARNING:MatchingPostProcessor:1 of 199 pdf cells matched neither a row nor a column band of the 27x7 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:71 of 114 pdf cells matched neither a row nor a column band of the 2x3 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:160 of 211 pdf cells matched neither a row nor a column band of the 2x3 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:183 of 249 pdf cells matched neither a row nor a column band of the 2x3 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:1 of 410 pdf cells matched neither a row nor a column band of the 48x15 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:1 of 480 pdf cells matched neither a row nor a column band of the 50x14 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:1 of 195 pdf cells matched neither a row nor a column band of the 27x7 grid and were dropped from the table"
+        ],
+        "access_violation_messages": 2
+      },
+      {
+        "source": "WHO_saturated_trans_fat_2023",
+        "table_drop_warning_count": 5,
+        "table_drop_lines": [
+          "WARNING:MatchingPostProcessor:18 of 260 pdf cells matched neither a row nor a column band of the 13x7 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:21 of 252 pdf cells matched neither a row nor a column band of the 13x16 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:1 of 183 pdf cells matched neither a row nor a column band of the 12x7 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:1 of 146 pdf cells matched neither a row nor a column band of the 12x6 grid and were dropped from the table",
+          "WARNING:MatchingPostProcessor:1 of 672 pdf cells matched neither a row nor a column band of the 168x9 grid and were dropped from the table"
+        ],
+        "access_violation_messages": 0
+      },
+      {
+        "source": "WHO_total_fat_2023",
+        "table_drop_warning_count": 1,
+        "table_drop_lines": [
+          "WARNING:MatchingPostProcessor:2 of 137 pdf cells matched neither a row nor a column band of the 11x5 grid and were dropped from the table"
+        ],
+        "access_violation_messages": 0
+      }
+    ],
+    "limitations": [
+      "Docling vol3 access violation events despite exit0; 24-page rerun matched174blocks with no event",
+      "OCR/captioning not evaluated",
+      "5 table rows are anchors, not exhaustive table fidelity",
+      "CPU/GPU timings describe this machine and different parser implementations"
+    ]
+  },
+  "recheck": {
+    "pages": 24,
+    "original_blocks": 174,
+    "recheck_blocks": 174,
+    "equal_page_kind_text_multiset": true,
+    "original_only": 0,
+    "recheck_only": 0,
+    "recheck_access_violation_messages": 0,
+    "status": "completed",
+    "interpretation": "one successful rerun does not establish native crash cause or permanent resolution"
+  },
+  "limitations": [
+    "BM25-only screening, not dense or answer quality",
+    "shared source corpus but sealed heldout fact groups not queried during screening",
+    "No image OCR/caption evaluation",
+    "Native fault observed; successful recovery is not root cause elimination"
+  ]
+}

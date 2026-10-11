@@ -1,3 +1,45 @@
+# 2026-10-09 upgrade status
+
+Generation, Vision, online validation and offline judges use Gemini. Retrieval
+and Ragas embeddings now use `app/core/embeddings.py` (Gemini Embedding 2,
+3072 dimensions by default). No application OpenAI key or direct OpenAI SDK
+dependency is required. Retrieval rejects incompatible/missing build manifests;
+new Gemini vectors must be rebuilt and activated before RAG traffic resumes.
+`convert_to_openai_function` in the agent runtime is a local LangChain schema
+serializer accepted by Gemini, not an OpenAI API call.
+
+The production graph now defaults to `DietTeam` model-led supervisor delegation
+and specialist tool loops, with durable proposal approval and a pooled Postgres
+checkpointer. The earlier node-per-intent graph remains available through
+`build_graph(model_driven=False)` for baseline evaluation. The diagrams below
+describe that baseline unless explicitly updated.
+
+An explicit `requested_action="weekly_review"` uses `WeeklyDeepTeam`. Its
+Supervisor can delegate to at most two bounded specialists: `weekly_analysis`
+reads the authenticated user's recent meals, profile, measurements and goal
+trend; `weekly_evidence` searches official guidance through the read-only MCP
+surface. A strategy change remains a pending proposal and crosses the same
+HITL/transaction boundary as other strategy changes. The MCP server exposes
+only `search_foods`, `nutrition_lookup` and `search_evidence`; it has no user
+record or write tool. Deep runs use a shared 20-model/30-tool/180-second budget.
+
+Local deployment uses one non-root image with separate API, scheduler worker,
+and read-only MCP commands. Compose disables the scheduler in the API process.
+The kind manifest runs two API replicas plus one worker and MCP replica, injects
+secrets only at runtime, and fixes UID/GID 999 in each container security
+context. Supabase stores checkpoints, execution budgets and proposals outside
+the pods, so an API rollout can reconnect to durable state; proposal versions
+and idempotency keys remain the duplicate-write boundary.
+
+The chat UI renders only server-emitted execution phases as a streaming process
+trace. Completed answers retain a collapsible trace, while strategy evidence,
+source metadata and proposal versions stay inside the existing HITL confirmation
+boundary.
+
+See [upgrade ledger](docs/UPGRADE_PROGRESS.md) for verified behavior, migration
+prerequisites and remaining stages. In particular, the remote proposal migration
+has not been applied because the configured database connection timed out.
+
 # Diet Agent 보고서용 핵심 정리
 
 이 프로젝트는 단순 칼로리 기록 앱이 아니라, **LangGraph 기반 Multi-Agent 식단 코칭 시스템**이다. 사용자의 식단 입력, 사진 기반 음식 인식, 인바디 업로드, 식단 조언, 식단 계획, 리포트, 기록 수정 요청을 각각 다른 Agent가 처리하고, Supervisor Agent가 의도를 판단해 적절한 Agent로 라우팅한다. 또한 식단 기록은 Human-in-the-loop 방식으로 사용자의 확인을 받은 뒤 저장하며, LangGraph checkpointer를 통해 대화 상태와 interrupt 상태를 관리한다.
@@ -428,4 +470,13 @@ flowchart LR
 | Pinecone | 영양지식 PDF 임베딩(dense) |
 | chunks.pkl | BM25 sparse 코퍼스(로컬) |
 
+## 2026-10-10 온보딩 경로 갱신
+POST /users/onboarding → explicit EnergyInputs/goal validation → Postgres profile(nutrition_policy_context)+pending strategy proposal 동일트랜잭션 → 기존 HITL /proposals/decision → 최신 profile/catalog receipt 검증 → strategy/version 원자저장. GET /users/onboarding으로 기존 전략/유효pending 복구. legacy /users/setup은 조회호환만. KDRI2025 유지식만 승인하며 목표별 조정은 별도 검토 후 활성화. 기존 graph/state/proposal 구조 유지.
 
+## 2026-10-10 실행 스트리밍
+
+`/chat`과 `/chat/resume`은 Agent runtime이 실제로 Supervisor 판단, 전문 Agent 위임, 기록 조회, 영양 계산, 근거 검색, 제안 검증을 시작할 때 request-scoped event sink의 `progress` SSE를 보낸다. 최종 설명은 `answer_delta`, 완료 메타데이터는 `completed`로 전달한다.
+
+모든 이벤트에는 클라이언트가 생성한 `stream_run_id`와 단조 증가 `seq`가 붙는다. 프론트는 `completed` 전에 연결이 끊기면 같은 실행 ID와 마지막 순번으로 한 번 재접속하고 이미 받은 이벤트를 제거한다. 같은 `run_id`의 완료 체크포인트가 있으면 그래프나 저장을 다시 실행하지 않고 남은 답변만 재생한다. 실행 도중 연결이 사라져도 그래프 작업은 끝까지 유지하며 기존 대화 advisory lock, 제안 idempotency key, HITL이 중복 저장을 차단한다.
+
+진행 이벤트 journal은 각 API Pod의 메모리에만 존재한다. 재연결이 다른 Pod로 전달되어 journal이 없고 체크포인트의 `execution_status`가 `running`이면, 해당 Pod가 같은 `run_id`와 LangGraph `thread_id`로 `graph.ainvoke(None, config)`를 호출해 `AsyncPostgresSaver`의 마지막 durable checkpoint부터 실행을 이어간다. 완료 상태라면 그래프를 다시 실행하지 않고 저장된 최종 상태만 반환한다. 실제 kind 시험에서는 첫 진행 이벤트 뒤 담당 Pod를 강제 삭제한 다음 다른 Pod로 재접속해 완료 이벤트와 pending proposal 1건을 복구했고, 중복 확정 후에도 식사 row는 1건만 저장됐다.

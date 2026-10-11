@@ -16,7 +16,7 @@ validator/node.py
   - 특정 영양소가 극단적으로 편중됐는지
   - 식사 구성이 실현 가능한지(끼니 수, 음식 다양성)
 """
-from langchain_openai import ChatOpenAI
+from app.core.llm import get_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState
 from app.core.config import get_settings
@@ -24,13 +24,9 @@ from app.rag.region_guidance import get_region_guidance
 import json, re
 
 # 최대 재생성 시도 횟수 - 무한 루프 방지
-MAX_ATTEMPTS = 3
+MAX_ATTEMPTS = get_settings().agent_max_validation_attempts
 
-llm = ChatOpenAI(
-    model="gpt-4o-mini",
-    temperature=0,
-    openai_api_key=get_settings().openai_api_key
-)
+llm = get_chat_model(temperature=0)
 
 VALIDATOR_PROMPT = ChatPromptTemplate.from_messages([
     ("system", """당신은 독립적인 영양학 전문 검증 AI입니다.
@@ -110,32 +106,20 @@ async def validator_node(state: AgentState) -> dict:
       - validation_passed: True → 통과, False → 재생성 필요
       - validation_attempts: 누적 시도 횟수
       - validation_feedback: 실패 시 재생성에 반영할 구체적 피드백
-      - can_improve: False이면 MAX_ATTEMPTS 도달로 강제 통과 처리
+      - can_improve: False이면 실패한 제안을 보류하고 종료
     """
     pending_meals = state.get("pending_meals") or []
     attempts = (state.get("validation_attempts") or 0) + 1
 
     print(f"=== [validator] 검증 시작 (시도 {attempts}/{MAX_ATTEMPTS}) ===")
 
-    # pending_meals가 없으면 즉시 통과 (diet_logger confirm 등 다른 경로)
+    # Empty or exhausted proposals never cross the approval boundary.
     if not pending_meals:
-        print("=== [validator] pending_meals 없음 → 즉시 통과 ===")
-        return {
-            "validation_passed": True,
-            "validation_attempts": attempts,
-            "validation_feedback": "",
-            "can_improve": False,
-        }
+        return blocked_proposal(attempts, "검증할 식단이 없습니다.")
 
-    # 최대 시도 횟수 초과 → 강제 통과 (무한 루프 방지)
+    # Budget exhaustion is a failure, never a validation pass.
     if attempts > MAX_ATTEMPTS:
-        print(f"=== [validator] 최대 시도 횟수({MAX_ATTEMPTS}) 초과 → 강제 통과 ===")
-        return {
-            "validation_passed": True,
-            "validation_attempts": attempts,
-            "validation_feedback": "",
-            "can_improve": False,
-        }
+        return blocked_proposal(attempts, "식단 검증 재시도 한도에 도달했습니다.")
 
     # 영양 합계 계산
     total_cal = round(sum(m["calories"] for m in pending_meals))
@@ -164,10 +148,10 @@ async def validator_node(state: AgentState) -> dict:
             )
             rag_query = query_resp.content.strip()
             result = await retrieve(rag_query)
-            rag_context = result["context"] or "관련 영양학 근거 없음 — 추측하지 말 것"
-            print(f"=== [validator] RAG: query='{rag_query}' grounded={result['grounded']} score={result['max_score']} ===")
+            rag_context = (result["context"] if result.get("grounded") else "") or "관련 영양학 근거 없음 — 추측하지 말 것"
+            print(f"=== [validator] RAG: query_redacted grounded={result['grounded']} score={result['max_score']} ===")
         except Exception as e:
-            print(f"=== [validator] RAG 실패: {e} ===")
+            print(f"=== [validator] RAG 실패 유형: {type(e).__name__} ===")
             rag_context = "영양 지식베이스 준비 중"
 
     # LLM 검증 실행
@@ -190,9 +174,14 @@ async def validator_node(state: AgentState) -> dict:
     ))
 
     raw = re.sub(r"```json|```", "", resp.content).strip()
-    result = json.loads(raw)
+    try:
+        result = json.loads(raw)
+        if not isinstance(result, dict) or type(result.get("passed")) is not bool:
+            raise ValueError("passed must be a boolean")
+    except (ValueError, TypeError):
+        result = {"passed": False, "feedback": "검증 응답 형식이 잘못되었습니다. 식단과 검증 결과를 다시 확인하세요."}
 
-    passed = result.get("passed", True)
+    passed = result["passed"]
     score = result.get("score", 100)
     issues = result.get("issues", [])
     feedback = result.get("feedback", "")
@@ -200,13 +189,16 @@ async def validator_node(state: AgentState) -> dict:
 
     print(f"=== [validator] 결과: {'✅ 통과' if passed else '❌ 실패'} (점수: {score}) ===")
     if issues:
-        print(f"=== [validator] 문제점: {issues} ===")
+        print(f"=== [validator] 문제점 수: {len(issues)} ===")
     if feedback:
-        print(f"=== [validator] 피드백: {feedback[:100]}... ===")
-    print(f"=== [validator] 근거: {reasoning} ===")
+        print("=== [validator] 피드백 생성됨 | content_redacted ===")
+    print("=== [validator] 검증 근거 생성됨 | content_redacted ===")
 
     # can_improve: 아직 재시도 여유가 있는지
     can_improve = (not passed) and (attempts < MAX_ATTEMPTS)
+
+    if not passed and not can_improve:
+        return blocked_proposal(attempts, feedback or "영양 검증 기준을 충족하지 못했습니다.")
 
     return {
         "validation_passed": passed,
@@ -216,6 +208,13 @@ async def validator_node(state: AgentState) -> dict:
     }
 
 
+def blocked_proposal(attempts: int, feedback: str) -> dict:
+    return {"validation_passed": False, "validation_attempts": attempts,
+            "validation_feedback": feedback, "can_improve": False,
+            "pending_meals": None, "awaiting_confirmation": False,
+            "response": "식단 제안을 보류했습니다. " + feedback + " 조건을 조정해 다시 요청해주세요."}
+
+
 def route_after_validator(state: AgentState) -> str:
     """
     validator 결과에 따른 라우팅 함수.
@@ -223,9 +222,9 @@ def route_after_validator(state: AgentState) -> str:
 
     반환값:
       "meal_plan" → 실패 + 재시도 가능 → meal_plan으로 루프백
-      "confirm"  → 통과 또는 최대 시도 초과 → 사용자 확인 후 저장
+      "confirm" → 검증 통과, "blocked" → 검증 실패 및 한도 도달
     """
-    passed = state.get("validation_passed", True)
+    passed = state.get("validation_passed") is True
     can_improve = state.get("can_improve", False)
 
     if not passed and can_improve:
@@ -233,5 +232,4 @@ def route_after_validator(state: AgentState) -> str:
         print(f"=== [validator→route] 재생성 → meal_plan (시도 {attempts}/{MAX_ATTEMPTS}) ===")
         return "meal_plan"
 
-    print(f"=== [validator→route] 통과 → confirm ===")
-    return "confirm"
+    return "confirm" if passed else "blocked"

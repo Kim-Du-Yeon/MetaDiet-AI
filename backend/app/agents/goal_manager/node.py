@@ -11,16 +11,17 @@ goal_manager/node.py
      이 경우 inbody의 response를 덮어쓰지 않고 이어붙인다.
 """
 from datetime import date
-from langchain_openai import ChatOpenAI
+from app.core.llm import get_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState
 from app.core.config import get_settings
 from app.tools.agent_tools import get_inbody_history_tool
 from app.db.supabase_client import get_supabase
 from app.rag.region_guidance import get_region_guidance
+from app.core.service_clock import service_today
 import json, re
 
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.2, openai_api_key=get_settings().openai_api_key)
+llm = get_chat_model(temperature=0.2)
 sb = get_supabase()
 
 GOAL_MANAGER_PROMPT = ChatPromptTemplate.from_messages([
@@ -87,7 +88,7 @@ def _calc_weekly_rate(current_weight: float, current_date: str, prev_weight: flo
 
 def _calc_needed_weekly_rate(remaining_weight: float, target_date_str: str, today: date = None):
     """목표일까지 남은 기간 기준, 목표 달성에 필요한 주당 변화율(kg/주). 기한이 지났으면 None."""
-    today = today or date.today()
+    today = today or service_today()
     days_remaining = (date.fromisoformat(target_date_str) - today).days
     if not days_remaining or days_remaining <= 0:
         return None

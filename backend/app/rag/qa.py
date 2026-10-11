@@ -10,18 +10,14 @@ rag/qa.py
 
 retrieve()가 검색·신뢰도를 책임지고, 여기선 '답변 생성 가드레일'만 담당한다(분화).
 """
-from langchain_openai import ChatOpenAI
+from app.core.llm import get_chat_model
 from langchain_core.prompts import ChatPromptTemplate
 from app.core.config import get_settings
 from app.rag.retriever import retrieve
 from app.rag.region_guidance import get_region_guidance
 
-# QA·평가는 토큰 절감을 위해 mini 사용 (판단형 작업이라 4o-mini로 충분)
-_llm = ChatOpenAI(
-    model="gpt-4o-mini",
-    temperature=0,
-    openai_api_key=get_settings().openai_api_key,
-)
+# QA uses the configured Gemini service model; offline judging is separate.
+_llm = get_chat_model(temperature=0)
 
 # 근거 없을 때 반환하는 고정 문구 (가드레일 ②). eval에서 이 문자열로 거절 여부 판정.
 NO_EVIDENCE = "제공된 자료에서 근거를 찾지 못했습니다."
@@ -46,7 +42,8 @@ QA_PROMPT = ChatPromptTemplate.from_messages([
 ])
 
 
-async def answer_from_knowledge(question: str, k: int = 4, user_region: str = "KR") -> dict:
+async def answer_from_knowledge(question: str, k: int = 4, user_region: str = "KR",
+                                *, retrieval_result: dict | None = None, config: dict | None = None) -> dict:
     """
     가드레일이 적용된 RAG 답변.
 
@@ -57,7 +54,7 @@ async def answer_from_knowledge(question: str, k: int = 4, user_region: str = "K
       sources   : [{source, page}] 인용 출처 목록
       context   : 사용된 근거 원문 (eval의 faithfulness 판정용)
     """
-    r = await retrieve(question, k=k)
+    r = retrieval_result if retrieval_result is not None else await retrieve(question, k=k)
 
     # 가드레일 ②: 근거가 약하거나 없으면 LLM 호출 없이 즉시 거절 (토큰 절감 + 환각 차단)
     if not r["grounded"] or not r["context"]:
@@ -73,7 +70,7 @@ async def answer_from_knowledge(question: str, k: int = 4, user_region: str = "K
     resp = await _llm.ainvoke(QA_PROMPT.format_messages(
         context=r["context"], question=question, no_evidence=NO_EVIDENCE,
         region_guidance=region_guidance,
-    ))
+    ), config=config)
     answer = resp.content.strip()
 
     sources = [
@@ -81,7 +78,7 @@ async def answer_from_knowledge(question: str, k: int = 4, user_region: str = "K
             "source": d.metadata.get("source_file", d.metadata.get("source", "Unknown")),
             "page":   d.metadata.get("page", "N/A"),
         }
-        for d in r["docs"][:3]
+        for d in r.get("context_docs", r["docs"])
     ]
 
     # 출처 안전망: LLM이 인용을 빠뜨려도 검색된 실제 출처를 footer로 강제 부착.
@@ -103,4 +100,5 @@ async def answer_from_knowledge(question: str, k: int = 4, user_region: str = "K
         "max_score": r["max_score"],
         "sources":  sources,
         "context":  r["context"],
+        "token_usage": getattr(resp, "usage_metadata", None),
     }

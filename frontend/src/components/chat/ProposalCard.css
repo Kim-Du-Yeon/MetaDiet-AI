@@ -1,0 +1,24 @@
+.proposal { margin: 12px auto; width: min(720px, calc(100% - 24px)); padding: 20px; border: 1px solid #dce8e2; border-radius: 18px; background: #fff; box-shadow: 0 12px 30px rgba(28, 72, 55, .08); color: #25352f; }
+.proposal h3 { margin: 3px 0 14px; font-size: 19px; }
+.proposal__eyebrow { color: #1f7a58; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+.proposal__notice { padding: 10px 12px; border-radius: 10px; background: #f2f7f4; color: #456258; font-size: 13px; }
+.proposal__date { color: #62736d; font-size: 13px; font-weight: 650; }
+.proposal__meals { display: grid; gap: 8px; margin: 12px 0; padding: 0; list-style: none; }
+.proposal__meals li { display: flex; justify-content: space-between; gap: 12px; padding-bottom: 8px; border-bottom: 1px solid #edf2ef; font-size: 13px; }
+.proposal__macros { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0 14px; }
+.proposal__macros span, .proposal__macros strong { padding: 7px 10px; border-radius: 999px; background: #f2f7f4; font-size: 12px; }
+.proposal__fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.proposal__fields label { display: grid; gap: 5px; color: #586a63; font-size: 12px; }
+.proposal__fields input { width: 100%; padding: 9px 10px; border: 1px solid #d8e1dc; border-radius: 9px; }
+.proposal__evidence { margin-top: 18px; padding-top: 15px; border-top: 1px solid #e6ede9; }
+.proposal__evidence h4 { margin: 0 0 10px; font-size: 13px; }
+.proposal__sources { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 8px; }
+.proposal__source { display: grid; gap: 3px; padding: 11px; border-radius: 11px; background: #f7f9f8; font-size: 12px; }
+.proposal__source span, .proposal__source small { color: #6f7e78; }
+.proposal__actions { display: flex; gap: 8px; margin-top: 18px; }
+.proposal button { min-height: 40px; padding: 9px 15px; border: 0; border-radius: 10px; cursor: pointer; font-weight: 700; }
+.proposal button:disabled { cursor: not-allowed; opacity: .48; }
+.proposal__confirm { flex: 1; background: #1f7a58; color: #fff; }
+.proposal__cancel, .proposal__secondary { background: #edf2ef; color: #40564d; }
+.proposal__secondary { grid-column: 1 / -1; }
+@media (max-width: 560px) { .proposal__fields { grid-template-columns: 1fr; } .proposal { padding: 16px; } }
