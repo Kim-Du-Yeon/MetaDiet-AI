@@ -55,7 +55,7 @@ flowchart LR
 | 정책 위반 / HITL 전 write | 0 / 0 | 평가한 실패 시나리오 범위 |
 | Agent p50 / p95 | 16.71s / 28.05s | 외부 API 상태에 따라 변동 |
 | 백엔드 회귀 | 376 passed, 1 skipped | 선택적 파서 환경 1건 skip |
-| 프론트엔드 회귀 | 41 passed | production build 별도 성공 |
+| 프론트엔드 회귀 | 42 passed | production build 별도 성공 |
 | 인앱 피드백 수명주기 | 201 생성, 200 재전송, DB 1행→삭제 후 0행 | 합성 계정 1건 공개 E2E |
 
 LangSmith에는 Supervisor 위임, 도구 호출, 재시도, 예산, HITL과 지연을 연결했다. 운영 trace는 입력·출력을 숨기고 가명 thread ID를 사용한다. Ragas와 custom evaluator는 검색 품질과 Agent 행동 품질을 서로 다른 gold contract로 평가한다.
@@ -94,7 +94,7 @@ LangSmith에는 Supervisor 위임, 도구 호출, 재시도, 예산, HITL과 지
 
 ## 7. 남은 한계와 다음 선택 작업
 
-- Render workspace 장애 이메일 알림 활성화 여부를 Dashboard에서 최종 확인한다.
+- Render workspace 장애 이메일 알림은 `Email` + `Only failure notifications`로 확인했으며 서비스별 override는 없다.
 - 무료 플랜은 15분 휴면 뒤 첫 API 요청에 cold start가 생긴다는 점을 제품 안내에 표시한다. health만 빨리 여는 lazy initialization과 인위적 keep-alive는 첫 채팅 지연 또는 운영 복잡도만 옮기므로 도입하지 않고, 상시 응답이 필요해질 때 휴면하지 않는 유료 instance로 전환한다.
 - 근거 누락 영어 질문 1건은 안전 보류하며 별도 개발셋에서 query expansion을 연구한다.
 - Vite 전환으로 오래된 `react-scripts` 빌드 의존성을 정리할 수 있다.

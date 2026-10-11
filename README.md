@@ -7,6 +7,7 @@ MetaDiet AI는 식사 기록, 체중·인바디 추세, 장기 목표와 영양 
 - 평가 방법과 전체 원본 결과: [EVALUATION.md](EVALUATION.md)
 - 포트폴리오 핵심 결과: [PORTFOLIO_RESULTS.md](PORTFOLIO_RESULTS.md)
 - 제한 베타 종료 체크리스트: [BETA_RELEASE_CHECKLIST.md](BETA_RELEASE_CHECKLIST.md)
+- 베타 릴리스 노트: [BETA_RELEASE_NOTES.md](BETA_RELEASE_NOTES.md)
 - 무료 베타 운영 절차: [deploy/RENDER_BETA.md](deploy/RENDER_BETA.md)
 
 ## 구현 범위
@@ -41,8 +42,8 @@ Jev는 Supervisor·도구 선택·RAG 재정렬에서 Gemini와 비교했지만 
 
 | 범위 | 결과 |
 |---|---|
-| 백엔드 회귀 | **360 passed, 1 skipped** |
-| 프론트엔드 회귀 | **35 passed**, production build 성공 |
+| 백엔드 회귀 | **376 passed, 1 skipped** |
+| 프론트엔드 회귀 | **42 passed**, production build 성공 |
 | 독립 RAG 20문항 | 지정 근거 Recall@4 85%, 대체 유효 근거 포함 evidence support 95% |
 | Ragas 독립 평가 | faithfulness 1.00, context recall 0.95 |
 | Agent 독립 흐름 | 목표 달성 8/8, 정책 위반 0, 승인 전 write 0 |
@@ -98,6 +99,6 @@ Ragas는 의존성 충돌을 피하기 위해 별도 평가 환경을 사용합�
 
 - Render 무료 API는 휴면 후 첫 요청이 실제 측정에서 약 53초 걸렸습니다.
 - 독립 RAG 영어 질문 1건은 근거를 찾지 못했으며, 시스템은 인용을 만들지 않고 답변을 보류합니다.
-- Render 장애 이메일 알림은 workspace Dashboard에서 별도로 활성화해야 합니다.
+- Render 장애 알림은 workspace Email + `Only failure notifications`로 설정했으며 서비스별 override는 없습니다.
 - `react-scripts`의 빌드 전이 의존성 취약점은 정적 런타임과 분리돼 있으며 Vite 전환을 후속 선택 작업으로 남겼습니다.
 - 의료 진단·치료 서비스가 아니며 일반 성인 체중 관리 정보에 한정합니다.

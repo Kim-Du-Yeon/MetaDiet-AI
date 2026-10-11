@@ -36,7 +36,7 @@
 | 공개 제한 부하 | health 50건·인증 조회 30건·Agent 2건, 오류 0 | 작은 제한 베타 표본이며 최대 처리량이 아님 |
 | kind rolling restart | health 400/400, p95 5.86ms | 로컬 Kubernetes 환경 |
 | 백엔드 회귀 | 376 passed, 1 skipped | 외부 서비스는 테스트 fixture로 격리 |
-| 프론트엔드 회귀 | 41 passed, production build 성공 | React UI 회귀와 번들 생성 |
+| 프론트엔드 회귀 | 42 passed, production build 성공 | React UI 회귀와 번들 생성 |
 | 공개 피드백 수명주기 | 최초 201, 동일 UUID 재전송 200, 행 1→계정 삭제 후 0 | 합성 사용자 1명의 기능·멱등성·삭제 확인 |
 
 무료 인스턴스가 깨어난 뒤의 `/health` 시간과 실제 상담 시간을 혼동하지 않는다. 첫 응답 지연을 안정적으로 없애야 하면 keep-alive 우회 대신 휴면하지 않는 Render 인스턴스로 전환한다.
