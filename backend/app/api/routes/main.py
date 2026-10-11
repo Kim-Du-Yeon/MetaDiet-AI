@@ -9,7 +9,7 @@ HITL 흐름:
   /chat/resume   → aupdate_state({"message": user_input}) + ainvoke(None)
                  → confirm 실행 → 저장/수정/취소
 """
-from fastapi import FastAPI, UploadFile, File, HTTPException, Depends
+from fastapi import FastAPI, UploadFile, File, HTTPException, Depends, Response, status
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from app.agents.graph import get_graph, lifespan
@@ -23,11 +23,12 @@ from app.core.auth import (
     get_recent_auth_context,
 )
 from app.schemas.models import InbodyUploadResponse, ResumeRequest
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 from typing import Optional, Literal
 from uuid import uuid4, UUID
 from app.schemas.proposals import ProposalDecision, MeasurementProposal, MeasurementRevision
 from app.db.proposals import ProposalRepository, ProposalConflict
+from app.db.feedback import FeedbackInput, FeedbackRepository, FeedbackStorageUnavailable
 from app.db.thread_lock import serialized_stream, conversation_lock
 from app.agents.execution_stream import (
     ExecutionEventJournal, find_journal, get_or_create_journal, progress_for_runtime_event,
@@ -38,7 +39,9 @@ from app.core.service_clock import service_today
 from app.core.cors import allowed_origins
 import calendar
 import hashlib
-import json, asyncio, time
+import json, asyncio, time, logging
+
+logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Diet Agent API", version="1.0.0", lifespan=lifespan)
 sb  = get_supabase()
@@ -73,6 +76,29 @@ class ChatRequest(BaseModel):
 
 class AccountDeleteRequest(BaseModel):
     confirmation: Literal["DELETE"]
+
+
+class FeedbackRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    rating: int = Field(ge=1, le=5, strict=True)
+    category: Literal["general", "answer_quality", "evidence", "usability", "bug"]
+    comment: str | None = Field(default=None, max_length=1000)
+    client_submission_id: UUID
+
+    @field_validator("comment")
+    @classmethod
+    def normalize_comment(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        normalized = value.strip()
+        return normalized or None
+
+
+class FeedbackResponse(BaseModel):
+    id: str
+    status: Literal["stored"] = "stored"
+    created: bool
 
 
 def _is_empty_ocr_value(value) -> bool:
@@ -840,6 +866,43 @@ async def get_calendar(target_date: str, current_user: str = Depends(get_current
     rows  = sb.table("meal_logs").select("*").eq("user_id",current_user).eq("log_date",target_date).execute().data
     total = {k: sum(r.get(k,0) for r in rows) for k in ["calories","protein_g","carbs_g","fat_g"]}
     return {"date": target_date, "meals": rows, "total": total}
+
+
+@app.post("/feedback", response_model=FeedbackResponse)
+async def submit_feedback(
+    req: FeedbackRequest,
+    response: Response,
+    current_user: str = Depends(get_current_user),
+):
+    """Store privacy-minimal beta feedback without tracing its comment body."""
+    submission = FeedbackInput(
+        rating=req.rating,
+        category=req.category,
+        comment=req.comment,
+        client_submission_id=req.client_submission_id,
+    )
+    try:
+        row, created = await FeedbackRepository().create(current_user, submission)
+    except FeedbackStorageUnavailable as exc:
+        logger.error(
+            "feedback_storage_unavailable",
+            extra={"error_type": type(exc).__name__},
+        )
+        raise HTTPException(
+            status_code=status.HTTP_503_SERVICE_UNAVAILABLE,
+            detail="피드백 저장 서비스를 잠시 사용할 수 없습니다.",
+        ) from None
+    response.status_code = status.HTTP_201_CREATED if created else status.HTTP_200_OK
+    logger.info(
+        "feedback_stored",
+        extra={
+            "feedback_id": row["id"],
+            "category": req.category,
+            "rating": req.rating,
+            "created": created,
+        },
+    )
+    return FeedbackResponse(id=row["id"], created=created)
 
 
 @app.delete("/users/me")

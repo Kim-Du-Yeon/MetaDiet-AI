@@ -3,6 +3,7 @@ from pathlib import Path
 from uuid import UUID
 
 import pytest
+from unittest.mock import AsyncMock
 
 
 class Cursor:
@@ -140,3 +141,120 @@ async def test_feedback_storage_error_redacts_comment():
 
     assert secret_comment not in str(exc.value)
     assert "database rejected" not in str(exc.value)
+
+
+def valid_payload(**overrides):
+    payload = {
+        "rating": 5,
+        "category": "general",
+        "comment": "좋아요",
+        "client_submission_id": "55555555-5555-5555-5555-555555555555",
+    }
+    payload.update(overrides)
+    return payload
+
+
+@pytest.mark.asyncio
+async def test_feedback_requires_authentication(client):
+    response = await client.post("/feedback", json=valid_payload())
+
+    assert response.status_code == 401
+
+
+@pytest.mark.asyncio
+async def test_feedback_uses_internal_user_not_request_identity(client, mock_current_user, monkeypatch):
+    import app.api.routes.main as main_module
+
+    repository = AsyncMock()
+    repository.create.return_value = ({"id": "feedback-1"}, True)
+    monkeypatch.setattr(main_module, "FeedbackRepository", lambda: repository)
+
+    response = await client.post("/feedback", json=valid_payload())
+    rejected = await client.post(
+        "/feedback",
+        json=valid_payload(user_id="attacker", page="other"),
+    )
+
+    assert response.status_code == 201
+    assert response.json() == {"id": "feedback-1", "status": "stored", "created": True}
+    assert rejected.status_code == 422
+    user_id, submission = repository.create.await_args.args
+    assert user_id == mock_current_user
+    assert submission.comment == "좋아요"
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    "override",
+    [
+        {"rating": 0},
+        {"rating": 6},
+        {"category": "medical"},
+        {"comment": "가" * 1001},
+        {"client_submission_id": "not-a-uuid"},
+    ],
+)
+async def test_feedback_validates_rating_category_and_comment(
+    client, mock_current_user, monkeypatch, override
+):
+    import app.api.routes.main as main_module
+
+    repository = AsyncMock()
+    monkeypatch.setattr(main_module, "FeedbackRepository", lambda: repository)
+
+    response = await client.post("/feedback", json=valid_payload(**override))
+
+    assert response.status_code == 422
+    repository.create.assert_not_awaited()
+
+
+@pytest.mark.asyncio
+async def test_feedback_trims_blank_comment_to_none(client, mock_current_user, monkeypatch):
+    import app.api.routes.main as main_module
+
+    repository = AsyncMock()
+    repository.create.return_value = ({"id": "feedback-2"}, True)
+    monkeypatch.setattr(main_module, "FeedbackRepository", lambda: repository)
+
+    response = await client.post("/feedback", json=valid_payload(comment="   \n"))
+
+    assert response.status_code == 201
+    assert repository.create.await_args.args[1].comment is None
+
+
+@pytest.mark.asyncio
+async def test_feedback_replay_returns_existing_id(client, mock_current_user, monkeypatch):
+    import app.api.routes.main as main_module
+
+    repository = AsyncMock()
+    repository.create.return_value = ({"id": "feedback-existing"}, False)
+    monkeypatch.setattr(main_module, "FeedbackRepository", lambda: repository)
+
+    response = await client.post("/feedback", json=valid_payload())
+
+    assert response.status_code == 200
+    assert response.json() == {
+        "id": "feedback-existing",
+        "status": "stored",
+        "created": False,
+    }
+
+
+@pytest.mark.asyncio
+async def test_feedback_db_failure_returns_redacted_503(
+    client, mock_current_user, monkeypatch, caplog
+):
+    import app.api.routes.main as main_module
+    from app.db.feedback import FeedbackStorageUnavailable
+
+    secret = "민감한 식사 및 건강 내용"
+    repository = AsyncMock()
+    repository.create.side_effect = FeedbackStorageUnavailable(secret)
+    monkeypatch.setattr(main_module, "FeedbackRepository", lambda: repository)
+
+    response = await client.post("/feedback", json=valid_payload(comment=secret))
+
+    assert response.status_code == 503
+    assert response.json() == {"detail": "피드백 저장 서비스를 잠시 사용할 수 없습니다."}
+    assert secret not in response.text
+    assert secret not in caplog.text
