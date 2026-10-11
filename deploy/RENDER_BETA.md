@@ -74,6 +74,8 @@ Render Dashboard의 **Workspace → Integrations → Notifications**에서 다�
 
 실제 제한 베타 부하 시험은 공개 URL에서 실행하고 p50/p95, 오류율, cold start, Gemini/Pinecone/Supabase 외부 호출 실패율을 별도 artifact로 남긴다.
 
+2026-10-11 실측에서 15분 이상 휴면 뒤 첫 `/health`는 53,022.0ms, 기동 직후 20회는 중앙값 236.2ms·p95 949.9ms였다. 이는 매 요청의 지연이 아니라 무료 Web Service를 깨우는 첫 API 요청의 지연이다. 정적 프론트엔드는 휴면하지 않는다. 제한 베타에서는 첫 응답이 최대 약 1분 늦을 수 있음을 안내한다. 인위적 keep-alive는 사용하지 않으며, 이 지연을 제거해야 하면 휴면하지 않는 유료 인스턴스로 전환한다.
+
 ## 6. 공개 E2E와 제한 부하 재현
 
 로컬 `backend/.env`의 서비스 키를 사용하며, 합성 사용자와 데이터는 각 스크립트의 `finally` 경로에서 삭제한다. 비밀값은 출력이나 artifact에 기록하지 않는다.

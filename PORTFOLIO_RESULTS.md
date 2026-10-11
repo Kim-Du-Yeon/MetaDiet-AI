@@ -74,7 +74,7 @@ LangSmith에는 Supervisor 위임, 도구 호출, 재시도, 예산, HITL과 지
 
 - Render 공개 API·정적 UI 배포와 Git push 자동 배포를 확인했다.
 - 제한 부하: health 50건, 인증 조회 30건, 실제 Agent SSE 2건에서 오류 0건.
-- 무료 인스턴스 cold start는 53,022ms, warm 요청 평균은 약 303ms였다.
+- 무료 인스턴스 cold start는 53,022ms였다. 기동 후 `/health` 20회는 중앙값 236.2ms, p95 949.9ms였다. 로컬 새 프로세스 기동 5,720.3ms와 import 중앙값 5,132.3ms를 분리 측정해, 지연의 대부분이 애플리케이션보다 Render 무료 scale-to-zero 복구에서 발생함을 확인했다.
 - kind rolling restart 중 `/health` 400/400 성공, p95 5.86ms였다.
 - 인증 SSE 중 Pod를 삭제한 뒤 다른 Pod에서 재개했고 proposal 중복 저장은 0건이었다.
 - 실제 Chromium에서 성공 흐름, proposal 복원, API 500, SSE 중단, 인증 401 UI를 확인했다.
@@ -82,7 +82,7 @@ LangSmith에는 Supervisor 위임, 도구 호출, 재시도, 예산, HITL과 지
 ## 7. 남은 한계와 다음 선택 작업
 
 - Render workspace 장애 이메일 알림 활성화 여부를 Dashboard에서 최종 확인한다.
-- 무료 플랜 cold start는 제품 안내에 표시하며 상시 응답이 필요해질 때 유료 instance를 검토한다.
+- 무료 플랜은 15분 휴면 뒤 첫 API 요청에 cold start가 생긴다는 점을 제품 안내에 표시한다. health만 빨리 여는 lazy initialization과 인위적 keep-alive는 첫 채팅 지연 또는 운영 복잡도만 옮기므로 도입하지 않고, 상시 응답이 필요해질 때 휴면하지 않는 유료 instance로 전환한다.
 - 근거 누락 영어 질문 1건은 안전 보류하며 별도 개발셋에서 query expansion을 연구한다.
 - Vite 전환으로 오래된 `react-scripts` 빌드 의존성을 정리할 수 있다.
 - 실제 임상 정책 승인과 장기간 사용자 효과 평가는 이 소프트웨어 평가와 구분한다.
