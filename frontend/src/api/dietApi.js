@@ -241,3 +241,23 @@ export async function deleteAccount() {
   }
   return data;
 }
+
+export async function submitBetaFeedback(payload) {
+  const res = notifyAuthExpired(await fetch(`${BASE_URL}/feedback`, {
+    method: "POST",
+    headers: authHeaders({ "Content-Type": "application/json" }),
+    body: JSON.stringify(payload),
+  }));
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const error = new Error(
+      typeof data.detail === "string"
+        ? data.detail
+        : "피드백을 전송하지 못했습니다. 잠시 후 다시 시도해주세요."
+    );
+    error.status = res.status;
+    error.retryable = res.status >= 500 || res.status === 429;
+    throw error;
+  }
+  return data;
+}

@@ -9,6 +9,7 @@ jest.mock("../lib/supabaseClient", () => ({
 jest.mock("../api/dietApi", () => ({
   deleteAccount: jest.fn(),
   setToken: jest.fn(),
+  submitBetaFeedback: jest.fn(),
 }));
 
 beforeEach(() => {
@@ -91,4 +92,9 @@ test("keeps service notices available from account settings", () => {
   render(<Settings session={{ user: { email: "member@example.com" } }} onDeleted={jest.fn()} />);
   expect(screen.getByRole("button", { name: "개인정보처리방침" })).toBeTruthy();
   expect(screen.getByRole("button", { name: "베타 이용 안내" })).toBeTruthy();
+  expect(screen.getByRole("heading", { name: "베타 피드백" })).toBeTruthy();
+  expect(
+    screen.getByRole("heading", { name: "베타 피드백" })
+      .closest("section").nextElementSibling.getAttribute("aria-labelledby")
+  ).toBe("delete-account-title");
 });

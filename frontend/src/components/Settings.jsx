@@ -2,6 +2,7 @@ import { useState } from "react";
 import { deleteAccount, setToken } from "../api/dietApi";
 import { supabase } from "../lib/supabaseClient";
 import LegalNotices from "./LegalNotices";
+import BetaFeedbackCard from "./BetaFeedbackCard";
 
 export function clearLocalSupabaseSession(storage = window.localStorage) {
   const keys = [];
@@ -99,6 +100,8 @@ export default function Settings({ session, onDeleted }) {
         <p>개인정보 처리 범위와 무료 베타의 제한을 확인할 수 있습니다.</p>
         <LegalNotices compact />
       </section>
+
+      <BetaFeedbackCard />
 
       <section className="settings-card settings-danger" aria-labelledby="delete-account-title">
         <p className="settings-eyebrow settings-eyebrow--danger">DANGER ZONE</p>

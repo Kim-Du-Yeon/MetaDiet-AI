@@ -1,5 +1,5 @@
 import { TextDecoder, TextEncoder } from "util";
-import { deleteAccount, getSessionRestore, sendChatMessage, setToken } from "./dietApi";
+import { deleteAccount, getSessionRestore, sendChatMessage, setToken, submitBetaFeedback } from "./dietApi";
 
 global.TextDecoder = TextDecoder;
 
@@ -101,4 +101,59 @@ test("getSessionRestore announces an expired authentication session", async () =
   expect(listener).toHaveBeenCalledTimes(1);
 
   window.removeEventListener("metadiet:auth-expired", listener);
+});
+
+test("submitBetaFeedback sends the exact authenticated contract", async () => {
+  setToken("feedback-token");
+  const payload = {
+    rating: 4,
+    category: "evidence",
+    comment: "근거가 유용해요",
+    client_submission_id: "11111111-1111-1111-1111-111111111111",
+  };
+  global.fetch = jest.fn().mockResolvedValue({
+    ok: true,
+    json: async () => ({ id: "feedback-1", status: "stored", created: true }),
+  });
+
+  await expect(submitBetaFeedback(payload)).resolves.toEqual({
+    id: "feedback-1",
+    status: "stored",
+    created: true,
+  });
+
+  expect(global.fetch).toHaveBeenCalledWith(
+    expect.stringContaining("/feedback"),
+    {
+      method: "POST",
+      headers: {
+        Authorization: "Bearer feedback-token",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    }
+  );
+});
+
+test("submitBetaFeedback surfaces a retryable generic error without mutating payload", async () => {
+  const payload = {
+    rating: 2,
+    category: "bug",
+    comment: "입력은 유지되어야 함",
+    client_submission_id: "22222222-2222-2222-2222-222222222222",
+  };
+  const snapshot = { ...payload };
+  global.fetch = jest.fn().mockResolvedValue({
+    ok: false,
+    status: 503,
+    json: async () => ({ detail: "피드백 저장 서비스를 잠시 사용할 수 없습니다." }),
+  });
+
+  await expect(submitBetaFeedback(payload)).rejects.toMatchObject({
+    message: "피드백 저장 서비스를 잠시 사용할 수 없습니다.",
+    retryable: true,
+    status: 503,
+  });
+  expect(payload).toEqual(snapshot);
+  expect(global.fetch).toHaveBeenCalledTimes(1);
 });

@@ -27,9 +27,23 @@ body { margin: 0; font-family: Inter, Pretendard, -apple-system, BlinkMacSystemF
 .settings-message, .settings-notice { padding: 11px 13px; border-radius: 10px; background: #fff3f1; color: #8f3028; font-size: 13px; }
 .settings-delete-button { width: 100%; margin-top: 20px; padding: 13px 18px; border: 0; border-radius: 12px; background: #a63a31; color: #fff; font-size: 15px; font-weight: 750; cursor: pointer; }
 .settings-delete-button:disabled { cursor: not-allowed; opacity: .55; }
+.feedback-rating { border: 0; padding: 0; margin: 20px 0 0; }
+.feedback-rating legend { font-size: 13px; font-weight: 700; color: #344c43; }
+.feedback-rating-options { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin-top: 9px; }
+.feedback-rating-options label { cursor: pointer; }
+.feedback-rating-options input { position: absolute; opacity: 0; pointer-events: none; }
+.feedback-rating-options span { display: block; text-align: center; padding: 10px 6px; border: 1px solid #cbd8d2; border-radius: 10px; color: #344c43; }
+.feedback-rating-options input:checked + span { color: #fff; background: #1f7a58; border-color: #1f7a58; }
+.feedback-rating-options input:focus-visible + span { outline: 3px solid rgba(31, 122, 88, .2); outline-offset: 2px; }
+.feedback-comment { resize: vertical; min-height: 112px; font-family: inherit; }
+.feedback-meta { display: flex; justify-content: space-between; gap: 16px; margin-top: 7px; color: #65756f; font-size: 12px; }
+.feedback-status { padding: 11px 13px; border-radius: 10px; background: #edf7f2; color: #185e44; font-size: 13px; }
+.feedback-submit-button { width: 100%; margin-top: 18px; padding: 13px 18px; border: 0; border-radius: 12px; background: #1f7a58; color: #fff; font-size: 15px; font-weight: 750; cursor: pointer; }
+.feedback-submit-button:disabled { cursor: wait; opacity: .6; }
 
 @media (max-width: 560px) {
   .tab { padding: 11px 6px; font-size: 12px; }
   .settings-page { width: min(100% - 20px, 720px); padding-top: 20px; }
   .settings-card { padding: 20px; border-radius: 16px; }
+  .feedback-meta { flex-direction: column; gap: 3px; }
 }
