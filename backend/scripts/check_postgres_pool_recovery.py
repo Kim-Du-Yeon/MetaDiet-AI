@@ -10,7 +10,11 @@ from psycopg_pool import AsyncConnectionPool
 
 
 def backend_dir(script_path: Path) -> Path:
-    return script_path.resolve().parent.parent
+    # ``resolve()`` rewrites a container path such as /app to the current
+    # Windows drive when this helper is exercised by host-side tests.  The
+    # script receives an absolute ``__file__`` in production, so preserving
+    # the supplied path keeps both host and container layouts deterministic.
+    return script_path.parent.parent
 
 
 BACKEND = backend_dir(Path(__file__))

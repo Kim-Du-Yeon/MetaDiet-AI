@@ -1118,3 +1118,12 @@ KDRI 2025 유지 에너지를 기준으로 대한비만학회 2022 식사치료�
 - 실제 시험: Supabase 합성 사용자를 만들고 특정 API Pod에 port-forward한 뒤 식사 기록 SSE를 시작했다. 첫 progress event(`seq=1`) 직후 그 Pod를 강제 삭제하고 Service NodePort로 같은 run ID와 마지막 seq를 보내 재접속했다.
 - 결과: 재접속 후 이벤트 49개를 받아 `completed=true`로 종료됐고 pending proposal은 1건, 승인 전 meal row는 0건이었다. 같은 proposal을 두 번 확정한 뒤 meal row는 **1건**이었다. 합성 Auth 사용자는 시험 후 0건으로 정리됐다. 원본은 `backend/artifacts/sse-pod-recovery-v1.json`이다.
 - 해석: LangGraph/Postgres checkpoint 기반 실행 재개와 proposal idempotency/HITL 경계가 실제 Pod 교체에서도 동작했다. 다만 이는 로컬 단일 노드 kind와 합성 사용자 1개 시험이며, 실제 클라우드 ingress의 connection draining과 다중 동시 사용자 부하는 베타 배포 단계에서 별도로 검증한다.
+
+## 43. Render 공개 베타 E2E·제한 부하 시험 (2026-10-11)
+
+- Render Blueprint로 `metadiet-api` Docker Web Service와 `metadiet-web` Static Site를 배포했다. 공개 API `/health`, 정적 사이트 응답, 실제 웹 origin의 CORS preflight가 모두 200이었다.
+- 첫 공개 Agent E2E는 Gemini 호출에서 `API_KEY_INVALID`로 실패했다. LangSmith의 `LangGraph → supervisor → ChatGoogleGenerativeAI` error trace를 통해 `GEMINI_API_KEY` 자리에 OpenAI 키가 입력된 설정 오류임을 확인했다. Render secret을 올바른 Google AI Studio 키로 교체하고 재배포한 뒤 같은 검증을 통과했다. 비밀값 자체는 로그·artifact·저장소에 기록하지 않았다.
+- 합성 사용자의 가입·온보딩·초기 전략 HITL 확정 뒤 실제 `record_only` 요청을 공개 SSE로 실행했다. 첫 이벤트는 4,180.8ms, 이벤트는 54개였고 progress → answer delta → completed 순서를 보였다. 같은 run ID 재생, pending proposal 새로고침 복원, 승인 뒤 pending 제거를 확인했다.
+- 같은 섭취 proposal을 두 번 확정해도 meal row는 1개였다. 초기 전략과 식사 proposal 상태는 모두 confirmed였고 합성 Auth 사용자는 시험 종료 후 삭제했다. LangSmith 최신 trace의 Supervisor와 Gemini 호출도 success였다.
+- 제한 부하는 health 50건/동시 10, 인증 조회 30건/동시 5, 실제 Agent SSE 2건/동시 2로 고정했다. 오류는 모두 0건이었다. health p50/p95는 229.7/638.5ms, 인증 조회 p50/p95는 807.2/2,068.8ms였다. 두 Agent의 첫 이벤트는 4,317.4/4,450.3ms, 둘을 동시에 완료한 wall time은 32.48초였다.
+- 시험 직후 `/health`도 정상이고 합성 Auth 사용자는 삭제됐다. 이 결과는 제한 베타의 작은 warm-load 표본이며 최대 처리량이나 15분 휴면 뒤 cold start를 대표하지 않는다. 원본은 git-ignored `backend/artifacts/render-beta-smoke-v1.json`과 `render-beta-load-v1.json`, 재현 스크립트는 `backend/scripts/check_render_beta.py`와 `check_render_load.py`다.

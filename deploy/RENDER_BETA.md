@@ -61,3 +61,18 @@ Invoke-RestMethod https://<api-host>/health
 - 512MB 안에서 FlashRank는 사용하지 않는다. 최종 평가에서 더 정확하고 메모리 사용이 낮았던 Hybrid + 리랭커 없음 구성을 유지한다.
 
 실제 제한 베타 부하 시험은 공개 URL에서 실행하고 p50/p95, 오류율, cold start, Gemini/Pinecone/Supabase 외부 호출 실패율을 별도 artifact로 남긴다.
+
+## 5. 공개 E2E와 제한 부하 재현
+
+로컬 `backend/.env`의 서비스 키를 사용하며, 합성 사용자와 데이터는 각 스크립트의 `finally` 경로에서 삭제한다. 비밀값은 출력이나 artifact에 기록하지 않는다.
+
+```powershell
+C:\Users\<user>\AppData\Local\Programs\Python\Python312\python.exe backend\scripts\check_render_beta.py `
+  --base-url https://metadiet-api.onrender.com
+
+C:\Users\<user>\AppData\Local\Programs\Python\Python312\python.exe backend\scripts\check_render_load.py `
+  --base-url https://metadiet-api.onrender.com `
+  --health-requests 50 --read-requests 30 --agent-requests 2
+```
+
+`check_render_beta.py`는 온보딩, 전략 확정, SSE, 동일 run 재생, proposal 복원, 중복 확정 방지를 검사한다. `check_render_load.py`는 공개 health, 인증된 읽기, 실제 Agent SSE를 서로 다른 제한 동시성으로 측정한다. 실패 시 같은 호출을 반복하기 전에 Render 로그와 LangSmith trace의 예외 유형을 확인한다.
