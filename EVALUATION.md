@@ -1151,3 +1151,10 @@ KDRI 2025 유지 에너지를 기준으로 대한비만학회 2022 식사치료�
 - 공개 정적 사이트는 GitHub에 새 커밋이 푸시된 뒤에도 이전 번들 `main.f6584129.js`를 계속 제공했다. Blueprint의 기존 서비스는 자동 배포 설정을 생략하면 현재 값을 유지하므로 `render.yaml`의 API·웹 서비스에 `autoDeployTrigger: commit`을 명시하고 매니페스트 테스트로 고정했다.
 - `render.yaml` 변경 뒤에도 공개 번들이 바뀌지 않아 Blueprint Auto Sync도 꺼진 상태로 진단했다. 현재 Dashboard에서 한 번 Manual Sync가 필요하며, 그 동작이 새 설정을 반영하면 이후 연결 브랜치의 커밋마다 자동 배포돼야 한다.
 - 인앱 브라우저 자동화는 Codex CUA 초기화 단계에서 `failed to write kernel assets: 지정된 경로를 찾을 수 없습니다`로 두 번 실패했다. 서비스나 Render 오류가 아니며 로컬 Playwright를 사용한 정책 UI 검증으로 우회했다. Dashboard 인증 세션이 필요한 Manual Sync는 이 우회로 실행할 수 없다.
+
+## 47. 공개 정책 UI 배포·프론트 의존성 감사 (2026-10-11)
+
+- Render 정적 사이트를 커밋 `8dae5b8`로 수동 배포했다. 빌드는 성공했고 공개 HTML이 새 번들 `main.5e73512f.js`를 반환했다.
+- 공개 URL의 실제 Chromium에서 로그인 전 개인정보처리방침·베타 이용 안내 버튼과 dialog를 확인했다. 390×844 viewport의 스크롤, Escape 닫기, 의료 서비스 제한·외부 처리자·삭제·민감정보 안내가 정상이며 console error·warning은 0건이었다.
+- Render `npm ci` 로그는 91개 취약점을 보고했다. 감사를 분리해 확인한 결과 직접 의존성 중 사용하지 않는 `axios`가 high로 포함돼 제거했고, 전체 프론트 32개 테스트와 production build가 통과했다.
+- 제거 뒤 남은 90건은 대부분 `react-scripts`가 설치하는 Jest·Webpack 개발/빌드 체인의 전이 의존성이다. Render는 결과 정적 파일만 배포해 이 도구를 런타임 서버로 노출하지 않는다. `npm audit fix --force`는 `react-scripts`를 깨뜨리는 major 변경을 제안하므로 제한 베타에서 강제 적용하지 않고, Vite 등 유지보수되는 빌드 체인 전환을 별도 후속 작업으로 남긴다.
