@@ -13,7 +13,7 @@
 
 **Subtitle**
 - LangGraph Multi-Agent Orchestration
-- Hybrid RAG + Reranking + Grounded Generation
+- Hybrid RAG + Grounded Generation
 - Human-in-the-loop Diet Logging
 - InBody OCR/Vision 기반 전략 재설정
 
@@ -398,22 +398,24 @@ if grounded == False:
 
 ## Slide 17. 성능 검증: RAG Evaluation
 
-| 모드 | n | Page hit | Source hit | Excerpt hit | Avg score | Citation rate | Faithfulness |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| dense | 10 | 0.80 | 1.00 | 0.70 | 0.817 | 1.00 | 1.00 |
-| hybrid | 10 | 1.00 | 1.00 | 0.90 | 0.817 | 1.00 | 1.00 |
-| full | 10 | 1.00 | 1.00 | 0.90 | 0.978 | 1.00 | 1.00 |
+| 최종 독립 평가 | 결과 |
+|---|---:|
+| 평가 문항 | 20 |
+| 지정 근거 Recall@4 | 0.85 |
+| 대체 유효 근거 포함 evidence support | 0.95 |
+| Ragas faithfulness | 1.00 |
+| Ragas context recall | 0.95 |
 
 **개선지표**
 
 | 개선 | 결과 |
 |---|---|
-| dense → hybrid | Page hit 0.80 → 1.00, Excerpt hit 0.70 → 0.90 |
-| hybrid → full | Avg score 0.817 → 0.978 |
-| citation/faithfulness | 1.00 유지 |
+| dense → hybrid | 근거 회수와 대체 유효 근거 평가에서 Hybrid 우세 |
+| 리랭커 비교 | FlashRank/Jev 모두 채택 기준 미충족, 운영 비활성 |
+| 최종 독립 평가 | evidence support 0.95, faithfulness 1.00, context recall 0.95 |
 
 **발표 메시지**
-> dense만으로도 문서는 찾았지만, page와 근거 문단 정밀도는 hybrid/RRF와 reranking을 넣었을 때 개선됐습니다.
+> Dense·BM25를 RRF로 합친 Hybrid가 최종 후보로 선정됐고, 리랭커는 품질·지연·메모리 기준을 충족하지 못해 제거했습니다.
 
 ---
 
@@ -428,9 +430,9 @@ if grounded == False:
 **설정**
 
 ```text
-LANGCHAIN_TRACING_V2=true
-LANGCHAIN_PROJECT=diet-agent
-LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
+LANGSMITH_TRACING=true
+LANGSMITH_PROJECT=metadiet-gemini-dev
+LANGSMITH_ENDPOINT=https://api.smith.langchain.com
 ```
 
 **보고서에서 말할 표현**
@@ -645,7 +647,7 @@ LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 |---|---|
 | AI Agent Engineer | LangGraph orchestration, subgraph, HITL, checkpoint |
 | LLM Engineer | prompt, guardrail, grounded generation, routing eval |
-| AI Engineer | RAG pipeline, embedding, reranking, eval, tracing |
+| AI Engineer | RAG pipeline, embedding·리랭커 비교 실험, eval, tracing |
 | Backend Engineer | FastAPI, Supabase, DB state, API 설계 |
 | Product-minded Engineer | 기존 앱 한계 분석, 사용자 오류 방지 UX |
 
@@ -674,8 +676,8 @@ LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 | Max chunk chars | 1200 |
 | Chunk overlap | 150 |
 | Dense threshold | 0.35 |
-| Backend regression | 360 passed / 1 skipped |
-| Frontend regression | 35 passed |
+| Backend regression | 376 passed / 1 skipped |
+| Frontend regression | 42 passed |
 
 ---
 
@@ -683,7 +685,7 @@ LANGCHAIN_ENDPOINT=https://api.smith.langchain.com
 
 1. 왜 필요한가: 기존 앱 한계
 2. 그래서 어떤 구조를 만들었나: Multi-Agent + LangGraph
-3. 핵심 기술: RAG, chunking, reranking, grounded generation
+3. 핵심 기술: RAG, chunking, 리랭커 비교와 미채택, grounded generation
 4. 안전장치: HITL, guardrail, threshold, validator
 5. 검증: routing eval, RAG eval, LangSmith
 6. 개선 과정: 무엇을 어떻게 고도화했나
