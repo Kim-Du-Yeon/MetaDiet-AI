@@ -79,6 +79,7 @@ async def test_account_deletion_removes_checkpoint_prefix_then_cascades_user():
         "delete from users where id=%s")
     assert "delete from checkpoint_blobs where thread_id like %s escape '\\'" in sql
     assert "delete from checkpoints where thread_id like %s escape '\\'" in sql
+    assert not any("delete from beta_feedback" in query for query in sql)
     assert lifecycle == ["begin", "commit", "begin", "commit"]
     auth_delete.assert_awaited_once_with("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa")
     assert "delete from account_deletion_tombstones where auth_id_hash=%s" in sql

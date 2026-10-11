@@ -11,6 +11,12 @@ test("opens the privacy notice with processors and deletion information", () => 
   expect(dialog).toHaveTextContent("Supabase");
   expect(dialog).toHaveTextContent("Google Gemini");
   expect(dialog).toHaveTextContent("계정 삭제");
+  expect(dialog).toHaveTextContent("만족도");
+  expect(dialog).toHaveTextContent("피드백 종류");
+  expect(dialog).toHaveTextContent("선택 의견");
+  expect(dialog).toHaveTextContent("서비스 개선");
+  expect(dialog).toHaveTextContent("대화·식사·인바디 기록을 자동으로 첨부하지 않습니다");
+  expect(dialog).toHaveTextContent("계정과 함께 삭제");
   fireEvent.click(screen.getByRole("button", { name: "안내 닫기" }));
   expect(screen.queryByRole("dialog")).not.toBeInTheDocument();
 });
