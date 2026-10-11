@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { deleteAccount, setToken } from "../api/dietApi";
 import { supabase } from "../lib/supabaseClient";
+import LegalNotices from "./LegalNotices";
 
 export function clearLocalSupabaseSession(storage = window.localStorage) {
   const keys = [];
@@ -90,6 +91,13 @@ export default function Settings({ session, onDeleted }) {
         <p className="settings-eyebrow">ACCOUNT</p>
         <h1>계정 설정</h1>
         <p className="settings-email">{session?.user?.email}</p>
+      </section>
+
+      <section className="settings-card" aria-labelledby="service-policy-title">
+        <p className="settings-eyebrow">SERVICE POLICY</p>
+        <h2 id="service-policy-title">서비스 안내</h2>
+        <p>개인정보 처리 범위와 무료 베타의 제한을 확인할 수 있습니다.</p>
+        <LegalNotices compact />
       </section>
 
       <section className="settings-card settings-danger" aria-labelledby="delete-account-title">

@@ -92,3 +92,16 @@ test("empty chat suggestions prepare a request without sending it", async () => 
   expect(screen.getByLabelText("식단 코치에게 메시지 보내기")).toHaveValue("오늘 저녁 식단을 추천해줘");
   expect(sendChatMessage).not.toHaveBeenCalled();
 });
+
+test("keeps the conversation usable when a streamed request is interrupted", async () => {
+  sendChatMessage.mockRejectedValue(new Error("네트워크 연결이 끊어졌습니다."));
+  render(<Harness />);
+  fireEvent.change(screen.getByPlaceholderText("오늘 뭐 드셨어요?"), { target: { value: "저녁 추천해줘" } });
+  fireEvent.click(screen.getByRole("button", { name: "전송" }));
+
+  expect(await screen.findByRole("alert")).toHaveTextContent("네트워크 연결이 끊어졌습니다.");
+  expect(screen.getByText("응답을 끝까지 받지 못했습니다. 잠시 후 다시 요청해주세요.")).toBeInTheDocument();
+  const composer = screen.getByLabelText("식단 코치에게 메시지 보내기");
+  fireEvent.change(composer, { target: { value: "다시 시도" } });
+  await waitFor(() => expect(screen.getByRole("button", { name: "전송" })).not.toBeDisabled());
+});

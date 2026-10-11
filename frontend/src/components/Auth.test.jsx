@@ -20,3 +20,9 @@ test("submits login with the keyboard and exposes errors accessibly", async () =
   }));
   expect(await screen.findByRole("alert")).toHaveTextContent("로그인 정보가 올바르지 않습니다.");
 });
+
+test("makes privacy and beta notices available before login", () => {
+  render(<Auth />);
+  expect(screen.getByRole("button", { name: "개인정보처리방침" })).toBeInTheDocument();
+  expect(screen.getByRole("button", { name: "베타 이용 안내" })).toBeInTheDocument();
+});

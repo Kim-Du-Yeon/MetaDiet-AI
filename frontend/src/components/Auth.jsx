@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../lib/supabaseClient";
+import LegalNotices from "./LegalNotices";
 import "./Auth.css";
 
 export default function Auth() {
@@ -50,5 +51,6 @@ export default function Auth() {
       {message && <p className="auth-message" role="alert">{message}</p>}
       <button className="auth-submit" type="submit" disabled={loading}>{loading ? "처리 중…" : mode === "login" ? "로그인" : "가입하기"}</button>
     </form>
+    <LegalNotices />
   </main>;
 }

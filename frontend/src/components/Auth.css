@@ -1,4 +1,4 @@
-.auth-page { min-height: 100vh; display: grid; place-items: center; padding: 24px; background: radial-gradient(circle at 50% -20%, #e8f4ee 0, #f6f9f7 42%, #f6f9f7 100%); color: #22332d; }
+.auth-page { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 24px; background: radial-gradient(circle at 50% -20%, #e8f4ee 0, #f6f9f7 42%, #f6f9f7 100%); color: #22332d; }
 .auth-card { width: min(100%, 460px); padding: 38px; border: 1px solid #dde8e2; border-radius: 24px; background: rgba(255,255,255,.94); box-shadow: 0 18px 50px rgba(26,67,51,.1); }
 .auth-header { margin-bottom: 26px; }
 .auth-eyebrow { display: block; margin-bottom: 8px; color: #1f7a58; font-size: 11px; font-weight: 850; letter-spacing: .15em; text-transform: uppercase; }

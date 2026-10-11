@@ -86,3 +86,9 @@ test("returns to password reauthentication if the partial-failure retry becomes 
   expect(screen.getByRole("button", { name: "계정 영구 삭제" })).toBeTruthy();
   expect(screen.getByLabelText("현재 비밀번호").disabled).toBe(false);
 });
+
+test("keeps service notices available from account settings", () => {
+  render(<Settings session={{ user: { email: "member@example.com" } }} onDeleted={jest.fn()} />);
+  expect(screen.getByRole("button", { name: "개인정보처리방침" })).toBeTruthy();
+  expect(screen.getByRole("button", { name: "베타 이용 안내" })).toBeTruthy();
+});
