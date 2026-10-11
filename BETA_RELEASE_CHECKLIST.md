@@ -19,6 +19,7 @@
 | Streaming UI | 완료 | 실제 SSE 진행 단계, 재연결, proposal·근거 카드, 오류 상태 |
 | 제한 부하·복구 | 완료 | 공개 제한 부하 오류 0건, kind Pod 재시작·중복 저장 방지 |
 | 개인정보·베타 안내 | 완료 | 로그인 전·계정 설정에서 공개, 계정 삭제 검증 |
+| 인앱 베타 피드백 | 완료 | 인증 API, 제출 멱등성, 최소 수집, 계정 삭제 cascade 공개 검증 |
 | 자동 배포 | 완료 | API·Web `autoDeployTrigger: commit`, GitHub provider 재연결 및 배포 확인 |
 | 장애 이메일 알림 | 완료 | Render Notifications에서 Email + Only failure notifications, 서비스별 override 없음 확인 |
 
@@ -34,8 +35,9 @@
 | 실제 Agent SSE 전체 wall time | 32.48초 | 동시 2건 완료까지의 벽시계 시간이며 요청별 중앙값이 아님 |
 | 공개 제한 부하 | health 50건·인증 조회 30건·Agent 2건, 오류 0 | 작은 제한 베타 표본이며 최대 처리량이 아님 |
 | kind rolling restart | health 400/400, p95 5.86ms | 로컬 Kubernetes 환경 |
-| 백엔드 회귀 | 360 passed, 1 skipped | 외부 서비스는 테스트 fixture로 격리 |
-| 프론트엔드 회귀 | 35 passed, production build 성공 | React UI 회귀와 번들 생성 |
+| 백엔드 회귀 | 376 passed, 1 skipped | 외부 서비스는 테스트 fixture로 격리 |
+| 프론트엔드 회귀 | 41 passed, production build 성공 | React UI 회귀와 번들 생성 |
+| 공개 피드백 수명주기 | 최초 201, 동일 UUID 재전송 200, 행 1→계정 삭제 후 0 | 합성 사용자 1명의 기능·멱등성·삭제 확인 |
 
 무료 인스턴스가 깨어난 뒤의 `/health` 시간과 실제 상담 시간을 혼동하지 않는다. 첫 응답 지연을 안정적으로 없애야 하면 keep-alive 우회 대신 휴면하지 않는 Render 인스턴스로 전환한다.
 
@@ -80,6 +82,9 @@ backend\venv\Scripts\python.exe backend\scripts\check_render_beta.py `
 backend\venv\Scripts\python.exe backend\scripts\check_render_load.py `
   --base-url https://metadiet-api.onrender.com `
   --health-requests 50 --read-requests 30 --agent-requests 2
+
+backend\venv\Scripts\python.exe backend\scripts\check_beta_feedback.py `
+  --base-url https://metadiet-api.onrender.com
 ```
 
 상세 평가 조건과 실패 분석은 [EVALUATION.md](EVALUATION.md), 핵심 비교 결과는 [PORTFOLIO_RESULTS.md](PORTFOLIO_RESULTS.md), 배포 절차는 [deploy/RENDER_BETA.md](deploy/RENDER_BETA.md)를 사용한다.

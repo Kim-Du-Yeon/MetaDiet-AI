@@ -1179,3 +1179,12 @@ KDRI 2025 유지 에너지를 기준으로 대한비만학회 2022 식사치료�
 - GitHub App 연결 후 커밋 `4e1a8f4`를 push했지만 새 Render deploy는 생성되지 않았고 공개 사이트는 이전 `main.5e73512f.js`를 계속 제공했다. 기존 서비스가 공개 URL clone 방식의 Git credential을 유지하는 것으로 판단한다. 새 인증 만료 처리는 로컬 build에서 검증됐지만 서비스의 Git credential을 다시 연결하거나 latest commit을 수동 배포하기 전에는 공개 사이트에 반영되지 않는다.
 - 이후 Git credential 연결이 전파된 뒤 커밋 `5f86bac` push에서 자동 배포가 동작했다. 공개 번들은 `main.60831615.js`로 바뀌어 인증 만료 수정이 반영됐고, 실제 Chromium의 로그인 화면과 정책 링크는 console error·warning 0건이었다. 따라서 앞선 미배포 상태는 최종 장애가 아니라 기존 서비스 연결 전파 중 관측한 중간 상태로 판정한다.
 - Render 공식 운영 설정에 따라 workspace email 알림을 `Only failure notifications`로 두면 deploy/build 실패, unhealthy service, Blueprint sync 실패를 받을 수 있다. 실제 Dashboard 값은 인증된 UI에서 확인해야 하며 현재 코드 검증만으로 알림 활성화를 주장하지 않는다.
+
+## 50. 인앱 베타 피드백 보안·배포 검증 (2026-10-11)
+
+- 설정 화면에 만족도 1~5, 고정 분류, 선택 의견 1,000자만 받는 피드백 카드를 추가했다. 대화·식사·인바디·이메일은 자동 첨부하지 않으며 서버가 JWT에서 내부 사용자 ID와 `settings` 페이지를 결정한다.
+- `beta_feedback`은 RLS를 활성화하고 브라우저 정책을 만들지 않았다. 백엔드 전용 Postgres 경로만 저장하며 `(user_id, client_submission_id)` unique 제약으로 재전송을 한 행으로 제한한다. `users.id` FK는 `ON DELETE CASCADE`다.
+- 첫 마이그레이션 명령은 PowerShell/Python 인용 오류로 SQL 실행 전 `SyntaxError`가 발생했다. 셸 문자열을 단순화해 재실행했고, 실제 catalog 감사에서 `RLS=true`, feedback FK `CASCADE`, idempotency unique를 확인했다.
+- 공개 Render API에서 합성 계정으로 첫 제출 HTTP 201, 같은 UUID 재전송 HTTP 200을 받았다. 재전송 뒤 DB 행은 1개였고 공개 계정 삭제 뒤 0개였다. 측정 시간은 최초 2,388.0ms, 재전송 1,307.5ms로 단일 warm 표본이며 일반 성능 분포로 확대하지 않는다.
+- 수명주기 artifact는 상태·행 수·시간·정리 상태만 기록한다. 댓글·토큰·사용자 식별자는 저장하지 않았으며 합성 계정은 공개 삭제 API로 정리됐다.
+- 최종 회귀는 backend **376 passed, 1 skipped**, frontend **41 passed**, production build 성공이다. 프론트 번들에서 `beta-feedback-title` 식별자를 확인해 자동 배포 반영도 확인했다.

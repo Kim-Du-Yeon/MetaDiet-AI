@@ -54,8 +54,9 @@ flowchart LR
 | Gemini Agent 독립 flow | 8/8 | 실제 사용자가 아닌 합성 시나리오 |
 | 정책 위반 / HITL 전 write | 0 / 0 | 평가한 실패 시나리오 범위 |
 | Agent p50 / p95 | 16.71s / 28.05s | 외부 API 상태에 따라 변동 |
-| 백엔드 회귀 | 360 passed, 1 skipped | 선택적 파서 환경 1건 skip |
-| 프론트엔드 회귀 | 35 passed | production build 별도 성공 |
+| 백엔드 회귀 | 376 passed, 1 skipped | 선택적 파서 환경 1건 skip |
+| 프론트엔드 회귀 | 41 passed | production build 별도 성공 |
+| 인앱 피드백 수명주기 | 201 생성, 200 재전송, DB 1행→삭제 후 0행 | 합성 계정 1건 공개 E2E |
 
 LangSmith에는 Supervisor 위임, 도구 호출, 재시도, 예산, HITL과 지연을 연결했다. 운영 trace는 입력·출력을 숨기고 가명 thread ID를 사용한다. Ragas와 custom evaluator는 검색 품질과 Agent 행동 품질을 서로 다른 gold contract로 평가한다.
 
@@ -69,6 +70,7 @@ LangSmith에는 Supervisor 위임, 도구 호출, 재시도, 예산, HITL과 지
 | SSE 도중 Pod 삭제 | journal은 Pod 메모리, 실행은 Postgres checkpoint에 존재 | 같은 run ID로 checkpoint부터 재개하고 proposal 멱등성 유지 |
 | 공개 자동 배포 미작동 | Render 로그의 저장소 접근 권한 경고 | GitHub credential 연결 후 push 자동 배포 확인 |
 | 만료 JWT가 화면에 잔류 | API 401 공통 경계 부재 | auth-expired 이벤트로 토큰 삭제·로그아웃·로그인 복귀 |
+| 피드백 재전송·개인정보 위험 | 네트워크 재시도 시 중복 저장 가능, 자유 입력에 민감정보 포함 가능 | 사용자별 UUID unique, 최소 필드·길이 제한, 원문 로그/trace 제외, 계정 삭제 cascade |
 
 ## 6. 배포 검증
 
@@ -88,6 +90,7 @@ LangSmith에는 Supervisor 위임, 도구 호출, 재시도, 예산, HITL과 지
 - kind rolling restart 중 `/health` 400/400 성공, p95 5.86ms였다.
 - 인증 SSE 중 Pod를 삭제한 뒤 다른 Pod에서 재개했고 proposal 중복 저장은 0건이었다.
 - 실제 Chromium에서 성공 흐름, proposal 복원, API 500, SSE 중단, 인증 401 UI를 확인했다.
+- 공개 피드백 API는 합성 계정에서 최초 저장 2,388.0ms, 동일 UUID 재전송 1,307.5ms였고 행 수는 1개로 유지됐다. 계정 삭제 후 피드백 행은 0개였다. 두 시간은 단일 표본이라 p50/p95로 표기하지 않는다.
 
 ## 7. 남은 한계와 다음 선택 작업
 
