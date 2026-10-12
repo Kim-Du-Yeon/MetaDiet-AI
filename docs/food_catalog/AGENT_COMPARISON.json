@@ -1,0 +1,919 @@
+{
+  "scope": "synthetic_live_gemini_current_agent_catalog_only_ablation",
+  "model": "gemini-3.8-flash",
+  "domain_writes": 0,
+  "proposal_repository": "in_memory",
+  "cases": [
+    {
+      "case": "rice",
+      "name": "멥쌀, 백미, 밥",
+      "selected_food_id": "csv:cef90c9133f4c4d1e4f3d850"
+    },
+    {
+      "case": "ricepaper",
+      "name": "라이스 페이퍼",
+      "selected_food_id": "mfds:P108-007000300-0037"
+    },
+    {
+      "case": "pigbar",
+      "name": "B.돼지바 마카롱",
+      "selected_food_id": "mfds:P101-102000100-0789"
+    }
+  ],
+  "samples": [
+    {
+      "case": "rice",
+      "repetition": 1,
+      "variant": "csv_only",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 19.813000000081956,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 19.831,
+      "proposal_prepared": true,
+      "exact_selected_product": true,
+      "sources": [
+        "csv"
+      ],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택하신 **멥쌀, 백미, 밥 50g**에 대한 영양 정보는 다음과 같습니다:\n\n- **열량**: 73 kcal\n- **탄수화물**: 15.9g\n- **단백질**: 1.3g\n- **지방**: 0.2g\n- **나트륨**: 0mg\n\n오늘 **간식**으로 기록 제안을 생성했습니다.\n해당 제안은 아직 저장 완료된 상태가 아니며 사용자 확인이 필요합니다. 이 내용대로 기록을 확정할까요?"
+    },
+    {
+      "case": "rice",
+      "repetition": 1,
+      "variant": "csv_mfds",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 15.906999999890104,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 15.913,
+      "proposal_prepared": true,
+      "exact_selected_product": true,
+      "sources": [
+        "csv"
+      ],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택하신 **멥쌀, 백미, 밥 50g**의 영양 정보를 조회하여 오늘 **간식** 섭취 기록 제안을 생성했습니다.\n\n### 영양 정보 (50g 기준)\n- **열량**: 73 kcal\n- **탄수화물**: 15.9g\n- **단백질**: 1.3g\n- **지방**: 0.2g\n- **나트륨**: 0mg\n\n해당 제안은 아직 실제 저장이 완료되지 않은 상태입니다. 이 내용대로 기록을 확정할까요?"
+    },
+    {
+      "case": "ricepaper",
+      "repetition": 1,
+      "variant": "csv_only",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 16.125,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 16.128,
+      "proposal_prepared": false,
+      "exact_selected_product": false,
+      "sources": [],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "search_foods",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "search_foods",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택해주신 라이스 페이퍼 제품(`mfds:P108-007000300-0037`)은 식품성분표에서 영양 정보를 조회할 수 없습니다. \n\n규정에 따라 유사한 다른 제품으로 임의 대체하여 기록할 수 없으므로, 정확한 간식 기록을 위해 해당 제품의 **1회 제공량 및 영양정보(열량, 탄수화물, 단백질, 지방 등)**를 알려주시면 감사하겠습니다."
+    },
+    {
+      "case": "ricepaper",
+      "repetition": 1,
+      "variant": "csv_mfds",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 16.108999999938533,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 16.1,
+      "proposal_prepared": true,
+      "exact_selected_product": true,
+      "sources": [
+        "mfds"
+      ],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택하신 **라이스 페이퍼 50g**에 대한 오늘 간식 기록 제안이 준비되었습니다.\n\n### 영양 정보 (50g 기준)\n- **열량**: 175 kcal\n- **탄수화물**: 43.5g\n- **단백질**: 0g\n- **지방**: 0g\n- **나트륨**: 75mg\n\n현재 제안은 임시 생성된 상태이며 아직 저장되지 않았습니다. 이대로 기록을 확정하시겠습니까?"
+    },
+    {
+      "case": "pigbar",
+      "repetition": 1,
+      "variant": "csv_only",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 17.344000000040978,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 17.352,
+      "proposal_prepared": false,
+      "exact_selected_product": false,
+      "sources": [],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "search_foods",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "search_foods",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택해주신 '돼지바 마카롱(mfds:P101-102000100-0789)' 제품의 영양정보를 식품성분표에서 조회할 수 없습니다.\n\n식품성분표에 없는 제품은 유사한 다른 제품으로 임의 대체하여 기록할 수 없으므로, 해당 제품의 포장지에 표기된 **1회 제공량(또는 총 내용량)**과 **영양정보(열량, 탄수화물, 단백질, 지방 등)**를 알려주시면 간식 기록 제안을 도와드리겠습니다."
+    },
+    {
+      "case": "pigbar",
+      "repetition": 1,
+      "variant": "csv_mfds",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 23.530999999959022,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 23.524,
+      "proposal_prepared": true,
+      "exact_selected_product": true,
+      "sources": [
+        "mfds"
+      ],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택하신 **B.돼지바 마카롱(장형식품)** 50g에 대한 영양 정보는 다음과 같습니다.\n\n### 📊 영양 정보 (50g 기준)\n- **열량**: 269 kcal\n- **탄수화물**: 27.5 g\n- **단백질**: 3.8 g\n- **지방**: 16.2 g\n- **나트륨**: 19 mg\n\n---\n\n오늘 **간식** 섭취 기록 제안을 생성했습니다. \n해당 제안은 아직 최종 저장된 상태가 아니므로, 내용이 맞으시면 확인 후 기록 저장을 진행해 주시기 바랍니다."
+    },
+    {
+      "case": "rice",
+      "repetition": 2,
+      "variant": "csv_mfds",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 16.844000000040978,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 16.841,
+      "proposal_prepared": true,
+      "exact_selected_product": true,
+      "sources": [
+        "csv"
+      ],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택하신 **멥쌀, 백미, 밥 50g**의 영양 정보를 바탕으로 오늘 간식 기록 제안을 준비했습니다.\n\n### 영양 정보 (50g 기준)\n- **열량**: 73 kcal\n- **탄수화물**: 15.9 g\n- **단백질**: 1.3 g\n- **지방**: 0.2 g\n- **나트륨**: 0 mg\n\n해당 내용으로 오늘 **간식(snack)** 섭취 기록을 확정하여 등록하시겠습니까? 확인해 주시면 기록 저장을 진행해 드리겠습니다."
+    },
+    {
+      "case": "rice",
+      "repetition": 2,
+      "variant": "csv_only",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 18.0,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 17.994,
+      "proposal_prepared": true,
+      "exact_selected_product": true,
+      "sources": [
+        "csv"
+      ],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택해주신 **멥쌀, 백미, 밥 50g**의 영양 정보는 다음과 같습니다.\n\n- **열량**: 73 kcal\n- **탄수화물**: 15.9g\n- **단백질**: 1.3g\n- **지방**: 0.2g\n- **나트륨**: 0mg\n\n해당 내용을 바탕으로 **오늘 간식 섭취 기록 제안**을 준비했습니다.  \n이 제안은 아직 데이터베이스에 최종 저장된 상태가 아니며 사용자 확인이 필요합니다. \n\n이대로 오늘 간식으로 확정하여 기록할까요?"
+    },
+    {
+      "case": "ricepaper",
+      "repetition": 2,
+      "variant": "csv_mfds",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 17.858999999938533,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 17.865,
+      "proposal_prepared": true,
+      "exact_selected_product": true,
+      "sources": [
+        "mfds"
+      ],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택하신 **라이스 페이퍼(제조사: BRANCH OF CHANH KHANG COMPANY LTD.) 50g**에 대한 오늘 간식 섭취 기록 제안을 준비했습니다.\n\n### 영양 정보 (50g 기준)\n- **열량**: 175 kcal\n- **탄수화물**: 43.5g\n- **단백질**: 0g\n- **지방**: 0g\n- **나트륨**: 75mg\n\n현재 기록 제안 상태이며 아직 최종 저장이 완료된 것은 아닙니다. 이 내용으로 오늘 간식 섭취 기록을 확정할까요?"
+    },
+    {
+      "case": "ricepaper",
+      "repetition": 2,
+      "variant": "csv_only",
+      "status": "completed",
+      "model_calls": 3,
+      "tool_calls": 2,
+      "elapsed_seconds": 14.297000000020489,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 14.288,
+      "proposal_prepared": false,
+      "exact_selected_product": false,
+      "sources": [],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택하신 제품 ID(`mfds:P108-007000300-0037`)로 영양 성분을 조회하는 과정에서 오류가 발생하여 정보를 불러오지 못했습니다.\n\n식품성분표 조회가 불가능한 경우 임의로 수치를 추정하거나 유사한 다른 제품으로 대체하여 기록할 수 없습니다. 정확한 간식 기록 제안을 위해, 가지고 계신 라이스 페이퍼 제품의 **1회 제공량(또는 100g당) 영양정보(열량, 탄수화물, 단백질, 지방 등)**를 알려주시면 감사하겠습니다."
+    },
+    {
+      "case": "pigbar",
+      "repetition": 2,
+      "variant": "csv_mfds",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 18.0,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 18.01,
+      "proposal_prepared": true,
+      "exact_selected_product": true,
+      "sources": [
+        "mfds"
+      ],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택하신 **B.돼지바 마카롱(제조사: 장형식품)** 50g에 대한 오늘 간식 기록 제안이 준비되었습니다.\n\n### 영양 정보 (50g 기준)\n- **열량**: 269 kcal\n- **탄수화물**: 27.5 g\n- **단백질**: 3.8 g\n- **지방**: 16.2 g\n- **나트륨**: 19 mg\n\n현재 단계는 기록 저장을 위한 **제안 상태**(확인 대기)입니다. 내용이 맞으시면 확인해 주시면 기록 저장을 완료하겠습니다."
+    },
+    {
+      "case": "pigbar",
+      "repetition": 2,
+      "variant": "csv_only",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 15.719000000040978,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 15.719,
+      "proposal_prepared": false,
+      "exact_selected_product": false,
+      "sources": [],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "search_foods",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "search_foods",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택해주신 제품(돼지바 마카롱)은 현재 식품성분표에서 조회가 되지 않아 영양 성분을 확인할 수 없습니다.\n\n유사한 다른 제품으로 임의 대체하여 기록할 수 없으므로, 정확한 기록을 위해 제품 포장지에 표기된 **1회 제공량(g) 및 영양정보(열량, 탄수화물, 단백질, 지방 등)**를 알려주시면 감사하겠습니다."
+    },
+    {
+      "case": "rice",
+      "repetition": 3,
+      "variant": "csv_only",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 16.468999999808148,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 16.48,
+      "proposal_prepared": true,
+      "exact_selected_product": true,
+      "sources": [
+        "csv"
+      ],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택하신 **멥쌀, 백미, 밥 50g**의 영양 정보는 다음과 같습니다:\n\n- **열량:** 73 kcal\n- **탄수화물:** 15.9 g\n- **단백질:** 1.3 g\n- **지방:** 0.2 g\n- **나트륨:** 0 mg\n\n오늘 **간식**으로 섭취 기록 제안을 준비했습니다. 이대로 기록을 저장하시겠습니까?"
+    },
+    {
+      "case": "rice",
+      "repetition": 3,
+      "variant": "csv_mfds",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 18.594000000040978,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 18.596,
+      "proposal_prepared": true,
+      "exact_selected_product": true,
+      "sources": [
+        "csv"
+      ],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택하신 **멥쌀, 백미, 밥 50g**의 영양 정보는 다음과 같습니다:\n\n- **열량**: 73 kcal\n- **탄수화물**: 15.9g\n- **단백질**: 1.3g\n- **지방**: 0.2g\n- **나트륨**: 0mg\n\n해당 내용으로 **오늘 간식 섭취 기록 제안**을 준비했습니다. \n\n이는 아직 확정 저장된 상태가 아니며 사용자 확인이 필요한 제안입니다. 이 내용대로 기록을 확정할까요?"
+    },
+    {
+      "case": "ricepaper",
+      "repetition": 3,
+      "variant": "csv_only",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 14.828999999910593,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 14.834,
+      "proposal_prepared": false,
+      "exact_selected_product": false,
+      "sources": [],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "search_foods",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "search_foods",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택해 주신 라이스 페이퍼(`mfds:P108-007000300-0037`)는 식품성분표 데이터베이스에서 영양 정보를 조회할 수 없습니다.\n\n다른 제품으로 임의 대체하여 기록할 수 없으므로, 정확한 기록을 위해 가지고 계신 제품 포장지의 **1회 제공량 및 영양성분 정보(열량, 탄수화물, 단백질, 지방 등)**를 알려주시면 감사하겠습니다. 영양 정보를 알려주시면 간식 기록을 도와드리겠습니다."
+    },
+    {
+      "case": "ricepaper",
+      "repetition": 3,
+      "variant": "csv_mfds",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 28.233999999938533,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 28.23,
+      "proposal_prepared": true,
+      "exact_selected_product": true,
+      "sources": [
+        "mfds"
+      ],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택하신 **라이스 페이퍼 50g**의 영양 정보를 바탕으로 오늘 간식 섭취 기록 제안을 생성했습니다.\n\n### 📋 영양 성분 정보 (50g 기준)\n- **열량**: 175 kcal\n- **탄수화물**: 43.5g\n- **단백질**: 0g\n- **지방**: 0g\n- **나트륨**: 75mg\n- **제조사**: BRANCH OF CHANH KHANG COMPANY LTD.\n\n---\n\n현재 상태는 **기록 제안** 단계이며, 아직 실제 데이터베이스에 최종 저장되지 않았습니다.  \n위 내용대로 간식 기록을 확정하여 등록할까요? 확인해 주시면 기록을 완료해 드리겠습니다."
+    },
+    {
+      "case": "pigbar",
+      "repetition": 3,
+      "variant": "csv_only",
+      "status": "completed",
+      "model_calls": 3,
+      "tool_calls": 2,
+      "elapsed_seconds": 11.562000000150874,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 11.566,
+      "proposal_prepared": false,
+      "exact_selected_product": false,
+      "sources": [],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택해주신 제품(`mfds:P101-102000100-0789` / 돼지바 마카롱)의 영양 정보를 조회하는 과정에서 오류가 발생하여 정보를 불러올 수 없었습니다.\n\n정확한 기록을 위해 해당 제품의 포장지에 표기된 **1회 제공량 및 영양성분 정보(열량, 탄수화물, 단백질, 지방 등)**를 알려주시면 식단 기록을 도와드리겠습니다."
+    },
+    {
+      "case": "pigbar",
+      "repetition": 3,
+      "variant": "csv_mfds",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 24.5,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 24.49,
+      "proposal_prepared": true,
+      "exact_selected_product": true,
+      "sources": [
+        "mfds"
+      ],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택하신 **B.돼지바 마카롱** 50g에 대한 영양 정보는 다음과 같습니다. (출처: 식품의약품안전처)\n\n- **열량**: 269 kcal\n- **탄수화물**: 27.5 g\n- **단백질**: 3.8 g\n- **지방**: 16.2 g\n- **나트륨**: 19 mg\n\n위 내용을 바탕으로 **오늘 간식 섭취 기록 제안**을 생성했습니다. \n\n해당 제안은 아직 최종 저장이 완료된 것이 아니며 사용자의 확인이 필요합니다. 이 내용대로 기록을 확정할까요?"
+    }
+  ],
+  "aggregates": [
+    {
+      "variant": "csv_only",
+      "n": 9,
+      "median_model_calls": 4,
+      "median_tool_calls": 3,
+      "median_wall_seconds": 16.128,
+      "proposal_count": 3,
+      "exact_product_proposals": 3
+    },
+    {
+      "variant": "csv_mfds",
+      "n": 9,
+      "median_model_calls": 4,
+      "median_tool_calls": 3,
+      "median_wall_seconds": 18.01,
+      "proposal_count": 9,
+      "exact_product_proposals": 9
+    }
+  ],
+  "limitations": [
+    "3 repetitions per case; no meaningful p95",
+    "Not an historical 100-second incident comparison",
+    "Catalog-only ablation of current Agent; includes local CSV construction, Gemini, DB reads",
+    "Synthetic explicit product choices; no user outcome or manufactured identity inference"
+  ]
+}

@@ -1,0 +1,369 @@
+{
+  "scope": "synthetic_live_gemini_current_agent_catalog_only_ablation",
+  "model": "gemini-3.8-flash",
+  "domain_writes": 0,
+  "proposal_repository": "in_memory",
+  "cases": [
+    {
+      "case": "rice",
+      "name": "멥쌀, 백미, 밥",
+      "selected_food_id": "csv:cef90c9133f4c4d1e4f3d850"
+    },
+    {
+      "case": "ricepaper",
+      "name": "라이스 페이퍼",
+      "selected_food_id": "mfds:P108-007000300-0037"
+    },
+    {
+      "case": "pigbar",
+      "name": "B.돼지바 마카롱",
+      "selected_food_id": "mfds:P101-102000100-0789"
+    }
+  ],
+  "samples": [
+    {
+      "case": "rice",
+      "repetition": 1,
+      "variant": "csv_only",
+      "status": "completed",
+      "model_calls": 6,
+      "tool_calls": 5,
+      "elapsed_seconds": 23.469000000040978,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 23.467,
+      "proposal_prepared": true,
+      "exact_selected_product": true,
+      "sources": [
+        "csv"
+      ],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "search_foods",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "search_foods",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "propose_meal",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택하신 **멥쌀, 백미, 밥(50g)**에 대한 영양 정보는 다음과 같습니다.\n\n### 영양 성분 (50g 기준)\n- **열량**: 73 kcal\n- **탄수화물**: 15.9g\n- **단백질**: 1.3g\n- **지방**: 0.2g\n- **나트륨**: 0mg\n\n오늘 **간식**으로 기록 제안을 생성했습니다. 이 내용으로 기록을 확정하시겠습니까?"
+    },
+    {
+      "case": "rice",
+      "repetition": 1,
+      "variant": "csv_mfds",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 22.608999999938533,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 22.61,
+      "proposal_prepared": false,
+      "exact_selected_product": false,
+      "sources": [],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "search_foods",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "search_foods",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택해 주신 식품 코드(`csv:cef90c9133f4c4d1e4f3d850`)로 영양 성분을 조회하는 과정에서 오류가 발생하여 영양 정보를 불러오지 못했습니다.\n\n영양 수치는 공식 데이터 조회를 통해서만 정확히 산출할 수 있어, 현재 해당 식품에 대한 식단 기록 제안을 바로 진행하기 어렵습니다.\n\n정확한 기록을 위해 번거로우시겠지만 섭취하신 제품의 **1회 제공량(g) 및 상세 영양정보(열량, 탄수화물, 단백질, 지방 등)**를 알려주시면 확인 후 기록을 도와드리겠습니다."
+    },
+    {
+      "case": "ricepaper",
+      "repetition": 1,
+      "variant": "csv_only",
+      "status": "completed",
+      "model_calls": 4,
+      "tool_calls": 3,
+      "elapsed_seconds": 15.875,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 15.882,
+      "proposal_prepared": false,
+      "exact_selected_product": false,
+      "sources": [],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "search_foods",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "search_foods",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택하신 라이스 페이퍼(`mfds:P108-007000300-0037`)는 식품성분표에서 영양 정보를 조회할 수 없었습니다.\n\n유사한 다른 제품으로 임의 대체하여 기록할 수 없으므로, 정확한 기록을 위해 해당 제품 포장지에 표기된 **1회 제공량 및 영양정보(열량, 탄수화물, 단백질, 지방 등)**를 알려주시면 확인 후 간식 기록을 도와드리겠습니다."
+    },
+    {
+      "case": "ricepaper",
+      "repetition": 1,
+      "variant": "csv_mfds",
+      "status": "completed",
+      "model_calls": 3,
+      "tool_calls": 2,
+      "elapsed_seconds": 13.360000000102445,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 13.354,
+      "proposal_prepared": false,
+      "exact_selected_product": false,
+      "sources": [],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택해주신 라이스 페이퍼 제품(`mfds:P108-007000300-0037`, 50g)의 영양 정보를 조회하는 과정에서 시스템 오류가 발생하여 조회가 완료되지 않았습니다.\n\n정확한 영양 수치 계산 및 식사 기록 제안을 위해, 번거로우시겠지만 가지고 계신 제품 포장지에 표기된 **1회 제공량 및 영양정보(열량, 탄수화물, 단백질, 지방 등)**를 알려주시면 확인 후 기록 제안을 도와드리겠습니다."
+    },
+    {
+      "case": "pigbar",
+      "repetition": 1,
+      "variant": "csv_only",
+      "status": "completed",
+      "model_calls": 3,
+      "tool_calls": 2,
+      "elapsed_seconds": 13.030999999959022,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 13.03,
+      "proposal_prepared": false,
+      "exact_selected_product": false,
+      "sources": [],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택해 주신 제품(`B.돼지바 마카롱`, ID: `mfds:P101-102000100-0789`)의 영양 성분 정보를 조회하는 중 오류가 발생하여 영양 수치를 가져오지 못했습니다.\n\n식품성분표 조회가 불가능한 경우 임의로 수치를 추정하여 기록할 수 없으므로, 해당 제품 포장지에 표기된 **1회 제공량 및 영양성분 정보(열량, 탄수화물, 단백질, 지방 등)**를 알려주시면 정확한 간식 기록 제안을 도와드리겠습니다."
+    },
+    {
+      "case": "pigbar",
+      "repetition": 1,
+      "variant": "csv_mfds",
+      "status": "completed",
+      "model_calls": 3,
+      "tool_calls": 2,
+      "elapsed_seconds": 14.219000000040978,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 14.212,
+      "proposal_prepared": false,
+      "exact_selected_product": false,
+      "sources": [],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택해주신 제품(ID: `mfds:P101-102000100-0789`, 돼지바 마카롱 50g)에 대한 영양 성분 조회를 시도했으나, 데이터 조회에 실패하여 영양 정보를 불러올 수 없었습니다.\n\n영양 수치는 공인된 영양 분석 결과에 기반해야 하므로 임의로 추정하여 기록할 수 없습니다. 번거로우시겠지만, 해당 제품 포장지에 표기된 **1회 제공량 및 영양정보(열량, 탄수화물, 단백질, 지방 등)**를 알려주시면 확인 후 간식 기록 제안을 도와드리겠습니다."
+    },
+    {
+      "case": "rice",
+      "repetition": 2,
+      "variant": "csv_mfds",
+      "status": "completed",
+      "model_calls": 3,
+      "tool_calls": 2,
+      "elapsed_seconds": 14.375,
+      "validation_attempts": 0,
+      "replans": 0,
+      "wall_seconds": 14.375,
+      "proposal_prepared": false,
+      "exact_selected_product": false,
+      "sources": [],
+      "events": [
+        {
+          "type": "tool_requested",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_failed",
+          "tool": "nutrition_lookup",
+          "agent": "meal"
+        },
+        {
+          "type": "tool_requested",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        },
+        {
+          "type": "tool_succeeded",
+          "tool": "delegate_meal",
+          "agent": "supervisor"
+        }
+      ],
+      "synthetic_response": "선택하신 식품(`멥쌀, 백미, 밥`, ID: `csv:cef90c9133f4c4d1e4f3d850`)의 영양 성분 정보를 시스템에서 조회하는 과정에서 오류가 발생하여 영양 수치를 불러오지 못했습니다.\n\n식품성분표 조회가 불가능한 경우 임의로 수치를 추정하여 기록할 수 없으므로, 해당 제품의 포장지에 표기된 **1회 제공량 및 영양성분 정보(열량, 탄수화물, 단백질, 지방 등)**를 알려주시면 확인 후 식단 기록을 진행해 드리겠습니다."
+    }
+  ],
+  "aggregates": [
+    {
+      "variant": "csv_only",
+      "n": 3,
+      "median_model_calls": 4,
+      "median_tool_calls": 3,
+      "median_wall_seconds": 15.882,
+      "proposal_count": 1,
+      "exact_product_proposals": 1
+    },
+    {
+      "variant": "csv_mfds",
+      "n": 4,
+      "median_model_calls": 3.0,
+      "median_tool_calls": 2.0,
+      "median_wall_seconds": 14.2935,
+      "proposal_count": 0,
+      "exact_product_proposals": 0
+    }
+  ],
+  "limitations": [
+    "3 repetitions per case; no meaningful p95",
+    "Not an historical 100-second incident comparison",
+    "Catalog-only ablation of current Agent; includes local CSV construction, Gemini, DB reads",
+    "Synthetic explicit product choices; no user outcome or manufactured identity inference"
+  ]
+}

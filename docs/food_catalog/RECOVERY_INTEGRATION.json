@@ -1,0 +1,12 @@
+{
+  "scope": "real_postgres_importer_session_local_temp_tables",
+  "checks": [
+    "repeat_import_single_row",
+    "previous_verified_version_restored",
+    "version_content_conflict_rejected",
+    "import_count_mismatch_rejected",
+    "unverified_version_rejected",
+    "public_observer_unchanged",
+    "forced_rollback_removes_all_fixtures"
+  ]
+}

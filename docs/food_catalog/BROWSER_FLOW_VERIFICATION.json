@@ -1,0 +1,36 @@
+{
+  "date": "2026-10-12",
+  "scope": "public_browser_synthetic_account_real_agent_and_database",
+  "url": "https://metadiet-web.onrender.com/",
+  "api_fix_commit": "0b57738",
+  "web_fix_commit": "af977fb",
+  "food_id": "mfds:P108-007000300-0037",
+  "product_name": "라이스 페이퍼",
+  "manufacturer": "BRANCH OF CHANH KHANG COMPANY LTD.",
+  "quantity_g": 10,
+  "basis_g": 100,
+  "calories": 35,
+  "catalog_version": "mfds-20260929",
+  "checks": [
+    "manufacturer_and_package_candidates_visible",
+    "selection_populates_input_without_saving",
+    "today_intent_present_in_generated_message",
+    "agent_prepares_exact_selected_product",
+    "proposal_card_date_2026_10_12_and_mfds_source_visible",
+    "before_confirm_zero_meal_rows_one_pending_proposal",
+    "explicit_confirm_updates_today_intake_to_35",
+    "refresh_restores_chat_and_35_kcal_without_pending_card",
+    "after_refresh_exactly_one_meal_row",
+    "stable_food_id_source_basis_manufacturer_and_catalog_version_persisted",
+    "earlier_wrong_date_proposal_cancelled_with_zero_meal_rows"
+  ],
+  "meal_count_before_confirm": 0,
+  "meal_count_after_refresh": 1,
+  "limitations": [
+    "Synthetic account, not actual user outcomes",
+    "One selected processed product in this browser flow",
+    "Repeated confirm HTTP behavior separately covered by PUBLIC_SMOKE.json"
+  ],
+  "synthetic_cleanup": "auth_identity_application_profile_domain_rows_and_checkpoints_removed",
+  "screenshot": "BROWSER_CONFIRMED.jpg"
+}
