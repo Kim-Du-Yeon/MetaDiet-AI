@@ -37,7 +37,7 @@ def run():
         assert trace_id, 'deployed response has no trace_id (check deployment version)'
         UUID(trace_id)
         status, _ = api_request(base + '/analytics/events', token=token, method='POST', payload={
-            'event_name': 'chat_completed', 'client_event_id': str(uuid4()),
+            'event_name': 'chat_completed', 'status': 'success', 'client_event_id': str(uuid4()),
             'session_id': str(uuid4()), 'trace_id': trace_id,
         })
         assert status == 201

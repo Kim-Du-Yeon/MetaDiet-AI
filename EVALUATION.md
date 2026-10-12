@@ -1230,3 +1230,11 @@ KDRI 2025 유지 에너지를 기준으로 대한비만학회 2022 식사치료�
 - 공개 합성 사용자 검증에서 최초 저장 201, 동일 ID 재전송 200, 재전송 후 1행, 공개 계정 삭제 후 0행을 확인했다. 집계 쿼리는 실제 Supabase에 연결해 실행했고 주간 활성 사용자와 cohort 비율 범위를 검증했다. 원문·토큰·계정 ID 없이 `backend/artifacts/product-analytics-lifecycle-v2.json`에 결과를 저장한다.
 - 첫 실행은 검증 스크립트의 Windows ProactorEventLoop 때문에 psycopg 비동기 연결이 실패했다. 공식 https://www.psycopg.org/psycopg3/docs/advanced/async.html 지침에 따라 SelectorEventLoop 정책을 설정하고 재실행해 통과했다. 합성 계정은 실패 경로에서도 정리한다.
 - 관리자 이메일 allowlist 등록 및 관리자 화면의 인증된 공개 조회는 별도 확인 항목이다. LangSmith 실제 trace 연결은 이 변경에서 완료됐다고 주장하지 않는다.
+
+## 56. 제품 이벤트와 실제 LangSmith 실행 연결 (2026-10-12)
+
+- 그래프 실제 실행마다 UUID root run ID를 지정하고 `trace_id` metadata, 완료·실패 checkpoint, SSE 응답과 브라우저 상담 완료 이벤트에 동일 ID를 전달한다. Pod 복구로 재실행하면 새 root ID를 사용하며 저장된 응답 재연결은 기존 ID를 유지한다. 서버에 도달하지 못한 네트워크 오류는 임의의 trace를 만들지 않는다.
+- 공식 LangChain run ID 설정 문서(https://docs.langchain.com/langsmith/trace-with-langchain)를 기준으로 구현했다. 공개 검증에서 SSE ID, `product_events.trace_id`, LangSmith `read_run`의 root ID와 trace ID가 모두 일치했고 `stream_run_id` metadata도 확인했다. 합성 계정을 정리했고 aggregate 결과는 `backend/artifacts/analytics-trace-v1.json`에 저장했다.
+- 첫 공개 요청은 이전 배포 응답으로 trace ID가 없었다. Render 배포 문서(https://render.com/docs/deploys)를 확인하고 배포 반영 후 재검증했다. 다음 검증은 스크립트의 필수 `status` 누락으로 HTTP 422 `Field required`를 반환했다. Pydantic validation 문서를 확인해 payload를 수정한 뒤 통과했다. Jest는 sandbox 임시 폴더 `EPERM`으로 시작하지 못해 일반 실행 환경에서 재검증했다.
+- 백엔드 전체 389 passed/1 skipped, 프론트 전체 58 passed, 운영 빌드 성공. 신규 회귀는 graph invocation ID와 checkpoint ID 일치, 실패 SSE ID 유지, 완료 이벤트의 실제 trace 전달을 확인한다.
+- 관리자 환경변수 설정 안내는 `docs/ADMIN_ANALYTICS_GUIDE.md`에 기록했다. 실제 관리자 계정 화면 검증은 운영 `ADMIN_EMAILS` 등록 후 진행한다. 공개 trace 공유 링크나 건강 원문 제품 이벤트를 만들지 않는다.
