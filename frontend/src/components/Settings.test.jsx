@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Settings from "./Settings";
+jest.mock("./AdminAnalytics", () => () => null);
 import { supabase } from "../lib/supabaseClient";
 import { deleteAccount, getAdminAnalytics, setToken } from "../api/dietApi";
 

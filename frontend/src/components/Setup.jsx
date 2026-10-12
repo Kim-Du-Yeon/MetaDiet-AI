@@ -82,7 +82,6 @@ export default function Setup({ onComplete }) {
     try {
       const decision=await decideProposal(result.pending_proposal,action);
       if(action==='confirm' && decision.status==='confirmed') {
-        trackProductEvent("signup_completed");
         trackProductEvent("onboarding_completed");
         onComplete();
       }

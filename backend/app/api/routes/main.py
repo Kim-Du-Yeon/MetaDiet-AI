@@ -122,11 +122,15 @@ class ProductEventRequest(BaseModel):
     @field_validator("properties")
     @classmethod
     def reject_sensitive_properties(cls, value: dict) -> dict:
-        forbidden = {
-            "message", "content", "email", "name", "food", "meal", "weight",
-            "height", "body_fat", "inbody", "comment", "answer", "prompt",
+        allowed = {
+            "source": {"web"}, "channel": {"text", "food_photo"},
+            "surface": {"chat", "setup", "dashboard", "settings"},
+            "category": {"general", "answer_quality", "evidence", "usability", "bug"},
+            "route": {"diet_logger", "meal_plan", "strategy", "inbody", "reporter",
+                      "confirm", "edit", "goal_manager", "off_topic"},
         }
-        if len(value) > 10 or any(key.lower() in forbidden for key in value):
+        if any(key not in allowed or not isinstance(item, str) or item not in allowed[key]
+               for key, item in value.items()):
             raise ValueError("민감 정보나 허용되지 않은 속성은 분석 이벤트에 저장할 수 없습니다.")
         return value
 

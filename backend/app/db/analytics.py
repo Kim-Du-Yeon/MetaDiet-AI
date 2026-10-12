@@ -74,22 +74,28 @@ class ProductEventRepository:
             async with self.connect() as conn:
                 row = await (
                     await conn.execute(
-                        """select
+                        """with cohort as (
+                           select a.id as auth_id, u.id as user_id,
+                             exists(select 1 from diet_strategies d where d.user_id=u.id) as onboarded,
+                             exists(select 1 from meal_logs m where m.user_id=u.id) as recorded_meal
+                           from auth.users a left join users u on u.auth_id=a.id
+                           where a.created_at >= now() - (%s * interval '1 day')
+                        ) select
                            count(distinct user_id) filter (where created_at >= now() - interval '1 day') as dau,
                            count(distinct user_id) filter (where created_at >= now() - interval '7 days') as wau,
-                           count(distinct user_id) filter (where event_name='signup_completed') as signups,
-                           count(distinct user_id) filter (where event_name='onboarding_completed' and status='success') as onboarding_completed,
-                           count(distinct user_id) filter (where event_name='meal_confirmed' and status='success') as first_meal_users,
-                           count(*) filter (where event_name='chat_completed') as chat_total,
-                           count(*) filter (where event_name='chat_completed' and status='success') as chat_succeeded,
+                           (select count(*) from cohort) as signups,
+                           (select count(*) from cohort where onboarded) as onboarding_completed,
+                           (select count(*) from cohort where recorded_meal) as first_meal_users,
+                           count(*) filter (where event_name='chat_completed' and created_at >= now() - (%s * interval '1 day')) as chat_total,
+                           count(*) filter (where event_name='chat_completed' and status='success' and created_at >= now() - (%s * interval '1 day')) as chat_succeeded,
                            percentile_cont(0.5) within group (order by duration_ms)
-                               filter (where event_name='chat_completed' and duration_ms is not null) as latency_p50_ms,
+                               filter (where event_name='chat_completed' and status='success' and duration_ms is not null and created_at >= now() - (%s * interval '1 day')) as latency_p50_ms,
                            percentile_cont(0.95) within group (order by duration_ms)
-                               filter (where event_name='chat_completed' and duration_ms is not null) as latency_p95_ms,
-                           count(*) filter (where status='failed') as errors
+                               filter (where event_name='chat_completed' and status='success' and duration_ms is not null and created_at >= now() - (%s * interval '1 day')) as latency_p95_ms,
+                           count(*) filter (where event_name='chat_completed' and status='failed' and created_at >= now() - (%s * interval '1 day')) as errors
                            from product_events
-                           where created_at >= now() - (%s * interval '1 day')""",
-                        (days,),
+                           where created_at >= now() - (greatest(%s, 7) * interval '1 day')""",
+                        (days,) * 7,
                     )
                 ).fetchone() or {}
         except Exception as exc:
@@ -105,6 +111,7 @@ class ProductEventRepository:
         chats = number("chat_total")
         return {
             "window_days": days,
+            "measurement_basis": "signup_cohort_and_browser_completed_requests",
             "active_users": {"daily": number("dau"), "weekly": number("wau")},
             "funnel": {
                 "signups": signups,

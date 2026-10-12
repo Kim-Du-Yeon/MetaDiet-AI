@@ -75,7 +75,8 @@ async def test_event_storage_is_idempotent_and_privacy_minimal():
 async def test_overview_returns_counts_rates_and_latency():
     from app.db.analytics import ProductEventRepository
 
-    repository = ProductEventRepository(connect=connector(AnalyticsConnection()))
+    connection = AnalyticsConnection()
+    repository = ProductEventRepository(connect=connector(connection))
     result = await repository.overview(days=7)
 
     assert result["active_users"] == {"daily": 3, "weekly": 8}
@@ -83,6 +84,11 @@ async def test_overview_returns_counts_rates_and_latency():
     assert result["funnel"]["first_meal_rate"] == 0.5
     assert result["agent"]["success_rate"] == 0.9
     assert result["agent"]["latency_p95_ms"] == 2400
+    sql, params = connection.queries[0]
+    assert "from auth.users" in sql
+    assert "greatest(%s, 7)" in sql
+    assert "event_name='chat_completed' and status='failed'" in sql
+    assert params == (7,) * 7
 
 
 def test_product_events_migration_is_private_indexed_and_constrained():
@@ -136,6 +142,10 @@ async def test_event_endpoint_rejects_payload_content_and_unknown_events(client,
         json=valid_event(event_name="meal_text", properties={"message": "민감한 식사 내용"}),
     )
     assert response.status_code == 422
+
+    sensitive = await client.post('/analytics/events', json=valid_event(
+        properties={'source': 'private health information'}))
+    assert sensitive.status_code == 422
 
 
 @pytest.mark.asyncio

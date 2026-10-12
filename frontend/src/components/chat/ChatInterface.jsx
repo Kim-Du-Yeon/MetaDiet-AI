@@ -175,9 +175,9 @@ export default function ChatInterface({
           : "인바디 측정 제안을 취소했습니다.", streaming: false }]);
       }
       if (action === "confirm") {
-        const eventName = approval.kind === "meal" || approval.kind === "meal_log"
-          ? "meal_confirmed" : "measurement_confirmed";
-        trackProductEvent(eventName);
+        const eventName = approval.kind === "intake" ? "meal_confirmed"
+          : ["measurement", "weight"].includes(approval.kind) ? "measurement_confirmed" : null;
+        if (eventName) trackProductEvent(eventName, { clientEventId: approval.id });
       }
     } catch (error) { setApprovalError(error.message); setStreamError(error.message); }
     finally { setIsLoading(false); }

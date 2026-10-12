@@ -1219,3 +1219,14 @@ KDRI 2025 유지 에너지를 기준으로 대한비만학회 2022 식사치료�
 - 관리자 조회는 검증된 JWT의 최상위 email과 서버 `ADMIN_EMAILS` allowlist를 비교한다. 사용자가 바꿀 수 있는 metadata는 관리자 판정에 사용하지 않는다.
 - 설정 화면의 운영 카드는 DAU·WAU, 온보딩 완료율, 첫 식사 기록률, Agent 성공률과 p95 지연을 1·7·30·90일 범위로 보여준다. 일반 사용자는 403 응답 뒤 카드를 볼 수 없다.
 - Supabase 실제 마이그레이션 뒤 catalog에서 RLS 활성화와 브라우저 역할 grant 없음이 확인됐다. `RLS enabled no policy` advisor는 브라우저 접근을 전부 차단한 의도된 백엔드 전용 설계이며, 이 테이블에는 허용 policy를 만들지 않는다.
+
+## 55. 제품 분석 정확성·공개 수명주기 검증 (2026-10-12)
+
+- 온보딩 확정 시 가입 이벤트를 보내던 방식은 가입 후 이탈을 측정하지 못했다. 가입 기간 cohort는 `auth.users.created_at`, 온보딩은 실제 전략 존재, 첫 식사 기록은 실제 `meal_logs` 존재로 계산한다. 삭제된 계정은 포함하지 않으며 미래 시점에 완료하면 동일 가입 cohort의 완료율이 변할 수 있다.
+- 1일 조회에서 WAU도 1일로 제한되던 오류를 수정해 활성 사용자는 항상 최근 24시간·7일을 조회한다. 오류 수는 실패한 상담 완료 이벤트만 세어 같은 실패의 `error_shown` 이벤트를 이중 계산하지 않는다. p50/p95는 성공 완료 요청만 포함한다.
+- 상담 완료율은 브라우저가 completed 이벤트를 수신한 비율이며 목표 달성률·답변 정확도가 아니다. 브라우저 종료·분석 전송 실패로 누락될 수 있는 best-effort 지표라는 한계를 유지한다.
+- 실제 proposal은 `intake`/`plan`/`weight`/`measurement`/`strategy`다. 잘못된 `meal` 비교를 바로잡고 전략과 계획은 측정 확정 이벤트로 보내지 않는다. 전환율 자체는 클라이언트 확정 이벤트를 신뢰하지 않고 DB 기록을 사용한다.
+- 이벤트 properties는 금지 키 목록 대신 고정 키·고정 값 allowlist로 제한해 임의 문자열에 건강 정보를 담는 경로를 차단한다. 관리자 컴포넌트 테스트를 계정 설정 테스트에서 분리해 `act` 경고를 제거했다.
+- 공개 합성 사용자 검증에서 최초 저장 201, 동일 ID 재전송 200, 재전송 후 1행, 공개 계정 삭제 후 0행을 확인했다. 집계 쿼리는 실제 Supabase에 연결해 실행했고 주간 활성 사용자와 cohort 비율 범위를 검증했다. 원문·토큰·계정 ID 없이 `backend/artifacts/product-analytics-lifecycle-v2.json`에 결과를 저장한다.
+- 첫 실행은 검증 스크립트의 Windows ProactorEventLoop 때문에 psycopg 비동기 연결이 실패했다. 공식 https://www.psycopg.org/psycopg3/docs/advanced/async.html 지침에 따라 SelectorEventLoop 정책을 설정하고 재실행해 통과했다. 합성 계정은 실패 경로에서도 정리한다.
+- 관리자 이메일 allowlist 등록 및 관리자 화면의 인증된 공개 조회는 별도 확인 항목이다. LangSmith 실제 trace 연결은 이 변경에서 완료됐다고 주장하지 않는다.
