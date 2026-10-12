@@ -2,6 +2,27 @@ import pytest
 import pandas as pd
 
 
+@pytest.mark.parametrize('expected,apply', [(2, True), (1, False)])
+def test_import_partial_collection_or_dry_run_never_writes(tmp_path, monkeypatch, expected, apply):
+    import sys
+    from scripts import import_food_catalog as importer
+    source = tmp_path / 'source.csv'
+    source.write_text('fixture', encoding='utf-8')
+    monkeypatch.setattr(importer, 'read_rows', lambda path: [])
+    monkeypatch.setattr(importer, 'normalize_rows', lambda rows: ([{'food_id': 'mfds:P1'}],
+        {'total': 1, 'accepted': 1, 'conflicts': 0}))
+    writes = []
+    monkeypatch.setattr(importer, 'apply_catalog', lambda *args: writes.append(args))
+    argv = ['import_food_catalog', str(source), '--version', 'test-v1', '--expected-rows', str(expected)]
+    monkeypatch.setattr(sys, 'argv', argv + (['--apply'] if apply else []))
+    if apply:
+        with pytest.raises(ValueError, match='incomplete_or_conflicting_catalog'):
+            importer.main()
+    else:
+        importer.main()
+    assert writes == []
+
+
 def test_import_normalizes_serving_basis_and_preserves_zero():
     from app.tools.food_import import normalize_rows
     rows, report = normalize_rows([{'식품코드': 'P1', '식품명': '제품', '제조사명': '회사',
