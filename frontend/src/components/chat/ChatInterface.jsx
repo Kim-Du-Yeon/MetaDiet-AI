@@ -3,6 +3,7 @@ import { sendChatMessage, uploadImage, resumeChat, getChatHistory, getSessionRes
 import ProposalCard from "./ProposalCard";
 import NutritionLabelForm from "./NutritionLabelForm";
 import FoodProductSearch from "./FoodProductSearch";
+import ProductChoiceCards from "./ProductChoiceCards";
 import ProcessTrace from "./ProcessTrace";
 import "./ChatInterface.css";
 
@@ -48,6 +49,7 @@ export default function ChatInterface({
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [approval, setApproval] = useState(null);
+  const [foodSelection, setFoodSelection] = useState(null);
   const [showNutritionLabel, setShowNutritionLabel] = useState(false);
   const [showFoodSearch, setShowFoodSearch] = useState(false);
   const [approvalError, setApprovalError] = useState("");
@@ -85,6 +87,7 @@ export default function ChatInterface({
         plan_date: restoredPending.plan_date || null,
       });
       setApproval(restored.pending_proposal ? { ...restored.pending_proposal, channel: restored.pending_proposal.payload?.meals?.every(meal => meal.source === "user_label") ? "upload" : "chat" } : null);
+      setFoodSelection(restored.food_selection || null);
       setIsInterrupted(!!restored.interrupted);
       if (restored.today_calories !== undefined && restored.target_calories !== undefined) {
         onStatsUpdate?.({ calories: restored.today_calories, target: restored.target_calories });
@@ -116,6 +119,7 @@ export default function ChatInterface({
   const lastTraceRef = useRef(null);
 
   const handleDone = (meta) => {
+    setFoodSelection(meta.food_selection || null);
     lastTraceRef.current = meta.trace_id || null;
     setApproval(meta.pending_proposal ? { ...meta.pending_proposal, channel: "chat" } : null);
     setMessages((prev) => {
@@ -200,10 +204,11 @@ export default function ChatInterface({
     finally { setIsLoading(false); }
   };
 
-  const sendMessage = async () => {
-    if (!input.trim() || isLoading) return;
+  const sendMessage = async (selection) => {
+    const request = typeof selection?.request === "string" ? selection.request : input;
+    if (!request.trim() || isLoading) return;
     resetProgress();
-    const userMsg = input.trim();
+    const userMsg = request.trim();
     const activeFoodEntry = foodEntry;
     const isFoodRejection = activeFoodEntry && FOOD_REJECTION_RE.test(userMsg);
     setInput("");
@@ -228,7 +233,7 @@ export default function ChatInterface({
     const startedAt = performance.now();
     trackProductEvent("chat_sent", { properties: { channel: "text" } });
     setIsLoading(true);
-    const newUserMessage = { role: "user", content: userMsg };
+    const newUserMessage = { role: "user", content: selection?.display || userMsg };
     setMessages((prev) => [...prev, newUserMessage, { role: "assistant", content: "", agentUsed: null, streaming: true }]);
     try {
       const contextMessages = [...messages, newUserMessage];
@@ -409,7 +414,7 @@ export default function ChatInterface({
           <div key={i} style={{ display:"flex", justifyContent: msg.role==="user"?"flex-end":"flex-start", marginBottom:12 }}>
             <div className={msg.role === "user" ? "chat-bubble chat-bubble--user" : "chat-bubble chat-bubble--assistant"} style={msg.role==="user" ? styles.userBubble : styles.aiBubble}>
               {msg.role === "assistant" && <ProcessTrace steps={msg.progressSteps || (msg.streaming ? progressSteps : [])} running={Boolean(msg.streaming)} />}
-              <p style={{ margin:0, whiteSpace:"pre-wrap", lineHeight:1.6 }}>{msg.content}</p>
+              <p style={{ margin:0, whiteSpace:"pre-wrap", lineHeight:1.6 }}>{msg.content.replace(/제품\s*선택\s*:\s*[\w:-]+\s*\/?\s*/g, "")}</p>
               {msg.streaming && <span style={styles.cursor}>▊</span>}
               {msg.agentUsed && !msg.streaming && <p style={styles.agentLabel}>{AGENT_LABELS[msg.agentUsed] || msg.agentUsed}</p>}
             </div>
@@ -459,7 +464,9 @@ export default function ChatInterface({
 
       <button type="button" disabled={isLoading || !!approval || restoreStatus !== "ready"} onClick={() => setShowNutritionLabel(true)}>제품 영양표 입력</button>
       <button type="button" disabled={isLoading || !!approval || restoreStatus !== "ready"} onClick={() => setShowFoodSearch(true)}>식품 제품 찾기</button>
-      {showFoodSearch && <FoodProductSearch onClose={() => setShowFoodSearch(false)} onSelect={message => { setInput(message); setShowFoodSearch(false); }} />}
+      {foodSelection && !approval && <ProductChoiceCards key={JSON.stringify(foodSelection)} selection={foodSelection} busy={isLoading}
+        onSelect={sendMessage} onSearch={() => setShowFoodSearch(true)} />}
+      {showFoodSearch && <FoodProductSearch contextRequest={foodSelection?.request} onClose={() => setShowFoodSearch(false)} onSelect={selection => { setShowFoodSearch(false); sendMessage(selection); }} />}
       {showNutritionLabel && <NutritionLabelForm threadId={threadId} onClose={() => setShowNutritionLabel(false)} onProposal={proposal => { setApproval({ ...proposal, channel: "upload" }); setShowNutritionLabel(false); }} />}
       {approval && <ProposalCard proposal={approval} busy={isLoading} onDecision={handleProposalDecision} onRevise={handleMeasurementRevision} />}
       {approvalError && <p role="alert" style={{ color: "#b42318", margin: 12 }}>{approvalError}</p>}

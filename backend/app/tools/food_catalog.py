@@ -9,6 +9,13 @@ from app.tools.food_import import normalize_name
 logger = logging.getLogger(__name__)
 CSV_COLUMNS = {'calories': '에너지', 'protein_g': '단백질', 'carbs_g': '탄수화물',
                'fat_g': '지방', 'sodium_mg': '나트륨'}
+# Reviewed aliases preserve cooking state; never map a brand to a generic food.
+STANDARD_ALIASES = {
+    '쌀밥': '멥쌀, 백미, 밥', '백미밥': '멥쌀, 백미, 밥', '밥': '멥쌀, 백미, 밥',
+    '현미밥': '멥쌀, 현미, 밥', '삼겹살구이': '돼지고기, 삼겹살, 구운것(팬)',
+    '구운삼겹살': '돼지고기, 삼겹살, 구운것(팬)', '고등어구이': '고등어, 구운것',
+    '구운고등어': '고등어, 구운것', '닭가슴살': '닭고기, 가슴, 생것',
+}
 
 
 class LabelNutrition(StrictModel):
@@ -40,8 +47,9 @@ def calculate_quote(row: dict, quantity_g: float) -> dict:
     return {'food_name': row['name'], 'quantity_g': quantity_g, 'source': row['source'],
             **{k: round(v * quantity_g / 100, 1) if v is not None else None for k, v in nutrients.items()},
             'food_id': row['food_id'], 'nutrition_metadata': {
-                k: row.get(k) for k in ('manufacturer', 'basis_g', 'basis_text', 'serving_text',
-                'package_text', 'source_date', 'source_url', 'catalog_version') if row.get(k) is not None}}
+                'food_kind': 'standard' if row['source'] == 'csv' else 'product',
+                **{k: row.get(k) for k in ('manufacturer', 'basis_g', 'basis_text', 'serving_text',
+                'package_text', 'source_date', 'source_url', 'catalog_version') if row.get(k) is not None}}}
 
 
 def quote_label(label: LabelNutrition) -> dict:
@@ -80,30 +88,31 @@ class FoodCatalog:
                 'source': 'csv', 'basis_g': 100, 'basis_text': '100g', 'manufacturer': '', 'nutrients': nutrients}
             self.legacy_ids[int(index)] = food_id
 
-    async def search(self, query: str, limit: int = 20) -> list[dict]:
+    async def search(self, query: str, limit: int = 20, *, kind: str = 'auto') -> list[dict]:
         normalized = normalize_name(query.strip())
-        if not normalized or len(normalized) > 200 or not 1 <= limit <= 20:
+        if not normalized or len(normalized) > 200 or not 1 <= limit <= 20 or kind not in {'auto', 'standard', 'product'}:
             raise ValueError('invalid_query')
-        local = [row for row in self.rows.values() if normalized in row['normalized_name']]
-        remote = await self.repository.search(normalized, limit) if self.repository else []
+        standards = [row for row in self.rows.values() if row['source'] == 'csv'] if kind != 'product' else []
+        target = STANDARD_ALIASES.get(normalized) if kind != 'product' else None
+        preferred = [row for row in standards if row['normalized_name'] == normalized
+                     or (target and row['name'] == target)]
+        local = preferred or [row for row in standards if normalized in row['normalized_name']]
+        # Generic foods cannot be displaced by an exact manufacturer-product name.
+        remote = await self.repository.search(normalized, limit) if self.repository and kind != 'standard' and not local and not target else []
         combined = list({row['food_id']: row for row in local + remote}.values())
         exact = [row for row in combined if row['normalized_name'] == normalized]
-        match_type = 'exact' if exact else 'partial'
+        match_type = 'verified_alias' if preferred and target else 'exact' if exact else 'partial'
         if exact:
             combined = exact
-        else:
-            aliases = {'닭가슴살': '닭고기, 가슴, 생것', '현미밥': '멥쌀, 현미, 밥'}
-            target = aliases.get(query.strip())
-            alias_rows = [row for row in self.rows.values() if target and row['name'] == target]
-            if alias_rows:
-                combined = alias_rows
-                match_type = 'verified_alias'
+        elif preferred:
+            combined = preferred
         combined.sort(key=lambda row: (row['name'], row.get('manufacturer', ''), row['food_id']))
         result = [{k: row.get(k) for k in ('food_id', 'name', 'source', 'manufacturer', 'basis_g',
                    'basis_text', 'package_text', 'catalog_version')} for row in combined[:limit]]
         self.rows.update((row['food_id'], row) for row in combined[:limit])
         for item in result:
             item['match_type'] = match_type
+            item['food_kind'] = 'standard' if item['source'] == 'csv' else 'product'
         logger.info('food_catalog_search', extra={'matches_count': len(result),
                     'sources': sorted({item['source'] for item in result}),
                     'result_status': 'ambiguous' if len(result) > 1 else 'found' if result else 'not_found'})

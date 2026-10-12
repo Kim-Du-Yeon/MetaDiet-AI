@@ -237,6 +237,7 @@ def _initial_state(req: ChatRequest, user_id: str, run_id: str | None = None) ->
         "requested_action": req.requested_action, "tool_policy": req.tool_policy,
         "pending_proposal": None, "proposal_decision": None, "proposal_result": None,
         "execution_usage": {}, "execution_status": "running", "execution_error": None, "agent_events": [],
+        "food_selection": None,
         "user_id": user_id, "message": req.message,
         "intent": "", "response": "", "messages": req.messages[-10:] if req.messages else [],
         "agent_used": "", "today_calories": 0.0, "today_protein": 0.0,
@@ -376,6 +377,7 @@ async def _stream(graph, config: dict, run_id: str, after_seq: int = 0):
     if after_seq < 100000:
         yield _sse({'type':'completed','agent_used':sv.get('agent_used',''),**stats,'pending_meals':pending,
             'pending_proposal':sv.get('pending_proposal'),'run_id':run_id,'trace_id':sv.get('trace_id'),'seq':100000,
+            'food_selection': sv.get('food_selection'),
             'execution_usage':sv.get('execution_usage'),'awaiting_confirmation':sv.get('awaiting_confirmation',False),
             'plan_date':sv.get('plan_date'),'thread_id':new_tid,'prev_thread_id':None,'interrupted':is_interrupted})
 
@@ -605,6 +607,7 @@ async def restore_session(thread_id: str, current_user: str = Depends(get_curren
         "thread_id": thread_id,
         "messages": messages,
         "pending_proposal": proposal,
+        "food_selection": sv.get('food_selection') if not active_pending else None,
         "pending_state": {
             "pending_meals": sv.get("pending_meals") if active_pending else None,
             "awaiting_confirmation": active_pending,
@@ -855,6 +858,7 @@ class NutritionFoodRequest(BaseModel):
     name: str = Field(min_length=1, max_length=200)
     quantity_g: float = Field(default=100, gt=0, le=10000)
     food_id: str | None = Field(default=None, max_length=200)
+    food_kind: Literal['auto', 'standard', 'product'] = 'auto'
 
 
 class NutritionLookupRequest(BaseModel):
@@ -875,10 +879,10 @@ async def nutrition_lookup(req: NutritionLookupRequest):
         empty = {'food_name': f.name, 'quantity_g': f.quantity_g, 'calories': None,
                  'protein_g': None, 'carbs_g': None, 'fat_g': None, 'sodium_mg': None, 'found_in_db': False}
         try:
-            matches = await catalog.search(f.name)
+            matches = await catalog.search(f.name, kind=f.food_kind) if f.food_kind != 'auto' else await catalog.search(f.name)
             if f.food_id:
                 matches = [item for item in matches if item['food_id'] == f.food_id]
-            if len(matches) != 1 or (not f.food_id and matches[0].get('match_type') == 'partial'):
+            if len(matches) != 1 or (not f.food_id and (matches[0].get('match_type') == 'partial' or matches[0].get('source') == 'mfds')):
                 results.append({**empty, 'status': 'ambiguous' if matches else 'not_found', 'candidates': matches})
                 continue
             quote = await catalog.lookup(matches[0]['food_id'], f.quantity_g)

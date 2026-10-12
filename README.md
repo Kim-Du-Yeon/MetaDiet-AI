@@ -120,3 +120,5 @@ Ragas는 의존성 충돌을 피하기 위해 별도 평가 환경을 사용합�
 - Render 장애 알림은 workspace Email + `Only failure notifications`로 설정했으며 서비스별 override는 없습니다.
 - `react-scripts`의 빌드 전이 의존성 취약점은 정적 런타임과 분리돼 있으며 Vite 전환을 후속 선택 작업으로 남겼습니다.
 - 의료 진단·치료 서비스가 아니며 일반 성인 체중 관리 정보에 한정합니다.
+
+일반 음식 표준값·제품 선택 카드: [구현 및 검증 기록](docs/food_catalog/SELECTION_POLICY.md).

@@ -94,6 +94,7 @@ class AgentState(TypedDict):
     execution_status: Annotated[str, keep_latest]
     execution_error: Annotated[Optional[str], keep_latest]
     agent_events: Annotated[list, keep_latest]
+    food_selection: Annotated[Optional[dict], keep_latest]
 
     # ── message에 keep_latest 리듀서 추가 ────────────────────────────
     # 이유: /chat/resume에서 aupdate_state({"message": resume_msg})로

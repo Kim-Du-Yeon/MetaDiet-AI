@@ -28,7 +28,8 @@ export default function ProposalCard({ proposal, busy, onDecision, onRevise }) {
     {proposal.kind === "plan" && <p className="proposal__notice">계획을 채택해도 실제 섭취량에는 반영되지 않습니다.</p>}
     {payload.expected && <p>대상: {payload.expected.food_name} · {payload.expected.quantity_g}g{payload.meal ? ` → ${payload.meal.food_name} ${payload.meal.quantity_g}g` : " (삭제)"}</p>}
     {payload.meals && <><p className="proposal__date">{payload.log_date}</p><ul className="proposal__meals">{payload.meals.map((meal, index) =>
-      <li key={index}><span>{meal.meal_type} · {meal.food_name} {meal.quantity_g}g<br /><small>{({ mfds: "식약처 가공식품 DB", csv: "국가표준식품성분표", user_label: "사용자 제공 영양표" })[meal.source] || meal.source}{meal.nutrition_metadata?.manufacturer && ` · ${meal.nutrition_metadata.manufacturer}`}{meal.nutrition_metadata?.basis_g && ` · 기준 ${meal.nutrition_metadata.basis_g}g`}</small></span><strong>{meal.calories} kcal</strong></li>)}</ul></>}
+      <li key={index}><span>{meal.meal_type} · {meal.food_name} {meal.quantity_g}g
+        <details><summary>{meal.source === "csv" ? "표준값 · 출처 보기" : "영양정보 출처 보기"}</summary><small>{({ mfds: "식약처 가공식품 DB", csv: "국가표준식품성분표", user_label: "사용자 제공 영양표" })[meal.source] || meal.source}{meal.nutrition_metadata?.manufacturer && ` · ${meal.nutrition_metadata.manufacturer}`}{meal.nutrition_metadata?.basis_g && ` · 기준 ${meal.nutrition_metadata.basis_g}g`}{meal.source === "csv" && " · 실제 조리법에 따라 달라질 수 있어요."}</small></details></span><strong>{meal.calories} kcal</strong></li>)}</ul></>}
     {["measurement", "weight"].includes(proposal.kind) && <div className="proposal__fields">{Object.entries(fields).filter(([key]) => proposal.kind === "measurement" || ["measured_date", "weight_kg"].includes(key)).map(([key, label]) =>
       <label key={key}><span>{label}</span><input
         type={key === "measured_date" ? "date" : "number"} step="any" value={draft[key] ?? ""} disabled={busy}

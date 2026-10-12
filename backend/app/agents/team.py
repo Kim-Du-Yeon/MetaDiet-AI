@@ -26,6 +26,10 @@ class Query(StrictModel):
     query: str = Field(min_length=1, max_length=1000)
 
 
+class FoodSearch(Query):
+    food_kind: Literal['auto', 'standard', 'product'] = 'auto'
+
+
 class FoodLookup(StrictModel):
     food_id: str | int
     quantity_g: float = Field(gt=0, le=10000)
@@ -69,8 +73,11 @@ BASE_INSTRUCTION = """당신은 일반 성인 식단 코칭 서비스의 전문 
 음식의 양은 사용자에게 확인하고 추정하여 실제 섭취로 기록하지 마세요.
 영양 수치는 nutrition_lookup 결과만 사용하세요. 목표 정책 변경에는 검색된 근거가 필요합니다.
 제품명이 식품성분표에 없으면 유사한 다른 제품을 같은 제품으로 취급하지 마세요.
-후보가 여러 개면 제조사·제품명·용량을 보여주고 사용자의 선택을 요청하세요.
-복수 후보일 때 사용자가 정확한 food_id를 선택: food_id 형태로 입력해야 조회할 수 있습니다.
+food_kind=standard인 일반 음식은 검증된 표준 항목으로 계산하고 실제 조리법에 따라 달라질 수 있음을 짧게 안내하세요.
+음식명과 조리 상태를 그대로 검색하세요. 일반 음식을 제조사 제품으로 바꾸지 마세요.
+food_kind=product인 제품은 후보가 하나여도 제품 선택 카드에서 확인해야 합니다.
+food_id나 내부 도구명을 답변에 쓰거나 사용자에게 ID 입력을 요구하지 마세요. 후보 목록은 화면 카드로 제공됩니다.
+브랜드와 제품 종류를 함께 검색하세요. 아이스크림 요청에 마카롱·케이크를 선택하지 마세요.
 음식 검색 실패 시 이름을 바꿔 계속 검색하지 말고 제품의 1회 제공량·영양정보를 요청하세요.
 전날 과식을 이유로 근거 없는 고정 칼로리 차감을 하지 마세요.
 propose 도구는 저장 완료가 아니라 사용자 확인이 필요한 제안을 만듭니다.
@@ -150,6 +157,8 @@ class DietTeam:
         self.food_search_cache = {}
         self.food_catalog = None
         self.ambiguous_food_ids = set()
+        self.food_selection = {'request': state.get('message', ''), 'items': []}
+        self.unresolved_foods = set()
         self.profile = None
         self.intake = None
         self.events = []
@@ -232,28 +241,43 @@ class DietTeam:
         if self.food_catalog is None:
             self.food_catalog = default_catalog()
         query = " ".join(args.query.split())
-        if query in self.food_search_cache:
-            cached = self.food_search_cache[query]
+        if '돼지바' in query and '아이스크림' in self.state.get('message', '') and '아이스크림' not in query:
+            query = '돼지바 아이스크림'
+        kind = getattr(args, 'food_kind', 'auto')
+        cache_key = (kind, query)
+        if cache_key in self.food_search_cache:
+            cached = self.food_search_cache[cache_key]
             self.food_ids.update(item["food_id"] for item in cached)
             return cached
-        result = await self.food_catalog.search(query)
+        # A named ice cream must not offer a cake/macaron sharing the brand name.
+        result = await self.food_catalog.search(query, kind=kind) if kind != 'auto' else await self.food_catalog.search(query)
+        # A model's tentative standard classification must not hide registered products.
+        if not result and kind == 'standard':
+            result = await self.food_catalog.search(query)
         self.food_ids.update(item['food_id'] for item in result)
-        if len(result) > 1 or any(item.get('match_type') == 'partial' for item in result):
+        if len(result) > 1 or any(item.get('source') == 'mfds' for item in result):
             self.ambiguous_food_ids.update(item['food_id'] for item in result)
+        products = [item for item in result if item.get('source') == 'mfds']
+        selections = re.findall(r'제품\s*선택\s*:\s*([\w:-]+)', self.state.get('message', ''))
+        existing_sets = [{c['food_id'] for c in item['candidates']} for item in self.food_selection['items']]
+        if products and not any(item['food_id'] in selections for item in products) and {p['food_id'] for p in products} not in existing_sets:
+            self.food_selection['items'].append({'query': query, 'quantity_g': None, 'candidates': products})
         if not result:
+            self.unresolved_foods.add(query)
             self.missing_food_searches = getattr(self, 'missing_food_searches', 0) + 1
             if self.missing_food_searches >= 3:
                 raise ExecutionStopped('food_not_found')
             raise ToolFeedback('food_not_found',
                 '식품성분표에 일치하는 제품이 없습니다. 다른 제품으로 대체하지 말고 사용자에게 제품 영양정보와 제공량을 요청하세요.',
                 retryable=False)
-        self.food_search_cache[query] = result
+        self.food_search_cache[cache_key] = result
+        self.unresolved_foods.discard(query)
         return result
 
     async def nutrition_lookup(self, args):
         food_id = args.food_id
         selections = re.findall(r'제품\s*선택\s*:\s*([\w:-]+)', self.state.get('message', ''))
-        user_selected = isinstance(food_id, str) and selections == [food_id]
+        user_selected = isinstance(food_id, str) and food_id in selections
         if self.food_catalog is None and user_selected:
             from app.tools.food_catalog import default_catalog
             self.food_catalog = default_catalog()
@@ -261,9 +285,12 @@ class DietTeam:
             food_id = self.food_catalog.legacy_ids.get(food_id, '')
         if food_id not in self.food_ids and not user_selected:
             raise ValueError("Search and select an offered food_id first")
-        if food_id in self.ambiguous_food_ids and selections != [str(food_id)]:
+        if (food_id in self.ambiguous_food_ids or str(food_id).startswith('mfds:')) and not user_selected:
+            for item in self.food_selection['items']:
+                if any(candidate['food_id'] == food_id for candidate in item['candidates']):
+                    item['quantity_g'] = args.quantity_g
             raise ToolFeedback('product_selection_required',
-                '여러 후보가 있습니다. 제조사·제품명·용량과 food_id를 보여주고 사용자에게 제품 선택: food_id 형태로 선택을 요청하세요. Agent의 product_confirmed 값만으로 선택할 수 없습니다.', retryable=False)
+                '브랜드 제품은 화면의 제품 선택 카드에서 확인해야 합니다. ID 입력을 요구하거나 후보 목록을 답변에 나열하지 마세요. 일반 음식의 조리 형태가 모호하면 조리 형태만 질문하세요.', retryable=False)
         quote_id = f"{args.food_id}:{args.quantity_g}"
         if quote_id in self.quotes:
             return {"quote_id": quote_id, **self.quotes[quote_id]}
@@ -316,6 +343,11 @@ class DietTeam:
             raise ToolFeedback("validation_failed", verdict.feedback, retryable=True)
 
     async def propose_meal(self, args):
+        from app.agents.runtime import ToolFeedback
+        if self.unresolved_foods:
+            raise ToolFeedback('food_not_found', '미등록 항목의 영양표와 제공량을 확인한 뒤 전체 식사를 검토하세요.', retryable=False)
+        if self.food_selection['items']:
+            raise ToolFeedback('product_selection_required', '제품 선택 카드의 확인이 끝난 뒤 전체 식사를 다시 검토하세요.', retryable=False)
         if self.proposal:
             raise ValueError("Confirm or cancel the existing proposal before creating another")
         if self.state.get("requested_action") == "record_only" and args.kind != "intake":
@@ -375,7 +407,7 @@ class DietTeam:
             "read_measurements": ("확정된 인바디 측정 이력 조회", Empty, self.read_measurements),
             "assess_goal_progress": ("28~42일 확정 체중 추세를 검토된 정책으로 평가. 칼로리를 자동 변경하지 않음", Empty, self.assess_goal_progress),
             "read_recent_intake": ("지난 7일 실제 섭취 및 수정할 기록 ID 조회", Empty, self.read_recent_intake),
-            "search_foods": ("국가 식품성분표에서 짧은 키워드로 음식 후보 검색", Query, self.search_foods),
+            "search_foods": ("음식명과 조리법으로 조회. 일반 음식은 auto/standard, 브랜드나 포장 제품은 product 사용. 제품 후보는 사용자 선택 카드로 확인", FoodSearch, self.search_foods),
             "nutrition_lookup": ("검색된 식품 ID와 사용자 확인한 g으로 영양 수치 계산", FoodLookup, self.nutrition_lookup),
             "search_evidence": ("공식 문서 근거 검색", Query, self.search_evidence),
             "propose_meal": ("섭취 기록 또는 계획 제안. 양은 확정된 quote_id 사용. DB 저장 아님", MealDraft, self.propose_meal),
@@ -457,6 +489,10 @@ class DietTeam:
                 self.proposal = None
         import time
         response = result.content
+        if self.food_selection['items'] and not self.proposal:
+            response = '일반 음식은 식품성분표의 표준값으로 계산합니다. 제품 확인이 필요한 항목은 아래 카드에서 선택해주세요. 선택 후 전체 식사 확인 카드를 검토해야 저장됩니다.'
+        if self.unresolved_foods and not self.proposal:
+            response += '\n\n미등록 항목(' + ', '.join(sorted(self.unresolved_foods)) + ')은 포장지의 제공량과 열량·탄수화물·단백질·지방을 알려주세요. 다른 식품으로 대체하거나 일부만 저장하지 않습니다.'
         if result.status == "completed" and self.evidence_search_attempted and not self.evidence and not self.proposal:
             response = ("공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 "
                         "권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 "
@@ -470,6 +506,7 @@ class DietTeam:
         if proposal and not self.proposal:
             response += "\n\n기존 확인 대기 제안은 유지됩니다. 확정·수정·취소를 선택해주세요."
         return {"response": response, "agent_used": "supervisor", "pending_proposal": proposal,
+            "food_selection": self.food_selection if self.food_selection['items'] and not self.proposal else None,
             "pending_meals": proposal["payload"].get("meals") if proposal else None,
             "plan_date": proposal["payload"].get("log_date") if proposal else None,
             "awaiting_confirmation": bool(proposal), "agent_events": self.events,

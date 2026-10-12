@@ -1,0 +1,14 @@
+.product-choices { margin: 16px 12px; padding: 20px; border: 1px solid #d6e3dd; border-radius: 16px; background: #f8fbf9; color: #243b32; }
+.product-choices h3 { margin: 0 0 8px; }
+.product-choices p { color: #52665d; line-height: 1.6; }
+.product-choices fieldset { border: 0; border-top: 1px solid #d6e3dd; padding: 16px 0; min-width: 0; }
+.product-choices legend { font-weight: 700; padding-right: 8px; }
+.product-choices input[type=number] { margin-left: 10px; width: 100px; padding: 8px; border: 1px solid #bdcec5; border-radius: 8px; }
+.product-choices__list { display: grid; gap: 8px; margin-top: 12px; max-height: 300px; overflow-y: auto; }
+.product-choices__option { display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid #d6e3dd; border-radius: 10px; background: white; cursor: pointer; }
+.product-choices__option:has(input:checked) { border-color: #197a55; background: #edf7f1; }
+.product-choices__option span { min-width: 0; overflow-wrap: anywhere; }
+.product-choices__option small { display: block; margin-top: 5px; color: #52665d; }
+.product-choices__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.product-choices button { padding: 10px 16px; border: 1px solid #197a55; border-radius: 8px; background: #197a55; color: white; cursor: pointer; }
+.product-choices button:disabled { opacity: .5; cursor: default; }

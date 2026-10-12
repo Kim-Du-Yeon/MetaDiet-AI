@@ -2,16 +2,23 @@ import { useState } from "react";
 import { nutritionLookup } from "../../api/dietApi";
 import "./NutritionLabelForm.css";
 
-export default function FoodProductSearch({ onSelect, onClose }) {
+export default function FoodProductSearch({ onSelect, onClose, contextRequest }) {
   const [query, setQuery] = useState("");
   const [grams, setGrams] = useState("");
   const [candidates, setCandidates] = useState([]);
   const [busy, setBusy] = useState(false);
   const [message, setMessage] = useState("");
+  function select(candidate) {
+    const food = `${candidate.name} ${grams}g`;
+    onSelect({
+      request: contextRequest ? `${contextRequest}\n제품 선택: ${candidate.food_id} / ${food}` : `제품 선택: ${candidate.food_id} / ${food} 오늘 먹었어. 기록만 해줘.`,
+      display: contextRequest ? `${food} 제품을 선택했어요.` : `${food} 오늘 먹었어. 기록만 해줘.`
+    });
+  }
   async function search(event) {
     event.preventDefault(); setBusy(true); setMessage(""); setCandidates([]);
     try {
-      const response = await nutritionLookup([{ name: query, quantity_g: Number(grams) }]);
+      const response = await nutritionLookup([{ name: query, quantity_g: Number(grams), food_kind: "product" }]);
       const result = response.results[0];
       setCandidates(result.candidates || (result.food_id ? [{ food_id: result.food_id, name: result.food_name, ...result.nutrition_metadata }] : []));
       if (result.status === "not_found" || result.status === "missing_nutrients") setMessage("계산 가능한 제품을 찾지 못했습니다. 제품 영양표 입력을 이용해주세요.");
@@ -25,7 +32,7 @@ export default function FoodProductSearch({ onSelect, onClose }) {
       <label>먹은 양 (g)<input required type="number" min="0.01" max="10000" step="any" value={grams} onChange={event => { setGrams(event.target.value); setCandidates([]); }} /></label>
     </fieldset><button disabled={busy}>제품 검색</button></form>
     {message && <p role="status">{message}</p>}
-    <ul>{candidates.map(candidate => <li key={candidate.food_id}><strong>{candidate.name}</strong><p>{candidate.manufacturer || "제조사 정보 없음"} · {candidate.package_text || "포장 용량 정보 없음"} · 기준 {candidate.basis_g}g</p><button type="button" onClick={() => onSelect(`제품 선택: ${candidate.food_id} / ${candidate.name} ${grams}g 오늘 먹었어. 기록만 해줘.`)}>이 제품 선택</button></li>)}</ul>
+    <ul>{candidates.map(candidate => <li key={candidate.food_id}><strong>{candidate.name}</strong><p>{candidate.food_kind === "standard" ? "일반 음식 표준값" : `${candidate.manufacturer || "제조사 정보 없음"} · ${candidate.package_text || "포장 용량 정보 없음"}`}</p><button type="button" onClick={() => select(candidate)}>{candidate.food_kind === "standard" ? "표준값으로 기록 검토" : "이 제품 선택"}</button></li>)}</ul>
     <button type="button" onClick={onClose}>닫기</button>
   </section>;
 }
