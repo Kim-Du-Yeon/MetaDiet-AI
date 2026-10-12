@@ -2,6 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import { getToken, BASE_URL, decideProposal } from "../api/dietApi";
 import ProposalCard from './chat/ProposalCard';
 import ActivityLevelSection from './setup/ActivityLevelSection';
+import BodyMetricsSection from './setup/BodyMetricsSection';
+import SetupSection from './setup/SetupSection';
 
 export default function Setup({ onComplete }) {
   const [form, setForm] = useState({
@@ -158,87 +160,48 @@ export default function Setup({ onComplete }) {
         <p style={styles.subtitle}>정확한 전략을 위해 기본 정보를 입력해주세요</p>
         {error && <p role="alert">{error}</p>}
 
-        {/* 목표 선택 */}
-        <div style={styles.section}>
-          <label style={styles.label}>목표</label>
-          <div style={styles.goalGrid}>
-            {Object.entries(GOAL_LABELS).map(([key, val]) => (
-              <button
-                key={key}
-                style={{
-                  ...styles.goalBtn,
-                  ...(form.goal === key ? styles.goalBtnActive : {}),
-                }}
-                onClick={() => setForm({ ...form, goal: key })}
-              >
-                <span style={styles.goalLabel}>{val.label}</span>
-                <span style={styles.goalDesc}>{val.desc}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* 영양 기준 지역 */}
-        <div style={styles.section}>
-          <label style={styles.label}>영양 기준 지역</label>
-          <div style={styles.genderRow}>
-            {[
-              { key: "KR", label: "한국 🇰🇷 (KDRIs 기준)" },
-            ].map((r) => (
-              <button
-                key={r.key}
-                style={{
-                  ...styles.genderBtn,
-                  ...(form.region === r.key ? styles.genderBtnActive : {}),
-                }}
-                onClick={() => setForm({ ...form, region: r.key })}
-              >
-                {r.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* 성별 */}
-        <div style={styles.section}>
-          <label style={styles.label}>성별</label>
-          <div style={styles.genderRow}>
-            {["male", "female"].map((g) => (
-              <button
-                key={g}
-                style={{
-                  ...styles.genderBtn,
-                  ...(form.gender === g ? styles.genderBtnActive : {}),
-                }}
-                onClick={() => setForm({ ...form, gender: g })}
-              >
-                {g === "male" ? "남성" : "여성"}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* 신체 정보 */}
-        {[
-          { key: "age", label: "나이", unit: "세", placeholder: "25" },
-          { key: "height_cm", label: "키", unit: "cm", placeholder: "175" },
-          { key: "weight_kg", label: "체중", unit: "kg", placeholder: "70" },
-        ].map((field) => (
-          <div key={field.key} style={styles.section}>
-            <label htmlFor={`setup-${field.key}`} style={styles.label}>{field.label}</label>
-            <div style={styles.inputRow}>
-              <input
-                id={`setup-${field.key}`}
-                type="number"
-                value={form[field.key]}
-                onChange={(e) => setForm({ ...form, [field.key]: e.target.value })}
-                placeholder={field.placeholder}
-                style={styles.input}
-              />
-              <span style={styles.unit}>{field.unit}</span>
+        <SetupSection title="목표와 기준" description="식단 전략 계산에 사용할 기본 기준을 선택해요." required>
+          <div className="setup-subsection">
+            <span className="setup-subsection__label">목표</span>
+            <div style={styles.goalGrid}>
+              {Object.entries(GOAL_LABELS).map(([key, val]) => (
+                <button
+                  key={key}
+                  style={{ ...styles.goalBtn, ...(form.goal === key ? styles.goalBtnActive : {}) }}
+                  onClick={() => setForm({ ...form, goal: key })}
+                >
+                  <span style={styles.goalLabel}>{val.label}</span>
+                  <span style={styles.goalDesc}>{val.desc}</span>
+                </button>
+              ))}
             </div>
           </div>
-        ))}
+          <div className="setup-subsection">
+            <span className="setup-subsection__label">영양 기준 지역</span>
+            <div style={styles.genderRow}>
+              <button style={{ ...styles.genderBtn, ...styles.genderBtnActive }}>한국 🇰🇷 (KDRIs 기준)</button>
+            </div>
+          </div>
+          <div className="setup-subsection">
+            <span className="setup-subsection__label">성별</span>
+            <div style={styles.genderRow}>
+              {["male", "female"].map((g) => (
+                <button
+                  key={g}
+                  style={{ ...styles.genderBtn, ...(form.gender === g ? styles.genderBtnActive : {}) }}
+                  onClick={() => setForm({ ...form, gender: g })}
+                >
+                  {g === "male" ? "남성" : "여성"}
+                </button>
+              ))}
+            </div>
+          </div>
+        </SetupSection>
+
+        <BodyMetricsSection
+          values={form}
+          onChange={(field, value) => setForm({ ...form, [field]: value })}
+        />
 
         <ActivityLevelSection
           value={form.activity}
@@ -248,9 +211,7 @@ export default function Setup({ onComplete }) {
             setForm({ ...form, general_adult_confirmed })
           }
         />
-        {/* 장기 목표 (선택) */}
-        <div style={styles.section}>
-          <label style={styles.label}>장기 목표 (선택)</label>
+        <SetupSection title="장기 목표" description="원하면 목표 체중과 기간, 우선순위를 추가할 수 있어요." optional>
           <div style={styles.inputRow}>
             <input
               type="number"
@@ -287,7 +248,7 @@ export default function Setup({ onComplete }) {
               </button>
             ))}
           </div>
-        </div>
+        </SetupSection>
 
         <button
           style={{ ...styles.submitBtn, opacity: loading ? 0.6 : 1 }}

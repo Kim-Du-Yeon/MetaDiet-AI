@@ -1,4 +1,5 @@
 import './ActivityLevelSection.css';
+import './SetupSection.css';
 
 const ACTIVITY_LEVELS = [
   { value: 'sedentary', label: '비활동적', description: '대부분 앉아서 생활하고 이동이 적어요' },
@@ -14,7 +15,7 @@ export default function ActivityLevelSection({
   onConfirmationChange,
 }) {
   return (
-    <section className="activity-section" aria-labelledby="activity-level-title">
+    <section className="setup-section activity-section" aria-labelledby="activity-level-title">
       <div className="activity-section__heading">
         <h3 id="activity-level-title">활동 수준</h3>
         <span>필수</span>

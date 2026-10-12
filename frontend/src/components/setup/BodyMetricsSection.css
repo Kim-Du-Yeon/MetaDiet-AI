@@ -1,0 +1,44 @@
+.body-metrics-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.body-metric-field label {
+  display: block;
+  margin-bottom: 7px;
+  color: #4b5b53;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.body-metric-field__control {
+  position: relative;
+}
+
+.body-metric-field__control input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 48px 12px 14px;
+  border: 1px solid #d7dfdb;
+  border-radius: 10px;
+  background: #fff;
+  color: #26372f;
+  font-size: 16px;
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.body-metric-field__control input:focus {
+  border-color: #1f7a58;
+  box-shadow: 0 0 0 3px rgba(31, 122, 88, 0.13);
+}
+
+.body-metric-field__control span {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  color: #8a9690;
+  font-size: 13px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
