@@ -12,6 +12,14 @@ MetaDiet AI는 식사 기록, 체중·인바디 추세, 장기 목표와 영양 
 - GitHub prerelease: [beta-v1.1.0](https://github.com/Kim-Du-Yeon/MetaDiet-AI/releases/tag/beta-v1.1.0)
 - 무료 베타 운영 절차: [deploy/RENDER_BETA.md](deploy/RENDER_BETA.md)
 
+## 지원용 자료 다운로드
+
+현재 포트폴리오 기준(2026-10-12)의 구현 기능, 실험 결과, 실패 원인과 해결 과정, 공개 배포·관측을 정리했습니다. 실제 사용자 피드백과 건강 효과는 미측정으로 구분합니다.
+
+- [발표자료 다운로드 (PPTX, 12장)](https://raw.githubusercontent.com/Kim-Du-Yeon/MetaDiet-AI/refs/heads/codex/metadiet-agent-upgrade/docs/portfolio/MetaDiet_AI_Presentation.pptx): 편집 가능한 표와 발표자 노트 포함, 약 10분 발표용
+- [제출용 포트폴리오 다운로드 (PDF, 7쪽)](https://raw.githubusercontent.com/Kim-Du-Yeon/MetaDiet-AI/refs/heads/codex/metadiet-agent-upgrade/docs/portfolio/MetaDiet_AI_Portfolio.pdf): 평가 조건·수치·한계와 실패 해결 과정 상세 설명
+- [저장소에서 PDF 미리보기](docs/portfolio/MetaDiet_AI_Portfolio.pdf)
+
 ## 구현 범위
 
 - **멀티에이전트 오케스트레이션:** Gemini Supervisor가 전문 Agent와 도구를 선택하고 LangGraph가 상태 전이, 실패 피드백, 실행 예산과 종료 조건을 관리
