@@ -41,8 +41,9 @@ test("account deletion password belongs to a submit form", () => {
   expect(form.querySelector('button[type="submit"]')?.textContent).toBe("계정 영구 삭제");
 });
 
-test("reauthenticates, switches to fresh token, deletes and clears local session", async () => {
+test("reauthenticates, switches to fresh token, deletes and clears stored sessions", async () => {
   window.localStorage.setItem("sb-project-auth-token", "synthetic-session");
+  window.sessionStorage.setItem("sb-project-auth-token", "synthetic-session");
   const onDeleted = jest.fn();
   render(<Settings session={{ user: { email: "member@example.com" } }} onDeleted={onDeleted} />);
   fireEvent.change(screen.getByLabelText("현재 비밀번호"), { target: { value: "correct-password" } });
@@ -56,6 +57,7 @@ test("reauthenticates, switches to fresh token, deletes and clears local session
   });
   expect(setToken).toHaveBeenCalledWith("fresh-token");
   expect(window.localStorage.getItem("sb-project-auth-token")).toBeNull();
+  expect(window.sessionStorage.getItem("sb-project-auth-token")).toBeNull();
   expect(supabase.auth.signOut).not.toHaveBeenCalled();
   expect(onDeleted).toHaveBeenCalledTimes(1);
 });

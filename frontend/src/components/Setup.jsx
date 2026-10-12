@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { getToken, BASE_URL, decideProposal } from "../api/dietApi";
 import ProposalCard from './chat/ProposalCard';
 
@@ -17,19 +17,27 @@ export default function Setup({ onComplete }) {
     goal_priority: "",
   });
   const [loading, setLoading] = useState(true);
+  const [initialLoading, setInitialLoading] = useState(true);
+  const [loadError, setLoadError] = useState("");
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
 
-  useEffect(()=>{
-    let active=true;
+  const loadExistingSetup = useCallback((isActive = () => true) => {
+    setInitialLoading(true);
+    setLoadError("");
     fetch(`${BASE_URL}/users/onboarding`,{headers:{Authorization:`Bearer ${getToken()}`}})
       .then(async res=>{if(!res.ok) throw new Error('기존 설정 조회에 실패했습니다.'); return res.json();})
-      .then(data=>{if(active){if(data.pending_proposal) setResult(data);
+      .then(data=>{if(isActive()){if(data.pending_proposal) setResult(data);
         else if(data.current_strategy) onComplete();}})
-      .catch(e=>{if(active) setError(e.message);})
-      .finally(()=>{if(active) setLoading(false);});
-    return ()=>{active=false;};
+      .catch(e=>{if(isActive()) setLoadError(e.message || '기존 설정 조회에 실패했습니다.');})
+      .finally(()=>{if(isActive()){setInitialLoading(false);setLoading(false);}});
   },[onComplete]);
+
+  useEffect(()=>{
+    let active=true;
+    loadExistingSetup(() => active);
+    return ()=>{active=false;};
+  },[loadExistingSetup]);
 
   const handleSubmit = async () => {
     if (!form.height_cm || !form.weight_kg || !form.age || !form.activity || !form.general_adult_confirmed) {
@@ -83,6 +91,17 @@ export default function Setup({ onComplete }) {
     bulk: { label: "증량 💪", desc: "근육량 증가" },
     maintain: { label: "유지 ⚖️", desc: "현재 체형 유지" },
   };
+
+  if (initialLoading) return <div style={styles.container}><div style={styles.card} role="status">
+    <h2 style={styles.title}>기존 설정을 확인하는 중입니다.</h2>
+    <p style={styles.subtitle}>잠시만 기다려주세요.</p>
+  </div></div>;
+
+  if (loadError) return <div style={styles.container}><div style={styles.card}>
+    <h2 style={styles.title}>설정을 불러오지 못했습니다.</h2>
+    <p role="alert">{loadError}</p>
+    <button style={styles.submitBtn} onClick={() => loadExistingSetup()}>다시 시도</button>
+  </div></div>;
 
   if(result?.pending_proposal) return <div style={styles.container}><div style={styles.card}>
     <h2 style={styles.title}>초기 전략 제안</h2>

@@ -1,4 +1,5 @@
 import { render,screen,fireEvent,waitFor } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import Setup from './Setup';
 import { decideProposal } from '../api/dietApi';
 jest.mock('../api/dietApi',()=>({BASE_URL:'http://test',getToken:()=> 'token',
@@ -28,4 +29,25 @@ test('existing strategy skips onboarding after a returning user reconnects',asyn
   render(<Setup onComplete={done}/>);
   await waitFor(()=>expect(done).toHaveBeenCalledTimes(1));
   expect(screen.queryByRole('button',{name:/시작하기/})).toBeNull();
+});
+
+test('does not flash the onboarding form while an existing strategy is loading',()=>{
+  global.fetch=jest.fn(()=>new Promise(()=>{}));
+  render(<Setup onComplete={jest.fn()}/>);
+
+  expect(screen.getByRole('status')).toHaveTextContent('기존 설정을 확인하는 중');
+  expect(screen.queryByRole('heading',{name:/식단 목표 설정/})).not.toBeInTheDocument();
+});
+
+test('shows a retry state instead of onboarding when the existing setup lookup fails',async()=>{
+  global.fetch=jest.fn()
+    .mockRejectedValueOnce(new Error('기존 설정 조회에 실패했습니다.'))
+    .mockImplementationOnce(()=>new Promise(()=>{}));
+  render(<Setup onComplete={jest.fn()}/>);
+
+  expect(await screen.findByRole('alert')).toHaveTextContent('기존 설정 조회에 실패했습니다.');
+  expect(screen.queryByRole('heading',{name:/식단 목표 설정/})).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole('button',{name:'다시 시도'}));
+  expect(screen.getByRole('status')).toHaveTextContent('기존 설정을 확인하는 중');
+  expect(global.fetch).toHaveBeenCalledTimes(2);
 });

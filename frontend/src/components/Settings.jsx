@@ -23,7 +23,8 @@ export default function Settings({ session, onDeleted }) {
   const supportsPasswordReauth = Boolean(session?.user?.email) && (!provider || provider === "email");
 
   const finishDeletion = async () => {
-    clearLocalSupabaseSession();
+    clearLocalSupabaseSession(window.localStorage);
+    clearLocalSupabaseSession(window.sessionStorage);
     setToken(null);
     onDeleted();
   };
