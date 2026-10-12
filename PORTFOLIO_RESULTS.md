@@ -140,3 +140,5 @@ LangSmith에는 Supervisor 위임, 도구 호출, 재시도, 예산, HITL과 지
 
 ## 일반 음식 표준값과 제품 선택 UX
 일반 음식에는 검증한 표준 항목을 적용하고 제조사 제품만 카드로 확인하도록 개선했다. 출처 추적과 HITL은 유지했다. 모델의 standard 오분류로 실제 등록 제품이 미등록 처리되는 실패를 재현하고 서버 fallback으로 보완했다. 전체 회귀는 백엔드 417 passed/1 skipped, 프론트 64 passed이며 production build를 통과했다. [상세 근거와 한계](docs/food_catalog/SELECTION_POLICY.md).
+
+공개 브라우저에서도 제품 카드 복원, 전체 식사 검토, 명시적 확정 후 4건 저장, 새로고침 상태 유지까지 합성 계정으로 검증했다. 미요청 월남쌈 후보가 추가되는 실제 실패를 관찰하고 서버 차단과 재현 테스트를 추가해 수정·재배포 후 검증했다. [공개 검증](docs/food_catalog/SELECTION_POLICY_PUBLIC.json).
