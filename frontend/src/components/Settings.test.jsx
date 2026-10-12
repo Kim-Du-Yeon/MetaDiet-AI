@@ -1,7 +1,8 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Settings from "./Settings";
+jest.mock("./AdminAnalytics", () => () => null);
 import { supabase } from "../lib/supabaseClient";
-import { deleteAccount, setToken } from "../api/dietApi";
+import { deleteAccount, getAdminAnalytics, setToken } from "../api/dietApi";
 
 jest.mock("../lib/supabaseClient", () => ({
   supabase: { auth: { signInWithPassword: jest.fn(), signOut: jest.fn() } },
@@ -10,10 +11,13 @@ jest.mock("../api/dietApi", () => ({
   deleteAccount: jest.fn(),
   setToken: jest.fn(),
   submitBetaFeedback: jest.fn(),
+  trackProductEvent: jest.fn(),
+  getAdminAnalytics: jest.fn(async () => null),
 }));
 
 beforeEach(() => {
   jest.clearAllMocks();
+  getAdminAnalytics.mockResolvedValue(null);
   supabase.auth.signInWithPassword.mockResolvedValue({
     data: { session: { access_token: "fresh-token" } },
     error: null,
@@ -41,8 +45,9 @@ test("account deletion password belongs to a submit form", () => {
   expect(form.querySelector('button[type="submit"]')?.textContent).toBe("계정 영구 삭제");
 });
 
-test("reauthenticates, switches to fresh token, deletes and clears local session", async () => {
+test("reauthenticates, switches to fresh token, deletes and clears stored sessions", async () => {
   window.localStorage.setItem("sb-project-auth-token", "synthetic-session");
+  window.sessionStorage.setItem("sb-project-auth-token", "synthetic-session");
   const onDeleted = jest.fn();
   render(<Settings session={{ user: { email: "member@example.com" } }} onDeleted={onDeleted} />);
   fireEvent.change(screen.getByLabelText("현재 비밀번호"), { target: { value: "correct-password" } });
@@ -56,6 +61,7 @@ test("reauthenticates, switches to fresh token, deletes and clears local session
   });
   expect(setToken).toHaveBeenCalledWith("fresh-token");
   expect(window.localStorage.getItem("sb-project-auth-token")).toBeNull();
+  expect(window.sessionStorage.getItem("sb-project-auth-token")).toBeNull();
   expect(supabase.auth.signOut).not.toHaveBeenCalled();
   expect(onDeleted).toHaveBeenCalledTimes(1);
 });

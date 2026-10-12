@@ -117,7 +117,17 @@ class ProposalRepository:
                 "values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) returning id",
                 (user_id, *(payload[k] for k in ("measured_date", "weight_kg", "skeletal_muscle_kg", "body_fat_kg",
                  "body_fat_pct", "bmi", "bmr_kcal", "protein_kg", "mineral_kg"))))).fetchone()
-            return {"measurement_id": str(row["id"])}
+            weight = await (await conn.execute(
+                "insert into weight_logs(user_id,measured_date,weight_kg,source) values(%s,%s,%s,'inbody') "
+                "on conflict (user_id,measured_date,source) do update set weight_kg=excluded.weight_kg returning id",
+                (user_id, payload["measured_date"], payload["weight_kg"]))).fetchone()
+            return {"measurement_id": str(row["id"]), "weight_log_id": str(weight["id"])}
+        if kind == "weight":
+            row = await (await conn.execute(
+                "insert into weight_logs(user_id,measured_date,weight_kg,source) values(%s,%s,%s,%s) "
+                "on conflict (user_id,measured_date,source) do update set weight_kg=excluded.weight_kg returning id",
+                (user_id, payload["measured_date"], payload["weight_kg"], payload["source"]))).fetchone()
+            return {"weight_log_id": str(row["id"])}
         if payload["effective_date"] != service_today().isoformat():
             raise ProposalConflict("전략 적용일을 오늘로 다시 확인해주세요.")
         from app.rag.strategy_evidence import evaluate_strategy, load_claims

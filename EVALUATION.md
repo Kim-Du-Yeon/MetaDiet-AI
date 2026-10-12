@@ -1198,3 +1198,49 @@ KDRI 2025 유지 에너지를 기준으로 대한비만학회 2022 식사치료�
 - 첫 실패 주입 명령은 Windows/bash 인용이 중첩돼 `unexpected EOF`가 발생했고 실제 API 요청이 한 번 실행됐다. route 코드를 임시 스크립트로 분리한 뒤 Playwright가 요구하는 `async (page) => { ... }` 함수 형식으로 고쳐 정확한 503을 재현했다. 검증 계정은 공개 삭제 흐름으로 제거했고 DB 재조회 결과 합성 사용자와 연결 피드백은 모두 0건이었다.
 - Codex CUA는 `failed to write kernel assets: 지정된 경로를 찾을 수 없습니다. (os error 3)`로 초기화되지 않아 공식 Playwright CLI로 전환했다. 이는 서비스 결함이 아니라 로컬 자동화 런타임 결함이며, 공개 UI 성공·실패·모바일 결과에는 영향을 주지 않았다.
 - 폼 수정 뒤 전체 프론트 회귀는 **42 passed**, production build는 `main.d694964f.js`로 성공했다.
+
+## 52. 공개 회원가입 이메일 리디렉션 복구 (2026-10-12)
+
+- 공개 베타 회원가입 메일의 확인 링크가 인증 완료 뒤 `localhost`로 이동해 `ERR_CONNECTION_REFUSED`가 발생했다. 회원가입 요청이 `emailRedirectTo`를 보내지 않았고, Supabase Auth가 이 경우 프로젝트 Site URL을 사용한 것이 직접 원인이다.
+- 회원가입 호출에 현재 앱의 `window.location.origin`을 명시해 로컬과 Render가 각자의 origin으로 돌아오도록 수정했다. 회귀 테스트는 Supabase `signUp` 인자에 이 주소가 포함되는지 검증한다.
+- Supabase 공식 문서 기준으로 이 주소는 Auth Redirect URLs 허용 목록에 있어야 한다. 운영 설정은 Site URL과 Redirect URL에 `https://metadiet-web.onrender.com`을 등록하고, 로컬 개발 주소는 별도 Redirect URL로 유지한다.
+- 첫 Jest 실행은 Windows 샌드박스가 임시 디렉터리 `realpath`를 `EPERM`으로 차단했다. 같은 명령을 샌드박스 밖에서 실행해 코드 오류와 환경 오류를 분리했고 수정 회귀 테스트 3개가 통과했다.
+
+## 53. 브라우저 세션 인증·온보딩 화면 깜빡임 복구 (2026-10-12)
+
+- Supabase JS 기본 인증 저장소가 `localStorage`여서 브라우저를 종료한 뒤에도 자동 로그인됐다. 인증 저장소를 `sessionStorage`로 바꿔 같은 브라우저 세션의 새로고침은 유지하되 브라우저 세션 종료 뒤에는 다시 로그인하도록 조정했다.
+- 기존 사용자의 온보딩 상태를 API에서 확인하는 동안 실제 키·체중 입력 폼이 먼저 렌더링됐다가 사라졌다. 초기 조회 중에는 전용 로딩 상태만 표시하고, 실패하면 입력 폼 대신 오류와 재시도 버튼을 표시하도록 상태를 분리했다.
+- 계정 삭제 경로가 기존 `localStorage`만 비우던 부분도 `sessionStorage`까지 함께 정리하도록 보완했다. 저장 방식, 로딩 화면, 실패 재시도, 계정 삭제 정리를 각각 회귀 테스트로 고정했다.
+
+## 54. 개인정보 최소화 제품 분석 기반 (2026-10-12)
+
+- 제한 베타 사용성을 관찰하기 위해 가입·온보딩·채팅·확정·피드백·오류의 단계 이벤트를 추가했다. 원문 대화, 음식명, 의견, 이메일, 체중·체성분은 이벤트 속성으로 허용하지 않는다.
+- `product_events`는 `(user_id, client_event_id)` unique로 브라우저 재시도의 중복 저장을 막고 계정 삭제 시 `ON DELETE CASCADE`로 함께 삭제된다. 공개 스키마의 RLS를 활성화하고 `anon`·`authenticated` 권한을 회수해 백엔드 전용 저장·집계 경로로 제한했다.
+- 관리자 조회는 검증된 JWT의 최상위 email과 서버 `ADMIN_EMAILS` allowlist를 비교한다. 사용자가 바꿀 수 있는 metadata는 관리자 판정에 사용하지 않는다.
+- 설정 화면의 운영 카드는 DAU·WAU, 온보딩 완료율, 첫 식사 기록률, Agent 성공률과 p95 지연을 1·7·30·90일 범위로 보여준다. 일반 사용자는 403 응답 뒤 카드를 볼 수 없다.
+- Supabase 실제 마이그레이션 뒤 catalog에서 RLS 활성화와 브라우저 역할 grant 없음이 확인됐다. `RLS enabled no policy` advisor는 브라우저 접근을 전부 차단한 의도된 백엔드 전용 설계이며, 이 테이블에는 허용 policy를 만들지 않는다.
+
+## 55. 제품 분석 정확성·공개 수명주기 검증 (2026-10-12)
+
+- 온보딩 확정 시 가입 이벤트를 보내던 방식은 가입 후 이탈을 측정하지 못했다. 가입 기간 cohort는 `auth.users.created_at`, 온보딩은 실제 전략 존재, 첫 식사 기록은 실제 `meal_logs` 존재로 계산한다. 삭제된 계정은 포함하지 않으며 미래 시점에 완료하면 동일 가입 cohort의 완료율이 변할 수 있다.
+- 1일 조회에서 WAU도 1일로 제한되던 오류를 수정해 활성 사용자는 항상 최근 24시간·7일을 조회한다. 오류 수는 실패한 상담 완료 이벤트만 세어 같은 실패의 `error_shown` 이벤트를 이중 계산하지 않는다. p50/p95는 성공 완료 요청만 포함한다.
+- 상담 완료율은 브라우저가 completed 이벤트를 수신한 비율이며 목표 달성률·답변 정확도가 아니다. 브라우저 종료·분석 전송 실패로 누락될 수 있는 best-effort 지표라는 한계를 유지한다.
+- 실제 proposal은 `intake`/`plan`/`weight`/`measurement`/`strategy`다. 잘못된 `meal` 비교를 바로잡고 전략과 계획은 측정 확정 이벤트로 보내지 않는다. 전환율 자체는 클라이언트 확정 이벤트를 신뢰하지 않고 DB 기록을 사용한다.
+- 이벤트 properties는 금지 키 목록 대신 고정 키·고정 값 allowlist로 제한해 임의 문자열에 건강 정보를 담는 경로를 차단한다. 관리자 컴포넌트 테스트를 계정 설정 테스트에서 분리해 `act` 경고를 제거했다.
+- 공개 합성 사용자 검증에서 최초 저장 201, 동일 ID 재전송 200, 재전송 후 1행, 공개 계정 삭제 후 0행을 확인했다. 집계 쿼리는 실제 Supabase에 연결해 실행했고 주간 활성 사용자와 cohort 비율 범위를 검증했다. 원문·토큰·계정 ID 없이 `backend/artifacts/product-analytics-lifecycle-v2.json`에 결과를 저장한다.
+- 첫 실행은 검증 스크립트의 Windows ProactorEventLoop 때문에 psycopg 비동기 연결이 실패했다. 공식 https://www.psycopg.org/psycopg3/docs/advanced/async.html 지침에 따라 SelectorEventLoop 정책을 설정하고 재실행해 통과했다. 합성 계정은 실패 경로에서도 정리한다.
+- 관리자 이메일 allowlist 등록 및 관리자 화면의 인증된 공개 조회는 별도 확인 항목이다. LangSmith 실제 trace 연결은 이 변경에서 완료됐다고 주장하지 않는다.
+
+## 56. 제품 이벤트와 실제 LangSmith 실행 연결 (2026-10-12)
+
+- 그래프 실제 실행마다 UUID root run ID를 지정하고 `trace_id` metadata, 완료·실패 checkpoint, SSE 응답과 브라우저 상담 완료 이벤트에 동일 ID를 전달한다. Pod 복구로 재실행하면 새 root ID를 사용하며 저장된 응답 재연결은 기존 ID를 유지한다. 서버에 도달하지 못한 네트워크 오류는 임의의 trace를 만들지 않는다.
+- 공식 LangChain run ID 설정 문서(https://docs.langchain.com/langsmith/trace-with-langchain)를 기준으로 구현했다. 공개 검증에서 SSE ID, `product_events.trace_id`, LangSmith `read_run`의 root ID와 trace ID가 모두 일치했고 `stream_run_id` metadata도 확인했다. 합성 계정을 정리했고 aggregate 결과는 `backend/artifacts/analytics-trace-v1.json`에 저장했다.
+- 첫 공개 요청은 이전 배포 응답으로 trace ID가 없었다. Render 배포 문서(https://render.com/docs/deploys)를 확인하고 배포 반영 후 재검증했다. 다음 검증은 스크립트의 필수 `status` 누락으로 HTTP 422 `Field required`를 반환했다. Pydantic validation 문서를 확인해 payload를 수정한 뒤 통과했다. Jest는 sandbox 임시 폴더 `EPERM`으로 시작하지 못해 일반 실행 환경에서 재검증했다.
+- 백엔드 전체 389 passed/1 skipped, 프론트 전체 58 passed, 운영 빌드 성공. 신규 회귀는 graph invocation ID와 checkpoint ID 일치, 실패 SSE ID 유지, 완료 이벤트의 실제 trace 전달을 확인한다.
+- 관리자 환경변수 설정 안내는 `docs/ADMIN_ANALYTICS_GUIDE.md`에 기록했다. 실제 관리자 계정 화면 검증은 운영 `ADMIN_EMAILS` 등록 후 진행한다. 공개 trace 공유 링크나 건강 원문 제품 이벤트를 만들지 않는다.
+
+## 57. 실제 관리자 공개 화면 검증 (2026-10-12)
+
+- 사용자가 관리자 이메일 환경변수를 등록한 뒤 재배포를 요청했다. 처음에는 Render 최신 배포가 In progress여서 기존 Live와 구분해 대기했다. 새 배포가 1분 17초 후 Live로 전환된 것을 확인하고 검증했다.
+- 사용자가 직접 로그인한 관리자 계정에서 설정의 제품 운영 지표 표시, 1·7·30·90일 기간 선택, 새로고침 후 로그인·대화 복원과 관리자 화면 재조회를 확인했다. 가입 이메일·대화 원문은 검증 문서에 기록하지 않는다.
+- 공개 합성 계정은 관리자 API 403, 이벤트 최초 저장 201/재전송 200, 중복 1행, 계정 삭제 후 0행이었다. 관리자 권한·집계 회귀 테스트 7개 통과. 실제 사용자 성과 수집은 사용자 참여 후 진행하며 테스트 데이터를 성과로 제시하지 않는다.

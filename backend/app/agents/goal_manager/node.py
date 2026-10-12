@@ -108,31 +108,40 @@ async def goal_manager_node(state: AgentState) -> dict:
         }
 
     history = await get_inbody_history_tool.ainvoke({"user_id": user_id, "limit": 10})
-    if not history:
+    try:
+        weight_history = sb.table("weight_logs").select("measured_date,weight_kg").eq(
+            "user_id", user_id).order("measured_date", desc=True).limit(10).execute().data
+    except Exception:
+        weight_history = []
+    if not weight_history and history:
+        weight_history = [{"measured_date": row["measured_date"], "weight_kg": row["weight_kg"]} for row in history]
+    if not weight_history:
         return {
-            "response": _append(state, "🎯 인바디 기록이 없어서 진행 상황을 계산할 수 없어요. 인바디를 먼저 업로드해주세요."),
+            "response": _append(state, "🎯 체중 기록이 없어서 진행 상황을 계산할 수 없어요. 체중을 먼저 기록해주세요."),
             "agent_used": "goal_manager",
         }
 
-    latest = history[0]
+    latest = weight_history[0]
     current_weight = latest["weight_kg"]
-    current_muscle = latest["skeletal_muscle_kg"]
 
     user_rows = sb.table("users").select("weight_kg").eq("id", user_id).limit(1).execute().data
-    start_weight = (user_rows[0].get("weight_kg") if user_rows else None) or history[-1]["weight_kg"]
+    start_weight = (user_rows[0].get("weight_kg") if user_rows else None) or weight_history[-1]["weight_kg"]
 
     progress = _calc_goal_progress(current_weight, target_weight_kg, start_weight)
     progress_pct = progress["progress_pct"]
     remaining_weight = progress["remaining_weight"]
 
-    if len(history) >= 2:
-        prev_log = history[1]
+    if len(weight_history) >= 2:
+        prev_log = weight_history[1]
         weekly_rate = _calc_weekly_rate(
             current_weight, latest["measured_date"], prev_log["weight_kg"], prev_log["measured_date"]
         )
-        muscle_change = round(current_muscle - prev_log["skeletal_muscle_kg"], 2)
     else:
         weekly_rate = None
+
+    if len(history) >= 2:
+        muscle_change = round(history[0]["skeletal_muscle_kg"] - history[1]["skeletal_muscle_kg"], 2)
+    else:
         muscle_change = None
 
     needed_weekly_rate = _calc_needed_weekly_rate(remaining_weight, target_date_str)

@@ -26,6 +26,12 @@ test("server error is surfaced", async () => {
   await expect(consumeEventStream(response('data: {"type":"error","content":"failed"}\n\n'), () => {})).rejects.toThrow("failed");
 });
 
+test("failed stream preserves its trace identifier for incident correlation", async () => {
+  await expect(consumeEventStream(response(
+    'data: {"type":"failed","content":"failed","trace_id":"root-span"}\n\n'
+  ), () => {})).rejects.toMatchObject({ traceId: "root-span" });
+});
+
 test("HTTP failure is surfaced before reading body", async () => {
   await expect(consumeEventStream({ ok: false, status: 401 }, () => {})).rejects.toThrow("401");
 });

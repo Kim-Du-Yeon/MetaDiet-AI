@@ -1,8 +1,8 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import BetaFeedbackCard from "./BetaFeedbackCard";
-import { submitBetaFeedback } from "../api/dietApi";
+import { submitBetaFeedback, trackProductEvent } from "../api/dietApi";
 
-jest.mock("../api/dietApi", () => ({ submitBetaFeedback: jest.fn() }));
+jest.mock("../api/dietApi", () => ({ submitBetaFeedback: jest.fn(), trackProductEvent: jest.fn() }));
 
 beforeEach(() => jest.clearAllMocks());
 
@@ -60,6 +60,9 @@ test("locks duplicate clicks and resets after success", async () => {
   expect(screen.getByLabelText("의견 (선택)").value).toBe("");
   expect(screen.getByLabelText("피드백 종류").value).toBe("general");
   expect(screen.getByRole("radio", { name: "4점" }).checked).toBe(false);
+  expect(trackProductEvent).toHaveBeenCalledWith("feedback_submitted", {
+    properties: { category: "answer_quality" },
+  });
 });
 
 test("retains input and reuses the submission id after failure", async () => {

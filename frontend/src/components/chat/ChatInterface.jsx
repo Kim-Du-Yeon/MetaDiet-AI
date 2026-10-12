@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { sendChatMessage, uploadImage, resumeChat, getChatHistory, getSessionRestore, rollbackToCheckpoint, nutritionLookup, decideProposal, reviseMeasurement } from "../../api/dietApi";
+import { sendChatMessage, uploadImage, resumeChat, getChatHistory, getSessionRestore, rollbackToCheckpoint, nutritionLookup, decideProposal, reviseMeasurement, trackProductEvent } from "../../api/dietApi";
 import ProposalCard from "./ProposalCard";
 import ProcessTrace from "./ProcessTrace";
 import "./ChatInterface.css";
@@ -109,7 +109,10 @@ export default function ChatInterface({
     });
   };
 
+  const lastTraceRef = useRef(null);
+
   const handleDone = (meta) => {
+    lastTraceRef.current = meta.trace_id || null;
     setApproval(meta.pending_proposal ? { ...meta.pending_proposal, channel: "chat" } : null);
     setMessages((prev) => {
       const updated = [...prev];
@@ -174,6 +177,11 @@ export default function ChatInterface({
           ? "인바디 측정값을 저장했습니다. 새 목표 전략 검토를 요청할 수 있습니다."
           : "인바디 측정 제안을 취소했습니다.", streaming: false }]);
       }
+      if (action === "confirm") {
+        const eventName = approval.kind === "intake" ? "meal_confirmed"
+          : ["measurement", "weight"].includes(approval.kind) ? "measurement_confirmed" : null;
+        if (eventName) trackProductEvent(eventName, { clientEventId: approval.id });
+      }
     } catch (error) { setApprovalError(error.message); setStreamError(error.message); }
     finally { setIsLoading(false); }
   };
@@ -210,6 +218,9 @@ export default function ChatInterface({
       return;
     }
     setFoodEntry(null);   // 직접 타이핑하면 음식 카드는 닫음
+    lastTraceRef.current = null;
+    const startedAt = performance.now();
+    trackProductEvent("chat_sent", { properties: { channel: "text" } });
     setIsLoading(true);
     const newUserMessage = { role: "user", content: userMsg };
     setMessages((prev) => [...prev, newUserMessage, { role: "assistant", content: "", agentUsed: null, streaming: true }]);
@@ -223,7 +234,10 @@ export default function ChatInterface({
         setIsRolledBack(false);
         await sendChatMessage(USER_ID, userMsg, handleToken, handleDone, pendingState, contextMessages, threadId, null, handleProgress);
       }
+      trackProductEvent("chat_completed", { traceId: lastTraceRef.current, durationMs: performance.now() - startedAt });
     } catch (e) {
+      trackProductEvent("chat_completed", { traceId: e.traceId || null, status: "failed", durationMs: performance.now() - startedAt });
+      trackProductEvent("error_shown", { status: "failed", properties: { surface: "chat" } });
       console.error(e);
       setStreamError(e.message || "응답을 받지 못했습니다.");
       setMessages((prev) => [...prev.slice(0, -1), { role: "assistant", content: "응답을 끝까지 받지 못했습니다. 잠시 후 다시 요청해주세요.", agentUsed: null, progressSteps: progressRef.current }]);
@@ -315,10 +329,15 @@ export default function ChatInterface({
     resetProgress();
     setIsLoading(true);
     const newUserMessage = { role: "user", content: text };
+    lastTraceRef.current = null;
+    const startedAt = performance.now();
+    trackProductEvent("chat_sent", { properties: { channel: "food_photo" } });
     setMessages((prev) => [...prev, newUserMessage, { role: "assistant", content: "", agentUsed: null, streaming: true }]);
     try {
       await sendChatMessage(USER_ID, text, handleToken, handleDone, pendingState, [...messages, newUserMessage], threadId, mealType, handleProgress);
+      trackProductEvent("chat_completed", { traceId: lastTraceRef.current, durationMs: performance.now() - startedAt });
     } catch (e) {
+      trackProductEvent("chat_completed", { traceId: e.traceId || null, status: "failed", durationMs: performance.now() - startedAt });
       setMessages((prev) => [...prev.slice(0, -1), { role: "assistant", content: "오류가 발생했습니다.", agentUsed: null }]);
       setIsLoading(false);
     }

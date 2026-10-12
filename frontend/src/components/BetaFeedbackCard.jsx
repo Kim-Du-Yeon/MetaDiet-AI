@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { submitBetaFeedback } from "../api/dietApi";
+import { submitBetaFeedback, trackProductEvent } from "../api/dietApi";
 
 const categories = [
   ["general", "전반적인 의견"],
@@ -46,6 +46,7 @@ export default function BetaFeedbackCard({ uuidFactory = defaultUuidFactory }) {
       setComment("");
       submissionId.current = null;
       setMessage("피드백을 보내주셔서 감사합니다.");
+      trackProductEvent("feedback_submitted", { properties: { category } });
     } catch {
       setMessage("피드백을 전송하지 못했습니다. 입력을 유지했으니 다시 시도해주세요.");
     } finally {

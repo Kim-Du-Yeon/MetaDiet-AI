@@ -1,5 +1,5 @@
 import { TextDecoder, TextEncoder } from "util";
-import { deleteAccount, getSessionRestore, sendChatMessage, setToken, submitBetaFeedback } from "./dietApi";
+import { deleteAccount, getAdminAnalytics, getSessionRestore, recordProductEvent, sendChatMessage, setToken, submitBetaFeedback } from "./dietApi";
 
 global.TextDecoder = TextDecoder;
 
@@ -156,4 +156,25 @@ test("submitBetaFeedback surfaces a retryable generic error without mutating pay
   });
   expect(payload).toEqual(snapshot);
   expect(global.fetch).toHaveBeenCalledTimes(1);
+});
+
+test("recordProductEvent sends only the allowlisted analytics contract", async () => {
+  setToken("analytics-token");
+  global.fetch = jest.fn().mockResolvedValue({ ok: true, json: async () => ({ id: "e1", created: true }) });
+  await recordProductEvent("chat_completed", {
+    clientEventId: "11111111-1111-4111-8111-111111111111",
+    durationMs: 1250.4,
+    properties: { route: "meal_plan" },
+  });
+  const body = JSON.parse(global.fetch.mock.calls[0][1].body);
+  expect(body).toEqual(expect.objectContaining({
+    event_name: "chat_completed", status: "success", duration_ms: 1250,
+    properties: { route: "meal_plan" },
+  }));
+  expect(body).not.toHaveProperty("message");
+});
+
+test("getAdminAnalytics hides the operations panel for ordinary users", async () => {
+  global.fetch = jest.fn().mockResolvedValue({ ok: false, status: 403, json: async () => ({}) });
+  await expect(getAdminAnalytics(7)).resolves.toBeNull();
 });

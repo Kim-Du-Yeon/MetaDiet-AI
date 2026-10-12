@@ -109,6 +109,7 @@ class Settings(BaseSettings):
     langsmith_project: str = "diet-agent"
     environment: str = "development"
     service_timezone: str = "Asia/Seoul"
+    admin_emails: str = ""
 
     class Config:
         env_file = ".env"

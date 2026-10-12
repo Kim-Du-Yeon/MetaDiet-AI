@@ -21,6 +21,58 @@ function authHeaders(extra = {}) {
   return _token ? { ...extra, Authorization: `Bearer ${_token}` } : extra;
 }
 
+function analyticsUuid() {
+  if (window.crypto?.randomUUID) return window.crypto.randomUUID();
+  return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (character) => {
+    const value = Math.floor(Math.random() * 16);
+    return (character === "x" ? value : (value & 0x3) | 0x8).toString(16);
+  });
+}
+
+function analyticsSessionId() {
+  const key = "metadiet:analytics-session";
+  let value = window.sessionStorage.getItem(key);
+  if (!value) {
+    value = analyticsUuid();
+    window.sessionStorage.setItem(key, value);
+  }
+  return value;
+}
+
+export async function recordProductEvent(eventName, options = {}) {
+  const payload = {
+    event_name: eventName,
+    status: options.status || "success",
+    client_event_id: options.clientEventId || analyticsUuid(),
+    session_id: analyticsSessionId(),
+    duration_ms: options.durationMs == null ? null : Math.max(0, Math.round(options.durationMs)),
+    trace_id: options.traceId || null,
+    properties: options.properties || {},
+  };
+  const res = notifyAuthExpired(await fetch(`${BASE_URL}/analytics/events`, {
+    method: "POST",
+    headers: authHeaders({ "Content-Type": "application/json" }),
+    body: JSON.stringify(payload),
+  }));
+  if (!res.ok) throw new Error("제품 사용 지표를 기록하지 못했습니다.");
+  return res.json();
+}
+
+// 분석 장애가 사용자 작업을 막지 않도록 호출부에서 await 없이 사용한다.
+export function trackProductEvent(eventName, options = {}) {
+  void recordProductEvent(eventName, options).catch(() => {});
+}
+
+export async function getAdminAnalytics(days = 7) {
+  const res = notifyAuthExpired(await fetch(`${BASE_URL}/admin/analytics/overview?days=${days}`, {
+    headers: authHeaders(),
+  }));
+  if (res.status === 403) return null;
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.detail || "운영 지표를 불러오지 못했습니다.");
+  return data;
+}
+
 function newStreamRunId() {
   return window.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
@@ -165,6 +217,30 @@ export async function getInbodyHistory() {
   return res.json();
 }
 
+export async function getDashboardSummary() {
+  const res = notifyAuthExpired(await fetch(`${BASE_URL}/dashboard/summary`, { headers: authHeaders() }));
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.detail || "측정 기록을 불러오지 못했습니다.");
+  return data;
+}
+
+export async function proposeWeight(payload) {
+  return postJson("/measurements/weight", payload, "체중 기록 제안을 만들지 못했습니다.");
+}
+
+export async function proposeBodyComposition(payload) {
+  return postJson("/measurements/body-composition", payload, "체성분 기록 제안을 만들지 못했습니다.");
+}
+
+async function postJson(path, payload, fallback) {
+  const res = notifyAuthExpired(await fetch(`${BASE_URL}${path}`, {
+    method: "POST", headers: authHeaders({ "Content-Type": "application/json" }), body: JSON.stringify(payload),
+  }));
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(typeof data.detail === "string" ? data.detail : fallback);
+  return data;
+}
+
 export async function getCurrentStrategy() {
   const res = await fetch(`${BASE_URL}/strategy/current`, { headers: authHeaders() });
   return res.json();
@@ -211,7 +287,8 @@ export async function decideProposal(proposal, action) {
 }
 
 export async function reviseMeasurement(proposal, payload) {
-  const res = await fetch(`${BASE_URL}/proposals/${proposal.id}/measurement`, {
+  const kind = proposal.kind === "weight" ? "weight" : "measurement";
+  const res = await fetch(`${BASE_URL}/proposals/${proposal.id}/${kind}`, {
     method: "PUT", headers: authHeaders({ "Content-Type": "application/json" }),
     body: JSON.stringify({ version: proposal.version, payload }),
   });

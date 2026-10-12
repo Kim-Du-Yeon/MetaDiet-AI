@@ -31,6 +31,7 @@ services:
       - {key: SUPABASE_DB_URL, sync: false}
       - {key: PINECONE_API_KEY, sync: false}
       - {key: LANGSMITH_API_KEY, sync: false}
+      - {key: ADMIN_EMAILS, sync: false}
       - {key: CORS_ORIGINS, sync: false}
 
   - type: web

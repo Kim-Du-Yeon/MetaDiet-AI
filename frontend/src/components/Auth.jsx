@@ -20,7 +20,11 @@ export default function Auth() {
     setMessage("");
     const { error } = mode === "login"
       ? await supabase.auth.signInWithPassword({ email, password })
-      : await supabase.auth.signUp({ email, password });
+      : await supabase.auth.signUp({
+        email,
+        password,
+        options: { emailRedirectTo: window.location.origin },
+      });
     if (error) setMessage(error.message);
     else if (mode === "signup") setMessage("가입 확인 메일을 확인해주세요.");
     setLoading(false);

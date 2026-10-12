@@ -6,10 +6,12 @@
 
 ---
 
+현재 수치·범위 기준: [PORTFOLIO_CASE_STUDY.md](PORTFOLIO_CASE_STUDY.md)와 [PORTFOLIO_RESULTS.md](PORTFOLIO_RESULTS.md), 2026-10-12. 슬라이드 내 이전 단계 수치는 해당 당시 실험으로만 사용한다. 실제 사용자 성과는 추후 추가한다.
+
 ## Slide 1. Title
 
 **MetaDiet AI**  
-인바디와 식단 기록을 기반으로 목표를 자동 조정하는 Multi-Agent 식단 코칭 시스템
+인바디와 식단 기록을 기반으로 목표 조정을 제안하고 승인 후 반영하는 Multi-Agent 식단 코칭 시스템
 
 **Subtitle**
 - LangGraph Multi-Agent Orchestration
@@ -45,7 +47,7 @@
 |---|---|
 | 사용자가 직접 입력 | 자연어/사진 입력 후 Agent가 후보 생성 |
 | 칼로리 계산 중심 | 기록 + 조언 + 식단 계획 + 리포트 |
-| 목표 수동 설정 | 인바디 갱신 시 전략 자동 재설정 |
+| 목표 수동 설정 | 인바디 갱신 시 전략 변경 제안과 사용자 승인 |
 | 근거 없는 조언 | RAG 기반 출처 표시 |
 | 단일 흐름 | Supervisor + 역할별 Agent |
 | 잘못 입력 시 수동 수정 | 자연어 edit Agent |
@@ -90,7 +92,7 @@ Data / Infra
 - Agent orchestration: LangGraph
 - DB: Supabase
 - Vector DB: Pinecone
-- RAG eval/tracing: LangSmith + local eval report
+- RAG eval/tracing: Ragas + LangSmith + 독립 Agent evaluator
 
 ---
 

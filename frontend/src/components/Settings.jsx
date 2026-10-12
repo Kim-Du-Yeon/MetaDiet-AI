@@ -3,6 +3,7 @@ import { deleteAccount, setToken } from "../api/dietApi";
 import { supabase } from "../lib/supabaseClient";
 import LegalNotices from "./LegalNotices";
 import BetaFeedbackCard from "./BetaFeedbackCard";
+import AdminAnalytics from "./AdminAnalytics";
 
 export function clearLocalSupabaseSession(storage = window.localStorage) {
   const keys = [];
@@ -23,7 +24,8 @@ export default function Settings({ session, onDeleted }) {
   const supportsPasswordReauth = Boolean(session?.user?.email) && (!provider || provider === "email");
 
   const finishDeletion = async () => {
-    clearLocalSupabaseSession();
+    clearLocalSupabaseSession(window.localStorage);
+    clearLocalSupabaseSession(window.sessionStorage);
     setToken(null);
     onDeleted();
   };
@@ -102,6 +104,7 @@ export default function Settings({ session, onDeleted }) {
       </section>
 
       <BetaFeedbackCard />
+      <AdminAnalytics />
 
       <section className="settings-card settings-danger" aria-labelledby="delete-account-title">
         <p className="settings-eyebrow settings-eyebrow--danger">DANGER ZONE</p>

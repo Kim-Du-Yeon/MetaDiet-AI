@@ -1,13 +1,11 @@
 import "./ProcessTrace.css";
 
-const PHASE_ICONS = { intent: "01", delegation: "02", records: "03", nutrition: "04", evidence: "05", analysis: "06", validation: "07" };
-
 export default function ProcessTrace({ steps = [], running = false }) {
   if (!steps.length) return null;
   const content = <ol className="process-trace__list">{steps.map((step, index) => {
     const active = running && index === steps.length - 1;
     return <li className={`process-trace__step${active ? " is-active" : ""}`} key={`${step.phase}-${step.label}-${index}`}>
-      <span className="process-trace__index" aria-hidden="true">{PHASE_ICONS[step.phase] || String(index + 1).padStart(2, "0")}</span>
+      <span className="process-trace__index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
       <span aria-current={active ? "step" : undefined}>{step.label}</span>
     </li>;
   })}</ol>;

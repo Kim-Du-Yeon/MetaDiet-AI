@@ -48,13 +48,20 @@ async def test_graph_runtime_events_are_forwarded_before_execution_completes():
     from app.agents.execution_stream import emit_runtime_event
 
     class FakeGraph:
+        invocation_id = None
+
         async def ainvoke(self, graph_input, config=None):
+            self.invocation_id = str(config["run_id"])
+            assert config["metadata"]["trace_id"] == self.invocation_id
             await emit_runtime_event("model_started", agent="supervisor")
             await emit_runtime_event("delegated", agent="meal")
             await emit_runtime_event("tool_started", agent="meal", tool="read_intake")
 
         async def aupdate_state(self, config, values):
-            assert values == {"execution_status": "completed", "execution_error": None}
+            from uuid import UUID
+            UUID(values["trace_id"])
+            assert values["trace_id"] == self.invocation_id
+            assert {k: v for k, v in values.items() if k != "trace_id"} == {"execution_status": "completed", "execution_error": None}
 
     frames = [frame async for frame in _run_and_stream(
         FakeGraph(), {"message": "저녁 추천"}, {"configurable": {"thread_id": "u_t"}}, "run-live"
@@ -75,7 +82,9 @@ async def test_failed_run_is_terminal_and_same_run_is_not_invoked_twice():
             raise RuntimeError("provider detail must not leak")
 
         async def aupdate_state(self, config, values):
-            assert values == {"execution_status": "failed", "execution_error": "execution_failed"}
+            from uuid import UUID
+            UUID(values["trace_id"])
+            assert {k: v for k, v in values.items() if k != "trace_id"} == {"execution_status": "failed", "execution_error": "execution_failed"}
 
     graph = FailingGraph()
     config = {"configurable": {"thread_id": "user-thread-failure"}}
@@ -101,7 +110,9 @@ async def test_running_checkpoint_without_local_journal_resumes_after_pod_change
             await emit_runtime_event("tool_started", agent="meal", tool="read_intake")
 
         async def aupdate_state(self, config, values):
-            assert values == {"execution_status": "completed", "execution_error": None}
+            from uuid import UUID
+            UUID(values["trace_id"])
+            assert {k: v for k, v in values.items() if k != "trace_id"} == {"execution_status": "completed", "execution_error": None}
 
     graph = FakeGraph()
     config = {"configurable": {"thread_id": "pod-recovery-thread"}}

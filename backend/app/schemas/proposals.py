@@ -49,6 +49,19 @@ class MeasurementProposal(StrictModel):
         return self
 
 
+class WeightProposal(StrictModel):
+    kind: Literal["weight"] = "weight"
+    measured_date: date
+    weight_kg: float = Field(gt=0, le=500)
+    source: Literal["manual"] = "manual"
+
+    @model_validator(mode="after")
+    def date_not_in_future(self):
+        if self.measured_date > service_today():
+            raise ValueError("측정일은 미래일 수 없습니다.")
+        return self
+
+
 class Evidence(StrictModel):
     source: str = Field(min_length=1)
     page: str
@@ -93,7 +106,7 @@ class MealChangeProposal(StrictModel):
         return self
 
 
-ProposalPayload = Annotated[MealProposal | MeasurementProposal | StrategyProposal | MealChangeProposal, Field(discriminator="kind")]
+ProposalPayload = Annotated[MealProposal | MeasurementProposal | WeightProposal | StrategyProposal | MealChangeProposal, Field(discriminator="kind")]
 payload_adapter = TypeAdapter(ProposalPayload)
 
 
@@ -106,3 +119,8 @@ class ProposalDecision(StrictModel):
 class MeasurementRevision(StrictModel):
     version: int = Field(ge=1)
     payload: MeasurementProposal
+
+
+class WeightRevision(StrictModel):
+    version: int = Field(ge=1)
+    payload: WeightProposal

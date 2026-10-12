@@ -20,15 +20,18 @@ from app.core.auth import (
     get_active_auth_id,
     get_current_user,
     get_current_auth_id,
+    get_current_admin,
     get_recent_auth_context,
 )
 from app.schemas.models import InbodyUploadResponse, ResumeRequest
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 from typing import Optional, Literal
 from uuid import uuid4, UUID
-from app.schemas.proposals import ProposalDecision, MeasurementProposal, MeasurementRevision
+from app.schemas.proposals import (ProposalDecision, MeasurementProposal, MeasurementRevision,
+                                   WeightProposal, WeightRevision)
 from app.db.proposals import ProposalRepository, ProposalConflict
 from app.db.feedback import FeedbackInput, FeedbackRepository, FeedbackStorageUnavailable
+from app.db.analytics import ProductAnalyticsUnavailable, ProductEventInput, ProductEventRepository
 from app.db.thread_lock import serialized_stream, conversation_lock
 from app.agents.execution_stream import (
     ExecutionEventJournal, find_journal, get_or_create_journal, progress_for_runtime_event,
@@ -98,6 +101,42 @@ class FeedbackRequest(BaseModel):
 class FeedbackResponse(BaseModel):
     id: str
     status: Literal["stored"] = "stored"
+    created: bool
+
+
+class ProductEventRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    event_name: Literal[
+        "signup_completed", "onboarding_started", "onboarding_completed",
+        "chat_sent", "chat_completed", "meal_proposed", "meal_confirmed",
+        "measurement_confirmed", "feedback_submitted", "error_shown",
+    ]
+    status: Literal["success", "failed", "cancelled"]
+    client_event_id: UUID
+    session_id: UUID
+    duration_ms: int | None = Field(default=None, ge=0, le=600_000)
+    trace_id: str | None = Field(default=None, max_length=128)
+    properties: dict[str, str | int | float | bool | None] = Field(default_factory=dict)
+
+    @field_validator("properties")
+    @classmethod
+    def reject_sensitive_properties(cls, value: dict) -> dict:
+        allowed = {
+            "source": {"web"}, "channel": {"text", "food_photo"},
+            "surface": {"chat", "setup", "dashboard", "settings"},
+            "category": {"general", "answer_quality", "evidence", "usability", "bug"},
+            "route": {"diet_logger", "meal_plan", "strategy", "inbody", "reporter",
+                      "confirm", "edit", "goal_manager", "off_topic"},
+        }
+        if any(key not in allowed or not isinstance(item, str) or item not in allowed[key]
+               for key, item in value.items()):
+            raise ValueError("민감 정보나 허용되지 않은 속성은 분석 이벤트에 저장할 수 없습니다.")
+        return value
+
+
+class ProductEventResponse(BaseModel):
+    id: str
     created: bool
 
 
@@ -225,6 +264,10 @@ def _sse(event: dict) -> str:
 
 
 async def _invoke_with_progress(graph, graph_input, config: dict, journal: ExecutionEventJournal):
+    # Each actual invocation gets a distinct LangSmith root span, including Pod recovery.
+    trace_id = uuid4()
+    invocation_config = {**config, "run_id": trace_id,
+                         "metadata": {**config.get("metadata", {}), "trace_id": str(trace_id)}}
     async def sink(kind: str, payload: dict):
         progress = progress_for_runtime_event(kind, **payload)
         if progress:
@@ -235,13 +278,16 @@ async def _invoke_with_progress(graph, graph_input, config: dict, journal: Execu
 
     token = set_event_sink(sink)
     try:
-        await graph.ainvoke(graph_input, config=config)
-        await graph.aupdate_state(config, {"execution_status": "completed", "execution_error": None})
+        await graph.ainvoke(graph_input, config=invocation_config)
+        await graph.aupdate_state(config, {"execution_status": "completed", "execution_error": None,
+                                          "trace_id": str(trace_id)})
     except Exception:
         try:
-            await graph.aupdate_state(config, {"execution_status": "failed", "execution_error": "execution_failed"})
+            await graph.aupdate_state(config, {"execution_status": "failed", "execution_error": "execution_failed",
+                                              "trace_id": str(trace_id)})
         finally:
-            await journal.publish("failed", {"content": "대화 실행에 실패했습니다. 잠시 후 다시 시도해주세요."})
+            await journal.publish("failed", {"content": "대화 실행에 실패했습니다. 잠시 후 다시 시도해주세요.",
+                                             "trace_id": str(trace_id)})
         raise
     finally:
         reset_event_sink(token)
@@ -298,7 +344,7 @@ async def _stream(graph, config: dict, run_id: str, after_seq: int = 0):
     if sv.get("execution_status") == "failed":
         if after_seq < 100000:
             yield _sse({"type": "failed", "content": "대화 실행에 실패했습니다. 잠시 후 다시 시도해주세요.",
-                        "run_id": run_id, "seq": 100000})
+                        "run_id": run_id, "trace_id": sv.get("trace_id"), "seq": 100000})
         return
 
     # response 읽기 우선순위:
@@ -328,7 +374,7 @@ async def _stream(graph, config: dict, run_id: str, after_seq: int = 0):
     stats = await _public_stats(sv.get("user_id"))
     if after_seq < 100000:
         yield _sse({'type':'completed','agent_used':sv.get('agent_used',''),**stats,'pending_meals':pending,
-            'pending_proposal':sv.get('pending_proposal'),'run_id':run_id,'seq':100000,
+            'pending_proposal':sv.get('pending_proposal'),'run_id':run_id,'trace_id':sv.get('trace_id'),'seq':100000,
             'execution_usage':sv.get('execution_usage'),'awaiting_confirmation':sv.get('awaiting_confirmation',False),
             'plan_date':sv.get('plan_date'),'thread_id':new_tid,'prev_thread_id':None,'interrupted':is_interrupted})
 
@@ -688,6 +734,46 @@ async def revise_measurement(proposal_id: UUID, req: MeasurementRevision, curren
         raise HTTPException(409, str(exc)) from exc
 
 
+@app.put("/proposals/{proposal_id}/weight")
+async def revise_weight(proposal_id: UUID, req: WeightRevision, current_user: str = Depends(get_current_user)):
+    repository = ProposalRepository()
+    try:
+        old = await repository.get(current_user, str(proposal_id))
+        if old["kind"] != "weight":
+            raise ProposalConflict("체중 기록 제안만 수정할 수 있습니다.")
+        return await repository.create(current_user, old["thread_id"], req.payload.model_dump(mode="json"),
+            str(uuid4()), replaces=(str(proposal_id), req.version))
+    except ProposalConflict as exc:
+        raise HTTPException(409, str(exc)) from exc
+
+
+class WeightEntryRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
+    measured_date: date
+    weight_kg: float = Field(gt=0, le=500)
+
+
+class MeasurementEntryRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
+    measured_date: date
+    weight_kg: float = Field(gt=0, le=500)
+    skeletal_muscle_kg: float = Field(gt=0, le=250)
+    body_fat_pct: float = Field(ge=0, le=100)
+
+
+@app.post("/measurements/weight")
+async def propose_weight(req: WeightEntryRequest, current_user: str = Depends(get_current_user)):
+    payload = WeightProposal(**req.model_dump(), source="manual").model_dump(mode="json")
+    return await ProposalRepository().create(current_user, "dashboard-weight", payload, str(uuid4()))
+
+
+@app.post("/measurements/body-composition")
+async def propose_body_composition(req: MeasurementEntryRequest, current_user: str = Depends(get_current_user)):
+    body_fat_kg = round(req.weight_kg * req.body_fat_pct / 100, 2)
+    payload = MeasurementProposal(**req.model_dump(), body_fat_kg=body_fat_kg).model_dump(mode="json")
+    return await ProposalRepository().create(current_user, "dashboard-measurement", payload, str(uuid4()))
+
+
 async def _process_food(image_bytes: bytes) -> dict:
     """음식 이미지 처리: 음식명 인식 → 확인용 메시지. 양·저장은 /chat(diet_logger)로 연결."""
     from app.ocr.food_vision import identify_foods_from_image
@@ -905,6 +991,34 @@ async def submit_feedback(
     return FeedbackResponse(id=row["id"], created=created)
 
 
+@app.post("/analytics/events", response_model=ProductEventResponse)
+async def record_product_event(
+    req: ProductEventRequest,
+    response: Response,
+    current_user: str = Depends(get_current_user),
+):
+    try:
+        row, created = await ProductEventRepository().record(
+            current_user, ProductEventInput(**req.model_dump())
+        )
+    except ProductAnalyticsUnavailable as exc:
+        logger.error("product_event_storage_unavailable", extra={"error_type": type(exc).__name__})
+        raise HTTPException(status_code=503, detail="사용 현황 기록 서비스를 잠시 사용할 수 없습니다.") from None
+    response.status_code = status.HTTP_201_CREATED if created else status.HTTP_200_OK
+    return ProductEventResponse(id=row["id"], created=created)
+
+
+@app.get("/admin/analytics/overview")
+async def admin_analytics_overview(days: int = 7, _admin: str = Depends(get_current_admin)):
+    if days not in {1, 7, 30, 90}:
+        raise HTTPException(status_code=422, detail="조회 기간은 1, 7, 30, 90일만 지원합니다.")
+    try:
+        return await ProductEventRepository().overview(days=days)
+    except ProductAnalyticsUnavailable as exc:
+        logger.error("product_analytics_unavailable", extra={"error_type": type(exc).__name__})
+        raise HTTPException(status_code=503, detail="제품 분석 지표를 불러올 수 없습니다.") from None
+
+
 @app.delete("/users/me")
 async def delete_account(req: AccountDeleteRequest,
                          auth: AuthContext = Depends(get_recent_auth_context)):
@@ -956,6 +1070,34 @@ async def weekly_report(current_user: str = Depends(get_current_user)):
 @app.get("/inbody/history")
 async def get_inbody_history(current_user: str = Depends(get_current_user)):
     return sb.table("inbody_logs").select("*").eq("user_id",current_user).order("measured_date",desc=False).execute().data
+
+
+@app.get("/dashboard/summary")
+async def get_dashboard_summary(current_user: str = Depends(get_current_user)):
+    profile_rows = sb.table("users").select("weight_kg,created_at").eq("id", current_user).limit(1).execute().data
+    profile = profile_rows[0] if profile_rows else {}
+    composition = sb.table("inbody_logs").select("*").eq("user_id", current_user).order("measured_date", desc=False).execute().data
+    try:
+        weights = sb.table("weight_logs").select("*").eq("user_id", current_user).order("measured_date", desc=False).execute().data
+    except Exception:
+        weights = []
+    if not weights and profile.get("weight_kg") is not None:
+        created = str(profile.get("created_at") or service_today().isoformat())[:10]
+        weights = [{"measured_date": created, "weight_kg": profile["weight_kg"], "source": "onboarding"}]
+
+    priority = {"onboarding": 0, "manual": 1, "inbody": 2}
+    by_date = {}
+    for row in weights:
+        key = str(row["measured_date"])
+        if key not in by_date or priority.get(row.get("source"), -1) >= priority.get(by_date[key].get("source"), -1):
+            by_date[key] = row
+    weight_history = [by_date[key] for key in sorted(by_date)]
+    return {
+        "latest_weight": weight_history[-1] if weight_history else None,
+        "latest_body_composition": composition[-1] if composition else None,
+        "weight_history": weight_history,
+        "body_composition_history": composition,
+    }
 
 
 @app.get("/strategy/current")

@@ -46,34 +46,30 @@ def main() -> None:
                  and ccu.table_name = 'users' and ccu.column_name = 'id'
                order by tc.table_name"""
         ).fetchall()
-        feedback_table = connection.execute(
-            """select c.relrowsecurity
+        protected_tables = connection.execute(
+            """select c.relname, c.relrowsecurity
                from pg_class c
                join pg_namespace n on n.oid = c.relnamespace
-               where n.nspname = 'public' and c.relname = 'beta_feedback'"""
-        ).fetchone()
-        feedback_unique = connection.execute(
-            """select 1
+               where n.nspname = 'public'
+                 and c.relname in ('beta_feedback', 'product_events')"""
+        ).fetchall()
+        idempotency_constraints = connection.execute(
+            """select t.relname, pg_get_constraintdef(c.oid)
                from pg_constraint c
                join pg_class t on t.oid = c.conrelid
                join pg_namespace n on n.oid = t.relnamespace
-               where n.nspname = 'public' and t.relname = 'beta_feedback'
-                 and c.contype = 'u'
-                 and pg_get_constraintdef(c.oid) ilike '%(user_id, client_submission_id)%'"""
-        ).fetchone()
-    feedback_fk = next(
-        (
-            row for row in user_fks
-            if row[0] == "beta_feedback" and row[1] == "user_id" and row[2] == "CASCADE"
-        ),
-        None,
-    )
-    if not feedback_table or not feedback_table[0]:
-        raise RuntimeError("beta_feedback table is missing or RLS is disabled")
-    if not feedback_fk:
-        raise RuntimeError("beta_feedback.user_id must cascade when users.id is deleted")
-    if not feedback_unique:
-        raise RuntimeError("beta_feedback idempotency constraint is missing")
+               where n.nspname = 'public'
+                 and t.relname in ('beta_feedback', 'product_events') and c.contype = 'u'"""
+        ).fetchall()
+    table_security = {row[0]: bool(row[1]) for row in protected_tables}
+    constraint_text = {row[0]: row[1] for row in idempotency_constraints}
+    for table, key in (("beta_feedback", "client_submission_id"), ("product_events", "client_event_id")):
+        if not table_security.get(table):
+            raise RuntimeError(f"{table} table is missing or RLS is disabled")
+        if not any(row[0] == table and row[1] == "user_id" and row[2] == "CASCADE" for row in user_fks):
+            raise RuntimeError(f"{table}.user_id must cascade when users.id is deleted")
+        if key not in constraint_text.get(table, ""):
+            raise RuntimeError(f"{table} idempotency constraint is missing")
     print(json.dumps({
         "checkpoint_tables": [{"table": row[0], "columns": row[1]} for row in checkpoint_columns],
         "users_columns": [
@@ -84,7 +80,12 @@ def main() -> None:
             {"table": row[0], "column": row[1], "delete_rule": row[2]} for row in user_fks
         ],
         "beta_feedback": {
-            "rls_enabled": bool(feedback_table[0]),
+            "rls_enabled": table_security["beta_feedback"],
+            "user_delete_cascade": True,
+            "idempotency_unique": True,
+        },
+        "product_events": {
+            "rls_enabled": table_security["product_events"],
             "user_delete_cascade": True,
             "idempotency_unique": True,
         },
