@@ -84,8 +84,10 @@ async def test_user_label_creates_pending_proposal_without_domain_write(client, 
     async def lock(*args):
         yield
     monkeypatch.setattr(main, 'conversation_lock', lock)
-    from types import SimpleNamespace
-    monkeypatch.setattr(main, 'get_graph', lambda: SimpleNamespace(aupdate_state=AsyncMock()))
+    from langgraph.checkpoint.memory import InMemorySaver
+    from app.agents.graph import build_graph
+    graph = build_graph(checkpointer=InMemorySaver())
+    monkeypatch.setattr(main, 'get_graph', lambda: graph)
     create = AsyncMock(return_value={'kind': 'intake', 'status': 'pending'})
     monkeypatch.setattr(ProposalRepository, 'create', create)
     response = await client.post('/nutrition/label-proposal', json={
@@ -97,6 +99,12 @@ async def test_user_label_creates_pending_proposal_without_domain_write(client, 
     payload = create.call_args.args[2]
     assert payload['meals'][0]['calories'] == 200
     assert payload['meals'][0]['source'] == 'user_label'
+    repeated = await client.post('/nutrition/label-proposal', json={
+        'food_name': '제품', 'basis_g': 50, 'quantity_g': 100, 'calories': 100,
+        'protein_g': 0, 'carbs_g': 20, 'fat_g': 2, 'meal_type': 'snack',
+        'log_date': '2026-10-12', 'thread_id': 't',
+        'request_id': '00000000-0000-4000-8000-000000000001'})
+    assert repeated.status_code == 200
 
 
 async def test_agent_cannot_self_confirm_ambiguous_product():

@@ -729,7 +729,7 @@ async def decide_proposal(req: ProposalDecision, current_user: str = Depends(get
                 state = _sv(await graph.aget_state(config))
                 if (state.get('pending_proposal') or {}).get('id') == result['id']:
                     await graph.aupdate_state(config, {'pending_proposal': None,
-                        'pending_meals': None, 'awaiting_confirmation': False})
+                        'pending_meals': None, 'awaiting_confirmation': False}, as_node='save_chat')
         return result
     except ProposalConflict as exc:
         raise HTTPException(409, str(exc)) from exc
@@ -914,7 +914,7 @@ async def propose_label(req: LabelProposalRequest, current_user: str = Depends(g
             proposal = await ProposalRepository().create(current_user, req.thread_id, payload, str(req.request_id))
             await get_graph().aupdate_state(
                 {'configurable': {'thread_id': f'{current_user}_{req.thread_id}'}},
-                {'pending_proposal': proposal, 'awaiting_confirmation': True})
+                {'pending_proposal': proposal, 'awaiting_confirmation': True}, as_node='save_chat')
             return proposal
     except ProposalConflict as exc:
         raise HTTPException(409, str(exc)) from exc

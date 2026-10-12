@@ -23,6 +23,7 @@
 2. 영양 조회 빈 배열이 422로 바뀐 호환성 회귀: Pydantic 목록 min_length 동작을 확인하고 최소 개수 제한을 제거, 최대 30개 제한은 유지.
 3. 영양표 API 테스트가 실제 DB 연결을 시도해 ProactorEventLoop 오류: psycopg 공식 async 문서에서 Windows Selector 요구사항 확인. 운영 루프 설정을 유지하고 테스트 DB/lock 경계를 mock 처리.
 4. 새 UI 테스트의 window.crypto 부재: Jest 공식 mock 문서를 확인하고 테스트 전역 경계를 mock. 운영은 HTTPS crypto.randomUUID를 사용하며 재시도 ID는 유지, 입력 변경 때 새 ID 생성.
+5. 공개 재요청 HTTP 500: Render 로그에 `langgraph.errors.InvalidUpdateError: Ambiguous update, specify as_node` 확인. 실제 MemorySaver 그래프로 동일 재요청 실패를 재현했다. LangGraph 공식 update_state 문서에 따라 외부 제안 상태 갱신의 as_node를 save_chat으로 명시하여 재실행 없이 체크포인트만 갱신한다. [공식 문서](https://reference.langchain.com/python/langgraph/pregel/main/Pregel/update_state).
 
 공식 참고: [pytest 임시경로](https://docs.pytest.org/en/stable/how-to/tmp_path.html), [psycopg async](https://www.psycopg.org/psycopg3/docs/advanced/async.html), [Jest mock](https://jestjs.io/docs/29.7/jest-object).
 
