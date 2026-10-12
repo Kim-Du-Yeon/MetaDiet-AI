@@ -26,3 +26,19 @@ test("makes privacy and beta notices available before login", () => {
   expect(screen.getByRole("button", { name: "개인정보처리방침" })).toBeInTheDocument();
   expect(screen.getByRole("button", { name: "베타 이용 안내" })).toBeInTheDocument();
 });
+
+test("returns email confirmations to the current app origin", async () => {
+  supabase.auth.signUp.mockResolvedValue({ error: null });
+  render(<Auth />);
+
+  fireEvent.click(screen.getByRole("tab", { name: "회원가입" }));
+  fireEvent.change(screen.getByLabelText("이메일"), { target: { value: "new@example.com" } });
+  fireEvent.change(screen.getByLabelText("비밀번호"), { target: { value: "safe-password" } });
+  fireEvent.submit(screen.getByRole("form", { name: "계정 만들기" }));
+
+  await waitFor(() => expect(supabase.auth.signUp).toHaveBeenCalledWith({
+    email: "new@example.com",
+    password: "safe-password",
+    options: { emailRedirectTo: window.location.origin },
+  }));
+});

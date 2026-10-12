@@ -1198,3 +1198,10 @@ KDRI 2025 유지 에너지를 기준으로 대한비만학회 2022 식사치료�
 - 첫 실패 주입 명령은 Windows/bash 인용이 중첩돼 `unexpected EOF`가 발생했고 실제 API 요청이 한 번 실행됐다. route 코드를 임시 스크립트로 분리한 뒤 Playwright가 요구하는 `async (page) => { ... }` 함수 형식으로 고쳐 정확한 503을 재현했다. 검증 계정은 공개 삭제 흐름으로 제거했고 DB 재조회 결과 합성 사용자와 연결 피드백은 모두 0건이었다.
 - Codex CUA는 `failed to write kernel assets: 지정된 경로를 찾을 수 없습니다. (os error 3)`로 초기화되지 않아 공식 Playwright CLI로 전환했다. 이는 서비스 결함이 아니라 로컬 자동화 런타임 결함이며, 공개 UI 성공·실패·모바일 결과에는 영향을 주지 않았다.
 - 폼 수정 뒤 전체 프론트 회귀는 **42 passed**, production build는 `main.d694964f.js`로 성공했다.
+
+## 52. 공개 회원가입 이메일 리디렉션 복구 (2026-10-12)
+
+- 공개 베타 회원가입 메일의 확인 링크가 인증 완료 뒤 `localhost`로 이동해 `ERR_CONNECTION_REFUSED`가 발생했다. 회원가입 요청이 `emailRedirectTo`를 보내지 않았고, Supabase Auth가 이 경우 프로젝트 Site URL을 사용한 것이 직접 원인이다.
+- 회원가입 호출에 현재 앱의 `window.location.origin`을 명시해 로컬과 Render가 각자의 origin으로 돌아오도록 수정했다. 회귀 테스트는 Supabase `signUp` 인자에 이 주소가 포함되는지 검증한다.
+- Supabase 공식 문서 기준으로 이 주소는 Auth Redirect URLs 허용 목록에 있어야 한다. 운영 설정은 Site URL과 Redirect URL에 `https://metadiet-web.onrender.com`을 등록하고, 로컬 개발 주소는 별도 Redirect URL로 유지한다.
+- 첫 Jest 실행은 Windows 샌드박스가 임시 디렉터리 `realpath`를 `EPERM`으로 차단했다. 같은 명령을 샌드박스 밖에서 실행해 코드 오류와 환경 오류를 분리했고 수정 회귀 테스트 3개가 통과했다.
