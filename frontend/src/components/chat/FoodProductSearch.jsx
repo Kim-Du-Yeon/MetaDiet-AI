@@ -19,13 +19,13 @@ export default function FoodProductSearch({ onSelect, onClose }) {
     finally { setBusy(false); }
   }
   return <section className="nutrition-label" aria-label="식품 제품 선택">
-    <h3>정확한 제품 찾기</h3><p>제조사와 용량을 확인하고 선택해주세요. 선택 후에도 확인 카드에서 확정해야 저장됩니다.</p>
+    <h3>정확한 제품 찾기</h3><p>오늘 섭취한 제품의 제조사와 용량을 확인하고 선택해주세요. 선택 후에도 확인 카드에서 확정해야 저장됩니다.</p>
     <form onSubmit={search}><fieldset disabled={busy}>
       <label>제품명<input required value={query} onChange={event => { setQuery(event.target.value); setCandidates([]); }} /></label>
       <label>먹은 양 (g)<input required type="number" min="0.01" max="10000" step="any" value={grams} onChange={event => { setGrams(event.target.value); setCandidates([]); }} /></label>
     </fieldset><button disabled={busy}>제품 검색</button></form>
     {message && <p role="status">{message}</p>}
-    <ul>{candidates.map(candidate => <li key={candidate.food_id}><strong>{candidate.name}</strong><p>{candidate.manufacturer || "제조사 정보 없음"} · {candidate.package_text || "포장 용량 정보 없음"} · 기준 {candidate.basis_g}g</p><button type="button" onClick={() => onSelect(`제품 선택: ${candidate.food_id} / ${candidate.name} ${grams}g 먹었어. 기록만 해줘.`)}>이 제품 선택</button></li>)}</ul>
+    <ul>{candidates.map(candidate => <li key={candidate.food_id}><strong>{candidate.name}</strong><p>{candidate.manufacturer || "제조사 정보 없음"} · {candidate.package_text || "포장 용량 정보 없음"} · 기준 {candidate.basis_g}g</p><button type="button" onClick={() => onSelect(`제품 선택: ${candidate.food_id} / ${candidate.name} ${grams}g 오늘 먹었어. 기록만 해줘.`)}>이 제품 선택</button></li>)}</ul>
     <button type="button" onClick={onClose}>닫기</button>
   </section>;
 }
