@@ -20,7 +20,9 @@ export async function consumeEventStream(response, onEvent, { afterSeq = 0 } = {
     if (!data) return; // comments/keepalives
     const event = JSON.parse(data);
     if (event.type === "error" || event.type === "failed") {
-      throw new Error(event.content || "처리 중 오류가 발생했습니다.");
+      const error = new Error(event.content || "처리 중 오류가 발생했습니다.");
+      error.traceId = event.trace_id || null;
+      throw error;
     }
     if (event.type === "done" || event.type === "completed") completed = true;
     if (Number.isInteger(event.seq)) {

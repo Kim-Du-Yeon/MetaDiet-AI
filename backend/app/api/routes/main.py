@@ -264,6 +264,10 @@ def _sse(event: dict) -> str:
 
 
 async def _invoke_with_progress(graph, graph_input, config: dict, journal: ExecutionEventJournal):
+    # Each actual invocation gets a distinct LangSmith root span, including Pod recovery.
+    trace_id = uuid4()
+    invocation_config = {**config, "run_id": trace_id,
+                         "metadata": {**config.get("metadata", {}), "trace_id": str(trace_id)}}
     async def sink(kind: str, payload: dict):
         progress = progress_for_runtime_event(kind, **payload)
         if progress:
@@ -274,13 +278,16 @@ async def _invoke_with_progress(graph, graph_input, config: dict, journal: Execu
 
     token = set_event_sink(sink)
     try:
-        await graph.ainvoke(graph_input, config=config)
-        await graph.aupdate_state(config, {"execution_status": "completed", "execution_error": None})
+        await graph.ainvoke(graph_input, config=invocation_config)
+        await graph.aupdate_state(config, {"execution_status": "completed", "execution_error": None,
+                                          "trace_id": str(trace_id)})
     except Exception:
         try:
-            await graph.aupdate_state(config, {"execution_status": "failed", "execution_error": "execution_failed"})
+            await graph.aupdate_state(config, {"execution_status": "failed", "execution_error": "execution_failed",
+                                              "trace_id": str(trace_id)})
         finally:
-            await journal.publish("failed", {"content": "대화 실행에 실패했습니다. 잠시 후 다시 시도해주세요."})
+            await journal.publish("failed", {"content": "대화 실행에 실패했습니다. 잠시 후 다시 시도해주세요.",
+                                             "trace_id": str(trace_id)})
         raise
     finally:
         reset_event_sink(token)
@@ -337,7 +344,7 @@ async def _stream(graph, config: dict, run_id: str, after_seq: int = 0):
     if sv.get("execution_status") == "failed":
         if after_seq < 100000:
             yield _sse({"type": "failed", "content": "대화 실행에 실패했습니다. 잠시 후 다시 시도해주세요.",
-                        "run_id": run_id, "seq": 100000})
+                        "run_id": run_id, "trace_id": sv.get("trace_id"), "seq": 100000})
         return
 
     # response 읽기 우선순위:
@@ -367,7 +374,7 @@ async def _stream(graph, config: dict, run_id: str, after_seq: int = 0):
     stats = await _public_stats(sv.get("user_id"))
     if after_seq < 100000:
         yield _sse({'type':'completed','agent_used':sv.get('agent_used',''),**stats,'pending_meals':pending,
-            'pending_proposal':sv.get('pending_proposal'),'run_id':run_id,'seq':100000,
+            'pending_proposal':sv.get('pending_proposal'),'run_id':run_id,'trace_id':sv.get('trace_id'),'seq':100000,
             'execution_usage':sv.get('execution_usage'),'awaiting_confirmation':sv.get('awaiting_confirmation',False),
             'plan_date':sv.get('plan_date'),'thread_id':new_tid,'prev_thread_id':None,'interrupted':is_interrupted})
 

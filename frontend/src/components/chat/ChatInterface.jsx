@@ -109,7 +109,10 @@ export default function ChatInterface({
     });
   };
 
+  const lastTraceRef = useRef(null);
+
   const handleDone = (meta) => {
+    lastTraceRef.current = meta.trace_id || null;
     setApproval(meta.pending_proposal ? { ...meta.pending_proposal, channel: "chat" } : null);
     setMessages((prev) => {
       const updated = [...prev];
@@ -215,6 +218,7 @@ export default function ChatInterface({
       return;
     }
     setFoodEntry(null);   // 직접 타이핑하면 음식 카드는 닫음
+    lastTraceRef.current = null;
     const startedAt = performance.now();
     trackProductEvent("chat_sent", { properties: { channel: "text" } });
     setIsLoading(true);
@@ -230,9 +234,9 @@ export default function ChatInterface({
         setIsRolledBack(false);
         await sendChatMessage(USER_ID, userMsg, handleToken, handleDone, pendingState, contextMessages, threadId, null, handleProgress);
       }
-      trackProductEvent("chat_completed", { durationMs: performance.now() - startedAt });
+      trackProductEvent("chat_completed", { traceId: lastTraceRef.current, durationMs: performance.now() - startedAt });
     } catch (e) {
-      trackProductEvent("chat_completed", { status: "failed", durationMs: performance.now() - startedAt });
+      trackProductEvent("chat_completed", { traceId: e.traceId || null, status: "failed", durationMs: performance.now() - startedAt });
       trackProductEvent("error_shown", { status: "failed", properties: { surface: "chat" } });
       console.error(e);
       setStreamError(e.message || "응답을 받지 못했습니다.");
@@ -325,14 +329,15 @@ export default function ChatInterface({
     resetProgress();
     setIsLoading(true);
     const newUserMessage = { role: "user", content: text };
+    lastTraceRef.current = null;
     const startedAt = performance.now();
     trackProductEvent("chat_sent", { properties: { channel: "food_photo" } });
     setMessages((prev) => [...prev, newUserMessage, { role: "assistant", content: "", agentUsed: null, streaming: true }]);
     try {
       await sendChatMessage(USER_ID, text, handleToken, handleDone, pendingState, [...messages, newUserMessage], threadId, mealType, handleProgress);
-      trackProductEvent("chat_completed", { durationMs: performance.now() - startedAt });
+      trackProductEvent("chat_completed", { traceId: lastTraceRef.current, durationMs: performance.now() - startedAt });
     } catch (e) {
-      trackProductEvent("chat_completed", { status: "failed", durationMs: performance.now() - startedAt });
+      trackProductEvent("chat_completed", { traceId: e.traceId || null, status: "failed", durationMs: performance.now() - startedAt });
       setMessages((prev) => [...prev.slice(0, -1), { role: "assistant", content: "오류가 발생했습니다.", agentUsed: null }]);
       setIsLoading(false);
     }

@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ChatInterface from "./ChatInterface";
-import { sendChatMessage, getSessionRestore } from "../../api/dietApi";
+import { sendChatMessage, getSessionRestore, trackProductEvent } from "../../api/dietApi";
 
 jest.mock("../../api/dietApi", () => ({
   sendChatMessage: jest.fn(), uploadImage: jest.fn(), resumeChat: jest.fn(),
@@ -33,7 +33,7 @@ test("renders streamed backend phases with the completed answer", async () => {
     onProgress({ phase: "intent", label: "요청 의도 분석 중" });
     onProgress({ phase: "evidence", label: "근거 자료 검색 중" });
     onToken("근거를 반영한 답변");
-    onDone({ agent_used: "strategy", awaiting_confirmation: false });
+    onDone({ agent_used: "strategy", awaiting_confirmation: false, trace_id: "actual-root-span" });
   });
   render(<Harness />);
   fireEvent.change(screen.getByPlaceholderText("오늘 뭐 드셨어요?"), { target: { value: "저녁 추천해줘" } });
@@ -42,6 +42,9 @@ test("renders streamed backend phases with the completed answer", async () => {
   await waitFor(() => expect(screen.getByText("근거를 반영한 답변")).toBeInTheDocument());
   expect(screen.getByText("검토 과정 2단계")).toBeInTheDocument();
   expect(screen.getByText("근거 자료 검색 중")).toBeInTheDocument();
+  expect(trackProductEvent).toHaveBeenCalledWith("chat_completed", expect.objectContaining({
+    traceId: "actual-root-span",
+  }));
 });
 
 test("restores recent messages and a pending proposal without rerunning chat", async () => {
