@@ -4,6 +4,25 @@ from langchain_core.messages import AIMessage
 from app.agents.team import DietTeam
 
 
+async def test_missing_branded_foods_stop_search_and_request_label(monkeypatch):
+    import app.tools.nutrition_db as nutrition
+    monkeypatch.setattr(nutrition, '_load_raw_df', lambda: pd.DataFrame([{'식품명': '쌀밥'}]))
+    root = Model([call('delegate_meal', {'query': 'record foods'})])
+    child = Model([call('search_foods', {'query': name}) for name in
+                   ['라이스페이퍼', '돼지바', '브랜드 아이스크림']] + [AIMessage(content='done')])
+    models = iter([root, child])
+    repo = AsyncMock()
+    team = DietTeam({'user_id': 'u1', 'message': '밥 450g 라이스페이퍼 10g 돼지바',
+                     'requested_action': 'record_only'}, model_factory=lambda: next(models),
+                    repository=repo, db=object())
+    result = await team.execute()
+    assert result['execution_status'] == 'blocked'
+    assert '영양정보' in result['response']
+    assert result['execution_usage']['tool_calls'] == 4
+    repo.create.assert_not_called()
+    assert any(event.get('reason') == 'food_not_found' for event in result['agent_events'])
+
+
 async def test_validator_distinguishes_csv_nutrition_from_guideline_evidence():
     from app.agents.team import Verdict
     captured = []

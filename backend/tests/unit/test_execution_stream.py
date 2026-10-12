@@ -7,6 +7,20 @@ from app.api.routes.main import _follow_or_resume_run, _run_and_stream
 
 
 @pytest.mark.asyncio
+async def test_blocked_graph_result_is_not_overwritten_as_completed():
+    class BlockedGraph:
+        async def ainvoke(self, graph_input, config=None):
+            return {'execution_status': 'blocked'}
+
+        async def aupdate_state(self, config, values):
+            assert values['execution_status'] == 'blocked'
+
+    assert [frame async for frame in _run_and_stream(
+        BlockedGraph(), {'message': 'food'}, {'configurable': {'thread_id': 'u_t'}}, 'blocked-test'
+    )] == []
+
+
+@pytest.mark.asyncio
 async def test_journal_replays_only_events_after_sequence_and_finishes():
     journal = ExecutionEventJournal("run-1")
     await journal.publish("progress", {"phase": "intent", "label": "의도 분석 중"})

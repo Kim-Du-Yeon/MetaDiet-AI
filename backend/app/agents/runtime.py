@@ -177,7 +177,7 @@ async def run_agent(*, model, instruction: str, request: str,
                     budget.failures[key] += 1
                     if budget.failures[key] >= 2:
                         events.append({"type": "tool_failed", "tool": name, "error": feedback["error"]})
-                        raise ExecutionStopped("repeated_tool_failure")
+                        raise ExecutionStopped("food_not_found" if feedback["error"] == "food_not_found" else "repeated_tool_failure")
                 events.append({"type": "tool_succeeded" if feedback["ok"] else "tool_failed", "tool": name})
                 await emit_runtime_event("tool_finished", agent=agent_name, tool=name, ok=feedback["ok"])
                 messages.append(ToolMessage(content=json.dumps(feedback, ensure_ascii=False), tool_call_id=call["id"]))
@@ -188,4 +188,8 @@ async def run_agent(*, model, instruction: str, request: str,
                         return AgentResult("completed", delegated_response, events)
     except (ExecutionStopped, TimeoutError) as exc:
         reason = str(exc) if isinstance(exc, ExecutionStopped) else "execution_timeout"
-        return AgentResult("blocked", "실행 한도 또는 도구 오류로 제안을 보류했습니다.", events, reason)
+        events.append({"type": "execution_blocked", "reason": reason})
+        content = ("식품성분표에서 일치하는 제품을 찾지 못했습니다. 제품별 수치가 필요한 음식은 "
+                   "포장지의 1회 제공량과 영양정보를 알려주세요. 확인되지 않은 수치로 기록하지 않았습니다."
+                   if reason == "food_not_found" else "실행 한도 또는 도구 오류로 제안을 보류했습니다.")
+        return AgentResult("blocked", content, events, reason)

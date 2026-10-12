@@ -278,8 +278,9 @@ async def _invoke_with_progress(graph, graph_input, config: dict, journal: Execu
 
     token = set_event_sink(sink)
     try:
-        await graph.ainvoke(graph_input, config=invocation_config)
-        await graph.aupdate_state(config, {"execution_status": "completed", "execution_error": None,
+        outcome = await graph.ainvoke(graph_input, config=invocation_config)
+        terminal_status = "blocked" if isinstance(outcome, dict) and outcome.get("execution_status") == "blocked" else "completed"
+        await graph.aupdate_state(config, {"execution_status": terminal_status, "execution_error": None,
                                           "trace_id": str(trace_id)})
     except Exception:
         try:

@@ -9,7 +9,7 @@ from typing import Literal
 from uuid import uuid4
 
 from pydantic import Field
-from app.agents.runtime import AgentTool, ExecutionBudget, ExecutionStopped, run_agent
+from app.agents.runtime import AgentTool, ExecutionBudget, ExecutionStopped, ToolFeedback, run_agent
 from app.core.config import get_settings
 from app.core.llm import get_chat_model
 from app.core.service_clock import service_today
@@ -67,6 +67,8 @@ BASE_INSTRUCTION = """당신은 일반 성인 식단 코칭 서비스의 전문 
 기록되지 않은 식사는 섭취량 0이라는 뜻이 아닙니다. 조회 실패와 기록 없음은 구분하세요.
 음식의 양은 사용자에게 확인하고 추정하여 실제 섭취로 기록하지 마세요.
 영양 수치는 nutrition_lookup 결과만 사용하세요. 목표 정책 변경에는 검색된 근거가 필요합니다.
+제품명이 식품성분표에 없으면 유사한 다른 제품을 같은 제품으로 취급하지 마세요.
+음식 검색 실패 시 이름을 바꿔 계속 검색하지 말고 제품의 1회 제공량·영양정보를 요청하세요.
 전날 과식을 이유로 근거 없는 고정 칼로리 차감을 하지 마세요.
 propose 도구는 저장 완료가 아니라 사용자 확인이 필요한 제안을 만듭니다.
 실패 피드백을 받아 허용된 대안 또는 질문으로 진행하세요. 근거가 없으면 그 한계를 밝히세요.
@@ -231,6 +233,13 @@ class DietTeam:
         rows = df[df["식품명"].str.contains(query, regex=False, na=False)].head(20)
         self.food_ids.update(int(i) for i in rows.index)
         result = [{"food_id": int(i), "name": row["식품명"]} for i, row in rows.iterrows()]
+        if not result:
+            self.missing_food_searches = getattr(self, 'missing_food_searches', 0) + 1
+            if self.missing_food_searches >= 3:
+                raise ExecutionStopped('food_not_found')
+            raise ToolFeedback('food_not_found',
+                '식품성분표에 일치하는 제품이 없습니다. 다른 제품으로 대체하지 말고 사용자에게 제품 영양정보와 제공량을 요청하세요.',
+                retryable=False)
         self.food_search_cache[query] = result
         return result
 
@@ -400,6 +409,7 @@ class DietTeam:
                 result = await run_agent(model=self.model_factory(),
                     instruction=BASE_INSTRUCTION + f"\n담당: {selected}\n{ROLE_INSTRUCTIONS[selected]}",
                     request=json.dumps({"task": args.query, "original_request": self.state["message"],
+                        "recent_messages": [str(m)[:2000] for m in self.state.get("messages", [])[-10:]],
                         "previous_proposal": self.state.get("pending_proposal")}, ensure_ascii=False),
                     tools=self.tools(selected), allowed_tools=self.allowed, budget=self.budget, config=self.config,
                     decision_selector=self.decision_client.choose if self.decision_client and self.jev_location == "tools" else None,
