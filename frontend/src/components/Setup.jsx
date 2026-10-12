@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { getToken, BASE_URL, decideProposal } from "../api/dietApi";
 import ProposalCard from './chat/ProposalCard';
+import ActivityLevelSection from './setup/ActivityLevelSection';
 
 export default function Setup({ onComplete }) {
   const [form, setForm] = useState({
@@ -239,18 +240,14 @@ export default function Setup({ onComplete }) {
           </div>
         ))}
 
-        <div style={styles.section}>
-          <label htmlFor="setup-activity" style={styles.label}>활동 수준</label>
-          <select id="setup-activity" value={form.activity} onChange={e=>setForm({...form,activity:e.target.value})}>
-            <option value="">선택해주세요</option>
-            <option value="sedentary">비활동적</option><option value="low_active">저활동적</option>
-            <option value="active">활동적</option><option value="very_active">매우 활동적</option>
-          </select>
-          <p>운동 시간뿐 아니라 일·이동 등 하루 전체 활동을 고려해주세요.</p>
-          <label><input type="checkbox" checked={form.general_adult_confirmed}
-            onChange={e=>setForm({...form,general_adult_confirmed:e.target.checked})}/>
-            일반 성인 적용: 19~64세이며 임신·수유, 질환별 영양관리·섭식장애 등 특별한 관리가 필요한 상황이 아닙니다.</label>
-        </div>
+        <ActivityLevelSection
+          value={form.activity}
+          confirmed={form.general_adult_confirmed}
+          onActivityChange={(activity) => setForm({ ...form, activity })}
+          onConfirmationChange={(general_adult_confirmed) =>
+            setForm({ ...form, general_adult_confirmed })
+          }
+        />
         {/* 장기 목표 (선택) */}
         <div style={styles.section}>
           <label style={styles.label}>장기 목표 (선택)</label>

@@ -13,8 +13,8 @@ test('initial strategy requires explicit confirmation before completion',async()
   await waitFor(()=>expect(screen.getByRole('button',{name:/전략/}).disabled).toBe(false));
   for(const [name,value] of [['나이','30'],['키','170'],['체중','70']])
     fireEvent.change(screen.getByLabelText(name),{target:{value}});
-  fireEvent.change(screen.getByLabelText('활동 수준'),{target:{value:'low_active'}});
-  fireEvent.click(screen.getByLabelText(/일반 성인 적용/));
+  fireEvent.click(screen.getByRole('radio',{name:/저활동적/}));
+  fireEvent.click(screen.getByRole('checkbox',{name:/일반 성인 기준 적용/}));
   fireEvent.click(screen.getByRole('button',{name:/전략/}));
   await screen.findByRole('heading',{name:'초기 전략 제안'});
   expect(done).not.toHaveBeenCalled();
