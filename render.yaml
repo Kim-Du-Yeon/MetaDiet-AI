@@ -1,6 +1,7 @@
 services:
   - type: web
     name: metadiet-api
+    branch: main
     runtime: docker
     plan: free
     region: singapore
@@ -36,6 +37,7 @@ services:
 
   - type: web
     name: metadiet-web
+    branch: main
     runtime: static
     autoDeployTrigger: commit
     buildCommand: cd frontend && npm ci && npm run build
