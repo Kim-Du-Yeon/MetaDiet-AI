@@ -299,3 +299,18 @@ async def test_food_search_and_quote_reuse_cached_results(monkeypatch):
     quote = FoodLookup(food_id=0, quantity_g=100)
     assert await team.nutrition_lookup(quote) == await team.nutrition_lookup(quote)
     assert loads == 1  # shared catalog reuses the same snapshot for search and calculation
+
+
+async def test_ui_selected_stable_id_is_revalidated_without_agent_search():
+    import pytest
+    from app.agents.team import FoodLookup
+    catalog = AsyncMock()
+    catalog.lookup.return_value = {'food_id': 'mfds:P1', 'source': 'mfds', 'calories': 10}
+    team = DietTeam({'user_id': 'u1', 'message': '제품 선택: mfds:P1 / 제품 10g 기록만 해줘.'},
+                    repository=AsyncMock(), db=object())
+    team.food_catalog = catalog
+    result = await team.nutrition_lookup(FoodLookup(food_id='mfds:P1', quantity_g=10))
+    assert result['food_id'] == 'mfds:P1'
+    catalog.lookup.assert_awaited_once_with('mfds:P1', 10)
+    with pytest.raises(ValueError, match='Search and select'):
+        await team.nutrition_lookup(FoodLookup(food_id='mfds:P2', quantity_g=10))

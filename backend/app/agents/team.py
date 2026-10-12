@@ -252,11 +252,15 @@ class DietTeam:
 
     async def nutrition_lookup(self, args):
         food_id = args.food_id
+        selections = re.findall(r'제품\s*선택\s*:\s*([\w:-]+)', self.state.get('message', ''))
+        user_selected = isinstance(food_id, str) and selections == [food_id]
+        if self.food_catalog is None and user_selected:
+            from app.tools.food_catalog import default_catalog
+            self.food_catalog = default_catalog()
         if isinstance(food_id, int) and self.food_catalog:
             food_id = self.food_catalog.legacy_ids.get(food_id, '')
-        if food_id not in self.food_ids:
+        if food_id not in self.food_ids and not user_selected:
             raise ValueError("Search and select an offered food_id first")
-        selections = re.findall(r'제품\s*선택\s*:\s*([\w:-]+)', self.state.get('message', ''))
         if food_id in self.ambiguous_food_ids and selections != [str(food_id)]:
             raise ToolFeedback('product_selection_required',
                 '여러 후보가 있습니다. 제조사·제품명·용량과 food_id를 보여주고 사용자에게 제품 선택: food_id 형태로 선택을 요청하세요. Agent의 product_confirmed 값만으로 선택할 수 없습니다.', retryable=False)
