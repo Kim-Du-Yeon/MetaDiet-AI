@@ -165,6 +165,30 @@ export async function getInbodyHistory() {
   return res.json();
 }
 
+export async function getDashboardSummary() {
+  const res = notifyAuthExpired(await fetch(`${BASE_URL}/dashboard/summary`, { headers: authHeaders() }));
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.detail || "측정 기록을 불러오지 못했습니다.");
+  return data;
+}
+
+export async function proposeWeight(payload) {
+  return postJson("/measurements/weight", payload, "체중 기록 제안을 만들지 못했습니다.");
+}
+
+export async function proposeBodyComposition(payload) {
+  return postJson("/measurements/body-composition", payload, "체성분 기록 제안을 만들지 못했습니다.");
+}
+
+async function postJson(path, payload, fallback) {
+  const res = notifyAuthExpired(await fetch(`${BASE_URL}${path}`, {
+    method: "POST", headers: authHeaders({ "Content-Type": "application/json" }), body: JSON.stringify(payload),
+  }));
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(typeof data.detail === "string" ? data.detail : fallback);
+  return data;
+}
+
 export async function getCurrentStrategy() {
   const res = await fetch(`${BASE_URL}/strategy/current`, { headers: authHeaders() });
   return res.json();
@@ -211,7 +235,8 @@ export async function decideProposal(proposal, action) {
 }
 
 export async function reviseMeasurement(proposal, payload) {
-  const res = await fetch(`${BASE_URL}/proposals/${proposal.id}/measurement`, {
+  const kind = proposal.kind === "weight" ? "weight" : "measurement";
+  const res = await fetch(`${BASE_URL}/proposals/${proposal.id}/${kind}`, {
     method: "PUT", headers: authHeaders({ "Content-Type": "application/json" }),
     body: JSON.stringify({ version: proposal.version, payload }),
   });

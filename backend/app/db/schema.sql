@@ -56,6 +56,17 @@ CREATE TABLE inbody_logs (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- 일상 체중 기록. 완전한 체성분 측정과 분리해 누락값을 만들지 않는다.
+CREATE TABLE weight_logs (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    measured_date DATE NOT NULL,
+    weight_kg FLOAT NOT NULL CHECK (weight_kg > 0 AND weight_kg <= 500),
+    source TEXT NOT NULL CHECK (source IN ('onboarding', 'manual', 'inbody')),
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    UNIQUE (user_id, measured_date, source)
+);
+
 -- 4. AI 식단 전략 (핵심 차별점)
 -- 기존 앱: 목표 칼로리 고정값
 -- 이 앱: 인바디 업데이트마다 AI가 재계산한 전략을 버전으로 쌓음

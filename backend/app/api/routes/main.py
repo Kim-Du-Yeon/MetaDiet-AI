@@ -26,7 +26,8 @@ from app.schemas.models import InbodyUploadResponse, ResumeRequest
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 from typing import Optional, Literal
 from uuid import uuid4, UUID
-from app.schemas.proposals import ProposalDecision, MeasurementProposal, MeasurementRevision
+from app.schemas.proposals import (ProposalDecision, MeasurementProposal, MeasurementRevision,
+                                   WeightProposal, WeightRevision)
 from app.db.proposals import ProposalRepository, ProposalConflict
 from app.db.feedback import FeedbackInput, FeedbackRepository, FeedbackStorageUnavailable
 from app.db.thread_lock import serialized_stream, conversation_lock
@@ -688,6 +689,46 @@ async def revise_measurement(proposal_id: UUID, req: MeasurementRevision, curren
         raise HTTPException(409, str(exc)) from exc
 
 
+@app.put("/proposals/{proposal_id}/weight")
+async def revise_weight(proposal_id: UUID, req: WeightRevision, current_user: str = Depends(get_current_user)):
+    repository = ProposalRepository()
+    try:
+        old = await repository.get(current_user, str(proposal_id))
+        if old["kind"] != "weight":
+            raise ProposalConflict("체중 기록 제안만 수정할 수 있습니다.")
+        return await repository.create(current_user, old["thread_id"], req.payload.model_dump(mode="json"),
+            str(uuid4()), replaces=(str(proposal_id), req.version))
+    except ProposalConflict as exc:
+        raise HTTPException(409, str(exc)) from exc
+
+
+class WeightEntryRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
+    measured_date: date
+    weight_kg: float = Field(gt=0, le=500)
+
+
+class MeasurementEntryRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
+    measured_date: date
+    weight_kg: float = Field(gt=0, le=500)
+    skeletal_muscle_kg: float = Field(gt=0, le=250)
+    body_fat_pct: float = Field(ge=0, le=100)
+
+
+@app.post("/measurements/weight")
+async def propose_weight(req: WeightEntryRequest, current_user: str = Depends(get_current_user)):
+    payload = WeightProposal(**req.model_dump(), source="manual").model_dump(mode="json")
+    return await ProposalRepository().create(current_user, "dashboard-weight", payload, str(uuid4()))
+
+
+@app.post("/measurements/body-composition")
+async def propose_body_composition(req: MeasurementEntryRequest, current_user: str = Depends(get_current_user)):
+    body_fat_kg = round(req.weight_kg * req.body_fat_pct / 100, 2)
+    payload = MeasurementProposal(**req.model_dump(), body_fat_kg=body_fat_kg).model_dump(mode="json")
+    return await ProposalRepository().create(current_user, "dashboard-measurement", payload, str(uuid4()))
+
+
 async def _process_food(image_bytes: bytes) -> dict:
     """음식 이미지 처리: 음식명 인식 → 확인용 메시지. 양·저장은 /chat(diet_logger)로 연결."""
     from app.ocr.food_vision import identify_foods_from_image
@@ -956,6 +997,34 @@ async def weekly_report(current_user: str = Depends(get_current_user)):
 @app.get("/inbody/history")
 async def get_inbody_history(current_user: str = Depends(get_current_user)):
     return sb.table("inbody_logs").select("*").eq("user_id",current_user).order("measured_date",desc=False).execute().data
+
+
+@app.get("/dashboard/summary")
+async def get_dashboard_summary(current_user: str = Depends(get_current_user)):
+    profile_rows = sb.table("users").select("weight_kg,created_at").eq("id", current_user).limit(1).execute().data
+    profile = profile_rows[0] if profile_rows else {}
+    composition = sb.table("inbody_logs").select("*").eq("user_id", current_user).order("measured_date", desc=False).execute().data
+    try:
+        weights = sb.table("weight_logs").select("*").eq("user_id", current_user).order("measured_date", desc=False).execute().data
+    except Exception:
+        weights = []
+    if not weights and profile.get("weight_kg") is not None:
+        created = str(profile.get("created_at") or service_today().isoformat())[:10]
+        weights = [{"measured_date": created, "weight_kg": profile["weight_kg"], "source": "onboarding"}]
+
+    priority = {"onboarding": 0, "manual": 1, "inbody": 2}
+    by_date = {}
+    for row in weights:
+        key = str(row["measured_date"])
+        if key not in by_date or priority.get(row.get("source"), -1) >= priority.get(by_date[key].get("source"), -1):
+            by_date[key] = row
+    weight_history = [by_date[key] for key in sorted(by_date)]
+    return {
+        "latest_weight": weight_history[-1] if weight_history else None,
+        "latest_body_composition": composition[-1] if composition else None,
+        "weight_history": weight_history,
+        "body_composition_history": composition,
+    }
 
 
 @app.get("/strategy/current")

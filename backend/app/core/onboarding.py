@@ -98,6 +98,11 @@ async def save_onboarding(req:OnboardingRequest,auth_id:str):
             await conn.execute('update users set goal=%s,height_cm=%s,age=%s,weight_kg=%s,target_weight_kg=%s,target_date=%s,goal_priority=%s,region=%s,nutrition_policy_context=%s where id=%s',(*values,user_id))
         else:
             await conn.execute("insert into users(goal,height_cm,age,weight_kg,target_weight_kg,target_date,goal_priority,region,nutrition_policy_context,id,auth_id,name) values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,'')",(*values,user_id,auth_id))
+        await conn.execute(
+            "insert into weight_logs(user_id,measured_date,weight_kg,source) values(%s,%s,%s,'onboarding') "
+            "on conflict (user_id,measured_date,source) do nothing",
+            (user_id, service_today(), req.weight_kg),
+        )
         @asynccontextmanager
         async def same_transaction():
             yield conn

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./ProposalCard.css";
 
-const labels = { intake: "실제 섭취 기록", plan: "식단 계획", measurement: "인바디 측정", strategy: "전략 변경", meal_delete: "섭취 기록 삭제", meal_replace: "섭취 기록 수정" };
+const labels = { intake: "실제 섭취 기록", plan: "식단 계획", measurement: "인바디 측정", weight: "체중 기록", strategy: "전략 변경", meal_delete: "섭취 기록 삭제", meal_replace: "섭취 기록 수정" };
 const fields = { measured_date: "측정일", weight_kg: "체중 (kg)", skeletal_muscle_kg: "골격근량 (kg)", body_fat_kg: "체지방량 (kg)", body_fat_pct: "체지방률 (%)" };
 
 function EvidenceList({ evidence = [] }) {
@@ -29,7 +29,7 @@ export default function ProposalCard({ proposal, busy, onDecision, onRevise }) {
     {payload.expected && <p>대상: {payload.expected.food_name} · {payload.expected.quantity_g}g{payload.meal ? ` → ${payload.meal.food_name} ${payload.meal.quantity_g}g` : " (삭제)"}</p>}
     {payload.meals && <><p className="proposal__date">{payload.log_date}</p><ul className="proposal__meals">{payload.meals.map((meal, index) =>
       <li key={index}><span>{meal.meal_type} · {meal.food_name} {meal.quantity_g}g</span><strong>{meal.calories} kcal</strong></li>)}</ul></>}
-    {proposal.kind === "measurement" && <div className="proposal__fields">{Object.entries(fields).map(([key, label]) =>
+    {["measurement", "weight"].includes(proposal.kind) && <div className="proposal__fields">{Object.entries(fields).filter(([key]) => proposal.kind === "measurement" || ["measured_date", "weight_kg"].includes(key)).map(([key, label]) =>
       <label key={key}><span>{label}</span><input
         type={key === "measured_date" ? "date" : "number"} step="any" value={draft[key] ?? ""} disabled={busy}
         onChange={event => setDraft({ ...draft, [key]: key === "measured_date" ? event.target.value : Number(event.target.value) })} /></label>)}
