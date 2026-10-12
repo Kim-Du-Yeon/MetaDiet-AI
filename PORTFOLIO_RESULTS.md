@@ -139,4 +139,4 @@ LangSmith에는 Supervisor 위임, 도구 호출, 재시도, 예산, HITL과 지
 실제 사용자 수·만족도·장기간 건강 효과는 미측정이다. 베타 참여 후 테스트 계정을 제외한 기간·표본 수·동의 범위를 먼저 기록하고, 실패 재현과 동일 조건 개선 전후 결과를 추가한다. 개발/독립/공개 부하 표본을 합쳐 하나의 성공률이나 p95로 만들지 않는다. 로컬 artifacts의 원문 trace·개인정보·키·dump는 공개 저장소에 올리지 않는다.
 
 ## 일반 음식 표준값과 제품 선택 UX
-일반 음식에는 검증한 표준 항목을 적용하고 제조사 제품만 카드로 확인하도록 개선했다. 출처 추적과 HITL은 유지했다. 모델의 standard 오분류로 실제 등록 제품이 미등록 처리되는 실패를 재현하고 서버 fallback으로 보완했다. 전체 회귀는 백엔드 416 passed/1 skipped, 프론트 63 passed이며 production build를 통과했다. [상세 근거와 한계](docs/food_catalog/SELECTION_POLICY.md).
+일반 음식에는 검증한 표준 항목을 적용하고 제조사 제품만 카드로 확인하도록 개선했다. 출처 추적과 HITL은 유지했다. 모델의 standard 오분류로 실제 등록 제품이 미등록 처리되는 실패를 재현하고 서버 fallback으로 보완했다. 전체 회귀는 백엔드 417 passed/1 skipped, 프론트 64 passed이며 production build를 통과했다. [상세 근거와 한계](docs/food_catalog/SELECTION_POLICY.md).

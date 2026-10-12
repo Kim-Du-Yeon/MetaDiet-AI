@@ -1,0 +1,33 @@
+{
+  "synthetic": true,
+  "domain_writes": 0,
+  "general_standard_count": 3,
+  "product_card_count": 1,
+  "proposal_meal_count": 4,
+  "stages": [
+    {
+      "execution_status": "completed",
+      "usage": {
+        "model_calls": 4,
+        "tool_calls": 8,
+        "elapsed_seconds": 34.96899999980815,
+        "validation_attempts": 0,
+        "replans": 0
+      }
+    },
+    {
+      "execution_status": "completed",
+      "usage": {
+        "model_calls": 5,
+        "tool_calls": 9,
+        "elapsed_seconds": 32.985000000102445,
+        "validation_attempts": 0,
+        "replans": 0
+      }
+    }
+  ],
+  "limitations": [
+    "Synthetic first candidate choice, no assertion of actual consumed manufacturer",
+    "Local Agent with live Gemini and DB reads; not public browser verification"
+  ]
+}

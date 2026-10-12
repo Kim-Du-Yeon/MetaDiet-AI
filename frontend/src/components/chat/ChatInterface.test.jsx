@@ -109,3 +109,17 @@ test("keeps the conversation usable when a streamed request is interrupted", asy
   fireEvent.change(composer, { target: { value: "다시 시도" } });
   await waitFor(() => expect(screen.getByRole("button", { name: "전송" })).not.toBeDisabled());
 });
+
+test("restores product cards and sends complete meal request without showing IDs", async () => {
+  getSessionRestore.mockResolvedValue({ messages: [], pending_state: {}, pending_proposal: null,
+    food_selection: { request: "어제 쌀밥 450g과 라이스페이퍼 80g", items: [{query: "라이스페이퍼", quantity_g: 80,
+      candidates: [{food_id: "mfds:P1", name: "라이스페이퍼", manufacturer: "테스트 제조사", package_text: "100g"}]}] } });
+  sendChatMessage.mockResolvedValue(undefined);
+  render(<Harness />);
+  fireEvent.click(await screen.findByRole("radio"));
+  fireEvent.click(screen.getByRole("button", {name: "선택한 제품으로 다시 검토"}));
+  await waitFor(() => expect(sendChatMessage).toHaveBeenCalled());
+  expect(sendChatMessage.mock.calls[0][1]).toContain("어제 쌀밥 450g");
+  expect(sendChatMessage.mock.calls[0][1]).toContain("제품 선택: mfds:P1");
+  expect(screen.queryByText(/mfds:P1/)).not.toBeInTheDocument();
+});

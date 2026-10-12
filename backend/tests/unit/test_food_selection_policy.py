@@ -66,7 +66,7 @@ async def test_missing_food_prevents_partial_proposal():
 
 async def test_repeated_queries_do_not_duplicate_product_cards():
     from app.agents.team import DietTeam, Query
-    team = DietTeam({'user_id': 'u', 'message': '제품 50g'}, repository=AsyncMock(), db=object())
+    team = DietTeam({'user_id': 'u', 'message': '제품 50g 제품 별칭'}, repository=AsyncMock(), db=object())
     team.food_catalog = AsyncMock()
     team.food_catalog.search.return_value = [{'food_id': 'mfds:P1', 'name': '제품', 'source': 'mfds', 'match_type': 'exact'}]
     await team.search_foods(Query(query='제품'))
@@ -80,3 +80,14 @@ async def test_tentative_standard_classification_does_not_hide_registered_produc
     team.food_catalog.search.side_effect = [[], [{'food_id': 'mfds:P1', 'name': '라이스페이퍼', 'source': 'mfds', 'match_type': 'exact'}]]
     await team.search_foods(FoodSearch(query='라이스페이퍼', food_kind='standard'))
     assert team.food_selection['items'] and not team.unresolved_foods
+
+
+async def test_unrequested_alternative_does_not_add_product_card():
+    from app.agents.team import DietTeam, Query
+    from app.agents.runtime import ToolFeedback
+    team = DietTeam({'user_id': 'u', 'message': '라이스페이퍼 80g'}, repository=AsyncMock(), db=object())
+    team.food_catalog = AsyncMock()
+    team.food_catalog.search.return_value = [{'food_id':'mfds:P2','name':'월남쌈','source':'mfds','match_type':'exact'}]
+    with pytest.raises(ToolFeedback, match='unrequested_product'):
+        await team.search_foods(Query(query='월남쌈'))
+    assert not team.food_selection['items']
