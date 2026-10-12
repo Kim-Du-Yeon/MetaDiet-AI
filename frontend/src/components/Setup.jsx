@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { getToken, BASE_URL, decideProposal, trackProductEvent } from "../api/dietApi";
 import ProposalCard from './chat/ProposalCard';
 import ActivityLevelSection from './setup/ActivityLevelSection';
@@ -24,22 +24,40 @@ export default function Setup({ onComplete }) {
   const [loadError, setLoadError] = useState("");
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
+  const lookupRef = useRef(null);
 
   const loadExistingSetup = useCallback((isActive = () => true) => {
+    lookupRef.current?.cancel();
+    const controller = new AbortController();
+    let cancelled = false;
+    let timeoutId;
+    const active = () => !cancelled && isActive();
+    const timeout = new Promise((_, reject) => {
+      timeoutId = setTimeout(() => {
+        reject(new Error('서버 응답이 지연되고 있습니다. 잠시 후 다시 시도해주세요.'));
+        controller.abort();
+      }, 90000);
+    });
+    lookupRef.current = { cancel: () => {
+      cancelled = true;
+      clearTimeout(timeoutId);
+      controller.abort();
+    }};
     setInitialLoading(true);
     setLoadError("");
-    fetch(`${BASE_URL}/users/onboarding`,{headers:{Authorization:`Bearer ${getToken()}`}})
+    Promise.race([fetch(`${BASE_URL}/users/onboarding`,{signal:controller.signal,headers:{Authorization:`Bearer ${getToken()}`}})
       .then(async res=>{if(!res.ok) throw new Error('기존 설정 조회에 실패했습니다.'); return res.json();})
-      .then(data=>{if(isActive()){if(data.pending_proposal) setResult(data);
+      , timeout])
+      .then(data=>{if(active()){if(data.pending_proposal) setResult(data);
         else if(data.current_strategy) onComplete();}})
-      .catch(e=>{if(isActive()) setLoadError(e.message || '기존 설정 조회에 실패했습니다.');})
-      .finally(()=>{if(isActive()){setInitialLoading(false);setLoading(false);}});
+      .catch(e=>{if(active()) setLoadError(e.message || '기존 설정 조회에 실패했습니다.');})
+      .finally(()=>{clearTimeout(timeoutId);if(active()){setInitialLoading(false);setLoading(false);}});
   },[onComplete]);
 
   useEffect(()=>{
     let active=true;
     loadExistingSetup(() => active);
-    return ()=>{active=false;};
+    return ()=>{active=false;lookupRef.current?.cancel();};
   },[loadExistingSetup]);
 
   const handleSubmit = async () => {
@@ -100,7 +118,7 @@ export default function Setup({ onComplete }) {
 
   if (initialLoading) return <div style={styles.container}><div style={styles.card} role="status">
     <h2 style={styles.title}>기존 설정을 확인하는 중입니다.</h2>
-    <p style={styles.subtitle}>잠시만 기다려주세요.</p>
+    <p style={styles.subtitle}>저장된 설정을 불러오고 있어요. 무료 서버가 쉬고 있었다면 기동에 약 1분이 걸릴 수 있습니다. 90초 안에 응답이 없으면 다시 시도할 수 있어요.</p>
   </div></div>;
 
   if (loadError) return <div style={styles.container}><div style={styles.card}>

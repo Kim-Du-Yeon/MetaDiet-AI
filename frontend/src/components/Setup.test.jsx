@@ -1,9 +1,24 @@
-import { render,screen,fireEvent,waitFor } from '@testing-library/react';
+import { render,screen,fireEvent,waitFor,act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Setup from './Setup';
 import { decideProposal } from '../api/dietApi';
 jest.mock('../api/dietApi',()=>({BASE_URL:'http://test',getToken:()=> 'token',
   decideProposal:jest.fn(async()=>({status:'confirmed'})),trackProductEvent:jest.fn()}));
+
+test('a stalled setup request times out and can be retried without showing onboarding',async()=>{
+  jest.useFakeTimers();
+  try {
+    global.fetch=jest.fn(()=>new Promise(()=>{}));
+    render(<Setup onComplete={jest.fn()}/>);
+    await act(async()=>{jest.advanceTimersByTime(90000);});
+    expect(screen.getByRole('alert')).toHaveTextContent('응답');
+    expect(global.fetch.mock.calls[0][1].signal.aborted).toBe(true);
+    expect(screen.queryByRole('heading',{name:/식단 목표 설정/})).not.toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button',{name:'다시 시도'}));
+    expect(global.fetch).toHaveBeenCalledTimes(2);
+    expect(screen.getByRole('status')).toBeInTheDocument();
+  } finally {jest.useRealTimers();}
+});
 
 test('initial strategy requires explicit confirmation before completion',async()=>{
   decideProposal.mockResolvedValue({status:'confirmed'});
