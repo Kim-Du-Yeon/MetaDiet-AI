@@ -11,6 +11,16 @@ export function setToken(token) {
 export function getToken() {
   return _token;
 }
+
+export async function proposeNutritionLabel(payload) {
+  const response = notifyAuthExpired(await fetch(`${BASE_URL}/nutrition/label-proposal`, {
+    method: "POST", headers: authHeaders({ "Content-Type": "application/json" }),
+    body: JSON.stringify(payload),
+  }));
+  const data = await response.json();
+  if (!response.ok) throw new Error(typeof data.detail === "string" ? data.detail : "기준량·영양값·날짜를 확인해주세요.");
+  return data;
+}
 function notifyAuthExpired(response) {
   if (response.status === 401 && typeof window !== "undefined") {
     window.dispatchEvent(new Event("metadiet:auth-expired"));

@@ -27,6 +27,13 @@ class ProposalRepository:
     def __init__(self, connect=connection):
         self.connect = connect
 
+    async def latest_pending(self, user_id: str, thread_id: str) -> dict | None:
+        async with self.connect() as conn:
+            row = await (await conn.execute(
+                "select * from agent_proposals where user_id=%s and thread_id=%s and status='pending' and expires_at>now() order by version desc limit 1",
+                (user_id, thread_id))).fetchone()
+            return self.public(row) if row else None
+
     async def create(self, user_id: str, thread_id: str, payload: dict, dedupe_key: str, *, replaces=None) -> dict:
         payload = payload_adapter.validate_python(payload).model_dump(mode="json")
         async with self.connect() as conn:
@@ -93,8 +100,9 @@ class ProposalRepository:
                 await conn.execute("delete from meal_logs where id=%s and user_id=%s", (payload["meal_id"], user_id))
             else:
                 meal = payload["meal"]
-                await conn.execute("update meal_logs set food_name=%s,meal_type=%s,quantity_g=%s,calories=%s,protein_g=%s,carbs_g=%s,fat_g=%s,sodium_mg=%s,source=%s where id=%s and user_id=%s",
-                    (*(meal[k] for k in ("food_name", "meal_type", "quantity_g", "calories", "protein_g", "carbs_g", "fat_g", "sodium_mg", "source")), payload["meal_id"], user_id))
+                await conn.execute("update meal_logs set food_name=%s,meal_type=%s,quantity_g=%s,calories=%s,protein_g=%s,carbs_g=%s,fat_g=%s,sodium_mg=%s,source=%s,food_id=%s,nutrition_metadata=%s where id=%s and user_id=%s",
+                    (*(meal[k] for k in ("food_name", "meal_type", "quantity_g", "calories", "protein_g", "carbs_g", "fat_g", "sodium_mg", "source")),
+                     meal.get('food_id'), Jsonb(meal.get('nutrition_metadata')), payload["meal_id"], user_id))
             return {"meal_id": payload["meal_id"], "action": kind}
         if kind == "plan":
             row = await (await conn.execute(
@@ -105,10 +113,11 @@ class ProposalRepository:
             ids = []
             for meal in payload["meals"]:
                 row = await (await conn.execute(
-                    "insert into meal_logs(user_id,log_date,meal_type,food_name,quantity_g,calories,protein_g,carbs_g,fat_g,sodium_mg,source) "
-                    "values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) returning id",
+                    "insert into meal_logs(user_id,log_date,meal_type,food_name,quantity_g,calories,protein_g,carbs_g,fat_g,sodium_mg,source,food_id,nutrition_metadata) "
+                    "values(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) returning id",
                     (user_id, payload["log_date"], meal["meal_type"], meal["food_name"], meal["quantity_g"],
-                     meal["calories"], meal["protein_g"], meal["carbs_g"], meal["fat_g"], meal["sodium_mg"], meal["source"])) ).fetchone()
+                     meal["calories"], meal["protein_g"], meal["carbs_g"], meal["fat_g"], meal["sodium_mg"], meal["source"],
+                     meal.get('food_id'), Jsonb(meal.get('nutrition_metadata')))) ).fetchone()
                 ids.append(str(row["id"]))
             return {"meal_ids": ids}
         if kind == "measurement":

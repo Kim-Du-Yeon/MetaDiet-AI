@@ -1,0 +1,517 @@
+{
+  "scope": "fixed_read_only_catalog_smoke_not_agent_or_user_results",
+  "cases": [
+    {
+      "variant": "csv_only",
+      "query": "멥쌀, 백미, 밥",
+      "status": "found",
+      "candidate_count_capped": 1,
+      "sources": [
+        "csv"
+      ],
+      "elapsed_seconds": 0.0004,
+      "quote_available": true,
+      "candidates": [
+        {
+          "food_id": "csv:cef90c9133f4c4d1e4f3d850",
+          "name": "멥쌀, 백미, 밥",
+          "source": "csv",
+          "manufacturer": "",
+          "basis_g": 100,
+          "basis_text": "100g",
+          "package_text": null,
+          "catalog_version": null
+        }
+      ]
+    },
+    {
+      "variant": "csv_only",
+      "query": "라이스페이퍼",
+      "status": "not_found",
+      "candidate_count_capped": 0,
+      "sources": [],
+      "elapsed_seconds": 0.0003,
+      "quote_available": false,
+      "candidates": []
+    },
+    {
+      "variant": "csv_only",
+      "query": "돼지바",
+      "status": "not_found",
+      "candidate_count_capped": 0,
+      "sources": [],
+      "elapsed_seconds": 0.0003,
+      "quote_available": false,
+      "candidates": []
+    },
+    {
+      "variant": "csv_only",
+      "query": "미등록_평가용_제품_20261012",
+      "status": "not_found",
+      "candidate_count_capped": 0,
+      "sources": [],
+      "elapsed_seconds": 0.0002,
+      "quote_available": false,
+      "candidates": []
+    },
+    {
+      "variant": "csv_mfds",
+      "query": "멥쌀, 백미, 밥",
+      "status": "found",
+      "candidate_count_capped": 1,
+      "sources": [
+        "csv"
+      ],
+      "elapsed_seconds": 0.3637,
+      "quote_available": true,
+      "candidates": [
+        {
+          "food_id": "csv:cef90c9133f4c4d1e4f3d850",
+          "name": "멥쌀, 백미, 밥",
+          "source": "csv",
+          "manufacturer": "",
+          "basis_g": 100,
+          "basis_text": "100g",
+          "package_text": null,
+          "catalog_version": null
+        }
+      ]
+    },
+    {
+      "variant": "csv_mfds",
+      "query": "라이스페이퍼",
+      "status": "ambiguous",
+      "candidate_count_capped": 20,
+      "sources": [
+        "mfds"
+      ],
+      "elapsed_seconds": 0.1516,
+      "quote_available": false,
+      "candidates": [
+        {
+          "food_id": "mfds:P108-007000300-0037",
+          "name": "라이스 페이퍼",
+          "source": "mfds",
+          "manufacturer": "BRANCH OF CHANH KHANG COMPANY LTD.",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "300g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0033",
+          "name": "라이스 페이퍼",
+          "source": "mfds",
+          "manufacturer": "BRANCH OF SAFOCO FOODSTUFF JOINT STOCK COMPANY - RICE PAPER PRODUCTION PLANT",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "500g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0036",
+          "name": "라이스 페이퍼",
+          "source": "mfds",
+          "manufacturer": "DUY ANH FOODS IMPORT EXPORT CO.,LTD",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0039",
+          "name": "라이스 페이퍼",
+          "source": "mfds",
+          "manufacturer": "EXOTIC FOOD PCL.",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "100g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0038",
+          "name": "라이스 페이퍼",
+          "source": "mfds",
+          "manufacturer": "LYAN DUC THANH COMPANY LTD.",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0035",
+          "name": "라이스 페이퍼",
+          "source": "mfds",
+          "manufacturer": "SAFOCO FOODSTUFF JOINT STOCK COMPANY",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0032",
+          "name": "라이스 페이퍼",
+          "source": "mfds",
+          "manufacturer": "TANISA COMPANY LIMITED",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0034",
+          "name": "라이스 페이퍼",
+          "source": "mfds",
+          "manufacturer": "TANISA FOODS JSC",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0031",
+          "name": "라이스 페이퍼",
+          "source": "mfds",
+          "manufacturer": "THUAN PHONG CO., LTD.",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0040",
+          "name": "라이스 페이퍼",
+          "source": "mfds",
+          "manufacturer": "TRAN NHI FOODS CO.,LTD",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0043",
+          "name": "라이스페이퍼",
+          "source": "mfds",
+          "manufacturer": "CHIEN HUONG JOINT STOCK COMPANY",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0044",
+          "name": "라이스페이퍼",
+          "source": "mfds",
+          "manufacturer": "HUONG NAM ENTERPRISE",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0020",
+          "name": "라이스페이퍼",
+          "source": "mfds",
+          "manufacturer": "KHWANFA TRADING CO LTD",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "100g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0013",
+          "name": "라이스페이퍼",
+          "source": "mfds",
+          "manufacturer": "해당없음",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "280g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0014",
+          "name": "라이스페이퍼",
+          "source": "mfds",
+          "manufacturer": "해당없음",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "1000g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0015",
+          "name": "라이스페이퍼",
+          "source": "mfds",
+          "manufacturer": "해당없음",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "400g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0016",
+          "name": "라이스페이퍼",
+          "source": "mfds",
+          "manufacturer": "해당없음",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "300g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0017",
+          "name": "라이스페이퍼",
+          "source": "mfds",
+          "manufacturer": "해당없음",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "300g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0018",
+          "name": "라이스페이퍼",
+          "source": "mfds",
+          "manufacturer": "해당없음",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "300g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P108-007000300-0019",
+          "name": "라이스페이퍼",
+          "source": "mfds",
+          "manufacturer": "해당없음",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "1000g",
+          "catalog_version": "mfds-20260929"
+        }
+      ]
+    },
+    {
+      "variant": "csv_mfds",
+      "query": "돼지바",
+      "status": "ambiguous",
+      "candidate_count_capped": 20,
+      "sources": [
+        "mfds"
+      ],
+      "elapsed_seconds": 0.1205,
+      "quote_available": false,
+      "candidates": [
+        {
+          "food_id": "mfds:P101-102000100-0789",
+          "name": "B.돼지바 마카롱",
+          "source": "mfds",
+          "manufacturer": "장형식품",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "400g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-409000100-0031",
+          "name": "너의희망이돼지바케익",
+          "source": "mfds",
+          "manufacturer": "주식회사큐앤비푸드",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "100g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-106000100-2164",
+          "name": "돼지바 다쿠아즈",
+          "source": "mfds",
+          "manufacturer": "자매제과팩토리",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "100g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-102000100-0812",
+          "name": "돼지바 마카롱",
+          "source": "mfds",
+          "manufacturer": "남포당컴퍼니",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "1000g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-106000100-2165",
+          "name": "돼지바 바닐라 자몽요거트",
+          "source": "mfds",
+          "manufacturer": "명품디저트",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "120g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-409000400-1411",
+          "name": "돼지바 케이크",
+          "source": "mfds",
+          "manufacturer": "(주)더브라운베이커리",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "1290g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-102000100-0055",
+          "name": "돼지바딸기마카롱",
+          "source": "mfds",
+          "manufacturer": "미나티",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "30g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-102000100-0983",
+          "name": "돼지바뚱카롱",
+          "source": "mfds",
+          "manufacturer": "낵스",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "900g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-103000100-0093",
+          "name": "돼지바르뱅쿠키",
+          "source": "mfds",
+          "manufacturer": "(주)조이푸드",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "75g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-102000100-0813",
+          "name": "돼지바마카롱",
+          "source": "mfds",
+          "manufacturer": "누니마카롱",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "100g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-102000100-0677",
+          "name": "돼지바마카롱",
+          "source": "mfds",
+          "manufacturer": "옹스옹스",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "40g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-102000100-0470",
+          "name": "돼지바마카롱",
+          "source": "mfds",
+          "manufacturer": "주식회사 티엠제과",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "2310g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-106000100-0460",
+          "name": "돼지바크런치",
+          "source": "mfds",
+          "manufacturer": "상일식품(주)",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "1000g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-103000100-0094",
+          "name": "돼지바크런치쿠키",
+          "source": "mfds",
+          "manufacturer": "하이미엘",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "130g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-401000400-0349",
+          "name": "돼지바크림도나스",
+          "source": "mfds",
+          "manufacturer": "마더스프레쉬",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "140g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-409000400-3304",
+          "name": "딜라이트 돼지바 케이크",
+          "source": "mfds",
+          "manufacturer": "주식회사베이커스딜라이트",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "140g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-106000100-3040",
+          "name": "뚱돼지바 팝시클",
+          "source": "mfds",
+          "manufacturer": "주식회사큐앤비푸드",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "100g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-103000100-0650",
+          "name": "벨쿠오레 돼지바 쿠키",
+          "source": "mfds",
+          "manufacturer": "(주)포스솔루션",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "110g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-409000400-2831",
+          "name": "빅토리아돼지바케이크",
+          "source": "mfds",
+          "manufacturer": "(주)케익드라마",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "840g",
+          "catalog_version": "mfds-20260929"
+        },
+        {
+          "food_id": "mfds:P101-106000100-4419",
+          "name": "설빙 돼지바 크런치",
+          "source": "mfds",
+          "manufacturer": "상일식품(주)",
+          "basis_g": 100.0,
+          "basis_text": "100g",
+          "package_text": "1000g",
+          "catalog_version": "mfds-20260929"
+        }
+      ]
+    },
+    {
+      "variant": "csv_mfds",
+      "query": "미등록_평가용_제품_20261012",
+      "status": "not_found",
+      "candidate_count_capped": 0,
+      "sources": [],
+      "elapsed_seconds": 0.1226,
+      "quote_available": false,
+      "candidates": []
+    }
+  ]
+}

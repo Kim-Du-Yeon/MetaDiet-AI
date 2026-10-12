@@ -23,6 +23,12 @@ def block_live_gemini(monkeypatch):
         raise AssertionError("Live Gemini calls are disabled in the regression suite")
 
     monkeypatch.setattr(llm_module, "ChatGoogleGenerativeAI", blocked)
+    # Food catalog DB boundary is also mocked in ordinary regressions.
+    from app.core.config import get_settings
+    monkeypatch.setattr(get_settings(), 'food_catalog_enabled', False)
+    from unittest.mock import AsyncMock
+    from app.db.proposals import ProposalRepository
+    monkeypatch.setattr(ProposalRepository, 'latest_pending', AsyncMock(return_value=None))
 
 
 class FakeResult:

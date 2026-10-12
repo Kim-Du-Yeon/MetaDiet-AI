@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { sendChatMessage, uploadImage, resumeChat, getChatHistory, getSessionRestore, rollbackToCheckpoint, nutritionLookup, decideProposal, reviseMeasurement, trackProductEvent } from "../../api/dietApi";
 import ProposalCard from "./ProposalCard";
+import NutritionLabelForm from "./NutritionLabelForm";
+import FoodProductSearch from "./FoodProductSearch";
 import ProcessTrace from "./ProcessTrace";
 import "./ChatInterface.css";
 
@@ -46,6 +48,8 @@ export default function ChatInterface({
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [approval, setApproval] = useState(null);
+  const [showNutritionLabel, setShowNutritionLabel] = useState(false);
+  const [showFoodSearch, setShowFoodSearch] = useState(false);
   const [approvalError, setApprovalError] = useState("");
   const [progressSteps, setProgressSteps] = useState([]);
   const [streamError, setStreamError] = useState("");
@@ -80,7 +84,7 @@ export default function ChatInterface({
         awaiting_confirmation: !!restoredPending.awaiting_confirmation,
         plan_date: restoredPending.plan_date || null,
       });
-      setApproval(restored.pending_proposal ? { ...restored.pending_proposal, channel: "chat" } : null);
+      setApproval(restored.pending_proposal ? { ...restored.pending_proposal, channel: restored.pending_proposal.payload?.meals?.every(meal => meal.source === "user_label") ? "upload" : "chat" } : null);
       setIsInterrupted(!!restored.interrupted);
       if (restored.today_calories !== undefined && restored.target_calories !== undefined) {
         onStatsUpdate?.({ calories: restored.today_calories, target: restored.target_calories });
@@ -174,8 +178,10 @@ export default function ChatInterface({
         await decideProposal(approval, action);
         setApproval(null);
         setMessages(prev => [...prev, { role: "assistant", content: action === "confirm"
-          ? "인바디 측정값을 저장했습니다. 새 목표 전략 검토를 요청할 수 있습니다."
-          : "인바디 측정 제안을 취소했습니다.", streaming: false }]);
+          ? (approval.kind === "intake" ? "제품 영양표로 섭취 기록을 저장했습니다." : "인바디 측정값을 저장했습니다. 새 목표 전략 검토를 요청할 수 있습니다.")
+          : "제안을 취소했습니다.", streaming: false }]);
+        const restored = await getSessionRestore(threadId);
+        onStatsUpdate?.({ calories: restored.today_calories, target: restored.target_calories });
       }
       if (action === "confirm") {
         const eventName = approval.kind === "intake" ? "meal_confirmed"
@@ -451,6 +457,10 @@ export default function ChatInterface({
         </div>
       )}
 
+      <button type="button" disabled={isLoading || !!approval || restoreStatus !== "ready"} onClick={() => setShowNutritionLabel(true)}>제품 영양표 입력</button>
+      <button type="button" disabled={isLoading || !!approval || restoreStatus !== "ready"} onClick={() => setShowFoodSearch(true)}>식품 제품 찾기</button>
+      {showFoodSearch && <FoodProductSearch onClose={() => setShowFoodSearch(false)} onSelect={message => { setInput(message); setShowFoodSearch(false); }} />}
+      {showNutritionLabel && <NutritionLabelForm threadId={threadId} onClose={() => setShowNutritionLabel(false)} onProposal={proposal => { setApproval({ ...proposal, channel: "upload" }); setShowNutritionLabel(false); }} />}
       {approval && <ProposalCard proposal={approval} busy={isLoading} onDecision={handleProposalDecision} onRevise={handleMeasurementRevision} />}
       {approvalError && <p role="alert" style={{ color: "#b42318", margin: 12 }}>{approvalError}</p>}
       {foodEntry && (

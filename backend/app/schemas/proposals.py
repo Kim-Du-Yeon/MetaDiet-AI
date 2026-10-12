@@ -18,8 +18,10 @@ class MealItem(StrictModel):
     protein_g: float = Field(ge=0, le=10000)
     carbs_g: float = Field(ge=0, le=10000)
     fat_g: float = Field(ge=0, le=10000)
-    sodium_mg: float = Field(default=0, ge=0, le=1000000)
-    source: Literal["csv", "llm_estimated"] = "csv"
+    sodium_mg: float | None = Field(default=0, ge=0, le=1000000)
+    source: Literal["csv", "llm_estimated", "mfds", "user_label"] = "csv"
+    food_id: str | None = Field(default=None, max_length=200)
+    nutrition_metadata: dict | None = None
 
 
 class MealProposal(StrictModel):

@@ -219,63 +219,18 @@ async def nutrition_db_tool(food_name: str, quantity_g: float) -> dict:
     quantity_g: 섭취량 (g)
     반환: 칼로리, 단백질, 탄수화물, 지방, 나트륨 (quantity_g 기준으로 환산)
     """
-    df = _load_raw_df()
-    if df.empty:
-        return {
-            "food_name":   food_name,
-            "quantity_g":  quantity_g,
-            "found_in_db": False,
-            "reason": "CSV 로드 실패 — .env의 NUTRITION_CSV_PATH 또는 파일 위치를 확인하세요",
-        }
-
-    # LLM이 컬럼 자동 파악 (strip 정규화된 컬럼명 기준)
-    col_map = await _get_column_mapping()
-    if not col_map:
-        return {
-            "food_name":   food_name,
-            "quantity_g":  quantity_g,
-            "found_in_db": False,
-            "reason": "컬럼 매핑 실패",
-        }
-
-    # LLM 키워드 분해 + AND 검색 + LLM 최적 선택
-    match = await _find_best_match_with_llm(food_name, df, col_map)
-
-    if match:
-        ratio = quantity_g / 100.0
-        food_col = col_map.get("food_name", "식품명")
-
-        def safe_float(val) -> float:
-            try:
-                return round(float(str(val).strip() or 0) * ratio, 1)
-            except (ValueError, TypeError):
-                return 0.0
-
-        result = {
-            "food_name":    food_name,
-            "matched_name": match.get(food_col, food_name),
-            "quantity_g":   quantity_g,
-            "calories":     safe_float(match.get(col_map.get("calories"))),
-            "protein_g":    safe_float(match.get(col_map.get("protein"))),
-            "carbs_g":      safe_float(match.get(col_map.get("carbs"))),
-            "fat_g":        safe_float(match.get(col_map.get("fat"))),
-            "sodium_mg":    safe_float(match.get(col_map.get("sodium"))),
-            "found_in_db":  True,
-        }
-        print(
-            f"=== CSV 조회 성공: {food_name} → {result['matched_name']} "
-            f"({quantity_g}g) | {result['calories']}kcal / "
-            f"단백질 {result['protein_g']}g ==="
-        )
-        return result
-
-    print(f"=== CSV 미발견: {food_name} → LLM 추정으로 폴백 ===")
-    return {
-        "food_name":    food_name,
-        "matched_name": None,
-        "quantity_g":   quantity_g,
-        "found_in_db":  False,
-    }
+    from app.tools.food_catalog import default_catalog
+    catalog = default_catalog()
+    matches = await catalog.search(food_name)
+    if len(matches) != 1:
+        return {"food_name": food_name, "quantity_g": quantity_g, "found_in_db": False,
+                "status": "ambiguous" if matches else "not_found", "candidates": matches}
+    try:
+        quote = await catalog.lookup(matches[0]["food_id"], quantity_g)
+    except ValueError:
+        return {"food_name": food_name, "quantity_g": quantity_g, "found_in_db": False,
+                "status": "missing_nutrients"}
+    return {**quote, "matched_name": quote["food_name"], "found_in_db": True}
 
 
 @tool

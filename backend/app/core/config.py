@@ -53,6 +53,7 @@ def _default_chunks_path() -> str:
 
 
 class Settings(BaseSettings):
+    food_catalog_enabled: bool = True
     typesafe_api_key: str = ""
     jev_model: str = "jev-1.13.0"
     gemini_api_key: str = ""

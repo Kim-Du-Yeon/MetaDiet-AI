@@ -298,4 +298,4 @@ async def test_food_search_and_quote_reuse_cached_results(monkeypatch):
     assert await team.search_foods(Query(query="쌀밥")) == await team.search_foods(Query(query=" 쌀밥 "))
     quote = FoodLookup(food_id=0, quantity_g=100)
     assert await team.nutrition_lookup(quote) == await team.nutrition_lookup(quote)
-    assert loads == 2
+    assert loads == 1  # shared catalog reuses the same snapshot for search and calculation

@@ -1,40 +1,18 @@
 """Read-only MCP surface for food, nutrition and guideline evidence."""
 import argparse
-import math
 from typing import Any
 
 from mcp.server import MCPServer
 
 
 async def search_foods_data(query: str, limit: int = 10) -> dict[str, Any]:
-    from app.tools.nutrition_db import _load_raw_df
-
-    query = query.strip()
-    if not query or len(query) > 200 or not 1 <= limit <= 20:
-        raise ValueError("invalid_arguments")
-    frame = _load_raw_df()
-    rows = frame[frame["식품명"].str.contains(query, regex=False, na=False)].head(limit)
-    return {"matches": [{"food_id": int(index), "name": str(row["식품명"])}
-                        for index, row in rows.iterrows()], "limit": limit}
+    from app.tools.food_catalog import default_catalog
+    return {'matches': await default_catalog().search(query, limit), 'limit': limit}
 
 
-async def nutrition_lookup_data(food_id: int, quantity_g: float) -> dict[str, Any]:
-    from app.tools.nutrition_db import _load_raw_df
-
-    if food_id < 0 or not math.isfinite(quantity_g) or not 0 < quantity_g <= 10_000:
-        raise ValueError("invalid_arguments")
-    frame = _load_raw_df()
-    if food_id not in frame.index:
-        raise ValueError("food_not_found")
-    row = frame.loc[food_id]
-    columns = {"calories": "에너지", "protein_g": "단백질", "carbs_g": "탄수화물",
-               "fat_g": "지방", "sodium_mg": "나트륨"}
-    values = {key: round(float(row[column]) * quantity_g / 100, 1)
-              for key, column in columns.items()}
-    if any(not math.isfinite(value) or value < 0 for value in values.values()):
-        raise ValueError("missing_nutrient_values")
-    return {"food_id": food_id, "food_name": str(row["식품명"]),
-            "quantity_g": quantity_g, "source": "csv", **values}
+async def nutrition_lookup_data(food_id: str | int, quantity_g: float) -> dict[str, Any]:
+    from app.tools.food_catalog import default_catalog
+    return await default_catalog().lookup(food_id, quantity_g)
 
 
 async def search_evidence_data(query: str, k: int = 4) -> dict[str, Any]:
@@ -77,7 +55,7 @@ def build_server() -> MCPServer:
         return await search_foods_data(query, limit)
 
     @server.tool(description="식품 ID와 확인된 양으로 영양값을 계산합니다.", structured_output=True)
-    async def nutrition_lookup(food_id: int, quantity_g: float) -> dict[str, Any]:
+    async def nutrition_lookup(food_id: str | int, quantity_g: float) -> dict[str, Any]:
         return await nutrition_lookup_data(food_id, quantity_g)
 
     @server.tool(description="색인된 공식 영양 지침에서 근거를 조회합니다.", structured_output=True)

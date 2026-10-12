@@ -27,8 +27,9 @@ class Query(StrictModel):
 
 
 class FoodLookup(StrictModel):
-    food_id: int = Field(ge=0)
+    food_id: str | int
     quantity_g: float = Field(gt=0, le=10000)
+    product_confirmed: bool = False
 
 
 class MealChange(StrictModel):
@@ -68,6 +69,8 @@ BASE_INSTRUCTION = """당신은 일반 성인 식단 코칭 서비스의 전문 
 음식의 양은 사용자에게 확인하고 추정하여 실제 섭취로 기록하지 마세요.
 영양 수치는 nutrition_lookup 결과만 사용하세요. 목표 정책 변경에는 검색된 근거가 필요합니다.
 제품명이 식품성분표에 없으면 유사한 다른 제품을 같은 제품으로 취급하지 마세요.
+후보가 여러 개면 제조사·제품명·용량을 보여주고 사용자의 선택을 요청하세요.
+복수 후보일 때 사용자가 정확한 food_id를 선택: food_id 형태로 입력해야 조회할 수 있습니다.
 음식 검색 실패 시 이름을 바꿔 계속 검색하지 말고 제품의 1회 제공량·영양정보를 요청하세요.
 전날 과식을 이유로 근거 없는 고정 칼로리 차감을 하지 마세요.
 propose 도구는 저장 완료가 아니라 사용자 확인이 필요한 제안을 만듭니다.
@@ -145,6 +148,8 @@ class DietTeam:
         self.evidence_cache = {}
         self.evidence_search_attempted = False
         self.food_search_cache = {}
+        self.food_catalog = None
+        self.ambiguous_food_ids = set()
         self.profile = None
         self.intake = None
         self.events = []
@@ -223,16 +228,18 @@ class DietTeam:
         return {"status": "proposal_prepared", "requires_confirmation": True}
 
     async def search_foods(self, args):
-        from app.tools.nutrition_db import _load_raw_df
+        from app.tools.food_catalog import default_catalog
+        if self.food_catalog is None:
+            self.food_catalog = default_catalog()
         query = " ".join(args.query.split())
         if query in self.food_search_cache:
             cached = self.food_search_cache[query]
             self.food_ids.update(item["food_id"] for item in cached)
             return cached
-        df = _load_raw_df()
-        rows = df[df["식품명"].str.contains(query, regex=False, na=False)].head(20)
-        self.food_ids.update(int(i) for i in rows.index)
-        result = [{"food_id": int(i), "name": row["식품명"]} for i, row in rows.iterrows()]
+        result = await self.food_catalog.search(query)
+        self.food_ids.update(item['food_id'] for item in result)
+        if len(result) > 1:
+            self.ambiguous_food_ids.update(item['food_id'] for item in result)
         if not result:
             self.missing_food_searches = getattr(self, 'missing_food_searches', 0) + 1
             if self.missing_food_searches >= 3:
@@ -244,18 +251,19 @@ class DietTeam:
         return result
 
     async def nutrition_lookup(self, args):
-        from app.tools.nutrition_db import _load_raw_df
-        if args.food_id not in self.food_ids:
+        food_id = args.food_id
+        if isinstance(food_id, int) and self.food_catalog:
+            food_id = self.food_catalog.legacy_ids.get(food_id, '')
+        if food_id not in self.food_ids:
             raise ValueError("Search and select an offered food_id first")
+        selections = re.findall(r'제품\s*선택\s*:\s*([\w:-]+)', self.state.get('message', ''))
+        if food_id in self.ambiguous_food_ids and selections != [str(food_id)]:
+            raise ToolFeedback('product_selection_required',
+                '여러 후보가 있습니다. 제조사·제품명·용량과 food_id를 보여주고 사용자에게 제품 선택: food_id 형태로 선택을 요청하세요. Agent의 product_confirmed 값만으로 선택할 수 없습니다.', retryable=False)
         quote_id = f"{args.food_id}:{args.quantity_g}"
         if quote_id in self.quotes:
             return {"quote_id": quote_id, **self.quotes[quote_id]}
-        row = _load_raw_df().loc[args.food_id]
-        fields = {"calories": "에너지", "protein_g": "단백질", "carbs_g": "탄수화물", "fat_g": "지방", "sodium_mg": "나트륨"}
-        values = {key: round(float(row[column]) * args.quantity_g / 100, 1) for key, column in fields.items()}
-        if any(not math.isfinite(v) or v < 0 for v in values.values()):
-            raise ValueError("missing_nutrient_values")
-        self.quotes[quote_id] = {"food_name": str(row["식품명"]), "quantity_g": args.quantity_g, "source": "csv", **values}
+        self.quotes[quote_id] = await self.food_catalog.lookup(food_id, args.quantity_g)
         return {"quote_id": quote_id, **self.quotes[quote_id]}
 
     async def search_evidence(self, args):

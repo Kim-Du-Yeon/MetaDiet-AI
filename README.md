@@ -11,6 +11,7 @@ MetaDiet AI는 식사 기록, 체중·인바디 추세, 장기 목표와 영양 
 - 베타 릴리스 노트: [BETA_RELEASE_NOTES.md](BETA_RELEASE_NOTES.md)
 - GitHub prerelease: [beta-v1.1.0](https://github.com/Kim-Du-Yeon/MetaDiet-AI/releases/tag/beta-v1.1.0)
 - 무료 베타 운영 절차: [deploy/RENDER_BETA.md](deploy/RENDER_BETA.md)
+- 국내 가공식품 DB 보강: [수입·검증·실패 해결 기록](docs/food_catalog/IMPLEMENTATION.md)
 
 ## 지원용 자료 다운로드
 

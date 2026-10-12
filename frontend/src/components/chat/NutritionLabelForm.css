@@ -1,0 +1,6 @@
+.nutrition-label { padding: 20px; border: 1px solid #bdd2ca; border-radius: 16px; background: #f5faf7; margin: 16px 0; }
+.nutrition-label fieldset { border: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.nutrition-label label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+.nutrition-label input, .nutrition-label select { box-sizing: border-box; width: 100%; min-width: 0; padding: 10px; border: 1px solid #b8c8c2; border-radius: 8px; background: white; }
+.nutrition-label button { margin: 12px 8px 0 0; padding: 10px; }
+@media (max-width: 480px) { .nutrition-label fieldset { grid-template-columns: 1fr; } }

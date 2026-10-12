@@ -578,6 +578,9 @@ async def restore_session(thread_id: str, current_user: str = Depends(get_curren
         except (ProposalConflict, KeyError, TypeError):
             proposal = None
 
+    if proposal is None:
+        proposal = await ProposalRepository().latest_pending(current_user, thread_id)
+
     def read_messages():
         rows = (sb.table("chat_history")
                 .select("role,content,agent_type,created_at")
@@ -604,7 +607,7 @@ async def restore_session(thread_id: str, current_user: str = Depends(get_curren
         "pending_proposal": proposal,
         "pending_state": {
             "pending_meals": sv.get("pending_meals") if active_pending else None,
-            "awaiting_confirmation": bool(sv.get("awaiting_confirmation")) if active_pending else False,
+            "awaiting_confirmation": active_pending,
             "plan_date": sv.get("plan_date") if active_pending else None,
         },
         "interrupted": bool(snap and snap.next and active_pending),
@@ -717,7 +720,17 @@ async def get_proposal(proposal_id: UUID, current_user: str = Depends(get_curren
 @app.post("/proposals/decision")
 async def decide_proposal(req: ProposalDecision, current_user: str = Depends(get_current_user)):
     try:
-        return await ProposalRepository().resolve(current_user, str(req.proposal_id), req.version, req.action)
+        result = await ProposalRepository().resolve(current_user, str(req.proposal_id), req.version, req.action)
+        meals = result.get('payload', {}).get('meals', [])
+        if meals and all(meal.get('source') == 'user_label' for meal in meals):
+            async with conversation_lock(current_user, result['thread_id']):
+                config = {'configurable': {'thread_id': f"{current_user}_{result['thread_id']}"}}
+                graph = get_graph()
+                state = _sv(await graph.aget_state(config))
+                if (state.get('pending_proposal') or {}).get('id') == result['id']:
+                    await graph.aupdate_state(config, {'pending_proposal': None,
+                        'pending_meals': None, 'awaiting_confirmation': False})
+        return result
     except ProposalConflict as exc:
         raise HTTPException(409, str(exc)) from exc
 
@@ -837,8 +850,15 @@ async def meal_photo(file: UploadFile = File(...), current_user: str = Depends(g
     return await _process_food(await file.read())
 
 
+class NutritionFoodRequest(BaseModel):
+    model_config = ConfigDict(extra='forbid', allow_inf_nan=False)
+    name: str = Field(min_length=1, max_length=200)
+    quantity_g: float = Field(default=100, gt=0, le=10000)
+    food_id: str | None = Field(default=None, max_length=200)
+
+
 class NutritionLookupRequest(BaseModel):
-    foods: list   # [{"name": "연어롤", "quantity_g": 200}, ...]
+    foods: list[NutritionFoodRequest] = Field(max_length=30)
 
 
 @app.post("/nutrition/lookup")
@@ -847,18 +867,57 @@ async def nutrition_lookup(req: NutritionLookupRequest):
     영양성분 '조회만' (기록 X). 사진/텍스트의 음식에 대해 CSV 영양성분을 반환.
     사용자가 식단 기록이 아니라 '이거 영양성분이 궁금'할 때 사용.
     """
-    from app.tools.nutrition_db import nutrition_db_tool
+    from app.tools.food_catalog import default_catalog
+    from psycopg import Error as DatabaseError
+    catalog = default_catalog()
     results = []
     for f in req.foods:
-        g = float(f.get("quantity_g") or 100)
-        r = await nutrition_db_tool.ainvoke({"food_name": f["name"], "quantity_g": g})
-        results.append({
-            "food_name": f["name"], "quantity_g": g,
-            "calories": r.get("calories"), "protein_g": r.get("protein_g"),
-            "carbs_g": r.get("carbs_g"), "fat_g": r.get("fat_g"),
-            "sodium_mg": r.get("sodium_mg"), "found_in_db": r.get("found_in_db", False),
-        })
+        empty = {'food_name': f.name, 'quantity_g': f.quantity_g, 'calories': None,
+                 'protein_g': None, 'carbs_g': None, 'fat_g': None, 'sodium_mg': None, 'found_in_db': False}
+        try:
+            matches = await catalog.search(f.name)
+            if f.food_id:
+                matches = [item for item in matches if item['food_id'] == f.food_id]
+            if len(matches) != 1:
+                results.append({**empty, 'status': 'ambiguous' if matches else 'not_found', 'candidates': matches})
+                continue
+            quote = await catalog.lookup(matches[0]['food_id'], f.quantity_g)
+            results.append({**quote, 'found_in_db': True, 'status': 'found'})
+        except ValueError:
+            results.append({**empty, 'status': 'missing_nutrients'})
+        except (TimeoutError, OSError, DatabaseError):
+            raise HTTPException(503, '식품 DB 조회가 지연되고 있습니다. 다시 시도해주세요.') from None
     return {"results": results}
+
+
+from app.tools.food_catalog import LabelNutrition
+
+
+class LabelProposalRequest(LabelNutrition):
+    log_date: date
+    meal_type: Literal['breakfast', 'lunch', 'dinner', 'snack']
+    thread_id: str = Field(min_length=1, max_length=100)
+    request_id: UUID
+
+
+@app.post('/nutrition/label-proposal')
+async def propose_label(req: LabelProposalRequest, current_user: str = Depends(get_current_user)):
+    from app.tools.food_catalog import quote_label
+    from app.schemas.proposals import MealProposal
+    if req.log_date > service_today():
+        raise HTTPException(422, '미래 날짜에는 섭취를 기록할 수 없습니다.')
+    label = LabelNutrition(**req.model_dump(exclude={'log_date', 'meal_type', 'thread_id', 'request_id'}))
+    meal = {**quote_label(label), 'meal_type': req.meal_type}
+    payload = MealProposal(kind='intake', log_date=req.log_date, meals=[meal]).model_dump(mode='json')
+    try:
+        async with conversation_lock(current_user, req.thread_id):
+            proposal = await ProposalRepository().create(current_user, req.thread_id, payload, str(req.request_id))
+            await get_graph().aupdate_state(
+                {'configurable': {'thread_id': f'{current_user}_{req.thread_id}'}},
+                {'pending_proposal': proposal, 'awaiting_confirmation': True})
+            return proposal
+    except ProposalConflict as exc:
+        raise HTTPException(409, str(exc)) from exc
 
 
 @app.get("/calories/history")
