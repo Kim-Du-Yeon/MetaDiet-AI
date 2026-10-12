@@ -47,6 +47,19 @@ async def test_catalog_uses_stable_ids_and_preserves_ambiguity():
     assert await catalog.search('돼지바') == []
 
 
+async def test_single_partial_match_requires_product_selection(client, monkeypatch):
+    from app.tools.food_catalog import FoodCatalog
+    catalog = FoodCatalog(frame=pd.DataFrame([{'식품명': '브랜드 제품 대용량',
+        '식품코드': 'P1', '에너지': 150, '단백질': 3, '탄수화물': 33,
+        '지방': 1, '나트륨': 2}]), repository=None)
+    assert (await catalog.search('브랜드 제품'))[0]['match_type'] == 'partial'
+    monkeypatch.setattr('app.tools.food_catalog.default_catalog', lambda: catalog)
+    response = await client.post('/nutrition/lookup', json={'foods': [
+        {'name': '브랜드 제품', 'quantity_g': 100}]})
+    assert response.status_code == 200
+    assert response.json()['results'][0]['status'] == 'ambiguous'
+
+
 def test_label_nutrition_calculates_only_observed_values():
     from app.tools.food_catalog import LabelNutrition, quote_label
     label = LabelNutrition(food_name='제품', manufacturer='회사', basis_g=50, quantity_g=100,

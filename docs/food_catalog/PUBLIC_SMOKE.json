@@ -1,0 +1,16 @@
+{
+  "synthetic": true,
+  "base_url": "https://metadiet-api.onrender.com",
+  "checks": [
+    "ambiguous_product_not_calculated",
+    "pending_without_domain_write",
+    "duplicate_request_same_proposal",
+    "pending_restore",
+    "explicit_confirm",
+    "duplicate_confirm_single_write",
+    "source_metadata_persisted",
+    "resolved_restore",
+    "cancel_no_write"
+  ],
+  "synthetic_cleanup": "auth_user_deleted"
+}

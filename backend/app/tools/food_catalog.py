@@ -88,6 +88,7 @@ class FoodCatalog:
         remote = await self.repository.search(normalized, limit) if self.repository else []
         combined = list({row['food_id']: row for row in local + remote}.values())
         exact = [row for row in combined if row['normalized_name'] == normalized]
+        match_type = 'exact' if exact else 'partial'
         if exact:
             combined = exact
         else:
@@ -96,10 +97,13 @@ class FoodCatalog:
             alias_rows = [row for row in self.rows.values() if target and row['name'] == target]
             if alias_rows:
                 combined = alias_rows
+                match_type = 'verified_alias'
         combined.sort(key=lambda row: (row['name'], row.get('manufacturer', ''), row['food_id']))
         result = [{k: row.get(k) for k in ('food_id', 'name', 'source', 'manufacturer', 'basis_g',
                    'basis_text', 'package_text', 'catalog_version')} for row in combined[:limit]]
         self.rows.update((row['food_id'], row) for row in combined[:limit])
+        for item in result:
+            item['match_type'] = match_type
         logger.info('food_catalog_search', extra={'matches_count': len(result),
                     'sources': sorted({item['source'] for item in result}),
                     'result_status': 'ambiguous' if len(result) > 1 else 'found' if result else 'not_found'})

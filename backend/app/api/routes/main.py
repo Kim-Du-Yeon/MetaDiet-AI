@@ -878,7 +878,7 @@ async def nutrition_lookup(req: NutritionLookupRequest):
             matches = await catalog.search(f.name)
             if f.food_id:
                 matches = [item for item in matches if item['food_id'] == f.food_id]
-            if len(matches) != 1:
+            if len(matches) != 1 or (not f.food_id and matches[0].get('match_type') == 'partial'):
                 results.append({**empty, 'status': 'ambiguous' if matches else 'not_found', 'candidates': matches})
                 continue
             quote = await catalog.lookup(matches[0]['food_id'], f.quantity_g)

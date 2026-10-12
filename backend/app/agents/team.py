@@ -238,7 +238,7 @@ class DietTeam:
             return cached
         result = await self.food_catalog.search(query)
         self.food_ids.update(item['food_id'] for item in result)
-        if len(result) > 1:
+        if len(result) > 1 or any(item.get('match_type') == 'partial' for item in result):
             self.ambiguous_food_ids.update(item['food_id'] for item in result)
         if not result:
             self.missing_food_searches = getattr(self, 'missing_food_searches', 0) + 1
