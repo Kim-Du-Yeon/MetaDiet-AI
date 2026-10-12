@@ -3,7 +3,7 @@ import '@testing-library/jest-dom';
 import Setup from './Setup';
 import { decideProposal } from '../api/dietApi';
 jest.mock('../api/dietApi',()=>({BASE_URL:'http://test',getToken:()=> 'token',
-  decideProposal:jest.fn(async()=>({status:'confirmed'}))}));
+  decideProposal:jest.fn(async()=>({status:'confirmed'})),trackProductEvent:jest.fn()}));
 
 test('initial strategy requires explicit confirmation before completion',async()=>{
   decideProposal.mockResolvedValue({status:'confirmed'});

@@ -20,6 +20,7 @@ from app.core.auth import (
     get_active_auth_id,
     get_current_user,
     get_current_auth_id,
+    get_current_admin,
     get_recent_auth_context,
 )
 from app.schemas.models import InbodyUploadResponse, ResumeRequest
@@ -30,6 +31,7 @@ from app.schemas.proposals import (ProposalDecision, MeasurementProposal, Measur
                                    WeightProposal, WeightRevision)
 from app.db.proposals import ProposalRepository, ProposalConflict
 from app.db.feedback import FeedbackInput, FeedbackRepository, FeedbackStorageUnavailable
+from app.db.analytics import ProductAnalyticsUnavailable, ProductEventInput, ProductEventRepository
 from app.db.thread_lock import serialized_stream, conversation_lock
 from app.agents.execution_stream import (
     ExecutionEventJournal, find_journal, get_or_create_journal, progress_for_runtime_event,
@@ -99,6 +101,38 @@ class FeedbackRequest(BaseModel):
 class FeedbackResponse(BaseModel):
     id: str
     status: Literal["stored"] = "stored"
+    created: bool
+
+
+class ProductEventRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    event_name: Literal[
+        "signup_completed", "onboarding_started", "onboarding_completed",
+        "chat_sent", "chat_completed", "meal_proposed", "meal_confirmed",
+        "measurement_confirmed", "feedback_submitted", "error_shown",
+    ]
+    status: Literal["success", "failed", "cancelled"]
+    client_event_id: UUID
+    session_id: UUID
+    duration_ms: int | None = Field(default=None, ge=0, le=600_000)
+    trace_id: str | None = Field(default=None, max_length=128)
+    properties: dict[str, str | int | float | bool | None] = Field(default_factory=dict)
+
+    @field_validator("properties")
+    @classmethod
+    def reject_sensitive_properties(cls, value: dict) -> dict:
+        forbidden = {
+            "message", "content", "email", "name", "food", "meal", "weight",
+            "height", "body_fat", "inbody", "comment", "answer", "prompt",
+        }
+        if len(value) > 10 or any(key.lower() in forbidden for key in value):
+            raise ValueError("민감 정보나 허용되지 않은 속성은 분석 이벤트에 저장할 수 없습니다.")
+        return value
+
+
+class ProductEventResponse(BaseModel):
+    id: str
     created: bool
 
 
@@ -944,6 +978,34 @@ async def submit_feedback(
         },
     )
     return FeedbackResponse(id=row["id"], created=created)
+
+
+@app.post("/analytics/events", response_model=ProductEventResponse)
+async def record_product_event(
+    req: ProductEventRequest,
+    response: Response,
+    current_user: str = Depends(get_current_user),
+):
+    try:
+        row, created = await ProductEventRepository().record(
+            current_user, ProductEventInput(**req.model_dump())
+        )
+    except ProductAnalyticsUnavailable as exc:
+        logger.error("product_event_storage_unavailable", extra={"error_type": type(exc).__name__})
+        raise HTTPException(status_code=503, detail="사용 현황 기록 서비스를 잠시 사용할 수 없습니다.") from None
+    response.status_code = status.HTTP_201_CREATED if created else status.HTTP_200_OK
+    return ProductEventResponse(id=row["id"], created=created)
+
+
+@app.get("/admin/analytics/overview")
+async def admin_analytics_overview(days: int = 7, _admin: str = Depends(get_current_admin)):
+    if days not in {1, 7, 30, 90}:
+        raise HTTPException(status_code=422, detail="조회 기간은 1, 7, 30, 90일만 지원합니다.")
+    try:
+        return await ProductEventRepository().overview(days=days)
+    except ProductAnalyticsUnavailable as exc:
+        logger.error("product_analytics_unavailable", extra={"error_type": type(exc).__name__})
+        raise HTTPException(status_code=503, detail="제품 분석 지표를 불러올 수 없습니다.") from None
 
 
 @app.delete("/users/me")

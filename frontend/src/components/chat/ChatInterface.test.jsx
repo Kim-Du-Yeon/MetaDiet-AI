@@ -7,6 +7,7 @@ jest.mock("../../api/dietApi", () => ({
   sendChatMessage: jest.fn(), uploadImage: jest.fn(), resumeChat: jest.fn(),
   getChatHistory: jest.fn(), rollbackToCheckpoint: jest.fn(), nutritionLookup: jest.fn(),
   decideProposal: jest.fn(), reviseMeasurement: jest.fn(), getSessionRestore: jest.fn(),
+  trackProductEvent: jest.fn(),
 }));
 
 beforeEach(() => {

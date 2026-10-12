@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Settings from "./Settings";
 import { supabase } from "../lib/supabaseClient";
-import { deleteAccount, setToken } from "../api/dietApi";
+import { deleteAccount, getAdminAnalytics, setToken } from "../api/dietApi";
 
 jest.mock("../lib/supabaseClient", () => ({
   supabase: { auth: { signInWithPassword: jest.fn(), signOut: jest.fn() } },
@@ -10,10 +10,13 @@ jest.mock("../api/dietApi", () => ({
   deleteAccount: jest.fn(),
   setToken: jest.fn(),
   submitBetaFeedback: jest.fn(),
+  trackProductEvent: jest.fn(),
+  getAdminAnalytics: jest.fn(async () => null),
 }));
 
 beforeEach(() => {
   jest.clearAllMocks();
+  getAdminAnalytics.mockResolvedValue(null);
   supabase.auth.signInWithPassword.mockResolvedValue({
     data: { session: { access_token: "fresh-token" } },
     error: null,

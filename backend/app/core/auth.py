@@ -158,3 +158,20 @@ def get_current_user(auth_id: str = Depends(get_current_auth_id)) -> str:
     if not rows:
         raise _UNAUTHORIZED("프로필이 없는 사용자입니다. 먼저 회원가입을 완료하세요.")
     return rows[0]["id"]
+
+
+def get_current_admin(token: str = Depends(oauth2_scheme)) -> str:
+    """Require a verified JWT whose top-level email is in the server allowlist."""
+    payload = _decode_verified_token(token)
+    auth_id = payload.get("sub")
+    email = str(payload.get("email") or "").strip().lower()
+    allowed = {
+        item.strip().lower()
+        for item in get_settings().admin_emails.split(",")
+        if item.strip()
+    }
+    if not auth_id:
+        raise _UNAUTHORIZED("토큰에 sub 클레임이 없습니다.")
+    if not email or email not in allowed:
+        raise HTTPException(status_code=403, detail="관리자 권한이 필요합니다.")
+    return str(auth_id)

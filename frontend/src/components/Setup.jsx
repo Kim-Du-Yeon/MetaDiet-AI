@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { getToken, BASE_URL, decideProposal } from "../api/dietApi";
+import { getToken, BASE_URL, decideProposal, trackProductEvent } from "../api/dietApi";
 import ProposalCard from './chat/ProposalCard';
 import ActivityLevelSection from './setup/ActivityLevelSection';
 import BodyMetricsSection from './setup/BodyMetricsSection';
@@ -81,7 +81,11 @@ export default function Setup({ onComplete }) {
     setLoading(true); setError('');
     try {
       const decision=await decideProposal(result.pending_proposal,action);
-      if(action==='confirm' && decision.status==='confirmed') onComplete();
+      if(action==='confirm' && decision.status==='confirmed') {
+        trackProductEvent("signup_completed");
+        trackProductEvent("onboarding_completed");
+        onComplete();
+      }
       else if(action==='cancel' && result.current_strategy) onComplete();
       else if(action==='cancel') setResult(null);
       else throw new Error('확정 상태를 확인하지 못했습니다. 다시 시도해주세요.');
