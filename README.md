@@ -23,6 +23,8 @@ MetaDiet AI는 식사 기록, 체중·인바디 추세, 장기 목표와 영양 
 - **결정적 영양 계산:** 칼로리·영양소 수치는 RAG가 아니라 국가표준식품성분표 CSV로 계산
 - **평가·관측:** Ragas, 독립 gold set, Agent/tool/HITL 평가, LangSmith trace, 비용·지연·재시도 관측
 - **Streaming UI:** 의도 분석 → Agent 위임 → 도구 실행 → 근거 검토 → 사용자 확인을 SSE 이벤트로 표시하고 연결 중단 시 재개
+- **제품 분석:** 관리자 DAU/WAU·가입 cohort 전환·상담 응답 완료율·p95, 개인정보를 최소화한 이벤트와 실제 LangSmith trace ID 연결
+- **체중·체성분:** 일상 체중과 완전한 인바디를 분리하고 사용자 확인 후 기록, 대시보드 즉시 갱신
 - **운영:** Docker Compose, 읽기 전용 MCP, Kubernetes kind 다중 Pod 복구, Render 무료 공개 베타와 제한 부하 시험
 
 ## 현재 운영 구성
@@ -44,14 +46,18 @@ Jev는 Supervisor·도구 선택·RAG 재정렬에서 Gemini와 비교했지만 
 
 | 범위 | 결과 |
 |---|---|
-| 백엔드 회귀 | **376 passed, 1 skipped** |
-| 프론트엔드 회귀 | **42 passed**, production build 성공 |
+| 백엔드 회귀 | **389 passed, 1 skipped** |
+| 프론트엔드 회귀 | **58 passed**, production build 성공 |
 | 독립 RAG 20문항 | 지정 근거 Recall@4 85%, 대체 유효 근거 포함 evidence support 95% |
 | Ragas 독립 평가 | faithfulness 1.00, context recall 0.95 |
 | Agent 독립 흐름 | 목표 달성 8/8, 정책 위반 0, 승인 전 write 0 |
 | kind rolling restart | `/health` 400/400, 실패 0, p95 5.86ms |
 | 공개 제한 부하 | health 50건·인증 조회 30건·Agent 2건 오류 0 |
+| 호출 최적화 (개발 8개 재시험) | p95 24.92→13.69초, 모델 호출 35→30, 목표 달성 8/8 유지 |
+| 공개 관리자·관측 | 실제 관리자 기간 조회·새로고침, 일반 사용자 403, SSE·제품 이벤트·LangSmith ID 일치 |
 | 공개 브라우저 | 스트리밍·proposal 복원·중복 방지·401/500/연결 중단 UI 검증 |
+
+문서 기준일은 2026-10-12이며 실제 사용자 피드백은 추후 추가합니다. 개발셋 전후 비교는 독립 최종 평가와 별도입니다.
 
 수치는 해당 gold set과 합성·제한 베타 조건의 결과이며 일반적인 임상 효과나 최대 처리량을 뜻하지 않습니다.
 
