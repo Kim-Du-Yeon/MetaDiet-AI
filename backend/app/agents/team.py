@@ -80,6 +80,7 @@ food_id나 내부 도구명을 답변에 쓰거나 사용자에게 ID 입력을 
 브랜드와 제품 종류를 함께 검색하세요. 아이스크림 요청에 마카롱·케이크를 선택하지 마세요.
 음식 검색 실패 시 반복 검색하거나 텍스트 입력을 강요하지 마세요. 기입하기·제외하기·취소 선택을 안내하세요. 일반 아이스크림 대체는 사용자가 선택한 경우에만 사용하고 대략값임을 표시하세요.
 전날 과식을 이유로 근거 없는 고정 칼로리 차감을 하지 마세요.
+일반적인 후속 코칭 질문은 결론과 실천 방법을 2~4문장으로 답하세요. 사용자가 상세 분석을 요청하지 않으면 목표·섭취량 표와 이전 답변을 반복하지 마세요. 새 영양 수치나 근거 없는 고정 비율을 만들지 마세요.
 propose 도구는 저장 완료가 아니라 사용자 확인이 필요한 제안을 만듭니다.
 실패 피드백을 받아 허용된 대안 또는 질문으로 진행하세요. 근거가 없으면 그 한계를 밝히세요.
 기록과 계획이 함께 요청되면 기록 제안을 먼저 만들고, 확정된 뒤 계획을 진행하도록 설명하세요.
@@ -89,8 +90,8 @@ propose 도구는 저장 완료가 아니라 사용자 확인이 필요한 제�
 ROLE_INSTRUCTIONS = {
     "meal": (
         "오늘·현재·최근의 섭취 기록을 묻거나 그 기록을 바탕으로 답하는 요청은 "
-        "반드시 read_intake 또는 read_recent_intake를 먼저 호출하세요. "
-        "조회 도구를 호출하지 않은 채 기록이 없거나 전달되지 않았다고 주장하지 마세요."
+        "서버가 제공한 verified_context의 scope가 fresh_current_request이면 그 최신 조회 결과를 사용하고, 없으면 반드시 read_intake 또는 read_recent_intake를 먼저 호출하세요. "
+        "verified_context 또는 조회 결과 없이 기록이 없거나 전달되지 않았다고 주장하지 마세요."
     ),
     "goal": "목표나 전략을 판단하기 전에 필요한 프로필·섭취·측정 이력을 도구로 확인하세요.",
     "evidence": "공식 근거를 묻는 요청은 search_evidence 결과만 사용하고 근거 부족을 숨기지 마세요.",
@@ -125,10 +126,12 @@ def _meal_allocation_is_unsupported(response: str, evidence: dict) -> bool:
 
 class DietTeam:
     def __init__(self, state, *, model_factory=None, repository=None, db=None, config=None,
-                 decision_client=None, jev_location=None, jev_mode="shadow", simple_meals_enabled=True):
+                 decision_client=None, jev_location=None, jev_mode="shadow", simple_meals_enabled=True, coaching_prefetch_enabled=True):
         if jev_location not in {None, "supervisor", "tools"} or jev_mode not in {"shadow", "enforce"}:
             raise ValueError("Invalid Jev experiment configuration")
         self.decision_client = decision_client
+        self.coaching_prefetch_enabled = coaching_prefetch_enabled
+        self.context_metrics = {"db_queries": 0, "cache_hits": 0, "prefetched": False}
         self.simple_meals_enabled = simple_meals_enabled
         self.jev_location = jev_location
         self.jev_mode = jev_mode
@@ -180,9 +183,13 @@ class DietTeam:
             for key, value in filters.items():
                 query = query.eq(key, value)
             return query.limit(100).execute().data
+        self.context_metrics["db_queries"] += 1
         return await asyncio.to_thread(execute)
 
     async def read_profile(self, args):
+        if self.profile is not None:
+            self.context_metrics["cache_hits"] += 1
+            return self.profile
         user = await self.rows("users", id=self.state["user_id"])
         strategies = await self.rows("diet_strategies", user_id=self.state["user_id"], is_active=True)
         if not user:
@@ -201,6 +208,10 @@ class DietTeam:
 
     async def read_intake(self, args):
         today = service_today().isoformat()
+        if self.intake is not None and self.intake["date"] == today:
+            self.context_metrics["cache_hits"] += 1
+            return self.intake
+        self.intake = None
         rows = await self.rows("meal_logs", user_id=self.state["user_id"], log_date=today)
         self.intake = {"date": today, "meals": rows,
                        "calories": sum(float(r["calories"]) for r in rows),
@@ -424,6 +435,34 @@ class DietTeam:
                  "evidence": ["search_evidence"]}[role]
         return [AgentTool(name, *specs[name], effect="proposal" if name.startswith("propose") else "read") for name in names]
 
+    def coaching_context_needed(self):
+        if not self.coaching_prefetch_enabled or self.state.get('requested_action') == 'record_only':
+            return False
+        if self.allowed is not None and not {'read_profile', 'read_intake'} <= self.allowed:
+            return False
+        message = self.state.get('message', '')
+        return (self.state.get('requested_action') == 'meal_plan'
+            or bool(re.search(r'(?:점심|저녁|아침|식단|메뉴).*(?:추천|조언)', message))
+            or bool(self.state.get('messages') and re.search(r'뷔페|일반식|먹어도|괜찮|그런가', message)))
+
+    async def coaching_context(self):
+        if not self.coaching_context_needed():
+            return None
+        from app.agents.execution_stream import emit_runtime_event
+        try:
+            for _ in range(2):
+                await self.budget.reserve('tool')
+            profile = await asyncio.wait_for(self.read_profile(Empty()), self.budget.remaining())
+            intake = await asyncio.wait_for(self.read_intake(Empty()), self.budget.remaining())
+            self.context_metrics['prefetched'] = True
+            await emit_runtime_event('coaching_context_ready', agent='meal')
+            return {'profile': profile, 'intake': intake, 'scope': 'fresh_current_request'}
+        except ExecutionStopped:
+            raise
+        except Exception:
+            # Never present an unavailable read as empty intake. Existing bounded tools may retry.
+            return {'status': 'unavailable', 'instruction': '조회 실패입니다. 도구로 재확인하고 실패하면 수치 기반 코칭을 보류하세요.'}
+
     def delegate_roles(self) -> list[str]:
         explicit = {"record_only": ["meal"], "meal_plan": ["meal"], "goal": ["goal"],
                     "evidence": ["evidence"]}.get(self.state.get("requested_action"))
@@ -499,11 +538,13 @@ class DietTeam:
                 if self.budget.persist:
                     await self.budget.persist(f"delegate:{selected}")
                 self.delegations[selected] = self.delegations.get(selected, 0) + 1
+                verified_context = await self.coaching_context() if selected == "meal" else None
                 result = await run_agent(model=self.model_factory(),
                     instruction=BASE_INSTRUCTION + f"\n담당: {selected}\n{ROLE_INSTRUCTIONS[selected]}",
                     request=json.dumps({"task": args.query, "original_request": self.state["message"],
                         "recent_messages": [str(m)[:2000] for m in self.state.get("messages", [])[-10:]],
-                        "previous_proposal": self.state.get("pending_proposal")}, ensure_ascii=False),
+                        "previous_proposal": self.state.get("pending_proposal"),
+                        "verified_context": verified_context}, ensure_ascii=False),
                     tools=self.tools(selected), allowed_tools=self.allowed, budget=self.budget, config=self.config,
                     decision_selector=self.decision_client.choose if self.decision_client and self.jev_location == "tools" else None,
                     selection_mode=self.jev_mode, agent_name=selected)
@@ -558,7 +599,7 @@ class DietTeam:
             "food_selection": self.food_selection if self.food_selection['items'] and not self.proposal else None,
             "pending_meals": proposal["payload"].get("meals") if proposal else None,
             "plan_date": proposal["payload"].get("log_date") if proposal else None,
-            "awaiting_confirmation": bool(proposal), "agent_events": self.events,
+            "awaiting_confirmation": bool(proposal), "agent_events": self.events + [{"type": "request_context_metrics", **self.context_metrics}],
             "execution_usage": {"model_calls": self.budget.model_calls, "tool_calls": self.budget.tool_calls,
                 "elapsed_seconds": self.previous_elapsed + time.monotonic() - self.budget.started,
                 "validation_attempts": self.validation_attempts, "replans": self.replans},

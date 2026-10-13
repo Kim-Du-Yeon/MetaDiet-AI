@@ -1,0 +1,21 @@
+{
+  "baseline": "b25d0b7",
+  "scope": "synthetic_scripted_model_query_counts",
+  "rows": [
+    {
+      "phase": "before",
+      "repeated_read_db_queries": 6,
+      "coaching_model_calls": 3,
+      "coaching_tool_budget": 3,
+      "coaching_db_queries": 3
+    },
+    {
+      "phase": "after",
+      "repeated_read_db_queries": 3,
+      "coaching_model_calls": 2,
+      "coaching_tool_budget": 3,
+      "coaching_db_queries": 3
+    }
+  ],
+  "limitations": "Scripted model paths demonstrate removed round trip, not guaranteed live model behavior. One ordinary request still needs 3 fresh DB reads."
+}

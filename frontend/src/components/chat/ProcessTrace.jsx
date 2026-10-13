@@ -2,6 +2,7 @@ import "./ProcessTrace.css";
 
 export default function ProcessTrace({ steps = [], running = false }) {
   if (!steps.length) return null;
+  if (running && steps[steps.length - 1]?.phase === "coaching_context") return <section className="process-trace is-running" aria-label="답변 준비 과정"><div className="process-trace__status" role="status">{steps[steps.length - 1].label}</div></section>;
   const content = <ol className="process-trace__list">{steps.map((step, index) => {
     const active = running && index === steps.length - 1;
     return <li className={`process-trace__step${active ? " is-active" : ""}`} key={`${step.phase}-${step.label}-${index}`}>

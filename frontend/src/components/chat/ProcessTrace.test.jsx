@@ -34,3 +34,11 @@ test("numbers streamed steps by their displayed order", () => {
   expect([...container.querySelectorAll(".process-trace__index")].map((node) => node.textContent))
     .toEqual(["01", "02", "03", "04"]);
 });
+
+
+test('coaching after a verified read shows one concise live status', () => {
+  render(<ProcessTrace running steps={[{phase:'intent',label:'요청 의도 분석 중'},
+    {phase:'coaching_context',label:'확인한 기록을 바탕으로 답변 준비 중'}]} />);
+  expect(screen.getByRole('status')).toHaveTextContent('확인한 기록을 바탕으로 답변 준비 중');
+  expect(screen.queryByText('요청 의도 분석 중')).not.toBeInTheDocument();
+});

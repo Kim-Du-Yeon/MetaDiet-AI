@@ -100,6 +100,8 @@ _TOOL_PHASES = {
 
 
 def progress_for_runtime_event(kind: str, **payload: Any) -> dict[str, Any] | None:
+    if kind == "coaching_context_ready":
+        return {"phase": "coaching_context", "label": "확인한 기록을 바탕으로 답변 준비 중"}
     if kind == "model_started" and payload.get("agent") == "supervisor":
         return {"phase": "intent", "label": "요청 의도 분석 중"}
     if kind == "delegated":
