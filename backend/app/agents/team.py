@@ -184,7 +184,9 @@ class DietTeam:
                 query = query.eq(key, value)
             return query.limit(100).execute().data
         self.context_metrics["db_queries"] += 1
-        return await asyncio.to_thread(execute)
+        from app.agents.execution_stream import measure_stage
+        async with measure_stage('db_read'):
+            return await asyncio.to_thread(execute)
 
     async def read_profile(self, args):
         if self.profile is not None:
@@ -613,6 +615,7 @@ TOOL_NAMES = {"read_profile", "read_intake", "read_measurements", "assess_goal_p
 
 
 async def team_node(state, config=None):
+    from app.agents.execution_stream import measure_stage
     if state.get("requested_action") == "weekly_review":
         from app.agents.weekly_deep import weekly_deep_node
         return await weekly_deep_node(state, config)
@@ -628,13 +631,17 @@ async def team_node(state, config=None):
     result = None
     try:
         try:
-            usage = await durable.update(seed=state.get("execution_usage") or {})
+            async with measure_stage('budget_storage'):
+                usage = await durable.update(seed=state.get("execution_usage") or {})
         except ExecutionStopped:
             raise
         except Exception:
             raise ExecutionStopped("budget_storage_unavailable") from None
         team = DietTeam({**state, "execution_usage": usage}, config=config)
-        team.budget.persist = durable.reserve
+        async def reserve(kind):
+            async with measure_stage('budget_storage'):
+                return await durable.reserve(kind)
+        team.budget.persist = reserve
         result = await team.execute()
     except ExecutionStopped as exc:
         result = {"response": "실행 한도 또는 상태 저장 오류로 제안을 보류했습니다.", "execution_status": "blocked",
@@ -643,7 +650,8 @@ async def team_node(state, config=None):
         # Normal suspension clears the active clock, excluding HITL waiting time.
         # A hard crash leaves it set: recovery conservatively counts that interval.
         try:
-            usage = await durable.update(finish=True)
+            async with measure_stage('budget_storage'):
+                usage = await durable.update(finish=True)
             if result is not None:
                 result["execution_usage"] = usage
         except Exception:

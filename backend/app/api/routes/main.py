@@ -265,11 +265,16 @@ def _sse(event: dict) -> str:
 
 
 async def _invoke_with_progress(graph, graph_input, config: dict, journal: ExecutionEventJournal):
+    from app.agents.execution_stream import measure_stage
     # Each actual invocation gets a distinct LangSmith root span, including Pod recovery.
     trace_id = uuid4()
     invocation_config = {**config, "run_id": trace_id,
                          "metadata": {**config.get("metadata", {}), "trace_id": str(trace_id)}}
     async def sink(kind: str, payload: dict):
+        if kind == 'stage_timing':
+            stage = payload['stage']
+            journal.timings[stage] = round(journal.timings.get(stage, 0) + payload['elapsed_ms'], 3)
+            return
         progress = progress_for_runtime_event(kind, **payload)
         if progress:
             previous = journal.events[-1] if journal.events else None
@@ -279,10 +284,12 @@ async def _invoke_with_progress(graph, graph_input, config: dict, journal: Execu
 
     token = set_event_sink(sink)
     try:
-        outcome = await graph.ainvoke(graph_input, config=invocation_config)
+        async with measure_stage('graph_total'):
+            outcome = await graph.ainvoke(graph_input, config=invocation_config)
         terminal_status = "blocked" if isinstance(outcome, dict) and outcome.get("execution_status") == "blocked" else "completed"
-        await graph.aupdate_state(config, {"execution_status": terminal_status, "execution_error": None,
-                                          "trace_id": str(trace_id)})
+        async with measure_stage('terminal_checkpoint'):
+            await graph.aupdate_state(config, {"execution_status": terminal_status, "execution_error": None,
+                                              "trace_id": str(trace_id)})
     except Exception:
         try:
             await graph.aupdate_state(config, {"execution_status": "failed", "execution_error": "execution_failed",
@@ -340,7 +347,9 @@ async def _follow_or_resume_run(graph, config: dict, run_id: str, after_seq: int
 
 
 async def _stream(graph, config: dict, run_id: str, after_seq: int = 0):
+    started = time.perf_counter()
     snap           = await graph.aget_state(config)
+    snapshot_ms = round((time.perf_counter() - started) * 1000, 3)
     is_interrupted = bool(snap.next) if snap else False
     sv             = _sv(snap)
     if sv.get("execution_status") == "failed":
@@ -374,12 +383,17 @@ async def _stream(graph, config: dict, run_id: str, after_seq: int = 0):
     # 이전 thread_id는 done 이벤트의 prev_thread_id로 프론트에 전달
     current_tid = config["configurable"]["thread_id"].split("_",1)[-1]
     new_tid = current_tid
+    stats_started = time.perf_counter()
     stats = await _public_stats(sv.get("user_id"))
+    journal = find_journal(run_id, config['configurable']['thread_id'])
+    timings = {**(journal.timings if journal else {}), 'response_snapshot': snapshot_ms,
+               'public_stats': round((time.perf_counter() - stats_started) * 1000, 3)}
     if after_seq < 100000:
         yield _sse({'type':'completed','agent_used':sv.get('agent_used',''),**stats,'pending_meals':pending,
             'pending_proposal':sv.get('pending_proposal'),'run_id':run_id,'trace_id':sv.get('trace_id'),'seq':100000,
             'food_selection': sv.get('food_selection'),
             'execution_usage':sv.get('execution_usage'),'awaiting_confirmation':sv.get('awaiting_confirmation',False),
+            'stage_timings_ms': timings,
             'plan_date':sv.get('plan_date'),'thread_id':new_tid,'prev_thread_id':None,'interrupted':is_interrupted})
 
 

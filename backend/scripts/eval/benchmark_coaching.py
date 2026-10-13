@@ -24,6 +24,7 @@ def run(token,payload):
         p=done['pending_proposal'];json_request(API+'/proposals/decision',token=token,method='POST',payload={'proposal_id':p['id'],'version':p['version'],'action':'cancel'})
     return {'first_event_ms':first,'first_answer_ms':answer,'total_ms':round((time.perf_counter()-started)*1000,1),
         'usage':done.get('execution_usage'),'trace_id':done.get('trace_id'),'answer_chars':len(content),
+        'stage_timings_ms':done.get('stage_timings_ms'),
         'progress':[e for e in events if e.get('type')=='progress'],'answer':content}
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--phase',choices=['before','after'],required=True);parser.add_argument('--repeats',type=int,default=3);parser.add_argument('--independent-queries',action='store_true');args=parser.parse_args()

@@ -123,9 +123,10 @@ async def run_agent(*, model, instruction: str, request: str,
             if decision_selector:
                 bound = model.bind_tools([tool.schema() for tool in turn_tools.values()]) if turn_tools else model
             await budget.reserve("model")
-            from app.agents.execution_stream import emit_runtime_event
+            from app.agents.execution_stream import emit_runtime_event, measure_stage
             await emit_runtime_event("model_started", agent=agent_name, context_verified=context_verified)
-            response = await asyncio.wait_for(bound.ainvoke(messages, config=config), budget.remaining())
+            async with measure_stage('model_' + agent_name):
+                response = await asyncio.wait_for(bound.ainvoke(messages, config=config), budget.remaining())
             messages.append(response)
             if getattr(response, "invalid_tool_calls", []):
                 raise ExecutionStopped("invalid_tool_call")

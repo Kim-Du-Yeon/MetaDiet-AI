@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import asyncio
+import time
+from contextlib import asynccontextmanager
 from contextvars import ContextVar
 from dataclasses import dataclass, field
 from typing import Any, AsyncIterator, Awaitable, Callable
@@ -15,6 +17,17 @@ async def emit_runtime_event(kind: str, **payload: Any) -> None:
     sink = _event_sink.get()
     if sink is not None:
         await sink(kind, payload)
+
+
+@asynccontextmanager
+async def measure_stage(stage: str):
+    """Fixed internal labels only; never include arguments, output or errors."""
+    started = time.perf_counter()
+    try:
+        yield
+    finally:
+        await emit_runtime_event('stage_timing', stage=stage,
+                                 elapsed_ms=round((time.perf_counter() - started) * 1000, 3))
 
 
 def set_event_sink(sink: EventSink):
@@ -31,6 +44,7 @@ class ExecutionEventJournal:
     events: list[dict[str, Any]] = field(default_factory=list)
     finished: bool = False
     task: asyncio.Task | None = None
+    timings: dict[str, float] = field(default_factory=dict)
     _condition: asyncio.Condition = field(default_factory=asyncio.Condition)
 
     async def publish(self, event_type: str, payload: dict[str, Any] | None = None) -> dict[str, Any]:
