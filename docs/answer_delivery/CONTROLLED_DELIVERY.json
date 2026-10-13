@@ -1,0 +1,67 @@
+{
+  "scope": "isolated_completed_answer_delivery_no_model_no_network",
+  "baseline": "cc30a62",
+  "rows": [
+    {
+      "words": 20,
+      "phase": "before",
+      "samples_ms": [
+        662.003,
+        666.428,
+        666.205
+      ],
+      "median_ms": 666.205
+    },
+    {
+      "words": 20,
+      "phase": "after",
+      "samples_ms": [
+        0.289,
+        0.222,
+        0.212
+      ],
+      "median_ms": 0.222
+    },
+    {
+      "words": 100,
+      "phase": "before",
+      "samples_ms": [
+        3332.275,
+        3331.992,
+        3332.59
+      ],
+      "median_ms": 3332.275
+    },
+    {
+      "words": 100,
+      "phase": "after",
+      "samples_ms": [
+        0.781,
+        0.724,
+        0.669
+      ],
+      "median_ms": 0.724
+    },
+    {
+      "words": 200,
+      "phase": "before",
+      "samples_ms": [
+        6662.031,
+        6666.146,
+        6664.409
+      ],
+      "median_ms": 6664.409
+    },
+    {
+      "words": 200,
+      "phase": "after",
+      "samples_ms": [
+        2.077,
+        1.372,
+        1.356
+      ],
+      "median_ms": 1.372
+    }
+  ],
+  "limitations": "Local loop timings are not public API latency. Identical answers isolate artificial pacing."
+}

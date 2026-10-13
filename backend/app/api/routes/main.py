@@ -365,7 +365,8 @@ async def _stream(graph, config: dict, run_id: str, after_seq: int = 0):
         if index <= after_seq:
             continue
         yield _sse({"type": "answer_delta", "content": word + " ", "run_id": run_id, "seq": index})
-        await asyncio.sleep(0.03)
+        # Yield cooperatively without adding artificial per-word latency.
+        await asyncio.sleep(0)
 
     # 저장 완료(pending=None, not interrupted)이면 새 thread_id 발급
     pending = sv.get("pending_meals")
