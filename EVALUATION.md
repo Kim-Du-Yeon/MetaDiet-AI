@@ -1,5 +1,9 @@
 # 2026-10-09 upgrade verification
 
+## First recommendation experiment (2026-10-13)
+
+[First coaching report](docs/first_coaching/README.md) contains a rotating three-arm actual-model comparison (18 responses), matched public multi-turn requests, blinded model rubric, stale-history/current-record checks, failure analysis and browser captures. Small synthetic samples are not real-user outcomes or p95 estimates.
+
 Gemini-only migration regression: 135 passed, 1 optional parser test skipped.
 Live Gemini Embedding 2 smoke test returned 3072 dimensions. Ragas now receives
 both an explicit Gemini judge and Gemini embeddings; implicit provider defaults

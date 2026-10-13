@@ -1,0 +1,90 @@
+{
+  "scope": "synthetic_public_matched_multiturn",
+  "summary": {
+    "before": {
+      "first": {
+        "samples": 6,
+        "total_ms": 20698.1,
+        "first_answer_ms": 20052.35,
+        "model_calls": [
+          2,
+          2,
+          2,
+          2,
+          2,
+          2
+        ],
+        "stages_ms": {
+          "model_supervisor": 4739.4439999999995,
+          "model_meal": 7417.5815,
+          "budget_storage": 4020.1375,
+          "db_read": 480.115,
+          "graph_total": 17789.122499999998
+        }
+      },
+      "followup": {
+        "samples": 6,
+        "total_ms": 9722.0,
+        "first_answer_ms": 9319.400000000001,
+        "model_calls": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "stages_ms": {
+          "model_supervisor": 0.0,
+          "model_meal": 3353.059,
+          "budget_storage": 2509.5645,
+          "db_read": 703.968,
+          "graph_total": 7862.34
+        }
+      }
+    },
+    "after": {
+      "first": {
+        "samples": 6,
+        "total_ms": 10300.349999999999,
+        "first_answer_ms": 9899.599999999999,
+        "model_calls": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "stages_ms": {
+          "model_supervisor": 0.0,
+          "model_meal": 3902.2614999999996,
+          "budget_storage": 2461.916,
+          "db_read": 417.19,
+          "graph_total": 8269.582999999999
+        }
+      },
+      "followup": {
+        "samples": 6,
+        "total_ms": 9581.2,
+        "first_answer_ms": 9171.75,
+        "model_calls": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "stages_ms": {
+          "model_supervisor": 0.0,
+          "model_meal": 3402.2085,
+          "budget_storage": 2471.4875,
+          "db_read": 464.14599999999996,
+          "graph_total": 7531.941
+        }
+      }
+    }
+  },
+  "limitations": "Six samples per turn/phase, warm server, sequential deployment comparison. Nested stages are not additive. No p95 or real-user claim."
+}

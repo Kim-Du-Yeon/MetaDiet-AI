@@ -1,5 +1,9 @@
 # 2026-10-09 upgrade status
 
+## First recommendation optimization (2026-10-13)
+
+`simple_recommendation` uses a full-message allowlist for simple today breakfast/lunch/dinner advice. Only fresh verified request context enables direct read-only meal execution. `FIRST_COACHING_MODE=low` removes Supervisor delegation and uses low thinking; `default` retains provider reasoning, `off` restores delegation. Complex plans, mutations, pending approvals and failed context reads keep the existing path. No cross-request intake cache. [Evidence and rollback](docs/first_coaching/README.md).
+
 Generation, Vision, online validation and offline judges use Gemini. Retrieval
 and Ragas embeddings now use `app/core/embeddings.py` (Gemini Embedding 2,
 3072 dimensions by default). No application OpenAI key or direct OpenAI SDK

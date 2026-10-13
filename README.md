@@ -1,5 +1,7 @@
 # MetaDiet AI
 
+최신 성능 실험: [첫 식사 추천의 모델 호출·추론 최적화와 검증 기록](docs/first_coaching/README.md).
+
 MetaDiet AI는 식사 기록, 체중·인바디 추세, 장기 목표와 영양 근거를 함께 사용하는 **LangGraph 기반 멀티에이전트 식단 코칭 서비스**입니다. 자연어와 사진 입력을 분석하되 실제 저장과 전략 변경은 사용자가 확인한 proposal만 반영합니다.
 
 - 공개 베타 UI: [metadiet-web.onrender.com](https://metadiet-web.onrender.com)
