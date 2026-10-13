@@ -561,7 +561,25 @@ class DietTeam:
                 "evidence": "식단 생성 없이 공식 근거 자체를 설명하는 질문 담당",
             }[role]
             delegates.append(AgentTool(f"delegate_{role}", description, Query, delegate, "delegate"))
-        result = await run_agent(model=self.model_factory(), instruction=BASE_INSTRUCTION +
+        from app.agents.coaching_route import simple_followup
+        direct = context_verified and simple_followup(self.state) and self.decision_client is None
+        if direct:
+            result = await run_agent(model=self.model_factory(),
+                instruction=BASE_INSTRUCTION + '\n담당: meal\n' + ROLE_INSTRUCTIONS['meal'] +
+                    '\n읽기 전용 후속 조언입니다. 질문에 바로 답하고 최신 verified_context를 우선하세요. 저장이나 계획 생성은 하지 마세요.',
+                request=json.dumps({'message': self.state['message'],
+                    'recent_messages': [str(m)[:2000] for m in self.state.get('messages', [])[-10:]],
+                    'verified_context': verified_context}, ensure_ascii=False),
+                tools=[tool for tool in self.tools('meal') if tool.effect == 'read'],
+                allowed_tools=self.allowed, budget=self.budget, config=self.config,
+                agent_name='meal', context_verified=True)
+        else:
+            result = await self.run_supervisor(delegates, verified_context, context_verified)
+        self.events.extend({**event, 'agent': 'meal' if direct else 'supervisor'} for event in result.events)
+        return await self.finalize_result(result, 'meal' if direct else 'supervisor')
+
+    async def run_supervisor(self, delegates, verified_context, context_verified):
+        return await run_agent(model=self.model_factory(), instruction=BASE_INSTRUCTION +
             "\n당신은 Supervisor입니다. 필요한 전문 Agent에 위임하고 결과에 따라 다음 작업을 결정하세요. 제안이 만들어지면 추가 제안으로 덮어쓰지 말고 사용자 확인을 요청하세요.",
             request=json.dumps({"message": self.state["message"], "recent_messages": [str(m)[:2000] for m in self.state.get("messages", [])[-10:]],
                 "verified_context": verified_context}, ensure_ascii=False),
@@ -569,7 +587,7 @@ class DietTeam:
             decision_selector=self.decision_client.choose if self.decision_client and self.jev_location == "supervisor" else None,
             selection_mode=self.jev_mode, select_first_only=True, finish_after_successful_delegate=True,
             agent_name="supervisor", context_verified=context_verified)
-        self.events.extend({**event, "agent": "supervisor"} for event in result.events)
+    async def finalize_result(self, result, agent_name):
         proposal = self.state.get("pending_proposal")
         if result.status == "completed" and self.proposal:
             digest = hashlib.sha256(json.dumps(self.proposal, sort_keys=True).encode()).hexdigest()
@@ -599,7 +617,7 @@ class DietTeam:
                         "식품성분표 수치를 바탕으로 저녁 식단을 다시 계산하겠습니다.")
         if proposal and not self.proposal:
             response += "\n\n기존 확인 대기 제안은 유지됩니다. 확정·수정·취소를 선택해주세요."
-        return {"response": response, "agent_used": "supervisor", "pending_proposal": proposal,
+        return {"response": response, "agent_used": agent_name, "pending_proposal": proposal,
             "food_selection": self.food_selection if self.food_selection['items'] and not self.proposal else None,
             "pending_meals": proposal["payload"].get("meals") if proposal else None,
             "plan_date": proposal["payload"].get("log_date") if proposal else None,

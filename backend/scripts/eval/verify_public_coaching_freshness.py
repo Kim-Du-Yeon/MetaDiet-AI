@@ -12,7 +12,7 @@ from check_render_beta import stream
 _cleanup = None
 
 
-def verify(output_dir=ROOT / 'docs/answer_delivery'):
+def verify(output_dir=ROOT / 'docs/answer_delivery', direct_followup=False):
     global _cleanup
     load_env(ROOT / 'backend/.env')
     load_env(ROOT / 'backend/.env.selection-browser')
@@ -50,10 +50,15 @@ def verify(output_dir=ROOT / 'docs/answer_delivery'):
     expected = sum(r['calories'] for r in records())
     history = [{'role': 'user', 'content': '점심 추천해줘'},
                {'role': 'assistant', 'content': '이전 조회에서는 오늘 섭취가 0kcal였습니다.'}]
-    row = run(token, {'message': '그럼 첫 문장을 "오늘 확정 섭취: N kcal" 형식으로 현재 확정 열량을 적고 점심 조언만 해줘. 계획 카드는 만들지 마.',
+    message = ('그럼 한식뷔페 먹어도 괜찮아? 첫 문장에 "오늘 섭취: N kcal" 형식으로 현재 섭취 열량을 적어줘.' if direct_followup else
+               '그럼 첫 문장을 "오늘 확정 섭취: N kcal" 형식으로 현재 확정 열량을 적고 점심 조언만 해줘. 계획 카드는 만들지 마.')
+    row = run(token, {'message': message,
                       'messages': history, 'thread_id': 'other-' + uuid4().hex, 'stream_run_id': str(uuid4()), 'after_seq': 0})
     assert any(e.get('phase') == 'coaching_context' for e in row['progress'])
-    current_intake = re.search(r'오늘\s*확정\s*섭취\s*:\s*(\d+(?:\.\d+)?)\s*kcal',
+    if direct_followup:
+        assert row['stage_timings_ms'].get('model_meal', 0) > 0
+        assert 'model_supervisor' not in row['stage_timings_ms']
+    current_intake = re.search(r'오늘\s*(?:확정\s*)?섭취\s*:\s*(\d+(?:\.\d+)?)\s*kcal',
                                row['answer'].replace(',', '').replace('**', ''), re.I)
     assert current_intake and abs(float(current_intake.group(1)) - expected) <= 1
     json_request(API + '/meal/delete/' + records()[0]['id'], token=token, method='DELETE')
@@ -61,6 +66,7 @@ def verify(output_dir=ROOT / 'docs/answer_delivery'):
     state = json_request(API + '/session/restore/freshness-refresh', token=token)
     assert state['today_calories'] == 0
     report = {'scope': 'synthetic_public_approval_and_context_freshness', 'cancel_no_write': True,
+              'direct_followup_verified': direct_followup,
               'revision_before_confirmation_no_write': True, 'duplicate_confirm_rows': 1,
               'confirmed_revised_intake_seen_despite_stale_messages': True, 'trace_id': row['trace_id'],
               'delete_and_refreshed_state_zero': True,
@@ -74,7 +80,9 @@ if __name__ == '__main__':
     try:
         parser = argparse.ArgumentParser()
         parser.add_argument('--output-dir', type=Path, default=ROOT / 'docs/answer_delivery')
-        verify(parser.parse_args().output_dir)
+        parser.add_argument('--direct-followup', action='store_true')
+        args = parser.parse_args()
+        verify(args.output_dir, args.direct_followup)
     finally:
         if _cleanup:
             _cleanup()

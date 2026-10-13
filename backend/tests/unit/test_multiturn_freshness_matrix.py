@@ -9,7 +9,8 @@ MODES=['confirmed','revised','deleted','other_thread','goal_changed','new_day','
 CASES=[(f'{mode}-{meal}',mode,meal) for mode in MODES for meal in ['점심','저녁']]
 @pytest.mark.parametrize('repeat',range(5))
 @pytest.mark.parametrize('name,mode,meal',CASES)
-async def test_multiturn_latest_context_and_no_unconfirmed_writes(monkeypatch,name,mode,meal,repeat):
+@pytest.mark.parametrize('direct_followup',[False, True])
+async def test_multiturn_latest_context_and_no_unconfirmed_writes(monkeypatch,name,mode,meal,repeat,direct_followup):
  day=[date(2026,10,13)];monkeypatch.setattr('app.agents.team.service_today',lambda:day[0])
  db={'calories':300,'target':2000};captured=[]
  class Model:
@@ -24,7 +25,8 @@ async def test_multiturn_latest_context_and_no_unconfirmed_writes(monkeypatch,na
   return [] if db['calories']==0 else [{'calories':db['calories']}]
  user=['u1'];repo=AsyncMock();history=[]
  async def turn(thread):
-  team=DietTeam({'user_id':user[0],'message':meal+' 추천해줘','messages':history,'requested_action':'meal_plan','thread_id':thread},repository=repo,db=object(),model_factory=Model)
+  followup = direct_followup and bool(history)
+  team=DietTeam({'user_id':user[0],'message':'그럼 한식뷔페 먹어도 괜찮아?' if followup else meal+' 추천해줘','messages':history,'requested_action':None if followup else 'meal_plan','thread_id':thread},repository=repo,db=object(),model_factory=Model)
   team.rows=AsyncMock(side_effect=rows)
   result=await team.execute()
   return team,result
@@ -37,7 +39,8 @@ async def test_multiturn_latest_context_and_no_unconfirmed_writes(monkeypatch,na
  original_rows=rows
  if mode=='read_failed':
   async def rows(*args,**kwargs):raise ConnectionError('synthetic unavailable')
- second,_=await turn('other' if mode=='other_thread' else 't')
+ second,result=await turn('other' if mode=='other_thread' else 't')
+ assert result['agent_used'] == ('meal' if direct_followup and mode!='read_failed' else 'supervisor')
  ctx=captured[-1]['verified_context']
  assert captured[-1]['recent_messages']
  if mode=='read_failed':
