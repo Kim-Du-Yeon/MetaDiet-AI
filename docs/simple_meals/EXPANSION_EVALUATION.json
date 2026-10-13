@@ -1,0 +1,568 @@
+{
+  "scope": "synthetic_expansion_csv_release_gate",
+  "baseline_commit": "d7f902a",
+  "domain_writes": 0,
+  "samples": [
+    {
+      "message": "고구마 사과 우유",
+      "previous_simple_supported": false,
+      "grams": [
+        150.0,
+        200.0,
+        200.0
+      ],
+      "calories": 482.5,
+      "status": "completed",
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.0,
+        "validation_attempts": 0,
+        "replans": 0
+      }
+    },
+    {
+      "message": "계란후라이 식빵 두장 플레인 요거트",
+      "previous_simple_supported": false,
+      "grams": [
+        50.0,
+        60.0,
+        100.0
+      ],
+      "calories": 359.4,
+      "status": "completed",
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.0,
+        "validation_attempts": 0,
+        "replans": 0
+      }
+    },
+    {
+      "message": "오트밀 바나나 아몬드",
+      "previous_simple_supported": false,
+      "grams": [
+        30.0,
+        100.0,
+        20.0
+      ],
+      "calories": 307.8,
+      "status": "completed",
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.01500000013038516,
+        "validation_attempts": 0,
+        "replans": 0
+      }
+    },
+    {
+      "message": "방울 토마토 다섯개 브로콜리 오이",
+      "previous_simple_supported": false,
+      "grams": [
+        75.0,
+        80.0,
+        150.0
+      ],
+      "calories": 60.7,
+      "status": "completed",
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.0,
+        "validation_attempts": 0,
+        "replans": 0
+      }
+    },
+    {
+      "message": "닭 가슴살, 밥 반공기, 깍두기",
+      "previous_simple_supported": false,
+      "grams": [
+        100.0,
+        100.0,
+        40.0
+      ],
+      "calories": 289.0,
+      "status": "completed",
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.0,
+        "validation_attempts": 0,
+        "replans": 0
+      }
+    },
+    {
+      "message": "고구마랑 우유 먹었어요",
+      "previous_simple_supported": false,
+      "grams": [
+        150.0,
+        200.0
+      ],
+      "calories": 378.5,
+      "status": "completed",
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.0,
+        "validation_attempts": 0,
+        "replans": 0
+      }
+    },
+    {
+      "message": "삶은계란 2개와 사과 반개",
+      "previous_simple_supported": false,
+      "grams": [
+        100.0,
+        100.0
+      ],
+      "calories": 197.0,
+      "status": "completed",
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.0,
+        "validation_attempts": 0,
+        "replans": 0
+      }
+    },
+    {
+      "message": "고구마 2개 180g 우유 한컵",
+      "previous_simple_supported": false,
+      "grams": [
+        180.0,
+        200.0
+      ],
+      "calories": 427.4,
+      "status": "completed",
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.0,
+        "validation_attempts": 0,
+        "replans": 0
+      }
+    },
+    {
+      "message": "닭가슴살 계란후라이 브로콜리",
+      "previous_simple_supported": false,
+      "grams": [
+        100.0,
+        50.0,
+        80.0
+      ],
+      "calories": 252.4,
+      "status": "completed",
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.0,
+        "validation_attempts": 0,
+        "replans": 0
+      }
+    }
+  ],
+  "negative_cases_preserved": [
+    "고구마빵 우유",
+    "그릭요거트",
+    "우유 200ml",
+    "사과주스",
+    "밥하고 피자",
+    "계란후라이 추천해줘",
+    "아몬드 -2개"
+  ],
+  "reviewed_standard_mappings": [
+    {
+      "aliases": [
+        "생 닭가슴살",
+        "닭가슴살 생것"
+      ],
+      "canonical": "닭고기, 가슴, 생것",
+      "default_g": 100,
+      "unit": "개",
+      "food_id": "csv:43150ae66cb9710b322916f2",
+      "calories": 106.0
+    },
+    {
+      "aliases": [
+        "구운 닭가슴살",
+        "닭가슴살 구운것"
+      ],
+      "canonical": "닭고기, 가슴, 구운것(팬)",
+      "default_g": 100,
+      "unit": "개",
+      "food_id": "csv:bfdb7a950051e5ac1afb6dbe",
+      "calories": 164.0
+    },
+    {
+      "aliases": [
+        "삶은 닭가슴살",
+        "닭가슴살",
+        "닭 가슴살",
+        "닭가슴",
+        "달각슴살",
+        "닭가슴샬",
+        "닭가슴삶"
+      ],
+      "canonical": "닭고기, 가슴, 삶은것",
+      "default_g": 100,
+      "unit": "개",
+      "food_id": "csv:cd654811eae047f62e118abe",
+      "calories": 127.0
+    },
+    {
+      "aliases": [
+        "현미밥"
+      ],
+      "canonical": "멥쌀, 현미, 밥",
+      "default_g": 200,
+      "unit": "공기",
+      "food_id": "csv:deac1220a778f366eb503483",
+      "calories": 332.0
+    },
+    {
+      "aliases": [
+        "쌀밥",
+        "백미밥",
+        "밥"
+      ],
+      "canonical": "멥쌀, 백미, 밥",
+      "default_g": 200,
+      "unit": "공기",
+      "food_id": "csv:cef90c9133f4c4d1e4f3d850",
+      "calories": 292.0
+    },
+    {
+      "aliases": [
+        "배추김치",
+        "배추 김치",
+        "김치"
+      ],
+      "canonical": "김치, 배추 김치",
+      "default_g": 40,
+      "unit": "회분",
+      "food_id": "csv:5e4235f1f26bce88c8533900",
+      "calories": 15.2
+    },
+    {
+      "aliases": [
+        "삶은 계란",
+        "삶은 달걀",
+        "삶은계란",
+        "삶은달걀",
+        "계란",
+        "달걀",
+        "달걀삶은것"
+      ],
+      "canonical": "달걀, 삶은것",
+      "default_g": 50,
+      "unit": "개",
+      "food_id": "csv:1d46be1c767a3fc994d496d3",
+      "calories": 72.5
+    },
+    {
+      "aliases": [
+        "계란후라이",
+        "계란 후라이",
+        "계란프라이",
+        "계란 프라이",
+        "달걀프라이",
+        "달걀 프라이"
+      ],
+      "canonical": "달걀, 부침(달걀프라이)",
+      "default_g": 50,
+      "unit": "개",
+      "food_id": "csv:b157ce27cfe5daabc5e3e29e",
+      "calories": 103.0
+    },
+    {
+      "aliases": [
+        "고등어구이",
+        "구운 고등어"
+      ],
+      "canonical": "고등어, 구운것",
+      "default_g": 100,
+      "unit": "회분",
+      "food_id": "csv:ae55613be8e0b1ab24566abe",
+      "calories": 264.0
+    },
+    {
+      "aliases": [
+        "삼겹살구이",
+        "구운 삼겹살"
+      ],
+      "canonical": "돼지고기, 삼겹살, 구운것(팬)",
+      "default_g": 100,
+      "unit": "회분",
+      "food_id": "csv:f8be30956771d4f085625c0f",
+      "calories": 484.0
+    },
+    {
+      "aliases": [
+        "바나나"
+      ],
+      "canonical": "바나나, 생것",
+      "default_g": 100,
+      "unit": "개",
+      "food_id": "csv:6c175b24938a7e6336f1fab3",
+      "calories": 77.0
+    },
+    {
+      "aliases": [
+        "두부"
+      ],
+      "canonical": "두부",
+      "default_g": 100,
+      "unit": "회분",
+      "food_id": "csv:3b1eddf75bb863c1d03db4b3",
+      "calories": 97.0
+    },
+    {
+      "aliases": [
+        "찐 고구마",
+        "찐고구마",
+        "고구마",
+        "고구먀"
+      ],
+      "canonical": "고구마, 찐것",
+      "default_g": 150,
+      "unit": "개",
+      "food_id": "csv:f3ee6d1ba92dd28b87ab5a2d",
+      "calories": 244.5
+    },
+    {
+      "aliases": [
+        "찐 감자",
+        "찐감자",
+        "감자"
+      ],
+      "canonical": "감자, 대지, 찐것",
+      "default_g": 150,
+      "unit": "개",
+      "food_id": "csv:a5cee850e9453f49b108d2e7",
+      "calories": 120.0
+    },
+    {
+      "aliases": [
+        "군고구마",
+        "구운 고구마",
+        "구운고구마"
+      ],
+      "canonical": "고구마, 구운것",
+      "default_g": 150,
+      "unit": "개",
+      "food_id": "csv:c91095adbecff6a33cc7112a",
+      "calories": 282.0
+    },
+    {
+      "aliases": [
+        "사과"
+      ],
+      "canonical": "사과, 생것",
+      "default_g": 200,
+      "unit": "개",
+      "food_id": "csv:6c66af695f8fc48e2f0c48ee",
+      "calories": 104.0
+    },
+    {
+      "aliases": [
+        "귤"
+      ],
+      "canonical": "귤, 온주밀감, 생것",
+      "default_g": 80,
+      "unit": "개",
+      "food_id": "csv:eb6a74e70cb274fe3946153a",
+      "calories": 31.2
+    },
+    {
+      "aliases": [
+        "딸기"
+      ],
+      "canonical": "딸기, 개량종, 생것",
+      "default_g": 20,
+      "unit": "개",
+      "food_id": "csv:2febc325b0ab041d17115fad",
+      "calories": 7.2
+    },
+    {
+      "aliases": [
+        "방울토마토",
+        "방울 토마토"
+      ],
+      "canonical": "토마토, 방울토마토, 생것",
+      "default_g": 15,
+      "unit": "개",
+      "food_id": "csv:177245f4668477f69476d763",
+      "calories": 3.8
+    },
+    {
+      "aliases": [
+        "토마토"
+      ],
+      "canonical": "토마토, 생것",
+      "default_g": 150,
+      "unit": "개",
+      "food_id": "csv:bb463d98490e7c6b2175120c",
+      "calories": 28.5
+    },
+    {
+      "aliases": [
+        "아보카도"
+      ],
+      "canonical": "아보카도, 생것",
+      "default_g": 100,
+      "unit": "개",
+      "food_id": "csv:9de62df7f2d609d3d4a87e2a",
+      "calories": 160.0
+    },
+    {
+      "aliases": [
+        "저지방 우유",
+        "저지방우유"
+      ],
+      "canonical": "우유, 저지방우유",
+      "default_g": 200,
+      "unit": "컵",
+      "food_id": "csv:675bafa346544bcc556609dd",
+      "calories": 92.0
+    },
+    {
+      "aliases": [
+        "우유"
+      ],
+      "canonical": "우유",
+      "default_g": 200,
+      "unit": "컵",
+      "food_id": "csv:2b7e75051be2c51a0337cb5b",
+      "calories": 134.0
+    },
+    {
+      "aliases": [
+        "플레인 요거트",
+        "플레인요거트",
+        "플레인 요구르트",
+        "요거트",
+        "요구르트",
+        "요거뜨"
+      ],
+      "canonical": "요구르트, 호상, 플레인",
+      "default_g": 100,
+      "unit": "회분",
+      "food_id": "csv:8471985b2f94289e8c9857e0",
+      "calories": 86.0
+    },
+    {
+      "aliases": [
+        "식빵"
+      ],
+      "canonical": "빵, 식빵, 우유",
+      "default_g": 30,
+      "unit": "장",
+      "food_id": "csv:0b39bd81fbf7d46f325795aa",
+      "calories": 85.2
+    },
+    {
+      "aliases": [
+        "오트밀",
+        "오트 밀",
+        "오트밀가루"
+      ],
+      "canonical": "귀리, 오트밀",
+      "default_g": 30,
+      "unit": "회분",
+      "food_id": "csv:65c445406b067253ace76b57",
+      "calories": 114.6
+    },
+    {
+      "aliases": [
+        "데친 브로콜리",
+        "브로콜리",
+        "브로컬리"
+      ],
+      "canonical": "브로콜리, 데친것",
+      "default_g": 80,
+      "unit": "회분",
+      "food_id": "csv:0a1bbbd28fad6e72c7bbc6b2",
+      "calories": 22.4
+    },
+    {
+      "aliases": [
+        "오이"
+      ],
+      "canonical": "오이, 다다기, 생것",
+      "default_g": 150,
+      "unit": "개",
+      "food_id": "csv:bbf2ae1262d55b36b2c7e67d",
+      "calories": 19.5
+    },
+    {
+      "aliases": [
+        "당근"
+      ],
+      "canonical": "당근, 뿌리, 생것",
+      "default_g": 100,
+      "unit": "개",
+      "food_id": "csv:c673115926674bf755706ea3",
+      "calories": 31.0
+    },
+    {
+      "aliases": [
+        "아몬드"
+      ],
+      "canonical": "아몬드, 말린것",
+      "default_g": 20,
+      "unit": "회분",
+      "food_id": "csv:3d739c0ef70519a283c34d83",
+      "calories": 116.2
+    },
+    {
+      "aliases": [
+        "호두"
+      ],
+      "canonical": "호두, 말린것",
+      "default_g": 20,
+      "unit": "회분",
+      "food_id": "csv:0145a3b1ea39d12d1029293b",
+      "calories": 137.6
+    },
+    {
+      "aliases": [
+        "볶은 땅콩",
+        "땅콩"
+      ],
+      "canonical": "땅콩, 볶은것",
+      "default_g": 20,
+      "unit": "회분",
+      "food_id": "csv:62add61ff78b747913563477",
+      "calories": 113.4
+    },
+    {
+      "aliases": [
+        "조미김",
+        "김"
+      ],
+      "canonical": "김, 조미김, 구운것",
+      "default_g": 5,
+      "unit": "회분",
+      "food_id": "csv:2c1c1aa48b50e31574fe0740",
+      "calories": 15.3
+    },
+    {
+      "aliases": [
+        "깍두기"
+      ],
+      "canonical": "김치, 깍두기",
+      "default_g": 40,
+      "unit": "회분",
+      "food_id": "csv:af45fb891a04a59d5d4f8bc7",
+      "calories": 16.0
+    }
+  ],
+  "mapping_count_including_mfds": 35,
+  "limitations": [
+    "App serving assumptions, not universal serving sizes.",
+    "Baseline support means deterministic parser coverage, not prior Agent failure.",
+    "No live HTTP latency or real-user outcomes measured."
+  ]
+}

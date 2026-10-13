@@ -1,6 +1,44 @@
 import pytest
-from app.tools.simple_meals import parse_simple_meal, calculate_simple_meal
+from app.tools.simple_meals import PORTIONS, parse_simple_meal, calculate_simple_meal
 from app.tools.food_catalog import FoodCatalog
+
+
+@pytest.mark.parametrize('message,grams', [
+    ('고구마 사과 우유', [150, 200, 200]),
+    ('계란후라이 식빵 두장 플레인 요거트', [50, 60, 100]),
+    ('오트밀 바나나 아몬드', [30, 100, 20]),
+    ('방울 토마토 다섯개 브로콜리 오이', [75, 80, 150]),
+    ('닭 가슴살, 밥 반공기, 깍두기', [100, 100, 40]),
+    ('고구마랑 우유 먹었어요', [150, 200]),
+    ('삶은계란 2개와 사과 반개', [100, 100]),
+    ('고구마 2개 180g 우유 한컵', [180, 200]),
+    ('닭가슴살 계란후라이 브로콜리', [100, 50, 80]),
+])
+@pytest.mark.asyncio
+async def test_expanded_everyday_inputs_need_no_question_and_use_real_catalog(message, grams):
+    parsed = parse_simple_meal(message)
+    assert parsed is not None
+    assert [i['quantity_g'] for i in parsed['items']] == grams
+    result = await calculate_simple_meal(parsed, FoodCatalog())
+    assert len(result['meals']) == len(grams)
+    assert all(m['source'] == 'csv' and m['calories'] >= 0 for m in result['meals'])
+
+
+@pytest.mark.parametrize('message', ['고구마빵 우유', '그릭요거트', '우유 200ml',
+    '사과주스', '밥하고 피자', '계란후라이 추천해줘', '아몬드 -2개'])
+def test_expansion_never_turns_unknown_product_or_unit_into_partial_meal(message):
+    assert parse_simple_meal(message) is None
+
+
+@pytest.mark.parametrize('aliases,canonical,grams,unit,food_id', [p for p in PORTIONS if not p[4]])
+@pytest.mark.asyncio
+async def test_every_standard_mapping_has_unique_complete_catalog_nutrients(aliases, canonical, grams, unit, food_id):
+    # A release gate against misspelled catalog names, missing nutrients, or duplicate rows.
+    result = await calculate_simple_meal(parse_simple_meal(aliases[0]), FoodCatalog())
+    meal = result['meals'][0]
+    assert meal['food_name'] == canonical
+    assert meal['quantity_g'] == grams
+    assert all(meal[k] >= 0 for k in ('calories', 'protein_g', 'carbs_g', 'fat_g'))
 
 
 @pytest.mark.parametrize('message,grams', [
