@@ -33,6 +33,23 @@ def test_explicit_cooking_wins():
 
 
 @pytest.mark.asyncio
+async def test_ricepaper_uses_reviewed_dry_wrapper_not_name_only_outlier():
+    from unittest.mock import AsyncMock
+    catalog = AsyncMock()
+    catalog.lookup.return_value = {
+        'food_name': '라이스페이퍼', 'quantity_g': 80,
+        'calories': 272, 'carbs_g': 68, 'protein_g': .4, 'fat_g': 0,
+        'source': 'mfds', 'food_id': 'mfds:P108-007000300-0013',
+        'nutrition_metadata': {},
+    }
+    result = await calculate_simple_meal(parse_simple_meal('라이스페이퍼 8장'), catalog)
+    catalog.lookup.assert_awaited_once_with('mfds:P108-007000300-0013', 80)
+    catalog.search.assert_not_awaited()
+    assert result['meals'][0]['calories'] == 272
+    assert result['meals'][0]['nutrition_metadata']['portion']['representative'] is True
+
+
+@pytest.mark.asyncio
 async def test_fast_path_creates_only_pending_proposal_without_model_or_domain_write():
     from unittest.mock import AsyncMock
     from app.agents.team import DietTeam
