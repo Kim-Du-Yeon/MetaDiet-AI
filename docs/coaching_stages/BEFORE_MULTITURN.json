@@ -1,0 +1,634 @@
+{
+  "scope": "synthetic_public_gemini_with_messages",
+  "phase": "before",
+  "dialogs": 6,
+  "samples": 12,
+  "rows": [
+    {
+      "first_event_ms": 6083.6,
+      "first_answer_ms": 23363.2,
+      "total_ms": 23962.9,
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 18.684972000000002
+      },
+      "trace_id": "8fdf04e5-d4a8-4548-84d8-84af83b461fe",
+      "answer_chars": 221,
+      "stage_timings_ms": {
+        "budget_storage": 6847.668,
+        "db_read": 429.799,
+        "model_supervisor": 5563.274,
+        "model_meal": 5710.877,
+        "graph_total": 20654.698,
+        "terminal_checkpoint": 219.366,
+        "response_snapshot": 72.784,
+        "public_stats": 526.162
+      },
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "1dfddc94-088c-437f-b62e-a36d1ef41763",
+          "seq": 1,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        },
+        {
+          "type": "progress",
+          "run_id": "1dfddc94-088c-437f-b62e-a36d1ef41763",
+          "seq": 2,
+          "phase": "delegation",
+          "label": "식사 전문 Agent에 위임 중",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "1dfddc94-088c-437f-b62e-a36d1ef41763",
+          "seq": 3,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        }
+      ],
+      "answer": "체중 감량을 위한 점심으로는 밥 한 공기 정도의 복합 탄수화물에 닭가슴살, 생선, 두부, 달걀 등 기름기 적은 단백질 반찬을 곁들이는 구성을 추천합니다. 여기에 신선한 채소나 나물 반찬을 함께 드시면 포만감을 오래 유지하고 균형 잡힌 영양 섭취에 도움이 됩니다. 외식을 하실 경우 찌개류보다는 덮밥(소스 적게), 쌈밥, 백반 정식처럼 단백질과 채소를 골고루 챙길 수 있는 메뉴를 선택해 보세요. ",
+      "scenario": "lunch_buffet",
+      "repeat": 0,
+      "turn": 0,
+      "history_messages": 0,
+      "delivery_tail_ms": 599.7
+    },
+    {
+      "first_event_ms": 5213.9,
+      "first_answer_ms": 17314.6,
+      "total_ms": 18230.0,
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 13.974017
+      },
+      "trace_id": "6ac1187b-58aa-4506-8ad1-c0924f7a1a05",
+      "answer_chars": 211,
+      "stage_timings_ms": {
+        "budget_storage": 4310.824,
+        "db_read": 496.758,
+        "model_supervisor": 9352.85,
+        "graph_total": 15683.302,
+        "terminal_checkpoint": 219.473,
+        "response_snapshot": 72.654,
+        "public_stats": 841.121
+      },
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "998e846f-bea9-45a1-8ed4-a9a94e1cfc8a",
+          "seq": 1,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        }
+      ],
+      "answer": "네, 한식뷔페에서 한 접시로 양을 정해 드시는 것은 훌륭한 조절 방법입니다. \n\n접시를 채우실 때 밥은 평소 드시는 밥 한 공기(약 200g) 이하로 담고, 나물이나 샐러드 등 채소류와 기름기 적은 고기·생선·두부 같은 단백질 반찬 위주로 구성해 보세요. 튀김류나 양념이 강한 반찬, 국물류만 조금 주의해서 덜어 드시면 감량 중에도 균형 잡힌 든든한 식사를 하실 수 있습니다. ",
+      "scenario": "lunch_buffet",
+      "repeat": 0,
+      "turn": 1,
+      "history_messages": 2,
+      "delivery_tail_ms": 915.4
+    },
+    {
+      "first_event_ms": 4980.1,
+      "first_answer_ms": 20362.0,
+      "total_ms": 20745.8,
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 17.33594
+      },
+      "trace_id": "e62be52a-4c68-4b04-a846-13bdef9c4fd3",
+      "answer_chars": 192,
+      "stage_timings_ms": {
+        "budget_storage": 6868.152,
+        "db_read": 527.781,
+        "model_supervisor": 3407.619,
+        "model_meal": 6486.973,
+        "graph_total": 18758.706,
+        "terminal_checkpoint": 218.032,
+        "response_snapshot": 72.469,
+        "public_stats": 309.732
+      },
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "9200a5a0-6efd-402e-8eaa-c36db5544248",
+          "seq": 1,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        },
+        {
+          "type": "progress",
+          "run_id": "9200a5a0-6efd-402e-8eaa-c36db5544248",
+          "seq": 2,
+          "phase": "delegation",
+          "label": "식사 전문 Agent에 위임 중",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "9200a5a0-6efd-402e-8eaa-c36db5544248",
+          "seq": 3,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        }
+      ],
+      "answer": "체중 감량을 고려한 저녁 메뉴로는 양질의 단백질과 식이섬유가 풍부한 식단을 추천합니다. \n\n현미밥 반 공기(약 100g)에 기름기가 적은 생선구이(고등어·삼치)나 닭가슴살, 두부구이를 메인으로 두고 쌈채소나 나물 반찬을 넉넉히 곁들여 보세요. 저녁에는 자극적이거나 기름진 음식을 피해 소화 부담을 줄이고 포만감을 오래 유지하는 것이 좋습니다. ",
+      "scenario": "dinner_store",
+      "repeat": 0,
+      "turn": 0,
+      "history_messages": 0,
+      "delivery_tail_ms": 383.8
+    },
+    {
+      "first_event_ms": 4636.4,
+      "first_answer_ms": 21187.9,
+      "total_ms": 21552.4,
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 18.363135999999997
+      },
+      "trace_id": "382489f2-89df-4975-ad2d-c63f45410b28",
+      "answer_chars": 168,
+      "stage_timings_ms": {
+        "budget_storage": 6842.433,
+        "db_read": 441.76,
+        "model_supervisor": 4842.14,
+        "model_meal": 5877.697,
+        "graph_total": 19767.489,
+        "terminal_checkpoint": 218.247,
+        "response_snapshot": 73.234,
+        "public_stats": 291.273
+      },
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "6d178612-8be0-4188-b9da-f3f801c61062",
+          "seq": 1,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        },
+        {
+          "type": "progress",
+          "run_id": "6d178612-8be0-4188-b9da-f3f801c61062",
+          "seq": 2,
+          "phase": "delegation",
+          "label": "식사 전문 Agent에 위임 중",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "6d178612-8be0-4188-b9da-f3f801c61062",
+          "seq": 3,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        }
+      ],
+      "answer": "편의점 샌드위치도 구성에 따라 훌륭한 저녁 식사가 될 수 있습니다. 마요네즈 소스나 가공육 비중이 높은 제품보다는 닭가슴살, 달걀, 채소가 풍부하게 들어간 제품을 선택해 보세요. 샌드위치만으로 부족할 수 있는 단백질과 포만감을 채우기 위해 삶은 달걀이나 무가당 두유를 함께 곁들이는 것을 추천합니다. ",
+      "scenario": "dinner_store",
+      "repeat": 0,
+      "turn": 1,
+      "history_messages": 2,
+      "delivery_tail_ms": 364.5
+    },
+    {
+      "first_event_ms": 4767.4,
+      "first_answer_ms": 22272.2,
+      "total_ms": 23132.3,
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 19.057919999999996
+      },
+      "trace_id": "6fa47563-4363-4821-bb29-cb02ff0ffeb4",
+      "answer_chars": 238,
+      "stage_timings_ms": {
+        "budget_storage": 6937.735,
+        "db_read": 405.436,
+        "model_supervisor": 3946.65,
+        "model_meal": 7741.018,
+        "graph_total": 20796.834,
+        "terminal_checkpoint": 220.757,
+        "response_snapshot": 74.31,
+        "public_stats": 787.125
+      },
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "0bfe4371-f5be-4a73-bfee-0372ae49f790",
+          "seq": 1,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        },
+        {
+          "type": "progress",
+          "run_id": "0bfe4371-f5be-4a73-bfee-0372ae49f790",
+          "seq": 2,
+          "phase": "delegation",
+          "label": "식사 전문 Agent에 위임 중",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "0bfe4371-f5be-4a73-bfee-0372ae49f790",
+          "seq": 3,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        }
+      ],
+      "answer": "체중 감량과 오전 활력을 위해 정제 탄수화물 대신 단백질과 식이섬유가 풍부한 복합 탄수화물 위주로 아침을 구성하는 것을 추천합니다. \n\n삶은 달걀 2개와 통밀 식빵 1~2장에 신선한 채소를 곁들이거나, 현미밥 반 공기(약 100g)에 달걀찜·두부구이와 나물 반찬을 함께 드시면 균형 잡힌 식사가 됩니다. 간편한 식사를 원하신다면 무가당 요거트에 오트밀과 견과류를 가볍게 더해 드셔도 포만감을 오래 유지하는 데 도움이 됩니다. ",
+      "scenario": "breakfast_rice",
+      "repeat": 0,
+      "turn": 0,
+      "history_messages": 0,
+      "delivery_tail_ms": 860.1
+    },
+    {
+      "first_event_ms": 4841.4,
+      "first_answer_ms": 16488.4,
+      "total_ms": 17086.6,
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 13.359426
+      },
+      "trace_id": "53bc4114-f8da-4d92-a83f-c0dc044387a0",
+      "answer_chars": 182,
+      "stage_timings_ms": {
+        "budget_storage": 4266.172,
+        "db_read": 699.047,
+        "model_supervisor": 8907.29,
+        "graph_total": 15025.747,
+        "terminal_checkpoint": 218.953,
+        "response_snapshot": 72.779,
+        "public_stats": 533.242
+      },
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "e69d64a2-015d-4794-aa64-c8eee101f639",
+          "seq": 1,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        }
+      ],
+      "answer": "네, 밥과 달걀로 구성한 일반식도 단백질과 에너지를 채우기에 아주 좋은 선택입니다. \n\n밥 분량을 적당히 조절하고 달걀 1~2개에 나물이나 채소 반찬을 곁들이면 포만감과 영양 균형을 더욱 높일 수 있습니다. 조리 시에는 기름을 많이 쓰기보다 달걀찜, 삶은 달걀, 혹은 기름을 적게 두른 프라이 형태로 드시는 것을 추천합니다. ",
+      "scenario": "breakfast_rice",
+      "repeat": 0,
+      "turn": 1,
+      "history_messages": 2,
+      "delivery_tail_ms": 598.2
+    },
+    {
+      "first_event_ms": 5269.0,
+      "first_answer_ms": 20752.0,
+      "total_ms": 21162.9,
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 17.436853
+      },
+      "trace_id": "71be1511-ef5f-498a-9b50-932f19de116c",
+      "answer_chars": 247,
+      "stage_timings_ms": {
+        "budget_storage": 7012.111,
+        "db_read": 835.948,
+        "model_supervisor": 4755.207,
+        "model_meal": 4746.33,
+        "graph_total": 19155.169,
+        "terminal_checkpoint": 227.331,
+        "response_snapshot": 73.202,
+        "public_stats": 324.523
+      },
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "ae78dd9f-a276-4862-af9f-dbe20c5f0b8c",
+          "seq": 1,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        },
+        {
+          "type": "progress",
+          "run_id": "ae78dd9f-a276-4862-af9f-dbe20c5f0b8c",
+          "seq": 2,
+          "phase": "delegation",
+          "label": "식사 전문 Agent에 위임 중",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "ae78dd9f-a276-4862-af9f-dbe20c5f0b8c",
+          "seq": 3,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        }
+      ],
+      "answer": "점심으로는 밥 1공기(약 200g)에 닭가슴살구이나 두부구이 등 기름기 적은 단백질 반찬, 그리고 풍성한 채소 샐러드나 나물 반찬을 곁들인 한식 백반 형태를 추천합니다. 외식을 하신다면 밥의 양을 평소보다 덜어내고 단백질과 채소 위주로 구성된 포케나 샤브샤브, 쌈밥 정식 등을 선택하시면 부담 없이 든든한 식사를 챙기실 수 있습니다. 식사 시 채소를 먼저 드시고 단백질, 탄수화물 순으로 섭취하시면 포만감을 오래 유지하는 데 도움이 됩니다. ",
+      "scenario": "lunch_buffet",
+      "repeat": 1,
+      "turn": 0,
+      "history_messages": 0,
+      "delivery_tail_ms": 410.9
+    },
+    {
+      "first_event_ms": 4815.0,
+      "first_answer_ms": 25026.2,
+      "total_ms": 25611.2,
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 21.740349000000002
+      },
+      "trace_id": "270705a7-28ca-46f7-99aa-4393e7567503",
+      "answer_chars": 229,
+      "stage_timings_ms": {
+        "budget_storage": 6926.014,
+        "db_read": 441.934,
+        "model_supervisor": 6528.573,
+        "model_meal": 7676.394,
+        "graph_total": 23398.628,
+        "terminal_checkpoint": 218.961,
+        "response_snapshot": 72.77,
+        "public_stats": 510.557
+      },
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "29d8a8ce-7a14-4e96-9a5e-2db3ae4f10d6",
+          "seq": 1,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        },
+        {
+          "type": "progress",
+          "run_id": "29d8a8ce-7a14-4e96-9a5e-2db3ae4f10d6",
+          "seq": 2,
+          "phase": "delegation",
+          "label": "식사 전문 Agent에 위임 중",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "29d8a8ce-7a14-4e96-9a5e-2db3ae4f10d6",
+          "seq": 3,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        }
+      ],
+      "answer": "네, 한식뷔페에서 접시 수를 한 접시로 제한하여 알맞게 담아 드시는 것은 다이어트 중에도 아주 좋은 방법입니다. \n\n접시를 담으실 때 나물과 쌈채소류를 풍성하게 담고, 기름기가 적은 수육·생선·두부 등 단백질 반찬과 밥을 적정량 곁들여 균형을 맞춰보세요. 식사하실 때는 채소부터 먼저 드시면서 천천히 식사하시고, 튀김이나 잡채 같은 고열량 반찬과 짠 국물류만 주의하시면 부담 없이 든든하게 드실 수 있습니다. ",
+      "scenario": "lunch_buffet",
+      "repeat": 1,
+      "turn": 1,
+      "history_messages": 2,
+      "delivery_tail_ms": 585.0
+    },
+    {
+      "first_event_ms": 4879.6,
+      "first_answer_ms": 21181.1,
+      "total_ms": 21822.5,
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 18.105922
+      },
+      "trace_id": "b927636e-549b-4899-a588-ab9cedac0b59",
+      "answer_chars": 218,
+      "stage_timings_ms": {
+        "budget_storage": 6866.038,
+        "db_read": 669.046,
+        "model_supervisor": 3909.784,
+        "model_meal": 6468.906,
+        "graph_total": 19757.143,
+        "terminal_checkpoint": 218.365,
+        "response_snapshot": 72.697,
+        "public_stats": 573.878
+      },
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "6e492e18-9660-433c-8fb5-d8bae655296b",
+          "seq": 1,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        },
+        {
+          "type": "progress",
+          "run_id": "6e492e18-9660-433c-8fb5-d8bae655296b",
+          "seq": 2,
+          "phase": "delegation",
+          "label": "식사 전문 Agent에 위임 중",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "6e492e18-9660-433c-8fb5-d8bae655296b",
+          "seq": 3,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        }
+      ],
+      "answer": "체중 감량을 고려한 저녁 식사로는 밥 2/3~1공기 정도의 복합 탄수화물에 기름기가 적은 단백질(생선구이, 두부구이, 닭가슴살 등)과 채소 반찬을 충분히 곁들인 구성을 추천합니다. 단백질과 식이섬유를 함께 챙기면 늦은 밤 허기를 예방하고 하루 영양 균형을 맞추는 데 도움이 됩니다. 국물류는 건더기 위주로 드시고, 지나치게 기름지거나 자극적인 메뉴는 피해 가볍고 든든하게 마무리해 보세요. ",
+      "scenario": "dinner_store",
+      "repeat": 1,
+      "turn": 0,
+      "history_messages": 0,
+      "delivery_tail_ms": 641.4
+    },
+    {
+      "first_event_ms": 5252.5,
+      "first_answer_ms": 21424.2,
+      "total_ms": 22132.9,
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 18.307426
+      },
+      "trace_id": "8c252a23-0ae2-4164-a5e0-41a4a4abe48c",
+      "answer_chars": 167,
+      "stage_timings_ms": {
+        "budget_storage": 6847.529,
+        "db_read": 764.168,
+        "model_supervisor": 3828.964,
+        "model_meal": 6509.807,
+        "graph_total": 19721.8,
+        "terminal_checkpoint": 218.256,
+        "response_snapshot": 72.571,
+        "public_stats": 634.454
+      },
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "2a54cd9c-da16-44cf-b21b-a0fc83cdc42e",
+          "seq": 1,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        },
+        {
+          "type": "progress",
+          "run_id": "2a54cd9c-da16-44cf-b21b-a0fc83cdc42e",
+          "seq": 2,
+          "phase": "delegation",
+          "label": "식사 전문 Agent에 위임 중",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "2a54cd9c-da16-44cf-b21b-a0fc83cdc42e",
+          "seq": 3,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        }
+      ],
+      "answer": "편의점 샌드위치로 저녁을 드셔도 괜찮습니다. 마요네즈 소스가 과하거나 튀김류 패티가 들어간 제품보다는 닭가슴살, 달걀, 로스트햄 등 단백질과 채소 비중이 높은 샌드위치를 선택해 보세요. 단백질 보충과 든든한 포만감을 위해 삶은 달걀이나 무가당 두유를 함께 곁들이시면 더욱 균형 잡힌 식사가 됩니다. ",
+      "scenario": "dinner_store",
+      "repeat": 1,
+      "turn": 1,
+      "history_messages": 2,
+      "delivery_tail_ms": 708.7
+    },
+    {
+      "first_event_ms": 5435.3,
+      "first_answer_ms": 20455.3,
+      "total_ms": 21035.0,
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 17.160633
+      },
+      "trace_id": "3f3b4805-e517-48f7-9d5c-fd32dce8534f",
+      "answer_chars": 213,
+      "stage_timings_ms": {
+        "budget_storage": 6826.6,
+        "db_read": 832.258,
+        "model_supervisor": 3938.339,
+        "model_meal": 5400.353,
+        "graph_total": 18801.579,
+        "terminal_checkpoint": 219.765,
+        "response_snapshot": 72.371,
+        "public_stats": 503.16
+      },
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "40356003-d12f-4162-851d-84404a5c06d2",
+          "seq": 1,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        },
+        {
+          "type": "progress",
+          "run_id": "40356003-d12f-4162-851d-84404a5c06d2",
+          "seq": 2,
+          "phase": "delegation",
+          "label": "식사 전문 Agent에 위임 중",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "40356003-d12f-4162-851d-84404a5c06d2",
+          "seq": 3,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        }
+      ],
+      "answer": "체중 감량을 위한 아침 식사는 혈당을 급격히 올리지 않고 포만감을 오래 유지할 수 있도록 복합 탄수화물과 양질의 단백질, 식이섬유의 조합을 추천합니다. 예를 들어 삶은 달걀 1~2개(또는 무가당 그릭요거트)에 통밀빵 한 쪽, 그리고 채소 샐러드나 사과 반 쪽을 곁들이시면 좋습니다. 바쁜 아침이라면 바나나 하나와 단백질 음료, 한 줌 견과류 정도로 간단히 구성해 보셔도 좋습니다. ",
+      "scenario": "breakfast_rice",
+      "repeat": 1,
+      "turn": 0,
+      "history_messages": 0,
+      "delivery_tail_ms": 579.7
+    },
+    {
+      "first_event_ms": 5011.0,
+      "first_answer_ms": 20497.2,
+      "total_ms": 21127.5,
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 17.157735000000002
+      },
+      "trace_id": "51ee4e1c-af06-4ee9-b9e2-be35255d5438",
+      "answer_chars": 205,
+      "stage_timings_ms": {
+        "budget_storage": 6929.198,
+        "db_read": 433.764,
+        "model_supervisor": 4171.165,
+        "model_meal": 5563.282,
+        "graph_total": 18652.662,
+        "terminal_checkpoint": 221.195,
+        "response_snapshot": 72.979,
+        "public_stats": 554.058
+      },
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "35c93cae-2caa-4a0d-b117-7912e1dd8e20",
+          "seq": 1,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        },
+        {
+          "type": "progress",
+          "run_id": "35c93cae-2caa-4a0d-b117-7912e1dd8e20",
+          "seq": 2,
+          "phase": "delegation",
+          "label": "식사 전문 Agent에 위임 중",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "35c93cae-2caa-4a0d-b117-7912e1dd8e20",
+          "seq": 3,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        }
+      ],
+      "answer": "네, 밥과 계란은 복합 탄수화물과 양질의 단백질을 고루 챙길 수 있어 아침 식사로 아주 좋습니다. 밥은 가급적 잡곡밥이나 현미밥으로 반 공기에서 2/3 공기 정도 덜어 드시고, 계란은 1~2개를 삶거나 기름을 적게 둘러 조리해 드시는 것을 추천합니다. 여기에 김이나 나물, 오이 등 간단한 채소를 곁들여 식이섬유를 보완하시면 포만감을 더 오래 유지하실 수 있습니다. ",
+      "scenario": "breakfast_rice",
+      "repeat": 1,
+      "turn": 1,
+      "history_messages": 2,
+      "delivery_tail_ms": 630.3
+    }
+  ],
+  "median_first_answer_ms": 20966.55,
+  "median_total_ms": 21357.65,
+  "median_delivery_tail_ms": 598.95,
+  "limitations": "Small actual Gemini synthetic sample; no p95 generalization or actual user outcomes. History is passed explicitly. Tail includes network/public stats, not just pacing."
+}

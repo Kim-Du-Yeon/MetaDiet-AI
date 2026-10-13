@@ -1,0 +1,37 @@
+{
+  "before": {
+    "first_answer_ms": 20966.5,
+    "total_ms": 21357.7,
+    "budget_storage": 6856.9,
+    "db_read": 512.3,
+    "model_supervisor": 4463.2,
+    "model_meal": 5794.3,
+    "graph_total": 19438.5,
+    "public_stats": 529.7,
+    "model_total": 10116.7,
+    "model_calls": 2.0,
+    "tool_calls": 3.0,
+    "turn_median_ms": [
+      21492.7,
+      21340.0
+    ]
+  },
+  "after": {
+    "first_answer_ms": 18054.6,
+    "total_ms": 18449.3,
+    "budget_storage": 3903.5,
+    "db_read": 502.5,
+    "model_supervisor": 4454.4,
+    "model_meal": 6268.5,
+    "graph_total": 16547.7,
+    "public_stats": 448.1,
+    "model_total": 10580.1,
+    "model_calls": 2.0,
+    "tool_calls": 3.0,
+    "turn_median_ms": [
+      19891.0,
+      17855.2
+    ]
+  },
+  "limitations": "12 synthetic requests per version, sequential not randomized. Nested graph spans must not be summed. Missing role span means role not called. No production p95 or causal estimate."
+}
