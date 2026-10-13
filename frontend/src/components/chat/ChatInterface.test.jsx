@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ChatInterface from "./ChatInterface";
-import { sendChatMessage, getSessionRestore, trackProductEvent, resolveMealChoices } from "../../api/dietApi";
+import { sendChatMessage, getSessionRestore, trackProductEvent, resolveMealChoices, decideProposal, resumeChat } from "../../api/dietApi";
 
 jest.mock("../../api/dietApi", () => ({
   sendChatMessage: jest.fn(), uploadImage: jest.fn(), resumeChat: jest.fn(),
@@ -44,6 +44,20 @@ test('unknown food can be excluded by buttons with retry instead of typed answer
   expect(resolveMealChoices.mock.calls[0][0].choices).toEqual([{index:1,action:'exclude'}]);
   expect(resolveMealChoices.mock.calls[0][0].request_id).toBe(resolveMealChoices.mock.calls[1][0].request_id);
   expect(sendChatMessage).not.toHaveBeenCalled();
+  decideProposal.mockResolvedValue({status:'confirmed'});
+  fireEvent.click(screen.getByRole('button',{name:'이대로 기록'}));
+  await waitFor(() => expect(decideProposal).toHaveBeenCalledTimes(1));
+  expect(resumeChat).not.toHaveBeenCalled();
+});
+
+test('restored external meal proposal confirms directly without resuming a finished graph', async () => {
+  getSessionRestore.mockResolvedValue({messages:[],pending_state:{},proposal_decision_mode:'direct',pending_proposal:{id:'p',version:1,kind:'intake',payload:{
+    log_date:'2026-10-13',meals:[{food_name:'밥',quantity_g:200,calories:300,carbs_g:65,protein_g:5,fat_g:1,source:'csv'}]}}});
+  decideProposal.mockResolvedValue({status:'confirmed'});
+  render(<Harness />);
+  fireEvent.click(await screen.findByRole('button',{name:'이대로 기록'}));
+  await waitFor(() => expect(decideProposal).toHaveBeenCalledTimes(1));
+  expect(resumeChat).not.toHaveBeenCalled();
 });
 
 test("renders streamed backend phases with the completed answer", async () => {

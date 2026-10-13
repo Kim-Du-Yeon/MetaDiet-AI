@@ -621,6 +621,8 @@ async def restore_session(thread_id: str, current_user: str = Depends(get_curren
         "thread_id": thread_id,
         "messages": messages,
         "pending_proposal": proposal,
+        "proposal_decision_mode": 'direct' if proposal and ((sv.get('food_selection') or {}).get('resolution_request') or
+            any((meal.get('nutrition_metadata') or {}).get('button_resolution') for meal in proposal.get('payload', {}).get('meals', []))) else 'chat',
         "food_selection": sv.get('food_selection') if not active_pending else None,
         "pending_state": {
             "pending_meals": sv.get("pending_meals") if active_pending else None,
@@ -739,14 +741,14 @@ async def decide_proposal(req: ProposalDecision, current_user: str = Depends(get
     try:
         result = await ProposalRepository().resolve(current_user, str(req.proposal_id), req.version, req.action)
         meals = result.get('payload', {}).get('meals', [])
-        if meals and all(meal.get('source') == 'user_label' for meal in meals):
+        if meals:
             async with conversation_lock(current_user, result['thread_id']):
                 config = {'configurable': {'thread_id': f"{current_user}_{result['thread_id']}"}}
                 graph = get_graph()
                 state = _sv(await graph.aget_state(config))
                 if (state.get('pending_proposal') or {}).get('id') == result['id']:
                     await graph.aupdate_state(config, {'pending_proposal': None,
-                        'pending_meals': None, 'awaiting_confirmation': False}, as_node='save_chat')
+                        'pending_meals': None, 'awaiting_confirmation': False, 'food_selection': None}, as_node='save_chat')
         return result
     except ProposalConflict as exc:
         raise HTTPException(409, str(exc)) from exc
@@ -815,7 +817,7 @@ async def revise_meal(proposal_id: UUID, req: MealRevision, current_user: str = 
                 raise HTTPException(422, '이 항목은 g 단위 식품 DB 조회로 수정할 수 없습니다.')
             grams = edit.amount if edit.unit == 'g' else edit.amount * portion['unit_g']
             quote = await catalog.lookup(meal['food_id'], grams)
-            for key in ('substitution', 'excluded_foods', 'requested_name'):
+            for key in ('substitution', 'excluded_foods', 'requested_name', 'button_resolution'):
                 if key in (meal.get('nutrition_metadata') or {}):
                     quote['nutrition_metadata'][key] = meal['nutrition_metadata'][key]
             portion.update(amount=edit.amount, unit=edit.unit, defaulted=False)

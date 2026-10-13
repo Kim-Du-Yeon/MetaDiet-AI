@@ -52,3 +52,20 @@ async def test_all_excluded_is_cancel_instead_of_empty_record():
     from app.tools.food_catalog import FoodCatalog
     with pytest.raises(ValueError, match='all_foods_excluded'):
         await resolve_meal_choices(parse_simple_meal('돼지바', allow_unknown=True), [{'index':0,'action':'exclude'}], FoodCatalog())
+
+
+async def test_direct_decision_clears_mixed_source_checkpoint(monkeypatch):
+    from app.schemas.proposals import ProposalDecision
+    graph, repo = AsyncMock(), AsyncMock()
+    identity = uuid4()
+    repo.resolve.return_value = {'id':str(identity), 'thread_id':'t', 'payload':{'meals':[{'source':'csv'},{'source':'user_label'}]}}
+    graph.aget_state.return_value = SimpleNamespace(values={'pending_proposal':{'id':str(identity)}})
+    @asynccontextmanager
+    async def lock(*args):
+        yield
+    monkeypatch.setattr(main,'ProposalRepository',lambda:repo)
+    monkeypatch.setattr(main,'get_graph',lambda:graph)
+    monkeypatch.setattr(main,'conversation_lock',lock)
+    await main.decide_proposal(ProposalDecision(proposal_id=identity,version=1,action='confirm'),'owner')
+    assert graph.aupdate_state.call_args.args[1]['pending_proposal'] is None
+    assert graph.aupdate_state.call_args.args[1]['food_selection'] is None

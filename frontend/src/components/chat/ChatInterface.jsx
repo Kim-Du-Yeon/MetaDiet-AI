@@ -78,7 +78,7 @@ export default function ChatInterface({
       const result = await resolveMealChoices({thread_id:threadId, selection_id:foodSelection.id,
         choices, cancel, request_id:resolutionRef.current.id});
       if (!result.cancelled) {
-        setApproval({...result, channel:'chat'});
+        setApproval({...result, channel:'upload'});
         setPendingState({pending_meals:result.payload.meals, awaiting_confirmation:true, plan_date:result.payload.log_date});
       }
       setFoodSelection(null);
@@ -105,7 +105,7 @@ export default function ChatInterface({
         awaiting_confirmation: !!restoredPending.awaiting_confirmation,
         plan_date: restoredPending.plan_date || null,
       });
-      setApproval(restored.pending_proposal ? { ...restored.pending_proposal, channel: restored.pending_proposal.payload?.meals?.every(meal => meal.source === "user_label") ? "upload" : "chat" } : null);
+      setApproval(restored.pending_proposal ? { ...restored.pending_proposal, channel: restored.proposal_decision_mode === 'direct' || restored.pending_proposal.payload?.meals?.some(meal => meal.nutrition_metadata?.button_resolution) || restored.pending_proposal.payload?.meals?.every(meal => meal.source === "user_label") ? "upload" : "chat" } : null);
       setFoodSelection(restored.food_selection || null);
       setIsInterrupted(!!restored.interrupted);
       if (restored.today_calories !== undefined && restored.target_calories !== undefined) {
@@ -202,8 +202,9 @@ export default function ChatInterface({
       } else {
         await decideProposal(approval, action);
         setApproval(null);
+        setFoodSelection(null); setPendingState(EMPTY_PENDING_STATE); setIsInterrupted(false);
         setMessages(prev => [...prev, { role: "assistant", content: action === "confirm"
-          ? (approval.kind === "intake" ? "제품 영양표로 섭취 기록을 저장했습니다." : "인바디 측정값을 저장했습니다. 새 목표 전략 검토를 요청할 수 있습니다.")
+          ? (approval.kind === "intake" ? "섭취 기록을 저장했습니다." : "인바디 측정값을 저장했습니다. 새 목표 전략 검토를 요청할 수 있습니다.")
           : "제안을 취소했습니다.", streaming: false }]);
         const restored = await getSessionRestore(threadId);
         setBudget({ calories: restored.today_calories, target: restored.target_calories });

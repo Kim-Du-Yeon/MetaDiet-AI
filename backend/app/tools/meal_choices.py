@@ -53,4 +53,5 @@ async def resolve_meal_choices(parsed, choices, catalog):
         raise ValueError('all_foods_excluded')
     for meal in meals:
         meal['nutrition_metadata']['excluded_foods'] = excluded
+        meal['nutrition_metadata']['button_resolution'] = True
     return MealProposal(kind='intake', log_date=parsed['log_date'], meals=meals).model_dump(mode='json')
