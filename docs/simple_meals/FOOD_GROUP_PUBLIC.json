@@ -1,0 +1,62 @@
+{
+  "scope": "synthetic_public_api",
+  "commit": "98c840e",
+  "passed": 6,
+  "meal_rows_before_confirmation": 0,
+  "results": [
+    {
+      "input": "밤크림빵",
+      "quantity_g": 80,
+      "calories": 332.0,
+      "basis": "빵, 곰보빵",
+      "status": "pending_then_cancelled"
+    },
+    {
+      "input": "버섯피자 3조각",
+      "quantity_g": 300,
+      "calories": 846.0,
+      "basis": "피자, 콤비네이션 피자, 냉동, 전자레인지 조리",
+      "status": "pending_then_cancelled"
+    },
+    {
+      "input": "새우만두 4개",
+      "quantity_g": 120,
+      "calories": 237.6,
+      "basis": "만두, 고기 만두",
+      "status": "pending_then_cancelled"
+    },
+    {
+      "input": "양념치킨",
+      "quantity_g": 150,
+      "calories": 433.5,
+      "basis": "닭고기, 살코기, 튀긴것(튀김옷)",
+      "status": "pending_then_cancelled"
+    },
+    {
+      "input": "망고주스",
+      "quantity_g": 200,
+      "calories": 72.0,
+      "basis": "오렌지 주스",
+      "status": "pending_then_cancelled"
+    },
+    {
+      "input": "컵라면",
+      "quantity_g": 500,
+      "calories": 505.0,
+      "basis": "라면, 조리후",
+      "status": "pending_then_cancelled"
+    }
+  ],
+  "edit_exclusion_confirmation": "passed",
+  "confirmed_rows": 2,
+  "cancelled_cases": 6,
+  "edited_grams": [
+    100,
+    120
+  ],
+  "browser_edit_exclusion_recalculation": "passed",
+  "deployment": {
+    "api": "98c840e Live Auto-Deploy",
+    "web": "98c840e Live Auto-Deploy"
+  }
+}

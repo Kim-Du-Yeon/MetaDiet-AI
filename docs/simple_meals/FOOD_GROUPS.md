@@ -25,4 +25,12 @@
 
 공식 근거: [Python 정규식](https://docs.python.org/3/library/re.html), [Node 파일 경로 API](https://nodejs.org/api/fs.html), [Pydantic Settings 환경파일 경로](https://docs.pydantic.dev/latest/concepts/pydantic_settings/#dotenv-env-support).
 
-공개 배포 검증 결과는 배포 완료 후 별도 추가한다. 실제 사용자 피드백은 아직 포함하지 않는다.
+## 공개 배포 결과
+
+기능 커밋 `98c840e`를 main에 푸시하고 Render API/Web Auto-Deploy Live를 확인했다. 공개 API에서 6개 음식군 입력 → proposal → 취소(섭취 기록 0건), 3개 음식 계산 → 빵 제외·피자 3→1조각 수정 → 확인 전 0건 → 확정 후 남긴 음식 2건 저장을 검증했다. [공개 합성 검증 원본](FOOD_GROUP_PUBLIC.json).
+
+실제 공개 브라우저에서도 합성 계정으로 `밤크림빵 버섯피자 3조각 새우만두 4개`의 3개 카드 생성, 빵 제외·피자 분량 수정, 재계산 v2, 합계 520kcal와 남은 칼로리 갱신, 취소를 검증했다. 기존 합성 API 검증의 520kcal 섭취량과 새 미확정 제안은 구분된다. 브라우저 full-page 캡처는 지원 오류가 발생해 공식 브라우저 문제 해결 지침에 따라 일반 뷰포트 캡처로 증빙을 저장했다.
+
+![공개 카드에서 제외와 재계산](FOOD_GROUP_CARD.png)
+
+합성 계정과 검증 기록은 테스트 후 정리한다. 실제 사용자 피드백은 아직 포함하지 않는다.
