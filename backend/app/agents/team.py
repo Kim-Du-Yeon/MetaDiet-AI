@@ -2,6 +2,7 @@
 import asyncio
 import hashlib
 import json
+import logging
 import math
 import re
 from datetime import date, timedelta
@@ -570,6 +571,11 @@ class DietTeam:
         from app.agents.coaching_route import simple_followup, simple_recommendation
         first_direct = self.first_coaching_mode != 'off' and simple_recommendation(self.state)
         direct = context_verified and (simple_followup(self.state) or first_direct) and self.decision_client is None
+        logging.getLogger(__name__).warning(
+            'coaching_route first_mode=%s eligible=%s verified=%s direct=%s action=%s pending=%s',
+            self.first_coaching_mode, simple_recommendation(self.state), context_verified, direct,
+            bool(self.state.get('requested_action')),
+            bool(self.state.get('pending_proposal') or self.state.get('awaiting_confirmation')))
         if direct:
             factory = self.first_coaching_model_factory if first_direct else self.coaching_model_factory
             result = await run_agent(model=factory(),
