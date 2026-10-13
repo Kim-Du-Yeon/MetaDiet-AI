@@ -22,6 +22,12 @@ pending proposals, mutations, explicit actions, uncertain inputs and failed
 reads. It does not introduce cross-request intake caching. See
 [paired follow-up evaluation](docs/direct_followup/README.md).
 
+Verified direct follow-ups use `COACHING_THINKING_LEVEL=low` (Gemini 3.8 Flash).
+Set it to `default` to omit the override. Supervisor, complex plans, writes,
+Vision and evaluation roles retain their existing provider settings. Native
+tool messages/signatures and final evidence checks are unchanged. See the
+[thinking-level experiment](docs/coaching_thinking/README.md).
+
 An explicit `requested_action="weekly_review"` uses `WeeklyDeepTeam`. Its
 Supervisor can delegate to at most two bounded specialists: `weekly_analysis`
 reads the authenticated user's recent meals, profile, measurements and goal

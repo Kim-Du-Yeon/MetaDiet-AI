@@ -1,0 +1,38 @@
+{
+  "scope": "small_sequential_public_before_after_not_randomized",
+  "before_commit": "41562aa",
+  "after_commit": "b051f24",
+  "before": {
+    "first": {
+      "total_ms": 20965.0,
+      "first_answer_ms": 20371.8,
+      "model_calls": 2.0,
+      "tool_calls": 3.0,
+      "model_meal_ms": 7221.0965
+    },
+    "followup": {
+      "total_ms": 13002.599999999999,
+      "first_answer_ms": 12138.25,
+      "model_calls": 1.0,
+      "tool_calls": 2.0,
+      "model_meal_ms": 6546.635
+    }
+  },
+  "after": {
+    "first": {
+      "total_ms": 19804.4,
+      "first_answer_ms": 19379.1,
+      "model_calls": 2.0,
+      "tool_calls": 3.0,
+      "model_meal_ms": 6999.389
+    },
+    "followup": {
+      "total_ms": 9861.15,
+      "first_answer_ms": 9488.75,
+      "model_calls": 1.0,
+      "tool_calls": 2.0,
+      "model_meal_ms": 3826.524
+    }
+  },
+  "followup_total_reduction_percent": 24.16016796640671
+}
