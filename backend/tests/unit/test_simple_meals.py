@@ -1,5 +1,5 @@
 import pytest
-from app.tools.simple_meals import PORTIONS, parse_simple_meal, calculate_simple_meal
+from app.tools.simple_meals import PORTIONS, CATEGORY_DEFAULTS, parse_simple_meal, calculate_simple_meal
 from app.tools.food_catalog import FoodCatalog
 
 
@@ -25,7 +25,7 @@ async def test_expanded_everyday_inputs_need_no_question_and_use_real_catalog(me
 
 
 @pytest.mark.parametrize('message', ['고구마빵 우유', '그릭요거트', '우유 200ml',
-    '사과주스', '밥하고 피자', '계란후라이 추천해줘', '아몬드 -2개'])
+    '사과주스', '밥하고 미등록새제품', '계란후라이 추천해줘', '아몬드 -2개'])
 def test_expansion_never_turns_unknown_product_or_unit_into_partial_meal(message):
     assert parse_simple_meal(message) is None
 
@@ -37,7 +37,7 @@ async def test_every_standard_mapping_has_unique_complete_catalog_nutrients(alia
     result = await calculate_simple_meal(parse_simple_meal(aliases[0]), FoodCatalog())
     meal = result['meals'][0]
     assert meal['food_name'] == canonical
-    assert meal['quantity_g'] == grams
+    assert meal['quantity_g'] == grams * CATEGORY_DEFAULTS.get(canonical, (1, {}))[0]
     assert all(meal[k] >= 0 for k in ('calories', 'protein_g', 'carbs_g', 'fat_g'))
 
 
@@ -51,7 +51,7 @@ def test_portions(message, grams):
     assert [item['quantity_g'] for item in parse_simple_meal(message)['items']] == grams
 
 
-@pytest.mark.parametrize('message', ['닭가슴살 밥 김치 피자', '닭가슴살 추천해줘',
+@pytest.mark.parametrize('message', ['닭가슴살 밥 김치 미등록새제품', '닭가슴살 추천해줘',
     '밥 -200g', '내일 밥 먹을 예정', '제품 선택: mfds:test', '닭가슴살 0개'])
 def test_never_silently_discards_or_records_advice(message):
     assert parse_simple_meal(message) is None

@@ -10,8 +10,10 @@ from app.tools.food_catalog import FoodCatalog
 
 
 @pytest.mark.parametrize('stale', [False, True])
-async def test_revision_recalculates_and_syncs_checkpoint_without_confirming(monkeypatch, stale):
-    payload = await calculate_simple_meal(parse_simple_meal('밥 한공기'), FoodCatalog())
+@pytest.mark.parametrize('message,amount,unit,grams', [('밥 한공기', 1.5, '공기', 300),
+    ('도미노피자', .5, '판', 400), ('물만두', 2, '회분', 300)])
+async def test_revision_recalculates_and_syncs_checkpoint_without_confirming(monkeypatch, stale, message, amount, unit, grams):
+    payload = await calculate_simple_meal(parse_simple_meal(message), FoodCatalog())
     proposal_id = uuid4()
     old = {'id': str(proposal_id), 'version': 1, 'kind': 'intake', 'status': 'pending',
            'thread_id': 't', 'payload': payload}
@@ -26,7 +28,7 @@ async def test_revision_recalculates_and_syncs_checkpoint_without_confirming(mon
     monkeypatch.setattr(main, 'ProposalRepository', lambda: repo)
     monkeypatch.setattr(main, 'get_graph', lambda: graph)
     monkeypatch.setattr(main, 'conversation_lock', lock)
-    request = main.MealRevision(version=1, log_date=payload['log_date'], meal_type='lunch', items=[{'amount': 1.5, 'unit': '공기'}])
+    request = main.MealRevision(version=1, log_date=payload['log_date'], meal_type='lunch', items=[{'amount': amount, 'unit': unit}])
     if stale:
         with pytest.raises(HTTPException) as error:
             await main.revise_meal(proposal_id, request, 'owner')
@@ -34,8 +36,10 @@ async def test_revision_recalculates_and_syncs_checkpoint_without_confirming(mon
         repo.create.assert_not_called()
     else:
         result = await main.revise_meal(proposal_id, request, 'owner')
-        assert result['payload']['meals'][0]['quantity_g'] == 300
-        assert result['payload']['meals'][0]['calories'] == payload['meals'][0]['calories'] * 1.5
+        assert result['payload']['meals'][0]['quantity_g'] == grams
+        expected = await FoodCatalog().lookup(payload['meals'][0]['food_id'], grams)
+        assert result['payload']['meals'][0]['calories'] == expected['calories']
+        assert result['payload']['meals'][0]['nutrition_metadata']['portion'].get('basis_note') == payload['meals'][0]['nutrition_metadata']['portion'].get('basis_note')
         assert graph.aupdate_state.call_args.args[1]['pending_proposal']['version'] == 2
         repo.get.assert_awaited_once_with('owner', str(proposal_id))
     repo.resolve.assert_not_called()

@@ -1,0 +1,125 @@
+{
+  "scope": "synthetic_deterministic_parser_and_catalog",
+  "baseline": "ddd82c8",
+  "cases": 12,
+  "before_complete": 0,
+  "after_complete": 12,
+  "configured_mappings": 53,
+  "results": [
+    {
+      "input": "소보로 빵을 먹었어",
+      "baseline_complete": false,
+      "after_complete": true,
+      "grams": [
+        80.0
+      ],
+      "calories": 332.0
+    },
+    {
+      "input": "메론빵으 ㄹ먹었어",
+      "baseline_complete": false,
+      "after_complete": true,
+      "grams": [
+        80.0
+      ],
+      "calories": 332.0
+    },
+    {
+      "input": "도미노피자를 먹었어",
+      "baseline_complete": false,
+      "after_complete": true,
+      "grams": [
+        200.0
+      ],
+      "calories": 564.0
+    },
+    {
+      "input": "냉동피자르 먹었어",
+      "baseline_complete": false,
+      "after_complete": true,
+      "grams": [
+        200.0
+      ],
+      "calories": 564.0
+    },
+    {
+      "input": "물만두를 머겅써",
+      "baseline_complete": false,
+      "after_complete": true,
+      "grams": [
+        150.0
+      ],
+      "calories": 232.5
+    },
+    {
+      "input": "군만두를 먹었어",
+      "baseline_complete": false,
+      "after_complete": true,
+      "grams": [
+        150.0
+      ],
+      "calories": 445.5
+    },
+    {
+      "input": "물만두 8개 군만두 3개",
+      "baseline_complete": false,
+      "after_complete": true,
+      "grams": [
+        120.0,
+        90.0
+      ],
+      "calories": 453.3
+    },
+    {
+      "input": "도미노 피자 3조각",
+      "baseline_complete": false,
+      "after_complete": true,
+      "grams": [
+        300.0
+      ],
+      "calories": 846.0
+    },
+    {
+      "input": "피자 반판",
+      "baseline_complete": false,
+      "after_complete": true,
+      "grams": [
+        400.0
+      ],
+      "calories": 1128.0
+    },
+    {
+      "input": "소보루빵 2개 멜론빵 100g",
+      "baseline_complete": false,
+      "after_complete": true,
+      "grams": [
+        160.0,
+        100.0
+      ],
+      "calories": 1079.0
+    },
+    {
+      "input": "베이글 크로와상 단팥빵",
+      "baseline_complete": false,
+      "after_complete": true,
+      "grams": [
+        100.0,
+        60.0,
+        80.0
+      ],
+      "calories": 767.6
+    },
+    {
+      "input": "만두 김치만두 햄버거",
+      "baseline_complete": false,
+      "after_complete": true,
+      "grams": [
+        150.0,
+        150.0,
+        200.0
+      ],
+      "calories": 990.5
+    }
+  ],
+  "limitations": "No live Agent latency or actual user success measured. App portions and generic approximations are editable."
+}

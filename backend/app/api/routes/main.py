@@ -812,10 +812,12 @@ async def revise_meal(proposal_id: UUID, req: MealRevision, current_user: str = 
         revised = []
         for meal, edit in zip(meals, req.items):
             portion = dict((meal.get('nutrition_metadata') or {}).get('portion') or {})
-            allowed_units = {'g'} | ({portion['default_unit'], '회분', '인분'} if portion.get('unit_g') else set())
+            unit_grams = portion.get('unit_grams') or ({portion['default_unit']: portion['unit_g'],
+                '회분': portion['unit_g'], '인분': portion['unit_g']} if portion.get('unit_g') else {})
+            allowed_units = {'g'} | set(unit_grams)
             if edit.unit not in allowed_units or not meal.get('food_id') or meal['source'] == 'user_label':
                 raise HTTPException(422, '이 항목은 g 단위 식품 DB 조회로 수정할 수 없습니다.')
-            grams = edit.amount if edit.unit == 'g' else edit.amount * portion['unit_g']
+            grams = edit.amount if edit.unit == 'g' else edit.amount * unit_grams[edit.unit]
             quote = await catalog.lookup(meal['food_id'], grams)
             for key in ('substitution', 'excluded_foods', 'requested_name', 'button_resolution'):
                 if key in (meal.get('nutrition_metadata') or {}):

@@ -39,7 +39,9 @@ async def test_manual_label_joins_whole_meal_and_stays_local():
 
 
 def test_unknown_food_and_advice_remain_distinct():
-    assert parse_simple_meal('밥 피자 1개', allow_unknown=True)['items'][1]['unresolved']
+    assert parse_simple_meal('밥 미등록제품 1개', allow_unknown=True)['items'][1]['unresolved']
+    pizza = parse_simple_meal('밥 피자 1조각', allow_unknown=True)['items'][1]
+    assert not pizza.get('unresolved') and pizza['quantity_g'] == 100
     assert parse_simple_meal('계란후라이 추천해줘', allow_unknown=True) is None
     assert parse_simple_meal('밥 -200g', allow_unknown=True) is None
 

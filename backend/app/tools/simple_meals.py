@@ -46,14 +46,42 @@ PORTIONS = [
     (('조미김', '김'), '김, 조미김, 구운것', 5, '회분', None),
     (('깍두기',), '김치, 깍두기', 40, '회분', None),
     (('라이스페이퍼', '라이스 페이퍼'), '라이스페이퍼', 10, '장', 'mfds:P108-007000300-0013'),
+    (('소보로빵', '소보로 빵', '소보루빵', '소보루 빵', '곰보빵', '메론빵', '메론 빵', '멜론빵', '멜론 빵'), '빵, 곰보빵', 80, '개', None),
+    (('단팥빵', '단팥 빵', '팥빵'), '빵, 팥빵', 80, '개', None),
+    (('크림빵', '크림 빵'), '빵, 크림빵', 80, '개', None),
+    (('베이글', '베이글빵'), '빵, 베이글', 100, '개', None),
+    (('크루아상', '크로와상', '크로아상'), '빵, 크루아상', 60, '개', None),
+    (('모닝빵', '모닝 빵'), '빵, 모닝빵', 30, '개', None),
+    (('카스테라', '카스텔라'), '빵, 카스텔라', 80, '회분', None),
+    (('도넛', '도너츠'), '빵, 도넛, 링', 60, '개', None),
+    (('붕어빵',), '빵, 붕어빵, 팥', 50, '개', None),
+    (('소시지빵', '소세지빵'), '빵, 소시지빵', 100, '개', None),
+    (('피자', '냉동피자', '냉동 피자', '도미노피자', '도미노 피자', '피자헛 피자', '피자헛피자'), '피자, 콤비네이션 피자, 냉동, 전자레인지 조리', 100, '조각', None),
+    (('불고기피자', '불고기 피자'), '피자, 불고기 피자, 냉동, 전자레인지 조리', 100, '조각', None),
+    (('물만두', '물 만두'), '만두, 물만두', 15, '개', None),
+    (('군만두', '군 만두', '군만듀'), '만두, 군만두', 30, '개', None),
+    (('김치만두', '김치 만두'), '만두, 김치 만두', 30, '개', None),
+    (('고기만두', '고기 만두', '찐만두', '만두', '만듀'), '만두, 고기 만두', 30, '개', None),
+    (('햄버거', '버거'), '햄버거, 소고기패티, 토마토, 양상추, 양파', 200, '개', None),
+    (('새우볶음밥', '새우 볶음밥'), '볶음밥, 새우 볶음밥', 300, '회분', None),
 ]
+# App portions: these are editable defaults, not claims about a specific product.
+CATEGORY_DEFAULTS = {
+    '피자, 콤비네이션 피자, 냉동, 전자레인지 조리': (2, {'조각': 100, '판': 800, '회분': 200, '인분': 200}),
+    '피자, 불고기 피자, 냉동, 전자레인지 조리': (2, {'조각': 100, '판': 800, '회분': 200, '인분': 200}),
+    '만두, 물만두': (10, {'개': 15, '회분': 150, '인분': 150}),
+    '만두, 군만두': (5, {'개': 30, '회분': 150, '인분': 150}),
+    '만두, 김치 만두': (5, {'개': 30, '회분': 150, '인분': 150}),
+    '만두, 고기 만두': (5, {'개': 30, '회분': 150, '인분': 150}),
+}
 COUNTS = {'한': 1, '하나': 1, '두': 2, '둘': 2, '세': 3, '네': 4, '다섯': 5, '여섯': 6, '반': .5}
 # Longer aliases must win: 계란후라이 must not be consumed as 계란.
 ALIASES = sorted(((alias, canonical, serving, unit, food_id)
     for aliases, canonical, serving, unit, food_id in PORTIONS for alias in aliases),
     key=lambda row: len(row[0]), reverse=True)
 TYPO_DISPLAY = {'달각슴살': '닭가슴살', '닭가슴샬': '닭가슴살', '닭가슴삶': '닭가슴살',
-    '고구먀': '고구마', '브로컬리': '브로콜리', '요거뜨': '요거트'}
+    '고구먀': '고구마', '브로컬리': '브로콜리', '요거뜨': '요거트',
+    '군만듀': '군만두', '만듀': '만두'}
 
 
 def parse_simple_meal(message, *, forced_meal_type=None, allow_unknown=False):
@@ -88,7 +116,8 @@ def parse_simple_meal(message, *, forced_meal_type=None, allow_unknown=False):
             text = re.sub(r'^' + word + r'(?:에|으로)?\s*', '', text)
             break
     meal_type = forced_meal_type or meal_type
-    text = re.sub(r'\s*(?:먹었어|먹었어요|먹었다|먹음|기록해줘|기록해주세요|기록만(?:\s*해줘)?)[.!]?$', '', text)
+    text = re.sub(r'\s*(?:먹었어|먹었어요|먹었다|먹음|머겅써|먹엇어|기록해줘|기록해주세요|기록만(?:\s*해줘)?)[.!]?$', '', text)
+    text = re.sub(r'(?:을|를|으\s*ㄹ|르)\s*$', '', text).rstrip()
     items = []
     while text.strip(' ,、'):
         text = text.lstrip(' ,、')
@@ -112,15 +141,16 @@ def parse_simple_meal(message, *, forced_meal_type=None, allow_unknown=False):
             matched = (unknown[1], None, serving, '개' if serving == 70 else '회분', None)
         alias, canonical, serving, default_unit, food_id = matched
         text = text[len(alias):].lstrip()
-        quantity = re.match(r'((?:\d+(?:\.\d+)?)|하나|한|둘|두|세|네|다섯|여섯|반)\s*(g|그램|공기|개|회분|인분|장|컵)', text, re.I)
-        amount, unit, defaulted = 1, default_unit, True
+        default_amount, unit_grams = CATEGORY_DEFAULTS.get(canonical, (1, {default_unit: serving, '회분': serving, '인분': serving}))
+        quantity = re.match(r'((?:\d+(?:\.\d+)?)|하나|한|둘|두|세|네|다섯|여섯|반)\s*(g|그램|공기|개|회분|인분|장|컵|조각|판)', text, re.I)
+        amount, unit, defaulted = default_amount, default_unit, True
         if quantity:
             amount = COUNTS.get(quantity[1])
             if amount is None:
                 amount = float(quantity[1])
             unit = quantity[2].lower()
             unit = 'g' if unit == '그램' else unit
-            if unit not in ({default_unit, 'g', '회분', '인분'} | ({'개', '장', '공기', '컵'} if canonical is None else set())):
+            if unit not in (set(unit_grams) | {'g'} | ({'개', '장', '공기', '컵'} if canonical is None else set())):
                 return None
             text = text[quantity.end():].lstrip()
             defaulted = False
@@ -129,15 +159,20 @@ def parse_simple_meal(message, *, forced_meal_type=None, allow_unknown=False):
             if explicit_mass:
                 amount, unit = float(explicit_mass[1]), 'g'
                 text = text[explicit_mass.end():].lstrip()
-        grams = amount if unit == 'g' else amount * serving
+        grams = amount if unit == 'g' else amount * unit_grams.get(unit, serving)
         if not 0 < grams <= 10000:
             return None
+        approximate = canonical in CATEGORY_DEFAULTS or canonical.startswith('빵,') if canonical else False
+        basis_note = ('곰보빵(소보로) 유사 기준이며 실제 메론빵 제품값이 아니에요.' if '메론' in alias or '멜론' in alias
+            else '일반 콤비네이션 피자 기준이며 브랜드 제품값이 아니에요.' if '도미노' in alias or '피자헛' in alias
+            else '앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.' if approximate else '')
         items.append({'canonical': canonical, 'food_id': food_id, 'quantity_g': grams,
             **({'unresolved': True} if canonical is None else {}),
             'portion': {'display_name': TYPO_DISPLAY.get(alias, alias),
                 'amount': amount, 'unit': unit, 'unit_g': serving,
                 'default_unit': default_unit, 'defaulted': defaulted,
-                'representative': bool(food_id), 'policy_version': 'simple-v2'}})
+                'unit_grams': unit_grams, 'basis_note': basis_note,
+                'representative': bool(food_id) or approximate, 'policy_version': 'simple-v3'}})
         text = re.sub(r'^(?:그리고\s+|이랑\s*|랑\s*|하고\s*|와\s*|과\s*)', '', text)
         if len(items) > 30:
             return None

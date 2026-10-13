@@ -26,12 +26,13 @@ export default function MealProposalEditor({ proposal, busy, onRevise, onChanged
       return <li key={index}><div><strong>{portion?.display_name || meal.food_name}</strong>
         <p>{portion ? `${portion.amount}${portion.unit} · ` : ''}{meal.quantity_g}g
           {portion?.defaulted && ' · 기본 분량으로 계산'}{portion?.representative && ' · 대표 기준·대략값'}</p>
+        {portion?.basis_note && <p>{portion.basis_note}</p>}
         <p><strong>{meal.calories} kcal</strong> · 탄수화물 {meal.carbs_g}g · 단백질 {meal.protein_g}g · 지방 {meal.fat_g}g</p>
         {editable && <div className="meal-preview__portion"><label>분량<input aria-label={`${index + 1}번 음식 분량`} type="number" min="0.01" max="10000" step="any"
           disabled={busy} value={draft.items[index].amount} onChange={e => change({ ...draft, items: draft.items.map((item, i) => i === index ? { ...item, amount: Number(e.target.value) } : item) })} /></label>
           <label>단위<select aria-label={`${index + 1}번 음식 단위`} disabled={busy} value={draft.items[index].unit}
             onChange={e => change({ ...draft, items: draft.items.map((item, i) => i === index ? { ...item, unit: e.target.value } : item) })}>
-            {[...new Set(['g', ...(portion?.default_unit ? [portion.default_unit, '회분', '인분'] : [])])].map(unit => <option key={unit}>{unit}</option>)}</select></label></div>}
+            {[...new Set(['g', ...(portion?.unit_grams ? Object.keys(portion.unit_grams) : portion?.default_unit ? [portion.default_unit, '회분', '인분'] : [])])].map(unit => <option key={unit}>{unit}</option>)}</select></label></div>}
         <details><summary>출처·상세 정보</summary><small>{meal.food_name} · {({ csv: '국가표준식품성분표', mfds: '식약처', user_label: '사용자 영양표' })[meal.source] || meal.source}
           {meal.nutrition_metadata?.manufacturer && ` · ${meal.nutrition_metadata.manufacturer}`} · 나트륨 {meal.sodium_mg ?? '미입력'}mg</small></details></div></li>;
     })}</ul>
