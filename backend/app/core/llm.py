@@ -12,9 +12,9 @@ def response_text(response: Any) -> str:
     if isinstance(content, str):
         return content
     return "".join(
-        block.get("text", "") for block in content
-        if isinstance(block, dict) and block.get("type") == "text"
-        and not block.get("thought", False)
+        block if isinstance(block, str) else block.get("text", "") for block in content
+        if isinstance(block, str) or (isinstance(block, dict) and block.get("type") == "text"
+        and not block.get("thought", False))
     )
 
 

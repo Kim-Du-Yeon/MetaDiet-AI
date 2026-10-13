@@ -6,6 +6,8 @@ import FoodProductSearch from "./FoodProductSearch";
 import ProductChoiceCards from "./ProductChoiceCards";
 import MealChoiceCards from './MealChoiceCards';
 import ProcessTrace from "./ProcessTrace";
+import AnswerContent from './AnswerContent';
+import CoachingActions from './CoachingActions';
 import "./ChatInterface.css";
 
 const USER_ID = "17691249-f22f-4447-a6e4-fca7a8e57cc8";
@@ -144,7 +146,9 @@ export default function ChatInterface({
     setApproval(meta.pending_proposal ? { ...meta.pending_proposal, channel: "chat" } : null);
     setMessages((prev) => {
       const updated = [...prev];
-      updated[updated.length - 1] = { ...updated[updated.length - 1], streaming: false, agentUsed: meta.agent_used, progressSteps: progressRef.current };
+      updated[updated.length - 1] = { ...updated[updated.length - 1],
+        ...(typeof meta.answer === 'string' ? { content: meta.answer } : {}),
+        streaming: false, agentUsed: meta.agent_used, progressSteps: progressRef.current };
       return updated;
     });
     setPendingState({ pending_meals: meta.pending_meals || null, awaiting_confirmation: meta.awaiting_confirmation || false, plan_date: meta.plan_date || null });
@@ -441,7 +445,8 @@ export default function ChatInterface({
           <div key={i} style={{ display:"flex", justifyContent: msg.role==="user"?"flex-end":"flex-start", marginBottom:12 }}>
             <div className={msg.role === "user" ? "chat-bubble chat-bubble--user" : "chat-bubble chat-bubble--assistant"} style={msg.role==="user" ? styles.userBubble : styles.aiBubble}>
               {msg.role === "assistant" && <ProcessTrace steps={msg.progressSteps || (msg.streaming ? progressSteps : [])} running={Boolean(msg.streaming)} />}
-              <p style={{ margin:0, whiteSpace:"pre-wrap", lineHeight:1.6 }}>{msg.content.replace(/제품\s*선택\s*:\s*[\w:-]+\s*\/?\s*/g, "")}</p>
+              {msg.role === 'assistant' ? <AnswerContent content={msg.content} streaming={msg.streaming} />
+                : <p style={{ margin: 0, whiteSpace: 'pre-wrap', lineHeight: 1.6 }}>{msg.content}</p>}
               {msg.streaming && <span style={styles.cursor}>▊</span>}
               {msg.agentUsed && !msg.streaming && <p style={styles.agentLabel}>{AGENT_LABELS[msg.agentUsed] || msg.agentUsed}</p>}
             </div>
@@ -489,8 +494,11 @@ export default function ChatInterface({
         </div>
       )}
 
-      <button type="button" disabled={isLoading || !!approval || restoreStatus !== "ready"} onClick={() => setShowNutritionLabel(true)}>제품 영양표 입력</button>
-      <button type="button" disabled={isLoading || !!approval || restoreStatus !== "ready"} onClick={() => setShowFoodSearch(true)}>제품을 정확히 입력</button>
+      <div className="chat-actions" aria-label="정확한 제품 입력">
+        <button type="button" disabled={isLoading || !!approval || restoreStatus !== "ready"} onClick={() => setShowNutritionLabel(true)}>제품 영양표 입력</button>
+        <button type="button" disabled={isLoading || !!approval || restoreStatus !== "ready"} onClick={() => setShowFoodSearch(true)}>제품을 정확히 입력</button>
+        {!!approval && <p className="chat-actions__status">현재 제안을 확인하거나 취소한 뒤 입력할 수 있어요.</p>}
+      </div>
       {foodSelection?.mode === 'meal_choices' && !approval && <MealChoiceCards key={foodSelection.id} selection={foodSelection} busy={isLoading}
         error={approvalError} onResolve={choices => resolveChoices(choices)} onCancel={() => resolveChoices([], true)} />}
       {foodSelection && foodSelection.mode !== 'meal_choices' && !approval && <ProductChoiceCards key={JSON.stringify(foodSelection)} selection={foodSelection} busy={isLoading}
@@ -498,10 +506,7 @@ export default function ChatInterface({
       {showFoodSearch && <FoodProductSearch contextRequest={foodSelection?.request} onClose={() => setShowFoodSearch(false)} onSelect={selection => { setShowFoodSearch(false); sendMessage(selection); }} />}
       {showNutritionLabel && <NutritionLabelForm threadId={threadId} onClose={() => setShowNutritionLabel(false)} onProposal={proposal => { setApproval({ ...proposal, channel: "upload" }); setShowNutritionLabel(false); }} />}
       {approval && <ProposalCard proposal={approval} busy={isLoading} onDecision={handleProposalDecision} onRevise={handleMeasurementRevision} budget={budget} />}
-      {!approval && restoreStatus === 'ready' && <div className="proposal__actions" aria-label="다음 식사 코칭">
-        {['점심', '저녁'].map(meal => <button key={meal} disabled={isLoading}
-          onClick={() => sendMessage({ request: `${meal} 식단 추천해줘. 오늘 확정된 섭취량과 목표를 반영해줘.`, display: `${meal} 추천` })}>{meal} 추천</button>)}
-      </div>}
+      {!approval && restoreStatus === 'ready' && <CoachingActions busy={isLoading} onRecommend={sendMessage} />}
       {approvalError && <div role="alert" style={{ color: "#b42318", margin: 12 }}>{approvalError}
         <button disabled={isLoading} onClick={restoreSession}>최신 제안 다시 불러오기</button></div>}
       {foodEntry && (

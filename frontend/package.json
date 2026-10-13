@@ -10,12 +10,14 @@
     "@testing-library/user-event": "^13.5.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
+    "react-markdown": "^10.1.0",
     "react-scripts": "5.0.1",
     "recharts": "^3.8.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
+    "prebuild": "node scripts/write-build-info.cjs",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -24,6 +26,15 @@
     "extends": [
       "react-app",
       "react-app/jest"
+    ]
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^unist-util-visit-parents/do-not-use-color$": "<rootDir>/node_modules/unist-util-visit-parents/lib/color.js",
+      "^#min(path|proc|url)$": "<rootDir>/node_modules/vfile/lib/min$1.browser.js"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(react-markdown|remark-.*|rehype-.*|unified|vfile.*|bail|trough|devlop|is-plain-obj|unist-.*|hast-.*|mdast-.*|micromark.*|decode-named-character-reference|character-entities.*|property-information|space-separated-tokens|comma-separated-tokens|escape-string-regexp|trim-lines|longest-streak|ccount|zwitch|estree-util-is-identifier.*|style-to-js|style-to-object|inline-style-parser|html-url-attributes)/)"
     ]
   },
   "browserslist": {

@@ -45,6 +45,7 @@ class ExecutionEventJournal:
     finished: bool = False
     task: asyncio.Task | None = None
     timings: dict[str, float] = field(default_factory=dict)
+    diagnostics: dict[str, Any] = field(default_factory=dict)
     _condition: asyncio.Condition = field(default_factory=asyncio.Condition)
 
     async def publish(self, event_type: str, payload: dict[str, Any] | None = None) -> dict[str, Any]:

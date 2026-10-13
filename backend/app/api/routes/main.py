@@ -40,6 +40,7 @@ from app.agents.execution_stream import (
 from datetime import date
 from app.core.service_clock import service_today
 from app.core.cors import allowed_origins
+from app.core.build_info import build_info
 import calendar
 import hashlib
 import json, asyncio, time, logging
@@ -74,7 +75,9 @@ class ChatRequest(BaseModel):
     tool_policy: Optional[list[Literal["read_profile", "read_intake", "read_measurements", "assess_goal_progress", "search_foods",
         "nutrition_lookup", "search_evidence", "propose_meal", "propose_strategy", "read_recent_intake", "propose_meal_change"]]] = None
     stream_run_id: Optional[str] = None
-    after_seq: int = 0
+    after_seq: int = Field(default=0, ge=0)
+    stream_protocol: Literal[1, 2] = 1
+    stream_reconnect: bool = False
 
 
 class AccountDeleteRequest(BaseModel):
@@ -264,13 +267,32 @@ def _sse(event: dict) -> str:
     return f"id: {event.get('seq', '')}\ndata: {json.dumps(event, ensure_ascii=False)}\n\n"
 
 
+def _v2(config):
+    return config.get('metadata', {}).get('stream_protocol') == 2
+
+
 async def _invoke_with_progress(graph, graph_input, config: dict, journal: ExecutionEventJournal):
     from app.agents.execution_stream import measure_stage
     # Each actual invocation gets a distinct LangSmith root span, including Pod recovery.
     trace_id = uuid4()
+    build = build_info()
     invocation_config = {**config, "run_id": trace_id,
-                         "metadata": {**config.get("metadata", {}), "trace_id": str(trace_id)}}
+                         "metadata": {**config.get("metadata", {}), "trace_id": str(trace_id),
+                                      'build_commit': build['commit'], 'delivery': build['delivery']}}
     async def sink(kind: str, payload: dict):
+        if kind == 'execution_route':
+            journal.diagnostics.update(payload)
+            # Child model spans inherit these safe, finite configuration labels.
+            invocation_config['metadata'].update(payload)
+            return
+        if kind == 'model_first_token':
+            journal.diagnostics.setdefault('model_first_token_ms', payload['elapsed_ms'])
+            return
+        if kind == 'model_usage':
+            usage = journal.diagnostics.setdefault('model_tokens', {})
+            for key, value in payload.items():
+                usage[key] = usage.get(key, 0) + value
+            return
         if kind == 'stage_timing':
             stage = payload['stage']
             journal.timings[stage] = round(journal.timings.get(stage, 0) + payload['elapsed_ms'], 3)
@@ -284,12 +306,22 @@ async def _invoke_with_progress(graph, graph_input, config: dict, journal: Execu
 
     token = set_event_sink(sink)
     try:
+        if _v2(config):
+            await journal.publish('started', {'build': build, 'trace_id': str(trace_id)})
         async with measure_stage('graph_total'):
             outcome = await graph.ainvoke(graph_input, config=invocation_config)
         terminal_status = "blocked" if isinstance(outcome, dict) and outcome.get("execution_status") == "blocked" else "completed"
         async with measure_stage('terminal_checkpoint'):
             await graph.aupdate_state(config, {"execution_status": terminal_status, "execution_error": None,
-                                              "trace_id": str(trace_id)})
+                                              "trace_id": str(trace_id),
+                                              **({'response_build': build, 'response_diagnostics': journal.diagnostics}
+                                                 if _v2(config) else {})})
+        if _v2(config):
+            # Publish only AFTER Agent validation and durable terminal state. The
+            # journal owns every sequence, including the authoritative final text.
+            payload = await _completed_payload(graph, config, journal.run_id)
+            await journal.publish('answer_delta', {'content': payload['answer']})
+            await journal.publish('completed', payload)
     except Exception:
         try:
             await graph.aupdate_state(config, {"execution_status": "failed", "execution_error": "execution_failed",
@@ -342,11 +374,29 @@ async def _follow_or_resume_run(graph, config: dict, run_id: str, after_seq: int
         async for event in journal.subscribe(after_seq=after_seq):
             yield _sse(event)
         return
+    if _v2(config):
+        yield _sse({'type': 'failed', 'run_id': run_id, 'seq': after_seq + 1,
+                    'content': '이전 실행의 연결을 복구하지 못했습니다. 기록을 확인한 뒤 다시 요청해주세요.',
+                    'reason': 'journal_unavailable'})
+        return
     async for chunk in _run_and_stream(graph, None, config, run_id, after_seq):
         yield chunk
 
 
 async def _stream(graph, config: dict, run_id: str, after_seq: int = 0):
+    if _v2(config):
+        journal = find_journal(run_id, config['configurable']['thread_id'])
+        if journal is not None:
+            # _run_and_stream / _replay_progress already delivered the final event.
+            return
+        snapshot = _sv(await graph.aget_state(config))
+        if snapshot.get('execution_status') not in {'completed', 'blocked'}:
+            yield _sse({'type': 'failed', 'run_id': run_id, 'seq': after_seq + 1,
+                        'content': '완료된 응답을 복구하지 못했습니다. 다시 요청해주세요.'})
+            return
+        payload = await _completed_payload(graph, config, run_id)
+        yield _sse({'type': 'completed', 'run_id': run_id, **payload, 'seq': after_seq + 1})
+        return
     started = time.perf_counter()
     snap           = await graph.aget_state(config)
     snapshot_ms = round((time.perf_counter() - started) * 1000, 3)
@@ -394,7 +444,20 @@ async def _stream(graph, config: dict, run_id: str, after_seq: int = 0):
             'food_selection': sv.get('food_selection'),
             'execution_usage':sv.get('execution_usage'),'awaiting_confirmation':sv.get('awaiting_confirmation',False),
             'stage_timings_ms': timings,
+            **(journal.diagnostics if journal else sv.get('response_diagnostics') or {}),
+            'answer': response_text, 'build': sv.get('response_build') or {'commit': 'unknown'},
+            'execution_status': sv.get('execution_status'),
             'plan_date':sv.get('plan_date'),'thread_id':new_tid,'prev_thread_id':None,'interrupted':is_interrupted})
+
+
+async def _completed_payload(graph, config, run_id):
+    legacy_config = {**config, 'metadata': {**config.get('metadata', {}), 'stream_protocol': 1}}
+    # The legacy renderer remains for old clients; v2 skips its word deltas.
+    async for frame in _stream(graph, legacy_config, run_id, 99999):
+        event = json.loads(frame.split('data: ', 1)[1])
+        if event['type'] == 'completed':
+            return {key: value for key, value in event.items() if key not in {'seq', 'type', 'run_id'}}
+    raise RuntimeError('terminal_snapshot_unavailable')
 
 
 async def _public_stats(user_id):
@@ -418,10 +481,23 @@ async def chat(req: ChatRequest, current_user: str = Depends(get_current_user)):
         tid    = f"{current_user}_{req.thread_id}"
         config = {"configurable": {"thread_id": tid},
                   "metadata": {"thread_id": _trace_thread_id(current_user, req.thread_id),
-                               "stream_run_id": stream_run_id}}
+                               "stream_run_id": stream_run_id, 'stream_protocol': req.stream_protocol}}
+
+        if _v2(config) and req.stream_run_id:
+            journal = find_journal(stream_run_id, tid)
+            if journal is not None:
+                async for event in journal.subscribe(req.after_seq):
+                    yield _sse(event)
+                return
 
         snap = await graph.aget_state(config)
         sv_now = _sv(snap)
+        if (_v2(config) and (req.stream_reconnect or req.after_seq > 0)
+                and sv_now.get('run_id') != stream_run_id):
+            yield _sse({'type': 'failed', 'run_id': stream_run_id, 'seq': req.after_seq + 1,
+                'reason': 'run_unavailable',
+                'content': '이전 실행을 찾지 못했습니다. 기록을 확인한 뒤 다시 요청해주세요.'})
+            return
         if req.stream_run_id and sv_now.get("run_id") == stream_run_id:
             progress_stream = (_follow_or_resume_run(graph, config, stream_run_id, req.after_seq)
                                if sv_now.get("execution_status") == "running"
@@ -469,7 +545,7 @@ async def chat(req: ChatRequest, current_user: str = Depends(get_current_user)):
             print(f"=== [chat] 완료된 thread → 새 thread: {new_tid} ===")
             config = {"configurable": {"thread_id": f"{current_user}_{new_tid}"},
                       "metadata": {"thread_id": _trace_thread_id(current_user, new_tid),
-                                   "stream_run_id": stream_run_id}}
+                                   "stream_run_id": stream_run_id, 'stream_protocol': req.stream_protocol}}
 
         try:
             async for chunk in _run_and_stream(
@@ -1408,5 +1484,5 @@ async def delete_meal(meal_id: str, current_user: str = Depends(get_current_user
 
 @app.get("/health")
 async def health():
-    return {"status":"ok"}
+    return {"status":"ok", 'build': build_info()}
 

@@ -95,7 +95,8 @@ async function postEventStream(path, body, onToken, onDone, onProgress) {
       const response = await fetch(`${BASE_URL}${path}`, {
         method: "POST",
         headers: authHeaders({ "Content-Type": "application/json" }),
-        body: JSON.stringify({ ...body, stream_run_id: streamRunId, after_seq: afterSeq }),
+        body: JSON.stringify({ ...body, stream_run_id: streamRunId, after_seq: afterSeq,
+          ...(path === '/chat' ? { stream_protocol: 2, stream_reconnect: attempt > 0 } : {}) }),
       });
       await consumeEventStream(response, data => {
         if (data.type === "progress") onProgress?.(data);

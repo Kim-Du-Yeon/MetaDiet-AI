@@ -92,7 +92,8 @@ async def run_agent(*, model, instruction: str, request: str,
                     selection_mode: Literal["shadow", "enforce"] = "shadow",
                     select_first_only: bool = False,
                     finish_after_successful_delegate: bool = False,
-                    agent_name: str = "specialist", context_verified: bool = False) -> AgentResult:
+                    agent_name: str = "specialist", context_verified: bool = False,
+                    buffered_stream: bool = False) -> AgentResult:
     """Model selects zero or more tools repeatedly until done or budget exhausted.
 
     A delegated agent must receive the *same* budget. Policies can only remove
@@ -126,7 +127,9 @@ async def run_agent(*, model, instruction: str, request: str,
             from app.agents.execution_stream import emit_runtime_event, measure_stage
             await emit_runtime_event("model_started", agent=agent_name, context_verified=context_verified)
             async with measure_stage('model_' + agent_name):
-                response = await asyncio.wait_for(bound.ainvoke(messages, config=config), budget.remaining())
+                from app.agents.model_delivery import invoke_model
+                response = await asyncio.wait_for(invoke_model(bound, messages, config,
+                    buffered_stream=buffered_stream), budget.remaining())
             messages.append(response)
             if getattr(response, "invalid_tool_calls", []):
                 raise ExecutionStopped("invalid_tool_call")

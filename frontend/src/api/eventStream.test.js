@@ -2,6 +2,22 @@ import { TextDecoder, TextEncoder } from "util";
 import { consumeEventStream } from "./eventStream";
 
 global.TextDecoder = TextDecoder;
+
+test('reader errors retain the last sequence to avoid duplicate tokens on retry', async () => {
+  const reader = { read: jest.fn().mockResolvedValueOnce({ done: false,
+    value: new TextEncoder().encode('data: {"type":"answer_delta","seq":8,"content":"답변"}\n\n')
+  }).mockRejectedValueOnce(new TypeError('network lost')), cancel: async () => {}, releaseLock: () => {} };
+  await expect(consumeEventStream({ ok: true, body: { getReader: () => reader } }, () => {}))
+    .rejects.toMatchObject({ lastSeq: 8 });
+});
+
+test('completed is authoritative even if the connection would fail immediately after it', async () => {
+  const reader = { read: jest.fn().mockResolvedValueOnce({ done: false,
+    value: new TextEncoder().encode('data: {"type":"completed","seq":9,"answer":"완료"}\n\n')
+  }).mockRejectedValueOnce(new TypeError('network lost')), cancel: async () => {}, releaseLock: () => {} };
+  await expect(consumeEventStream({ ok: true, body: { getReader: () => reader } }, () => {})).resolves.toBe(9);
+  expect(reader.read).toHaveBeenCalledTimes(1);
+});
 function response(text) {
   const bytes = new TextEncoder().encode(text);
   let index = 0;

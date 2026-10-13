@@ -44,6 +44,7 @@ export async function consumeEventStream(response, onEvent, { afterSeq = 0 } = {
       if (done) break;
       buffer += decoder.decode(value, { stream: true });
       drain();
+      if (completed) return lastSeq;
     }
     buffer += decoder.decode();
     drain();
@@ -53,6 +54,9 @@ export async function consumeEventStream(response, onEvent, { afterSeq = 0 } = {
       throw error;
     }
     return lastSeq;
+  } catch (error) {
+    error.lastSeq = lastSeq;
+    throw error;
   } finally {
     await reader.cancel().catch(() => {});
     reader.releaseLock();

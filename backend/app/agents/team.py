@@ -571,6 +571,15 @@ class DietTeam:
         from app.agents.coaching_route import simple_followup, simple_recommendation
         first_direct = self.first_coaching_mode != 'off' and simple_recommendation(self.state)
         direct = context_verified and (simple_followup(self.state) or first_direct) and self.decision_client is None
+        from app.agents.execution_stream import emit_runtime_event
+        delivery = get_settings().coaching_delivery if direct else 'invoke'
+        route_metadata = dict(route=(
+            'first_direct' if direct and first_direct else 'followup_direct' if direct else 'supervisor'),
+            reasoning=self.first_coaching_mode if direct and first_direct else (
+                get_settings().coaching_thinking_level if direct else 'default'), model_delivery=delivery)
+        self.config = {**(self.config or {}), 'metadata': {
+            **(self.config or {}).get('metadata', {}), **route_metadata}}
+        await emit_runtime_event('execution_route', **route_metadata)
         logging.getLogger(__name__).warning(
             'coaching_route first_mode=%s eligible=%s verified=%s direct=%s action=%s pending=%s',
             self.first_coaching_mode, simple_recommendation(self.state), context_verified, direct,
@@ -587,7 +596,7 @@ class DietTeam:
                     'verified_context': verified_context}, ensure_ascii=False),
                 tools=[tool for tool in self.tools('meal') if tool.effect == 'read'],
                 allowed_tools=self.allowed, budget=self.budget, config=self.config,
-                agent_name='meal', context_verified=True)
+                agent_name='meal', context_verified=True, buffered_stream=delivery == 'buffered_stream')
         else:
             result = await self.run_supervisor(delegates, verified_context, context_verified)
         self.events.extend({**event, 'agent': 'meal' if direct else 'supervisor'} for event in result.events)

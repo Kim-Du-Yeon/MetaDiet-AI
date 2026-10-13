@@ -79,6 +79,18 @@ test("renders streamed backend phases with the completed answer", async () => {
   }));
 });
 
+test('completed snapshot replaces partial text and recommendation buttons use the direct request', async () => {
+  sendChatMessage.mockImplementation(async (_user, _message, onToken, onDone) => {
+    onToken('중간 답변');
+    onDone({ answer: '**최종 답변**', execution_status: 'completed' });
+  });
+  render(<Harness />);
+  fireEvent.click(await screen.findByRole('button', { name: '점심 추천' }));
+  await screen.findByText('최종 답변');
+  expect(screen.queryByText('중간 답변')).not.toBeInTheDocument();
+  expect(sendChatMessage.mock.calls[0][1]).toBe('점심 추천해줘');
+});
+
 test("restores recent messages and a pending proposal without rerunning chat", async () => {
   getSessionRestore.mockResolvedValue({
     messages: [

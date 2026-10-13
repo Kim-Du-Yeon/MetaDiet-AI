@@ -1,0 +1,17 @@
+.answer-content { line-height: 1.7; overflow-wrap: anywhere; color: #243b34; }
+.answer-content > :first-child { margin-top: 0; }
+.answer-content > :last-child { margin-bottom: 0; }
+.answer-content p { margin: .65em 0; }
+.answer-content h1, .answer-content h2, .answer-content h3, .answer-content h4 { font-size: 1.07em; line-height: 1.45; margin: 1.1em 0 .45em; }
+.answer-content ul, .answer-content ol { padding-left: 1.4em; margin: .5em 0; }
+.answer-content li + li { margin-top: .3em; }
+.answer-content hr { border: 0; border-top: 1px solid #dce7e2; margin: 1em 0; }
+.answer-content a { color: #126447; text-underline-offset: 3px; }
+.answer-content pre { overflow-x: auto; white-space: pre-wrap; }
+.answer-content--pending { margin: 0; white-space: pre-wrap; }
+.chat-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 16px; }
+.chat-actions button { border: 1px solid #b9d1c6; border-radius: 12px; background: #f5faf7; color: #185b43; padding: 10px 16px; min-height: 44px; font: inherit; font-weight: 600; cursor: pointer; }
+.chat-actions button:hover:not(:disabled) { background: #e4f2eb; }
+.chat-actions button:focus-visible { outline: 3px solid #258b66; outline-offset: 3px; }
+.chat-actions button:disabled { opacity: .55; cursor: wait; }
+.chat-actions__status { flex-basis: 100%; margin: 0; color: #52685e; font-size: .85rem; }

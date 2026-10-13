@@ -21,6 +21,8 @@ def enable_candidate(monkeypatch):
     '오늘 점심 메뉴 추천해줘. 조언만 해줘.',
     '점심 추천해줘', '오늘 저녁 식단을 추천해줘',
     '점심 추천해줘. 오늘 남은 칼로리도 알려줘.',
+    '점심 식단 추천해줘. 오늘 확정된 섭취량과 목표를 반영해줘.',
+    '저녁 식단 추천해줘. 오늘 확정된 섭취량과 목표를 반영해줘.',
 ])
 async def test_explicit_first_advice_is_one_readonly_model_call(message):
     tools_seen = []
