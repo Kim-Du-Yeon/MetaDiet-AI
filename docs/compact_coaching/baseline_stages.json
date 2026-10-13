@@ -1,0 +1,52 @@
+{
+  "source": "docs/latency100/after.json",
+  "source_sha256": "4123a68bf4babad29b9a5631f35b917ad804b310e2624ca4e7dd6d59bb023e42",
+  "attempts": 100,
+  "note": "Stages can be nested; do not sum their medians. Model timings are observed only where emitted.",
+  "stages": {
+    "budget_commit": {
+      "observed_count": 100,
+      "median_ms": 353.755
+    },
+    "budget_connection_wait": {
+      "observed_count": 100,
+      "median_ms": 1046.88
+    },
+    "budget_sql": {
+      "observed_count": 100,
+      "median_ms": 1053.371
+    },
+    "budget_storage": {
+      "observed_count": 100,
+      "median_ms": 2455.477
+    },
+    "db_read": {
+      "observed_count": 95,
+      "median_ms": 489.708
+    },
+    "graph_total": {
+      "observed_count": 100,
+      "median_ms": 8601.58
+    },
+    "model_meal": {
+      "observed_count": 96,
+      "median_ms": 4444.34
+    },
+    "model_supervisor": {
+      "observed_count": 20,
+      "median_ms": 4574.574
+    },
+    "public_stats": {
+      "observed_count": 100,
+      "median_ms": 322.086
+    },
+    "response_snapshot": {
+      "observed_count": 100,
+      "median_ms": 71.386
+    },
+    "terminal_checkpoint": {
+      "observed_count": 100,
+      "median_ms": 217.32
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "scope": "alternating_prompt_real_model_synthetic_db_100_each",
+  "measurement": {
+    "baseline": {
+      "attempts": 100,
+      "completed": 100,
+      "failed_or_blocked": 0,
+      "unexpected_proposals": 0,
+      "first_answer_ms_completed": {
+        "n": 0,
+        "median": null,
+        "p95": null
+      },
+      "total_ms_completed": {
+        "n": 100,
+        "median": 4322.9,
+        "p95": 7320.47
+      },
+      "duration_ms_all_attempts": {
+        "n": 100,
+        "median": 4322.9,
+        "p95": 7320.47
+      },
+      "model_calls_completed": {
+        "n": 100,
+        "median": 1.0,
+        "p95": 1
+      },
+      "fresh": 100,
+      "no_write": 100
+    },
+    "compact": {
+      "attempts": 100,
+      "completed": 100,
+      "failed_or_blocked": 0,
+      "unexpected_proposals": 0,
+      "first_answer_ms_completed": {
+        "n": 0,
+        "median": null,
+        "p95": null
+      },
+      "total_ms_completed": {
+        "n": 100,
+        "median": 4412.73,
+        "p95": 6111.91
+      },
+      "duration_ms_all_attempts": {
+        "n": 100,
+        "median": 4412.73,
+        "p95": 6111.91
+      },
+      "model_calls_completed": {
+        "n": 100,
+        "median": 1.0,
+        "p95": 1
+      },
+      "fresh": 100,
+      "no_write": 100
+    }
+  },
+  "quality": {
+    "baseline": {
+      "attempts": 100,
+      "judge_completed": 100,
+      "relevant": 100,
+      "actionable": 100,
+      "no_invented_intake": 100,
+      "no_false_save_claim": 100,
+      "concise": 100
+    },
+    "compact": {
+      "attempts": 100,
+      "judge_completed": 100,
+      "relevant": 100,
+      "actionable": 100,
+      "no_invented_intake": 100,
+      "no_false_save_claim": 100,
+      "concise": 100
+    }
+  },
+  "tokens": {
+    "baseline": {
+      "input_tokens": {
+        "n": 100,
+        "median": 1357.0,
+        "p95": 1362
+      },
+      "output_tokens": {
+        "n": 100,
+        "median": 108.5,
+        "p95": 476
+      },
+      "total_tokens": {
+        "n": 100,
+        "median": 1466.0,
+        "p95": 1829
+      }
+    },
+    "compact": {
+      "input_tokens": {
+        "n": 100,
+        "median": 887.0,
+        "p95": 892
+      },
+      "output_tokens": {
+        "n": 100,
+        "median": 123.5,
+        "p95": 158
+      },
+      "total_tokens": {
+        "n": 100,
+        "median": 1009.5,
+        "p95": 1050
+      }
+    }
+  },
+  "gates": {
+    "median_10_percent": false,
+    "p95_not_10_percent_worse": true,
+    "freshness_and_no_write": true,
+    "rubric_nonregression": true
+  },
+  "adopt": false
+}

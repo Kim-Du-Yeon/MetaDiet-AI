@@ -1,5 +1,11 @@
 # 2026-10-09 upgrade verification
 
+## Scoped follow-up prompt experiment (2026-10-14)
+
+Result: baseline/candidate 100 each, median 4322.90/4412.73ms, p95 7320.47/6111.91ms, freshness 100/100 in each. The median speed gate failed; the candidate remains disabled. Tail or token savings do not override the predeclared gate.
+
+[Single-bottleneck report](docs/compact_coaching/README.md) starts from the existing100 public-stage logs and isolates model generation. The candidate changes only the verified read-only follow-up instruction; model, low reasoning, tools and fresh-context logic stay fixed. Both conditions are rerun in100 alternating pairs with frozen synthetic contexts. Adoption requires the predeclared speed, tail, freshness, no-write and blinded quality gates. Local model timings must not be presented as public API latency.
+
 ## 100-attempt comparison policy (2026-10-13)
 
 New speed/accuracy comparisons require at least 100 attempts per condition, frozen matched inputs, and failed attempts retained. [The current report](docs/latency100/README.md) separates public before/after, alternating native-provider delivery, live database reservations, automated quality judging and functional browser/SSE checks. Public latency uses 20 unique cases repeated five times, not 100 independent users. Native freshness uses five synthetic current-state conditions against stale history. Small functional smoke checks are not performance evidence.

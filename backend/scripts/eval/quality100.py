@@ -10,10 +10,11 @@ from evaluate_followup_quality import Grade, Review, get_chat_model, get_setting
 
 async def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('input', choices=['before', 'after', 'native_stream'])
+    parser.add_argument('input', choices=['before', 'after', 'native_stream', 'paired'])
+    parser.add_argument('--folder', type=Path, default=ROOT/'docs/latency100')
     parser.add_argument('--retry-failed', action='store_true', help='Supplement only; never overwrite primary evidence')
     args = parser.parse_args()
-    folder = ROOT/'docs/latency100'
+    folder = args.folder
     source = folder/(args.input+'.json')
     output = folder/(args.input+'_quality.json')
     failed_indices = None
@@ -24,7 +25,7 @@ async def main():
     if output.exists(): raise SystemExit('Refusing to overwrite evidence')
     data = json.loads(source.read_text(encoding='utf-8'))
     samples = data['rows']
-    assert len(samples) == (200 if args.input == 'native_stream' else 100)
+    assert len(samples) == (200 if args.input in ('native_stream', 'paired') else 100)
     order = failed_indices if failed_indices is not None else list(range(len(samples)))
     random.Random(1331).shuffle(order)
     rows = []
