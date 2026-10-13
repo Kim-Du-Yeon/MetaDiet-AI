@@ -784,6 +784,7 @@ class MealPortionEdit(BaseModel):
     model_config = ConfigDict(extra='forbid', allow_inf_nan=False)
     amount: float = Field(gt=0, le=10000)
     unit: str = Field(max_length=10)
+    exclude: bool = False
 
 
 class MealRevision(BaseModel):
@@ -810,8 +811,12 @@ async def revise_meal(proposal_id: UUID, req: MealRevision, current_user: str = 
             raise HTTPException(422, '음식 항목 수가 일치하지 않습니다.')
         catalog = default_catalog()
         revised = []
+        excluded = list(dict.fromkeys(name for meal in meals for name in (meal.get('nutrition_metadata') or {}).get('excluded_foods', [])))
         for meal, edit in zip(meals, req.items):
             portion = dict((meal.get('nutrition_metadata') or {}).get('portion') or {})
+            if edit.exclude:
+                excluded.append(portion.get('display_name') or meal['food_name'])
+                continue
             unit_grams = portion.get('unit_grams') or ({portion['default_unit']: portion['unit_g'],
                 '회분': portion['unit_g'], '인분': portion['unit_g']} if portion.get('unit_g') else {})
             allowed_units = {'g'} | set(unit_grams)
@@ -826,6 +831,11 @@ async def revise_meal(proposal_id: UUID, req: MealRevision, current_user: str = 
             quote['nutrition_metadata']['portion'] = portion
             quote['meal_type'] = req.meal_type or meal['meal_type']
             revised.append(quote)
+        if not revised:
+            raise HTTPException(422, '모든 음식을 제외하려면 제안을 취소해주세요.')
+        if excluded:
+            for meal in revised:
+                meal['nutrition_metadata']['excluded_foods'] = list(dict.fromkeys(excluded))
         payload = MealProposal(kind=old['kind'], log_date=req.log_date, meals=revised).model_dump(mode='json')
         async with conversation_lock(current_user, old['thread_id']):
             graph = get_graph()

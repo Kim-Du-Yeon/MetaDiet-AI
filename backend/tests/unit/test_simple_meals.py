@@ -27,7 +27,14 @@ async def test_expanded_everyday_inputs_need_no_question_and_use_real_catalog(me
 @pytest.mark.parametrize('message', ['고구마빵 우유', '그릭요거트', '우유 200ml',
     '사과주스', '밥하고 미등록새제품', '계란후라이 추천해줘', '아몬드 -2개'])
 def test_expansion_never_turns_unknown_product_or_unit_into_partial_meal(message):
-    assert parse_simple_meal(message) is None
+    parsed = parse_simple_meal(message)
+    if message in {'고구마빵 우유', '그릭요거트', '사과주스'}:
+        assert parsed is not None
+        assert parsed['items'][0]['portion']['representative']
+        assert parsed['items'][0]['portion']['display_name'] == message.split()[0]
+        assert len(parsed['items']) == (2 if message == '고구마빵 우유' else 1)
+    else:
+        assert parsed is None
 
 
 @pytest.mark.parametrize('aliases,canonical,grams,unit,food_id', [p for p in PORTIONS if not p[4]])

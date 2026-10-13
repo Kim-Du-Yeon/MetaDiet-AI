@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
 from app.core.service_clock import service_today
 from app.schemas.proposals import MealProposal
+from app.tools.food_groups import match_food_group
 
 # alias, exact catalog name, app serving grams, display unit, representative ID
 PORTIONS = [
@@ -122,6 +123,7 @@ def parse_simple_meal(message, *, forced_meal_type=None, allow_unknown=False):
     while text.strip(' ,、'):
         text = text.lstrip(' ,、')
         matched = None
+        group_match = None
         for candidate in ALIASES:
             if text.startswith(candidate[0]):
                 tail = text[len(candidate[0]):]
@@ -129,6 +131,12 @@ def parse_simple_meal(message, *, forced_meal_type=None, allow_unknown=False):
                     continue
                 matched = candidate
                 break
+        possible_group = match_food_group(text)
+        if possible_group and (not matched or len(possible_group[1]) > len(matched[0])):
+            group_match = possible_group
+            if group_match:
+                group, alias, _ = group_match
+                matched = (alias, group.canonical, group.serving_g, group.unit, None)
         if not matched:
             if not allow_unknown:
                 return None
@@ -142,6 +150,9 @@ def parse_simple_meal(message, *, forced_meal_type=None, allow_unknown=False):
         alias, canonical, serving, default_unit, food_id = matched
         text = text[len(alias):].lstrip()
         default_amount, unit_grams = CATEGORY_DEFAULTS.get(canonical, (1, {default_unit: serving, '회분': serving, '인분': serving}))
+        if group_match:
+            group, _, unit_grams = group_match
+            default_amount = group.count
         quantity = re.match(r'((?:\d+(?:\.\d+)?)|하나|한|둘|두|세|네|다섯|여섯|반)\s*(g|그램|공기|개|회분|인분|장|컵|조각|판)', text, re.I)
         amount, unit, defaulted = default_amount, default_unit, True
         if quantity:
@@ -166,13 +177,17 @@ def parse_simple_meal(message, *, forced_meal_type=None, allow_unknown=False):
         basis_note = ('곰보빵(소보로) 유사 기준이며 실제 메론빵 제품값이 아니에요.' if '메론' in alias or '멜론' in alias
             else '일반 콤비네이션 피자 기준이며 브랜드 제품값이 아니에요.' if '도미노' in alias or '피자헛' in alias
             else '앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.' if approximate else '')
+        if group_match:
+            approximate = True
+            basis_note = f'{group.name} 음식군 대표값({canonical})으로 계산했어요. 실제 제품·재료와 다를 수 있어요.'
         items.append({'canonical': canonical, 'food_id': food_id, 'quantity_g': grams,
             **({'unresolved': True} if canonical is None else {}),
             'portion': {'display_name': TYPO_DISPLAY.get(alias, alias),
                 'amount': amount, 'unit': unit, 'unit_g': serving,
                 'default_unit': default_unit, 'defaulted': defaulted,
                 'unit_grams': unit_grams, 'basis_note': basis_note,
-                'representative': bool(food_id) or approximate, 'policy_version': 'simple-v3'}})
+                **({'food_group': group.name} if group_match else {}),
+                'representative': bool(food_id) or approximate, 'policy_version': 'simple-v4'}})
         text = re.sub(r'^(?:그리고\s+|이랑\s*|랑\s*|하고\s*|와\s*|과\s*)', '', text)
         if len(items) > 30:
             return None

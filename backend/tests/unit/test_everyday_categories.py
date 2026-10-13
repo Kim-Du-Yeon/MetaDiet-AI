@@ -29,7 +29,7 @@ async def test_brand_and_melon_keep_explicit_approximation_not_exact_product_cla
         portion = meal['nutrition_metadata']['portion']
         assert portion['representative'] is True
         assert portion['basis_note']
-        assert portion['policy_version'] == 'simple-v3'
+        assert portion['policy_version'] == 'simple-v4'
     assert '도미노' in result['meals'][0]['nutrition_metadata']['portion']['display_name']
     assert '도미노' not in result['meals'][0]['food_name']
 

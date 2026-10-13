@@ -65,3 +65,33 @@ async def test_restore_reconciles_revision_committed_before_checkpoint_failure(m
     assert graph.aupdate_state.call_args.args[1]['pending_proposal']['version'] == 2
     graph.ainvoke.assert_not_called()
     repository.resolve.assert_not_called()
+
+
+@pytest.mark.parametrize('exclude_all', [False, True])
+async def test_excluding_food_recalculates_without_confirmation(monkeypatch, exclude_all):
+    payload = await calculate_simple_meal(parse_simple_meal('밥 닭가슴살'), FoodCatalog())
+    proposal_id = uuid4()
+    old = {'id': str(proposal_id), 'version': 1, 'kind': 'intake', 'status': 'pending', 'thread_id': 't', 'payload': payload}
+    repo = AsyncMock()
+    repo.get.return_value = old
+    repo.create.side_effect = lambda user, thread, value, key, **kw: {**old, 'version': 2, 'payload': value}
+    graph = AsyncMock()
+    graph.aget_state.return_value = SimpleNamespace(values={'pending_proposal': old})
+    @asynccontextmanager
+    async def lock(*args):
+        yield
+    monkeypatch.setattr(main, 'ProposalRepository', lambda: repo)
+    monkeypatch.setattr(main, 'get_graph', lambda: graph)
+    monkeypatch.setattr(main, 'conversation_lock', lock)
+    request = main.MealRevision(version=1, log_date=payload['log_date'], meal_type='lunch', items=[
+        {'amount': 1, 'unit': '공기', 'exclude': True}, {'amount': 100, 'unit': 'g', 'exclude': exclude_all}])
+    if exclude_all:
+        with pytest.raises(HTTPException) as error:
+            await main.revise_meal(proposal_id, request, 'owner')
+        assert error.value.status_code == 422
+        repo.create.assert_not_called()
+    else:
+        result = await main.revise_meal(proposal_id, request, 'owner')
+        assert len(result['payload']['meals']) == 1
+        assert result['payload']['meals'][0]['nutrition_metadata']['excluded_foods'] == ['밥']
+    repo.resolve.assert_not_called()

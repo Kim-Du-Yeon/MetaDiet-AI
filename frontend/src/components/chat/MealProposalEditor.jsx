@@ -28,11 +28,11 @@ export default function MealProposalEditor({ proposal, busy, onRevise, onChanged
           {portion?.defaulted && ' · 기본 분량으로 계산'}{portion?.representative && ' · 대표 기준·대략값'}</p>
         {portion?.basis_note && <p>{portion.basis_note}</p>}
         <p><strong>{meal.calories} kcal</strong> · 탄수화물 {meal.carbs_g}g · 단백질 {meal.protein_g}g · 지방 {meal.fat_g}g</p>
-        {editable && <div className="meal-preview__portion"><label>분량<input aria-label={`${index + 1}번 음식 분량`} type="number" min="0.01" max="10000" step="any"
-          disabled={busy} value={draft.items[index].amount} onChange={e => change({ ...draft, items: draft.items.map((item, i) => i === index ? { ...item, amount: Number(e.target.value) } : item) })} /></label>
-          <label>단위<select aria-label={`${index + 1}번 음식 단위`} disabled={busy} value={draft.items[index].unit}
+        {editable && <><button type="button" className="proposal__secondary" disabled={busy} aria-label={`${index + 1}번 음식 ${draft.items[index].exclude ? '제외 취소' : '제외하기'}`} onClick={() => change({ ...draft, items: draft.items.map((item, i) => { if (i !== index) return item; const { exclude, ...rest } = item; return exclude ? rest : { ...rest, exclude: true }; }) })}>{draft.items[index].exclude ? '제외 취소' : '제외하기'}</button>{draft.items[index].exclude && <p>제외 예정 · 다시 계산하면 합계에서 빠져요.</p>}<div className="meal-preview__portion"><label>분량<input aria-label={`${index + 1}번 음식 분량`} type="number" min="0.01" max="10000" step="any"
+          disabled={busy || draft.items[index].exclude} value={draft.items[index].amount} onChange={e => change({ ...draft, items: draft.items.map((item, i) => i === index ? { ...item, amount: Number(e.target.value) } : item) })} /></label>
+          <label>단위<select aria-label={`${index + 1}번 음식 단위`} disabled={busy || draft.items[index].exclude} value={draft.items[index].unit}
             onChange={e => change({ ...draft, items: draft.items.map((item, i) => i === index ? { ...item, unit: e.target.value } : item) })}>
-            {[...new Set(['g', ...(portion?.unit_grams ? Object.keys(portion.unit_grams) : portion?.default_unit ? [portion.default_unit, '회분', '인분'] : [])])].map(unit => <option key={unit}>{unit}</option>)}</select></label></div>}
+            {[...new Set(['g', ...(portion?.unit_grams ? Object.keys(portion.unit_grams) : portion?.default_unit ? [portion.default_unit, '회분', '인분'] : [])])].map(unit => <option key={unit}>{unit}</option>)}</select></label></div></>}
         <details><summary>출처·상세 정보</summary><small>{meal.food_name} · {({ csv: '국가표준식품성분표', mfds: '식약처', user_label: '사용자 영양표' })[meal.source] || meal.source}
           {meal.nutrition_metadata?.manufacturer && ` · ${meal.nutrition_metadata.manufacturer}`} · 나트륨 {meal.sodium_mg ?? '미입력'}mg</small></details></div></li>;
     })}</ul>
@@ -40,8 +40,9 @@ export default function MealProposalEditor({ proposal, busy, onRevise, onChanged
     <div className="proposal__macros"><strong>합계 {Math.round(total)} kcal</strong>
       {['carbs_g', 'protein_g', 'fat_g'].map((key, index) => <span key={key}>{['탄수화물', '단백질', '지방'][index]} {payload.meals.reduce((sum, meal) => sum + meal[key], 0).toFixed(1)}g</span>)}</div>
     {proposal.kind === 'intake' && payload.log_date === today && budget?.target > 0 && <p>이 식사를 기록하면 오늘 남는 칼로리: <strong>{Math.round(budget.target - budget.calories - total)} kcal</strong> (아직 섭취량에 반영되지 않았어요)</p>}
+    {draft.items.every(item => item.exclude) && <p role="status">모두 제외하려면 아래 취소 버튼을 눌러주세요.</p>}
     {changed && <p role="status">변경한 분량은 다시 계산한 뒤 기록할 수 있어요. 위 영양값은 변경 전 값입니다.</p>}
-    {editable && <button className="proposal__secondary" disabled={busy || !changed || draft.items.some(item => !(item.amount > 0))}
+    {editable && <button className="proposal__secondary" disabled={busy || !changed || draft.items.every(item => item.exclude) || draft.items.some(item => !item.exclude && !(item.amount > 0))}
       onClick={() => onRevise(draft)}>수정한 분량 다시 계산</button>}
   </div>;
 }
