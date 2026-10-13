@@ -1,0 +1,76 @@
+{
+  "scope": "disposable_synthetic_public_browser",
+  "stages": [
+    {
+      "time_utc": "2026-10-13T01:23:51.511208+00:00",
+      "stage": "before_confirmation",
+      "meal_rows": 0,
+      "total_calories": 0,
+      "portion_metadata_present": null
+    },
+    {
+      "time_utc": "2026-10-13T01:24:28.233965+00:00",
+      "stage": "after_revision_before_confirmation",
+      "meal_rows": 0,
+      "total_calories": 0,
+      "portion_metadata_present": null
+    },
+    {
+      "time_utc": "2026-10-13T01:25:11.403109+00:00",
+      "stage": "after_confirmation",
+      "meal_rows": 3,
+      "total_calories": 707.2,
+      "portion_metadata_present": true
+    },
+    {
+      "time_utc": "2026-10-13T01:25:41.109141+00:00",
+      "stage": "after_reload",
+      "meal_rows": 3,
+      "total_calories": 707.2,
+      "portion_metadata_present": true
+    },
+    {
+      "time_utc": "2026-10-13T01:29:56.479228+00:00",
+      "stage": "after_exact_product_pending",
+      "meal_rows": 3,
+      "total_calories": 707.2,
+      "portion_metadata_present": true
+    },
+    {
+      "time_utc": "2026-10-13T01:34:24.687634+00:00",
+      "stage": "after_product_cancel_and_dinner_coaching",
+      "meal_rows": 3,
+      "total_calories": 707.2,
+      "portion_metadata_present": true
+    },
+    {
+      "time_utc": "2026-10-13T01:36:25.236932+00:00",
+      "stage": "after_final_representative",
+      "meal_rows": 3,
+      "total_calories": 707.2,
+      "portion_metadata_present": true
+    }
+  ],
+  "initial_request_usage": [
+    {
+      "tool_calls": 2,
+      "elapsed_seconds": 6.42745
+    }
+  ],
+  "feature_commit": "902fb1eb04d5c954ce7ce78036c83e7809c248e0",
+  "final_code_commit": "bbeb58cf56424447ff42f96d5823d091912f9f11",
+  "final_api_live": true,
+  "synthetic_fixture_cleaned": true,
+  "exact_product_selection": "pending_then_cancelled",
+  "dinner_coaching": "confirmed_intake_and_remaining_budget_reflected_without_domain_write",
+  "final_ricepaper": {
+    "food_id": "mfds:P108-007000300-0013",
+    "quantity_g": 80,
+    "calories": 272,
+    "representative": true
+  },
+  "limits": [
+    "Synthetic account, not real user outcomes.",
+    "initial_request_usage is server budget time, not complete browser wall time."
+  ]
+}
