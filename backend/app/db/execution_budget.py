@@ -1,7 +1,7 @@
 """Reserve calls before external effects; survive crashes and checkpoint rollback."""
 from datetime import datetime, timezone
 from psycopg.types.json import Jsonb
-from app.db.proposals import connection
+from app.db.budget_pool import connection
 from app.agents.runtime import ExecutionStopped
 
 

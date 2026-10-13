@@ -2,6 +2,8 @@
 import json
 import os
 import re
+import argparse
+from pathlib import Path
 from uuid import uuid4
 from benchmark_coaching import API, ROOT, load_env, service_api, json_request, run
 from check_render_beta import stream
@@ -10,7 +12,7 @@ from check_render_beta import stream
 _cleanup = None
 
 
-def verify():
+def verify(output_dir=ROOT / 'docs/answer_delivery'):
     global _cleanup
     load_env(ROOT / 'backend/.env')
     load_env(ROOT / 'backend/.env.selection-browser')
@@ -63,13 +65,16 @@ def verify():
               'confirmed_revised_intake_seen_despite_stale_messages': True, 'trace_id': row['trace_id'],
               'delete_and_refreshed_state_zero': True,
               'limitations': 'One disposable account. Date, target and DB outage coverage is scripted regression, not public fault injection.'}
-    (ROOT / 'docs/answer_delivery/FRESHNESS_PUBLIC.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
+    output_dir.mkdir(parents=True, exist_ok=True)
+    (output_dir / 'FRESHNESS_PUBLIC.json').write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
     print('Public approval/freshness checks passed; fixture meal records restored to empty.')
 
 
 if __name__ == '__main__':
     try:
-        verify()
+        parser = argparse.ArgumentParser()
+        parser.add_argument('--output-dir', type=Path, default=ROOT / 'docs/answer_delivery')
+        verify(parser.parse_args().output_dir)
     finally:
         if _cleanup:
             _cleanup()

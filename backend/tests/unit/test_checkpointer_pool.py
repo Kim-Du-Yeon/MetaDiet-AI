@@ -1,4 +1,5 @@
 from types import SimpleNamespace
+from contextlib import asynccontextmanager
 
 import pytest
 
@@ -31,6 +32,11 @@ async def test_graph_lifespan_uses_bounded_pool_and_releases_graph(monkeypatch):
             events.append(("setup",))
 
     graph = object()
+    @asynccontextmanager
+    async def budget_lifespan(url):
+        assert url == "postgresql://fixture"
+        yield
+    monkeypatch.setattr("app.db.budget_pool.lifespan", budget_lifespan)
     monkeypatch.setattr(module, "get_settings", lambda: SimpleNamespace(supabase_db_url="postgresql://fixture"))
     monkeypatch.setattr(module, "AsyncConnectionPool", Pool)
     monkeypatch.setattr(module, "AsyncPostgresSaver", Saver)

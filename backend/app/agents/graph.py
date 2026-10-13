@@ -262,6 +262,8 @@ async def lifespan(app):
         print("=== [lifespan] 체크포인터 테이블 준비 완료 ===")
         _diet_agent_graph = build_graph(checkpointer=checkpointer)
         print("=== [lifespan] Diet Agent 그래프 빌드 완료 ===")
-        yield
+        from app.db.budget_pool import lifespan as budget_lifespan
+        async with budget_lifespan(db_url):
+            yield
     _diet_agent_graph = None
     print("=== [lifespan] 그래프 해제 완료 ===")
