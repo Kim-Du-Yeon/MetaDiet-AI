@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect, useCallback } from "react";
-import { sendChatMessage, uploadImage, resumeChat, getChatHistory, getSessionRestore, rollbackToCheckpoint, nutritionLookup, decideProposal, reviseMeal, reviseMeasurement, trackProductEvent } from "../../api/dietApi";
+import { sendChatMessage, uploadImage, resumeChat, getChatHistory, getSessionRestore, rollbackToCheckpoint, nutritionLookup, decideProposal, reviseMeal, reviseMeasurement, trackProductEvent, resolveMealChoices } from "../../api/dietApi";
 import ProposalCard from "./ProposalCard";
 import NutritionLabelForm from "./NutritionLabelForm";
 import FoodProductSearch from "./FoodProductSearch";
 import ProductChoiceCards from "./ProductChoiceCards";
+import MealChoiceCards from './MealChoiceCards';
 import ProcessTrace from "./ProcessTrace";
 import "./ChatInterface.css";
 
@@ -67,6 +68,23 @@ export default function ChatInterface({
   const fileInputRef = useRef(null);
   const progressRef = useRef([]);
   const restoreStartedRef = useRef(false);
+  const resolutionRef = useRef(null);
+
+  async function resolveChoices(choices, cancel = false) {
+    const fingerprint = JSON.stringify({id:foodSelection.id, choices, cancel});
+    if (resolutionRef.current?.fingerprint !== fingerprint) resolutionRef.current = {fingerprint, id:window.crypto.randomUUID()};
+    setIsLoading(true); setApprovalError('');
+    try {
+      const result = await resolveMealChoices({thread_id:threadId, selection_id:foodSelection.id,
+        choices, cancel, request_id:resolutionRef.current.id});
+      if (!result.cancelled) {
+        setApproval({...result, channel:'chat'});
+        setPendingState({pending_meals:result.payload.meals, awaiting_confirmation:true, plan_date:result.payload.log_date});
+      }
+      setFoodSelection(null);
+    } catch (error) { setApprovalError(error.message); }
+    finally { setIsLoading(false); }
+  }
 
   const restoreSession = useCallback(async () => {
     setRestoreStatus("loading");
@@ -472,7 +490,9 @@ export default function ChatInterface({
 
       <button type="button" disabled={isLoading || !!approval || restoreStatus !== "ready"} onClick={() => setShowNutritionLabel(true)}>제품 영양표 입력</button>
       <button type="button" disabled={isLoading || !!approval || restoreStatus !== "ready"} onClick={() => setShowFoodSearch(true)}>제품을 정확히 입력</button>
-      {foodSelection && !approval && <ProductChoiceCards key={JSON.stringify(foodSelection)} selection={foodSelection} busy={isLoading}
+      {foodSelection?.mode === 'meal_choices' && !approval && <MealChoiceCards key={foodSelection.id} selection={foodSelection} busy={isLoading}
+        error={approvalError} onResolve={choices => resolveChoices(choices)} onCancel={() => resolveChoices([], true)} />}
+      {foodSelection && foodSelection.mode !== 'meal_choices' && !approval && <ProductChoiceCards key={JSON.stringify(foodSelection)} selection={foodSelection} busy={isLoading}
         onSelect={sendMessage} onSearch={() => setShowFoodSearch(true)} />}
       {showFoodSearch && <FoodProductSearch contextRequest={foodSelection?.request} onClose={() => setShowFoodSearch(false)} onSelect={selection => { setShowFoodSearch(false); sendMessage(selection); }} />}
       {showNutritionLabel && <NutritionLabelForm threadId={threadId} onClose={() => setShowNutritionLabel(false)} onProposal={proposal => { setApproval({ ...proposal, channel: "upload" }); setShowNutritionLabel(false); }} />}

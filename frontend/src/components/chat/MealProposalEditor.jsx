@@ -14,6 +14,7 @@ export default function MealProposalEditor({ proposal, busy, onRevise, onChanged
   const editable = payload.meals.every(meal => meal.food_id && meal.source !== 'user_label');
   const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Seoul' }).format(new Date());
   const changed = JSON.stringify(draft) !== JSON.stringify(initial());
+  const excluded = [...new Set(payload.meals.flatMap(meal => meal.nutrition_metadata?.excluded_foods || []))];
   return <div className="meal-preview">
     {editable ? <div className="proposal__fields"><label>섭취일<input type="date" value={draft.log_date} disabled={busy}
       max={proposal.kind === 'intake' ? today : undefined} onChange={e => change({ ...draft, log_date: e.target.value })} /></label>
@@ -34,6 +35,7 @@ export default function MealProposalEditor({ proposal, busy, onRevise, onChanged
         <details><summary>출처·상세 정보</summary><small>{meal.food_name} · {({ csv: '국가표준식품성분표', mfds: '식약처', user_label: '사용자 영양표' })[meal.source] || meal.source}
           {meal.nutrition_metadata?.manufacturer && ` · ${meal.nutrition_metadata.manufacturer}`} · 나트륨 {meal.sodium_mg ?? '미입력'}mg</small></details></div></li>;
     })}</ul>
+    {excluded.length > 0 && <p role="status">기록에서 제외: {excluded.join(', ')}. 합계에도 포함되지 않았어요.</p>}
     <div className="proposal__macros"><strong>합계 {Math.round(total)} kcal</strong>
       {['carbs_g', 'protein_g', 'fat_g'].map((key, index) => <span key={key}>{['탄수화물', '단백질', '지방'][index]} {payload.meals.reduce((sum, meal) => sum + meal[key], 0).toFixed(1)}g</span>)}</div>
     {proposal.kind === 'intake' && payload.log_date === today && budget?.target > 0 && <p>이 식사를 기록하면 오늘 남는 칼로리: <strong>{Math.round(budget.target - budget.calories - total)} kcal</strong> (아직 섭취량에 반영되지 않았어요)</p>}

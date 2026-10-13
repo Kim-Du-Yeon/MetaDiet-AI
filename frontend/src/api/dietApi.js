@@ -317,6 +317,15 @@ export async function reviseMeal(proposal, payload) {
   return data;
 }
 
+export async function resolveMealChoices(payload) {
+  const res = await fetch(`${BASE_URL}/nutrition/meal-choices`, {
+    method:'POST', headers:authHeaders({'Content-Type':'application/json'}), body:JSON.stringify(payload),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(typeof data.detail === 'string' ? data.detail : '선택 또는 입력값을 확인해주세요.');
+  return data;
+}
+
 export async function deleteAccount() {
   const res = await fetch(`${BASE_URL}/users/me`, {
     method: "DELETE",

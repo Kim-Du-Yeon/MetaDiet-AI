@@ -20,7 +20,7 @@ PORTIONS = [
     (('삶은 계란', '삶은 달걀', '삶은계란', '삶은달걀', '계란', '달걀', '달걀삶은것'), '달걀, 삶은것', 50, '개', None),
     (('계란후라이', '계란 후라이', '계란프라이', '계란 프라이', '달걀프라이', '달걀 프라이'), '달걀, 부침(달걀프라이)', 50, '개', None),
     (('고등어구이', '구운 고등어'), '고등어, 구운것', 100, '회분', None),
-    (('삼겹살구이', '구운 삼겹살'), '돼지고기, 삼겹살, 구운것(팬)', 100, '회분', None),
+    (('삼겹살구이', '구운 삼겹살', '삼겹살'), '돼지고기, 삼겹살, 구운것(팬)', 100, '회분', None),
     (('바나나',), '바나나, 생것', 100, '개', None),
     (('두부',), '두부', 100, '회분', None),
     (('찐 고구마', '찐고구마', '고구마', '고구먀'), '고구마, 찐것', 150, '개', None),
@@ -56,10 +56,12 @@ TYPO_DISPLAY = {'달각슴살': '닭가슴살', '닭가슴샬': '닭가슴살', 
     '고구먀': '고구마', '브로컬리': '브로콜리', '요거뜨': '요거트'}
 
 
-def parse_simple_meal(message, *, forced_meal_type=None):
+def parse_simple_meal(message, *, forced_meal_type=None, allow_unknown=False):
     if not isinstance(message, str) or len(message) > 2000:
         return None
     text = message.strip()
+    if allow_unknown and re.search(r'추천|계획|예정|알려|어떻게|\?|수정|삭제', text):
+        return None
     today = service_today()
     day = today
     date_match = re.match(r'^(\d{4}-\d{2}-\d{2})\s+', text)
@@ -86,17 +88,28 @@ def parse_simple_meal(message, *, forced_meal_type=None):
             text = re.sub(r'^' + word + r'(?:에|으로)?\s*', '', text)
             break
     meal_type = forced_meal_type or meal_type
-    text = re.sub(r'\s*(?:먹었어|먹었어요|먹었다|먹음|기록해줘|기록해주세요)[.!]?$', '', text)
+    text = re.sub(r'\s*(?:먹었어|먹었어요|먹었다|먹음|기록해줘|기록해주세요|기록만(?:\s*해줘)?)[.!]?$', '', text)
     items = []
     while text.strip(' ,、'):
         text = text.lstrip(' ,、')
         matched = None
         for candidate in ALIASES:
             if text.startswith(candidate[0]):
+                tail = text[len(candidate[0]):]
+                if allow_unknown and tail and not re.match(r'^[\s,\d]|^(?:이랑|랑|하고|와|과|한|두|반)', tail):
+                    continue
                 matched = candidate
                 break
         if not matched:
-            return None
+            if not allow_unknown:
+                return None
+            unknown = re.match(r'([가-힣A-Za-z][가-힣A-Za-z ]*?)(?=\s*(?:\d|한|두|반)\s*(?:개|장|공기|g)|,|$|\s+(?:그리고|랑|하고)\s+)', text)
+            if not unknown or len(unknown[1].strip()) > 100:
+                return None
+            alias = unknown[1].strip()
+            # No implicit brand substitution: the user must choose a generic basis.
+            serving = 70 if '돼지바' in alias or '아이스크림' in alias else 100
+            matched = (unknown[1], None, serving, '개' if serving == 70 else '회분', None)
         alias, canonical, serving, default_unit, food_id = matched
         text = text[len(alias):].lstrip()
         quantity = re.match(r'((?:\d+(?:\.\d+)?)|하나|한|둘|두|세|네|다섯|여섯|반)\s*(g|그램|공기|개|회분|인분|장|컵)', text, re.I)
@@ -107,7 +120,7 @@ def parse_simple_meal(message, *, forced_meal_type=None):
                 amount = float(quantity[1])
             unit = quantity[2].lower()
             unit = 'g' if unit == '그램' else unit
-            if unit not in {default_unit, 'g', '회분', '인분'}:
+            if unit not in ({default_unit, 'g', '회분', '인분'} | ({'개', '장', '공기', '컵'} if canonical is None else set())):
                 return None
             text = text[quantity.end():].lstrip()
             defaulted = False
@@ -120,12 +133,16 @@ def parse_simple_meal(message, *, forced_meal_type=None):
         if not 0 < grams <= 10000:
             return None
         items.append({'canonical': canonical, 'food_id': food_id, 'quantity_g': grams,
+            **({'unresolved': True} if canonical is None else {}),
             'portion': {'display_name': TYPO_DISPLAY.get(alias, alias),
                 'amount': amount, 'unit': unit, 'unit_g': serving,
                 'default_unit': default_unit, 'defaulted': defaulted,
                 'representative': bool(food_id), 'policy_version': 'simple-v2'}})
-        text = re.sub(r'^(?:이랑|랑|하고|와|과)\s+', '', text)
+        text = re.sub(r'^(?:그리고\s+|이랑\s*|랑\s*|하고\s*|와\s*|과\s*)', '', text)
         if len(items) > 30:
+            return None
+    if allow_unknown and items and all(i.get('unresolved') for i in items):
+        if all(i['portion']['defaulted'] and not re.search(r'돼지바|아이스크림', i['portion']['display_name']) for i in items):
             return None
     return {'log_date': day.isoformat(), 'meal_type': meal_type, 'items': items} if items else None
 

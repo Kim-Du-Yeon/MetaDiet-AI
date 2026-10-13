@@ -815,6 +815,9 @@ async def revise_meal(proposal_id: UUID, req: MealRevision, current_user: str = 
                 raise HTTPException(422, '이 항목은 g 단위 식품 DB 조회로 수정할 수 없습니다.')
             grams = edit.amount if edit.unit == 'g' else edit.amount * portion['unit_g']
             quote = await catalog.lookup(meal['food_id'], grams)
+            for key in ('substitution', 'excluded_foods', 'requested_name'):
+                if key in (meal.get('nutrition_metadata') or {}):
+                    quote['nutrition_metadata'][key] = meal['nutrition_metadata'][key]
             portion.update(amount=edit.amount, unit=edit.unit, defaulted=False)
             quote['nutrition_metadata']['portion'] = portion
             quote['meal_type'] = req.meal_type or meal['meal_type']
@@ -996,6 +999,57 @@ async def propose_label(req: LabelProposalRequest, current_user: str = Depends(g
             return proposal
     except ProposalConflict as exc:
         raise HTTPException(409, str(exc)) from exc
+
+
+class MealFoodChoice(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    index: int = Field(ge=0, le=29)
+    action: Literal['generic', 'label', 'exclude']
+    label: LabelNutrition | None = None
+
+
+class MealChoicesRequest(BaseModel):
+    model_config = ConfigDict(extra='forbid')
+    thread_id: str = Field(min_length=1, max_length=100)
+    selection_id: str = Field(min_length=64, max_length=64)
+    request_id: UUID
+    choices: list[MealFoodChoice] = Field(default_factory=list, max_length=30)
+    cancel: bool = False
+
+
+@app.post('/nutrition/meal-choices')
+async def resolve_food_choices(req: MealChoicesRequest, current_user: str = Depends(get_current_user)):
+    from app.tools.meal_choices import resolve_meal_choices
+    from app.tools.food_catalog import default_catalog
+    async with conversation_lock(current_user, req.thread_id):
+        graph = get_graph()
+        config = {'configurable': {'thread_id': f'{current_user}_{req.thread_id}'}}
+        state = _sv(await graph.aget_state(config))
+        selection = state.get('food_selection') or {}
+        if selection.get('mode') != 'meal_choices' or selection.get('id') != req.selection_id:
+            raise HTTPException(409, '선택 내용이 변경되었습니다. 다시 불러와주세요.')
+        digest = hashlib.sha256(req.model_dump_json(exclude={'request_id'}).encode()).hexdigest()
+        if state.get('pending_proposal'):
+            if selection.get('resolution_request') == str(req.request_id) and selection.get('resolution_digest') == digest:
+                return state['pending_proposal']
+            raise HTTPException(409, '기존 제안을 먼저 확인하거나 취소해주세요.')
+        if req.cancel:
+            await graph.aupdate_state(config, {'food_selection': None}, as_node='save_chat')
+            return {'cancelled': True}
+        try:
+            payload = await asyncio.wait_for(resolve_meal_choices(selection['parsed'],
+                [c.model_dump(exclude_none=True) for c in req.choices], default_catalog()), timeout=20)
+            proposal = await ProposalRepository().create(current_user, req.thread_id, payload, str(req.request_id))
+            await graph.aupdate_state(config, {'pending_proposal': proposal, 'pending_meals': payload['meals'],
+                'plan_date': payload['log_date'], 'awaiting_confirmation': True,
+                'food_selection': {**selection, 'resolution_request': str(req.request_id), 'resolution_digest': digest}}, as_node='save_chat')
+            return proposal
+        except ProposalConflict as exc:
+            raise HTTPException(409, str(exc)) from exc
+        except ValueError as exc:
+            raise HTTPException(422, '선택 또는 입력값을 확인해주세요. 모두 제외하려면 전체 취소를 눌러주세요.') from exc
+        except TimeoutError as exc:
+            raise HTTPException(503, '조회가 지연됐습니다. 다시 시도하거나 취소할 수 있어요.') from exc
 
 
 @app.get("/calories/history")

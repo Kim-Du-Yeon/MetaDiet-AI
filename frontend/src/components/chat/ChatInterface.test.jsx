@@ -1,17 +1,18 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ChatInterface from "./ChatInterface";
-import { sendChatMessage, getSessionRestore, trackProductEvent } from "../../api/dietApi";
+import { sendChatMessage, getSessionRestore, trackProductEvent, resolveMealChoices } from "../../api/dietApi";
 
 jest.mock("../../api/dietApi", () => ({
   sendChatMessage: jest.fn(), uploadImage: jest.fn(), resumeChat: jest.fn(),
   getChatHistory: jest.fn(), rollbackToCheckpoint: jest.fn(), nutritionLookup: jest.fn(),
   decideProposal: jest.fn(), reviseMeasurement: jest.fn(), getSessionRestore: jest.fn(),
-  trackProductEvent: jest.fn(),
+  trackProductEvent: jest.fn(), resolveMealChoices:jest.fn(),
 }));
 
 beforeEach(() => {
   jest.clearAllMocks();
+  Object.defineProperty(window, 'crypto', {configurable:true, value:{randomUUID:jest.fn(()=>'11111111-1111-4111-8111-111111111111')}});
   getSessionRestore.mockResolvedValue({ messages: [], pending_state: {}, pending_proposal: null });
 });
 
@@ -27,6 +28,23 @@ function Harness() {
       threadId={threadId} setThreadId={setThreadId} prevThreadId={previous} setPrevThreadId={setPrevious}
       isInterrupted={interrupted} setIsInterrupted={setInterrupted} onStatsUpdate={setStats} /></>;
 }
+
+test('unknown food can be excluded by buttons with retry instead of typed answer', async () => {
+  getSessionRestore.mockResolvedValue({messages:[], pending_state:{}, food_selection:{mode:'meal_choices',id:'choice',items:[
+    {index:1,query:'돼지바',quantity_g:70,generic_available:true}]}});
+  resolveMealChoices.mockRejectedValueOnce(new Error('조회 실패')).mockResolvedValueOnce({id:'p',version:1,kind:'intake',payload:{
+    log_date:'2026-10-13',meals:[{food_name:'밥',quantity_g:200,calories:300,carbs_g:65,protein_g:5,fat_g:1,source:'csv'}]}});
+  render(<Harness />);
+  await screen.findByRole('button',{name:'제외하기'});
+  fireEvent.click(screen.getByRole('button',{name:'제외하기'}));
+  fireEvent.click(screen.getByRole('button',{name:'선택 적용'}));
+  await screen.findAllByText('조회 실패');
+  fireEvent.click(screen.getByRole('button',{name:'선택 적용'}));
+  await screen.findByRole('button',{name:'이대로 기록'});
+  expect(resolveMealChoices.mock.calls[0][0].choices).toEqual([{index:1,action:'exclude'}]);
+  expect(resolveMealChoices.mock.calls[0][0].request_id).toBe(resolveMealChoices.mock.calls[1][0].request_id);
+  expect(sendChatMessage).not.toHaveBeenCalled();
+});
 
 test("renders streamed backend phases with the completed answer", async () => {
   sendChatMessage.mockImplementation(async (_user, _message, onToken, onDone, _pending, _messages, _thread, _meal, onProgress) => {

@@ -14,7 +14,7 @@ async def test_missing_branded_foods_stop_search_and_request_label(monkeypatch):
     repo = AsyncMock()
     team = DietTeam({'user_id': 'u1', 'message': '밥 450g 라이스페이퍼 10g 돼지바',
                      'requested_action': 'record_only'}, model_factory=lambda: next(models),
-                    repository=repo, db=object())
+                    repository=repo, db=object(), simple_meals_enabled=False)
     result = await team.execute()
     assert result['execution_status'] == 'blocked'
     assert '영양정보' in result['response']
@@ -67,7 +67,7 @@ async def test_supervisor_delegates_and_meal_agent_selects_tools_before_proposal
         return {"id": "p1", "version": 1, "kind": payload["kind"], "payload": payload, "status": "pending"}
     repo.create.side_effect = create
     team = DietTeam({"user_id": "u1", "thread_id": "t1", "run_id": "r1", "message": "점심 쌀밥 200g 기록만",
-                     "requested_action": "record_only"}, model_factory=lambda: next(models), repository=repo, db=object())
+                     "requested_action": "record_only"}, model_factory=lambda: next(models), repository=repo, db=object(), simple_meals_enabled=False)
     result = await team.execute()
     assert result["pending_proposal"]["payload"]["meals"][0]["calories"] == 300
     assert result["awaiting_confirmation"] is True

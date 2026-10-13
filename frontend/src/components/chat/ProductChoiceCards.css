@@ -12,3 +12,9 @@
 .product-choices__actions { display: flex; flex-wrap: wrap; gap: 8px; }
 .product-choices button { padding: 10px 16px; border: 1px solid #197a55; border-radius: 8px; background: #197a55; color: white; cursor: pointer; }
 .product-choices button:disabled { opacity: .5; cursor: default; }
+.meal-choice-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:12px; margin-top:16px; }
+.meal-choice-fields label { display:grid; gap:6px; }
+.meal-choice-fields input { box-sizing:border-box; width:100%; min-width:0; padding:10px; border:1px solid #b8c8c2; border-radius:8px; }
+.meal-choice-fields p { grid-column:1 / -1; }
+.product-choices button[aria-pressed="true"] { outline:3px solid #1b795b; outline-offset:2px; }
+@media (max-width:480px) { .meal-choice-fields { grid-template-columns:1fr; } }
