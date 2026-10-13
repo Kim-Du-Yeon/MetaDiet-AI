@@ -14,6 +14,14 @@ checkpointer. The earlier node-per-intent graph remains available through
 `build_graph(model_driven=False)` for baseline evaluation. The diagrams below
 describe that baseline unless explicitly updated.
 
+Simple read-only follow-up meal coaching can bypass the Supervisor model only
+after a fresh request-scoped profile/intake read and conservative eligibility
+checks (`agents/coaching_route.py`). This path exposes read tools only, shares
+the bounded runtime and final evidence guards, and retains normal routing for
+pending proposals, mutations, explicit actions, uncertain inputs and failed
+reads. It does not introduce cross-request intake caching. See
+[paired follow-up evaluation](docs/direct_followup/README.md).
+
 An explicit `requested_action="weekly_review"` uses `WeeklyDeepTeam`. Its
 Supervisor can delegate to at most two bounded specialists: `weekly_analysis`
 reads the authenticated user's recent meals, profile, measurements and goal

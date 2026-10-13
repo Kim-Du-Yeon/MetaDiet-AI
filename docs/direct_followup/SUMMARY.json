@@ -1,0 +1,34 @@
+{
+  "before": {
+    "first": {
+      "total_ms": 20342.0,
+      "first_answer_ms": 19812.949999999997,
+      "model_calls": 2.0,
+      "tool_calls": 3.0,
+      "supervisor_calls": 6
+    },
+    "followup": {
+      "total_ms": 19278.6,
+      "first_answer_ms": 18643.85,
+      "model_calls": 1.5,
+      "tool_calls": 2.5,
+      "supervisor_calls": 6
+    }
+  },
+  "after": {
+    "first": {
+      "total_ms": 19823.050000000003,
+      "first_answer_ms": 19146.5,
+      "model_calls": 2.0,
+      "tool_calls": 3.0,
+      "supervisor_calls": 6
+    },
+    "followup": {
+      "total_ms": 12069.75,
+      "first_answer_ms": 11697.95,
+      "model_calls": 1.0,
+      "tool_calls": 2.0,
+      "supervisor_calls": 0
+    }
+  }
+}
