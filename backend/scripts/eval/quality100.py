@@ -11,15 +11,22 @@ from evaluate_followup_quality import Grade, Review, get_chat_model, get_setting
 async def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('input', choices=['before', 'after', 'native_stream'])
+    parser.add_argument('--retry-failed', action='store_true', help='Supplement only; never overwrite primary evidence')
     args = parser.parse_args()
     folder = ROOT/'docs/latency100'
     source = folder/(args.input+'.json')
     output = folder/(args.input+'_quality.json')
+    failed_indices = None
+    if args.retry_failed:
+        primary = json.loads(output.read_text(encoding='utf-8'))
+        failed_indices = [r['index'] for r in primary['rows'] if r['judge_status'] == 'failed']
+        output = folder/(args.input+'_quality_retry.json')
     if output.exists(): raise SystemExit('Refusing to overwrite evidence')
     data = json.loads(source.read_text(encoding='utf-8'))
     samples = data['rows']
     assert len(samples) == (200 if args.input == 'native_stream' else 100)
-    order = list(range(len(samples))); random.Random(1331).shuffle(order)
+    order = failed_indices if failed_indices is not None else list(range(len(samples)))
+    random.Random(1331).shuffle(order)
     rows = []
     judge = get_chat_model(role='eval').with_structured_output(Review)
     for start in range(0, len(order), 5):
@@ -45,14 +52,16 @@ async def main():
                 rows.append({'index': index, 'mode': samples[index].get('mode', args.input),
                              'judge_status': 'completed', **grade.model_dump()})
         except Exception as exc:
+            code = getattr(exc, 'code', None)
+            safe_code = code if isinstance(code, (int, str)) and len(str(code)) < 40 else None
             rows.extend({'index': i, 'mode': samples[i].get('mode', args.input),
-                         'judge_status': 'failed', 'error_type': type(exc).__name__} for i in indices)
+                         'judge_status': 'failed', 'error_type': type(exc).__name__, 'error_code': safe_code} for i in indices)
         report = {'scope': 'blinded_synthetic_model_rubric_all_attempts', 'judge': get_settings().gemini_eval_model,
             'source_sha256': hashlib.sha256(source.read_bytes()).hexdigest(), 'rows': rows,
             'limitations': 'One automated judge, same provider family; not independent human or clinical validation. Judge failures remain in denominator.'}
         output.write_text(json.dumps(report, ensure_ascii=False, indent=2)+'\n', encoding='utf-8')
-        print(args.input, len(rows), '/', len(samples), flush=True)
-    assert len(rows) == len(samples)
+        print(args.input, len(rows), '/', len(order), flush=True)
+    assert len(rows) == len(order)
 
 
 if __name__ == '__main__': asyncio.run(main())

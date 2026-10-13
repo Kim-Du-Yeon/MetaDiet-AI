@@ -1,5 +1,11 @@
 # 2026-10-09 upgrade verification
 
+## 100-attempt comparison policy (2026-10-13)
+
+New speed/accuracy comparisons require at least 100 attempts per condition, frozen matched inputs, and failed attempts retained. [The current report](docs/latency100/README.md) separates public before/after, alternating native-provider delivery, live database reservations, automated quality judging and functional browser/SSE checks. Public latency uses 20 unique cases repeated five times, not 100 independent users. Native freshness uses five synthetic current-state conditions against stale history. Small functional smoke checks are not performance evidence.
+
+The verification-first guard remains: no raw model drafts are released before final validation. Budget initialization and buffered streaming experiments are not enabled by default when predefined improvement gates are unmet.
+
 ## First recommendation experiment (2026-10-13)
 
 [First coaching report](docs/first_coaching/README.md) contains a rotating three-arm actual-model comparison (18 responses), matched public multi-turn requests, blinded model rubric, stale-history/current-record checks, failure analysis and browser captures. Small synthetic samples are not real-user outcomes or p95 estimates.

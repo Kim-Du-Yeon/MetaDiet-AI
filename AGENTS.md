@@ -2,6 +2,10 @@
 
 This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
+## Performance verification policy
+
+For new speed or accuracy comparisons, run at least 100 attempts per condition on the same frozen cases. Keep failures/timeouts in the denominator and distinguish synthetic evaluations from actual user outcomes. Smaller smoke tests verify functionality only; they are not performance evidence.
+
 ## Project
 
 MetaDiet AI — a LangGraph multi-agent diet coaching system. FastAPI backend, React frontend, Supabase Postgres, Pinecone for hybrid RAG. Full architecture is documented in [ARCHITECTURE.md](ARCHITECTURE.md) (with mermaid diagrams per subsystem) and evaluation methodology in [EVALUATION.md](EVALUATION.md) — read those before making non-trivial changes to the graph, RAG pipeline, or eval scripts.

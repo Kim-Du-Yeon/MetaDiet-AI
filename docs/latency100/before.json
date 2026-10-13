@@ -1,0 +1,2830 @@
+{
+  "phase": "before",
+  "dataset_sha256": "0315a67e6bb811303408ad4bdb60fa22cb4c82d5feece1094fb75699ea1752ad",
+  "expected_commit": null,
+  "health": {
+    "status": "ok"
+  },
+  "scope": "synthetic_public_serial_20_cases_five_repeats",
+  "rows": [
+    {
+      "status": "completed",
+      "first_answer_ms": 18526.44549999968,
+      "answer": "외식 시에는 살코기, 생선, 두부 등 단백질과 채소가 골고루 포함된 백반이나 덮밥류를 우선적으로 선택해 보세요. \n\n튀김류나 당류 및 정제 탄수화물 비중이 높은 면 요리는 피하고, 국물 요리를 드실 때는 건더기 위주로 섭취하는 것이 좋습니다. ",
+      "usage": {
+        "tool_calls": 1,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 14.917026
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2963.174,
+        "model_supervisor": 7288.944,
+        "model_meal": 3940.222,
+        "graph_total": 16551.744,
+        "terminal_checkpoint": 226.996,
+        "response_snapshot": 73.488,
+        "public_stats": 615.196
+      },
+      "build": null,
+      "trace_id": "b0fffa03-4f2a-494c-aa7c-da39ce7eaffc",
+      "route": null,
+      "total_ms": 19219.68210000341,
+      "case": 17,
+      "repeat": 1,
+      "group": "complex",
+      "question": "외식할 때 점심 메뉴 고르는 방법을 두 문장으로 알려줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 12486.298799994984,
+      "answer": "일반식을 드셔도 전혀 문제없으며, 다이어트를 지속하는 데도 좋은 선택입니다. \n\n밥 한 공기(약 200g)에 고기나 생선, 두부 등 단백질 반찬 1~2가지와 채소를 곁들여 적정 분량으로 드시면 균형 잡힌 식사가 됩니다. 찌개나 국의 국물 섭취와 기름진 튀김류만 적당히 조절하시면 충분합니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 9.716104
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2440.683,
+        "db_read": 1408.073,
+        "model_meal": 5896.218,
+        "graph_total": 10849.833,
+        "terminal_checkpoint": 224.527,
+        "response_snapshot": 71.869,
+        "public_stats": 396.652
+      },
+      "build": null,
+      "trace_id": "ed4e500a-8bec-42e6-8d94-1e46d2f331c4",
+      "route": null,
+      "total_ms": 12959.61399999942,
+      "case": 14,
+      "repeat": 3,
+      "group": "followup",
+      "question": "일반식 먹는 건 그런가?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8678.009499999462,
+      "answer": "감량 목표와 균형 잡힌 영양 섭취를 고려할 때, 포만감이 오래 가고 단백질을 챙길 수 있는 식단을 추천합니다. \n\n통곡물 탄수화물(오트밀, 통밀빵, 또는 현미밥 반 공기)에 달걀 1~2개나 그릭요거트 같은 양질의 단백질, 그리고 신선한 채소나 과일을 곁들여 보세요. 예를 들어 통밀 식빵 한 장에 달걀프라이, 샐러드를 곁들이거나 그릭요거트에 베리류와 견과류를 가볍게 더해 드시면 든든하게 하루를 시작하실 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.1140550000000005
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2436.302,
+        "db_read": 791.628,
+        "model_meal": 2956.727,
+        "graph_total": 7137.472,
+        "terminal_checkpoint": 215.972,
+        "response_snapshot": 70.822,
+        "public_stats": 556.665
+      },
+      "build": null,
+      "trace_id": "625e1f53-50f6-4f4d-8edb-1b94568ef0a6",
+      "route": null,
+      "total_ms": 9315.084900001239,
+      "case": 8,
+      "repeat": 2,
+      "group": "first",
+      "question": "아침 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 10891.696300001058,
+      "answer": "현재 감량 목표와 일일 목표 섭취량(약 2,325kcal)을 고려했을 때, 점심은 든든하면서도 단백질과 식이섬유가 균형 잡힌 한식 백반 형태나 포케·샐러드 볼을 추천합니다.\n\n**추천 메뉴:**\n- **현미밥(또는 잡곡밥 1공기, 약 200g)과 닭가슴살/소고기 우둔살 구이 + 채소 반찬** (예: 비빔밥, 쌈밥 정식)\n- **닭가슴살 또는 연어 포케(현미밥 베이스, 소스 절반)**\n\n단백질 30~40g 정도를 챙기고 정제 탄수화물과 자극적인 양념은 줄여 식사하시면 오후 시간 동안 포만감을 유지하며 건강하게 감량을 이어가실 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 8.188386
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2435.26,
+        "db_read": 549.102,
+        "model_meal": 5129.159,
+        "graph_total": 9480.962,
+        "terminal_checkpoint": 213.626,
+        "response_snapshot": 70.598,
+        "public_stats": 780.082
+      },
+      "build": null,
+      "trace_id": "4d592551-763b-49bf-a6ef-63062b88a0ca",
+      "route": null,
+      "total_ms": 11749.947600001178,
+      "case": 0,
+      "repeat": 1,
+      "group": "first",
+      "question": "점심 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 20252.28369999968,
+      "answer": "다이어트 중 편의점에서 따뜻하게 드실 수 있는 메뉴로는 **전자레인지에 데운 즉석 잡곡밥에 닭가슴살(또는 닭가슴살 핫바)**, 그리고 나트륨 부담이 적은 **따뜻한 컵미역국이나 컵북어국** 조합을 추천합니다. \n\n한 그릇으로 간편하게 드시고 싶다면 **전자레인지용 닭가슴살 도시락**이나 **소고기죽·전복죽에 감동란(반숙란)**을 더해 단백질 균형을 맞춰 따뜻하게 데워 드시는 것도 좋습니다. \n\n국물류를 곁들이실 때는 국물을 모두 마시기보다 건더기 위주로 드시면 염분 섭취를 효과적으로 줄일 수 있습니다. ",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 17.578118
+      },
+      "stage_timings_ms": {
+        "budget_storage": 3900.711,
+        "db_read": 937.783,
+        "model_supervisor": 3742.26,
+        "model_meal": 8661.503,
+        "graph_total": 18834.831,
+        "terminal_checkpoint": 214.433,
+        "response_snapshot": 71.382,
+        "public_stats": 551.103
+      },
+      "build": null,
+      "trace_id": "6d68aaba-9d3c-4553-89ee-9b6bed520b49",
+      "route": null,
+      "total_ms": 20877.48549999378,
+      "case": 18,
+      "repeat": 2,
+      "group": "complex",
+      "question": "오늘 점심은 편의점에서 먹을 건데 따뜻한 메뉴로 추천해줘. 저장하지 마."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9826.052000003983,
+      "answer": "저녁 식사로는 단백질과 채소를 중심으로 균형을 맞춘 한식을 추천합니다. \n\n현미밥이나 잡곡밥 2/3~1공기에 닭가슴살구이나 두부구이, 기름기가 적은 생선구이 같은 양질의 단백질 반찬을 곁들이고, 쌈채소나 나물류를 충분히 함께 드셔보세요. 포만감을 오래 유지하면서도 부담 없이 감량 목표에 맞는 균형 잡힌 식사를 하실 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.902186
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2454.786,
+        "db_read": 639.325,
+        "model_meal": 3890.802,
+        "graph_total": 8202.528,
+        "terminal_checkpoint": 214.078,
+        "response_snapshot": 72.591,
+        "public_stats": 779.578
+      },
+      "build": null,
+      "trace_id": "9a5bccb3-8f71-44c9-a88f-3c67cfec4b58",
+      "route": null,
+      "total_ms": 10681.007600003795,
+      "case": 9,
+      "repeat": 0,
+      "group": "first",
+      "question": "저녁 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 60699.29129999946,
+      "answer": "오늘 목표(2,325kcal, 탄수화물 319.7g, 단백질 116.3g, 지방 64.6g)와 현재 기록을 고려해 균형 잡힌 점심 식단 계획(백미밥 200g, 삶은 닭가슴살 120g, 두부 100g)을 제안 카드로 구성했습니다. \n\n일반 음식은 표준 항목 기준으로 계산되었으므로 실제 조리법과 양에 따라 영양 수치가 달라질 수 있습니다. 제안된 식단 계획은 확인 카드에서 확인 및 분량 조정한 뒤 반영하실 수 있습니다. ",
+      "usage": {
+        "tool_calls": 13,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 9,
+        "elapsed_seconds": 57.85222200000001,
+        "validation_attempts": 1
+      },
+      "stage_timings_ms": {
+        "budget_storage": 12672.378,
+        "db_read": 680.652,
+        "model_supervisor": 3597.182,
+        "model_meal": 29731.016,
+        "graph_total": 59281.347,
+        "terminal_checkpoint": 216.0,
+        "response_snapshot": 71.243,
+        "public_stats": 546.341
+      },
+      "build": null,
+      "trace_id": "3e0458c3-b49a-47de-85a7-c4ec2f93bf9b",
+      "route": null,
+      "unexpected_proposal": true,
+      "total_ms": 63517.40019999852,
+      "case": 4,
+      "repeat": 2,
+      "group": "button",
+      "question": "점심 식단 추천해줘. 오늘 확정된 섭취량과 목표를 반영해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 40870.82519999967,
+      "answer": "내일 점심으로는 단백질과 식이섬유를 고루 챙길 수 있는 생선구이나 두부조림, 또는 닭가슴살을 곁들인 한식 백반을 추천합니다. \n\n밥은 평소의 2/3~한 공기 정도로 조절하고, 나물이나 샐러드 등 신선한 채소 반찬을 먼저 섭취하시면 포만감을 오래 유지하면서 균형 잡힌 식사를 하실 수 있습니다. ",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 38.192417
+      },
+      "stage_timings_ms": {
+        "budget_storage": 3902.953,
+        "db_read": 460.67,
+        "model_supervisor": 24661.197,
+        "model_meal": 8623.26,
+        "graph_total": 39288.76,
+        "terminal_checkpoint": 215.191,
+        "response_snapshot": 70.967,
+        "public_stats": 557.122
+      },
+      "build": null,
+      "trace_id": "c39fb7af-d730-413b-bfce-cb1026910b39",
+      "route": null,
+      "total_ms": 41505.97359999665,
+      "case": 16,
+      "repeat": 1,
+      "group": "complex",
+      "question": "내일 점심 추천해줘. 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 18432.62970000069,
+      "answer": "내일 점심은 포만감을 유지하면서도 균형을 잡기 좋은 **생선구이 백반**이나 **두부/닭가슴살 샐러드 포케**를 추천합니다. \n\n식사를 구성하실 때는 밥은 한 공기(약 200g) 기준으로 채소 반찬을 먼저 섭취해 식이섬유를 채우고, 기름기가 적은 단백질 위주로 곁들여 보세요. 찌개나 국물류, 양념장은 염분과 열량 조절을 위해 건더기 위주로 드시는 것이 체중 감량에 도움이 됩니다. ",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 15.816756000000002
+      },
+      "stage_timings_ms": {
+        "budget_storage": 3926.842,
+        "db_read": 500.352,
+        "model_supervisor": 4212.643,
+        "model_meal": 6848.58,
+        "graph_total": 16818.328,
+        "terminal_checkpoint": 217.279,
+        "response_snapshot": 70.92,
+        "public_stats": 255.254
+      },
+      "build": null,
+      "trace_id": "a809551b-884f-4a45-975d-1e1340667ae5",
+      "route": null,
+      "total_ms": 18761.244799999986,
+      "case": 16,
+      "repeat": 3,
+      "group": "complex",
+      "question": "내일 점심 추천해줘. 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 11146.244299998216,
+      "answer": "현재 목표인 체중 감량(다이어트)과 균형 잡힌 영양 섭취를 고려할 때, 저녁 식사는 담백한 단백질과 채소를 중심으로 구성하시는 것을 추천합니다.\n\n예를 들어 잡곡밥 2/3~1공기에 닭가슴살구이나 두부구이, 기름기가 적은 생선구이(고등어·삼치 등)를 메인으로 두고 신선한 샐러드나 나물 반찬을 곁들이시면 좋습니다. 포만감을 오래 유지하면서도 칼로리 부담을 줄일 수 있도록 튀김이나 자극적인 양념은 피하고, 담백한 조리법 위주로 식사해 보세요. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 8.427965
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2481.913,
+        "db_read": 708.023,
+        "model_meal": 5358.073,
+        "graph_total": 9514.385,
+        "terminal_checkpoint": 214.754,
+        "response_snapshot": 71.332,
+        "public_stats": 378.127
+      },
+      "build": null,
+      "trace_id": "ab9e5ab5-f9a9-44de-bb17-bc6aa064e380",
+      "route": null,
+      "total_ms": 11595.787700003712,
+      "case": 9,
+      "repeat": 4,
+      "group": "first",
+      "question": "저녁 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8834.418499995081,
+      "answer": "편의점 샌드위치도 좋은 선택이 될 수 있습니다. \n\n다이어트 목표와 영양 균형을 위해 닭가슴살, 달걀, 햄·치즈 등 단백질과 채소가 비교적 풍부하게 들어간 제품을 골라보세요. 여기에 삶은 달걀이나 무가당 두유를 곁들이시면 단백질을 보충하고 포만감을 더 오래 유지하는 데 도움이 됩니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.096971
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2463.684,
+        "db_read": 475.491,
+        "model_meal": 3184.745,
+        "graph_total": 7153.723,
+        "terminal_checkpoint": 215.507,
+        "response_snapshot": 71.214,
+        "public_stats": 580.695
+      },
+      "build": null,
+      "trace_id": "279fab86-8097-4c5b-9728-a4ff79e10be2",
+      "route": null,
+      "total_ms": 9487.67080000107,
+      "case": 11,
+      "repeat": 4,
+      "group": "followup",
+      "question": "그럼 편의점에서 샌드위치 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 19245.261699994444,
+      "answer": "아침 식사가 미기록 상태이더라도 결식으로 단정하지 않으며, 저녁에 과도하게 몰아먹거나 지나치게 줄이지 않는 적정 분량의 식사가 적절합니다. \n\n저녁 메뉴로는 밥 한 공기(약 200g)에 기름기가 적은 단백질(생선구이, 닭가슴살, 두부구이 등) 한 접시, 그리고 포만감을 채워줄 채소 반찬이나 쌈채소를 곁들인 담백한 한식 구성을 추천합니다. \n\n취침 전 소화 부담을 줄이고 하루 감량·균형 목표를 유지하기 위해 튀김류나 자극적인 양념은 피하고 편안한 조리법으로 드셔보세요. ",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 16.570253
+      },
+      "stage_timings_ms": {
+        "budget_storage": 3942.445,
+        "db_read": 573.351,
+        "model_supervisor": 2794.699,
+        "model_meal": 8920.279,
+        "graph_total": 17803.369,
+        "terminal_checkpoint": 215.05,
+        "response_snapshot": 71.121,
+        "public_stats": 525.903
+      },
+      "build": null,
+      "trace_id": "8a2edbe9-f014-4b14-a670-fb71bd0013b7",
+      "route": null,
+      "total_ms": 19849.220599993714,
+      "case": 19,
+      "repeat": 2,
+      "group": "complex",
+      "question": "아침을 기록하지 않았는데 안 먹었다고 가정하지 말고 저녁 메뉴만 추천해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 14974.449900000764,
+      "answer": "현재 하루 목표 칼로리는 2,325 kcal이며, 아직 등록된 식사 기록이 없어 표기상 2,325 kcal가 남아 있으나 이미 드신 식사가 있다면 미기록 상태일 수 있습니다.\n\n점심 식사로는 오후 활동 에너지를 고려해 600~750 kcal 선에서 단백질과 식이섬유를 충분히 챙기는 구성을 권장합니다. 밥(약 200g)에 닭가슴살이나 생선구이 등 단백질 반찬과 채소 반찬을 곁들인 한식 백반, 또는 통곡물이 포함된 든든한 샐러드 보울을 추천해 드립니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 12.321353000000002
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2464.722,
+        "db_read": 528.605,
+        "model_meal": 9386.38,
+        "graph_total": 13348.924,
+        "terminal_checkpoint": 217.076,
+        "response_snapshot": 71.169,
+        "public_stats": 296.569
+      },
+      "build": null,
+      "trace_id": "cc1959be-3fae-4348-b4f8-77ad5c38bf10",
+      "route": null,
+      "total_ms": 15342.308100000082,
+      "case": 7,
+      "repeat": 4,
+      "group": "first",
+      "question": "점심 추천해줘. 오늘 남은 칼로리도 알려줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9562.561600003392,
+      "answer": "현재 체중 감량 목표와 균형 잡힌 영양 관리를 고려했을 때, 저녁 식사는 담백한 단백질과 식이섬유 중심의 식단을 추천합니다. \n\n기름기가 적은 구운 닭가슴살이나 소고기 우둔살, 두부구이에 신선한 쌈채소나 채소 볶음을 곁들이고, 밥은 2/3공기 정도로 조절해 드시면 좋습니다. 국물 요리를 드신다면 건더기 위주로 섭취해 나트륨과 불필요한 열량을 줄여보세요. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.0544530000000005
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2464.864,
+        "db_read": 483.258,
+        "model_meal": 4265.638,
+        "graph_total": 8129.966,
+        "terminal_checkpoint": 215.688,
+        "response_snapshot": 72.277,
+        "public_stats": 532.339
+      },
+      "build": null,
+      "trace_id": "570aaac3-545b-4151-ba17-6665f5c3b469",
+      "route": null,
+      "total_ms": 10165.922400003183,
+      "case": 9,
+      "repeat": 3,
+      "group": "first",
+      "question": "저녁 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8469.536299999163,
+      "answer": "현재 체중 감량 목표와 활동량을 고려할 때, 아침 식사는 포만감을 오래 유지하고 혈당을 완만하게 올릴 수 있는 복합 탄수화물과 단백질 위주의 구성을 추천합니다. \n\n통밀빵 1~2장에 달걀 2개(또는 닭가슴살 소시지), 그리고 샐러드나 방울토마토를 곁들인 서양식 구성이나, 잡곡밥 반 공기에 기름기가 적은 단백질 반찬(두부구이, 생선구이)과 나물류를 곁들인 한식을 추천드립니다. 바쁜 아침이라면 그릭요거트에 오트밀과 견과류를 곁들이는 것도 간편하면서 균형 잡힌 좋은 선택입니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.034624
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2461.366,
+        "db_read": 477.954,
+        "model_meal": 3185.112,
+        "graph_total": 7065.649,
+        "terminal_checkpoint": 215.005,
+        "response_snapshot": 71.266,
+        "public_stats": 342.135
+      },
+      "build": null,
+      "trace_id": "5294db02-3c26-4f36-8ba6-d5ad38113346",
+      "route": null,
+      "total_ms": 8886.881200000062,
+      "case": 8,
+      "repeat": 0,
+      "group": "first",
+      "question": "아침 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 11142.771300001186,
+      "answer": "현재 목표(체중 감량)와 일일 권장 섭취량(약 2,325kcal)을 고려할 때, 저녁 식사는 단백질과 식이섬유를 충분히 채우면서 정제 탄수화물과 지방을 적절히 조절하는 구성을 추천합니다.\n\n**추천 저녁 식단 조합:**\n1. **닭가슴살 또는 소둔지살 샐러드 & 통곡물밥 반 공기(약 100g)**: 기름기가 적은 단백질 위주로 구성하고 잎채소를 곁들여 포만감을 높입니다.\n2. **두부 버섯 전골 또는 맑은 순두부찌개 & 잡곡밥**: 따뜻한 국물 요리를 원하실 경우, 염분이 높은 양념보다는 맑은 국물 위주로 건더기(두부, 버섯, 채소)를 풍성하게 드시는 것이 좋습니다.\n3. **연어구이 또는 고등어구이 백반**: 양질의 불포화지방과 단백질을 챙길 수 있는 생선구이에 쌈채소와 밥 2/3공기를 곁들여 보세요.\n\n기름진 조리법(튀김·볶음)보다는 찜, 구이, 삶는 방식을 선택하시고, 식사 전 신선한 채소를 먼저 드시면 혈당 급상승을 막고 과식을 예방하는 데 도움이 됩니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 8.149725
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2464.608,
+        "db_read": 442.423,
+        "model_meal": 5318.947,
+        "graph_total": 9510.422,
+        "terminal_checkpoint": 214.883,
+        "response_snapshot": 71.741,
+        "public_stats": 654.487
+      },
+      "build": null,
+      "trace_id": "99c5ed09-49a9-421e-bd90-ed638ebf436e",
+      "route": null,
+      "total_ms": 11874.894900000072,
+      "case": 9,
+      "repeat": 2,
+      "group": "first",
+      "question": "저녁 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8393.489900001441,
+      "answer": "네, 편의점 샌드위치도 다이어트 점심으로 충분히 괜찮습니다. \n\n마요네즈나 튀김류 패티가 많은 종류보다는 닭가슴살, 달걀, 햄, 채소가 주로 들어간 제품을 고르시면 좋습니다. 단백질을 조금 더 채우고 포만감을 오래 유지하려면 삶은 달걀이나 무가당 두유를 곁들여 함께 드셔보세요. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.865974
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2465.781,
+        "db_read": 623.93,
+        "model_meal": 2762.783,
+        "graph_total": 6911.135,
+        "terminal_checkpoint": 215.689,
+        "response_snapshot": 71.566,
+        "public_stats": 362.282
+      },
+      "build": null,
+      "trace_id": "04c2be04-082a-43b0-b85f-093d69014803",
+      "route": null,
+      "total_ms": 8835.92150000186,
+      "case": 11,
+      "repeat": 0,
+      "group": "followup",
+      "question": "그럼 편의점에서 샌드위치 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 10926.2041999973,
+      "answer": "체중 감량 목표와 균형 잡힌 영양 섭취를 위해 단백질과 채소 위주의 든든한 한 끼를 추천합니다. 현미밥(또는 잡곡밥) 반 공기(약 100~130g)에 구운 생선(고등어·연어)이나 기름기 적은 육류(소고기 우둔살·닭가슴살) 1토막, 그리고 쌈채소나 나물 반찬을 곁들여 드셔보세요. 포만감을 오래 유지하면서도 부담 없는 저녁 식사를 완성할 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 8.278859
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2462.763,
+        "db_read": 579.884,
+        "model_meal": 5333.958,
+        "graph_total": 9325.449,
+        "terminal_checkpoint": 215.66,
+        "response_snapshot": 71.208,
+        "public_stats": 317.849
+      },
+      "build": null,
+      "trace_id": "af8b261f-3a45-4897-a0ce-ba08c55d78d6",
+      "route": null,
+      "total_ms": 11318.317299999762,
+      "case": 3,
+      "repeat": 4,
+      "group": "first",
+      "question": "오늘 저녁 식단을 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9195.786700001918,
+      "answer": "일반식을 드셔도 전혀 문제없으며, 오히려 지속 가능한 다이어트에 매우 좋습니다. \n\n밥 양만 평소의 2/3 공기 정도로 조절하고, 고기·생선·두부 같은 단백질 반찬과 나물 등 채소를 곁들여 드시면 충분합니다. 찌개나 국물의 염분, 튀김류 반찬만 가볍게 주의해 편안하게 식사해 보세요. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.586123
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2465.527,
+        "db_read": 428.708,
+        "model_meal": 3717.285,
+        "graph_total": 7645.426,
+        "terminal_checkpoint": 215.639,
+        "response_snapshot": 71.352,
+        "public_stats": 402.211
+      },
+      "build": null,
+      "trace_id": "c3e0e89b-ff48-4b52-b524-a3b65fa6ae62",
+      "route": null,
+      "total_ms": 9672.395800000231,
+      "case": 14,
+      "repeat": 0,
+      "group": "followup",
+      "question": "일반식 먹는 건 그런가?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9857.50860000553,
+      "answer": "네, 밥과 계란은 탄수화물과 양질의 단백질을 챙길 수 있어 훌륭한 일반식 조합입니다. 계란을 2개 정도 활용하시고 조리 시 기름 사용만 적당히 조절해 주시면 감량 중에도 부담 없이 드실 수 있습니다. 여기에 김, 나물, 샐러드 같은 채소 반찬을 한두 가지 곁들이시면 포만감과 영양 균형을 더욱 높일 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.0135440000000004
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2460.358,
+        "db_read": 411.326,
+        "model_meal": 4260.868,
+        "graph_total": 8249.024,
+        "terminal_checkpoint": 215.402,
+        "response_snapshot": 71.332,
+        "public_stats": 294.476
+      },
+      "build": null,
+      "trace_id": "79f0f127-76e4-45c1-bbb6-daf7a8f3cc95",
+      "route": null,
+      "total_ms": 10224.043100002746,
+      "case": 12,
+      "repeat": 0,
+      "group": "followup",
+      "question": "그럼 일반식으로 밥이랑 계란 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 36257.86220000009,
+      "answer": "오늘 등록된 식사 기록은 아직 없으나, 하루 목표 섭취량(2,325 kcal, 탄수화물 약 320g, 단백질 약 116g, 지방 약 65g)을 고려할 때 점심은 탄수화물과 단백질, 채소가 고루 포함된 식사를 추천합니다. \n\n밥 한 공기(약 200g)를 기본으로 닭가슴살, 생선구이, 두부구이 등 단백질 식품 1종과 샐러드나 나물류 등 채소 반찬을 곁들여 드셔보세요. 식사를 마치신 후 드신 음식명과 분량을 말씀해 주시면 영양 수치를 계산하여 기록을 도와드리겠습니다. ",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 33.521007999999995
+      },
+      "stage_timings_ms": {
+        "budget_storage": 5910.695,
+        "db_read": 616.48,
+        "model_supervisor": 3739.658,
+        "model_meal": 18745.212,
+        "graph_total": 34837.292,
+        "terminal_checkpoint": 217.603,
+        "response_snapshot": 71.673,
+        "public_stats": 339.319
+      },
+      "build": null,
+      "trace_id": "e127424f-d485-4338-b99e-3744bb19ff08",
+      "route": null,
+      "total_ms": 36673.761099998956,
+      "case": 4,
+      "repeat": 4,
+      "group": "button",
+      "question": "점심 식단 추천해줘. 오늘 확정된 섭취량과 목표를 반영해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 51363.63180000626,
+      "answer": "아침 미기록을 결식으로 가정하지 않고, 하루 감량 목표(2,325 kcal) 내에서 한 끼 식사로 적절한 탄수화물과 단백질을 고루 갖춘 저녁 메뉴를 제안해 드립니다.\n\n추천 메뉴는 **현미밥 1공기(200g, 332 kcal)**와 **구운 고등어 1토막(120g, 316.8 kcal)**에 쌈채소나 기본 나물 반찬을 곁들이는 구성입니다. 검증된 표준 영양 데이터 기준으로 계산되었으며, 실제 조리법이나 부재료에 따라 영양 수치는 달라질 수 있습니다. \n\n식단 계획 제안이 준비되었으니 화면의 확인 카드에서 분량을 확인하시고 원하시는 대로 수정하여 저장해 보세요. ",
+      "usage": {
+        "tool_calls": 10,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 6,
+        "elapsed_seconds": 48.585829000000004,
+        "validation_attempts": 1
+      },
+      "stage_timings_ms": {
+        "budget_storage": 9874.284,
+        "db_read": 486.086,
+        "model_supervisor": 4214.618,
+        "model_meal": 22656.688,
+        "graph_total": 49907.779,
+        "terminal_checkpoint": 217.668,
+        "response_snapshot": 71.424,
+        "public_stats": 551.789
+      },
+      "build": null,
+      "trace_id": "a832e54d-d203-44c4-b6bd-f05f60234eff",
+      "route": null,
+      "unexpected_proposal": true,
+      "total_ms": 54644.370699999854,
+      "case": 19,
+      "repeat": 3,
+      "group": "complex",
+      "question": "아침을 기록하지 않았는데 안 먹었다고 가정하지 말고 저녁 메뉴만 추천해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8507.309000000532,
+      "answer": "네, 밥과 계란 조합은 탄수화물과 양질의 단백질을 챙길 수 있어 다이어트 중 일반식으로 좋은 선택입니다. 계란을 2개 정도 챙겨 드시고 조리 시 기름 사용만 가볍게 조절해 주시면 더욱 좋습니다. 여기에 김치나 나물, 샐러드 같은 채소 반찬을 한두 가지 곁들이면 포만감과 영양 균형을 한층 더 높일 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.09485
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2461.216,
+        "db_read": 398.979,
+        "model_meal": 3399.328,
+        "graph_total": 7095.218,
+        "terminal_checkpoint": 215.949,
+        "response_snapshot": 71.593,
+        "public_stats": 350.962
+      },
+      "build": null,
+      "trace_id": "4e18c5e4-447f-4972-9f6f-af80a6d89e79",
+      "route": null,
+      "total_ms": 8933.870300003036,
+      "case": 12,
+      "repeat": 2,
+      "group": "followup",
+      "question": "그럼 일반식으로 밥이랑 계란 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9242.226700000174,
+      "answer": "체중 감량과 균형 잡힌 영양 섭취를 위해 단백질과 식이섬유가 풍부한 한식 식단을 추천해 드립니다. \n\n현미밥 1공기(약 200g)에 기름기를 뺀 소고기 우둔살 구이나 닭가슴살 볶음(약 120~150g), 그리고 쌈 채소나 나물 반찬, 맑은 된장국을 곁들여 보세요. 단백질과 채소를 먼저 섭취해 포만감을 높이고 탄수화물 섭취량을 자연스럽게 조절하시면 좋습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.556175
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2463.222,
+        "db_read": 444.91,
+        "model_meal": 3624.102,
+        "graph_total": 7599.598,
+        "terminal_checkpoint": 216.441,
+        "response_snapshot": 71.548,
+        "public_stats": 259.379
+      },
+      "build": null,
+      "trace_id": "995555a5-43e0-4794-bdf6-6b6c9231eaba",
+      "route": null,
+      "total_ms": 9576.206400000956,
+      "case": 1,
+      "repeat": 4,
+      "group": "first",
+      "question": "저녁 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8991.326799994567,
+      "answer": "저녁으로 샌드위치를 드셔도 괜찮습니다. 닭가슴살, 달걀 등 단백질 재료와 신선한 채소가 충분히 들어간 구성을 선택하시면 균형 잡힌 식사가 됩니다. 다만 마요네즈나 달콤한 소스가 많이 들어간 종류보다는 담백한 소스를 고르시는 것을 추천합니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.303086
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2465.463,
+        "db_read": 769.742,
+        "model_meal": 3124.562,
+        "graph_total": 7374.277,
+        "terminal_checkpoint": 215.09,
+        "response_snapshot": 71.531,
+        "public_stats": 318.141
+      },
+      "build": null,
+      "trace_id": "825d743d-14e9-4ca1-bf18-adadeec158af",
+      "route": null,
+      "total_ms": 9383.162999998603,
+      "case": 15,
+      "repeat": 1,
+      "group": "followup",
+      "question": "저녁에 샌드위치 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8027.175999995961,
+      "answer": "네, 밥과 계란으로 드셔도 좋습니다. 밥 한 공기(약 200g)에 계란 2개 정도를 곁들이면 탄수화물과 단백질을 균형 있게 섭취할 수 있습니다. 여기에 김치, 나물, 샐러드 같은 채소 반찬을 조금 더해주시면 포만감과 영양 균형을 더욱 잘 챙길 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.546203
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2461.135,
+        "db_read": 658.462,
+        "model_meal": 2504.321,
+        "graph_total": 6569.332,
+        "terminal_checkpoint": 215.509,
+        "response_snapshot": 71.611,
+        "public_stats": 306.654
+      },
+      "build": null,
+      "trace_id": "380c04bd-cf26-4c1f-ba3d-dd10b1f45200",
+      "route": null,
+      "total_ms": 8409.679099997447,
+      "case": 12,
+      "repeat": 4,
+      "group": "followup",
+      "question": "그럼 일반식으로 밥이랑 계란 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8540.664299995115,
+      "answer": "일반식을 드셔도 전혀 문제없으며, 다이어트 중에도 충분히 건강하게 드실 수 있습니다. \n\n밥의 양을 평소보다 살짝 줄이고 계란, 두부, 생선, 살코기 같은 단백질 반찬과 채소를 골고루 곁들이시면 좋습니다. 국물류는 건더기 위주로 드시는 방식으로 조절하시면 든든하면서도 부담 없이 식사하실 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.076515
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2466.48,
+        "db_read": 619.661,
+        "model_meal": 3076.68,
+        "graph_total": 7057.307,
+        "terminal_checkpoint": 216.245,
+        "response_snapshot": 71.834,
+        "public_stats": 339.551
+      },
+      "build": null,
+      "trace_id": "e86576f5-6aef-42b9-908b-2d08b6baf86d",
+      "route": null,
+      "total_ms": 8954.347499995492,
+      "case": 14,
+      "repeat": 1,
+      "group": "followup",
+      "question": "일반식 먹는 건 그런가?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 10186.13130000449,
+      "answer": "체중 감량 목표와 균형 잡힌 영양 섭취를 고려해, 단백질과 식이섬유를 충분히 챙길 수 있는 한식 기반의 점심 메뉴를 추천해 드립니다.\n\n밥은 기본 한 공기(약 200g) 기준으로 잡고, 기름기가 적은 단백질 주메뉴(닭가슴살 구이, 두부조림, 또는 기름기를 뺀 수육/생선구이)에 나물이나 채소 반찬을 곁들여 드시는 것을 권장합니다. 외식 메뉴를 찾으신다면 밥의 양을 조절하기 편하고 채소 섭취가 쉬운 비빔밥(고추장 양 조절)이나 생선구이 백반이 훌륭한 선택이 될 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.710128000000001
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2465.536,
+        "db_read": 470.418,
+        "model_meal": 4795.238,
+        "graph_total": 8758.968,
+        "terminal_checkpoint": 218.264,
+        "response_snapshot": 71.333,
+        "public_stats": 286.748
+      },
+      "build": null,
+      "trace_id": "a00084e0-9d87-4668-aadb-41a692eb1862",
+      "route": null,
+      "total_ms": 10546.905100003642,
+      "case": 0,
+      "repeat": 0,
+      "group": "first",
+      "question": "점심 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 32020.671799997217,
+      "answer": "아침 식사 미기록은 섭취량 0으로 간주하지 않으므로, 저녁에 식사량을 무리하게 늘리거나 극단적으로 줄이지 않고 정규 1회 분량의 균형식을 유지하는 것이 좋습니다. \n\n저녁 메뉴로는 현미밥이나 잡곡밥 등 복합 탄수화물과 함께 기름기가 적은 생선구이, 두부구이, 닭가슴살 등의 단백질 식품, 그리고 식이섬유가 풍부한 채소 반찬을 곁들인 담백한 구성을 추천합니다. 야간 소화 부담을 줄이기 위해 자극적이거나 기름진 양념은 피하고 적정 포만감을 느낄 정도로 섭취해 보세요. ",
+      "usage": {
+        "tool_calls": 5,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 29.496902999999996
+      },
+      "stage_timings_ms": {
+        "budget_storage": 5437.453,
+        "db_read": 643.134,
+        "model_supervisor": 4194.828,
+        "model_meal": 15490.277,
+        "graph_total": 30558.463,
+        "terminal_checkpoint": 214.97,
+        "response_snapshot": 71.462,
+        "public_stats": 334.629
+      },
+      "build": null,
+      "trace_id": "dc0c9149-f552-49f7-83d6-690aeca6f383",
+      "route": null,
+      "total_ms": 32432.126899999275,
+      "case": 19,
+      "repeat": 1,
+      "group": "complex",
+      "question": "아침을 기록하지 않았는데 안 먹었다고 가정하지 말고 저녁 메뉴만 추천해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 18140.534000005573,
+      "answer": "내일 점심으로는 밥 2/3공기에 양질의 단백질과 나물·채소가 풍부한 한식 백반(예: 생선구이나 제육 쌈밥) 또는 닭가슴살·달걀을 곁들인 포케/샐러드볼을 추천합니다. 기름기가 많거나 정제 탄수화물 위주의 메뉴(중식, 분식류)보다는 단백질과 식이섬유 위주로 구성하시면 포만감을 오래 유지할 수 있습니다. 외식 시 국물은 건더기 위주로 드시고 밥양만 평소보다 조금 조절해 보세요. ",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 15.447416
+      },
+      "stage_timings_ms": {
+        "budget_storage": 3940.563,
+        "db_read": 439.221,
+        "model_supervisor": 2902.502,
+        "model_meal": 7923.572,
+        "graph_total": 16498.241,
+        "terminal_checkpoint": 217.998,
+        "response_snapshot": 71.314,
+        "public_stats": 271.548
+      },
+      "build": null,
+      "trace_id": "5ab90077-9ccf-4937-a605-9f114203237f",
+      "route": null,
+      "total_ms": 18486.306500002684,
+      "case": 16,
+      "repeat": 4,
+      "group": "complex",
+      "question": "내일 점심 추천해줘. 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 11487.296100000094,
+      "answer": "현재 기록된 섭취량이 없어 목표 기준 남은 칼로리는 2,325 kcal이지만, 아직 기록하지 않은 식사가 있다면 실제 남은 양은 달라질 수 있습니다.\n\n점심 식사로는 탄수화물과 단백질, 식이섬유가 균형을 이루는 비빔밥(밥 1공기, 계란·나물 위주)이나 닭가슴살 쌈밥 정식을 추천합니다. 한 끼에 약 600~750 kcal 수준으로 단백질을 25~30g 정도 챙겨 드시면 오후 포만감을 안정적으로 유지할 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 8.703637
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2463.578,
+        "db_read": 464.994,
+        "model_meal": 5680.946,
+        "graph_total": 10046.925,
+        "terminal_checkpoint": 216.649,
+        "response_snapshot": 71.45,
+        "public_stats": 348.44
+      },
+      "build": null,
+      "trace_id": "c2fae311-faf4-4d31-90c8-e5912b4b7eac",
+      "route": null,
+      "total_ms": 11907.698600000003,
+      "case": 7,
+      "repeat": 1,
+      "group": "first",
+      "question": "점심 추천해줘. 오늘 남은 칼로리도 알려줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 31448.464400004013,
+      "answer": "오늘 확정된 섭취 기록은 현재 등록되어 있지 않으므로, 아침 식사 여부를 고려하여 점심을 조절하시는 것을 권장합니다. \n\n현재 감량 목표 전략(일일 2,325 kcal)을 반영하면, 점심은 밥 한 공기(200g) 수준의 복합 탄수화물과 생선·살코기·두부 등의 단백질, 채소 반찬을 고루 갖춘 균형 잡힌 식단(한 끼 약 700~800 kcal)을 추천합니다. \n\n원하시는 구체적인 메뉴나 식재료가 있으시면 말씀해 주시면 상세한 식단 계획 제안을 도와드리겠습니다. ",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 28.769441999999998
+      },
+      "stage_timings_ms": {
+        "budget_storage": 5926.806,
+        "db_read": 787.012,
+        "model_supervisor": 3377.088,
+        "model_meal": 15400.471,
+        "graph_total": 29836.228,
+        "terminal_checkpoint": 215.375,
+        "response_snapshot": 71.421,
+        "public_stats": 818.751
+      },
+      "build": null,
+      "trace_id": "9904b610-e538-4d3b-9e0b-e4a25c2177d9",
+      "route": null,
+      "total_ms": 32341.212999999698,
+      "case": 4,
+      "repeat": 0,
+      "group": "button",
+      "question": "점심 식단 추천해줘. 오늘 확정된 섭취량과 목표를 반영해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 10110.676500000409,
+      "answer": "체중 감량과 균형 잡힌 영양 섭취를 위해 아침 식사는 복합 탄수화물과 양질의 단백질, 식이섬유를 함께 구성하는 것을 권장합니다. \n\n예를 들어 통밀빵이나 오트밀에 삶은 달걀 1~2개와 신선한 샐러드를 곁들이거나, 잡곡밥 반 공기에 기름기 적은 생선구이(또는 두부구이)와 나물 반찬을 함께 드시면 포만감이 오래 유지되어 점심 과식을 예방하는 데 도움이 됩니다. 바쁜 아침이라면 그릭 요거트에 견과류 한 줌과 제철 과일을 가볍게 챙겨 드시는 것도 좋은 방법입니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.391619
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2466.669,
+        "db_read": 435.102,
+        "model_meal": 4488.73,
+        "graph_total": 8483.945,
+        "terminal_checkpoint": 215.979,
+        "response_snapshot": 71.237,
+        "public_stats": 431.994
+      },
+      "build": null,
+      "trace_id": "c664fd8b-216b-4870-97bc-da3f3c086cbd",
+      "route": null,
+      "total_ms": 10624.432899996464,
+      "case": 8,
+      "repeat": 3,
+      "group": "first",
+      "question": "아침 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9357.59490000055,
+      "answer": "체중 감량 목표와 균형 잡힌 영양 섭취를 고려해, 단백질과 식이섬유 중심의 가벼운 한 끼를 추천합니다.\n\n* **추천 메뉴:** 닭가슴살 또는 두부구이를 곁들인 채소 샐러드와 잡곡밥 반 공기(약 100g)\n* **대안 메뉴:** 담백하게 끓인 소고기 버섯전골이나 생선구이 백반(밥은 1/2~2/3 공기)\n\n포만감을 오래 유지할 수 있도록 기름진 조리법 대신 굽거나 찌는 방식을 선택하시고, 식사 후 편하게 기록해 주세요. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.459474
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2462.846,
+        "db_read": 583.205,
+        "model_meal": 3351.04,
+        "graph_total": 7670.048,
+        "terminal_checkpoint": 214.779,
+        "response_snapshot": 71.189,
+        "public_stats": 415.092
+      },
+      "build": null,
+      "trace_id": "a8f07c8c-a47c-417f-badb-c87d81f43d88",
+      "route": null,
+      "total_ms": 9849.39519999898,
+      "case": 1,
+      "repeat": 1,
+      "group": "first",
+      "question": "저녁 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 16268.335200002184,
+      "answer": "체중 감량을 위해 내일 점심은 밥 한 공기(약 200g)에 닭가슴살, 달걀, 생선 등 양질의 단백질 반찬과 신선한 채소를 곁들인 한식 일반식을 추천합니다. 국물 요리는 건더기 위주로 드시고, 튀김류나 당류가 많은 소스는 가급적 피하시면 부담 없이 균형 잡힌 식사를 하실 수 있습니다. 오후 시간대 포만감을 길게 유지할 수 있도록 천천히 꼭꼭 씹어 드셔보세요. ",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 13.751267
+      },
+      "stage_timings_ms": {
+        "budget_storage": 3939.025,
+        "db_read": 498.53,
+        "model_supervisor": 4150.972,
+        "model_meal": 4783.613,
+        "graph_total": 14787.876,
+        "terminal_checkpoint": 216.303,
+        "response_snapshot": 71.592,
+        "public_stats": 326.847
+      },
+      "build": null,
+      "trace_id": "3d0b6760-bde5-4a72-bf7c-4af5dc80eda5",
+      "route": null,
+      "total_ms": 16669.508200000564,
+      "case": 16,
+      "repeat": 0,
+      "group": "complex",
+      "question": "내일 점심 추천해줘. 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 35177.28759999591,
+      "answer": "아침 식사가 미기록 상태인 것은 섭취량이 0kcal라는 의미가 아니므로, 저녁에 남은 칼로리를 몰아서 섭취하지 않고 평소의 적정 1끼 기준에 맞추는 것이 좋습니다.\n\n일일 다이어트 목표(2,325 kcal)에 맞춘 균형 잡힌 저녁 식사로는 밥 한 공기(약 200g)에 양질의 단백질(기름기 적은 생선구이나 두부, 살코기)과 신선한 채소 반찬을 곁들인 식단을 추천합니다. 튀김이나 자극적인 양념 대신 굽거나 찐 조리법을 선택하시면 부담 없이 든든한 포만감을 유지하실 수 있습니다. ",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 5,
+        "elapsed_seconds": 32.406006
+      },
+      "stage_timings_ms": {
+        "budget_storage": 6905.694,
+        "db_read": 467.639,
+        "model_supervisor": 2847.254,
+        "model_meal": 18681.781,
+        "graph_total": 33574.843,
+        "terminal_checkpoint": 220.408,
+        "response_snapshot": 71.74,
+        "public_stats": 875.498
+      },
+      "build": null,
+      "trace_id": "d5ad2010-07c1-4450-ba3a-7ceb41a0b1dc",
+      "route": null,
+      "total_ms": 36128.40349999897,
+      "case": 19,
+      "repeat": 0,
+      "group": "complex",
+      "question": "아침을 기록하지 않았는데 안 먹었다고 가정하지 말고 저녁 메뉴만 추천해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 11775.74270000332,
+      "answer": "저녁으로 샌드위치를 드셔도 괜찮습니다. 닭가슴살, 달걀 등 단백질과 채소가 풍부하게 들어간 구성을 선택하시면 균형 잡힌 한 끼가 됩니다. 마요네즈나 달콤한 소스를 가볍게 조절하고 통곡물 빵을 활용하시면 체중 감량에 더욱 도움이 됩니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 9.130535
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2467.768,
+        "db_read": 699.019,
+        "model_meal": 5892.953,
+        "graph_total": 10161.404,
+        "terminal_checkpoint": 216.27,
+        "response_snapshot": 71.137,
+        "public_stats": 294.188
+      },
+      "build": null,
+      "trace_id": "54aad6de-cf7e-4906-b7c7-b280cd8457e2",
+      "route": null,
+      "total_ms": 12143.214700001408,
+      "case": 15,
+      "repeat": 3,
+      "group": "followup",
+      "question": "저녁에 샌드위치 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9188.030899997102,
+      "answer": "네, 한식뷔페에서 일반식으로 한 접시를 알맞게 담아 드시는 것은 좋은 선택입니다. \n\n밥은 평소 먹는 양(한 공기 정도)으로 담고, 제육볶음이나 생선구이 같은 단백질 반찬과 나물·채소를 고루 곁들이면 균형 잡힌 식사를 할 수 있습니다. 튀김류나 양념이 강한 반찬의 비중만 조절해 한 접시 위주로 식사하시면 체중 관리 중에도 무리 없이 즐기실 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.4522949999999994
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2462.385,
+        "db_read": 446.524,
+        "model_meal": 3351.465,
+        "graph_total": 7784.702,
+        "terminal_checkpoint": 218.574,
+        "response_snapshot": 71.509,
+        "public_stats": 390.451
+      },
+      "build": null,
+      "trace_id": "4bf281e8-6d14-4339-836e-8500114d1f6d",
+      "route": null,
+      "total_ms": 9652.802299999166,
+      "case": 10,
+      "repeat": 2,
+      "group": "followup",
+      "question": "그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 17789.174400000775,
+      "answer": "내일 점심으로는 잡곡밥 1공기에 기름기가 적은 살코기나 생선구이, 두부 같은 단백질 메인 요리와 채소 반찬을 곁들인 한식 백반을 추천합니다. 외식을 하신다면 포케나 닭가슴살 샐러드 보울, 혹은 샤브샤브처럼 단백질과 채소를 충분히 섭취할 수 있는 메뉴가 좋습니다. 국물 요리는 건더기 위주로 드시고 정제 탄수화물이나 튀김류를 피하시면 다이어트 중에도 포만감을 유지하며 균형 있게 식사하실 수 있습니다. ",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 15.359234999999998
+      },
+      "stage_timings_ms": {
+        "budget_storage": 3941.701,
+        "db_read": 837.02,
+        "model_supervisor": 4210.278,
+        "model_meal": 6117.882,
+        "graph_total": 16388.258,
+        "terminal_checkpoint": 215.268,
+        "response_snapshot": 71.509,
+        "public_stats": 297.742
+      },
+      "build": null,
+      "trace_id": "70527821-267e-4a8a-b819-be3b6f703fb2",
+      "route": null,
+      "total_ms": 18162.046900004498,
+      "case": 16,
+      "repeat": 2,
+      "group": "complex",
+      "question": "내일 점심 추천해줘. 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 12180.704599995806,
+      "answer": "오늘 저녁은 감량 목표와 균형 잡힌 영양 섭취를 고려해 잡곡밥 한 공기(약 200g)에 기름기가 적은 단백질(생선구이, 닭가슴살, 또는 두부구이)과 신선한 채소 반찬을 곁들인 식단을 추천합니다. \n\n단백질과 식이섬유를 충분히 챙기면 포만감을 오래 유지하면서 늦은 시간 야식 섭취를 예방하는 데 도움이 됩니다. 식사 후 편안한 상태에서 실제 드신 메뉴를 기록해 주시면 남은 목표 관리에 맞춰 추가 조언을 드리겠습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 9.500225
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2472.755,
+        "db_read": 420.749,
+        "model_meal": 6484.42,
+        "graph_total": 10796.009,
+        "terminal_checkpoint": 220.782,
+        "response_snapshot": 71.524,
+        "public_stats": 292.934
+      },
+      "build": null,
+      "trace_id": "2656c864-739d-47fc-892b-8d9ce4563ce0",
+      "route": null,
+      "total_ms": 12548.216899995168,
+      "case": 3,
+      "repeat": 2,
+      "group": "first",
+      "question": "오늘 저녁 식단을 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8370.276399997238,
+      "answer": "체중 감량과 균형 잡힌 영양 섭취를 위해 단백질과 식이섬유가 풍부한 한식 백반이나 샐러드 볼 형태의 메뉴를 추천합니다.\n\n예를 들어 밥 2/3공기에 기름기가 적은 생선구이나 두부구이, 닭가슴살을 주단백질로 곁들이고 나물·채소 반찬을 충분히 드시면 든든하면서도 부담 없이 식사하실 수 있습니다. 외식이라면 닭가슴살 샐러드 랩이나 기름진 양념이 적은 비빔밥(양념장 반만 넣기)도 좋은 선택입니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.790083
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2485.047,
+        "db_read": 536.271,
+        "model_meal": 2730.024,
+        "graph_total": 6884.868,
+        "terminal_checkpoint": 220.96,
+        "response_snapshot": 77.135,
+        "public_stats": 302.917
+      },
+      "build": null,
+      "trace_id": "9bdd6f65-5611-48bd-8aff-56643d632a89",
+      "route": null,
+      "total_ms": 8739.314500002365,
+      "case": 6,
+      "repeat": 2,
+      "group": "first",
+      "question": "오늘 점심 메뉴 추천해줘. 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9270.136200000707,
+      "answer": "체중 감량을 고려한 균형 잡힌 점심으로 밥 1공기(약 200g)에 닭가슴살이나 생선구이 같은 담백한 단백질 반찬, 그리고 풍성한 채소 샐러드나 나물류를 곁들인 한식을 추천합니다. \n\n외식을 하신다면 밥 양을 조절하기 쉬운 비빔밥(양념장 적게)이나 샤브샤브, 쌈밥 정식도 좋은 선택입니다. 기름진 튀김류나 국물류의 섭취는 줄이고, 단백질과 식이섬유 위주로 식사하시면 포만감을 오래 유지할 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.566485999999999
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2482.812,
+        "db_read": 423.837,
+        "model_meal": 3599.105,
+        "graph_total": 7824.216,
+        "terminal_checkpoint": 215.783,
+        "response_snapshot": 71.527,
+        "public_stats": 257.494
+      },
+      "build": null,
+      "trace_id": "188bdc08-5ce7-42a1-8a84-f4135947c951",
+      "route": null,
+      "total_ms": 9610.775000001013,
+      "case": 0,
+      "repeat": 4,
+      "group": "first",
+      "question": "점심 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 24130.988199998683,
+      "answer": "오늘 확정된 섭취 기록이 아직 없으므로, 하루 목표(2,325 kcal, 단백질 116g, 탄수화물 320g, 지방 65g)를 고려할 때 점심은 약 750~800 kcal 내외로 균형 있게 구성하는 것을 추천합니다.\n\n잡곡밥 한 공기(200g)에 단백질 공급원인 생선구이나 기름기 적은 육류(150g 내외), 신선한 쌈 채소와 나물 반찬을 곁들이시면 단백질과 식이섬유를 충분히 채울 수 있습니다. 선호하시거나 드실 예정인 메뉴를 말씀해 주시면 계획 또는 기록 제안 카드로 연결해 드릴게요. ",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 21.082386999999997
+      },
+      "stage_timings_ms": {
+        "budget_storage": 3997.095,
+        "db_read": 678.002,
+        "model_supervisor": 4101.768,
+        "model_meal": 11885.713,
+        "graph_total": 22397.816,
+        "terminal_checkpoint": 216.281,
+        "response_snapshot": 72.184,
+        "public_stats": 580.519
+      },
+      "build": null,
+      "trace_id": "d1aaff67-6dec-44bb-bfa5-740f9495ab91",
+      "route": null,
+      "total_ms": 24786.20869999577,
+      "case": 4,
+      "repeat": 3,
+      "group": "button",
+      "question": "점심 식단 추천해줘. 오늘 확정된 섭취량과 목표를 반영해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 14060.658299997158,
+      "answer": "감량을 위한 아침 식사로는 단백질과 식이섬유를 중심으로 구성해 포만감을 오래 유지하는 것을 추천합니다. \n\n삶은 달걀 2개에 통곡물 식빵 한 장과 샐러드를 곁들이거나, 그릭요거트에 베리류 과일과 견과류를 챙겨 드시면 간편하면서도 균형 잡힌 식사가 됩니다. 한식 위주라면 잡곡밥 반 공기에 기름기 적은 두부부침이나 생선구이, 나물 반찬을 함께 구성해 보세요. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 11.263186
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2458.536,
+        "db_read": 567.949,
+        "model_meal": 8276.907,
+        "graph_total": 12353.28,
+        "terminal_checkpoint": 215.187,
+        "response_snapshot": 71.564,
+        "public_stats": 262.321
+      },
+      "build": null,
+      "trace_id": "2d416332-3983-44fe-895d-528211b35f06",
+      "route": null,
+      "total_ms": 14395.09089999774,
+      "case": 8,
+      "repeat": 1,
+      "group": "first",
+      "question": "아침 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 18288.54290000163,
+      "answer": "다이어트 중 편의점에서 따뜻하게 드시기 좋은 조합으로 **전자레인지에 데운 즉석 닭가슴살(또는 닭가슴살 핫바)과 현미밥/잡곡밥 삼각김밥, 컵 미역국(또는 맑은 콩나물국)** 조합을 추천합니다. 국물은 나트륨 조절을 위해 건더기 위주로 드시고, 부족한 포만감과 단백질은 따뜻하게 데운 무가당 두유나 삶은 계란을 곁들여 채우시면 균형 잡힌 한 끼가 됩니다. 더 간편하게 드시려면 편의점 다이어트 도시락을 데워 드시는 것도 좋은 방법입니다. ",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 15.669939
+      },
+      "stage_timings_ms": {
+        "budget_storage": 3938.841,
+        "db_read": 441.843,
+        "model_supervisor": 4038.606,
+        "model_meal": 6836.582,
+        "graph_total": 16841.655,
+        "terminal_checkpoint": 215.424,
+        "response_snapshot": 71.573,
+        "public_stats": 423.081
+      },
+      "build": null,
+      "trace_id": "4721c5a6-73ad-4c5c-8959-da7c2054bd40",
+      "route": null,
+      "total_ms": 18787.049899998237,
+      "case": 18,
+      "repeat": 0,
+      "group": "complex",
+      "question": "오늘 점심은 편의점에서 먹을 건데 따뜻한 메뉴로 추천해줘. 저장하지 마."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9977.380100004666,
+      "answer": "현재 체중 감량 목표와 균형 잡힌 영양 관리를 고려할 때, 저녁 식사는 단백질과 채소 위주로 구성해 포만감을 채우는 식단을 추천합니다. \n\n현미밥 1/2~2/3공기에 기름기가 적은 단백질(닭가슴살, 구운 생선, 두부 등) 1접시, 그리고 나물이나 샐러드 등 신선한 채소를 곁들여 드셔보세요. 소화 부담을 줄이기 위해 자극적이거나 기름진 양념은 피하고 담백하게 조리해 드시는 것을 권장합니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.011701
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2462.518,
+        "db_read": 571.08,
+        "model_meal": 4114.983,
+        "graph_total": 8360.556,
+        "terminal_checkpoint": 214.764,
+        "response_snapshot": 71.707,
+        "public_stats": 398.517
+      },
+      "build": null,
+      "trace_id": "3d2bb1fb-3cb1-4bb2-ad0b-05dd2f56b33a",
+      "route": null,
+      "total_ms": 10450.162900000578,
+      "case": 1,
+      "repeat": 0,
+      "group": "first",
+      "question": "저녁 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 26884.8089000021,
+      "answer": "단백질(살코기, 생선, 두부 등)과 신선한 채소가 골고루 포함된 쌈밥, 덮밥, 구이 정식 같은 메뉴를 우선적으로 선택해 보세요. \n\n튀김류나 자극적인 국물 위주의 메뉴는 피하고, 밥이나 면 등 탄수화물의 섭취량을 평소 식사량에 맞춰 조절해 드시는 것이 좋습니다. ",
+      "usage": {
+        "tool_calls": 1,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 22.822074999999998
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2950.064,
+        "model_supervisor": 12231.192,
+        "model_meal": 7086.891,
+        "graph_total": 24069.033,
+        "terminal_checkpoint": 214.431,
+        "response_snapshot": 71.13,
+        "public_stats": 269.575
+      },
+      "build": null,
+      "trace_id": "0aaff54f-1ee3-4da9-9bdc-46f8025ebff5",
+      "route": null,
+      "total_ms": 27228.389399999287,
+      "case": 17,
+      "repeat": 0,
+      "group": "complex",
+      "question": "외식할 때 점심 메뉴 고르는 방법을 두 문장으로 알려줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8237.586200004444,
+      "answer": "네, 한식뷔페에서 일반식으로 한 접시만 덜어 드시는 것은 좋은 선택입니다. \n\n밥은 평소 공깃밥 분량(약 200g) 정도로 담고, 생선구이나 제육 등 단백질 반찬과 나물·채소류를 골고루 채워 드시면 균형 잡힌 식사가 됩니다. 튀김류나 양념이 많은 반찬보다는 덜 자극적인 반찬 위주로 구성해 식사해 보세요. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.784661
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2458.914,
+        "db_read": 479.185,
+        "model_meal": 2680.605,
+        "graph_total": 6803.508,
+        "terminal_checkpoint": 214.71,
+        "response_snapshot": 71.348,
+        "public_stats": 557.894
+      },
+      "build": null,
+      "trace_id": "4b1b6229-a651-4554-b616-57630bee28d1",
+      "route": null,
+      "total_ms": 8870.320000001811,
+      "case": 10,
+      "repeat": 0,
+      "group": "followup",
+      "question": "그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 11028.760399996827,
+      "answer": "오늘 저녁은 감량 목표와 균형 잡힌 영양 섭취를 위해 잡곡밥 1공기(약 200g)에 기름기가 적은 단백질 반찬(구운 생선, 두부조림, 또는 닭가슴살구이)과 신선한 채소 반찬을 곁들인 식단을 추천합니다. \n\n단백질과 식이섬유를 충분히 채우면 포만감을 오래 유지하면서 늦은 저녁 과식을 예방하는 데 도움이 됩니다. 국물류를 드신다면 나트륨 섭취를 줄이기 위해 국물보다는 건더기 위주로 드시는 것을 권장합니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 8.155798
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2461.88,
+        "db_read": 411.788,
+        "model_meal": 5297.941,
+        "graph_total": 9426.441,
+        "terminal_checkpoint": 216.92,
+        "response_snapshot": 71.363,
+        "public_stats": 528.345
+      },
+      "build": null,
+      "trace_id": "ecdd1f0f-dcbb-4aa4-a629-c1a3218a4e09",
+      "route": null,
+      "total_ms": 11630.188299997826,
+      "case": 3,
+      "repeat": 1,
+      "group": "first",
+      "question": "오늘 저녁 식단을 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9004.078300000401,
+      "answer": "닭가슴살과 샐러드는 단백질과 식이섬유를 챙기기에 좋은 구성입니다. 다만 현재 목표와 활동량을 고려할 때 탄수화물이 부족하면 오후에 허기가 지거나 피로해질 수 있으니, 고구마·현미밥·통밀빵 등 복합 탄수화물을 함께 곁들여 드시는 것을 권장합니다. 드레싱은 당류나 지방 함량을 고려해 적당량 조절해 드시면 더욱 균형 잡힌 식사가 됩니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.524719
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2458.562,
+        "db_read": 476.522,
+        "model_meal": 3520.857,
+        "graph_total": 7588.721,
+        "terminal_checkpoint": 215.185,
+        "response_snapshot": 71.348,
+        "public_stats": 265.81
+      },
+      "build": null,
+      "trace_id": "ef8137eb-823f-45e5-b187-0cfc6628e7ff",
+      "route": null,
+      "total_ms": 9341.132999994443,
+      "case": 13,
+      "repeat": 0,
+      "group": "followup",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 11587.800000001153,
+      "answer": "체중 감량과 균형 잡힌 영양 섭취를 위해 점심으로는 단백질과 식이섬유가 풍부한 한식 백반(생선구이 또는 기름기 적은 제육·소불고기에 채소 반찬)이나 닭가슴살 샐러드 보울을 추천합니다. \n\n밥은 평소의 2/3~한 공기 분량(약 130~200g)으로 조절하고, 나물이나 쌈 채소를 먼저 드시면 포만감을 오래 유지하면서 오후 에너지를 안정적으로 채우실 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 8.919426999999999
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2465.115,
+        "db_read": 424.394,
+        "model_meal": 6074.788,
+        "graph_total": 9946.56,
+        "terminal_checkpoint": 216.611,
+        "response_snapshot": 73.489,
+        "public_stats": 523.233
+      },
+      "build": null,
+      "trace_id": "dc617c36-7c7e-4cfe-a672-78092a5d8ade",
+      "route": null,
+      "total_ms": 12181.641799994395,
+      "case": 6,
+      "repeat": 1,
+      "group": "first",
+      "question": "오늘 점심 메뉴 추천해줘. 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 10146.309700001439,
+      "answer": "체중 감량과 균형 잡힌 영양 섭취를 위해 아침 식사는 단백질과 복합 탄수화물, 식이섬유를 고루 갖춘 구성을 추천합니다. \n\n통밀빵 한 조각이나 오트밀에 삶은 달걀 1~2개 또는 그릭요거트를 곁들이고, 신선한 채소 샐러드나 방울토마토를 함께 드시면 포만감을 오래 유지하는 데 도움이 됩니다. \n\n한식을 선호하신다면 밥 2/3공기에 기름기 적은 생선구이나 두부구이, 맑은 국과 나물 반찬 위주로 가볍게 챙겨 드시는 것을 권장합니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.433887
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2465.786,
+        "db_read": 472.092,
+        "model_meal": 4446.352,
+        "graph_total": 8741.587,
+        "terminal_checkpoint": 214.791,
+        "response_snapshot": 71.458,
+        "public_stats": 264.57
+      },
+      "build": null,
+      "trace_id": "13514f14-307f-42e5-9cb1-16e526c21260",
+      "route": null,
+      "total_ms": 10485.895500001789,
+      "case": 8,
+      "repeat": 4,
+      "group": "first",
+      "question": "아침 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 30125.43310000183,
+      "answer": "현재 확정된 오늘 식사 기록이 없으나, 미기록된 식사가 있을 수 있으므로 하루 감량 목표(2,325 kcal)에 맞춘 균형 식단을 추천해 드립니다.\n\n저녁 식사는 밥 한 공기(약 200g) 정도의 복합 탄수화물에 생선구이, 닭가슴살, 두부 등 단백질 반찬 1종과 나물·채소류를 곁들인 정갈한 한식 식단을 권장합니다. 오늘 드신 아침이나 점심 식사를 먼저 기록해 주시면 남은 영양 섭취량에 맞춰 보다 정밀한 식단 계획을 도와드릴 수 있습니다. 선호하시는 저녁 메뉴가 있다면 말씀해 주세요. ",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 27.387945999999996
+      },
+      "stage_timings_ms": {
+        "budget_storage": 5916.453,
+        "db_read": 455.122,
+        "model_supervisor": 2768.578,
+        "model_meal": 13690.686,
+        "graph_total": 28453.479,
+        "terminal_checkpoint": 229.283,
+        "response_snapshot": 71.017,
+        "public_stats": 299.908
+      },
+      "build": null,
+      "trace_id": "32205ad4-8105-4401-b38d-861e21436237",
+      "route": null,
+      "total_ms": 30505.72120000288,
+      "case": 5,
+      "repeat": 3,
+      "group": "button",
+      "question": "저녁 식단 추천해줘. 오늘 확정된 섭취량과 목표를 반영해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 12284.049800000503,
+      "answer": "체중 감량을 고려한 균형 잡힌 점심으로 **잡곡밥 1공기(약 200g)에 생선구이나 기름기 적은 살코기 구이, 그리고 나물이나 샐러드 등 채소 반찬을 곁들인 한식 차림**을 추천합니다. 외식을 하신다면 밥의 양을 조절할 수 있는 쌈밥정식이나 단백질 토핑을 더한 포케·샐러드볼이 좋은 선택입니다. 탄수화물, 단백질, 식이섬유를 골고루 챙기면서 포만감을 오래 유지할 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 9.411483
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2462.372,
+        "db_read": 489.388,
+        "model_meal": 6428.09,
+        "graph_total": 10463.593,
+        "terminal_checkpoint": 216.4,
+        "response_snapshot": 71.689,
+        "public_stats": 298.163
+      },
+      "build": null,
+      "trace_id": "08b27242-429c-4975-93b3-39a697243467",
+      "route": null,
+      "total_ms": 12656.167400004051,
+      "case": 0,
+      "repeat": 2,
+      "group": "first",
+      "question": "점심 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 18669.34290000063,
+      "answer": "외식할 때는 살코기, 생선, 두부 등 양질의 단백질과 채소가 함께 포함된 정식이나 구이류 메뉴를 우선 선택해 보세요. \n\n튀김이나 국물 위주의 고나트륨 메뉴는 피하고, 밥이나 소스의 양을 덜어내어 직접 조절해 드시는 것을 권장합니다. ",
+      "usage": {
+        "tool_calls": 1,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 16.182719
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2952.831,
+        "model_supervisor": 7043.872,
+        "model_meal": 5697.881,
+        "graph_total": 17226.644,
+        "terminal_checkpoint": 214.971,
+        "response_snapshot": 71.294,
+        "public_stats": 344.134
+      },
+      "build": null,
+      "trace_id": "1dc44ceb-58b4-4957-9b97-e8311492fc6a",
+      "route": null,
+      "total_ms": 19088.0576999989,
+      "case": 17,
+      "repeat": 3,
+      "group": "complex",
+      "question": "외식할 때 점심 메뉴 고르는 방법을 두 문장으로 알려줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9419.847000004665,
+      "answer": "네, 한식뷔페에서 일반식으로 한 접시 구성해 드시는 것은 좋은 선택입니다. \n\n밥은 평소 공깃밥 기준 반 공기에서 한 공기 정도로 담고, 제육볶음이나 생선구이 같은 단백질 반찬 1~2가지와 나물·채소류를 접시의 절반가량 채워 드시면 영양 균형을 잡기 좋습니다. 튀김류나 양념이 강한 반찬의 비중만 조절해 한 접시 위주로 식사하시면 목표 관리에도 부담이 없습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.637132
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2466.84,
+        "db_read": 573.977,
+        "model_meal": 3565.18,
+        "graph_total": 7925.002,
+        "terminal_checkpoint": 215.899,
+        "response_snapshot": 71.305,
+        "public_stats": 331.773
+      },
+      "build": null,
+      "trace_id": "43676bce-8005-4765-b283-43fa247b5f98",
+      "route": null,
+      "total_ms": 9826.14000000467,
+      "case": 10,
+      "repeat": 4,
+      "group": "followup",
+      "question": "그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9196.368900004018,
+      "answer": "편의점 샌드위치도 감량 중 점심으로 충분히 드실 수 있습니다. 마요네즈나 튀김 패티 비중이 높은 제품보다는 닭가슴살, 달걀, 햄과 채소가 넉넉히 들어간 종류를 선택하시는 것이 좋습니다. 단백질이 다소 부족할 수 있으니 삶은 달걀이나 저지방 우유, 두유를 함께 곁들이시면 더욱 균형 잡힌 식사가 됩니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.733257
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2460.434,
+        "db_read": 430.295,
+        "model_meal": 3916.894,
+        "graph_total": 7780.114,
+        "terminal_checkpoint": 215.612,
+        "response_snapshot": 70.97,
+        "public_stats": 287.997
+      },
+      "build": null,
+      "trace_id": "534947f9-ef6d-4e26-9db8-88fb8f6963da",
+      "route": null,
+      "total_ms": 9556.651700004295,
+      "case": 11,
+      "repeat": 1,
+      "group": "followup",
+      "question": "그럼 편의점에서 샌드위치 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8264.4575000013,
+      "answer": "한식뷔페에서 일반식 한 접시로 식사하시는 것은 좋은 선택입니다. \n\n접시의 절반은 나물이나 쌈채소류로 채우고, 밥은 평소 공기밥 분량 정도로 조절하며, 수육이나 생선구이 같은 단백질 반찬을 곁들이시면 균형 잡힌 식사를 하실 수 있습니다. 기름진 튀김류나 양념이 강한 메뉴는 적정량만 담아 드시는 것을 추천합니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.824294
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2463.213,
+        "db_read": 441.991,
+        "model_meal": 2983.497,
+        "graph_total": 6846.019,
+        "terminal_checkpoint": 215.643,
+        "response_snapshot": 71.601,
+        "public_stats": 295.521
+      },
+      "build": null,
+      "trace_id": "65e5b886-024d-4313-99fc-67a9dff29319",
+      "route": null,
+      "total_ms": 8627.463600001647,
+      "case": 10,
+      "repeat": 1,
+      "group": "followup",
+      "question": "그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 19752.126799998223,
+      "answer": "편의점에서 따뜻하고 든든하게 드실 수 있는 다이어트 조합으로 다음 메뉴를 추천합니다.\n\n1. **따뜻한 즉석 닭가슴살 볶음밥(또는 현미 즉석밥) + 닭가슴살 핫바**: 전자레인지로 간편하게 데워 복합 탄수화물과 단백질을 고르게 챙길 수 있습니다.\n2. **전자레인지용 파우치 닭죽/소고기죽 + 삶은 달걀 2개**: 속을 편안하고 따뜻하게 데워주며, 부족한 단백질을 달걀로 보충하기 좋습니다.\n3. **맑은 컵국(미역국 등) + 삼각김밥 1개 + 데운 닭가슴살(오리지널)**: 따뜻한 국물과 함께 든든하게 식사하되, 국물은 다 마시지 않고 건더기 위주로 드시면 나트륨 부담을 줄일 수 있습니다.\n\n요청하신 대로 별도의 기록이나 저장은 진행하지 않았으니 편안하게 점심 식사 챙겨 드세요. ",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 17.273556
+      },
+      "stage_timings_ms": {
+        "budget_storage": 3943.36,
+        "db_read": 645.445,
+        "model_supervisor": 3684.508,
+        "model_meal": 8554.28,
+        "graph_total": 18315.933,
+        "terminal_checkpoint": 215.357,
+        "response_snapshot": 71.1,
+        "public_stats": 311.56
+      },
+      "build": null,
+      "trace_id": "ccf63103-7df8-4540-873a-365d982680fc",
+      "route": null,
+      "total_ms": 20138.68929999444,
+      "case": 18,
+      "repeat": 3,
+      "group": "complex",
+      "question": "오늘 점심은 편의점에서 먹을 건데 따뜻한 메뉴로 추천해줘. 저장하지 마."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8908.916500004125,
+      "answer": "감량 목표와 균형 잡힌 영양 섭취를 위해 단백질과 식이섬유가 풍부한 아침 식단을 추천합니다.\n\n1. **한식 구성**: 잡곡밥 2/3공기(약 130~140g), 달걀프라이 1~2개 또는 연두부, 맑은 콩나물국과 나물 반찬\n2. **간편식 구성**: 통밀 식빵 1~2장, 삶은 달걀 1~2개, 플레인 요거트와 견과류 한 줌 또는 신선한 채소 샐러드\n\n포만감을 오래 유지하고 혈당을 완만하게 올릴 수 있도록 정제 탄수화물보다는 통곡물과 단백질 위주로 챙겨 드시는 것을 권장합니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.304625
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2460.606,
+        "db_read": 425.616,
+        "model_meal": 3495.608,
+        "graph_total": 7325.713,
+        "terminal_checkpoint": 217.134,
+        "response_snapshot": 71.837,
+        "public_stats": 313.083
+      },
+      "build": null,
+      "trace_id": "a6db828a-8728-4afa-9b55-7e7d7e75e736",
+      "route": null,
+      "total_ms": 9293.660700001055,
+      "case": 2,
+      "repeat": 1,
+      "group": "first",
+      "question": "아침 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 11617.595800002164,
+      "answer": "현재 설정된 하루 목표 칼로리는 **2,325 kcal**이며, 등록된 식사 기록이 없어 표기상으로는 2,325 kcal가 남아 있습니다(아침 등 아직 기록하지 않은 식사가 있다면 실제 남은 양은 달라질 수 있습니다).\n\n점심 메뉴로는 균형 잡힌 영양과 포만감을 위해 잡곡밥(1공기 기준)에 생선구이나 두부구이, 닭가슴살 등 기름기가 적은 단백질 반찬과 나물 채소를 곁들인 한식 백반을 추천합니다. 찌개나 국류는 나트륨과 불필요한 열량 섭취를 줄이기 위해 국물보다는 건더기 위주로 드시는 것이 좋습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 9.144621
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2462.234,
+        "db_read": 568.228,
+        "model_meal": 6053.714,
+        "graph_total": 10203.278,
+        "terminal_checkpoint": 217.14,
+        "response_snapshot": 71.312,
+        "public_stats": 328.011
+      },
+      "build": null,
+      "trace_id": "1e82e2ed-e80e-4167-a668-9399cac08056",
+      "route": null,
+      "total_ms": 12020.675500003563,
+      "case": 7,
+      "repeat": 3,
+      "group": "first",
+      "question": "점심 추천해줘. 오늘 남은 칼로리도 알려줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 20629.4648999974,
+      "answer": "다이어트 중 따뜻한 편의점 한 끼로는 전자레인지에 데운 닭가슴살(또는 닭가슴살 핫바)에 즉석 잡곡밥을 곁들여 단백질과 포만감을 챙기는 조합을 추천합니다. 따뜻한 국물이 당기신다면 간편 닭죽이나 맑은 국물 컵밥에 반숙란을 더해 드시되, 국물은 다 마시기보다 건더기 위주로 섭취하시면 나트륨 부담을 줄일 수 있습니다. 요청하신 대로 별도의 식단 기록이나 제안 저장은 진행하지 않았습니다. ",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 18.123486999999997
+      },
+      "stage_timings_ms": {
+        "budget_storage": 3940.21,
+        "db_read": 464.031,
+        "model_supervisor": 4114.767,
+        "model_meal": 9177.881,
+        "graph_total": 19192.954,
+        "terminal_checkpoint": 218.768,
+        "response_snapshot": 71.6,
+        "public_stats": 293.601
+      },
+      "build": null,
+      "trace_id": "42e1f2ef-d19d-444b-bcf2-03b88e74c1c2",
+      "route": null,
+      "total_ms": 20997.53590000182,
+      "case": 18,
+      "repeat": 4,
+      "group": "complex",
+      "question": "오늘 점심은 편의점에서 먹을 건데 따뜻한 메뉴로 추천해줘. 저장하지 마."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 36482.957699998224,
+      "answer": "현재 조회된 오늘 섭취 기록은 0건이나, 기록이 없다고 해서 실제 미섭취(공복)를 의미하는 것은 아닙니다. 아침이나 점심을 이미 드셨다면 해당 식사를 먼저 기록해 주셔야 남은 목표량에 맞춘 정확한 저녁 식단 계획이 가능합니다.\n\n일일 목표(2,325 kcal, 단백질 116.3g, 탄수화물 319.7g, 지방 64.6g)를 고려할 때, 일반적인 저녁 한 끼는 밥 한 공기(200g) 정도의 탄수화물과 기름기 적은 육류·생선·두부 등 단백질 찬, 채소를 곁들인 균형 잡힌 한식 구성을 권장합니다. 드신 식사를 알려주시면 목표 영양소에 맞추어 식단 제안을 진행해 드리겠습니다. ",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 33.57141
+      },
+      "stage_timings_ms": {
+        "budget_storage": 5910.936,
+        "db_read": 491.069,
+        "model_supervisor": 3458.042,
+        "model_meal": 20181.048,
+        "graph_total": 35011.808,
+        "terminal_checkpoint": 215.084,
+        "response_snapshot": 71.045,
+        "public_stats": 336.246
+      },
+      "build": null,
+      "trace_id": "224d2dff-8ea3-4cc9-b1a4-97a17db5b76c",
+      "route": null,
+      "total_ms": 36893.81760000106,
+      "case": 5,
+      "repeat": 2,
+      "group": "button",
+      "question": "저녁 식단 추천해줘. 오늘 확정된 섭취량과 목표를 반영해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 10172.05140000442,
+      "answer": "현재 등록된 오늘 섭취 기록이 없어 목표 칼로리(2,325 kcal) 전체가 남아 있는 상태로 조회되지만, 아직 기록하지 않은 식사가 있다면 실제 남은 양은 달라질 수 있습니다.\n\n점심으로는 단백질과 식이섬유를 균형 있게 채울 수 있는 **닭가슴살 샐러드와 현미밥 반 공기(약 100g)** 또는 **두부 버섯 덮밥** 같은 메뉴를 추천합니다. \n\n오후 활동과 저녁 식사를 고려해 점심에는 약 600~750 kcal 내외로 든든하게 구성해 보세요. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.432837
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2466.629,
+        "db_read": 725.859,
+        "model_meal": 4208.614,
+        "graph_total": 8516.01,
+        "terminal_checkpoint": 215.252,
+        "response_snapshot": 71.602,
+        "public_stats": 335.227
+      },
+      "build": null,
+      "trace_id": "ecb0139e-c744-41a3-914b-ce71c5a51dad",
+      "route": null,
+      "total_ms": 10577.429900004063,
+      "case": 7,
+      "repeat": 2,
+      "group": "first",
+      "question": "점심 추천해줘. 오늘 남은 칼로리도 알려줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 35638.67060000484,
+      "answer": "현재 등록된 오늘 확정 섭취 기록은 없는 상태이나, 기록되지 않은 식사가 있다면 먼저 입력해 주셔야 더욱 정밀한 반영이 가능합니다. \n\n하루 목표(2,325 kcal, 단백질 116.3g, 탄수화물 319.7g, 지방 64.6g)를 고려할 때, 저녁은 밥 한 공기 분량의 복합 탄수화물에 생선·두부·살코기 등 단백질 식품 한 접시, 식이섬유가 풍부한 채소를 곁들인 균형 잡힌 구성을 권장합니다. \n\n원하시는 구체적인 메뉴나 식재료가 있다면 말씀해 주세요. 상세 영양 정보를 계산해 맞춤 식단으로 제안해 드리겠습니다. ",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 32.941362999999996
+      },
+      "stage_timings_ms": {
+        "budget_storage": 5929.525,
+        "db_read": 458.322,
+        "model_supervisor": 2318.674,
+        "model_meal": 20362.977,
+        "graph_total": 34214.837,
+        "terminal_checkpoint": 216.172,
+        "response_snapshot": 71.026,
+        "public_stats": 276.046
+      },
+      "build": null,
+      "trace_id": "8e7e2681-0a14-4ddd-95b5-6f4e33f3533d",
+      "route": null,
+      "total_ms": 35990.12550000043,
+      "case": 5,
+      "repeat": 0,
+      "group": "button",
+      "question": "저녁 식단 추천해줘. 오늘 확정된 섭취량과 목표를 반영해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8147.109099998488,
+      "answer": "네, 편의점 샌드위치로 점심을 드셔도 괜찮습니다. \n\n다만 샌드위치 단독으로는 단백질이 부족하고 마요네즈 등 소스로 인해 당류나 지방이 높을 수 있으니, 닭가슴살이나 달걀, 햄이 든 샌드위치를 고르시는 것을 추천합니다. 여기에 삶은 달걀이나 무가당 두유를 하나 곁들이시면 단백질을 보충해 더 든든하고 균형 잡힌 한 끼가 됩니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.510421
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2463.066,
+        "db_read": 463.183,
+        "model_meal": 2628.859,
+        "graph_total": 6510.57,
+        "terminal_checkpoint": 213.993,
+        "response_snapshot": 71.277,
+        "public_stats": 274.444
+      },
+      "build": null,
+      "trace_id": "7cccacb7-c356-4115-af35-ee4287d7c047",
+      "route": null,
+      "total_ms": 8490.212499993504,
+      "case": 11,
+      "repeat": 2,
+      "group": "followup",
+      "question": "그럼 편의점에서 샌드위치 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8707.314899998892,
+      "answer": "현재 체중 감량 목표와 균형 잡힌 영양 관리를 고려했을 때, 저녁 식사는 담백한 단백질과 식이섬유를 충분히 채우고 복합 탄수화물을 적정량 곁들이는 구성을 추천합니다. \n\n예를 들어 **잡곡밥 2/3~1공기(약 130~150g)**에 **기름기가 적은 닭가슴살·두부 구이·생선구이** 중 한 가지 단백질을 메인으로 하고, **신선한 쌈 채소나 나물 반찬**을 넉넉히 곁들이시면 포만감과 영양 균형을 모두 챙길 수 있습니다. 외식이나 간편식을 이용하신다면 채소가 풍성한 비빔밥(양념장 조절)이나 닭가슴살 샐러드 볼, 두부 서브웨이 샌드위치 등도 좋은 선택입니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.257202
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2479.413,
+        "db_read": 448.732,
+        "model_meal": 3448.768,
+        "graph_total": 7274.773,
+        "terminal_checkpoint": 215.978,
+        "response_snapshot": 71.343,
+        "public_stats": 296.006
+      },
+      "build": null,
+      "trace_id": "dc437352-30aa-46f6-a452-a887af05b312",
+      "route": null,
+      "total_ms": 9079.424299998209,
+      "case": 9,
+      "repeat": 1,
+      "group": "first",
+      "question": "저녁 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9503.922399999283,
+      "answer": "현재 하루 감량 목표(약 2,325kcal)와 균형 잡힌 영양 비율을 고려할 때, 아침은 포만감을 오래 유지할 수 있는 복합 탄수화물과 양질의 단백질 조합을 추천합니다.\n\n**추천 메뉴 조합:**\n1. **간편식:** 통밀 토스트 1~2장 + 삶은 달걀 2개 + 그릭 요거트나 사과 반 개\n2. **한식:** 잡곡밥 2/3공기 + 두부구이나 계란찜 + 기름기 적은 맑은 국 및 나물 반찬\n\n아침에 단백질과 식이섬유를 충분히 섭취하면 점심 전까지 혈당과 식욕을 안정적으로 관리하는 데 도움이 됩니다. 원하시는 특정 음식이나 상황(외식, 간편식 등)이 있다면 말씀해 주세요! ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.83603
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2480.944,
+        "db_read": 421.527,
+        "model_meal": 4097.492,
+        "graph_total": 7886.403,
+        "terminal_checkpoint": 214.006,
+        "response_snapshot": 71.273,
+        "public_stats": 559.702
+      },
+      "build": null,
+      "trace_id": "74cf5583-3aef-4d44-8c7d-76029f64399a",
+      "route": null,
+      "total_ms": 10138.803799993184,
+      "case": 2,
+      "repeat": 4,
+      "group": "first",
+      "question": "아침 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 26650.18019999843,
+      "answer": "현재 오늘 식사 기록이 등록되어 있지 않으나, 미기록이 결식을 의미하는 것은 아니므로 이전 식사를 하셨다면 먼저 기록해 주시면 보다 정밀한 조언이 가능합니다. \n\n하루 목표 섭취량(2,325 kcal)을 고려할 때, 저녁 식사는 잡곡밥 1공기(200g)에 양질의 단백질(닭가슴살, 두부, 생선 등 120~150g)과 풍부한 채소 반찬을 곁들인 균형 잡힌 구성을 추천합니다. 포만감을 충분히 유지하면서 소화 부담을 줄이기 위해 튀김류보다는 굽거나 찐 조리법을 선택해 보세요. ",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 24.216711
+      },
+      "stage_timings_ms": {
+        "budget_storage": 3939.911,
+        "db_read": 459.127,
+        "model_supervisor": 5224.574,
+        "model_meal": 14232.376,
+        "graph_total": 25241.51,
+        "terminal_checkpoint": 214.829,
+        "response_snapshot": 70.823,
+        "public_stats": 575.346
+      },
+      "build": null,
+      "trace_id": "e4fe7878-a2ae-4469-a3c6-b1c21763733a",
+      "route": null,
+      "total_ms": 27297.697099995275,
+      "case": 5,
+      "repeat": 4,
+      "group": "button",
+      "question": "저녁 식단 추천해줘. 오늘 확정된 섭취량과 목표를 반영해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9952.389500002027,
+      "answer": "네, 밥과 계란은 탄수화물과 양질의 단백질을 챙길 수 있는 아주 좋은 일반식 조합입니다. 계란을 2개 정도 곁들이시고, 김치, 나물, 샐러드 같은 채소 반찬을 함께 드시면 포만감과 영양 균형을 더욱 높일 수 있습니다. 조리 시 식용유 사용만 적당히 조절해 주시면 감량 목표에도 잘 맞습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.4086289999999995
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2459.609,
+        "db_read": 1508.825,
+        "model_meal": 3462.396,
+        "graph_total": 8499.489,
+        "terminal_checkpoint": 214.986,
+        "response_snapshot": 72.873,
+        "public_stats": 344.754
+      },
+      "build": null,
+      "trace_id": "1e02259f-6d13-4afc-aa96-b7f0bbfa94b7",
+      "route": null,
+      "total_ms": 10364.143200000399,
+      "case": 12,
+      "repeat": 1,
+      "group": "followup",
+      "question": "그럼 일반식으로 밥이랑 계란 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9333.774599996104,
+      "answer": "닭가슴살과 샐러드는 단백질과 식이섬유를 챙기기에 아주 좋은 구성입니다. 다만 감량 중이라도 오후 활동 에너지를 유지하려면 고구마나 통곡물 빵, 밥 반 공기 정도의 복합 탄수화물을 곁들이는 것을 권장합니다. 드레싱은 가벼운 오일이나 요거트 베이스를 적당량 곁들여 건강한 지방도 함께 챙겨보세요. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.833959999999999
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2475.075,
+        "db_read": 512.615,
+        "model_meal": 3863.534,
+        "graph_total": 7871.379,
+        "terminal_checkpoint": 217.03,
+        "response_snapshot": 71.555,
+        "public_stats": 251.962
+      },
+      "build": null,
+      "trace_id": "7b3a5cc9-caf7-435d-8cab-a47d6234dc05",
+      "route": null,
+      "total_ms": 9661.931599999662,
+      "case": 13,
+      "repeat": 3,
+      "group": "followup",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8577.281500001845,
+      "answer": "닭가슴살과 샐러드는 단백질과 식이섬유를 챙기기에 좋은 구성입니다. 다만 현재 목표 칼로리와 균형 잡힌 에너지 공급을 위해 고구마, 잡곡밥 등 복합 탄수화물을 적정량 함께 곁들여 드시는 것을 권장합니다. 드레싱은 당류나 지방 함량이 과하지 않은 가벼운 종류로 선택해 조절해 보세요. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.035755
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2463.588,
+        "db_read": 514.395,
+        "model_meal": 3110.618,
+        "graph_total": 7130.945,
+        "terminal_checkpoint": 218.296,
+        "response_snapshot": 71.385,
+        "public_stats": 317.671
+      },
+      "build": null,
+      "trace_id": "ef355884-e0ab-42ac-805a-556b5199f36a",
+      "route": null,
+      "total_ms": 8971.062700002221,
+      "case": 13,
+      "repeat": 2,
+      "group": "followup",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 20397.11919999536,
+      "answer": "다이어트 중 편의점에서 따뜻하고 든든하게 드실 수 있는 점심 조합 2가지를 추천해 드립니다.\n\n1. **따뜻한 닭가슴살 팩 + 삼각김밥(또는 즉석밥) + 컵 미역국/된장국**  \n   전자레인지로 데운 닭가슴살로 충분한 단백질을 챙기고, 밥류와 따뜻한 국물 컵을 곁들이면 포만감을 높이면서 속을 편안하게 채울 수 있습니다. (국물은 나트륨 조절을 위해 건더기 위주로 드시는 것을 권장합니다.)\n\n2. **간편 컵국밥(소고기미역국밥·황태국밥류) + 온장고 훈제란/닭가슴살 핫바**  \n   전자레인지로 조리하는 따뜻한 국밥류에 계란이나 핫바를 추가해 단백질 균형을 맞추는 조합입니다. \n\n기호에 맞게 선택해 보시고, 식사 후 기록이 필요하실 때 말씀해 주세요! ",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 17.613968999999997
+      },
+      "stage_timings_ms": {
+        "budget_storage": 3980.291,
+        "db_read": 472.53,
+        "model_supervisor": 3167.158,
+        "model_meal": 9743.303,
+        "graph_total": 18774.602,
+        "terminal_checkpoint": 218.033,
+        "response_snapshot": 71.299,
+        "public_stats": 366.349
+      },
+      "build": null,
+      "trace_id": "2a0ede2c-eb89-46ba-b41f-3becdd080401",
+      "route": null,
+      "total_ms": 20840.52719999454,
+      "case": 18,
+      "repeat": 1,
+      "group": "complex",
+      "question": "오늘 점심은 편의점에서 먹을 건데 따뜻한 메뉴로 추천해줘. 저장하지 마."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 32649.81689999695,
+      "answer": "오늘 현재까지 확정된 식사 기록은 없으며, 하루 목표(2,325 kcal, 단백질 116.3g)를 고려할 때 점심은 약 700~800 kcal, 단백질 35~40g 수준으로 구성하시는 것을 권장합니다.\n\n잡곡밥이나 쌀밥 한 공기(200g)를 기본으로 생선구이, 닭가슴살, 기름기가 적은 살코기 등 단백질 위주의 주반찬 1접시와 풍부한 채소 반찬을 곁들인 한식 구성을 추천합니다. 원하시는 구체적인 메뉴를 말씀해 주시면 영양 수치를 확인하여 식단 계획으로 제안해 드리겠습니다. ",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 29.718111
+      },
+      "stage_timings_ms": {
+        "budget_storage": 5949.126,
+        "db_read": 700.861,
+        "model_supervisor": 3705.221,
+        "model_meal": 15151.284,
+        "graph_total": 30867.905,
+        "terminal_checkpoint": 233.844,
+        "response_snapshot": 71.361,
+        "public_stats": 358.227
+      },
+      "build": null,
+      "trace_id": "7fde1e2a-0da4-4e6a-944c-5168a8826580",
+      "route": null,
+      "total_ms": 33081.3102999964,
+      "case": 4,
+      "repeat": 1,
+      "group": "button",
+      "question": "점심 식단 추천해줘. 오늘 확정된 섭취량과 목표를 반영해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 17941.384600002493,
+      "answer": "단백질(살코기, 생선, 두부 등)과 신선한 채소가 균형 있게 구성된 백반, 쌈밥, 구이류 메뉴를 우선적으로 선택해 보세요. 또한 튀김이나 기름진 볶음 요리보다는 찜이나 구이 위주로 고르고, 국물은 남기면서 밥 양을 가볍게 조절하는 것이 좋습니다. ",
+      "usage": {
+        "tool_calls": 1,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 15.229906
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2955.22,
+        "model_supervisor": 5157.45,
+        "model_meal": 6819.128,
+        "graph_total": 16489.23,
+        "terminal_checkpoint": 215.452,
+        "response_snapshot": 71.551,
+        "public_stats": 308.891
+      },
+      "build": null,
+      "trace_id": "d73c0edb-8652-4a14-aff0-9dc3735cffd9",
+      "route": null,
+      "total_ms": 18320.90590000007,
+      "case": 17,
+      "repeat": 4,
+      "group": "complex",
+      "question": "외식할 때 점심 메뉴 고르는 방법을 두 문장으로 알려줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9700.975499996275,
+      "answer": "편의점 샌드위치도 점심 식사로 괜찮은 선택입니다. \n\n다만 단백질이 부족하고 소스류로 인해 당류나 나트륨이 높을 수 있으니, 닭가슴살이나 달걀, 햄·치즈 위주의 샌드위치를 고르는 것을 권장합니다. 부족한 단백질과 포만감을 채우기 위해 삶은 달걀 한두 개나 무가당 두유, 저지방 우유를 함께 곁들여 드시면 균형 잡힌 식사가 됩니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.139782
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2483.916,
+        "db_read": 414.497,
+        "model_meal": 4245.606,
+        "graph_total": 8235.487,
+        "terminal_checkpoint": 217.089,
+        "response_snapshot": 71.571,
+        "public_stats": 395.217
+      },
+      "build": null,
+      "trace_id": "5d5063b8-8da5-4122-ab1a-38d72ed0ca7d",
+      "route": null,
+      "total_ms": 10169.100599996455,
+      "case": 11,
+      "repeat": 3,
+      "group": "followup",
+      "question": "그럼 편의점에서 샌드위치 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9357.785200001672,
+      "answer": "현재 감량 목표와 균형 잡힌 식단을 고려할 때, 점심으로는 양질의 단백질과 식이섬유가 풍부한 한식 백반 형태를 추천합니다. \n\n메인으로 **닭가슴살 샐러드 덮밥(또는 현미밥)**, 기름기가 적은 **소고기 우둔살이나 목살을 곁들인 쌈밥**, 혹은 **생선구이 정식**을 선택해 보세요. 식사 시 채소 반찬을 먼저 섭취하고 밥은 한 공기(약 200g) 기준으로 알맞게 드시면 포만감을 오래 유지하면서 오후 에너지를 안정적으로 채우실 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.7338439999999995
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2471.599,
+        "db_read": 941.788,
+        "model_meal": 3253.319,
+        "graph_total": 7862.509,
+        "terminal_checkpoint": 215.812,
+        "response_snapshot": 71.721,
+        "public_stats": 371.812
+      },
+      "build": null,
+      "trace_id": "e54c960a-ea5e-4535-b741-cb9199ad8b4b",
+      "route": null,
+      "total_ms": 9809.078400001454,
+      "case": 6,
+      "repeat": 4,
+      "group": "first",
+      "question": "오늘 점심 메뉴 추천해줘. 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9444.243899997673,
+      "answer": "체중 감량 목표와 균형 잡힌 영양 섭취를 고려해, 단백질과 식이섬유 중심의 가벼우면서도 든든한 저녁 식단을 추천해 드립니다.\n\n밥은 잡곡밥 2/3~1공기(약 130~200g) 정도로 조절하고, 기름기가 적은 닭가슴살구이·두부부침·생선구이 등 단백질 반찬 1종과 나물이나 쌈채소 등 신선한 채소를 곁들여 드시는 것을 권장합니다. \n\n저녁 시간대에는 나트륨이 많은 국물류나 기름진 튀김류를 피하고 담백한 조리법을 선택하시면 감량 관리에 더욱 효과적입니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.656871000000001
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2463.019,
+        "db_read": 474.523,
+        "model_meal": 3718.584,
+        "graph_total": 7833.224,
+        "terminal_checkpoint": 215.559,
+        "response_snapshot": 71.39,
+        "public_stats": 413.242
+      },
+      "build": null,
+      "trace_id": "be83c0c3-7b8a-41ec-a684-ef3f81c71f12",
+      "route": null,
+      "total_ms": 9930.837299994892,
+      "case": 1,
+      "repeat": 3,
+      "group": "first",
+      "question": "저녁 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9444.29780000064,
+      "answer": "체중 감량과 균형 잡힌 영양 섭취를 위해 단백질과 식이섬유가 풍부한 한식 백반이나 샐러드 볼, 또는 닭가슴살 웜볼을 추천합니다. \n\n식사를 구성하실 때는 밥은 평소의 2/3 공기 정도로 조절하고, 기름기가 적은 단백질(생선구이, 기름기 적은 육류, 두부, 달걀)과 채소 반찬을 충분히 곁들이시면 포만감을 오래 유지하는 데 도움이 됩니다. \n\n국물류는 나트륨 섭취를 줄이기 위해 건더기 위주로 드시는 것을 권장합니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.952139000000001
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2480.795,
+        "db_read": 656.405,
+        "model_meal": 3977.259,
+        "graph_total": 7982.335,
+        "terminal_checkpoint": 215.264,
+        "response_snapshot": 71.687,
+        "public_stats": 520.669
+      },
+      "build": null,
+      "trace_id": "d0853af4-dfc5-4e3c-a78b-9187ff841775",
+      "route": null,
+      "total_ms": 10041.105600001174,
+      "case": 6,
+      "repeat": 0,
+      "group": "first",
+      "question": "오늘 점심 메뉴 추천해줘. 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 12115.192200006277,
+      "answer": "체중 감량과 균형 잡힌 영양 섭취를 위해 점심으로는 단백질과 식이섬유가 풍부한 한식 백반(생선구이 또는 기름기 적은 제육볶음과 쌈채소)이나 닭가슴살·두부를 곁들인 샐러드 보울을 추천합니다. \n\n밥은 평소의 2/3 공기 정도로 조절하고 나물이나 채소 반찬을 먼저 섭취하시면 포만감을 오래 유지하는 데 도움이 됩니다. 국물류를 드실 때는 나트륨 섭취를 줄이기 위해 건더기 위주로 드시는 것을 권장합니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 9.690784
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2461.975,
+        "db_read": 509.454,
+        "model_meal": 6539.707,
+        "graph_total": 10692.131,
+        "terminal_checkpoint": 217.408,
+        "response_snapshot": 71.77,
+        "public_stats": 308.617
+      },
+      "build": null,
+      "trace_id": "2b6ec231-bcbc-468b-b2e5-a2688eb239e7",
+      "route": null,
+      "total_ms": 12496.462200004316,
+      "case": 6,
+      "repeat": 3,
+      "group": "first",
+      "question": "오늘 점심 메뉴 추천해줘. 조언만 해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 12286.673700000392,
+      "answer": "체중 감량과 균형 잡힌 영양 섭취를 위해 현미밥이나 잡곡밥 한 공기(200g)에 기름기가 적은 단백질 반찬(구운 닭가슴살, 두부구이, 생선구이 중 택1)과 풍부한 채소 반찬(쌈채소, 나물류)을 곁들인 식단을 추천합니다. 국이나 찌개는 건더기 위주로 드시고, 양념이 과하지 않은 조리법을 선택하시면 든든하면서도 부담 없는 저녁 식사를 하실 수 있습니다. 오늘 드신 식사를 기록해 주시면 남은 권장량에 맞춰 더 맞춤화된 조언을 드릴 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 9.793581
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2489.188,
+        "db_read": 532.207,
+        "model_meal": 6735.871,
+        "graph_total": 10853.951,
+        "terminal_checkpoint": 215.599,
+        "response_snapshot": 71.452,
+        "public_stats": 521.275
+      },
+      "build": null,
+      "trace_id": "ad3e5212-95f5-443f-8d6e-514668c6177c",
+      "route": null,
+      "total_ms": 12877.439900003083,
+      "case": 3,
+      "repeat": 0,
+      "group": "first",
+      "question": "오늘 저녁 식단을 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7298.201699995843,
+      "answer": "네, 저녁으로 샌드위치를 드셔도 괜찮습니다. \n\n다만 감량 목표를 고려해 튀긴 패티나 마요네즈 기반의 무거운 소스는 줄이고, 닭가슴살이나 달걀 같은 담백한 단백질과 채소가 풍부하게 들어간 구성을 추천합니다. 빵은 호밀빵이나 통밀빵을 고르시면 더 든든하고 안정적으로 포만감을 유지할 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.901749000000001
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2457.17,
+        "db_read": 441.348,
+        "model_meal": 2078.516,
+        "graph_total": 5924.471,
+        "terminal_checkpoint": 215.395,
+        "response_snapshot": 73.191,
+        "public_stats": 293.484
+      },
+      "build": null,
+      "trace_id": "623a7439-7f1a-4a74-a195-3a6ef35686d5",
+      "route": null,
+      "total_ms": 7667.114299998502,
+      "case": 15,
+      "repeat": 2,
+      "group": "followup",
+      "question": "저녁에 샌드위치 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 23069.803200000024,
+      "answer": "외식 점심은 살코기, 생선, 두부 등 단백질과 채소가 균형 있게 나오는 정식이나 백반 위주의 메뉴를 우선적으로 선택해 보세요. \n\n튀김이나 달고 짠 양념 요리보다는 구이·찜 형태의 조리법을 고르고, 국물 요리는 건더기 위주로 드시는 것이 좋습니다. ",
+      "usage": {
+        "tool_calls": 1,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 20.358915
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2922.399,
+        "model_supervisor": 10641.055,
+        "model_meal": 6339.433,
+        "graph_total": 21464.442,
+        "terminal_checkpoint": 213.436,
+        "response_snapshot": 70.788,
+        "public_stats": 310.102
+      },
+      "build": null,
+      "trace_id": "c0606b3a-302d-49fa-9dae-6652bcd9edff",
+      "route": null,
+      "total_ms": 23456.37490000081,
+      "case": 17,
+      "repeat": 2,
+      "group": "complex",
+      "question": "외식할 때 점심 메뉴 고르는 방법을 두 문장으로 알려줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9268.347500001255,
+      "answer": "닭가슴살과 샐러드는 단백질과 식이섬유를 챙기기에 아주 좋은 구성입니다. 다만 감량 목표라도 탄수화물과 에너지가 너무 부족하면 오후에 허기가 심해질 수 있으니 밥이나 고구마, 통밀빵 같은 복합 탄수화물을 곁들여 드시는 것을 권장합니다. 드레싱은 가볍게 곁들여 적정량의 지방도 함께 균형 있게 채워보세요. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.784446000000001
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2438.202,
+        "db_read": 436.093,
+        "model_meal": 3938.625,
+        "graph_total": 7847.805,
+        "terminal_checkpoint": 212.986,
+        "response_snapshot": 71.091,
+        "public_stats": 363.263
+      },
+      "build": null,
+      "trace_id": "3934e6c1-bfdb-433a-ad6b-f0c0d1d25a70",
+      "route": null,
+      "total_ms": 9705.673399999796,
+      "case": 13,
+      "repeat": 4,
+      "group": "followup",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 32457.247300000745,
+      "answer": "아침 기록이 비어 있더라도 결식으로 간주하지 않으므로, 남은 칼로리를 저녁 한 끼에 몰아서 과식하기보다는 일반적인 1회 식사량에 맞춰 균형 있게 드시는 것이 좋습니다.\n\n저녁 메뉴로는 소화에 부담이 적고 영양 균형을 맞출 수 있는 잡곡밥(또는 현미밥) 1공기에 닭가슴살·두부·생선구이 등 양질의 단백질 찬과 신선한 쌈채소나 나물 반찬을 곁들인 식단을 추천합니다. \n\n기름지거나 자극적인 조리는 피하시고, 식사 후 실제 드신 메뉴와 분량을 기록해 주시면 남은 일정에 맞춰 식단을 점검해 드리겠습니다. ",
+      "usage": {
+        "tool_calls": 5,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 29.859029
+      },
+      "stage_timings_ms": {
+        "budget_storage": 5356.944,
+        "db_read": 600.793,
+        "model_supervisor": 3671.671,
+        "model_meal": 16981.654,
+        "graph_total": 30972.573,
+        "terminal_checkpoint": 213.757,
+        "response_snapshot": 71.115,
+        "public_stats": 465.351
+      },
+      "build": null,
+      "trace_id": "146e6652-b588-4bc3-b7e9-a6ccda540827",
+      "route": null,
+      "total_ms": 32997.98500000179,
+      "case": 19,
+      "repeat": 4,
+      "group": "complex",
+      "question": "아침을 기록하지 않았는데 안 먹었다고 가정하지 말고 저녁 메뉴만 추천해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 41509.956499998225,
+      "answer": "현재 오늘 확정된 식사 기록은 등록되어 있지 않으나, 기록이 없다고 해서 식사를 하지 않으신 것은 아니므로 앞선 식사가 있었다면 먼저 기록해 주시면 더 정밀하게 반영할 수 있습니다.\n\n하루 목표 섭취량(2,325 kcal, 단백질 116.3g, 탄수화물 319.7g, 지방 64.6g)을 고려할 때, 저녁 식사는 밥 한 공기(약 200g) 정도의 복합 탄수화물과 살코기·생선·두부 등 단백질 급원, 채소류를 균형 있게 구성한 식단을 권장합니다.\n\n선호하시거나 드시고 싶은 구체적인 메뉴를 말씀해 주시면 맞춤형 식단 계획을 확인 카드로 제안해 드리겠습니다. ",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 38.642872
+      },
+      "stage_timings_ms": {
+        "budget_storage": 5958.036,
+        "db_read": 603.748,
+        "model_supervisor": 3529.054,
+        "model_meal": 24117.598,
+        "graph_total": 39966.535,
+        "terminal_checkpoint": 236.543,
+        "response_snapshot": 71.225,
+        "public_stats": 354.837
+      },
+      "build": null,
+      "trace_id": "735f48fb-f032-4184-9f76-cb9e33418ccf",
+      "route": null,
+      "total_ms": 41974.10310000123,
+      "case": 5,
+      "repeat": 1,
+      "group": "button",
+      "question": "저녁 식단 추천해줘. 오늘 확정된 섭취량과 목표를 반영해줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9938.773900001252,
+      "answer": "네, 밥과 계란 조합은 탄수화물과 양질의 단백질을 챙길 수 있는 훌륭한 일반식입니다. \n\n계란은 1~2개 정도 곁들이고, 포만감과 영양 균형을 위해 김치, 나물, 샐러드 같은 채소 반찬이나 김을 함께 드시면 더욱 좋습니다. 조리 시 식용유 사용만 적당히 조절해 주시면 부담 없이 깔끔한 한 끼로 드실 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.266999
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2438.124,
+        "db_read": 455.998,
+        "model_meal": 4219.872,
+        "graph_total": 8299.896,
+        "terminal_checkpoint": 217.562,
+        "response_snapshot": 71.176,
+        "public_stats": 616.877
+      },
+      "build": null,
+      "trace_id": "612d3090-73f2-41fe-bbec-459a1b973cc6",
+      "route": null,
+      "total_ms": 10629.970000001776,
+      "case": 12,
+      "repeat": 3,
+      "group": "followup",
+      "question": "그럼 일반식으로 밥이랑 계란 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 10424.244900001213,
+      "answer": "한식뷔페에서 일반식 한 접시로 드시는 것은 좋은 선택입니다. 접시를 채울 때 밥은 공기 반~한 공기 분량 정도로 잡고, 나물이나 샐러드 같은 채소 반찬과 살코기·생선·두부 등 단백질을 균형 있게 담아보세요. 튀김이나 양념이 강한 반찬 위주로 넘치게 담지 않고 한 접시로 식사를 마무리하시면 부담 없이 든든하게 드실 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.705548
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2439.654,
+        "db_read": 695.623,
+        "model_meal": 4625.852,
+        "graph_total": 8746.998,
+        "terminal_checkpoint": 220.956,
+        "response_snapshot": 70.984,
+        "public_stats": 367.244
+      },
+      "build": null,
+      "trace_id": "ae1f7e0e-7e9d-4ec6-ac4b-68f766c81486",
+      "route": null,
+      "total_ms": 10861.559900004067,
+      "case": 10,
+      "repeat": 3,
+      "group": "followup",
+      "question": "그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9685.51540000044,
+      "answer": "오늘 목표 섭취량은 2,325kcal이며, 현재 기록된 식사가 없어 확정된 기준으로는 2,325kcal가 남아 있습니다(미기록 식사가 있다면 실제 남은 양은 달라질 수 있습니다).\n\n점심 식사로는 감량 목표와 탄수화물·단백질 균형을 고려해 600~750kcal 수준의 균형식을 추천합니다. \n\n현미밥 1공기(200g)에 닭가슴살 볶음이나 소고기 우둔살 등 살코기 위주의 단백질 반찬, 그리고 쌈 채소나 나물 반찬을 곁들여 드시면 든든하면서도 부담 없이 식사하실 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.010147
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2440.738,
+        "db_read": 519.013,
+        "model_meal": 3966.042,
+        "graph_total": 8047.3,
+        "terminal_checkpoint": 215.031,
+        "response_snapshot": 71.366,
+        "public_stats": 324.147
+      },
+      "build": null,
+      "trace_id": "496cd536-6cb4-4655-b326-ac2bf32824b8",
+      "route": null,
+      "total_ms": 10083.233400000609,
+      "case": 7,
+      "repeat": 0,
+      "group": "first",
+      "question": "점심 추천해줘. 오늘 남은 칼로리도 알려줘."
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9922.787000003154,
+      "answer": "감량 목표(일일 약 2,325 kcal)와 균형 잡힌 영양 섭취를 고려할 때, 아침 식사로는 단백질과 복합 탄수화물, 식이섬유가 조화된 식단을 추천합니다.\n\n* **한식형:** 잡곡밥 1/2~2/3공기, 계란찜(또는 달걀프라이 2개), 두부구이, 맑은 국 및 나물 반찬\n* **간편식형:** 통밀 식빵 1~2장, 삶은 달걀 2개(또는 닭가슴살 100g), 그릭요거트와 신선한 채소 샐러드\n\n포만감을 오래 유지하기 위해 단백질을 충분히 챙겨 드시고, 선호하는 식사 형태에 맞춰 편한 조합으로 구성해 보세요. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.362111
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2446.633,
+        "db_read": 437.479,
+        "model_meal": 4522.161,
+        "graph_total": 8461.876,
+        "terminal_checkpoint": 216.317,
+        "response_snapshot": 71.853,
+        "public_stats": 387.712
+      },
+      "build": null,
+      "trace_id": "5d8b9a33-fa73-43e9-b295-7b5b6845cf20",
+      "route": null,
+      "total_ms": 10387.209400003485,
+      "case": 2,
+      "repeat": 2,
+      "group": "first",
+      "question": "아침 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9869.676599999366,
+      "answer": "목표 감량 및 균형 잡힌 영양 관리를 위해, 점심으로는 복합 탄수화물과 양질의 단백질, 채소가 어우러진 식단을 추천합니다.\n\n* **추천 메뉴:** 밥(현미밥 또는 잡곡밥) 1공기(약 200g), 닭가슴살구이 또는 소고기 우둔살/생선구이 1토막, 쌈채소나 나물 반찬, 맑은 국류\n* **외식 시 대안:** 단백질 토핑(닭가슴살, 달걀, 소고기 등)을 곁들인 샐러드 보울/포케(드레싱은 절반만) 또는 생선구이 백반\n\n지나치게 기름지거나 자극적인 양념은 피하고, 든든한 단백질 위주로 구성해 포만감을 유지해 보세요. 식사 후 편하게 기록해 주시면 오늘 남은 섭취량 조절을 함께 도와드릴게요! ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.41956
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2437.348,
+        "db_read": 560.521,
+        "model_meal": 4404.798,
+        "graph_total": 8477.436,
+        "terminal_checkpoint": 216.007,
+        "response_snapshot": 71.387,
+        "public_stats": 371.265
+      },
+      "build": null,
+      "trace_id": "95f2b330-9156-4d08-a27f-ac3ea88dd41a",
+      "route": null,
+      "total_ms": 10317.341699999815,
+      "case": 0,
+      "repeat": 3,
+      "group": "first",
+      "question": "점심 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8388.564100001531,
+      "answer": "저녁으로 샌드위치를 드셔도 괜찮습니다. \n\n다만 체중 감량 목표를 고려해 마요네즈 등 고칼로리 소스는 줄이고, 닭가슴살·달걀 등 단백질과 신선한 채소가 풍부한 구성을 선택하는 것이 좋습니다. 통밀빵을 선택하거나 튀긴 패티를 피하시면 저녁 식사로 더욱 균형 있게 섭취할 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.684951
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2437.785,
+        "db_read": 530.67,
+        "model_meal": 2726.139,
+        "graph_total": 6758.423,
+        "terminal_checkpoint": 226.7,
+        "response_snapshot": 74.94,
+        "public_stats": 329.698
+      },
+      "build": null,
+      "trace_id": "eb18c122-ebf0-4e75-9ceb-1d19558e6a85",
+      "route": null,
+      "total_ms": 8791.85210000287,
+      "case": 15,
+      "repeat": 4,
+      "group": "followup",
+      "question": "저녁에 샌드위치 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9529.155500000343,
+      "answer": "감량 목표와 균형 잡힌 영양 섭취를 위해 단백질과 복합 탄수화물, 식이섬유가 조화로운 아침 식사를 추천합니다. \n\n통밀빵 1~2장에 삶은 달걀 2개와 샐러드를 곁들이거나, 현미밥 반 공기에 계란찜, 나물 반찬 조합을 드시면 포만감이 오래 유지되어 점심 과식을 예방하는 데 도움이 됩니다. 바쁜 아침이라면 그릭요거트에 오트밀과 제철 과일을 곁들여 간편하게 구성해 보시는 것도 좋습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.722333
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2439.278,
+        "db_read": 511.699,
+        "model_meal": 3851.579,
+        "graph_total": 8017.936,
+        "terminal_checkpoint": 227.043,
+        "response_snapshot": 75.047,
+        "public_stats": 580.805
+      },
+      "build": null,
+      "trace_id": "66f6b316-b8f3-4424-82be-705f7760d237",
+      "route": null,
+      "total_ms": 10190.847199999553,
+      "case": 2,
+      "repeat": 3,
+      "group": "first",
+      "question": "아침 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9010.64910000423,
+      "answer": "닭가슴살과 샐러드는 단백질과 식이섬유를 챙기기에 좋은 구성입니다. 다만 탄수화물과 적정 에너지가 부족해 오후에 허기가 질 수 있으니, 밥 반 공기나 고구마·통밀빵 같은 복합 탄수화물을 함께 곁들여 균형을 맞춰보세요. 드레싱은 가볍게 둘러 건강하게 드시면 훌륭한 점심 식사가 됩니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.044719000000001
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2433.471,
+        "db_read": 555.213,
+        "model_meal": 3126.137,
+        "graph_total": 7117.209,
+        "terminal_checkpoint": 231.893,
+        "response_snapshot": 75.308,
+        "public_stats": 318.61
+      },
+      "build": null,
+      "trace_id": "c79a2cec-0522-4cca-a12f-b723d028a6f0",
+      "route": null,
+      "total_ms": 9406.469100002141,
+      "case": 13,
+      "repeat": 1,
+      "group": "followup",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9490.92820000078,
+      "answer": "체중 감량과 하루 균형 잡힌 영양 섭취를 위해 단백질과 복합 탄수화물, 식이섬유가 고루 포함된 가벼운 아침 식단을 추천합니다.\n\n1. **한식 구성:** 잡곡밥 1/2~2/3공기, 달걀프라이 1~2개 또는 두부구이, 나물 반찬과 맑은 국\n2. **간편식 구성:** 통밀빵 1~2장, 삶은 달걀 2개(또는 닭가슴살 소시지), 사과 반 쪽 또는 샐러드\n3. **요거트 볼:** 무가당 그릭요거트에 오트밀 또는 견과류 한 줌, 베리류 과일 곁들이기\n\n포만감을 오래 유지하고 점심 폭식을 예방할 수 있도록 단백질 식품을 꼭 함께 챙겨 드시는 것을 권장합니다. 선호하시는 스타일(한식, 간편식 등)이 있다면 말씀해 주세요! ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.851055000000001
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2450.565,
+        "db_read": 468.614,
+        "model_meal": 3957.893,
+        "graph_total": 7874.46,
+        "terminal_checkpoint": 227.237,
+        "response_snapshot": 75.109,
+        "public_stats": 319.433
+      },
+      "build": null,
+      "trace_id": "a849b5b1-f51c-4975-8cb4-78896bf70fcc",
+      "route": null,
+      "total_ms": 9886.185199997271,
+      "case": 2,
+      "repeat": 0,
+      "group": "first",
+      "question": "아침 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8836.501300000236,
+      "answer": "저녁에 샌드위치를 드셔도 괜찮습니다. 다만 감량 목표를 고려해 닭가슴살, 달걀 등 담백한 단백질과 채소가 풍부한 구성을 선택하시는 것을 권장합니다. 마요네즈나 당류가 많은 소스는 가볍게 줄이고, 통밀 식빵을 선택하시면 든든하면서도 부담 없는 저녁 식사가 됩니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.117182
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2437.463,
+        "db_read": 487.966,
+        "model_meal": 3188.179,
+        "graph_total": 7156.265,
+        "terminal_checkpoint": 227.129,
+        "response_snapshot": 75.303,
+        "public_stats": 337.494
+      },
+      "build": null,
+      "trace_id": "491dc930-ed03-4cdb-9080-4b4a6f68f96d",
+      "route": null,
+      "total_ms": 9247.978100000182,
+      "case": 15,
+      "repeat": 0,
+      "group": "followup",
+      "question": "저녁에 샌드위치 먹어도 괜찮아?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8117.789800002356,
+      "answer": "일반식을 드셔도 전혀 문제없으며, 다이어트 중에도 충분히 가능합니다. \n\n밥 양을 평소의 2/3 공기 정도로 조절하고, 기름진 튀김류 대신 살코기나 생선, 달걀 같은 단백질 반찬과 나물·채소를 함께 곁들여 드시면 든든하고 균형 잡힌 식사가 됩니다. 드신 후 어떤 메뉴를 드셨는지 편하게 알려주시면 기록해 드릴게요. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.633439
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2450.376,
+        "db_read": 420.674,
+        "model_meal": 2922.142,
+        "graph_total": 6657.953,
+        "terminal_checkpoint": 227.767,
+        "response_snapshot": 75.011,
+        "public_stats": 306.916
+      },
+      "build": null,
+      "trace_id": "873fbfed-88d8-4af6-93d9-d65284f79159",
+      "route": null,
+      "total_ms": 8498.13140000333,
+      "case": 14,
+      "repeat": 4,
+      "group": "followup",
+      "question": "일반식 먹는 건 그런가?"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9700.502799998503,
+      "answer": "목표 체중 감량(다이어트)과 균형 잡힌 영양 섭취를 위해 단백질과 식이섬유가 풍부하면서 부담 없는 저녁 식사를 추천합니다. \n\n현미밥(또는 잡곡밥) 2/3~1공기에 닭가슴살·두부구이·생선구이 등 기름기 적은 단백질 반찬 1~2종, 그리고 쌈채소나 나물류를 곁들인 한식 상차림을 권장합니다. 외식을 하신다면 담백한 목살이나 소고기 우둔살을 곁들인 포케나 샤브샤브도 좋은 선택입니다. 선호하시는 메뉴나 재료가 있다면 말씀해 주세요! ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.118041
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2453.928,
+        "db_read": 493.653,
+        "model_meal": 4175.26,
+        "graph_total": 8166.363,
+        "terminal_checkpoint": 226.437,
+        "response_snapshot": 74.773,
+        "public_stats": 315.862
+      },
+      "build": null,
+      "trace_id": "63bd7e70-05ca-4d87-9ebb-4907ce8ecec1",
+      "route": null,
+      "total_ms": 10089.711500004341,
+      "case": 1,
+      "repeat": 2,
+      "group": "first",
+      "question": "저녁 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 11062.649699997564,
+      "answer": "체중 감량 목표를 고려해 저녁에는 양질의 단백질과 풍부한 채소, 적정량의 복합 탄수화물로 구성된 균형 잡힌 한 끼를 추천합니다. \n\n현미밥(또는 잡곡밥) 반 공기에서 2/3 공기 정도에 기름기를 뺀 닭가슴살구이나 두부구이, 그리고 샐러드나 나물 반찬을 곁들여 드셔보세요. 오늘 낮 동안 드신 식사량에 맞춰 탄수화물 양을 조절하시고, 포만감을 오래 유지할 수 있도록 채소를 넉넉히 챙겨 드시는 것이 좋습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 8.535658999999999
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2442.934,
+        "db_read": 429.218,
+        "model_meal": 5737.102,
+        "graph_total": 9598.12,
+        "terminal_checkpoint": 230.241,
+        "response_snapshot": 75.138,
+        "public_stats": 300.438
+      },
+      "build": null,
+      "trace_id": "997b180a-1702-461a-a671-9b91b85178c9",
+      "route": null,
+      "total_ms": 11437.102099996991,
+      "case": 3,
+      "repeat": 3,
+      "group": "first",
+      "question": "오늘 저녁 식단을 추천해줘"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9833.45990000089,
+      "answer": "일반식을 드셔도 전혀 문제없으며, 감량 중에도 균형 잡힌 일반식은 매우 좋은 선택입니다. \n\n밥 양을 평소의 2/3 공기 정도로 조절하고, 고기·생선·두부 같은 단백질 반찬과 채소를 곁들여 드시면 충분합니다. 찌개의 국물이나 기름진 양념 위주의 반찬만 조금 덜어내고 드시면 부담 없이 식사하실 수 있습니다. ",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.347516
+      },
+      "stage_timings_ms": {
+        "budget_storage": 2444.587,
+        "db_read": 765.352,
+        "model_meal": 4138.811,
+        "graph_total": 8409.224,
+        "terminal_checkpoint": 226.309,
+        "response_snapshot": 75.134,
+        "public_stats": 280.35
+      },
+      "build": null,
+      "trace_id": "32831e13-a76d-4d3e-9fe2-3acde6a48050",
+      "route": null,
+      "total_ms": 10187.24349999684,
+      "case": 14,
+      "repeat": 2,
+      "group": "followup",
+      "question": "일반식 먹는 건 그런가?"
+    }
+  ]
+}
