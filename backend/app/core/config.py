@@ -63,6 +63,8 @@ class Settings(BaseSettings):
     gemini_eval_model: str = "gemini-3.8-flash"
     # Only verified read-only follow-ups; 'default' omits the provider override.
     coaching_thinking_level: Literal['default', 'low'] = 'low'
+    # off=Supervisor, default=direct/provider default, low=direct/low reasoning.
+    first_coaching_mode: Literal['off', 'default', 'low'] = 'low'
     model_timeout_seconds: float = 30
     eval_model_timeout_seconds: float = 90
     model_max_retries: int = 0

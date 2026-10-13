@@ -9,9 +9,11 @@ MODES=['confirmed','revised','deleted','other_thread','goal_changed','new_day','
 CASES=[(f'{mode}-{meal}',mode,meal) for mode in MODES for meal in ['점심','저녁']]
 @pytest.mark.parametrize('repeat',range(5))
 @pytest.mark.parametrize('name,mode,meal',CASES)
-@pytest.mark.parametrize('direct_followup',[False, True])
+@pytest.mark.parametrize('direct_followup',[False, True, 'first'])
 async def test_multiturn_latest_context_and_no_unconfirmed_writes(monkeypatch,name,mode,meal,repeat,direct_followup):
  day=[date(2026,10,13)];monkeypatch.setattr('app.agents.team.service_today',lambda:day[0])
+ from app.core.config import get_settings
+ monkeypatch.setattr(get_settings(),'first_coaching_mode','low' if direct_followup=='first' else 'off')
  db={'calories':300,'target':2000};captured=[]
  class Model:
   def bind_tools(self,schemas):return self
@@ -26,7 +28,8 @@ async def test_multiturn_latest_context_and_no_unconfirmed_writes(monkeypatch,na
  user=['u1'];repo=AsyncMock();history=[]
  async def turn(thread):
   followup = direct_followup and bool(history)
-  team=DietTeam({'user_id':user[0],'message':'그럼 한식뷔페 먹어도 괜찮아?' if followup else meal+' 추천해줘','messages':history,'requested_action':None if followup else 'meal_plan','thread_id':thread},repository=repo,db=object(),model_factory=Model)
+  first_advice = direct_followup=='first'
+  team=DietTeam({'user_id':user[0],'message':meal+' 추천해줘. 조언만 해줘.' if first_advice else ('그럼 한식뷔페 먹어도 괜찮아?' if followup else meal+' 추천해줘'),'messages':history,'requested_action':None if followup or first_advice else 'meal_plan','thread_id':thread},repository=repo,db=object(),model_factory=Model)
   team.rows=AsyncMock(side_effect=rows)
   result=await team.execute()
   return team,result

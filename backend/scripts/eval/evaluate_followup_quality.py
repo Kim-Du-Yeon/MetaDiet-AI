@@ -30,6 +30,7 @@ async def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--output-dir', type=Path, default=ROOT/'docs/direct_followup')
     parser.add_argument('--alternating', action='store_true')
+    parser.add_argument('--turn', type=int, choices=[0,1], default=1)
     args = parser.parse_args()
     folder = args.output_dir
     samples = []
@@ -43,17 +44,17 @@ async def main():
     else:
         for phase in ('before', 'after'):
             for row in json.loads((folder/f'{phase.upper()}_MULTITURN.json').read_text(encoding='utf-8'))['rows']:
-                if row['turn'] != 1:
+                if row['turn'] != args.turn:
                     continue
                 samples.append({'phase':phase,'scenario':row['scenario'],'repeat':row['repeat'],
-                    'question':questions[row['scenario']][1], 'answer':row['answer'],
+                    'question':questions[row['scenario']][args.turn], 'answer':row['answer'],
                     'background':'오늘 실제 섭취 기록 0건.'})
         assert len(samples) == 12
     random.Random(42).shuffle(samples)
     for i,sample in enumerate(samples):sample['id'] = f'item-{i+1}'
     blind = [{k:s[k] for k in ('id','question','answer','background')} for s in samples]
     prompt = ('다음 합성 식단 코칭 답변을 항목별로 엄격하게 평가하세요. 각 id를 정확히 한 번 반환하세요. '
-        '공통 배경: 성인 감량 목표, 이전 턴은 식사 조언 요청. 현재 수치는 각 background 참조. '
+        '공통 배경: 성인 감량 목표의 식사 조언 요청. 현재 수치는 각 background 참조. '
         'relevant=질문에 직접 답함, actionable=실행 가능한 구성/선택 조언 있음, '
         'no_invented_intake=먹었다는 사실/섭취량을 지어내지 않음(미래 식사 예시는 허용), '
         'no_false_save_claim=저장했다고 주장하지 않음, concise=불필요한 목표표나 반복 없이 500자 이내. '
@@ -63,12 +64,13 @@ async def main():
     mapping = {s['id']:s for s in samples}
     rows = [{**mapping[g.id], **g.model_dump()} for g in review.grades]
     criteria = ['relevant','actionable','no_invented_intake','no_false_save_claim','concise']
-    phases = ('default','low') if args.alternating else ('before','after')
+    phases = sorted({s['phase'] for s in samples})
     summary = {p:{c:sum(r[c] for r in rows if r['phase']==p) for c in criteria} for p in phases}
     report = {'scope':'synthetic_blinded_model_rubric', 'samples':len(rows),
         'judge':get_settings().gemini_eval_model, 'summary':summary,'rows':rows,
         'limitations':'One model judge, same provider family; not independent human/clinical validation. Freshness is separately tested against DB.'}
-    (folder/('ALTERNATING_QUALITY.json' if args.alternating else 'QUALITY.json')).write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    filename = 'ALTERNATING_QUALITY.json' if args.alternating else ('FIRST_QUALITY.json' if args.turn==0 else 'QUALITY.json')
+    (folder/filename).write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     print(json.dumps(summary))
 
 if __name__ == '__main__':asyncio.run(main())

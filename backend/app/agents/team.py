@@ -144,6 +144,9 @@ class DietTeam:
         self.db = db or get_supabase()
         self.config = config
         settings = get_settings()
+        self.first_coaching_mode = settings.first_coaching_mode
+        self.first_coaching_model_factory = model_factory or (
+            lambda: get_chat_model(thinking_level='low' if self.first_coaching_mode == 'low' else None))
         self.coaching_model_factory = model_factory or (
             lambda: get_chat_model(thinking_level=None if settings.coaching_thinking_level == 'default'
                                    else settings.coaching_thinking_level))
@@ -564,12 +567,15 @@ class DietTeam:
                 "evidence": "식단 생성 없이 공식 근거 자체를 설명하는 질문 담당",
             }[role]
             delegates.append(AgentTool(f"delegate_{role}", description, Query, delegate, "delegate"))
-        from app.agents.coaching_route import simple_followup
-        direct = context_verified and simple_followup(self.state) and self.decision_client is None
+        from app.agents.coaching_route import simple_followup, simple_recommendation
+        first_direct = self.first_coaching_mode != 'off' and simple_recommendation(self.state)
+        direct = context_verified and (simple_followup(self.state) or first_direct) and self.decision_client is None
         if direct:
-            result = await run_agent(model=self.coaching_model_factory(),
+            factory = self.first_coaching_model_factory if first_direct else self.coaching_model_factory
+            result = await run_agent(model=factory(),
                 instruction=BASE_INSTRUCTION + '\n담당: meal\n' + ROLE_INSTRUCTIONS['meal'] +
-                    '\n읽기 전용 후속 조언입니다. 질문에 바로 답하고 최신 verified_context를 우선하세요. 저장이나 계획 생성은 하지 마세요.',
+                    ('\n읽기 전용 식사 조언입니다.' if first_direct else '\n읽기 전용 후속 조언입니다.') +
+                    ' 질문에 바로 답하고 최신 verified_context를 우선하세요. 저장이나 계획 생성은 하지 마세요.',
                 request=json.dumps({'message': self.state['message'],
                     'recent_messages': [str(m)[:2000] for m in self.state.get('messages', [])[-10:]],
                     'verified_context': verified_context}, ensure_ascii=False),

@@ -2,6 +2,19 @@
 import re
 
 
+def simple_recommendation(state):
+    """Allow only a complete, unambiguous advice request; never strip unknown text."""
+    if (state.get('requested_action') or state.get('pending_proposal')
+            or state.get('awaiting_confirmation')):
+        return False
+    return bool(re.fullmatch(
+        r'\s*(?:오늘\s*)?(?:아침|점심|저녁)\s*(?:(?:메뉴|식단)(?:을)?\s*)?'
+        r'추천(?:\s*해\s*줘|\s*해주세요)?[.!?\s]*'
+        r'(?:(?:계획\s*카드는\s*만들지\s*말고\s*)?조언만\s*해\s*줘[.!?\s]*)?'
+        r'(?:오늘\s*남은\s*칼로리도\s*알려\s*줘[.!?\s]*)?',
+        state.get('message', '')))
+
+
 def simple_followup(state):
     if (state.get('requested_action') or state.get('pending_proposal')
             or state.get('awaiting_confirmation')):

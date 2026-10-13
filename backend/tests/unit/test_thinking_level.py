@@ -30,7 +30,7 @@ async def test_lower_thinking_only_for_verified_followup(monkeypatch, setting, e
     from langchain_core.messages import AIMessage
     from app.agents.team import DietTeam
     from app.core.config import get_settings
-    settings = get_settings().model_copy(update={'coaching_thinking_level':setting})
+    settings = get_settings().model_copy(update={'coaching_thinking_level':setting, 'first_coaching_mode':'off'})
     monkeypatch.setattr('app.agents.team.get_settings', lambda:settings)
     seen = []
     class Model:
