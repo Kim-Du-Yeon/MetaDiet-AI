@@ -144,6 +144,9 @@ class DietTeam:
         self.db = db or get_supabase()
         self.config = config
         settings = get_settings()
+        self.coaching_model_factory = model_factory or (
+            lambda: get_chat_model(thinking_level=None if settings.coaching_thinking_level == 'default'
+                                   else settings.coaching_thinking_level))
         usage = state.get("execution_usage") or {}
         self.budget = ExecutionBudget(max_model_calls=settings.agent_max_model_calls,
             max_tool_calls=settings.agent_max_tool_calls,
@@ -564,7 +567,7 @@ class DietTeam:
         from app.agents.coaching_route import simple_followup
         direct = context_verified and simple_followup(self.state) and self.decision_client is None
         if direct:
-            result = await run_agent(model=self.model_factory(),
+            result = await run_agent(model=self.coaching_model_factory(),
                 instruction=BASE_INSTRUCTION + '\n담당: meal\n' + ROLE_INSTRUCTIONS['meal'] +
                     '\n읽기 전용 후속 조언입니다. 질문에 바로 답하고 최신 verified_context를 우선하세요. 저장이나 계획 생성은 하지 마세요.',
                 request=json.dumps({'message': self.state['message'],

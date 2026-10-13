@@ -22,6 +22,7 @@ config.py
   ENVIRONMENT              기본값: development
 """
 import os
+from typing import Literal
 from pydantic_settings import BaseSettings
 from functools import lru_cache
 
@@ -60,6 +61,8 @@ class Settings(BaseSettings):
     gemini_model: str = "gemini-3.8-flash"
     gemini_vision_model: str = "gemini-3.8-flash"
     gemini_eval_model: str = "gemini-3.8-flash"
+    # Only verified read-only follow-ups; 'default' omits the provider override.
+    coaching_thinking_level: Literal['default', 'low'] = 'low'
     model_timeout_seconds: float = 30
     eval_model_timeout_seconds: float = 90
     model_max_retries: int = 0

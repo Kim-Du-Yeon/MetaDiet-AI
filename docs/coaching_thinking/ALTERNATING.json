@@ -1,0 +1,598 @@
+{
+  "model": "gemini-3.8-flash",
+  "scope": "alternating_real_model_synthetic_db_production_team",
+  "summary": {
+    "default": {
+      "n": 9,
+      "median_seconds": 8.716120799999771,
+      "fresh": 9,
+      "completed": 9,
+      "no_write": 9
+    },
+    "low": {
+      "n": 9,
+      "median_seconds": 5.058506199999101,
+      "fresh": 9,
+      "completed": 9,
+      "no_write": 9
+    }
+  },
+  "rows": [
+    {
+      "pair": 0,
+      "case": "confirmed",
+      "scenario": "lunch_buffet",
+      "level": "default",
+      "seconds": 7.594420400000672,
+      "question": "그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "점심 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 7.593000000000757,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal입니다. \n\n한식뷔페에서 일반식 한 접시를 밥과 단백질 반찬, 채소 위주로 골고루 담아 드신다면 좋은 선택입니다. 기름진 부침이나 튀김, 단 양념류를 과하게 담지 않고 밥은 평소 먹는 한 공기 분량에 맞춰 조절해 드시는 것을 권장합니다.",
+      "no_write": true
+    },
+    {
+      "pair": 0,
+      "case": "confirmed",
+      "scenario": "lunch_buffet",
+      "level": "low",
+      "seconds": 4.426668300002348,
+      "question": "그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "점심 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 4.437999999998283,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 밥과 나물 위주의 채소 반찬, 담백한 단백질 위주로 한 접시를 구성해 드시는 것은 좋은 선택입니다. 기름진 튀김류나 양념이 강한 고기 반찬의 비중만 조절하시면 하루 기준 칼로리 내에서 균형 있게 식사하실 수 있습니다.",
+      "no_write": true
+    },
+    {
+      "pair": 1,
+      "case": "confirmed",
+      "scenario": "dinner_store",
+      "level": "low",
+      "seconds": 7.016513300000952,
+      "question": "그럼 편의점에서 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "저녁 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 7.014999999999418,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal입니다. 현재 섭취 열량을 고려했을 때 편의점 샌드위치를 저녁으로 드셔도 충분히 괜찮습니다. 닭가슴살이나 달걀 등 단백질 위주의 샌드위치를 선택하시고, 당류가 적은 음료를 함께 곁들여 균형을 맞춰보세요.",
+      "no_write": true
+    },
+    {
+      "pair": 1,
+      "case": "confirmed",
+      "scenario": "dinner_store",
+      "level": "default",
+      "seconds": 9.22267490000013,
+      "question": "그럼 편의점에서 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "저녁 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 9.21900000000096,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal입니다. 현재까지의 섭취량을 고려했을 때 편의점 샌드위치를 저녁으로 드셔도 충분히 괜찮습니다. 닭가슴살이나 달걀 등 단백질이 포함된 샌드위치를 선택하시고, 당류 음료 대신 물이나 달지 않은 차류와 함께 드시는 것을 추천합니다.",
+      "no_write": true
+    },
+    {
+      "pair": 2,
+      "case": "confirmed",
+      "scenario": "breakfast_rice",
+      "level": "default",
+      "seconds": 7.048480499997822,
+      "question": "그럼 일반식으로 밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "아침 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 7.047000000002299,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal입니다.\n\n밥과 계란은 복합 탄수화물과 양질의 단백질을 균형 있게 채울 수 있어 훌륭한 식사 구성입니다. 밥 한 공기(약 200g)에 달걀 1~2개를 곁들이고, 김이나 나물 등 채소 반찬을 더해주시면 식이섬유와 비타민까지 고르게 챙기실 수 있습니다.",
+      "no_write": true
+    },
+    {
+      "pair": 2,
+      "case": "confirmed",
+      "scenario": "breakfast_rice",
+      "level": "low",
+      "seconds": 4.0845776999995,
+      "question": "그럼 일반식으로 밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "아침 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 4.0939999999973224,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n밥과 계란은 양질의 복합 탄수화물과 단백질을 고루 갖춘 훌륭한 식단 구성입니다. 계란을 삶거나 기름을 적게 둘러 조리하고, 김치나 나물 등 채소 반찬을 곁들이시면 포만감과 영양 균형을 더욱 챙길 수 있습니다.",
+      "no_write": true
+    },
+    {
+      "pair": 3,
+      "case": "deleted",
+      "scenario": "lunch_buffet",
+      "level": "low",
+      "seconds": 4.821185400000104,
+      "question": "그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "점심 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 4.812000000001717,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식 한 접시를 덜어 드시는 것은 영양 균형을 맞추기 좋은 선택입니다. 밥은 2/3 공기 정도로 조절하고 나물과 채소류를 접시의 절반, 기름기가 적은 단백질 반찬(생선구이, 수육, 두부 등)을 위주로 구성해 보세요. 튀김류나 양념이 강한 조림보다는 맑은 국이나 쌈 채소를 곁들이시면 부담 없이 든든한 식사를 하실 수 있습니다.",
+      "no_write": true
+    },
+    {
+      "pair": 3,
+      "case": "deleted",
+      "scenario": "lunch_buffet",
+      "level": "default",
+      "seconds": 8.716120799999771,
+      "question": "그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "점심 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 8.703000000001339,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal입니다.\n\n한식뷔페에서 일반식 한 접시를 드시는 것은 밥 양을 조절하고 나물과 단백질 반찬 위주로 구성한다면 훌륭한 선택입니다. 밥은 평소 한 공기 분량(약 200g) 이하로 담고, 튀김이나 달고 짠 양념 메뉴보다는 쌈채소와 두부, 기름기 적은 고기 반찬을 곁들여 드시는 것을 권장합니다.",
+      "no_write": true
+    },
+    {
+      "pair": 4,
+      "case": "deleted",
+      "scenario": "dinner_store",
+      "level": "default",
+      "seconds": 10.657709800001612,
+      "question": "그럼 편의점에서 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "저녁 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 10.65599999999904,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal입니다. \n\n편의점 샌드위치는 간편하고 균형 있는 저녁 식사로 선택하셔도 좋습니다. 닭가슴살, 달걀, 햄 등 단백질과 채소가 비교적 풍부하게 들어있고 당류와 소스가 과하지 않은 제품을 골라보세요. 곁들일 음료로는 당류 음료 대신 물이나 차, 또는 무가당 두유를 함께 챙기시면 더욱 좋습니다.",
+      "no_write": true
+    },
+    {
+      "pair": 4,
+      "case": "deleted",
+      "scenario": "dinner_store",
+      "level": "low",
+      "seconds": 7.329026399998838,
+      "question": "그럼 편의점에서 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "저녁 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 7.328000000001339,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal\n\n편의점 샌드위치로 식사하셔도 괜찮습니다. 다만 제품에 따라 단백질이 부족하고 소스나 가공육 비중이 높을 수 있으니, 닭가슴살·달걀 등이 포함된 제품을 고르고 삶은 달걀이나 두유 등을 곁들여 단백질을 보충해 주시면 좋습니다.",
+      "no_write": true
+    },
+    {
+      "pair": 5,
+      "case": "deleted",
+      "scenario": "breakfast_rice",
+      "level": "low",
+      "seconds": 5.058506199999101,
+      "question": "그럼 일반식으로 밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "아침 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 5.062999999998283,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal\n\n밥과 계란은 양질의 복합 탄수화물과 단백질을 고루 챙길 수 있어 훌륭한 일반식 조합입니다. 밥 한 공기(약 200g)에 삶은 달걀이나 계란후라이 1~2개를 곁들이고, 김치나 나물 같은 채소 반찬을 더하시면 포만감과 영양 균형을 더욱 높일 수 있습니다. 편안하게 식사하시고 드신 후 기록해 주시면 됩니다.",
+      "no_write": true
+    },
+    {
+      "pair": 5,
+      "case": "deleted",
+      "scenario": "breakfast_rice",
+      "level": "default",
+      "seconds": 7.806399600001896,
+      "question": "그럼 일반식으로 밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "아침 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 7.812000000001717,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal입니다. 밥과 계란은 양질의 탄수화물과 단백질을 고루 챙길 수 있는 훌륭한 식단 조합이므로 드셔도 좋습니다. 여기에 나물이나 김 등 채소 반찬을 곁들이시면 영양 균형을 더욱 잘 맞추실 수 있습니다.",
+      "no_write": true
+    },
+    {
+      "pair": 6,
+      "case": "goal_changed",
+      "scenario": "lunch_buffet",
+      "level": "default",
+      "seconds": 10.166929799997888,
+      "question": "그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "점심 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 10.15599999999904,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다. \n\n한식뷔페에서 일반식 한 접시로 드시는 것은 균형 잡힌 식단을 구성하기에 좋은 선택입니다. 밥은 평소 드시던 분량으로 담고, 나물·쌈채소류와 기름기가 적은 단백질 반찬 위주로 채워 드시면 부담 없이 즐기실 수 있습니다. 양념이 강한 조림이나 튀김류, 국물 섭취만 조금 조절해 주시면 더욱 좋습니다.",
+      "no_write": true
+    },
+    {
+      "pair": 6,
+      "case": "goal_changed",
+      "scenario": "lunch_buffet",
+      "level": "low",
+      "seconds": 4.382190399999672,
+      "question": "그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "점심 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 4.375,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다. \n\n한식뷔페에서 밥과 단백질 반찬, 채소를 고르게 담아 일반식 한 접시로 드시는 것은 좋은 선택입니다. 다만 튀김이나 양념류 대신 나물과 구이류 위주로 채우고, 밥은 평소 공기밥 분량인 2/3~1공기 정도로 조절해 드시면 균형 잡힌 식사를 유지하실 수 있습니다.",
+      "no_write": true
+    },
+    {
+      "pair": 7,
+      "case": "goal_changed",
+      "scenario": "dinner_store",
+      "level": "low",
+      "seconds": 7.055122499998106,
+      "question": "그럼 편의점에서 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "저녁 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 7.061999999998079,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다. \n\n현재 하루 기준 칼로리에 여유가 있으므로 편의점 샌드위치로 식사하셔도 괜찮습니다. 소스가 과하거나 가공육 위주인 제품보다는 닭가슴살, 달걀, 채소가 풍부한 샌드위치를 고르고 물이나 무가당 음료와 함께 드시는 것을 권장합니다.",
+      "no_write": true
+    },
+    {
+      "pair": 7,
+      "case": "goal_changed",
+      "scenario": "dinner_store",
+      "level": "default",
+      "seconds": 11.669345099999191,
+      "question": "그럼 편의점에서 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "저녁 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 11.6720000000023,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다. \n\n편의점 샌드위치로 가볍게 저녁을 드셔도 괜찮으며, 단백질과 채소 비중이 높은 닭가슴살이나 달걀 샌드위치를 추천합니다. 소스가 과하지 않은 제품을 고르시고, 부족한 영양과 포만감을 채우기 위해 무가당 두유나 삶은 달걀을 함께 곁들여 보세요.",
+      "no_write": true
+    },
+    {
+      "pair": 8,
+      "case": "goal_changed",
+      "scenario": "breakfast_rice",
+      "level": "default",
+      "seconds": 8.259746800002176,
+      "question": "그럼 일반식으로 밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "아침 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 8.25,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다. \n\n밥과 계란은 탄수화물과 양질의 단백질을 고루 채울 수 있어 일반식으로 아주 좋은 선택입니다. 여기에 나물이나 샐러드 같은 채소 반찬을 곁들이시면 식이섬유까지 균형 있게 섭취하실 수 있습니다.",
+      "no_write": true
+    },
+    {
+      "pair": 8,
+      "case": "goal_changed",
+      "scenario": "breakfast_rice",
+      "level": "low",
+      "seconds": 7.380324899997504,
+      "question": "그럼 일반식으로 밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "아침 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "status": "completed",
+      "agent": "meal",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 2,
+        "elapsed_seconds": 7.375,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다. 밥과 계란은 탄수화물과 양질의 단백질을 챙길 수 있는 아주 좋은 일반식 조합입니다. 밥 한 공기(약 200g)에 달걀 1~2개를 곁들이고, 식이섬유와 포만감을 위해 채소 반찬이나 김을 함께 드시면 더욱 균형 잡힌 식사가 됩니다.",
+      "no_write": true
+    }
+  ]
+}

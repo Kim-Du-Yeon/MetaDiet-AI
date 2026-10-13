@@ -1,5 +1,5 @@
 """Lazy Gemini models; importing the application never requires a Gemini key."""
-from typing import Any
+from typing import Any, Literal
 
 from langchain_core.runnables import Runnable
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -22,10 +22,14 @@ class ConfiguredChatModel(Runnable):
     """Keep provider construction lazy while preserving native tools and tracing."""
 
     def __init__(self, *, role: str = "chat", temperature: float = 0,
-                 max_tokens: int | None = None):
+                 max_tokens: int | None = None,
+                 thinking_level: Literal['low', 'medium', 'high'] | None = None):
         if role not in {"chat", "vision", "eval"}:
             raise ValueError(f"Unknown model role: {role}")
         self.role = role
+        if thinking_level not in {None, 'low', 'medium', 'high'}:
+            raise ValueError(f'Unsupported thinking level: {thinking_level}')
+        self.thinking_level = thinking_level
         self.temperature = temperature
         self.max_tokens = max_tokens
         self._provider = None
@@ -43,6 +47,7 @@ class ConfiguredChatModel(Runnable):
                 temperature=self.temperature, max_tokens=self.max_tokens,
                 timeout=settings.eval_model_timeout_seconds if self.role == "eval" else settings.model_timeout_seconds,
                 max_retries=settings.model_max_retries,
+                **({'thinking_level': self.thinking_level} if self.thinking_level is not None else {}),
             )
         return self._provider
 

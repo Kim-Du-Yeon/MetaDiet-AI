@@ -1,0 +1,47 @@
+{
+  "model": "gemini-3.8-flash",
+  "scope": "alternating_real_model_synthetic_db_production_team",
+  "summary": {
+    "default": {
+      "n": 1,
+      "median_seconds": 18.46513699999923,
+      "fresh": 1,
+      "completed": 1,
+      "no_write": 1
+    }
+  },
+  "rows": [
+    {
+      "pair": 0,
+      "case": "confirmed",
+      "scenario": "lunch_buffet",
+      "level": "default",
+      "seconds": 18.46513699999923,
+      "question": "그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 목표: N kcal\"로 현재 기록과 목표를 적어줘.",
+      "history": [
+        {
+          "role": "user",
+          "content": "점심 추천해줘. 계획 카드는 만들지 말고 조언만 해줘."
+        },
+        {
+          "role": "assistant",
+          "content": "이전 조회의 섭취 기록은 300 kcal, 목표는 2000 kcal입니다. 밥과 단백질 반찬을 곁들이세요."
+        }
+      ],
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "status": "completed",
+      "agent": "supervisor",
+      "usage": {
+        "model_calls": 2,
+        "tool_calls": 3,
+        "elapsed_seconds": 18.46900000000096,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "answer": "오늘 섭취: 600 kcal, 목표: 2000 kcal로 남은 열량 여유가 충분하여 한식뷔페에서 일반식 한 접시를 드시는 것은 좋은 선택입니다. 접시를 담으실 때는 밥을 적당량 담고 나물과 샐러드 등 채소류를 풍성하게 채운 뒤, 생선·두부·살코기 위주의 단백질 반찬을 곁들여 보세요. 튀김이나 양념이 강한 볶음류 위주보다는 담백한 조리법의 반찬을 골고루 선택하시면 균형 잡힌 식사를 하실 수 있습니다.",
+      "no_write": true
+    }
+  ]
+}
