@@ -35,6 +35,8 @@ def main():
         thread='perf-'+args.phase+'-'+uuid4().hex
         for index,message in enumerate(['점심 추천해줘. 식단 계획 카드는 만들지 말고 조언만 해줘.','그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아?']):
             row=run(token,{'message':message,'thread_id':thread,'stream_run_id':str(uuid4()),'after_seq':0})
+            if args.phase == 'after' and not any(e.get('phase') == 'coaching_context' for e in row['progress']):
+                raise RuntimeError('new_coaching_context_not_observed; stop instead of measuring old deploy')
             row.update(repeat=repeat,turn=index,message=message);rows.append(row)
             print(args.phase,repeat,index,round(row['total_ms']),row['usage'],flush=True)
     report={'scope':'synthetic_public_coaching','phase':args.phase,'samples':len(rows),'rows':rows,

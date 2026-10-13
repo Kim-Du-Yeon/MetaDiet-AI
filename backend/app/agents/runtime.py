@@ -92,7 +92,7 @@ async def run_agent(*, model, instruction: str, request: str,
                     selection_mode: Literal["shadow", "enforce"] = "shadow",
                     select_first_only: bool = False,
                     finish_after_successful_delegate: bool = False,
-                    agent_name: str = "specialist") -> AgentResult:
+                    agent_name: str = "specialist", context_verified: bool = False) -> AgentResult:
     """Model selects zero or more tools repeatedly until done or budget exhausted.
 
     A delegated agent must receive the *same* budget. Policies can only remove
@@ -124,7 +124,7 @@ async def run_agent(*, model, instruction: str, request: str,
                 bound = model.bind_tools([tool.schema() for tool in turn_tools.values()]) if turn_tools else model
             await budget.reserve("model")
             from app.agents.execution_stream import emit_runtime_event
-            await emit_runtime_event("model_started", agent=agent_name)
+            await emit_runtime_event("model_started", agent=agent_name, context_verified=context_verified)
             response = await asyncio.wait_for(bound.ainvoke(messages, config=config), budget.remaining())
             messages.append(response)
             if getattr(response, "invalid_tool_calls", []):

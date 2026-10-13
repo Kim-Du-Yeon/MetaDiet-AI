@@ -523,6 +523,8 @@ class DietTeam:
                             'model_calls': self.budget.model_calls, 'tool_calls': self.budget.tool_calls,
                             'elapsed_seconds': self.previous_elapsed + time.monotonic() - self.budget.started,
                             'validation_attempts': 0, 'replans': 0}}
+        verified_context = await self.coaching_context()
+        context_verified = bool(verified_context and verified_context.get("scope") == "fresh_current_request")
         roles = self.delegate_roles()
         delegates = []
         for role in roles:
@@ -538,16 +540,15 @@ class DietTeam:
                 if self.budget.persist:
                     await self.budget.persist(f"delegate:{selected}")
                 self.delegations[selected] = self.delegations.get(selected, 0) + 1
-                verified_context = await self.coaching_context() if selected == "meal" else None
                 result = await run_agent(model=self.model_factory(),
                     instruction=BASE_INSTRUCTION + f"\n담당: {selected}\n{ROLE_INSTRUCTIONS[selected]}",
                     request=json.dumps({"task": args.query, "original_request": self.state["message"],
                         "recent_messages": [str(m)[:2000] for m in self.state.get("messages", [])[-10:]],
                         "previous_proposal": self.state.get("pending_proposal"),
-                        "verified_context": verified_context}, ensure_ascii=False),
+                        "verified_context": verified_context if selected == "meal" else None}, ensure_ascii=False),
                     tools=self.tools(selected), allowed_tools=self.allowed, budget=self.budget, config=self.config,
                     decision_selector=self.decision_client.choose if self.decision_client and self.jev_location == "tools" else None,
-                    selection_mode=self.jev_mode, agent_name=selected)
+                    selection_mode=self.jev_mode, agent_name=selected, context_verified=context_verified)
                 self.events.extend({**event, "agent": selected} for event in result.events)
                 if result.status == "blocked":
                     raise ExecutionStopped(result.reason or "specialist_blocked")
@@ -560,11 +561,12 @@ class DietTeam:
             delegates.append(AgentTool(f"delegate_{role}", description, Query, delegate, "delegate"))
         result = await run_agent(model=self.model_factory(), instruction=BASE_INSTRUCTION +
             "\n당신은 Supervisor입니다. 필요한 전문 Agent에 위임하고 결과에 따라 다음 작업을 결정하세요. 제안이 만들어지면 추가 제안으로 덮어쓰지 말고 사용자 확인을 요청하세요.",
-            request=json.dumps({"message": self.state["message"], "recent_messages": [str(m)[:2000] for m in self.state.get("messages", [])[-10:]]}, ensure_ascii=False),
+            request=json.dumps({"message": self.state["message"], "recent_messages": [str(m)[:2000] for m in self.state.get("messages", [])[-10:]],
+                "verified_context": verified_context}, ensure_ascii=False),
             tools=delegates, budget=self.budget, config=self.config,
             decision_selector=self.decision_client.choose if self.decision_client and self.jev_location == "supervisor" else None,
             selection_mode=self.jev_mode, select_first_only=True, finish_after_successful_delegate=True,
-            agent_name="supervisor")
+            agent_name="supervisor", context_verified=context_verified)
         self.events.extend({**event, "agent": "supervisor"} for event in result.events)
         proposal = self.state.get("pending_proposal")
         if result.status == "completed" and self.proposal:

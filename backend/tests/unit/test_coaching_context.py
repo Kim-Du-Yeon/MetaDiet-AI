@@ -63,3 +63,33 @@ async def test_prefetch_failure_does_not_escape_or_claim_empty_intake():
     assert result['status']=='unavailable'
     assert 'intake' not in result
     assert team.intake is None
+
+
+async def test_prefetch_preserves_execution_budget_stop():
+    from app.agents.runtime import ExecutionStopped
+    team=make_team();team.budget.max_tool_calls=0
+    with pytest.raises(ExecutionStopped,match='tool_call_limit'):
+        await team.coaching_context()
+
+def test_coaching_progress_describes_verified_context():
+    from app.agents.execution_stream import progress_for_runtime_event
+    result=progress_for_runtime_event('coaching_context_ready',agent='meal')
+    assert result['phase']=='coaching_context'
+    assert result['label']=='확인한 기록을 바탕으로 답변 준비 중'
+
+async def test_changed_strategy_is_loaded_in_next_request():
+    for target in [2000,1800]:
+        team=make_team();team.rows=AsyncMock(side_effect=[[{'goal':'diet'}],[{'daily_calories':target}]])
+        assert (await team.read_profile(Empty()))['strategy']['daily_calories']==target
+        assert team.rows.await_count==2
+
+
+async def test_direct_supervisor_coaching_also_uses_fresh_context():
+    root=Model([AIMessage(content='한식뷔페도 괜찮습니다.')])
+    team=make_team(model_factory=lambda:root)
+    team.rows=AsyncMock(side_effect=[[{'goal':'diet'}],[{'daily_calories':2000}],[{'calories':900}]])
+    result=await team.execute()
+    assert team.rows.await_count==3
+    assert 'verified_context' in str(root.ainvoke.call_args)
+    assert result['execution_usage']['model_calls']==1
+    assert team.intake['calories']==900
