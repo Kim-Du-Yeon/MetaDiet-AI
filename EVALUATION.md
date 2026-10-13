@@ -1,5 +1,9 @@
 # 2026-10-09 upgrade verification
 
+## Durable budget pipeline (2026-10-14)
+
+[Matched100-pair report](docs/budget_pipeline/README.md): real Gemini + isolated real Postgres budget, synthetic profile/intake. Storage median380.64→275.47ms, total3966.23→3940.20ms, total p956188.70→6213.39ms. Storage gate passes but total>=5% improvement gate fails, so BUDGET_PIPELINE remains false. Local and previous public2.46s figures are not comparable before/after. All200 attempts complete with fresh values; live cap/rollback/cancellation/pool-reuse checks pass.
+
 ## Scoped follow-up prompt experiment (2026-10-14)
 
 Result: baseline/candidate 100 each, median 4322.90/4412.73ms, p95 7320.47/6111.91ms, freshness 100/100 in each. The median speed gate failed; the candidate remains disabled. Tail or token savings do not override the predeclared gate.

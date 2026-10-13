@@ -1,0 +1,190 @@
+{
+  "scope": "real_model_and_isolated_postgres_synthetic_profile_100_each",
+  "measurement": {
+    "baseline": {
+      "attempts": 100,
+      "completed": 100,
+      "failed_or_blocked": 0,
+      "unexpected_proposals": 0,
+      "first_answer_ms_completed": {
+        "n": 0,
+        "median": null,
+        "p95": null
+      },
+      "total_ms_completed": {
+        "n": 100,
+        "median": 3966.23,
+        "p95": 6188.7
+      },
+      "duration_ms_all_attempts": {
+        "n": 100,
+        "median": 3966.23,
+        "p95": 6188.7
+      },
+      "model_calls_completed": {
+        "n": 100,
+        "median": 1.0,
+        "p95": 1
+      },
+      "fresh": 100,
+      "no_write": 100
+    },
+    "pipeline": {
+      "attempts": 100,
+      "completed": 100,
+      "failed_or_blocked": 0,
+      "unexpected_proposals": 0,
+      "first_answer_ms_completed": {
+        "n": 0,
+        "median": null,
+        "p95": null
+      },
+      "total_ms_completed": {
+        "n": 100,
+        "median": 3940.2,
+        "p95": 6213.39
+      },
+      "duration_ms_all_attempts": {
+        "n": 100,
+        "median": 3940.2,
+        "p95": 6213.39
+      },
+      "model_calls_completed": {
+        "n": 100,
+        "median": 1.0,
+        "p95": 1
+      },
+      "fresh": 100,
+      "no_write": 100
+    }
+  },
+  "stages": {
+    "baseline": {
+      "budget_storage": {
+        "n": 100,
+        "median": 380.64,
+        "p95": 430.17
+      },
+      "budget_connection_wait": {
+        "n": 100,
+        "median": 158.82,
+        "p95": 182.78
+      },
+      "budget_pool_checkout": {
+        "n": 100,
+        "median": 53.29,
+        "p95": 59.99
+      },
+      "budget_setup": {
+        "n": 100,
+        "median": 105.43,
+        "p95": 122.21
+      },
+      "budget_setup_enqueue": {
+        "n": 0,
+        "median": null,
+        "p95": null
+      },
+      "budget_sql": {
+        "n": 100,
+        "median": 163.19,
+        "p95": 188.99
+      },
+      "budget_commit": {
+        "n": 100,
+        "median": 57.49,
+        "p95": 65.32
+      },
+      "model_meal": {
+        "n": 100,
+        "median": 2601.04,
+        "p95": 4794.89
+      }
+    },
+    "pipeline": {
+      "budget_storage": {
+        "n": 100,
+        "median": 275.47,
+        "p95": 304.29
+      },
+      "budget_connection_wait": {
+        "n": 100,
+        "median": 107.79,
+        "p95": 126.5
+      },
+      "budget_pool_checkout": {
+        "n": 100,
+        "median": 53.22,
+        "p95": 66.98
+      },
+      "budget_setup": {
+        "n": 0,
+        "median": null,
+        "p95": null
+      },
+      "budget_setup_enqueue": {
+        "n": 100,
+        "median": 54.24,
+        "p95": 64.9
+      },
+      "budget_sql": {
+        "n": 100,
+        "median": 57.01,
+        "p95": 61.96
+      },
+      "budget_commit": {
+        "n": 100,
+        "median": 109.8,
+        "p95": 121.77
+      },
+      "model_meal": {
+        "n": 100,
+        "median": 2603.56,
+        "p95": 5065.73
+      }
+    }
+  },
+  "quality": {
+    "baseline": {
+      "attempts": 100,
+      "judge_completed": 97,
+      "relevant": 97,
+      "actionable": 97,
+      "no_invented_intake": 97,
+      "no_false_save_claim": 97,
+      "concise": 97
+    },
+    "pipeline": {
+      "attempts": 100,
+      "judge_completed": 98,
+      "relevant": 98,
+      "actionable": 98,
+      "no_invented_intake": 98,
+      "no_false_save_claim": 98,
+      "concise": 98
+    }
+  },
+  "gates": {
+    "complete_timing_and_judge_evidence": false,
+    "storage_median_20_percent": true,
+    "total_median_5_percent": false,
+    "p95_not_10_percent_worse": true,
+    "completion_freshness_no_write": true,
+    "quality_nonregression": true
+  },
+  "adopt": false,
+  "safety": {
+    "baseline": {
+      "concurrent_reserved": 5,
+      "concurrent_blocked": 7,
+      "restart_cap": true,
+      "rollback": true
+    },
+    "pipeline": {
+      "concurrent_reserved": 5,
+      "concurrent_blocked": 7,
+      "restart_cap": true,
+      "rollback": true
+    }
+  }
+}

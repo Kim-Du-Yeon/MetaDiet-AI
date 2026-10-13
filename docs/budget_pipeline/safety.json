@@ -1,0 +1,20 @@
+{
+  "scope": "real_model_and_isolated_postgres_synthetic_profile_100_each",
+  "model": "gemini-3.8-flash",
+  "rows": [],
+  "schema_cleaned": true,
+  "safety": {
+    "baseline": {
+      "concurrent_reserved": 5,
+      "concurrent_blocked": 7,
+      "restart_cap": true,
+      "rollback": true
+    },
+    "pipeline": {
+      "concurrent_reserved": 5,
+      "concurrent_blocked": 7,
+      "restart_cap": true,
+      "rollback": true
+    }
+  }
+}

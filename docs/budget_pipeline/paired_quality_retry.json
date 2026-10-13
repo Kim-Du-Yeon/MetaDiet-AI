@@ -1,0 +1,68 @@
+{
+  "scope": "blinded_synthetic_model_rubric_all_attempts",
+  "judge": "gemini-3.1-pro-preview",
+  "source_sha256": "bf64481df43b7407ba7c8e3854b794f7bb1bfbea047d207670e9d6d555b61e6b",
+  "rows": [
+    {
+      "index": 7,
+      "mode": "baseline",
+      "judge_status": "completed",
+      "id": "7",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "concise": true,
+      "reason": "질문에 직접 답하며, 적절한 추가 식단 조언을 제공하고, 배경 수치를 정확히 반영함."
+    },
+    {
+      "index": 53,
+      "mode": "pipeline",
+      "judge_status": "completed",
+      "id": "53",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "concise": true,
+      "reason": "요청한 형식을 준수하고, 실용적인 식단 구성 조언을 간결하게 제공함."
+    },
+    {
+      "index": 139,
+      "mode": "baseline",
+      "judge_status": "completed",
+      "id": "139",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "concise": true,
+      "reason": "샌드위치 섭취에 대한 구체적인 선택 기준을 제시하며, 배경 수치를 정확히 사용함."
+    },
+    {
+      "index": 185,
+      "mode": "pipeline",
+      "judge_status": "completed",
+      "id": "185",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "concise": true,
+      "reason": "한식뷔페 이용 시의 실용적인 팁을 제공하며, 요구된 첫 문장 형식을 잘 지킴."
+    },
+    {
+      "index": 16,
+      "mode": "baseline",
+      "judge_status": "completed",
+      "id": "16",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "concise": true,
+      "reason": "질문에 적절히 답하며, 뷔페에서의 식단 구성 조언을 간결하게 제공함."
+    }
+  ],
+  "limitations": "One automated judge, same provider family; not independent human or clinical validation. Judge failures remain in denominator."
+}

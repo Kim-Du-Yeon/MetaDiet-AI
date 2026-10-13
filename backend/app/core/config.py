@@ -68,6 +68,7 @@ class Settings(BaseSettings):
     # Experimental native streaming remains buffered before final validation.
     coaching_delivery: Literal['invoke', 'buffered_stream'] = 'invoke'
     compact_followup_prompt: bool = False
+    budget_pipeline: bool = False
     model_timeout_seconds: float = 30
     eval_model_timeout_seconds: float = 90
     model_max_retries: int = 0
