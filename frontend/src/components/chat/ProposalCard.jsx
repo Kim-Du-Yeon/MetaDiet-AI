@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./ProposalCard.css";
+import MealProposalEditor from "./MealProposalEditor";
 
 const labels = { intake: "실제 섭취 기록", plan: "식단 계획", measurement: "인바디 측정", weight: "체중 기록", strategy: "전략 변경", meal_delete: "섭취 기록 삭제", meal_replace: "섭취 기록 수정" };
 const fields = { measured_date: "측정일", weight_kg: "체중 (kg)", skeletal_muscle_kg: "골격근량 (kg)", body_fat_kg: "체지방량 (kg)", body_fat_pct: "체지방률 (%)" };
@@ -17,9 +18,10 @@ function EvidenceList({ evidence = [] }) {
   </section>;
 }
 
-export default function ProposalCard({ proposal, busy, onDecision, onRevise }) {
+export default function ProposalCard({ proposal, busy, onDecision, onRevise, budget }) {
   const [draft, setDraft] = useState(proposal.payload);
   useEffect(() => setDraft(proposal.payload), [proposal]);
+  const [mealChanged, setMealChanged] = useState(false);
   const payload = proposal.payload;
   const changed = JSON.stringify(draft) !== JSON.stringify(payload);
   return <section aria-label="확인 대기 제안" className="proposal">
@@ -27,9 +29,7 @@ export default function ProposalCard({ proposal, busy, onDecision, onRevise }) {
     <h3>{labels[proposal.kind]} 확인</h3>
     {proposal.kind === "plan" && <p className="proposal__notice">계획을 채택해도 실제 섭취량에는 반영되지 않습니다.</p>}
     {payload.expected && <p>대상: {payload.expected.food_name} · {payload.expected.quantity_g}g{payload.meal ? ` → ${payload.meal.food_name} ${payload.meal.quantity_g}g` : " (삭제)"}</p>}
-    {payload.meals && <><p className="proposal__date">{payload.log_date}</p><ul className="proposal__meals">{payload.meals.map((meal, index) =>
-      <li key={index}><span>{meal.meal_type} · {meal.food_name} {meal.quantity_g}g
-        <details><summary>{meal.source === "csv" ? "표준값 · 출처 보기" : "영양정보 출처 보기"}</summary><small>{({ mfds: "식약처 가공식품 DB", csv: "국가표준식품성분표", user_label: "사용자 제공 영양표" })[meal.source] || meal.source}{meal.nutrition_metadata?.manufacturer && ` · ${meal.nutrition_metadata.manufacturer}`}{meal.nutrition_metadata?.basis_g && ` · 기준 ${meal.nutrition_metadata.basis_g}g`}{meal.source === "csv" && " · 실제 조리법에 따라 달라질 수 있어요."}</small></details></span><strong>{meal.calories} kcal</strong></li>)}</ul></>}
+    {payload.meals && <MealProposalEditor proposal={proposal} busy={busy} onRevise={onRevise} onChanged={setMealChanged} budget={budget} />}
     {["measurement", "weight"].includes(proposal.kind) && <div className="proposal__fields">{Object.entries(fields).filter(([key]) => proposal.kind === "measurement" || ["measured_date", "weight_kg"].includes(key)).map(([key, label]) =>
       <label key={key}><span>{label}</span><input
         type={key === "measured_date" ? "date" : "number"} step="any" value={draft[key] ?? ""} disabled={busy}
@@ -39,7 +39,7 @@ export default function ProposalCard({ proposal, busy, onDecision, onRevise }) {
       <strong>{payload.daily_calories} kcal</strong><span>단백질 {payload.protein_g}g</span><span>탄수화물 {payload.carbs_g}g</span><span>지방 {payload.fat_g}g</span>
     </div><p>{payload.strategy_note}</p><EvidenceList evidence={payload.evidence} /></>}
     <div className="proposal__actions">
-      <button className="proposal__confirm" disabled={busy || changed} onClick={() => onDecision("confirm")}>이 내용 확정</button>
+      <button className="proposal__confirm" disabled={busy || changed || mealChanged} onClick={() => onDecision("confirm")}>{proposal.kind === "intake" ? "이대로 기록" : "이 내용 확정"}</button>
       <button className="proposal__cancel" disabled={busy} onClick={() => onDecision("cancel")}>취소</button>
     </div>
   </section>;

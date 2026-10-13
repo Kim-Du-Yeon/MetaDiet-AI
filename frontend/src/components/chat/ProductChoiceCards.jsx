@@ -35,6 +35,9 @@ export default function ProductChoiceCards({ selection, busy, onSelect, onSearch
       </fieldset>)}
       <div className="product-choices__actions"><button disabled={busy || !ready}>선택한 제품으로 다시 검토</button>
         {onSearch && <button type="button" disabled={busy} onClick={onSearch}>다른 제품 찾기</button>}</div>
+      {(busy || !ready) && <p role="status">{busy ? '요청 처리 중입니다. 완료 후 다시 사용할 수 있어요.'
+        : items.some((item, index) => !choices[index]) ? '각 음식의 제품을 하나씩 선택해주세요.'
+        : '모든 음식에 먹은 양을 0보다 크고 10,000g 이하로 입력해주세요.'}</p>}
     </form>
   </section>;
 }

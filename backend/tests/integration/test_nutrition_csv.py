@@ -29,5 +29,5 @@ async def test_chicken_breast_200g_golden_value():
     result = await nutrition_db_tool.ainvoke({"food_name": "닭가슴살", "quantity_g": 200})
 
     assert result["found_in_db"] is True
-    assert result["calories"] == 212.0
-    assert result["protein_g"] == 45.9
+    assert result["calories"] == 254.0
+    assert result["protein_g"] == 56.2

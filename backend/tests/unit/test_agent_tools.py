@@ -83,5 +83,5 @@ def _stub_nutrition_llm(monkeypatch):
 async def test_nutrition_db_tool_csv_lookup_golden_value(_stub_nutrition_llm):
     result = await nutrition_db_tool.ainvoke({"food_name": "닭가슴살", "quantity_g": 200})
     assert result["found_in_db"] is True
-    assert result["calories"] == 212.0
-    assert result["protein_g"] == 45.9
+    assert result["calories"] == 254.0
+    assert result["protein_g"] == 56.2

@@ -45,7 +45,7 @@ class ProposalRepository:
                     raise ProposalConflict("같은 요청 ID에 다른 내용이 전달됐습니다.")
                 return self.public(previous)
             if replaces:
-                old = await (await conn.execute("select id from agent_proposals where user_id=%s and id=%s and version=%s and status='pending' for update",
+                old = await (await conn.execute("select id from agent_proposals where user_id=%s and id=%s and version=%s and status='pending' and expires_at>now() for update",
                     (user_id, replaces[0], replaces[1]))).fetchone()
                 if not old:
                     raise ProposalConflict("수정하려는 제안이 이미 변경되었습니다.")

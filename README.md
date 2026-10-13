@@ -22,6 +22,10 @@ MetaDiet AI는 식사 기록, 체중·인바디 추세, 장기 목표와 영양 
 - [제출용 포트폴리오 다운로드 (PDF, 7쪽)](https://raw.githubusercontent.com/Kim-Du-Yeon/MetaDiet-AI/refs/heads/main/docs/portfolio/MetaDiet_AI_Portfolio.pdf): 평가 조건·수치·한계와 실패 해결 과정 상세 설명
 - [저장소에서 PDF 미리보기](docs/portfolio/MetaDiet_AI_Portfolio.pdf)
 
+## 간단한 식사 입력
+
+`닭가슴살 밥 한공기 김치`처럼 입력하면 앱 기본 분량으로 음식별 영양값과 확인 카드를 표시합니다. 분량을 바로 수정하고 **이대로 기록**으로 저장할 수 있습니다. 정확한 제품 찾기는 보조 기능입니다. [구현·경로 비교·실패 해결 기록](docs/simple_meals/RESULTS.md)을 확인하세요.
+
 ## 구현 범위
 
 - **멀티에이전트 오케스트레이션:** Gemini Supervisor가 전문 Agent와 도구를 선택하고 LangGraph가 상태 전이, 실패 피드백, 실행 예산과 종료 조건을 관리

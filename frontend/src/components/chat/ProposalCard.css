@@ -22,3 +22,9 @@
 .proposal__cancel, .proposal__secondary { background: #edf2ef; color: #40564d; }
 .proposal__secondary { grid-column: 1 / -1; }
 @media (max-width: 560px) { .proposal__fields { grid-template-columns: 1fr; } .proposal { padding: 16px; } }
+.meal-preview__portion { display: flex; gap: 12px; flex-wrap: wrap; margin: 12px 0; }
+.meal-preview__portion label { display: grid; gap: 4px; }
+.meal-preview__portion input { width: 100px; }
+.meal-preview input, .meal-preview select { padding: 10px; border: 1px solid #cedbd5; border-radius: 8px; background: white; max-width: 100%; }
+.meal-preview .proposal__meals li { display: block; padding: 16px; border: 1px solid #dde7e2; border-radius: 12px; margin-bottom: 10px; }
+.meal-preview p { line-height: 1.65; margin: 6px 0; }

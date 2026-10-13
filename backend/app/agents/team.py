@@ -125,10 +125,11 @@ def _meal_allocation_is_unsupported(response: str, evidence: dict) -> bool:
 
 class DietTeam:
     def __init__(self, state, *, model_factory=None, repository=None, db=None, config=None,
-                 decision_client=None, jev_location=None, jev_mode="shadow"):
+                 decision_client=None, jev_location=None, jev_mode="shadow", simple_meals_enabled=True):
         if jev_location not in {None, "supervisor", "tools"} or jev_mode not in {"shadow", "enforce"}:
             raise ValueError("Invalid Jev experiment configuration")
         self.decision_client = decision_client
+        self.simple_meals_enabled = simple_meals_enabled
         self.jev_location = jev_location
         self.jev_mode = jev_mode
         self.state = dict(state)
@@ -439,6 +440,37 @@ class DietTeam:
         return ["meal", "goal", "evidence"]
 
     async def execute(self):
+        from app.tools.simple_meals import parse_simple_meal, calculate_simple_meal
+        parsed = parse_simple_meal(self.state.get('message', ''),
+            forced_meal_type=self.state.get('forced_meal_type'))
+        if (self.simple_meals_enabled and parsed and self.state.get('requested_action') in {None, 'record_only'}
+                and not self.state.get('pending_proposal') and not self.state.get('awaiting_confirmation')):
+            required = {'search_foods', 'nutrition_lookup', 'propose_meal'}
+            if self.allowed is None or required <= self.allowed:
+                from app.tools.food_catalog import default_catalog
+                await self.budget.reserve('tool')
+                try:
+                    payload = await asyncio.wait_for(calculate_simple_meal(parsed,
+                        self.food_catalog or default_catalog()), self.budget.remaining())
+                except ValueError:
+                    # No partial proposal; unresolved representatives stay in the existing flow.
+                    payload = None
+                if payload:
+                    await self.budget.reserve('tool')
+                    digest = hashlib.sha256(json.dumps(payload, sort_keys=True).encode()).hexdigest()
+                    proposal = await asyncio.wait_for(self.repository.create(self.state['user_id'],
+                        self.state.get('thread_id', 'default'), payload,
+                        f"{self.state.get('run_id', str(uuid4()))}:{digest}"), self.budget.remaining())
+                    import time
+                    return {'response': '기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.',
+                        'agent_used': 'diet_logger', 'pending_proposal': proposal,
+                        'pending_meals': payload['meals'], 'plan_date': payload['log_date'],
+                        'food_selection': None, 'awaiting_confirmation': True,
+                        'agent_events': [{'type': 'simple_meal_calculated', 'items_count': len(payload['meals'])}],
+                        'execution_status': 'completed', 'execution_usage': {
+                            'model_calls': self.budget.model_calls, 'tool_calls': self.budget.tool_calls,
+                            'elapsed_seconds': self.previous_elapsed + time.monotonic() - self.budget.started,
+                            'validation_attempts': 0, 'replans': 0}}
         roles = self.delegate_roles()
         delegates = []
         for role in roles:

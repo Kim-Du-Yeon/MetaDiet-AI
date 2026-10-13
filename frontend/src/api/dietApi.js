@@ -307,6 +307,16 @@ export async function reviseMeasurement(proposal, payload) {
   return data;
 }
 
+export async function reviseMeal(proposal, payload) {
+  const res = await fetch(`${BASE_URL}/proposals/${proposal.id}/meal`, {
+    method: 'PUT', headers: authHeaders({ 'Content-Type': 'application/json' }),
+    body: JSON.stringify({ version: proposal.version, ...payload }),
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(typeof data.detail === 'string' ? data.detail : '분량을 확인해주세요.');
+  return data;
+}
+
 export async function deleteAccount() {
   const res = await fetch(`${BASE_URL}/users/me`, {
     method: "DELETE",

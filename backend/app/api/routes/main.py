@@ -583,6 +583,20 @@ async def restore_session(thread_id: str, current_user: str = Depends(get_curren
     if proposal is None:
         proposal = await ProposalRepository().latest_pending(current_user, thread_id)
 
+    if pending and proposal and pending.get('id') != proposal.get('id'):
+        # A revision may commit before checkpoint persistence fails. Reconcile
+        # under the same conversation lock; never rerun the Agent or save intake.
+        async with conversation_lock(current_user, thread_id):
+            fresh = _sv(await graph.aget_state(config))
+            latest = await ProposalRepository().latest_pending(current_user, thread_id)
+            if latest and (fresh.get('pending_proposal') or {}).get('id') != latest['id']:
+                await graph.aupdate_state(config, {'pending_proposal': latest,
+                    'pending_meals': latest['payload'].get('meals'),
+                    'plan_date': latest['payload'].get('log_date'), 'awaiting_confirmation': True},
+                    as_node='save_pending_chat')
+                proposal = latest
+                snap = await graph.aget_state(config)
+
     def read_messages():
         rows = (sb.table("chat_history")
                 .select("role,content,agent_type,created_at")
@@ -762,6 +776,66 @@ async def revise_weight(proposal_id: UUID, req: WeightRevision, current_user: st
             str(uuid4()), replaces=(str(proposal_id), req.version))
     except ProposalConflict as exc:
         raise HTTPException(409, str(exc)) from exc
+
+
+class MealPortionEdit(BaseModel):
+    model_config = ConfigDict(extra='forbid', allow_inf_nan=False)
+    amount: float = Field(gt=0, le=10000)
+    unit: str = Field(max_length=10)
+
+
+class MealRevision(BaseModel):
+    model_config = ConfigDict(extra='forbid', allow_inf_nan=False)
+    version: int = Field(gt=0)
+    log_date: date
+    meal_type: Literal['breakfast', 'lunch', 'dinner', 'snack'] | None
+    items: list[MealPortionEdit] = Field(min_length=1, max_length=30)
+
+
+@app.put('/proposals/{proposal_id}/meal')
+async def revise_meal(proposal_id: UUID, req: MealRevision, current_user: str = Depends(get_current_user)):
+    from app.schemas.proposals import MealProposal
+    from app.tools.food_catalog import default_catalog
+    repository = ProposalRepository()
+    try:
+        old = await repository.get(current_user, str(proposal_id))
+        if old['kind'] not in {'intake', 'plan'} or old['status'] != 'pending' or old['version'] != req.version:
+            raise ProposalConflict('수정 가능한 최신 식사 제안이 아닙니다.')
+        if old['kind'] == 'intake' and req.log_date > service_today():
+            raise HTTPException(422, '실제 섭취일은 미래일 수 없습니다.')
+        meals = old['payload']['meals']
+        if len(meals) != len(req.items):
+            raise HTTPException(422, '음식 항목 수가 일치하지 않습니다.')
+        catalog = default_catalog()
+        revised = []
+        for meal, edit in zip(meals, req.items):
+            portion = dict((meal.get('nutrition_metadata') or {}).get('portion') or {})
+            allowed_units = {'g'} | ({portion['default_unit'], '회분', '인분'} if portion.get('unit_g') else set())
+            if edit.unit not in allowed_units or not meal.get('food_id') or meal['source'] == 'user_label':
+                raise HTTPException(422, '이 항목은 g 단위 식품 DB 조회로 수정할 수 없습니다.')
+            grams = edit.amount if edit.unit == 'g' else edit.amount * portion['unit_g']
+            quote = await catalog.lookup(meal['food_id'], grams)
+            portion.update(amount=edit.amount, unit=edit.unit, defaulted=False)
+            quote['nutrition_metadata']['portion'] = portion
+            quote['meal_type'] = req.meal_type or meal['meal_type']
+            revised.append(quote)
+        payload = MealProposal(kind=old['kind'], log_date=req.log_date, meals=revised).model_dump(mode='json')
+        async with conversation_lock(current_user, old['thread_id']):
+            graph = get_graph()
+            config = {'configurable': {'thread_id': f"{current_user}_{old['thread_id']}"}}
+            state = _sv(await graph.aget_state(config))
+            pending = state.get('pending_proposal') or {}
+            if pending.get('id') != old['id'] or pending.get('version') != req.version:
+                raise ProposalConflict('대화 상태가 변경되었습니다. 다시 불러와주세요.')
+            new = await repository.create(current_user, old['thread_id'], payload, str(uuid4()),
+                replaces=(str(proposal_id), req.version))
+            await graph.aupdate_state(config, {'pending_proposal': new, 'pending_meals': revised,
+                'plan_date': req.log_date.isoformat(), 'awaiting_confirmation': True})
+            return new
+    except ProposalConflict as exc:
+        raise HTTPException(409, str(exc)) from exc
+    except ValueError as exc:
+        raise HTTPException(422, '분량 또는 식품 기준을 확인해주세요.') from exc
 
 
 class WeightEntryRequest(BaseModel):

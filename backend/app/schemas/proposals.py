@@ -29,6 +29,12 @@ class MealProposal(StrictModel):
     log_date: date
     meals: list[MealItem] = Field(min_length=1, max_length=30)
 
+    @model_validator(mode='after')
+    def intake_date_not_future(self):
+        if self.kind == 'intake' and self.log_date > service_today():
+            raise ValueError('실제 섭취일은 미래일 수 없습니다.')
+        return self
+
 
 class MeasurementProposal(StrictModel):
     kind: Literal["measurement"] = "measurement"
