@@ -1,0 +1,289 @@
+{
+  "scope": "synthetic_public_independent_fixed_queries",
+  "phase": "after",
+  "samples": 6,
+  "rows": [
+    {
+      "first_event_ms": 6167.2,
+      "first_answer_ms": 20436.5,
+      "total_ms": 22790.7,
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 16.227246
+      },
+      "trace_id": "38afa204-2e37-475c-9473-566562a5c0fd",
+      "answer_chars": 209,
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "fcc3685f-b72a-4ac3-b590-cafb21db0f36",
+          "seq": 1,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        },
+        {
+          "type": "progress",
+          "run_id": "fcc3685f-b72a-4ac3-b590-cafb21db0f36",
+          "seq": 2,
+          "phase": "delegation",
+          "label": "식사 전문 Agent에 위임 중",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "fcc3685f-b72a-4ac3-b590-cafb21db0f36",
+          "seq": 3,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        }
+      ],
+      "answer": "점심 메뉴로는 복합 탄수화물과 양질의 단백질, 식이섬유가 균형을 이루는 한식 백반(생선구이나 살코기 위주의 육류, 나물 반찬) 또는 단백질 포케를 추천합니다. \n\n튀김이나 면류 대신 단백질과 신선한 채소 위주로 구성하시면 오후 동안 포만감을 안정적으로 유지할 수 있어 감량에 효과적입니다. 외식 시에는 찌개나 국의 국물 섭취를 줄이고 건더기 위주로 드시는 것을 권장합니다. ",
+      "repeat": 0,
+      "turn": 0,
+      "message": "점심 추천해줘. 식단 계획 카드는 만들지 말고 조언만 해줘.",
+      "context_expected": true
+    },
+    {
+      "first_event_ms": 3509.6,
+      "first_answer_ms": 25430.7,
+      "total_ms": 27606.6,
+      "usage": {
+        "tool_calls": 2,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 22.403157
+      },
+      "trace_id": "7e0b26c4-fc6b-4929-8d1a-3128af7363a6",
+      "answer_chars": 219,
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "d2655c55-c8d5-45d8-94f8-592eafa54609",
+          "seq": 1,
+          "phase": "intent",
+          "label": "요청 의도 분석 중"
+        },
+        {
+          "type": "progress",
+          "run_id": "d2655c55-c8d5-45d8-94f8-592eafa54609",
+          "seq": 2,
+          "phase": "delegation",
+          "label": "식사 전문 Agent에 위임 중",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "d2655c55-c8d5-45d8-94f8-592eafa54609",
+          "seq": 3,
+          "phase": "records",
+          "label": "사용자 정보 확인 중",
+          "tool": "read_profile",
+          "agent": "meal"
+        }
+      ],
+      "answer": "네, 한식뷔페에서 추가 리필 없이 한 접시로 양을 정해 드시는 것은 체중 관리 중에도 아주 좋은 실천 방법입니다. \n\n밥은 평소 드시던 분량만큼 담고 나물이나 샐러드 등 채소 반찬을 넉넉히 채운 뒤, 기름기가 적은 고기나 생선, 두부 같은 단백질 반찬을 곁들여보세요. 튀김이나 당분이 많은 양념 요리는 소량만 맛보는 정도로 조절하고 천천히 식사하시면 포만감 있게 균형을 맞추실 수 있습니다. ",
+      "repeat": 0,
+      "turn": 1,
+      "message": "그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아?",
+      "context_expected": false
+    },
+    {
+      "first_event_ms": 4756.6,
+      "first_answer_ms": 19878.1,
+      "total_ms": 22112.0,
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 16.841029
+      },
+      "trace_id": "9ac72f7c-4790-44f8-b0e2-1f54ece1a131",
+      "answer_chars": 233,
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "a8414073-82d9-415d-9917-7daaa323fdb3",
+          "seq": 1,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        },
+        {
+          "type": "progress",
+          "run_id": "a8414073-82d9-415d-9917-7daaa323fdb3",
+          "seq": 2,
+          "phase": "delegation",
+          "label": "식사 전문 Agent에 위임 중",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "a8414073-82d9-415d-9917-7daaa323fdb3",
+          "seq": 3,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        }
+      ],
+      "answer": "체중 감량을 고려한 점심으로는 밥 1공기(잡곡밥 권장)에 생선구이나 기름기 적은 살코기, 두부 등의 단백질 반찬, 그리고 나물이나 쌈 채소를 곁들인 한식 정식을 추천합니다. \n\n단백질과 채소를 먼저 충분히 섭취하면 포만감을 오래 유지하면서 오후 식욕을 안정적으로 관리할 수 있습니다. \n\n외식을 하신다면 맑은 찌개류나 비빔밥(양념장 조절)을 선택하시고, 튀김류나 당류가 많은 소스는 덜어내며 드시는 것을 권장합니다. ",
+      "repeat": 1,
+      "turn": 0,
+      "message": "점심 추천해줘. 식단 계획 카드는 만들지 말고 조언만 해줘.",
+      "context_expected": true
+    },
+    {
+      "first_event_ms": 3560.2,
+      "first_answer_ms": 25575.7,
+      "total_ms": 28041.9,
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 22.347543
+      },
+      "trace_id": "67aad357-e743-423f-a051-aaf32df4d112",
+      "answer_chars": 219,
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "7369d782-f0b8-43a2-9326-f0b511b799a9",
+          "seq": 1,
+          "phase": "intent",
+          "label": "요청 의도 분석 중"
+        },
+        {
+          "type": "progress",
+          "run_id": "7369d782-f0b8-43a2-9326-f0b511b799a9",
+          "seq": 2,
+          "phase": "delegation",
+          "label": "식사 전문 Agent에 위임 중",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "7369d782-f0b8-43a2-9326-f0b511b799a9",
+          "seq": 3,
+          "phase": "records",
+          "label": "사용자 정보 확인 중",
+          "tool": "read_profile",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "7369d782-f0b8-43a2-9326-f0b511b799a9",
+          "seq": 4,
+          "phase": "records",
+          "label": "오늘 섭취 기록 확인 중",
+          "tool": "read_intake",
+          "agent": "meal"
+        }
+      ],
+      "answer": "한식뷔페에서 한 접시로 제한하여 식사하시는 것은 섭취량을 조절하고 균형을 맞추기에 아주 좋은 방법입니다. \n\n접시의 절반은 나물이나 샐러드 등 채소류로 채우고, 1/4은 기름기가 적은 살코기·두부·달걀 등의 단백질, 나머지 1/4은 밥으로 구성해 보세요. 전이나 튀김, 양념이 강한 볶음류는 양을 조절하시고, 국은 국물보다 건더기 위주로 드시면 부담 없이 건강한 한 끼를 드실 수 있습니다. ",
+      "repeat": 1,
+      "turn": 1,
+      "message": "그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아?",
+      "context_expected": false
+    },
+    {
+      "first_event_ms": 5001.9,
+      "first_answer_ms": 21654.5,
+      "total_ms": 23631.8,
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 18.331402
+      },
+      "trace_id": "1570ac89-b9dc-4985-992f-bdf37c97a8c0",
+      "answer_chars": 189,
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "c1c9a3ea-0161-4da2-8ca0-8d2e4f26de47",
+          "seq": 1,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        },
+        {
+          "type": "progress",
+          "run_id": "c1c9a3ea-0161-4da2-8ca0-8d2e4f26de47",
+          "seq": 2,
+          "phase": "delegation",
+          "label": "식사 전문 Agent에 위임 중",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "c1c9a3ea-0161-4da2-8ca0-8d2e4f26de47",
+          "seq": 3,
+          "phase": "coaching_context",
+          "label": "확인한 기록을 바탕으로 답변 준비 중"
+        }
+      ],
+      "answer": "체중 감량을 위해 점심으로는 단백질과 식이섬유를 충분히 채울 수 있는 생선구이 백반, 닭가슴살 샐러드 웜볼, 또는 두부 쌈밥을 추천합니다. 식사 시 밥은 2/3~한 공기 정도로 유지하고 튀김류나 당류가 많은 소스는 덜어내는 것이 좋습니다. 나물이나 쌈 채소를 먼저 드시면 포만감을 오래 유지하면서 칼로리를 자연스럽게 조절할 수 있습니다. ",
+      "repeat": 2,
+      "turn": 0,
+      "message": "점심 추천해줘. 식단 계획 카드는 만들지 말고 조언만 해줘.",
+      "context_expected": true
+    },
+    {
+      "first_event_ms": 3423.6,
+      "first_answer_ms": 24270.7,
+      "total_ms": 26679.6,
+      "usage": {
+        "tool_calls": 2,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 21.134854999999998
+      },
+      "trace_id": "670bbc74-b0dc-4010-a3c3-799bc4c92d9f",
+      "answer_chars": 205,
+      "progress": [
+        {
+          "type": "progress",
+          "run_id": "df08ed9f-e8ff-420b-b7d6-ead5dcb70466",
+          "seq": 1,
+          "phase": "intent",
+          "label": "요청 의도 분석 중"
+        },
+        {
+          "type": "progress",
+          "run_id": "df08ed9f-e8ff-420b-b7d6-ead5dcb70466",
+          "seq": 2,
+          "phase": "delegation",
+          "label": "식사 전문 Agent에 위임 중",
+          "agent": "meal"
+        },
+        {
+          "type": "progress",
+          "run_id": "df08ed9f-e8ff-420b-b7d6-ead5dcb70466",
+          "seq": 3,
+          "phase": "records",
+          "label": "사용자 정보 확인 중",
+          "tool": "read_profile",
+          "agent": "meal"
+        }
+      ],
+      "answer": "한식뷔페에서 일반식 한 접시로 식사하는 것은 반찬 구성만 신경 쓰신다면 감량 중에도 좋은 선택입니다. 밥은 평소 드시던 양 정도로 담고, 나물과 채소류를 충분히 채운 뒤 기름진 튀김이나 양념육 대신 담백한 육류·생선·두부 위주로 접시를 채워보세요. 짠 국물이나 떡·식혜 같은 단 후식을 피하고 채소부터 천천히 드시면 포만감을 유지하며 부담 없이 즐기실 수 있습니다. ",
+      "repeat": 2,
+      "turn": 1,
+      "message": "그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아?",
+      "context_expected": false
+    }
+  ],
+  "median_total_ms": 25155.699999999997,
+  "median_first_answer_ms": 22962.6,
+  "limitations": "API requests omit messages: these are independent queries, not a browser multiturn benchmark. Only the explicit recommendation is eligible for context prefetch. Small synthetic sample, no p95 generalization. First event is progress, not answer. No real user outcomes."
+}

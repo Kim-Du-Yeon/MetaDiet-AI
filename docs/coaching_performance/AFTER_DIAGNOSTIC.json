@@ -1,0 +1,40 @@
+{
+  "first_event_ms": 5242.7,
+  "first_answer_ms": 24080.0,
+  "total_ms": 26216.3,
+  "usage": {
+    "tool_calls": 3,
+    "delegations": {
+      "meal": 1
+    },
+    "model_calls": 2,
+    "elapsed_seconds": 20.607235
+  },
+  "trace_id": "9e61ada0-98f3-4712-96a8-e3d95872e63b",
+  "answer_chars": 250,
+  "progress": [
+    {
+      "type": "progress",
+      "run_id": "2c9e470f-f7b2-4b29-b714-bc40654273f5",
+      "seq": 1,
+      "phase": "coaching_context",
+      "label": "확인한 기록을 바탕으로 답변 준비 중"
+    },
+    {
+      "type": "progress",
+      "run_id": "2c9e470f-f7b2-4b29-b714-bc40654273f5",
+      "seq": 2,
+      "phase": "delegation",
+      "label": "식사 전문 Agent에 위임 중",
+      "agent": "meal"
+    },
+    {
+      "type": "progress",
+      "run_id": "2c9e470f-f7b2-4b29-b714-bc40654273f5",
+      "seq": 3,
+      "phase": "coaching_context",
+      "label": "확인한 기록을 바탕으로 답변 준비 중"
+    }
+  ],
+  "answer": "하루 목표인 약 2,300kcal를 고려할 때 점심은 밥 한 공기(200g)에 양질의 단백질과 채소를 곁들여 700~800kcal 내외로 균형 있게 구성하시는 것을 추천합니다. 생선구이, 기름기 적은 살코기, 두부 등을 메인 단백질로 두고 나물이나 쌈채소를 충분히 곁들인 한식 백반이나 쌈밥 정식이 든든하면서도 감량에 효과적입니다. 외식을 하실 경우에는 튀김류 대신 구이나 찜 요리를 선택하시고, 국물 요리는 건더기 위주로 드시는 것이 좋습니다. "
+}

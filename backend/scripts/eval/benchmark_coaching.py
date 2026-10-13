@@ -26,7 +26,9 @@ def run(token,payload):
         'usage':done.get('execution_usage'),'trace_id':done.get('trace_id'),'answer_chars':len(content),
         'progress':[e for e in events if e.get('type')=='progress'],'answer':content}
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--phase',choices=['before','after'],required=True);parser.add_argument('--repeats',type=int,default=3);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--phase',choices=['before','after'],required=True);parser.add_argument('--repeats',type=int,default=3);parser.add_argument('--independent-queries',action='store_true');args=parser.parse_args()
+    if args.phase == 'after' and not args.independent_queries:
+        parser.error('After comparisons must explicitly acknowledge independent API queries; browser messages are not included.')
     load_env(ROOT/'backend/.env');load_env(ROOT/'backend/.env.selection-browser')
     token=service_api('/auth/v1/token?grant_type=password','POST',{'email':__import__('os').environ['EMAIL'],'password':__import__('os').environ['PASSWORD']})['access_token']
     json_request(API+'/health',timeout=90)
@@ -35,12 +37,12 @@ def main():
         thread='perf-'+args.phase+'-'+uuid4().hex
         for index,message in enumerate(['점심 추천해줘. 식단 계획 카드는 만들지 말고 조언만 해줘.','그럼 한식뷔페 가서 일반식 한 접시 먹는 건 괜찮아?']):
             row=run(token,{'message':message,'thread_id':thread,'stream_run_id':str(uuid4()),'after_seq':0})
-            if args.phase == 'after' and not any(e.get('phase') == 'coaching_context' for e in row['progress']):
+            if args.phase == 'after' and index == 0 and not any(e.get('phase') == 'coaching_context' for e in row['progress']):
                 raise RuntimeError('new_coaching_context_not_observed; stop instead of measuring old deploy')
-            row.update(repeat=repeat,turn=index,message=message);rows.append(row)
+            row.update(repeat=repeat,turn=index,message=message,context_expected=index == 0);rows.append(row)
             print(args.phase,repeat,index,round(row['total_ms']),row['usage'],flush=True)
-    report={'scope':'synthetic_public_coaching','phase':args.phase,'samples':len(rows),'rows':rows,
+    report={'scope':'synthetic_public_independent_fixed_queries','phase':args.phase,'samples':len(rows),'rows':rows,
       'median_total_ms':statistics.median(r['total_ms'] for r in rows),'median_first_answer_ms':statistics.median(r['first_answer_ms'] for r in rows),
-      'limitations':'Small synthetic sample, no p95 generalization. First event is progress, not answer. No real user outcomes.'}
+      'limitations':'API requests omit messages: these are independent queries, not a browser multiturn benchmark. Only the explicit recommendation is eligible for context prefetch. Small synthetic sample, no p95 generalization. First event is progress, not answer. No real user outcomes.'}
     (ROOT/'docs/coaching_performance'/f'{args.phase.upper()}_LIVE.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 if __name__=='__main__':main()
