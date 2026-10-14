@@ -1,0 +1,68 @@
+{
+  "scope": "public_serial_real_model_real_database_synthetic_fixture",
+  "phase": "before",
+  "expected_commit": "a1eab89c9e653d7e458c6bf1dec9ed6ff1240d72",
+  "health": {
+    "status": "ok",
+    "build": {
+      "commit": "a1eab89c9e653d7e458c6bf1dec9ed6ff1240d72",
+      "protocol": 2,
+      "delivery": "verified_buffered"
+    }
+  },
+  "started_at": "2026-10-14T12:47:09.313776+09:00",
+  "dataset_sha256": "e81f370a057d062be520a85ccd71e51fea9679ddc30a1039730b63cdc4660985",
+  "rows": [
+    {
+      "status": "completed",
+      "first_answer_ms": 9446.478700003354,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 한 공기(약 200g) 분량으로 담고, 기름진 튀김류나 양념육 대신 나물·쌈채소와 살코기 위주의 단백질 반찬을 곁들이시면 하루 목표 범위 내에서 균형 있게 식사하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.189207
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.223,
+        "budget_setup_enqueue": 361.329,
+        "budget_connection_wait": 718.17,
+        "budget_sql": 375.184,
+        "budget_commit": 721.471,
+        "budget_storage": 1815.138,
+        "db_read": 603.646,
+        "model_meal": 3446.235,
+        "graph_total": 7542.685,
+        "terminal_checkpoint": 223.029,
+        "response_snapshot": 72.94,
+        "public_stats": 255.252
+      },
+      "build": {
+        "commit": "a1eab89c9e653d7e458c6bf1dec9ed6ff1240d72",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "3251951a-9fd5-40a6-87d6-c6372c0efa71",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2058,
+        "output_tokens": 103,
+        "total_tokens": 2161
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "total_ms": 9517.73389999289,
+      "pair": 0,
+      "case": "confirmed",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "preflight_unavailable": [],
+      "mode": "baseline",
+      "no_write": true,
+      "postflight_verified": true
+    }
+  ]
+}

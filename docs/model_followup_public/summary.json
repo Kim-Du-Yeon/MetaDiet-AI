@@ -1,0 +1,174 @@
+{
+  "experiment": "model",
+  "measurement": {
+    "before": {
+      "attempts": 100,
+      "completed": 100,
+      "failed_or_blocked": 0,
+      "unexpected_proposals": 0,
+      "first_answer_ms_completed": {
+        "n": 100,
+        "median": 7747.14,
+        "p95": 9479.88
+      },
+      "total_ms_completed": {
+        "n": 100,
+        "median": 7821.04,
+        "p95": 9551.32
+      },
+      "duration_ms_all_attempts": {
+        "n": 100,
+        "median": 7821.04,
+        "p95": 9551.32
+      },
+      "model_calls_completed": {
+        "n": 100,
+        "median": 1.0,
+        "p95": 1
+      },
+      "fresh": 100,
+      "no_write": 100
+    },
+    "after": {
+      "attempts": 100,
+      "completed": 100,
+      "failed_or_blocked": 0,
+      "unexpected_proposals": 0,
+      "first_answer_ms_completed": {
+        "n": 100,
+        "median": 6263.32,
+        "p95": 10655.11
+      },
+      "total_ms_completed": {
+        "n": 100,
+        "median": 6334.47,
+        "p95": 10727.31
+      },
+      "duration_ms_all_attempts": {
+        "n": 100,
+        "median": 6334.47,
+        "p95": 10727.31
+      },
+      "model_calls_completed": {
+        "n": 100,
+        "median": 1.0,
+        "p95": 2
+      },
+      "fresh": 100,
+      "no_write": 100
+    }
+  },
+  "quality": {
+    "before": {
+      "attempts": 100,
+      "judge_completed": 100,
+      "relevant": 100,
+      "actionable": 100,
+      "no_invented_intake": 100,
+      "no_false_save_claim": 100,
+      "concise": 100,
+      "judge_model": "gemini-3.1-pro-preview"
+    },
+    "after": {
+      "attempts": 100,
+      "judge_completed": 100,
+      "relevant": 100,
+      "actionable": 98,
+      "no_invented_intake": 100,
+      "no_false_save_claim": 100,
+      "concise": 100,
+      "judge_model": "gemini-3.1-pro-preview"
+    }
+  },
+  "primary_quality": {
+    "before": {
+      "attempts": 100,
+      "judge_completed": 100,
+      "relevant": 100,
+      "actionable": 100,
+      "no_invented_intake": 100,
+      "no_false_save_claim": 100,
+      "concise": 100
+    },
+    "after": {
+      "attempts": 100,
+      "judge_completed": 100,
+      "relevant": 100,
+      "actionable": 98,
+      "no_invented_intake": 100,
+      "no_false_save_claim": 100,
+      "concise": 100
+    }
+  },
+  "stages": {
+    "before": {
+      "model_meal": {
+        "n": 100,
+        "median": 2674.69,
+        "p95": 4025.96
+      },
+      "budget_storage": {
+        "n": 100,
+        "median": 1762.34,
+        "p95": 1780.3
+      },
+      "db_read": {
+        "n": 100,
+        "median": 432.56,
+        "p95": 673.86
+      },
+      "graph_total": {
+        "n": 100,
+        "median": 6012.07,
+        "p95": 7518.11
+      },
+      "output_tokens": {
+        "n": 100,
+        "median": 107.5,
+        "p95": 325
+      }
+    },
+    "after": {
+      "model_meal": {
+        "n": 100,
+        "median": 1244.05,
+        "p95": 2276.03
+      },
+      "budget_storage": {
+        "n": 100,
+        "median": 1776.96,
+        "p95": 2486.49
+      },
+      "db_read": {
+        "n": 100,
+        "median": 413.54,
+        "p95": 628.44
+      },
+      "graph_total": {
+        "n": 100,
+        "median": 4524.47,
+        "p95": 8805.06
+      },
+      "output_tokens": {
+        "n": 100,
+        "median": 100.0,
+        "p95": 131
+      }
+    }
+  },
+  "gates": {
+    "complete_safe_fresh": true,
+    "no_proposals": true,
+    "complete_judge": true,
+    "quality_nonregression": false,
+    "all_attempt_median_5_percent": true,
+    "all_attempt_p95_nonregression": false,
+    "model_median_10_percent": true,
+    "complete_finite_timings": true
+  },
+  "adopt": false,
+  "limitations": [
+    "Sequential windows, 20 repeated synthetic cases, not independent users.",
+    "One automated same-provider judge; no clinical correctness claim."
+  ]
+}

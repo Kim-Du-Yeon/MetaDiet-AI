@@ -1282,3 +1282,8 @@ KDRI 2025 유지 에너지를 기준으로 대한비만학회 2022 식사치료�
 - 재현 테스트에서 미등록 제품 3회 검색은 위임 포함 도구 4회에서 종료하며 proposal 저장은 호출하지 않는다. 이는 scripted-model 회귀 테스트이며 실제 모델의 동일 호출 횟수를 보장하는 성능 측정은 아니다.
 - 전체 백엔드 회귀: 391 passed, 1 기존 optional parser skipped, 3 deprecation warnings. 기본 Windows 임시폴더 접근 거부는 pytest 공식 basetemp 옵션으로 프로젝트 전용 테스트 임시폴더를 지정하여 해결했다.
 - 참고: https://reference.langchain.com/python/langchain/agents/middleware/tool_call_limit/ToolCallLimitMiddleware , https://docs.pytest.org/en/stable/how-to/tmp_path.html
+## 2026-10-14 공개 모델 병목 실험
+
+기존 200건 분석과 추가 공개 300건(기존100, Flash-Lite100, 도구 생략100)을 분리한다. 두 비교에서 기존100과 judge를 SHA 보존해 재사용했으며 독립적인 baseline 두 번으로 세지 않는다. 완료·최신 기록 반영·미저장·judge 완전성, 품질 각 항목 비회귀, 전체 중앙값5% 개선, p95 비회귀, 모델 단계 중앙값10% 개선을 사전 기준으로 설정했다.
+
+기존 전체 중앙값/p95 7.821/9.551초. Flash-Lite 6.334/10.727초 및 actionable98/100으로 기각, 도구 생략 7.884/9.707초로 기각했다. 각100건 완료·최신값·미저장, 실패·보류0건이다. SDK 모델 timer 경계와 순차 시간대 차이를 제한으로 공개한다. 실제 사용자·임상 검증이나 장애율 개선으로 표현하지 않는다. [모델 실험](docs/model_followup_public/README.md), [도구 실험](docs/tool_free_followup_public/README.md)에 사전 기준·원본·judge·판정·복구 증거를 보존한다.
