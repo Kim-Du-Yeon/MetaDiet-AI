@@ -1,0 +1,72 @@
+{
+  "scope": "public_serial_real_model_real_database_synthetic_fixture",
+  "phase": "before",
+  "expected_commit": "3fc5aed0903de48ef6aa4ceec97a856893def2c1",
+  "health": {
+    "status": "ok",
+    "build": {
+      "commit": "3fc5aed0903de48ef6aa4ceec97a856893def2c1",
+      "protocol": 2,
+      "delivery": "verified_buffered"
+    }
+  },
+  "started_at": "2026-10-14T13:47:16.710203+09:00",
+  "dataset_sha256": "e81f370a057d062be520a85ccd71e51fea9679ddc30a1039730b63cdc4660985",
+  "rows": [
+    {
+      "status": "completed",
+      "first_answer_ms": 9017.780800000764,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 충분히 괜찮습니다. 밥은 평소 드시던 반 공기에서 한 공기 정도로 담고, 나물과 쌈 채소류를 먼저 채운 뒤 단백질 반찬을 곁들이시면 균형 있게 드실 수 있습니다. 기름진 튀김류나 당분이 많은 양념 반찬의 양만 가볍게 조절해 보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.148019
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 355.463,
+        "budget_setup_enqueue": 360.461,
+        "budget_connection_wait": 716.508,
+        "budget_sql": 452.353,
+        "budget_commit": 717.025,
+        "budget_storage": 1886.197,
+        "db_read": 431.428,
+        "sdk_prepare_meal": 599.119,
+        "tool_bind_meal": 2.408,
+        "provider_roundtrip": 3635.046,
+        "model_meal": 3636.25,
+        "graph_total": 7256.968,
+        "terminal_checkpoint": 224.645,
+        "response_snapshot": 73.844,
+        "public_stats": 319.613
+      },
+      "build": {
+        "commit": "3fc5aed0903de48ef6aa4ceec97a856893def2c1",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "d3232169-3bd9-4eed-9605-a5383139d6b1",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2052,
+        "output_tokens": 111,
+        "total_tokens": 2163
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "read",
+      "total_ms": 9087.575099998503,
+      "pair": 0,
+      "case": "confirmed",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "preflight_unavailable": [],
+      "mode": "baseline",
+      "no_write": true,
+      "postflight_verified": true
+    }
+  ]
+}

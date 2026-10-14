@@ -1287,3 +1287,8 @@ KDRI 2025 유지 에너지를 기준으로 대한비만학회 2022 식사치료�
 기존 200건 분석과 추가 공개 300건(기존100, Flash-Lite100, 도구 생략100)을 분리한다. 두 비교에서 기존100과 judge를 SHA 보존해 재사용했으며 독립적인 baseline 두 번으로 세지 않는다. 완료·최신 기록 반영·미저장·judge 완전성, 품질 각 항목 비회귀, 전체 중앙값5% 개선, p95 비회귀, 모델 단계 중앙값10% 개선을 사전 기준으로 설정했다.
 
 기존 전체 중앙값/p95 7.821/9.551초. Flash-Lite 6.334/10.727초 및 actionable98/100으로 기각, 도구 생략 7.884/9.707초로 기각했다. 각100건 완료·최신값·미저장, 실패·보류0건이다. SDK 모델 timer 경계와 순차 시간대 차이를 제한으로 공개한다. 실제 사용자·임상 검증이나 장애율 개선으로 표현하지 않는다. [모델 실험](docs/model_followup_public/README.md), [도구 실험](docs/tool_free_followup_public/README.md)에 사전 기준·원본·judge·판정·복구 증거를 보존한다.
+## 2026-10-14 SDK 준비 분리와 새 공개100쌍
+
+이전100건을 재사용하지 않고 같은4질문·5상태·5반복의 공개 기준100건과 provider 재사용100건을 새로 수집했다. `sdk_prepare_meal`, `tool_bind_meal`, `provider_roundtrip`을 분리하고 기존 nested timer를 합산하지 않는다. baseline3fc5aed, 후보bf37eda. 모델3.8 Flash/low/invoke/default/read와 budget pipeline·현재 DB 조회를 유지했다.
+
+전체 중앙값7.918→7.406초, p95 11.021→9.662초, 준비514.69→0.03ms, 외부호출2.760→2.671초. 양쪽 완료·최신값·미저장100/100, judge100완료·품질5기준각100/100, 실패0건. 모델구간10% 기준 미달(약3.22% 개선)로adopt=false. flagfalse 복구와 공개응답을 확인했고 합성 계정·env를 삭제했다. [동결 기준·원본·judge·판정·복구](docs/sdk_phase_public/README.md). 별도 preflight의 Live 직전CancelledError도 보존했다. 실제 사용자/임상 검증으로 일반화하지 않고 provider 내부 순수 네트워크/생성은 아직 분리하지 못했음을 명시한다.

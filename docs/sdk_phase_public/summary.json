@@ -1,0 +1,175 @@
+{
+  "measurement": {
+    "before": {
+      "attempts": 100,
+      "completed": 100,
+      "failed_or_blocked": 0,
+      "unexpected_proposals": 0,
+      "first_answer_ms_completed": {
+        "n": 100,
+        "median": 7845.29,
+        "p95": 10949.95
+      },
+      "total_ms_completed": {
+        "n": 100,
+        "median": 7918.13,
+        "p95": 11021.3
+      },
+      "duration_ms_all_attempts": {
+        "n": 100,
+        "median": 7918.13,
+        "p95": 11021.3
+      },
+      "model_calls_completed": {
+        "n": 100,
+        "median": 1.0,
+        "p95": 1
+      },
+      "fresh": 100,
+      "no_write": 100
+    },
+    "after": {
+      "attempts": 100,
+      "completed": 100,
+      "failed_or_blocked": 0,
+      "unexpected_proposals": 0,
+      "first_answer_ms_completed": {
+        "n": 100,
+        "median": 7335.38,
+        "p95": 9589.1
+      },
+      "total_ms_completed": {
+        "n": 100,
+        "median": 7406.28,
+        "p95": 9662.35
+      },
+      "duration_ms_all_attempts": {
+        "n": 100,
+        "median": 7406.28,
+        "p95": 9662.35
+      },
+      "model_calls_completed": {
+        "n": 100,
+        "median": 1.0,
+        "p95": 1
+      },
+      "fresh": 100,
+      "no_write": 100
+    }
+  },
+  "stages": {
+    "before": {
+      "sdk_prepare_meal": {
+        "n": 100,
+        "median": 514.69,
+        "p95": 681.35
+      },
+      "tool_bind_meal": {
+        "n": 100,
+        "median": 2.41,
+        "p95": 87.38
+      },
+      "provider_roundtrip": {
+        "n": 100,
+        "median": 2760.21,
+        "p95": 5065.97
+      },
+      "model_meal": {
+        "n": 100,
+        "median": 2760.29,
+        "p95": 5066.04
+      },
+      "budget_storage": {
+        "n": 100,
+        "median": 1799.15,
+        "p95": 1832.36
+      },
+      "db_read": {
+        "n": 100,
+        "median": 431.1,
+        "p95": 590.68
+      },
+      "graph_total": {
+        "n": 100,
+        "median": 6099.56,
+        "p95": 8609.77
+      }
+    },
+    "after": {
+      "sdk_prepare_meal": {
+        "n": 100,
+        "median": 0.03,
+        "p95": 0.03
+      },
+      "tool_bind_meal": {
+        "n": 100,
+        "median": 2.25,
+        "p95": 4.07
+      },
+      "provider_roundtrip": {
+        "n": 100,
+        "median": 2671.29,
+        "p95": 4646.43
+      },
+      "model_meal": {
+        "n": 100,
+        "median": 2671.37,
+        "p95": 4646.51
+      },
+      "budget_storage": {
+        "n": 100,
+        "median": 1759.21,
+        "p95": 1777.47
+      },
+      "db_read": {
+        "n": 100,
+        "median": 459.91,
+        "p95": 653.53
+      },
+      "graph_total": {
+        "n": 100,
+        "median": 5537.83,
+        "p95": 7688.68
+      }
+    }
+  },
+  "quality": {
+    "before": {
+      "attempts": 100,
+      "judge_completed": 100,
+      "relevant": 100,
+      "actionable": 100,
+      "no_invented_intake": 100,
+      "no_false_save_claim": 100,
+      "concise": 100,
+      "judge_model": "gemini-3.1-pro-preview"
+    },
+    "after": {
+      "attempts": 100,
+      "judge_completed": 100,
+      "relevant": 100,
+      "actionable": 100,
+      "no_invented_intake": 100,
+      "no_false_save_claim": 100,
+      "concise": 100,
+      "judge_model": "gemini-3.1-pro-preview"
+    }
+  },
+  "limitations": [
+    "Provider roundtrip includes serialization, transport, generation and parsing.",
+    "Nested timers are not additive; sequential repeated synthetic cases, not real users."
+  ],
+  "gates": {
+    "complete_safe_fresh": true,
+    "no_proposals": true,
+    "complete_judge": true,
+    "quality_nonregression": true,
+    "all_attempt_median_5_percent": true,
+    "all_attempt_p95_nonregression": true,
+    "model_median_10_percent": false,
+    "phase_complete": true,
+    "finite_phase_timings": true,
+    "failure_rate_nonregression": true
+  },
+  "adopt": false
+}
