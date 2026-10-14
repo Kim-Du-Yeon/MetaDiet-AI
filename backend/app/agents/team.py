@@ -201,7 +201,9 @@ class DietTeam:
         self.context_metrics["db_queries"] += 1
         from app.agents.execution_stream import measure_stage
         async with measure_stage('db_read'):
-            return await asyncio.to_thread(execute)
+            from app.core.external_retry import retry_external
+            return await asyncio.wait_for(retry_external(lambda: asyncio.to_thread(execute),
+                operation='profile_intake_read'), self.budget.remaining())
 
     async def read_profile(self, args):
         if self.profile is not None:

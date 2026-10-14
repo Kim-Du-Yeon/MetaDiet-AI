@@ -11,6 +11,8 @@ import budget_public100
 def evidence():
     base = dict(total_ms_completed={'median':1000,'p95':1500,'n':100},completed=100,fresh=100,no_write=100,unexpected_proposals=0)
     candidate = {**base,'total_ms_completed':{'median':800,'p95':1300,'n':100}}
+    base['duration_ms_all_attempts'] = dict(base['total_ms_completed'])
+    candidate['duration_ms_all_attempts'] = dict(candidate['total_ms_completed'])
     storage = {'baseline':{'median':300,'n':100},'pipeline':{'median':100,'n':100}}
     grades = {'baseline':{'judge_completed':100,'relevant':100},'pipeline':{'judge_completed':100,'relevant':100}}
     return base,candidate,storage,grades
@@ -37,6 +39,12 @@ def test_partial_response_timings_block_adoption():
     args = evidence()
     args[1]['total_ms_completed']['n'] = 99
     assert not all(public_gates(*args).values())
+
+
+def test_slow_failed_attempts_cannot_hide_behind_completed_timings():
+    args = evidence()
+    args[1]['duration_ms_all_attempts']['p95'] = 90000
+    assert not public_gates(*args)['all_attempt_p95_not_10_percent_worse']
 
 
 def test_missing_stats_are_retried_not_treated_as_zero(monkeypatch):

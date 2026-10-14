@@ -7,6 +7,26 @@ import pytest
 from app.api.routes import main
 
 
+async def test_failed_stream_retains_safe_retry_diagnostics():
+    from app.agents.execution_stream import emit_runtime_event
+    async def fail(*args, **kwargs):
+        await emit_runtime_event('external_failure', operation='model', error_type='GoogleAPIError', retry=False)
+        raise RuntimeError('private provider content')
+    graph = SimpleNamespace(ainvoke=fail, aupdate_state=AsyncMock())
+    config = {'configurable': {'thread_id': str(uuid4())}, 'metadata': {'stream_protocol': 2}}
+    raw = []
+    with pytest.raises(RuntimeError, match='private provider content'):
+        async for frame in main._run_and_stream(graph, {}, config, str(uuid4())):
+            raw.append(frame)
+    frames = events(raw)
+    final = frames[-1]
+    assert final['type'] == 'failed'
+    assert final['external_failures'][0]['error_type'] == 'GoogleAPIError'
+    assert 'graph_total' in final['stage_timings_ms']
+    assert 'private provider content' not in str(final)
+    assert graph.aupdate_state.call_args.args[1]['response_diagnostics']['external_failures']
+
+
 def events(frames):
     return [json.loads(f.split('data: ', 1)[1]) for f in frames]
 

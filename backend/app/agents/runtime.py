@@ -128,8 +128,10 @@ async def run_agent(*, model, instruction: str, request: str,
             await emit_runtime_event("model_started", agent=agent_name, context_verified=context_verified)
             async with measure_stage('model_' + agent_name):
                 from app.agents.model_delivery import invoke_model
-                response = await asyncio.wait_for(invoke_model(bound, messages, config,
-                    buffered_stream=buffered_stream), budget.remaining())
+                from app.core.external_retry import retry_external
+                response = await asyncio.wait_for(retry_external(
+                    lambda: invoke_model(bound, messages, config, buffered_stream=buffered_stream),
+                    operation='model', before_retry=lambda: budget.reserve('model')), budget.remaining())
             messages.append(response)
             if getattr(response, "invalid_tool_calls", []):
                 raise ExecutionStopped("invalid_tool_call")

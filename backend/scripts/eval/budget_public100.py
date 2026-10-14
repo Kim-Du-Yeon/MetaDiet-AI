@@ -53,11 +53,16 @@ def persist_capture(report, output, row, before, readback):
     save()
 
 def main():
+    global FOLDER, COMMIT
     parser = argparse.ArgumentParser()
     parser.add_argument('phase', choices=['setup','before','after','cleanup'])
     parser.add_argument('--resume',action='store_true',help='Append remaining cases without removing failed attempts')
     parser.add_argument('--probe',action='store_true',help='One separately recorded deployment warm-up, outside the 100')
+    parser.add_argument('--folder', default='docs/budget_public')
+    parser.add_argument('--expected-commit', default=COMMIT)
     args = parser.parse_args()
+    FOLDER = ROOT / args.folder
+    COMMIT = args.expected_commit
     load_env(ROOT/'backend/.env')
     FOLDER.mkdir(exist_ok=True)
     if args.phase == 'setup':

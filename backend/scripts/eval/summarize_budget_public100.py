@@ -2,6 +2,7 @@
 import hashlib
 import json
 import math
+import argparse
 from pathlib import Path
 from summarize_latency100 import distribution, quality, summarize
 from summarize_budget_pipeline100 import decision
@@ -15,11 +16,18 @@ def public_gates(base, candidate, storage, grades):
         group[key] == 100 for group in (base,candidate) for key in ('completed','fresh','no_write'))
     gates['no_unexpected_proposals'] = all(group['unexpected_proposals']==0 for group in (base,candidate))
     gates['complete_response_timings'] = all(group['total_ms_completed'].get('n')==100 for group in (base,candidate))
+    a, b = base.get('duration_ms_all_attempts', {}), candidate.get('duration_ms_all_attempts', {})
+    valid = all(v.get('n') == 100 and v.get('median') is not None and v.get('p95') is not None for v in (a,b))
+    gates['all_attempt_median_5_percent'] = valid and b['median'] <= .95*a['median']
+    gates['all_attempt_p95_not_10_percent_worse'] = valid and b['p95'] <= 1.1*a['p95']
     return gates
 
 
 def main():
-    folder = ROOT/'docs/budget_public'
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--folder', default='docs/budget_public')
+    args = parser.parse_args()
+    folder = ROOT/args.folder
     groups, grades, stages, reports, judges = {}, {}, {}, {}, {}
     for phase,mode in [('before','baseline'),('after','pipeline')]:
         source = folder/(phase+'.json')

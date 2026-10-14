@@ -280,6 +280,11 @@ async def _invoke_with_progress(graph, graph_input, config: dict, journal: Execu
                          "metadata": {**config.get("metadata", {}), "trace_id": str(trace_id),
                                       'build_commit': build['commit'], 'delivery': build['delivery']}}
     async def sink(kind: str, payload: dict):
+        if kind == 'external_failure':
+            failures = journal.diagnostics.setdefault('external_failures', [])
+            if len(failures) < 32:
+                failures.append(payload)
+            return
         if kind == 'execution_route':
             journal.diagnostics.update(payload)
             # Child model spans inherit these safe, finite configuration labels.
@@ -325,10 +330,14 @@ async def _invoke_with_progress(graph, graph_input, config: dict, journal: Execu
     except Exception:
         try:
             await graph.aupdate_state(config, {"execution_status": "failed", "execution_error": "execution_failed",
-                                              "trace_id": str(trace_id)})
+                                              "trace_id": str(trace_id),
+                                              **({'response_build': build, 'response_diagnostics': journal.diagnostics}
+                                                 if _v2(config) else {})})
         finally:
             await journal.publish("failed", {"content": "대화 실행에 실패했습니다. 잠시 후 다시 시도해주세요.",
-                                             "trace_id": str(trace_id)})
+                                             "trace_id": str(trace_id), 'build': build,
+                                             'external_failures': journal.diagnostics.get('external_failures', []),
+                                             'stage_timings_ms': dict(journal.timings)})
         raise
     finally:
         reset_event_sink(token)
@@ -468,7 +477,9 @@ async def _public_stats(user_id):
         strategy = sb.table("diet_strategies").select("daily_calories").eq("user_id", user_id).eq("is_active", True).limit(1).execute().data
         return {"today_calories": sum(float(m["calories"]) for m in meals), "target_calories": strategy[0]["daily_calories"]} if strategy else {}
     try:
-        return await asyncio.to_thread(read)
+        from app.core.external_retry import retry_external
+        return await asyncio.wait_for(retry_external(lambda: asyncio.to_thread(read),
+            operation='public_stats'), timeout=15)
     except Exception:
         return {}  # Unavailable is not zero; retain the UI's last known values.
 

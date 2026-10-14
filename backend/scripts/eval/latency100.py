@@ -44,16 +44,20 @@ def capture(token, payload):
             for line in response:
                 if not line.startswith(b'data:'): continue
                 event = json.loads(line[5:])
+                if event['type']=='started':
+                    row.update(build=event.get('build'), trace_id=event.get('trace_id'))
                 if event['type']=='answer_delta':
                     if row['first_answer_ms'] is None: row['first_answer_ms']=(time.perf_counter()-started)*1000
                     row['answer'] += event.get('content','')
                 elif event['type'] in ('failed','error'):
                     row['error_type']=event['type']
+                    for key in ('external_failures', 'stage_timings_ms', 'build', 'trace_id'):
+                        if key in event: row[key] = event[key]
                 elif event['type']=='completed':
                     row.update(status=event.get('execution_status','completed'),usage=event.get('execution_usage') or {},
                         stage_timings_ms=event.get('stage_timings_ms') or {},build=event.get('build'),
                         trace_id=event.get('trace_id'),route=event.get('route'))
-                    for key in ('model_tokens', 'model_first_token_ms', 'reasoning', 'model_delivery'):
+                    for key in ('model_tokens', 'model_first_token_ms', 'reasoning', 'model_delivery', 'external_failures'):
                         if key in event: row[key] = event[key]
                     if 'answer' in event: row['answer']=event['answer']
                     if event.get('pending_proposal'):
