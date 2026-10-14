@@ -60,7 +60,7 @@ def main():
     parser.add_argument('--probe',action='store_true',help='One separately recorded deployment warm-up, outside the 100')
     parser.add_argument('--folder', default='docs/budget_public')
     parser.add_argument('--expected-commit', default=COMMIT)
-    parser.add_argument('--experiment', choices=['budget', 'brief', 'model', 'tool_free'], default='budget')
+    parser.add_argument('--experiment', choices=['budget', 'brief', 'model', 'tool_free', 'sdk'], default='budget')
     args = parser.parse_args()
     FOLDER = ROOT / args.folder
     COMMIT = args.expected_commit
@@ -154,6 +154,10 @@ def main():
             assert (row.get('route'), row.get('reasoning'), row.get('model_delivery'), row.get('model_name'), row.get('answer_style')) == (
                 'followup_direct', 'low', 'invoke', 'gemini-3.8-flash', 'default'), 'Model configuration mismatch; evidence retained'
             assert row.get('tool_policy') == ('none' if args.phase=='after' else 'read'), 'Tool policy mismatch; evidence retained'
+        if args.experiment == 'sdk' and row['status'] == 'completed':
+            assert (row.get('route'), row.get('reasoning'), row.get('model_delivery'), row.get('model_name'), row.get('answer_style'), row.get('tool_policy')) == (
+                'followup_direct', 'low', 'invoke', 'gemini-3.8-flash', 'default', 'read'), 'Model configuration mismatch; evidence retained'
+            assert all(k in stages for k in ('sdk_prepare_meal', 'tool_bind_meal', 'provider_roundtrip')), 'Phase timings missing; evidence retained'
         # Missing timings on failures remain in the denominator and block adoption.
 
 if __name__ == '__main__': main()

@@ -58,6 +58,10 @@ class ConfiguredChatModel(Runnable):
     def invoke(self, input, config=None, **kwargs):
         return self._text_response(self._client().invoke(input, config=config, **kwargs))
 
+    def prepare(self):
+        """Build only the stateless provider, before timing its external call."""
+        self._client()
+
     async def ainvoke(self, input, config=None, **kwargs):
         return self._text_response(await self._client().ainvoke(input, config=config, **kwargs))
 

@@ -103,7 +103,13 @@ async def run_agent(*, model, instruction: str, request: str,
                  if allowed_tools is None or tool.name in allowed_tools}
     if len({tool.name for tool in tools}) != len(tools):
         raise ValueError("Duplicate tool names")
-    bound = model.bind_tools([tool.schema() for tool in available.values()]) if available else model
+    from app.agents.execution_stream import emit_runtime_event, measure_stage
+    from app.core.llm import ConfiguredChatModel
+    async with measure_stage('sdk_prepare_' + agent_name):
+        if isinstance(model, ConfiguredChatModel):
+            model.prepare()
+    async with measure_stage('tool_bind_' + agent_name):
+        bound = model.bind_tools([tool.schema() for tool in available.values()]) if available else model
     messages = [SystemMessage(content=instruction), HumanMessage(content=request)]
     events = []
     read_cache: dict[tuple[str, str], dict] = {}
@@ -122,7 +128,8 @@ async def run_agent(*, model, instruction: str, request: str,
                 if selection_mode == "enforce" and decision.choice in candidates:
                     turn_tools = {} if decision.choice == "finish" else {decision.choice: available[decision.choice]}
             if decision_selector:
-                bound = model.bind_tools([tool.schema() for tool in turn_tools.values()]) if turn_tools else model
+                async with measure_stage('tool_bind_' + agent_name):
+                    bound = model.bind_tools([tool.schema() for tool in turn_tools.values()]) if turn_tools else model
             await budget.reserve("model")
             from app.agents.execution_stream import emit_runtime_event, measure_stage
             await emit_runtime_event("model_started", agent=agent_name, context_verified=context_verified)

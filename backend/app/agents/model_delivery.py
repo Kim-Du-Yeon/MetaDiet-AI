@@ -1,11 +1,17 @@
 """Native provider streaming is buffered until the existing final guard passes."""
 import time
 from langchain_core.messages import message_chunk_to_message
-from app.agents.execution_stream import emit_runtime_event
+from app.agents.execution_stream import emit_runtime_event, measure_stage
 from app.core.llm import response_text
 
 
 async def invoke_model(model, messages, config, *, buffered_stream=False):
+    # Includes provider serialization/network/generation/parse; not pure GPU time.
+    async with measure_stage('provider_roundtrip'):
+        return await _invoke_model(model, messages, config, buffered_stream=buffered_stream)
+
+
+async def _invoke_model(model, messages, config, *, buffered_stream=False):
     started = time.perf_counter()
     if not buffered_stream:
         response = await model.ainvoke(messages, config=config)
