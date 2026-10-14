@@ -1,5 +1,9 @@
 # 2026-10-09 upgrade verification
 
+## Public budget pipeline, 100 attempts per condition (2026-10-14)
+
+[Public report](docs/budget_public/README.md): identical public commit `f60c040`, configuration flag only, 100 attempts each. Completion/latest calorie-target reflection: baseline 99/100, candidate 100/100; meal/strategy unchanged 100/100 in both. Storage median 2497.04→1800.26ms (n=99/100), completed total median 8235.73→7806.99ms, p95 10987.28→10758.95ms. Five automated quality criteria each score 99/100→100/100 with all judge calls completed. One baseline Gemini 504 is preserved; strict complete-evidence gate fails, so no permanent enablement. Flag restored false, public old-path/freshness probe passed, fixture deleted. Backend 977 passed, 1 existing skipped. Public real-model/DB synthetic-account measurements remain separate from local isolated-DB results. Sequential time-window confounding remains.
+
 ## Durable budget pipeline (2026-10-14)
 
 [Matched100-pair report](docs/budget_pipeline/README.md): real Gemini + isolated real Postgres budget, synthetic profile/intake. Storage median380.64→275.47ms, total3966.23→3940.20ms, total p956188.70→6213.39ms. Storage gate passes but total>=5% improvement gate fails, so BUDGET_PIPELINE remains false. Local and previous public2.46s figures are not comparable before/after. All200 attempts complete with fresh values; live cap/rollback/cancellation/pool-reuse checks pass.

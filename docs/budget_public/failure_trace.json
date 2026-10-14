@@ -1,0 +1,33 @@
+{
+  "scope": "single_failed_synthetic_request",
+  "matches": 3,
+  "errors": [
+    {
+      "name": "ChatGoogleGenerativeAI",
+      "run_id": "01a137d3-2671-7dd1-a538-6fb7bc84d9c8",
+      "markers": [
+        "GoogleAPIError",
+        "504",
+        "DEADLINE_EXCEEDED"
+      ]
+    },
+    {
+      "name": "supervisor",
+      "run_id": "01a137d3-1ae1-7531-aa09-d31f6b5ad149",
+      "markers": [
+        "GoogleAPIError",
+        "504",
+        "DEADLINE_EXCEEDED"
+      ]
+    },
+    {
+      "name": "LangGraph",
+      "run_id": "9c9ed9b2-3ff8-4756-aae8-d3b9ee00771f",
+      "markers": [
+        "GoogleAPIError",
+        "504",
+        "DEADLINE_EXCEEDED"
+      ]
+    }
+  ]
+}

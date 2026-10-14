@@ -1,0 +1,4817 @@
+{
+  "scope": "public_serial_real_model_real_database_synthetic_fixture",
+  "phase": "after",
+  "expected_commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+  "health": {
+    "status": "ok",
+    "build": {
+      "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+      "protocol": 2,
+      "delivery": "verified_buffered"
+    }
+  },
+  "started_at": "2026-10-14T09:51:46.654664+09:00",
+  "dataset_sha256": "e81f370a057d062be520a85ccd71e51fea9679ddc30a1039730b63cdc4660985",
+  "rows": [
+    {
+      "status": "completed",
+      "first_answer_ms": 8090.366799995536,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 한 공기 분량(약 200g)으로 담고, 기름진 볶음이나 튀김류 대신 나물·채소 반찬과 살코기 위주의 단백질을 곁들여 드시면 균형 잡힌 식사를 하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.440113
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.833,
+        "budget_setup_enqueue": 360.61,
+        "budget_connection_wait": 718.592,
+        "budget_sql": 363.303,
+        "budget_commit": 718.148,
+        "budget_storage": 1800.321,
+        "db_read": 405.343,
+        "model_meal": 3019.959,
+        "graph_total": 6282.088,
+        "terminal_checkpoint": 223.961,
+        "response_snapshot": 72.71,
+        "public_stats": 284.201
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "bf280694-3482-46eb-aa18-c903e9933d3b",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2057,
+        "output_tokens": 101,
+        "total_tokens": 2158
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8163.988699991023,
+      "pair": 0,
+      "case": "confirmed",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 10695.362400001613,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal입니다. \n\n점심으로 샌드위치를 드셔도 괜찮습니다. 닭가슴살이나 달걀 등 단백질과 신선한 채소가 충분히 들어간 구성을 선택하시면 영양 균형을 맞추기 좋습니다. 소스는 과하지 않게 가볍게 조절하여 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 8.067369
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 357.065,
+        "budget_setup_enqueue": 362.181,
+        "budget_connection_wait": 719.85,
+        "budget_sql": 363.351,
+        "budget_commit": 722.206,
+        "budget_storage": 1805.698,
+        "db_read": 398.163,
+        "model_meal": 5648.025,
+        "graph_total": 9003.676,
+        "terminal_checkpoint": 220.916,
+        "response_snapshot": 72.688,
+        "public_stats": 289.457
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "2fbb095e-b0a7-4fa0-9b4a-76e57d92264f",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2054,
+        "output_tokens": 580,
+        "total_tokens": 2634
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 10767.4410000036,
+      "pair": 1,
+      "case": "confirmed",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7208.054599992465,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal입니다.\n\n밥과 계란 조합은 탄수화물과 양질의 단백질을 챙길 수 있어 식사 구성으로 아주 좋습니다. 다만 비타민이나 식이섬유가 부족해지기 쉬우므로 김치, 나물, 샐러드 같은 채소 반찬을 곁들여 드시는 것을 권장합니다. 계란을 조리할 때는 조리용 기름의 양만 적당히 조절해 주시면 균형 잡힌 식사로 충분합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.582625
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 357.533,
+        "budget_setup_enqueue": 361.264,
+        "budget_connection_wait": 719.447,
+        "budget_sql": 367.416,
+        "budget_commit": 754.142,
+        "budget_storage": 1841.348,
+        "db_read": 420.138,
+        "model_meal": 2296.248,
+        "graph_total": 5501.423,
+        "terminal_checkpoint": 224.058,
+        "response_snapshot": 72.869,
+        "public_stats": 298.639
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "d9e68753-0914-46f7-afda-fd6dfbe9bc18",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2047,
+        "output_tokens": 128,
+        "total_tokens": 2175
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7280.788100004429,
+      "pair": 2,
+      "case": "confirmed",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7635.128199995961,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 충분히 채울 수 있는 아주 좋은 선택입니다. 다만 현재 탄수화물 섭취 여유가 충분하므로, 지속 가능한 에너지를 위해 고구마나 통곡물 빵, 잡곡밥 같은 복합 탄수화물을 소량 곁들여 균형을 맞추는 것을 추천합니다. 드레싱은 당류가 적은 올리브오일이나 발사믹 등을 가볍게 뿌려 드시면 좋습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.080909999999999
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.923,
+        "budget_setup_enqueue": 363.905,
+        "budget_connection_wait": 721.433,
+        "budget_sql": 362.409,
+        "budget_commit": 719.386,
+        "budget_storage": 1803.511,
+        "db_read": 359.999,
+        "model_meal": 2800.609,
+        "graph_total": 5966.238,
+        "terminal_checkpoint": 219.822,
+        "response_snapshot": 73.059,
+        "public_stats": 271.365
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "10383d05-f0f3-4c5b-aa4f-144fec4b8131",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2051,
+        "output_tokens": 135,
+        "total_tokens": 2186
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7702.3332999960985,
+      "pair": 3,
+      "case": "confirmed",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9027.3637999926,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal입니다. \n\n한식뷔페에서 일반식을 드셔도 괜찮으며, 남은 기준 내에서 균형 있게 식사하시려면 밥은 기본 한 공기(약 200g) 정도로 덜고 나물과 샐러드 등 채소 반찬을 접시의 절반가량 채우는 것을 권장합니다. 제육볶음이나 불고기 같은 단백질 반찬은 기름기 위주보다는 살코기 중심으로 적당량 곁들이고, 튀김이나 전, 단 음료는 가볍게 조절하시면 좋습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.148666
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 372.006,
+        "budget_setup_enqueue": 361.877,
+        "budget_connection_wait": 734.524,
+        "budget_sql": 365.53,
+        "budget_commit": 715.412,
+        "budget_storage": 1815.758,
+        "db_read": 331.915,
+        "model_meal": 3894.405,
+        "graph_total": 7293.051,
+        "terminal_checkpoint": 225.292,
+        "response_snapshot": 72.846,
+        "public_stats": 327.563
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "4e92329f-3299-4ede-8df5-8f33266e111e",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2049,
+        "output_tokens": 146,
+        "total_tokens": 2195
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 9101.514900001348,
+      "pair": 4,
+      "case": "edited",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7810.300199998892,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal입니다. \n\n점심으로 샌드위치를 드셔도 하루 기준 칼로리 여유가 충분하여 괜찮습니다. 닭가슴살이나 달걀, 채소가 풍부한 샌드위치를 고르시고 고칼로리 소스를 가볍게 곁들이시면 더욱 균형 잡힌 식사가 됩니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.214888
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 358.795,
+        "budget_setup_enqueue": 364.811,
+        "budget_connection_wait": 724.201,
+        "budget_sql": 368.245,
+        "budget_commit": 721.439,
+        "budget_storage": 1814.155,
+        "db_read": 484.743,
+        "model_meal": 2651.68,
+        "graph_total": 6093.348,
+        "terminal_checkpoint": 221.179,
+        "response_snapshot": 72.822,
+        "public_stats": 282.003
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "3dcdbf15-87ab-44a6-9cb6-c6b801ccc1ee",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2052,
+        "output_tokens": 92,
+        "total_tokens": 2144
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7882.398799993098,
+      "pair": 5,
+      "case": "edited",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7243.318200009526,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n밥과 계란은 탄수화물과 양질의 단백질을 균형 있게 챙길 수 있는 좋은 조합입니다. 남은 열량 여유가 충분하므로 밥 한 공기(약 200g)에 계란 1~2개를 곁들여 드셔도 괜찮습니다. 여기에 김치, 나물 등 식이섬유가 풍부한 채소를 함께 곁들이시면 더욱 균형 잡힌 식사가 됩니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.606779
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 371.955,
+        "budget_setup_enqueue": 365.374,
+        "budget_connection_wait": 737.893,
+        "budget_sql": 362.023,
+        "budget_commit": 717.214,
+        "budget_storage": 1817.411,
+        "db_read": 456.011,
+        "model_meal": 2327.715,
+        "graph_total": 5485.838,
+        "terminal_checkpoint": 218.702,
+        "response_snapshot": 72.611,
+        "public_stats": 306.653
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "ae9657d9-d8b9-4f9e-8e67-cd48e82028a8",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2045,
+        "output_tokens": 121,
+        "total_tokens": 2166
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7313.507600003504,
+      "pair": 6,
+      "case": "edited",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 10073.936799992225,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 충분히 채울 수 있어 좋은 선택입니다. 다만 탄수화물이 다소 부족할 수 있으니 고구마나 통곡물 빵, 밥 반 공기 정도를 곁들이면 더 균형 잡힌 식사가 됩니다. 드레싱은 가볍게 곁들여 지방 섭취를 조절해 보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.278898
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.195,
+        "budget_setup_enqueue": 365.412,
+        "budget_connection_wait": 722.184,
+        "budget_sql": 363.083,
+        "budget_commit": 716.014,
+        "budget_storage": 1801.577,
+        "db_read": 421.071,
+        "model_meal": 4878.841,
+        "graph_total": 8421.04,
+        "terminal_checkpoint": 220.04,
+        "response_snapshot": 72.752,
+        "public_stats": 276.654
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "c8d40a51-4cbf-4a5c-857d-5ccb076e42a1",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2052,
+        "output_tokens": 111,
+        "total_tokens": 2163
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 10146.923399996012,
+      "pair": 7,
+      "case": "edited",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7216.996800008928,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 공기밥 분량(약 200g)으로 조절하고, 기름진 전류나 튀김류보다는 나물과 쌈 채소, 생선이나 살코기 위주의 단백질 반찬을 먼저 덜어 드시면 균형 잡힌 식사가 가능합니다. 짠 국물이나 자극적인 양념 메뉴 섭취를 조금 줄여 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.611373
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.737,
+        "budget_setup_enqueue": 360.084,
+        "budget_connection_wait": 717.392,
+        "budget_sql": 362.144,
+        "budget_commit": 714.116,
+        "budget_storage": 1793.932,
+        "db_read": 433.247,
+        "model_meal": 2257.055,
+        "graph_total": 5509.228,
+        "terminal_checkpoint": 224.289,
+        "response_snapshot": 73.597,
+        "public_stats": 270.138
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "bfff0a94-60a7-4bf1-b915-e5347e5ed748",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1825,
+        "output_tokens": 126,
+        "total_tokens": 1951
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7293.198100000154,
+      "pair": 8,
+      "case": "deleted",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7538.658899997245,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal입니다. \n\n현재 하루 섭취 여유가 충분하므로 샌드위치를 드셔도 괜찮습니다. 닭가슴살, 달걀 등 단백질과 신선한 채소가 충분히 들어간 샌드위치를 고르고, 마요네즈나 당류가 많은 소스는 가볍게 조절해 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.97978
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 355.872,
+        "budget_setup_enqueue": 361.772,
+        "budget_connection_wait": 718.22,
+        "budget_sql": 362.181,
+        "budget_commit": 714.227,
+        "budget_storage": 1794.957,
+        "db_read": 374.691,
+        "model_meal": 2670.95,
+        "graph_total": 5855.761,
+        "terminal_checkpoint": 224.156,
+        "response_snapshot": 72.785,
+        "public_stats": 265.282
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "bcc79ea4-2074-4783-9cc6-5faadaaed02a",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1822,
+        "output_tokens": 98,
+        "total_tokens": 1920
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7609.792599992943,
+      "pair": 9,
+      "case": "deleted",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7682.207200006815,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal\n\n밥과 계란의 조합은 탄수화물과 양질의 단백질을 균형 있게 섭취할 수 있어 식사로 아주 좋습니다. 계란은 프라이나 삶은 달걀 형태로 1~2개 곁들이시고, 여기에 김치나 나물 등 채소 반찬을 함께 드시면 식이섬유와 포만감을 더 보완할 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.163322
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 375.341,
+        "budget_setup_enqueue": 360.205,
+        "budget_connection_wait": 736.099,
+        "budget_sql": 362.551,
+        "budget_commit": 719.255,
+        "budget_storage": 1818.231,
+        "db_read": 344.453,
+        "model_meal": 2929.914,
+        "graph_total": 6048.568,
+        "terminal_checkpoint": 219.587,
+        "response_snapshot": 73.139,
+        "public_stats": 259.456
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "61633b3f-7c93-4580-8221-f8017ff82b70",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1821,
+        "output_tokens": 103,
+        "total_tokens": 1924
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7754.28130000364,
+      "pair": 10,
+      "case": "deleted",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7754.7233999939635,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal입니다.\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 충분히 채울 수 있어 감량 식단으로 아주 좋은 구성입니다. 다만 탄수화물과 필수 에너지가 부족해질 수 있으니 고구마, 잡곡밥 반 공기, 통밀빵 등의 복합 탄수화물을 곁들여 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.337879
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.837,
+        "budget_setup_enqueue": 365.491,
+        "budget_connection_wait": 729.341,
+        "budget_sql": 362.753,
+        "budget_commit": 714.618,
+        "budget_storage": 1807.034,
+        "db_read": 362.091,
+        "model_meal": 2972.972,
+        "graph_total": 6177.557,
+        "terminal_checkpoint": 220.141,
+        "response_snapshot": 72.617,
+        "public_stats": 191.738
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "b0757b9f-ac85-41bb-8dc3-800740d69549",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1824,
+        "output_tokens": 102,
+        "total_tokens": 1926
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7825.635500004864,
+      "pair": 11,
+      "case": "deleted",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7516.414600002463,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 한 공기(약 200g) 분량으로 덜고, 나물과 쌈 채소를 넉넉히 담아 채우면 포만감을 지키기 좋습니다. 기름진 볶음이나 튀김류는 소량만 담고 국물은 건더기 위주로 드시면 기준 칼로리 안에서 건강하게 식사하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.994906
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.838,
+        "budget_setup_enqueue": 360.362,
+        "budget_connection_wait": 717.811,
+        "budget_sql": 364.98,
+        "budget_commit": 716.142,
+        "budget_storage": 1799.248,
+        "db_read": 412.536,
+        "model_meal": 2640.999,
+        "graph_total": 5872.18,
+        "terminal_checkpoint": 223.743,
+        "response_snapshot": 72.648,
+        "public_stats": 264.994
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "1c8ef3e7-88cb-4cf7-ba7f-2e56572abc61",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2055,
+        "output_tokens": 122,
+        "total_tokens": 2177
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7586.900400012382,
+      "pair": 12,
+      "case": "goal_changed",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8448.44869998633,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다. 점심으로 샌드위치를 드셔도 영양 균형과 남은 하루 기준 칼로리 안에서 충분히 괜찮습니다. 통밀빵에 닭가슴살이나 달걀, 신선한 채소가 듬뿍 들어간 메뉴를 고르고 마요네즈 등 고칼로리 소스는 가볍게 조절해 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.860211
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 357.814,
+        "budget_setup_enqueue": 360.053,
+        "budget_connection_wait": 718.427,
+        "budget_sql": 380.179,
+        "budget_commit": 724.182,
+        "budget_storage": 1823.085,
+        "db_read": 376.936,
+        "model_meal": 3526.793,
+        "graph_total": 6749.393,
+        "terminal_checkpoint": 225.307,
+        "response_snapshot": 72.887,
+        "public_stats": 299.751
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "a75e3ff3-1bea-4215-a38d-869fca0a1b1f",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2048,
+        "output_tokens": 103,
+        "total_tokens": 2151
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8520.087599987164,
+      "pair": 13,
+      "case": "goal_changed",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7822.595100005856,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal\n\n밥과 계란은 탄수화물과 단백질을 균형 있게 섭취할 수 있어 식사로 드셔도 괜찮습니다. 밥 한 공기(약 200g)에 계란 1~2개와 함께 나물이나 김치 등 채소 반찬을 곁들이시면 더욱 균형 잡힌 식사가 됩니다. 조리 시 식용유 사용량만 가볍게 조절해 주시면 부담 없이 즐기실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.247051
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 439.94,
+        "budget_setup_enqueue": 362.306,
+        "budget_connection_wait": 802.813,
+        "budget_sql": 362.881,
+        "budget_commit": 717.688,
+        "budget_storage": 1883.686,
+        "db_read": 369.336,
+        "model_meal": 2769.448,
+        "graph_total": 6137.22,
+        "terminal_checkpoint": 221.614,
+        "response_snapshot": 72.711,
+        "public_stats": 288.003
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "3045e66f-4e61-44a4-9c29-6a67c0d6d22a",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2051,
+        "output_tokens": 125,
+        "total_tokens": 2176
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7887.71040001302,
+      "pair": 14,
+      "case": "goal_changed",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7307.733299996471,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 충분히 채울 수 있어 좋은 선택입니다. 다만 탄수화물이 다소 부족할 수 있으니 고구마나 통곡물 빵, 밥 반 공기 정도를 함께 곁들여 균형을 맞춰보세요. 드레싱은 가볍게 곁들이는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.680557
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.903,
+        "budget_setup_enqueue": 361.434,
+        "budget_connection_wait": 718.978,
+        "budget_sql": 363.598,
+        "budget_commit": 715.779,
+        "budget_storage": 1798.647,
+        "db_read": 352.531,
+        "model_meal": 2398.864,
+        "graph_total": 5571.078,
+        "terminal_checkpoint": 219.65,
+        "response_snapshot": 72.719,
+        "public_stats": 346.038
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "52044dfd-25f6-4d3f-adff-0cf4469b13b2",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2052,
+        "output_tokens": 105,
+        "total_tokens": 2157
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7368.398899998283,
+      "pair": 15,
+      "case": "goal_changed",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7726.381400003447,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal.\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 먹는 한 공기(약 200g) 정도로 담고, 나물과 쌈 채소를 접시의 절반가량 채운 뒤 기름기가 적은 단백질 반찬을 곁들이시면 균형 잡힌 식사를 하실 수 있습니다. 양념이 강한 볶음류나 튀김류는 적당량만 덜어 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.192899
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 358.645,
+        "budget_setup_enqueue": 360.289,
+        "budget_connection_wait": 719.481,
+        "budget_sql": 361.187,
+        "budget_commit": 714.162,
+        "budget_storage": 1795.117,
+        "db_read": 377.259,
+        "model_meal": 2840.453,
+        "graph_total": 6068.426,
+        "terminal_checkpoint": 221.125,
+        "response_snapshot": 72.871,
+        "public_stats": 274.15
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "33304367-9301-4e7d-8fc8-bdc16942a893",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1819,
+        "output_tokens": 126,
+        "total_tokens": 1945
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7796.557200010284,
+      "pair": 16,
+      "case": "prior_day_only",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7315.392899996368,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal입니다. 점심으로 샌드위치를 드셔도 전혀 문제없으며 든든한 한 끼로 좋은 선택입니다. 통밀빵에 닭가슴살이나 달걀, 신선한 채소를 듬뿍 곁들인 구성으로 선택하시면 균형 잡힌 식사를 하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.749765
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.888,
+        "budget_setup_enqueue": 362.75,
+        "budget_connection_wait": 720.214,
+        "budget_sql": 361.724,
+        "budget_commit": 715.637,
+        "budget_storage": 1797.871,
+        "db_read": 393.087,
+        "model_meal": 2342.159,
+        "graph_total": 5611.639,
+        "terminal_checkpoint": 221.171,
+        "response_snapshot": 72.659,
+        "public_stats": 282.992
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "e4b8fd8f-15a9-4c08-9b52-36dfa08c39c3",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1823,
+        "output_tokens": 86,
+        "total_tokens": 1909
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7385.913899997831,
+      "pair": 17,
+      "case": "prior_day_only",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7745.716699995683,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal.\n\n밥과 계란의 조합은 탄수화물과 단백질을 균형 있게 챙길 수 있어 식사로 아주 좋습니다. 계란 1~2개에 밥을 곁들이시고, 식이섬유가 풍부한 채소나 김치류를 함께 더해주시면 더욱 균형 잡힌 식사가 됩니다. 조리 시 식용유 사용량만 가볍게 조절해 보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.172998
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 360.208,
+        "budget_setup_enqueue": 364.083,
+        "budget_connection_wait": 724.864,
+        "budget_sql": 362.729,
+        "budget_commit": 716.921,
+        "budget_storage": 1804.869,
+        "db_read": 403.557,
+        "model_meal": 2724.16,
+        "graph_total": 6044.418,
+        "terminal_checkpoint": 221.573,
+        "response_snapshot": 73.366,
+        "public_stats": 271.309
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "651f89b7-bc77-4061-ac8c-4d67a3c16464",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1821,
+        "output_tokens": 110,
+        "total_tokens": 1931
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7817.4213000020245,
+      "pair": 18,
+      "case": "prior_day_only",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8495.388499999535,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal입니다.\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 충분히 채울 수 있어 다이어트에 좋은 조합입니다. 다만 탄수화물과 에너지가 다소 부족할 수 있으니 고구마, 통곡물 빵, 또는 가벼운 밥 반 공기를 함께 곁들여 드시는 것을 권장합니다. 드레싱은 당류가 낮은 올리브유나 발사믹을 적정량 활용해 균형을 맞춰보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.7252659999999995
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.392,
+        "budget_setup_enqueue": 361.489,
+        "budget_connection_wait": 718.43,
+        "budget_sql": 361.903,
+        "budget_commit": 717.734,
+        "budget_storage": 1798.346,
+        "db_read": 362.738,
+        "model_meal": 3322.681,
+        "graph_total": 6814.861,
+        "terminal_checkpoint": 221.331,
+        "response_snapshot": 72.714,
+        "public_stats": 258.309
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "eaacc3d1-deff-44fa-9596-dd84e770db09",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1827,
+        "output_tokens": 127,
+        "total_tokens": 1954
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8573.184299995773,
+      "pair": 19,
+      "case": "prior_day_only",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7519.7220999980345,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 한 공기 분량(약 200g)으로 담고 나물이나 쌈채소 등 채소류를 충분히 채운 뒤, 기름진 부위나 튀김류 위주의 반찬 대신 담백한 단백질 위주로 적정량 곁들여 드시면 균형 잡힌 식사를 하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.935332
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.474,
+        "budget_setup_enqueue": 362.863,
+        "budget_connection_wait": 719.882,
+        "budget_sql": 362.518,
+        "budget_commit": 717.22,
+        "budget_storage": 1799.909,
+        "db_read": 381.604,
+        "model_meal": 2461.284,
+        "graph_total": 5823.579,
+        "terminal_checkpoint": 225.595,
+        "response_snapshot": 73.659,
+        "public_stats": 283.297
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "d29c89d2-4625-492c-854e-a0dd6b4dc79b",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2051,
+        "output_tokens": 116,
+        "total_tokens": 2167
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7593.215400003828,
+      "pair": 20,
+      "case": "confirmed",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7779.839000009815,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal입니다. 점심으로 샌드위치를 드셔도 영양 목표 범위 내에서 충분히 괜찮습니다. 닭가슴살이나 달걀, 채소가 풍부한 샌드위치를 선택하시고 마요네즈 등 소스가 과하지 않은 메뉴를 추천합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.191489
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 357.836,
+        "budget_setup_enqueue": 360.391,
+        "budget_connection_wait": 718.934,
+        "budget_sql": 368.051,
+        "budget_commit": 717.304,
+        "budget_storage": 1804.58,
+        "db_read": 357.282,
+        "model_meal": 2897.224,
+        "graph_total": 6072.456,
+        "terminal_checkpoint": 221.001,
+        "response_snapshot": 72.841,
+        "public_stats": 280.201
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "c7d91846-6a51-4579-9de3-dca0ca587e5a",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2050,
+        "output_tokens": 81,
+        "total_tokens": 2131
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7851.849900005618,
+      "pair": 21,
+      "case": "confirmed",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7767.061399994418,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n밥과 계란의 조합은 탄수화물과 양질의 단백질을 균형 있게 섭취할 수 있어 식사로 드시기에 매우 좋습니다. 포만감과 미네랄을 보완하기 위해 김치나 나물, 샐러드 같은 채소 반찬을 곁들여 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.1828710000000004
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.4,
+        "budget_setup_enqueue": 361.317,
+        "budget_connection_wait": 718.312,
+        "budget_sql": 363.229,
+        "budget_commit": 719.659,
+        "budget_storage": 1801.49,
+        "db_read": 403.817,
+        "model_meal": 2922.876,
+        "graph_total": 6077.731,
+        "terminal_checkpoint": 226.109,
+        "response_snapshot": 73.604,
+        "public_stats": 276.256
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "c88d91f1-79d8-40e3-b147-e4da76ef2ea6",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2048,
+        "output_tokens": 97,
+        "total_tokens": 2145
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7838.815800001612,
+      "pair": 22,
+      "case": "confirmed",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7440.483699989272,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 충분히 채울 수 있어 좋은 선택입니다. 다만 현재 섭취량과 목표 에너지를 고려했을 때 탄수화물이 다소 부족할 수 있으므로, 고구마나 현미밥 등 복합 탄수화물을 소량 곁들여 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.973885
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.913,
+        "budget_setup_enqueue": 362.024,
+        "budget_connection_wait": 719.51,
+        "budget_sql": 363.385,
+        "budget_commit": 717.911,
+        "budget_storage": 1801.109,
+        "db_read": 358.097,
+        "model_meal": 2729.146,
+        "graph_total": 5815.655,
+        "terminal_checkpoint": 220.573,
+        "response_snapshot": 73.93,
+        "public_stats": 225.575
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "357d0429-b5f0-4392-84b8-a19df4f55db2",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2049,
+        "output_tokens": 101,
+        "total_tokens": 2150
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7512.547599995742,
+      "pair": 23,
+      "case": "confirmed",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 6934.716299991123,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 먹는 한 공기(약 200g) 분량으로 담고, 기름진 볶음이나 튀김류보다는 나물과 쌈 채소, 기름기 적은 단백질 반찬 위주로 구성해 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.439055
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 358.39,
+        "budget_setup_enqueue": 365.814,
+        "budget_connection_wait": 724.834,
+        "budget_sql": 365.589,
+        "budget_commit": 721.075,
+        "budget_storage": 1811.804,
+        "db_read": 274.329,
+        "model_meal": 2282.518,
+        "graph_total": 5282.922,
+        "terminal_checkpoint": 221.79,
+        "response_snapshot": 72.952,
+        "public_stats": 230.809
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "9a791cd3-afe4-4baa-b816-7c0f682abf88",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2053,
+        "output_tokens": 98,
+        "total_tokens": 2151
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7007.4437000002945,
+      "pair": 24,
+      "case": "edited",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7426.513000013074,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n현재 기준 여유 칼로리가 약 1,150 kcal 남아 있어 점심으로 샌드위치를 드셔도 괜찮습니다. 닭가슴살이나 달걀 등 단백질과 신선한 채소가 풍부한 샌드위치를 선택하시면 균형 잡힌 식사 관리에 더욱 좋습니다. 마요네즈나 당류가 높은 소스는 적당량으로 조절해 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.915497
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 358.425,
+        "budget_setup_enqueue": 362.382,
+        "budget_connection_wait": 723.06,
+        "budget_sql": 372.194,
+        "budget_commit": 718.392,
+        "budget_storage": 1813.949,
+        "db_read": 376.247,
+        "model_meal": 2493.349,
+        "graph_total": 5801.274,
+        "terminal_checkpoint": 229.679,
+        "response_snapshot": 73.032,
+        "public_stats": 236.142
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "35902935-22dd-430e-8b75-d2f652d77662",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2052,
+        "output_tokens": 116,
+        "total_tokens": 2168
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7497.108500014292,
+      "pair": 25,
+      "case": "edited",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7030.090200001723,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal입니다.\n\n밥과 계란은 탄수화물과 단백질을 균형 있게 보충할 수 있어 좋은 선택입니다. 여기에 김치나 나물, 샐러드 같은 채소를 곁들이시면 식이섬유와 포만감을 더 챙기실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.446621
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 357.995,
+        "budget_setup_enqueue": 362.674,
+        "budget_connection_wait": 721.309,
+        "budget_sql": 366.12,
+        "budget_commit": 719.794,
+        "budget_storage": 1807.517,
+        "db_read": 411.614,
+        "model_meal": 2021.377,
+        "graph_total": 5333.475,
+        "terminal_checkpoint": 221.835,
+        "response_snapshot": 72.879,
+        "public_stats": 275.279
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "a163b578-a5de-40e2-a30d-f4b93970a8ef",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2052,
+        "output_tokens": 82,
+        "total_tokens": 2134
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7098.806100009824,
+      "pair": 26,
+      "case": "edited",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8115.915100002894,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal입니다.\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 보충하기에 아주 훌륭한 선택입니다. 현재 섭취 여유량이 충분하므로, 에너지가 부족하지 않도록 고구마나 통곡물 밥 같은 복합 탄수화물을 적정량 곁들여 드시는 것을 권장합니다. 드레싱은 가벼운 오일이나 오리엔탈 계열로 적당량 활용해 균형을 맞춰보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.581448
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 362.486,
+        "budget_setup_enqueue": 359.694,
+        "budget_connection_wait": 722.76,
+        "budget_sql": 364.797,
+        "budget_commit": 717.549,
+        "budget_storage": 1805.394,
+        "db_read": 376.285,
+        "model_meal": 3101.281,
+        "graph_total": 6462.726,
+        "terminal_checkpoint": 219.68,
+        "response_snapshot": 72.96,
+        "public_stats": 250.908
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "6ec8879e-2c17-4c9e-8097-11a3abd6d5a0",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2049,
+        "output_tokens": 129,
+        "total_tokens": 2178
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8185.823099993286,
+      "pair": 27,
+      "case": "edited",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 10760.644099995261,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal입니다. \n\n한식뷔페에서 일반식을 드셔도 충분히 괜찮습니다. 밥은 평소 드시던 정량만큼만 담고 나물이나 쌈 채소를 접시에 넉넉히 채운 뒤, 고기·생선 등 단백질 반찬을 곁들여 드시면 균형 잡힌 식사를 하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 8.001637
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 357.435,
+        "budget_setup_enqueue": 360.315,
+        "budget_connection_wait": 718.273,
+        "budget_sql": 365.735,
+        "budget_commit": 715.893,
+        "budget_storage": 1800.202,
+        "db_read": 363.876,
+        "model_meal": 5589.574,
+        "graph_total": 9137.067,
+        "terminal_checkpoint": 221.334,
+        "response_snapshot": 73.104,
+        "public_stats": 258.182
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "a4b81ac4-572b-402e-8285-9ab9bfdfbf2e",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1826,
+        "output_tokens": 429,
+        "total_tokens": 2255
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 10832.702500003506,
+      "pair": 28,
+      "case": "deleted",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9833.53009998973,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal입니다. 점심으로 샌드위치를 드셔도 괜찮습니다. 닭가슴살이나 달걀처럼 단백질이 풍부하고 채소가 넉넉히 들어간 샌드위치를 선택하시고, 마요네즈나 자극적인 소스 대신 가벼운 드레싱을 곁들이시면 더욱 균형 잡힌 식사가 됩니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.234285
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 361.073,
+        "budget_setup_enqueue": 359.642,
+        "budget_connection_wait": 721.352,
+        "budget_sql": 363.288,
+        "budget_commit": 714.161,
+        "budget_storage": 1799.104,
+        "db_read": 465.958,
+        "model_meal": 4781.152,
+        "graph_total": 8167.422,
+        "terminal_checkpoint": 220.387,
+        "response_snapshot": 72.639,
+        "public_stats": 244.763
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "65a54c43-f1ea-485c-9b39-500b30f7ee1a",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1825,
+        "output_tokens": 98,
+        "total_tokens": 1923
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 9910.727599999518,
+      "pair": 29,
+      "case": "deleted",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9714.793799998006,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal입니다. 밥과 계란은 탄수화물과 양질의 단백질을 균형 있게 채울 수 있어 좋은 식사 구성입니다. 포만감과 영양 균형을 위해 나물이나 샐러드 같은 채소를 곁들이고, 계란 조리 시 기름 사용량을 적당히 조절해 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.160473
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 374.936,
+        "budget_setup_enqueue": 360.544,
+        "budget_connection_wait": 736.052,
+        "budget_sql": 362.593,
+        "budget_commit": 715.527,
+        "budget_storage": 1814.449,
+        "db_read": 452.083,
+        "model_meal": 4694.889,
+        "graph_total": 8058.106,
+        "terminal_checkpoint": 219.075,
+        "response_snapshot": 73.198,
+        "public_stats": 229.376
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "d87d6bb2-1be8-483f-af17-3a0afc065db5",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1822,
+        "output_tokens": 326,
+        "total_tokens": 2148
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 9787.931700004265,
+      "pair": 30,
+      "case": "deleted",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 10853.675899998052,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal\n\n닭가슴살과 샐러드는 충분한 단백질과 식이섬유를 섭취할 수 있어 감량 식단으로 매우 좋은 선택입니다. 다만 탄수화물이 부족해 포만감이 오래가지 않거나 에너지가 부족할 수 있으니 잡곡밥이나 고구마 등을 소량 곁들여 균형을 맞춰보세요. 드레싱은 당류가 적은 오리엔탈이나 발사믹 등을 적당량 곁들이는 것을 추천합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 8.134267
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 357.278,
+        "budget_setup_enqueue": 360.561,
+        "budget_connection_wait": 718.463,
+        "budget_sql": 364.103,
+        "budget_commit": 719.119,
+        "budget_storage": 1801.973,
+        "db_read": 345.594,
+        "model_meal": 5655.117,
+        "graph_total": 9085.83,
+        "terminal_checkpoint": 228.183,
+        "response_snapshot": 72.696,
+        "public_stats": 321.03
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "b4ef047d-71cb-45b2-bd95-320c0185a86a",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1828,
+        "output_tokens": 396,
+        "total_tokens": 2224
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 10927.590099992813,
+      "pair": 31,
+      "case": "deleted",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8257.093399995938,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 먹는 한 공기(약 200g) 분량으로 맞추고 나물과 쌈 채소를 넉넉히 담아 드시면 포만감을 채우기 좋습니다. 튀김이나 양념육 대신 수육, 생선구이, 두부 같은 담백한 단백질 위주로 선택해 보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.354089
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.381,
+        "budget_setup_enqueue": 361.199,
+        "budget_connection_wait": 718.125,
+        "budget_sql": 362.063,
+        "budget_commit": 717.328,
+        "budget_storage": 1797.8,
+        "db_read": 702.787,
+        "model_meal": 2710.306,
+        "graph_total": 6486.584,
+        "terminal_checkpoint": 223.239,
+        "response_snapshot": 72.822,
+        "public_stats": 312.211
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "54bd91f3-ef08-4693-8be5-c5deba925a30",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2047,
+        "output_tokens": 113,
+        "total_tokens": 2160
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8329.916699993191,
+      "pair": 32,
+      "case": "goal_changed",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8011.305299995001,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다. 점심으로 샌드위치를 드셔도 영양 목표 범위 내에서 충분히 괜찮습니다. 닭가슴살이나 달걀 등 단백질과 신선한 채소가 풍부하고 소스가 과하지 않은 제품을 선택하시면 더욱 균형 잡힌 식사가 됩니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.251922
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.577,
+        "budget_setup_enqueue": 360.47,
+        "budget_connection_wait": 717.639,
+        "budget_sql": 368.772,
+        "budget_commit": 719.101,
+        "budget_storage": 1805.79,
+        "db_read": 467.032,
+        "model_meal": 2736.87,
+        "graph_total": 6146.718,
+        "terminal_checkpoint": 221.177,
+        "response_snapshot": 72.837,
+        "public_stats": 216.904
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "2296af60-1530-4b7e-b71e-8a4511506638",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2054,
+        "output_tokens": 83,
+        "total_tokens": 2137
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8084.797899995465,
+      "pair": 33,
+      "case": "goal_changed",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7563.185199993313,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다. 밥과 계란은 탄수화물과 단백질을 고르게 챙길 수 있어 훌륭한 식사 조합입니다. 밥 한 공기에 계란 1~2개와 함께 김치나 나물 같은 채소 반찬을 곁들이시면 더욱 균형 잡힌 식사가 됩니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.78292
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.559,
+        "budget_setup_enqueue": 359.662,
+        "budget_connection_wait": 716.782,
+        "budget_sql": 362.922,
+        "budget_commit": 718.489,
+        "budget_storage": 1798.474,
+        "db_read": 400.598,
+        "model_meal": 2494.485,
+        "graph_total": 5832.655,
+        "terminal_checkpoint": 221.386,
+        "response_snapshot": 74.438,
+        "public_stats": 307.037
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "a108a1ce-97d6-416b-aa4e-94bb089276cd",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2050,
+        "output_tokens": 91,
+        "total_tokens": 2141
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7634.477699990384,
+      "pair": 34,
+      "case": "goal_changed",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7136.993699998129,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다.\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 채우기에 아주 좋은 조합입니다. 다만 탄수화물이 다소 부족할 수 있으니 고구마나 통곡물 빵, 잡곡밥을 조금 곁들여 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.535801
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 355.893,
+        "budget_setup_enqueue": 360.299,
+        "budget_connection_wait": 716.755,
+        "budget_sql": 362.925,
+        "budget_commit": 716.809,
+        "budget_storage": 1796.76,
+        "db_read": 325.907,
+        "model_meal": 2224.761,
+        "graph_total": 5422.19,
+        "terminal_checkpoint": 221.601,
+        "response_snapshot": 72.928,
+        "public_stats": 291.93
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "3e1c815b-5d4c-4fee-a45a-5d98c8d9387b",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2050,
+        "output_tokens": 86,
+        "total_tokens": 2136
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7205.6430999946315,
+      "pair": 35,
+      "case": "goal_changed",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7266.387099996791,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal.\n\n한식뷔페에서 일반식을 드셔도 충분히 괜찮습니다. 밥은 평소 한 공기 분량(약 200g)으로 조절하고, 기름에 볶거나 튀긴 메뉴보다는 나물·생채소와 구운 고기나 생선 등 단백질 위주로 접시를 채우시면 균형 있게 드실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.666966
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 370.991,
+        "budget_setup_enqueue": 365.288,
+        "budget_connection_wait": 736.845,
+        "budget_sql": 388.78,
+        "budget_commit": 719.486,
+        "budget_storage": 1845.394,
+        "db_read": 393.575,
+        "model_meal": 2310.397,
+        "graph_total": 5560.46,
+        "terminal_checkpoint": 222.092,
+        "response_snapshot": 72.667,
+        "public_stats": 301.003
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "54f5c12f-aa91-4626-9d96-e5fa0f607987",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1825,
+        "output_tokens": 103,
+        "total_tokens": 1928
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7339.139999996405,
+      "pair": 36,
+      "case": "prior_day_only",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7271.924299988314,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal입니다. 샌드위치는 단백질과 채소가 풍부한 구성을 고르시면 점심 식사로 충분히 드셔도 좋습니다. 닭가슴살, 달걀, 로스트비프 등 단백질 위주의 재료에 양상추나 토마토가 넉넉히 들어간 메뉴를 선택하고, 마요네즈 계열 소스는 가볍게 조절해 보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.642817
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 373.668,
+        "budget_setup_enqueue": 359.382,
+        "budget_connection_wait": 733.612,
+        "budget_sql": 373.275,
+        "budget_commit": 719.155,
+        "budget_storage": 1826.331,
+        "db_read": 486.938,
+        "model_meal": 2228.144,
+        "graph_total": 5544.982,
+        "terminal_checkpoint": 220.272,
+        "response_snapshot": 72.766,
+        "public_stats": 282.252
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "4317d1d8-f738-4789-b899-f291923b8d05",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1823,
+        "output_tokens": 108,
+        "total_tokens": 1931
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7347.82529999211,
+      "pair": 37,
+      "case": "prior_day_only",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9780.342800004291,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal\n\n밥과 계란은 탄수화물과 양질의 단백질을 고루 챙길 수 있어 훌륭한 식사 구성입니다. 여기에 김치나 나물, 샐러드 등 식이섬유가 풍부한 채소 반찬을 함께 곁들이시면 영양 균형과 포만감을 더욱 높일 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.429416
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 440.79,
+        "budget_setup_enqueue": 360.353,
+        "budget_connection_wait": 801.779,
+        "budget_sql": 363.235,
+        "budget_commit": 717.483,
+        "budget_storage": 1882.787,
+        "db_read": 444.452,
+        "model_meal": 4017.342,
+        "graph_total": 7588.63,
+        "terminal_checkpoint": 220.642,
+        "response_snapshot": 72.721,
+        "public_stats": 776.451
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "17b99552-3fe1-4367-a016-4d288c98b3d7",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1815,
+        "output_tokens": 95,
+        "total_tokens": 1910
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 9848.98759999487,
+      "pair": 38,
+      "case": "prior_day_only",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7891.248500003712,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal.\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 챙기기에 좋은 구성입니다. 다만 현재 목표 칼로리와 탄수화물 권장량을 고려할 때 에너지가 부족할 수 있으니 밥이나 고구마 같은 복합 탄수화물을 곁들여 균형을 맞춰 드시는 것을 추천합니다. 드레싱은 가벼운 오일이나 오리엔탈 계열로 적당량 활용해 보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.101833
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.242,
+        "budget_setup_enqueue": 362.044,
+        "budget_connection_wait": 718.853,
+        "budget_sql": 364.662,
+        "budget_commit": 717.957,
+        "budget_storage": 1801.766,
+        "db_read": 430.316,
+        "model_meal": 2618.965,
+        "graph_total": 5942.514,
+        "terminal_checkpoint": 220.445,
+        "response_snapshot": 72.818,
+        "public_stats": 288.967
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "8bda65fe-4c6d-4443-9742-dcb6108eeeb8",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1828,
+        "output_tokens": 120,
+        "total_tokens": 1948
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7953.88840000669,
+      "pair": 39,
+      "case": "prior_day_only",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 10687.078699993435,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal입니다. \n\n한식뷔페에서도 밥과 나물 채소, 담백한 고기나 두부 위주로 골라 담으시면 일반식으로 드셔도 괜찮습니다. 전이나 튀김, 단 양념류는 과식하기 쉬우므로 접시에 먹을 만큼만 미리 덜어 조절해 보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.938164
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 357.121,
+        "budget_setup_enqueue": 377.671,
+        "budget_connection_wait": 735.363,
+        "budget_sql": 362.224,
+        "budget_commit": 719.144,
+        "budget_storage": 1817.011,
+        "db_read": 581.032,
+        "model_meal": 5417.645,
+        "graph_total": 8792.616,
+        "terminal_checkpoint": 221.792,
+        "response_snapshot": 72.872,
+        "public_stats": 231.345
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "19c12b1f-3302-4c4f-aa60-78a6b3eb6f83",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2054,
+        "output_tokens": 446,
+        "total_tokens": 2500
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 10758.950000003097,
+      "pair": 40,
+      "case": "confirmed",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8257.384500000626,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n샌드위치는 점심 메뉴로 충분히 드셔도 괜찮습니다. 마요네즈나 당류가 많은 소스를 줄이고 닭가슴살, 달걀, 신선한 채소가 풍부한 통곡물 샌드위치를 선택하시면 남은 하루 영양 균형을 맞추는 데 더욱 좋습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.435593
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.581,
+        "budget_setup_enqueue": 358.897,
+        "budget_connection_wait": 716.009,
+        "budget_sql": 362.338,
+        "budget_commit": 717.615,
+        "budget_storage": 1796.248,
+        "db_read": 694.511,
+        "model_meal": 2879.465,
+        "graph_total": 6333.807,
+        "terminal_checkpoint": 225.017,
+        "response_snapshot": 72.901,
+        "public_stats": 508.793
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "9d6dbce6-ab7a-42d5-a65e-bad66df6602d",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2052,
+        "output_tokens": 92,
+        "total_tokens": 2144
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8329.721300004167,
+      "pair": 41,
+      "case": "confirmed",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7534.533800004283,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n밥과 계란의 조합은 탄수화물과 양질의 단백질을 고루 챙길 수 있어 식사 구성으로 아주 좋습니다. 여기에 김치, 나물, 샐러드 등 식이섬유가 풍부한 채소 반찬을 곁들이시면 영양 균형과 포만감을 더욱 높일 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.971
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.143,
+        "budget_setup_enqueue": 361.076,
+        "budget_connection_wait": 717.871,
+        "budget_sql": 364.844,
+        "budget_commit": 719.539,
+        "budget_storage": 1802.569,
+        "db_read": 401.424,
+        "model_meal": 2547.144,
+        "graph_total": 5875.399,
+        "terminal_checkpoint": 221.279,
+        "response_snapshot": 73.262,
+        "public_stats": 232.089
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "2c217976-5e86-4067-bb25-d299fe947808",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2046,
+        "output_tokens": 96,
+        "total_tokens": 2142
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7607.2928000066895,
+      "pair": 42,
+      "case": "confirmed",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 6941.855099998065,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 충분히 채울 수 있어 좋은 선택입니다. 다만 현재 남은 열량과 영양 균형을 고려했을 때 탄수화물이 부족할 수 있으므로, 통곡물 밥이나 고구마 등을 소량 곁들여 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.434881000000001
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.227,
+        "budget_setup_enqueue": 363.982,
+        "budget_connection_wait": 720.808,
+        "budget_sql": 363.308,
+        "budget_commit": 718.196,
+        "budget_storage": 1802.61,
+        "db_read": 384.469,
+        "model_meal": 2124.356,
+        "graph_total": 5288.174,
+        "terminal_checkpoint": 221.065,
+        "response_snapshot": 72.532,
+        "public_stats": 234.064
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "29ae7cb6-ebcf-43bb-8902-c928f86a92b3",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2058,
+        "output_tokens": 96,
+        "total_tokens": 2154
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7010.773400004837,
+      "pair": 43,
+      "case": "confirmed",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7580.697199999122,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 공기 기준(약 200g)으로 담고 나물이나 쌈채소를 먼저 채운 뒤, 기름진 볶음이나 튀김류는 적당량만 곁들이시면 하루 목표 범위 안에서 균형 있게 식사하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.820817
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 372.312,
+        "budget_setup_enqueue": 360.363,
+        "budget_connection_wait": 733.256,
+        "budget_sql": 361.585,
+        "budget_commit": 717.209,
+        "budget_storage": 1812.343,
+        "db_read": 466.169,
+        "model_meal": 2473.485,
+        "graph_total": 5682.447,
+        "terminal_checkpoint": 221.898,
+        "response_snapshot": 73.202,
+        "public_stats": 293.034
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "897bb291-7b6a-4abb-83e2-7956a22c9869",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2056,
+        "output_tokens": 98,
+        "total_tokens": 2154
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7652.332500001648,
+      "pair": 44,
+      "case": "edited",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7855.1631000009365,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n현재 기준 칼로리에 여유가 있어 샌드위치를 점심으로 드셔도 괜찮습니다. 닭가슴살이나 달걀 등 단백질 재료와 신선한 채소가 풍부하게 들어간 구성을 고르고, 당류나 지방이 많은 진한 소스는 가볍게 곁들이는 것을 추천합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.278884
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 371.734,
+        "budget_setup_enqueue": 362.606,
+        "budget_connection_wait": 734.96,
+        "budget_sql": 368.697,
+        "budget_commit": 716.871,
+        "budget_storage": 1820.847,
+        "db_read": 394.509,
+        "model_meal": 2836.192,
+        "graph_total": 6196.539,
+        "terminal_checkpoint": 220.134,
+        "response_snapshot": 72.549,
+        "public_stats": 264.748
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "261e0cda-fc6e-40ea-af79-98c64bd8d89e",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2051,
+        "output_tokens": 95,
+        "total_tokens": 2146
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7926.089400003548,
+      "pair": 45,
+      "case": "edited",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7709.579400005168,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n밥과 계란은 탄수화물과 양질의 단백질을 균형 있게 챙길 수 있는 아주 좋은 조합입니다. 남은 칼로리 여유도 충분하므로 밥 한 공기(약 200g)에 계란 1~2개를 곁들여 드시면 든든한 식사가 됩니다. 여기에 김치나 나물 같은 채소 반찬을 더해 주시면 식이섬유와 포만감을 함께 챙기실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.978976
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.437,
+        "budget_setup_enqueue": 360.578,
+        "budget_connection_wait": 717.552,
+        "budget_sql": 361.438,
+        "budget_commit": 717.895,
+        "budget_storage": 1797.16,
+        "db_read": 388.983,
+        "model_meal": 2756.45,
+        "graph_total": 5868.217,
+        "terminal_checkpoint": 220.675,
+        "response_snapshot": 72.697,
+        "public_stats": 261.723
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "d5722b0f-12fa-4f8b-a948-14bd9dc6e047",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2044,
+        "output_tokens": 128,
+        "total_tokens": 2172
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7781.900699992548,
+      "pair": 46,
+      "case": "edited",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7619.523400004255,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 충분히 채울 수 있어 좋은 선택입니다. 다만 탄수화물이 다소 부족할 수 있으니 밥이나 고구마 같은 복합 탄수화물을 적정량 곁들여 균형을 맞춰보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.036653
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.639,
+        "budget_setup_enqueue": 360.352,
+        "budget_connection_wait": 717.603,
+        "budget_sql": 363.993,
+        "budget_commit": 722.869,
+        "budget_storage": 1804.735,
+        "db_read": 357.852,
+        "model_meal": 2688.15,
+        "graph_total": 5877.215,
+        "terminal_checkpoint": 220.622,
+        "response_snapshot": 73.108,
+        "public_stats": 253.133
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "0fe6a172-80a8-44ce-8a15-976c01213d89",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2050,
+        "output_tokens": 87,
+        "total_tokens": 2137
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7696.569400010048,
+      "pair": 47,
+      "case": "edited",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8226.688700000523,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 공기밥 한 공기 분량(약 200g) 정도로 담고 나물이나 샐러드 등 채소 반찬을 먼저 넉넉히 채운 뒤, 기름진 부침이나 튀김류 대신 담백한 단백질 위주로 곁들이시면 균형 잡힌 식사를 하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.1631409999999995
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.275,
+        "budget_setup_enqueue": 360.131,
+        "budget_connection_wait": 716.938,
+        "budget_sql": 362.751,
+        "budget_commit": 717.091,
+        "budget_storage": 1797.057,
+        "db_read": 424.106,
+        "model_meal": 2680.202,
+        "graph_total": 6053.958,
+        "terminal_checkpoint": 222.558,
+        "response_snapshot": 73.323,
+        "public_stats": 808.68
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "1c46a43d-c38b-4f45-95fc-dc6513d1f726",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1825,
+        "output_tokens": 112,
+        "total_tokens": 1937
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8300.654000006034,
+      "pair": 48,
+      "case": "deleted",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9026.004800005467,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal\n\n샌드위치는 한 끼 식사로 충분히 드셔도 괜찮습니다. 닭가슴살, 달걀, 참치 등 단백질과 신선한 채소가 풍부한 구성을 고르고, 마요네즈나 당류가 많은 소스는 가볍게 곁들이는 것을 추천합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.121905
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.939,
+        "budget_setup_enqueue": 360.995,
+        "budget_connection_wait": 718.683,
+        "budget_sql": 363.877,
+        "budget_commit": 717.998,
+        "budget_storage": 1800.848,
+        "db_read": 506.355,
+        "model_meal": 3753.42,
+        "graph_total": 6968.218,
+        "terminal_checkpoint": 222.832,
+        "response_snapshot": 72.724,
+        "public_stats": 531.756
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "b41e356e-caf2-4570-8213-10f164cbc622",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1824,
+        "output_tokens": 216,
+        "total_tokens": 2040
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 9097.774100009701,
+      "pair": 49,
+      "case": "deleted",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7668.006799998693,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal\n\n밥과 계란의 조합은 탄수화물과 양질의 단백질을 균형 있게 섭취할 수 있어 식사로 아주 좋습니다. 계란을 조리할 때 기름 사용량을 적절히 조절하시고, 김치나 나물 등 채소 반찬을 함께 곁들이시면 더욱 균형 잡힌 식사가 됩니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.158503
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 371.438,
+        "budget_setup_enqueue": 363.719,
+        "budget_connection_wait": 735.712,
+        "budget_sql": 365.739,
+        "budget_commit": 715.975,
+        "budget_storage": 1817.711,
+        "db_read": 728.441,
+        "model_meal": 2370.287,
+        "graph_total": 5996.012,
+        "terminal_checkpoint": 220.51,
+        "response_snapshot": 72.836,
+        "public_stats": 229.036
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "98625aaf-aa47-4151-8e4b-2af188a8a49a",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1823,
+        "output_tokens": 96,
+        "total_tokens": 1919
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7740.002000005916,
+      "pair": 50,
+      "case": "deleted",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7902.225199999521,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 챙기기에 좋은 구성입니다. 다만 탄수화물과 전반적인 열량이 부족할 수 있으니 밥이나 고구마 같은 복합 탄수화물을 곁들여 균형을 맞춰 드시는 것을 추천합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.36381
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.06,
+        "budget_setup_enqueue": 361.788,
+        "budget_connection_wait": 718.45,
+        "budget_sql": 362.922,
+        "budget_commit": 714.942,
+        "budget_storage": 1796.613,
+        "db_read": 427.751,
+        "model_meal": 2844.792,
+        "graph_total": 6241.022,
+        "terminal_checkpoint": 221.272,
+        "response_snapshot": 73.029,
+        "public_stats": 231.198
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "a9293e4a-b133-4421-8c0c-ef37546636fd",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1825,
+        "output_tokens": 87,
+        "total_tokens": 1912
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7972.951600007946,
+      "pair": 51,
+      "case": "deleted",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7201.524799995241,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 먹는 한 공기(약 200g) 정도로 담고, 나물과 채소 반찬 위주로 접시를 채우며 튀김이나 양념육류의 양만 조절해 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.54951
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 357.24,
+        "budget_setup_enqueue": 361.169,
+        "budget_connection_wait": 718.999,
+        "budget_sql": 363.451,
+        "budget_commit": 716.818,
+        "budget_storage": 1799.573,
+        "db_read": 388.453,
+        "model_meal": 2158.381,
+        "graph_total": 5477.072,
+        "terminal_checkpoint": 224.578,
+        "response_snapshot": 74.025,
+        "public_stats": 295.271
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "e65e77f0-26ea-43db-ace2-9af4e5c95d36",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2056,
+        "output_tokens": 93,
+        "total_tokens": 2149
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7271.621799998684,
+      "pair": 52,
+      "case": "goal_changed",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7614.66360000486,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다. 점심으로 샌드위치를 드셔도 하루 목표 칼로리 범위 내에서 충분히 괜찮습니다. 마요네즈나 당류가 많은 소스 대신 채소와 닭가슴살, 달걀 등 담백한 단백질이 풍부한 종류를 선택하시면 더 균형 잡힌 식사가 됩니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.972756
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.609,
+        "budget_setup_enqueue": 361.016,
+        "budget_connection_wait": 718.194,
+        "budget_sql": 364.749,
+        "budget_commit": 715.811,
+        "budget_storage": 1799.051,
+        "db_read": 408.877,
+        "model_meal": 2556.415,
+        "graph_total": 5904.412,
+        "terminal_checkpoint": 225.973,
+        "response_snapshot": 73.133,
+        "public_stats": 315.043
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "7ce61ae0-344e-4b1a-9d62-b4fa6f1b10d5",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2050,
+        "output_tokens": 93,
+        "total_tokens": 2143
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7688.412600007723,
+      "pair": 53,
+      "case": "goal_changed",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7340.206499997294,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다.\n\n밥과 계란의 조합은 탄수화물과 양질의 단백질을 균형 있게 섭취할 수 있어 좋은 선택입니다. 여기에 식이섬유가 풍부한 김치나 나물 등 채소 반찬을 곁들이시면 더욱 균형 잡힌 식사가 됩니다. 조리 시 식용유 사용량만 가볍게 조절해 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.780597
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.139,
+        "budget_setup_enqueue": 360.664,
+        "budget_connection_wait": 717.401,
+        "budget_sql": 363.467,
+        "budget_commit": 717.304,
+        "budget_storage": 1798.452,
+        "db_read": 416.73,
+        "model_meal": 2453.798,
+        "graph_total": 5678.101,
+        "terminal_checkpoint": 227.152,
+        "response_snapshot": 73.316,
+        "public_stats": 293.271
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "760746c8-e663-46bf-a8b6-4eaa8f96bee5",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2043,
+        "output_tokens": 109,
+        "total_tokens": 2152
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7417.211799998768,
+      "pair": 54,
+      "case": "goal_changed",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8163.706299994374,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다. \n\n닭가슴살과 샐러드는 단백질과 식이섬유를 충분히 챙길 수 있어 현재 감량 목표에 아주 좋은 구성입니다. 다만 탄수화물이 다소 부족할 수 있으니 고구마나 잡곡밥 반 공기 정도를 함께 곁들이시면 더 균형 잡힌 식사가 됩니다. 드레싱은 가벼운 오리엔탈이나 발사믹 위주로 적당량 곁들여 드셔보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.429379
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.376,
+        "budget_setup_enqueue": 359.661,
+        "budget_connection_wait": 716.624,
+        "budget_sql": 362.672,
+        "budget_commit": 716.682,
+        "budget_storage": 1796.26,
+        "db_read": 427.239,
+        "model_meal": 2957.095,
+        "graph_total": 6437.399,
+        "terminal_checkpoint": 223.093,
+        "response_snapshot": 73.044,
+        "public_stats": 317.0
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "62732e1d-c943-46a3-9ac3-ef0aa17578ad",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2050,
+        "output_tokens": 126,
+        "total_tokens": 2176
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8241.45449999196,
+      "pair": 55,
+      "case": "goal_changed",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9023.268899996765,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 공깃밥(약 200g) 기준으로 덜고, 나물과 샐러드 같은 채소 반찬을 먼저 채운 뒤 기름지지 않은 육류나 두부 위주로 단백질을 곁들여 보세요. 국물류는 건더기 위주로 드시고 튀김이나 전 같은 기름진 음식만 섭취량을 조절하시면 균형 잡힌 식사를 하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.285282
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.874,
+        "budget_setup_enqueue": 361.692,
+        "budget_connection_wait": 719.153,
+        "budget_sql": 362.787,
+        "budget_commit": 717.558,
+        "budget_storage": 1799.782,
+        "db_read": 417.588,
+        "model_meal": 4006.917,
+        "graph_total": 7185.024,
+        "terminal_checkpoint": 221.195,
+        "response_snapshot": 72.792,
+        "public_stats": 286.008
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "401bc5b6-ebc8-4fa5-9a26-6206ca33f338",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1827,
+        "output_tokens": 346,
+        "total_tokens": 2173
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 9093.676899996353,
+      "pair": 56,
+      "case": "prior_day_only",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7381.313899997622,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal.\n\n샌드위치는 단백질과 채소가 균형 있게 들어간 종류(예: 닭가슴살, 달걀, 로스트비프 샌드위치 등)로 선택하시면 점심 식사로 충분히 괜찮습니다. 소스는 마요네즈 기반보다는 머스터드나 발사믹처럼 가벼운 것을 고르고 통곡물 빵을 활용하시면 더욱 좋습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.858626
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.934,
+        "budget_setup_enqueue": 362.747,
+        "budget_connection_wait": 720.33,
+        "budget_sql": 362.807,
+        "budget_commit": 717.809,
+        "budget_storage": 1801.285,
+        "db_read": 325.665,
+        "model_meal": 2482.424,
+        "graph_total": 5704.244,
+        "terminal_checkpoint": 223.718,
+        "response_snapshot": 73.007,
+        "public_stats": 258.5
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "94bebb34-e441-4024-b683-4d6f3f03d6a4",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1826,
+        "output_tokens": 105,
+        "total_tokens": 1931
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7455.028899988974,
+      "pair": 57,
+      "case": "prior_day_only",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7999.667600000976,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal입니다.\n\n밥과 계란의 조합은 탄수화물과 양질의 단백질을 고르게 섭취할 수 있어 식사로 아주 좋습니다. 계란 1~2개에 밥 한 공기를 기본으로 구성하고, 김치나 나물 등 채소 반찬을 곁들이면 포만감과 영양 균형을 더욱 높일 수 있습니다. 계란 조리 시 기름 사용량만 적당히 조절해 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.191117
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.252,
+        "budget_setup_enqueue": 363.551,
+        "budget_connection_wait": 720.372,
+        "budget_sql": 363.09,
+        "budget_commit": 719.215,
+        "budget_storage": 1802.954,
+        "db_read": 433.53,
+        "model_meal": 2825.964,
+        "graph_total": 6075.821,
+        "terminal_checkpoint": 224.977,
+        "response_snapshot": 73.238,
+        "public_stats": 279.999
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "4fd11ab8-b686-4129-9648-97bf21484bcd",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1823,
+        "output_tokens": 124,
+        "total_tokens": 1947
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8056.176099998993,
+      "pair": 58,
+      "case": "prior_day_only",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8145.088500008569,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 챙기기 좋은 훌륭한 선택입니다. 다만 탄수화물과 적정 에너지가 부족해질 수 있으니, 밥 반 공기나 고구마 등 복합 탄수화물을 함께 곁들여 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.509732
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 358.781,
+        "budget_setup_enqueue": 361.193,
+        "budget_connection_wait": 720.572,
+        "budget_sql": 362.931,
+        "budget_commit": 717.319,
+        "budget_storage": 1801.094,
+        "db_read": 398.45,
+        "model_meal": 3211.434,
+        "graph_total": 6405.334,
+        "terminal_checkpoint": 221.184,
+        "response_snapshot": 72.593,
+        "public_stats": 269.996
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "b42a4149-cf67-4b25-9082-422f50408f8e",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1826,
+        "output_tokens": 94,
+        "total_tokens": 1920
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8217.050000006566,
+      "pair": 59,
+      "case": "prior_day_only",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7457.526199999847,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 먹는 1공기 분량으로 담고 나물이나 쌈채소를 충분히 곁들이며, 기름진 볶음이나 튀김류 반찬은 적당량 덜어 드시면 균형 잡힌 식사를 유지하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.920041
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.913,
+        "budget_setup_enqueue": 362.42,
+        "budget_connection_wait": 719.906,
+        "budget_sql": 362.786,
+        "budget_commit": 719.023,
+        "budget_storage": 1802.035,
+        "db_read": 386.684,
+        "model_meal": 2529.649,
+        "graph_total": 5766.922,
+        "terminal_checkpoint": 222.449,
+        "response_snapshot": 73.675,
+        "public_stats": 275.648
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "f3fc4f44-1cd3-4f47-9476-1b79d49d5b3a",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2051,
+        "output_tokens": 96,
+        "total_tokens": 2147
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7534.078600001521,
+      "pair": 60,
+      "case": "confirmed",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7475.725500000408,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal입니다. \n\n점심으로 샌드위치를 드셔도 하루 에너지 기준 내에서 충분히 괜찮습니다. 통밀빵에 닭가슴살, 달걀 등 단백질과 신선한 채소가 풍부하게 들어간 구성을 선택하시면 균형 잡힌 식사를 하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.9075880000000005
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 359.655,
+        "budget_setup_enqueue": 360.805,
+        "budget_connection_wait": 721.007,
+        "budget_sql": 382.075,
+        "budget_commit": 718.308,
+        "budget_storage": 1821.68,
+        "db_read": 328.793,
+        "model_meal": 2564.337,
+        "graph_total": 5806.856,
+        "terminal_checkpoint": 221.79,
+        "response_snapshot": 73.045,
+        "public_stats": 259.636
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "19953974-40e4-493c-8e23-a7d8ea91c601",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2046,
+        "output_tokens": 87,
+        "total_tokens": 2133
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7547.021699996549,
+      "pair": 61,
+      "case": "confirmed",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7689.2306999943685,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n밥과 계란의 조합은 탄수화물과 단백질을 균형 있게 섭취할 수 있어 아주 좋습니다. 밥 한 공기(약 200g)에 계란 1~2개를 곁들이고, 식이섬유와 포만감을 위해 채소 반찬을 함께 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.13896
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.944,
+        "budget_setup_enqueue": 360.124,
+        "budget_connection_wait": 717.631,
+        "budget_sql": 362.399,
+        "budget_commit": 717.033,
+        "budget_storage": 1797.345,
+        "db_read": 425.951,
+        "model_meal": 2731.759,
+        "graph_total": 6063.207,
+        "terminal_checkpoint": 220.745,
+        "response_snapshot": 75.665,
+        "public_stats": 280.798
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "823c9a6c-28da-44e2-ac97-3c94ef448ca5",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2051,
+        "output_tokens": 96,
+        "total_tokens": 2147
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7760.81300000078,
+      "pair": 62,
+      "case": "confirmed",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8307.478699993226,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 충분히 채울 수 있어 좋은 선택입니다. 다만 현재 남은 열량과 영양 균형을 고려할 때 탄수화물이 부족할 수 있으므로, 통곡물 밥이나 고구마 같은 복합 탄수화물을 적정량 곁들여 드시는 것을 권장합니다. 드레싱은 당류와 지방 함량이 과하지 않은 가벼운 종류로 조절해 보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.745666999999999
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.81,
+        "budget_setup_enqueue": 360.154,
+        "budget_connection_wait": 717.517,
+        "budget_sql": 364.496,
+        "budget_commit": 714.743,
+        "budget_storage": 1797.04,
+        "db_read": 338.38,
+        "model_meal": 3480.641,
+        "graph_total": 6639.154,
+        "terminal_checkpoint": 226.188,
+        "response_snapshot": 73.911,
+        "public_stats": 290.237
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "a992d180-eaf0-46c0-bbaa-4a2aaf97435c",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2055,
+        "output_tokens": 126,
+        "total_tokens": 2181
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8379.342599990196,
+      "pair": 63,
+      "case": "confirmed",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7176.865700006601,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 공기 기준(약 200g)으로 담고 나물이나 쌈채소 비중을 높이며, 튀김이나 양념육 대신 담백한 단백질 위주로 덜어 드시면 남은 하루 기준 내에서 균형 있게 식사하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.666944
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.43,
+        "budget_setup_enqueue": 360.122,
+        "budget_connection_wait": 717.227,
+        "budget_sql": 362.786,
+        "budget_commit": 714.221,
+        "budget_storage": 1794.525,
+        "db_read": 362.795,
+        "model_meal": 2385.344,
+        "graph_total": 5502.367,
+        "terminal_checkpoint": 220.824,
+        "response_snapshot": 73.048,
+        "public_stats": 274.815
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "ef7a25fb-b1b3-4d68-8fbe-30c857a11221",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2049,
+        "output_tokens": 103,
+        "total_tokens": 2152
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7245.391300006304,
+      "pair": 64,
+      "case": "edited",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7075.567599997157,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal입니다. \n\n남은 칼로리 여유가 충분하므로 샌드위치를 드셔도 괜찮습니다. 닭가슴살이나 달걀 등 단백질과 신선한 채소가 풍부하게 들어간 통밀 샌드위치를 선택하시고, 마요네즈 등 고칼로리 소스는 가볍게 조절해 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.598219
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 358.592,
+        "budget_setup_enqueue": 360.059,
+        "budget_connection_wait": 719.233,
+        "budget_sql": 363.638,
+        "budget_commit": 715.05,
+        "budget_storage": 1798.239,
+        "db_read": 399.428,
+        "model_meal": 2329.28,
+        "graph_total": 5481.343,
+        "terminal_checkpoint": 221.686,
+        "response_snapshot": 73.053,
+        "public_stats": 191.538
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "6def638d-f9b2-45e4-bd3b-1d93f4f87cb2",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2049,
+        "output_tokens": 104,
+        "total_tokens": 2153
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7147.077500005253,
+      "pair": 65,
+      "case": "edited",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7071.658700006083,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n밥과 계란은 탄수화물과 양질의 단백질을 균형 있게 섭취할 수 있어 식사로 드시기에 매우 좋습니다. 남은 하루 열량 여유도 충분하므로, 밥 한 공기 분량에 계란 1~2개와 함께 김치나 나물 같은 채소를 곁들여 드시면 더욱 균형 잡힌 식사가 됩니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.6090040000000005
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 371.525,
+        "budget_setup_enqueue": 359.72,
+        "budget_connection_wait": 731.859,
+        "budget_sql": 364.046,
+        "budget_commit": 715.681,
+        "budget_storage": 1811.889,
+        "db_read": 371.945,
+        "model_meal": 2301.075,
+        "graph_total": 5443.11,
+        "terminal_checkpoint": 222.187,
+        "response_snapshot": 72.648,
+        "public_stats": 223.164
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "a1b5a6ef-4911-4f75-beb9-252edc3bbbc9",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2045,
+        "output_tokens": 108,
+        "total_tokens": 2153
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7142.671299996437,
+      "pair": 66,
+      "case": "edited",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9239.072399999714,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 충분히 채울 수 있어 좋은 선택입니다. 다만 현재 남은 에너지와 탄수화물 목표를 고려해 고구마, 통곡물빵, 잡곡밥 같은 복합 탄수화물을 적정량 곁들여 드시는 것을 권장합니다. 드레싱은 가벼운 오일이나 오리엔탈 계열로 적당량 조절해 곁들이시면 더욱 균형 잡힌 식사가 됩니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.123461
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 357.494,
+        "budget_setup_enqueue": 360.921,
+        "budget_connection_wait": 719.025,
+        "budget_sql": 363.775,
+        "budget_commit": 714.787,
+        "budget_storage": 1797.874,
+        "db_read": 405.865,
+        "model_meal": 3568.14,
+        "graph_total": 7266.23,
+        "terminal_checkpoint": 221.596,
+        "response_snapshot": 72.841,
+        "public_stats": 523.472
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "fd02bdb9-bf99-4f73-b2f3-86b11aea881d",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2052,
+        "output_tokens": 131,
+        "total_tokens": 2183
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 9309.02079999214,
+      "pair": 67,
+      "case": "edited",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8271.117299998878,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 공기밥 분량(약 200g) 정도로 덜고, 나물과 쌈 채소류를 먼저 채운 뒤 기름기가 적은 단백질 반찬(수육, 두부조림 등) 위주로 구성해 보세요. 튀김이나 양념육, 전 종류는 1~2점 정도로 조절하시면 충분히 균형 잡힌 식사를 하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.502232
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.585,
+        "budget_setup_enqueue": 361.265,
+        "budget_connection_wait": 718.53,
+        "budget_sql": 363.04,
+        "budget_commit": 715.75,
+        "budget_storage": 1797.637,
+        "db_read": 409.8,
+        "model_meal": 3093.975,
+        "graph_total": 6388.371,
+        "terminal_checkpoint": 221.941,
+        "response_snapshot": 73.028,
+        "public_stats": 467.469
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "9bba47f0-ab4f-4672-9e93-8c6bf1b306ed",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1822,
+        "output_tokens": 127,
+        "total_tokens": 1949
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8342.53730000637,
+      "pair": 68,
+      "case": "deleted",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7101.114699995378,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal입니다. 점심으로 샌드위치를 드셔도 전혀 문제없습니다. 마요네즈나 고열량 소스 대신 머스터드나 채소가 듬뿍 들어간 닭가슴살·달걀 샌드위치를 선택하시면 균형 잡힌 식사를 하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.533853
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 357.461,
+        "budget_setup_enqueue": 359.573,
+        "budget_connection_wait": 717.679,
+        "budget_sql": 362.73,
+        "budget_commit": 714.557,
+        "budget_storage": 1795.245,
+        "db_read": 421.192,
+        "model_meal": 2210.629,
+        "graph_total": 5414.792,
+        "terminal_checkpoint": 220.416,
+        "response_snapshot": 72.791,
+        "public_stats": 274.231
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "fa04a8d4-01c8-483a-9012-ebd5b5955cca",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1823,
+        "output_tokens": 84,
+        "total_tokens": 1907
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7174.127899997984,
+      "pair": 69,
+      "case": "deleted",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7424.560900006327,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal입니다. 밥과 계란은 탄수화물과 단백질을 균형 있게 챙길 수 있어 훌륭한 식단 조합입니다. 계란을 1~2개 곁들이고, 식이섬유와 비타민을 보충할 수 있도록 김치나 나물, 샐러드 같은 채소 반찬을 함께 드시는 것을 추천합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.727351
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 357.096,
+        "budget_setup_enqueue": 359.642,
+        "budget_connection_wait": 717.318,
+        "budget_sql": 363.605,
+        "budget_commit": 714.369,
+        "budget_storage": 1795.587,
+        "db_read": 326.791,
+        "model_meal": 2397.964,
+        "graph_total": 5623.126,
+        "terminal_checkpoint": 220.337,
+        "response_snapshot": 73.157,
+        "public_stats": 239.691
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "81ed6a45-855c-4761-8dc1-95a2765f9006",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1821,
+        "output_tokens": 101,
+        "total_tokens": 1922
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7497.477299999446,
+      "pair": 70,
+      "case": "deleted",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8260.439899997436,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 챙기기에 아주 좋은 구성입니다. 다만 탄수화물과 적정 지방이 부족할 수 있으니 밥이나 고구마 같은 복합 탄수화물, 가벼운 드레싱이나 견과류를 곁들여 균형을 맞춰 드시는 것을 추천합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.742227
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.248,
+        "budget_setup_enqueue": 360.586,
+        "budget_connection_wait": 717.438,
+        "budget_sql": 363.756,
+        "budget_commit": 714.872,
+        "budget_storage": 1796.363,
+        "db_read": 376.011,
+        "model_meal": 3447.868,
+        "graph_total": 6574.213,
+        "terminal_checkpoint": 221.477,
+        "response_snapshot": 73.021,
+        "public_stats": 276.402
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "51c0c561-c5c9-480a-b2e4-64cb9df93916",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1828,
+        "output_tokens": 99,
+        "total_tokens": 1927
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8332.821199990576,
+      "pair": 71,
+      "case": "deleted",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7680.113299997174,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal\n\n한식뷔페에서 일반식을 드셔도 충분히 괜찮습니다. 밥은 평소 공기밥 분량인 2/3~1공기 정도로 담고, 기름진 볶음이나 튀김류보다는 나물, 쌈채소, 생선이나 살코기 위주의 단백질 반찬을 먼저 챙겨 드시면 균형 있게 조절하실 수 있습니다. 국물은 건더기 위주로 드시면서 과식을 예방해 보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.931666
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.441,
+        "budget_setup_enqueue": 359.527,
+        "budget_connection_wait": 716.542,
+        "budget_sql": 362.021,
+        "budget_commit": 714.744,
+        "budget_storage": 1793.597,
+        "db_read": 416.379,
+        "model_meal": 2548.61,
+        "graph_total": 5805.118,
+        "terminal_checkpoint": 220.721,
+        "response_snapshot": 72.617,
+        "public_stats": 289.209
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "0d99e4f0-8742-43c4-bec0-0a7c0a75e9d3",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2060,
+        "output_tokens": 126,
+        "total_tokens": 2186
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7750.413599991589,
+      "pair": 72,
+      "case": "goal_changed",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7947.770500002662,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal\n\n현재 기준 칼로리 여유가 충분하므로 샌드위치를 드셔도 괜찮습니다. 닭가슴살이나 달걀 등 단백질과 채소가 골고루 들어간 메뉴를 고르시고, 고칼로리 마요네즈나 달콤한 소스는 줄여서 담백하게 선택해 보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.427808000000001
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 370.29,
+        "budget_setup_enqueue": 363.282,
+        "budget_connection_wait": 734.126,
+        "budget_sql": 375.952,
+        "budget_commit": 715.8,
+        "budget_storage": 1826.158,
+        "db_read": 344.832,
+        "model_meal": 2997.443,
+        "graph_total": 6320.876,
+        "terminal_checkpoint": 221.091,
+        "response_snapshot": 72.715,
+        "public_stats": 235.997
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "d7012f06-aaa0-44da-afa8-3f399a281687",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2050,
+        "output_tokens": 93,
+        "total_tokens": 2143
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8016.940200002864,
+      "pair": 73,
+      "case": "goal_changed",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8059.342099993955,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal\n\n밥과 계란은 탄수화물과 단백질을 균형 있게 섭취할 수 있어 식사로 아주 좋습니다. 밥 한 공기(약 200g)에 계란 1~2개를 곁들이고, 식이섬유와 포만감을 더해줄 김치나 나물 등 채소 반찬을 함께 드시면 더욱 건강한 한 끼가 됩니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.52353
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 357.103,
+        "budget_setup_enqueue": 362.579,
+        "budget_connection_wait": 720.257,
+        "budget_sql": 365.085,
+        "budget_commit": 719.587,
+        "budget_storage": 1805.24,
+        "db_read": 371.171,
+        "model_meal": 3111.469,
+        "graph_total": 6406.116,
+        "terminal_checkpoint": 225.132,
+        "response_snapshot": 72.673,
+        "public_stats": 236.65
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "15de7919-f9ed-4d0f-a0de-377b7da0eafc",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2048,
+        "output_tokens": 108,
+        "total_tokens": 2156
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8129.604500005371,
+      "pair": 74,
+      "case": "goal_changed",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7824.292599994806,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 충분히 채울 수 있어 훌륭한 식단 선택입니다. 다만 하루 목표 칼로리와 탄수화물 균형을 고려해 고구마나 잡곡밥 등 복합 탄수화물을 적정량 곁들여 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.262944
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.933,
+        "budget_setup_enqueue": 360.936,
+        "budget_connection_wait": 718.423,
+        "budget_sql": 362.053,
+        "budget_commit": 715.915,
+        "budget_storage": 1796.708,
+        "db_read": 412.949,
+        "model_meal": 2998.976,
+        "graph_total": 6163.115,
+        "terminal_checkpoint": 227.717,
+        "response_snapshot": 73.413,
+        "public_stats": 241.906
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "de9c2eff-b3cf-4b58-a8f6-9ccc2567a281",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2058,
+        "output_tokens": 96,
+        "total_tokens": 2154
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7894.7350999951595,
+      "pair": 75,
+      "case": "goal_changed",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7358.384999999544,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal.\n\n한식뷔페에서도 밥 분량(한 공기 약 200g 기준)을 정해두고 나물이나 쌈 채소, 기름기가 적은 단백질 위주로 접시를 채우시면 충분히 좋은 선택이 됩니다. 튀김이나 양념육 대신 구이·찜류를 고르고 국물 섭취를 조절하시면 하루 기준 칼로리 안에서 균형 있게 식사하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.828547
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.289,
+        "budget_setup_enqueue": 360.718,
+        "budget_connection_wait": 717.589,
+        "budget_sql": 361.939,
+        "budget_commit": 714.406,
+        "budget_storage": 1794.217,
+        "db_read": 386.197,
+        "model_meal": 2457.74,
+        "graph_total": 5711.216,
+        "terminal_checkpoint": 220.274,
+        "response_snapshot": 72.763,
+        "public_stats": 218.921
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "f64b3cbb-6f83-42af-bd16-3fda815af919",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1822,
+        "output_tokens": 118,
+        "total_tokens": 1940
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7429.591799998889,
+      "pair": 76,
+      "case": "prior_day_only",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7771.813100000145,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal.\n\n점심으로 샌드위치를 드셔도 괜찮습니다. 닭가슴살, 달걀, 참치 등 단백질 토핑과 신선한 채소가 풍부한 구성을 고르고, 마요네즈나 당류가 많은 소스는 가볍게 조절해 곁들이는 것을 추천합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.998505
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.41,
+        "budget_setup_enqueue": 360.227,
+        "budget_connection_wait": 718.31,
+        "budget_sql": 363.624,
+        "budget_commit": 715.3,
+        "budget_storage": 1797.635,
+        "db_read": 369.131,
+        "model_meal": 2639.125,
+        "graph_total": 5872.895,
+        "terminal_checkpoint": 220.989,
+        "response_snapshot": 72.901,
+        "public_stats": 504.782
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "9ba72a9f-6ee9-4acd-9fcb-f32204052c28",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1817,
+        "output_tokens": 90,
+        "total_tokens": 1907
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7848.811200005002,
+      "pair": 77,
+      "case": "prior_day_only",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7718.918000013218,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal\n\n밥과 계란의 조합은 탄수화물과 단백질을 균형 있게 챙길 수 있어 식사로 드시기에 매우 좋습니다. 계란프라이나 삶은 계란 1~2개에 밥 한 공기(약 200g)를 곁들이시고, 식이섬유 보충을 위해 김치나 나물 등 채소 반찬을 함께 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.080534999999999
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.29,
+        "budget_setup_enqueue": 361.382,
+        "budget_connection_wait": 718.234,
+        "budget_sql": 365.08,
+        "budget_commit": 717.494,
+        "budget_storage": 1801.096,
+        "db_read": 378.927,
+        "model_meal": 2769.176,
+        "graph_total": 5983.943,
+        "terminal_checkpoint": 219.344,
+        "response_snapshot": 73.064,
+        "public_stats": 304.804
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "ec499031-8095-466c-ae26-be6649dcd646",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1817,
+        "output_tokens": 112,
+        "total_tokens": 1929
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7789.021900010994,
+      "pair": 78,
+      "case": "prior_day_only",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8258.177000010619,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 챙기기에 좋은 훌륭한 식단입니다. 다만 탄수화물이 부족하면 오후에 피로감을 느끼거나 과식으로 이어질 수 있으니, 밥이나 고구마 같은 복합 탄수화물을 적정량 곁들여 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.725424
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.304,
+        "budget_setup_enqueue": 361.909,
+        "budget_connection_wait": 718.783,
+        "budget_sql": 368.587,
+        "budget_commit": 714.748,
+        "budget_storage": 1802.403,
+        "db_read": 370.36,
+        "model_meal": 3304.282,
+        "graph_total": 6571.115,
+        "terminal_checkpoint": 222.69,
+        "response_snapshot": 74.704,
+        "public_stats": 247.111
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "e2d380cd-02da-4b47-855e-c382d34759ee",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1820,
+        "output_tokens": 99,
+        "total_tokens": 1919
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8328.538000001572,
+      "pair": 79,
+      "case": "prior_day_only",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8423.355599996285,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 충분히 괜찮습니다. 밥은 평소 먹는 1공기 분량으로 담고 나물과 쌈 채소를 먼저 채운 뒤, 기름진 튀김이나 양념육 대신 담백한 단백질 반찬 위주로 곁들이시면 균형 있게 드실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.864720999999999
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.333,
+        "budget_setup_enqueue": 359.952,
+        "budget_connection_wait": 716.865,
+        "budget_sql": 363.231,
+        "budget_commit": 714.737,
+        "budget_storage": 1795.113,
+        "db_read": 572.442,
+        "model_meal": 3369.061,
+        "graph_total": 6747.541,
+        "terminal_checkpoint": 222.408,
+        "response_snapshot": 72.821,
+        "public_stats": 280.742
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "df892355-46f1-4833-ac48-6271c9e8aae1",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2052,
+        "output_tokens": 97,
+        "total_tokens": 2149
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8495.450999995228,
+      "pair": 80,
+      "case": "confirmed",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7632.299600008992,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n샌드위치를 드셔도 괜찮습니다. 닭가슴살, 달걀 등 단백질과 신선한 채소가 풍부한 샌드위치를 선택하시고 소스는 가볍게 곁들이는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.048451999999999
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.024,
+        "budget_setup_enqueue": 360.81,
+        "budget_connection_wait": 717.439,
+        "budget_sql": 362.486,
+        "budget_commit": 715.32,
+        "budget_storage": 1795.539,
+        "db_read": 445.731,
+        "model_meal": 2580.472,
+        "graph_total": 5928.685,
+        "terminal_checkpoint": 221.844,
+        "response_snapshot": 72.75,
+        "public_stats": 271.216
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "44bf7086-b02c-4d41-be02-31082b7aa0b4",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2050,
+        "output_tokens": 74,
+        "total_tokens": 2124
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7702.692799997749,
+      "pair": 81,
+      "case": "confirmed",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7688.970400005928,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n밥과 계란은 탄수화물과 단백질을 균형 있게 섭취할 수 있어 매우 좋은 조합입니다. 남은 기준 칼로리 여유도 충분하므로, 밥 한 공기(약 200g)에 삶은 계란이나 계란프라이 1~2개를 곁들이고 식이섬유를 위한 채소 반찬을 더해 드시는 것을 추천합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.165361000000001
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 373.305,
+        "budget_setup_enqueue": 360.044,
+        "budget_connection_wait": 733.902,
+        "budget_sql": 363.658,
+        "budget_commit": 714.801,
+        "budget_storage": 1812.68,
+        "db_read": 419.423,
+        "model_meal": 2665.793,
+        "graph_total": 6039.993,
+        "terminal_checkpoint": 221.307,
+        "response_snapshot": 72.613,
+        "public_stats": 275.028
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "86887b65-ebab-407e-9dcb-8b80dbc12ab8",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2048,
+        "output_tokens": 112,
+        "total_tokens": 2160
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7764.702700005728,
+      "pair": 82,
+      "case": "confirmed",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7782.115200010594,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal입니다.\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 충분히 채울 수 있어 좋은 선택입니다. 다만 현재 식단에서 탄수화물이 다소 부족할 수 있으니 고구마나 잡곡밥 등 복합 탄수화물을 소량 곁들여 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.244771999999999
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.489,
+        "budget_setup_enqueue": 363.706,
+        "budget_connection_wait": 720.85,
+        "budget_sql": 362.82,
+        "budget_commit": 715.074,
+        "budget_storage": 1799.024,
+        "db_read": 413.754,
+        "model_meal": 2727.822,
+        "graph_total": 6126.372,
+        "terminal_checkpoint": 221.208,
+        "response_snapshot": 72.778,
+        "public_stats": 272.104
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "3f0d30cc-155e-4e16-b27c-3edf2f19b5c1",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2052,
+        "output_tokens": 93,
+        "total_tokens": 2145
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7856.390600005398,
+      "pair": 83,
+      "case": "confirmed",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7631.288299991866,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 충분히 괜찮습니다. 밥은 평소 먹는 한 공기(약 200g) 분량으로 담고, 기름진 튀김이나 전류보다는 나물, 쌈채소 등 채소류와 담백한 살코기·두부 위주로 접시를 구성해 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.111684
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 360.713,
+        "budget_setup_enqueue": 377.408,
+        "budget_connection_wait": 738.86,
+        "budget_sql": 362.093,
+        "budget_commit": 715.813,
+        "budget_storage": 1817.066,
+        "db_read": 422.68,
+        "model_meal": 2766.206,
+        "graph_total": 5979.886,
+        "terminal_checkpoint": 220.574,
+        "response_snapshot": 72.788,
+        "public_stats": 245.1
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "a4df68b2-6bb6-4f13-84a2-33c04a9b1989",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2050,
+        "output_tokens": 104,
+        "total_tokens": 2154
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7701.318299994455,
+      "pair": 84,
+      "case": "edited",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8174.714599997969,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n현재 기준 칼로리까지 여유가 충분하므로 샌드위치를 드셔도 괜찮습니다. 닭가슴살, 달걀 등 단백질과 신선한 채소가 충분히 들어간 샌드위치를 고르고, 마요네즈나 당류가 많은 소스는 가볍게 조절해 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.511786
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 360.011,
+        "budget_setup_enqueue": 360.485,
+        "budget_connection_wait": 721.098,
+        "budget_sql": 372.161,
+        "budget_commit": 721.37,
+        "budget_storage": 1814.909,
+        "db_read": 427.136,
+        "model_meal": 3051.37,
+        "graph_total": 6394.563,
+        "terminal_checkpoint": 220.049,
+        "response_snapshot": 72.773,
+        "public_stats": 195.24
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "0e25ecf7-fac5-4428-b00c-16b4124bcfa1",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2055,
+        "output_tokens": 98,
+        "total_tokens": 2153
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8247.51539999852,
+      "pair": 85,
+      "case": "edited",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7340.3008000022965,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n밥과 계란의 조합은 탄수화물과 양질의 단백질을 균형 있게 섭취할 수 있어 아주 좋습니다. 현재 하루 기준 칼로리까지 여유가 있으므로 밥 한 공기(약 200g)에 계란 1~2개를 곁들여 드셔도 괜찮습니다. 이때 김치나 나물 같은 채소를 함께 곁들이시면 식이섬유와 포만감을 더 챙기실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.801673
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.328,
+        "budget_setup_enqueue": 359.386,
+        "budget_connection_wait": 716.225,
+        "budget_sql": 362.009,
+        "budget_commit": 713.917,
+        "budget_storage": 1792.467,
+        "db_read": 397.037,
+        "model_meal": 2421.873,
+        "graph_total": 5679.344,
+        "terminal_checkpoint": 225.484,
+        "response_snapshot": 72.788,
+        "public_stats": 281.463
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "b85c65b8-014e-4384-a6cc-5ab42f4d164e",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2053,
+        "output_tokens": 124,
+        "total_tokens": 2177
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7412.4584999954095,
+      "pair": 86,
+      "case": "edited",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7492.0482999878,
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 충분히 채울 수 있어 좋은 선택입니다. 다만 현재까지 탄수화물 섭취량이 상대적으로 적을 수 있으므로, 고구마나 현미밥 등 복합 탄수화물을 적정량 곁들여 균형을 맞춰 드시는 것을 추천합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.844435
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.554,
+        "budget_setup_enqueue": 360.494,
+        "budget_connection_wait": 717.597,
+        "budget_sql": 362.912,
+        "budget_commit": 714.364,
+        "budget_storage": 1795.148,
+        "db_read": 396.734,
+        "model_meal": 2425.141,
+        "graph_total": 5780.28,
+        "terminal_checkpoint": 219.7,
+        "response_snapshot": 72.949,
+        "public_stats": 296.72
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "b03f3b13-30ad-43d0-b46c-aac578527b45",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2051,
+        "output_tokens": 98,
+        "total_tokens": 2149
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7562.950599996839,
+      "pair": 87,
+      "case": "edited",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 850,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7218.434700000216,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 공기밥 분량(약 200g)으로 조절하고, 나물이나 쌈 채소를 접시의 절반 정도로 먼저 채운 뒤 단백질 반찬을 곁들이시면 균형 있게 드실 수 있습니다. 양념이 강하거나 기름진 튀김·전류는 적당량만 덜어 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.737359
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 357.006,
+        "budget_setup_enqueue": 362.065,
+        "budget_connection_wait": 719.644,
+        "budget_sql": 362.114,
+        "budget_commit": 715.005,
+        "budget_storage": 1797.05,
+        "db_read": 454.711,
+        "model_meal": 2348.709,
+        "graph_total": 5572.982,
+        "terminal_checkpoint": 221.545,
+        "response_snapshot": 72.944,
+        "public_stats": 279.528
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "6177c22f-98bc-45dd-ac19-439f53a8b825",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1820,
+        "output_tokens": 118,
+        "total_tokens": 1938
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7289.381999988109,
+      "pair": 88,
+      "case": "deleted",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7216.894900004263,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal입니다. 샌드위치는 단백질과 채소를 함께 챙기기 좋아 점심 메뉴로 충분히 드셔도 괜찮습니다. 닭가슴살이나 달걀, 채소가 풍부한 통밀 샌드위치를 고르시고 소스는 가볍게 조절해 드시는 것을 추천합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.622172
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.582,
+        "budget_setup_enqueue": 359.845,
+        "budget_connection_wait": 716.981,
+        "budget_sql": 364.084,
+        "budget_commit": 716.062,
+        "budget_storage": 1797.428,
+        "db_read": 419.169,
+        "model_meal": 2309.821,
+        "graph_total": 5498.543,
+        "terminal_checkpoint": 220.615,
+        "response_snapshot": 72.855,
+        "public_stats": 271.812
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "5e32ce27-6525-4a4f-9b94-f72c130056f2",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1820,
+        "output_tokens": 87,
+        "total_tokens": 1907
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7290.639600003487,
+      "pair": 89,
+      "case": "deleted",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 9979.991000000155,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal\n\n밥과 계란은 탄수화물과 양질의 단백질을 고루 챙길 수 있는 좋은 조합입니다. 계란을 삶거나 기름을 적게 둘러 조리하고, 김치나 나물 등 채소를 곁들이시면 포만감과 영양 균형을 더욱 높일 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.820815
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.544,
+        "budget_setup_enqueue": 362.852,
+        "budget_connection_wait": 720.006,
+        "budget_sql": 363.335,
+        "budget_commit": 714.494,
+        "budget_storage": 1798.119,
+        "db_read": 482.703,
+        "model_meal": 4244.234,
+        "graph_total": 7708.429,
+        "terminal_checkpoint": 222.127,
+        "response_snapshot": 72.798,
+        "public_stats": 831.477
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "2e412ead-e3c2-4641-ada6-679a89c88187",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1821,
+        "output_tokens": 332,
+        "total_tokens": 2153
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 10052.248699998017,
+      "pair": 90,
+      "case": "deleted",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 11057.241600006819,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal입니다.\n\n닭가슴살과 샐러드는 양질의 단백질과 풍부한 식이섬유를 채우기에 매우 훌륭한 식단입니다. 다만 현재 식단만으로는 탄수화물과 전반적인 에너지가 다소 부족할 수 있으니, 밥이나 고구마 같은 복합 탄수화물을 적정량 곁들여 균형을 맞춰 드시는 것을 추천합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.886677000000001
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 357.203,
+        "budget_setup_enqueue": 361.072,
+        "budget_connection_wait": 718.913,
+        "budget_sql": 363.18,
+        "budget_commit": 716.059,
+        "budget_storage": 1798.468,
+        "db_read": 456.975,
+        "model_meal": 5272.522,
+        "graph_total": 9071.414,
+        "terminal_checkpoint": 235.634,
+        "response_snapshot": 72.773,
+        "public_stats": 456.474
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "04b51394-fe0d-41fa-aa5b-2fc20028bcad",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1828,
+        "output_tokens": 482,
+        "total_tokens": 2310
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 11130.429100012407,
+      "pair": 91,
+      "case": "deleted",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 2000,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7943.375399991055,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 충분히 괜찮습니다. 밥은 평소 공기밥 분량(약 200g) 정도로 담고, 나물과 채소 반찬 위주에 기름기가 적은 단백질 찬을 곁들여 한 접시로 식사를 마치시면 균형 있게 드실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.397326
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.331,
+        "budget_setup_enqueue": 360.995,
+        "budget_connection_wait": 717.912,
+        "budget_sql": 363.061,
+        "budget_commit": 714.174,
+        "budget_storage": 1795.433,
+        "db_read": 425.471,
+        "model_meal": 3064.314,
+        "graph_total": 6270.421,
+        "terminal_checkpoint": 222.185,
+        "response_snapshot": 73.106,
+        "public_stats": 250.2
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "f4c3f380-bc40-4063-a160-f41aa22af1da",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2052,
+        "output_tokens": 99,
+        "total_tokens": 2151
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8013.83569999598,
+      "pair": 92,
+      "case": "goal_changed",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7173.600499998429,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal\n\n현재 기준 칼로리에 여유가 있어 점심으로 샌드위치를 드셔도 괜찮습니다. 닭가슴살, 달걀 등 단백질 재료와 신선한 채소가 풍부한 샌드위치를 선택하시면 균형 잡힌 식사 관리에 도움이 됩니다. 드신 후에는 앱에 기록하여 남은 식사량을 점검해보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.49975
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 358.131,
+        "budget_setup_enqueue": 360.234,
+        "budget_connection_wait": 718.949,
+        "budget_sql": 363.338,
+        "budget_commit": 715.817,
+        "budget_storage": 1798.425,
+        "db_read": 344.551,
+        "model_meal": 2213.61,
+        "graph_total": 5446.96,
+        "terminal_checkpoint": 219.557,
+        "response_snapshot": 72.725,
+        "public_stats": 298.321
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "60b51a20-a971-40d1-88f3-bb313761f796",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2051,
+        "output_tokens": 103,
+        "total_tokens": 2154
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7245.28879999707,
+      "pair": 93,
+      "case": "goal_changed",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7427.659999986645,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다.\n\n밥과 계란은 탄수화물과 단백질을 균형 있게 채우기 좋은 훌륭한 식단 구성입니다. 밥 한 공기(약 200g)에 달걀 1~2개를 곁들이고, 여기에 김치나 나물 같은 채소를 함께 더해주시면 포만감과 영양 균형을 더욱 높일 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.943257
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 372.077,
+        "budget_setup_enqueue": 360.451,
+        "budget_connection_wait": 733.087,
+        "budget_sql": 365.576,
+        "budget_commit": 715.023,
+        "budget_storage": 1814.013,
+        "db_read": 422.877,
+        "model_meal": 2494.649,
+        "graph_total": 5785.954,
+        "terminal_checkpoint": 220.29,
+        "response_snapshot": 72.853,
+        "public_stats": 254.455
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "c91c6ecb-d366-4fcc-9f74-c4f64f545d59",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2048,
+        "output_tokens": 107,
+        "total_tokens": 2155
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7499.2190999910235,
+      "pair": 94,
+      "case": "goal_changed",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8168.790900002932,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다.\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 충분히 채울 수 있어 다이어트 식단으로 아주 좋습니다. 다만 탄수화물이 부족해 포만감이 오래 가지 않거나 오후에 피로할 수 있으니, 고구마나 현미밥 등 복합 탄수화물을 소량 곁들여 균형을 맞춰보세요. 드레싱은 당류와 지방이 과하지 않은 가벼운 오리엔탈이나 발사믹을 추천합니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.42577
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 358.177,
+        "budget_setup_enqueue": 359.318,
+        "budget_connection_wait": 718.074,
+        "budget_sql": 361.634,
+        "budget_commit": 714.843,
+        "budget_storage": 1794.853,
+        "db_read": 397.328,
+        "model_meal": 3105.234,
+        "graph_total": 6334.73,
+        "terminal_checkpoint": 220.256,
+        "response_snapshot": 72.875,
+        "public_stats": 242.583
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "35c31bf0-3e0a-4d19-9a4d-f32185a1d75f",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2051,
+        "output_tokens": 132,
+        "total_tokens": 2183
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8239.418500001193,
+      "pair": 95,
+      "case": "goal_changed",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 1800,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 10912.572599991108,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal입니다. \n\n한식뷔페에서도 나물이나 쌈 채소를 충분히 담고 기름기 적은 고기나 두부 같은 단백질 위주로 구성하시면 훌륭한 식사가 됩니다. 밥은 평소 드시는 한 공기 분량을 유지하시고, 튀김류나 양념이 강한 국물 위주의 섭취만 가볍게 조절해 보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.8121979999999995
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 358.717,
+        "budget_setup_enqueue": 360.632,
+        "budget_connection_wait": 719.874,
+        "budget_sql": 363.779,
+        "budget_commit": 718.56,
+        "budget_storage": 1802.498,
+        "db_read": 483.504,
+        "model_meal": 5389.191,
+        "graph_total": 8966.742,
+        "terminal_checkpoint": 227.128,
+        "response_snapshot": 73.858,
+        "public_stats": 529.567
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "f12ba571-2691-4596-9b9e-479bd41cc0cb",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1822,
+        "output_tokens": 543,
+        "total_tokens": 2365
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 10984.487399997306,
+      "pair": 96,
+      "case": "prior_day_only",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8182.439099997282,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal\n\n샌드위치는 단백질과 채소를 충분히 채워 드시면 좋은 선택입니다. 닭가슴살, 달걀, 햄 등 단백질 재료와 신선한 채소를 곁들이고 마요네즈나 당류가 많은 소스 양만 가볍게 조절해 보세요. 통곡물 식빵을 선택하시면 포만감을 더 오래 유지하는 데 도움이 됩니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 5.248518
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 355.869,
+        "budget_setup_enqueue": 359.686,
+        "budget_connection_wait": 716.124,
+        "budget_sql": 362.348,
+        "budget_commit": 714.179,
+        "budget_storage": 1792.952,
+        "db_read": 649.154,
+        "model_meal": 2710.785,
+        "graph_total": 6227.404,
+        "terminal_checkpoint": 220.554,
+        "response_snapshot": 74.811,
+        "public_stats": 290.39
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "a694c987-6537-4be9-8e8b-9370a64b8e1c",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1818,
+        "output_tokens": 106,
+        "total_tokens": 1924
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 8254.498599999351,
+      "pair": 97,
+      "case": "prior_day_only",
+      "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 8961.563500008197,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal입니다.\n\n밥과 계란의 조합은 탄수화물과 양질의 단백질을 균형 있게 공급해주어 식사로 드시기에 아주 좋습니다. 계란은 프라이나 삶은 달걀 1~2개 정도로 곁들이고, 식이섬유와 비타민 보충을 위해 나물이나 김치 등 채소 반찬을 함께 챙겨 드시면 더욱 균형 잡힌 식사가 됩니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.346332
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 357.79,
+        "budget_setup_enqueue": 361.347,
+        "budget_connection_wait": 719.742,
+        "budget_sql": 363.008,
+        "budget_commit": 713.892,
+        "budget_storage": 1796.977,
+        "db_read": 387.207,
+        "model_meal": 3999.47,
+        "graph_total": 7297.85,
+        "terminal_checkpoint": 224.497,
+        "response_snapshot": 73.38,
+        "public_stats": 263.511
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "af63c0bd-1b10-400c-b664-531b17945510",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1816,
+        "output_tokens": 276,
+        "total_tokens": 2092
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 9033.139700011816,
+      "pair": 98,
+      "case": "prior_day_only",
+      "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 7517.458899994381,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal.\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 챙기기에 좋은 구성입니다. 다만 현재 식단만으로는 탄수화물과 에너지가 부족할 수 있으니 밥이나 고구마 같은 복합 탄수화물을 적정량 곁들여 드시는 것을 권장합니다. 드레싱은 가벼운 오일이나 오리엔탈 계열로 적당량 활용해 보세요.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 4.936707999999999
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.171,
+        "budget_setup_enqueue": 360.412,
+        "budget_connection_wait": 717.192,
+        "budget_sql": 367.127,
+        "budget_commit": 715.064,
+        "budget_storage": 1799.681,
+        "db_read": 387.114,
+        "model_meal": 2607.891,
+        "graph_total": 5812.37,
+        "terminal_checkpoint": 220.004,
+        "response_snapshot": 72.659,
+        "public_stats": 290.435
+      },
+      "build": {
+        "commit": "f60c040bb1a973db4e8ecc18196ecf52920d73c8",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "8651eda8-fce7-44fe-a1fe-61d8652b5044",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 1824,
+        "output_tokens": 115,
+        "total_tokens": 1939
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 7588.571600004798,
+      "pair": 99,
+      "case": "prior_day_only",
+      "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 0,
+      "expected_target": 1900,
+      "fresh": true,
+      "no_write": true,
+      "preflight_unavailable": [],
+      "mode": "pipeline"
+    }
+  ]
+}
