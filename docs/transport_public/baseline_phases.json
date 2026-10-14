@@ -1,0 +1,111 @@
+{
+  "measurement": {
+    "before": {
+      "attempts": 100,
+      "completed": 100,
+      "failed_or_blocked": 0,
+      "unexpected_proposals": 0,
+      "first_answer_ms_completed": {
+        "n": 100,
+        "median": 8310.63,
+        "p95": 10346.31
+      },
+      "total_ms_completed": {
+        "n": 100,
+        "median": 8384.22,
+        "p95": 10420.69
+      },
+      "duration_ms_all_attempts": {
+        "n": 100,
+        "median": 8384.22,
+        "p95": 10420.69
+      },
+      "model_calls_completed": {
+        "n": 100,
+        "median": 1.0,
+        "p95": 1
+      },
+      "fresh": 100,
+      "no_write": 100
+    }
+  },
+  "stages": {
+    "before": {
+      "sdk_prepare_meal": {
+        "n": 100,
+        "median": 772.1,
+        "p95": 954.21
+      },
+      "tool_bind_meal": {
+        "n": 100,
+        "median": 2.25,
+        "p95": 87.98
+      },
+      "provider_roundtrip": {
+        "n": 100,
+        "median": 2864.86,
+        "p95": 4571.18
+      },
+      "model_meal": {
+        "n": 100,
+        "median": 2864.96,
+        "p95": 4571.24
+      },
+      "budget_storage": {
+        "n": 100,
+        "median": 1798.86,
+        "p95": 1833.81
+      },
+      "db_read": {
+        "n": 100,
+        "median": 449.05,
+        "p95": 716.91
+      },
+      "graph_total": {
+        "n": 100,
+        "median": 6523.02,
+        "p95": 8376.5
+      },
+      "transport_connect": {
+        "n": 100,
+        "median": 32.55,
+        "p95": 182.55
+      },
+      "transport_tls": {
+        "n": 100,
+        "median": 16.89,
+        "p95": 174.52
+      },
+      "transport_send_headers": {
+        "n": 100,
+        "median": 0.3,
+        "p95": 0.74
+      },
+      "transport_send_body": {
+        "n": 100,
+        "median": 0.27,
+        "p95": 1.52
+      },
+      "transport_wait_headers": {
+        "n": 100,
+        "median": 2749.39,
+        "p95": 4448.6
+      },
+      "transport_receive_body": {
+        "n": 100,
+        "median": 0.52,
+        "p95": 0.95
+      },
+      "model_first_token_ms": {
+        "n": 0,
+        "median": null,
+        "p95": null
+      }
+    }
+  },
+  "quality": {},
+  "limitations": [
+    "Provider roundtrip includes serialization, transport, generation and parsing.",
+    "Nested timers are not additive; sequential repeated synthetic cases, not real users."
+  ]
+}

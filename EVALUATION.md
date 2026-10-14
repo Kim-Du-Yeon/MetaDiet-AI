@@ -1289,6 +1289,10 @@ KDRI 2025 유지 에너지를 기준으로 대한비만학회 2022 식사치료�
 기존 전체 중앙값/p95 7.821/9.551초. Flash-Lite 6.334/10.727초 및 actionable98/100으로 기각, 도구 생략 7.884/9.707초로 기각했다. 각100건 완료·최신값·미저장, 실패·보류0건이다. SDK 모델 timer 경계와 순차 시간대 차이를 제한으로 공개한다. 실제 사용자·임상 검증이나 장애율 개선으로 표현하지 않는다. [모델 실험](docs/model_followup_public/README.md), [도구 실험](docs/tool_free_followup_public/README.md)에 사전 기준·원본·judge·판정·복구 증거를 보존한다.
 ## 2026-10-14 SDK 준비 분리와 새 공개100쌍
 
+후속 [외부 transport 100쌍](docs/transport_public/README.md)은 같은 HTTPX 경로·같은 runtime commit에서 invoke/버퍼형 스트림을 새로 각각100건 측정했다. 전체 median8384.22→8454.92ms, p95 10420.69→11374.91ms, provider2864.86→3099.12ms로adopt=false. 헤더 대기2749.39→2102.67ms, 본문 수신0.52→833.93ms를 공통 전체 경계와 함께 해석한다. 모델 첫 text2142.70ms는 사용자 첫 표시8377.62ms와 다르다.
+
+양쪽 완료·최신 섭취/목표 열량·미저장100/100, judge100완료·5기준각100/100, 최종 실패0건. 후보에는 복구된외부500 INTERNAL1건이 있으며 trace child 오류/root완료와11.07초를 보존한다. 신규 transport는기본false이며 공개invoke/기본통신 복구를 확인했다. 서버 큐/순수 추론/순수 생성 duration은미측정, 20조건 반복·순차 창·자동judge·통신경로변경 제한을 명시한다. 기존aiohttp운영 수치와직접 비교하지 않는다.
+
 이전100건을 재사용하지 않고 같은4질문·5상태·5반복의 공개 기준100건과 provider 재사용100건을 새로 수집했다. `sdk_prepare_meal`, `tool_bind_meal`, `provider_roundtrip`을 분리하고 기존 nested timer를 합산하지 않는다. baseline3fc5aed, 후보bf37eda. 모델3.8 Flash/low/invoke/default/read와 budget pipeline·현재 DB 조회를 유지했다.
 
 전체 중앙값7.918→7.406초, p95 11.021→9.662초, 준비514.69→0.03ms, 외부호출2.760→2.671초. 양쪽 완료·최신값·미저장100/100, judge100완료·품질5기준각100/100, 실패0건. 모델구간10% 기준 미달(약3.22% 개선)로adopt=false. flagfalse 복구와 공개응답을 확인했고 합성 계정·env를 삭제했다. [동결 기준·원본·judge·판정·복구](docs/sdk_phase_public/README.md). 별도 preflight의 Live 직전CancelledError도 보존했다. 실제 사용자/임상 검증으로 일반화하지 않고 provider 내부 순수 네트워크/생성은 아직 분리하지 못했음을 명시한다.
