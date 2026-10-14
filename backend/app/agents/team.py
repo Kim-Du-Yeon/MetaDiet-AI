@@ -583,10 +583,12 @@ class DietTeam:
         direct = context_verified and (simple_followup(self.state) or first_direct) and self.decision_client is None
         from app.agents.execution_stream import emit_runtime_event
         delivery = get_settings().coaching_delivery if direct else 'invoke'
+        brief = direct and not first_direct and get_settings().brief_followup_answer
         route_metadata = dict(route=(
             'first_direct' if direct and first_direct else 'followup_direct' if direct else 'supervisor'),
             reasoning=self.first_coaching_mode if direct and first_direct else (
-                get_settings().coaching_thinking_level if direct else 'default'), model_delivery=delivery)
+                get_settings().coaching_thinking_level if direct else 'default'), model_delivery=delivery,
+            answer_style='brief' if brief else 'default', model_name=get_settings().gemini_model)
         self.config = {**(self.config or {}), 'metadata': {
             **(self.config or {}).get('metadata', {}), **route_metadata}}
         await emit_runtime_event('execution_route', **route_metadata)
@@ -602,6 +604,11 @@ class DietTeam:
                 ' 질문에 바로 답하고 최신 verified_context를 우선하세요. 저장이나 계획 생성은 하지 마세요.')
             if not first_direct and get_settings().compact_followup_prompt:
                 instruction = COMPACT_FOLLOWUP_INSTRUCTION
+            if brief:
+                instruction += ('\n단순 후속 질문의 답변은 250자 이내로 완결하세요. '
+                    '요청한 현재 수치는 먼저 표시하고, 결론 1문장과 실천 방법 1~2문장만 답하세요. '
+                    '오늘 기록이 0건이어도 금식으로 해석하지 말고 같은 분량으로 답하세요. '
+                    '반복 목표 설명·표·소제목·마무리 질문을 생략하되 필요한 안전 안내는 유지하세요.')
             result = await run_agent(model=factory(),
                 instruction=instruction,
                 request=json.dumps({'message': self.state['message'],
