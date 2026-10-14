@@ -35,3 +35,5 @@ Render flag를false로 복구하고 Live 후 [rollback/before_probe.json](rollba
 합성 계정과 git-ignored env는 [cleanup.json](cleanup.json)의 status=deleted/tombstone_cleanup_pending=false와 users 행 부재를 확인한 뒤 정리했다. 결과 문서는 검증된 runtime bf37eda를 유지하도록 `[skip render]`로 게시한다. 문서 게시로 다시 서비스를 재시작하지 않으며 이후 코드 main push의 자동 배포 설정은 유지한다.
 
 Git core.autocrlf=true 환경에서 judge source_sha256가 원본 byte에 대응하도록 이 폴더의 JSON은 [Git 공식 attributes 문서](https://git-scm.com/docs/gitattributes)에 따라 `-text`로 보존한다. 원본 byte와 staged Git blob의 SHA256가 같은지 게시 전에 검사한다. 전역 Git 설정이나 이전 실험 원본은 변경하지 않는다.
+
+원본 CRLF를 보존하면서 Git diff의 기본 whitespace 검사가 CR을 trailing whitespace로 보고했다. [Git 공식 whitespace 설정](https://git-scm.com/docs/git-config)의 cr-at-eol을 이 폴더 JSON에만 적용해 정상 CRLF를 구분하며 실제 trailing-space/space-before-tab 검사는 유지한다. 원본이나 judge hash를 변경하지 않고 다시 검사한다.
