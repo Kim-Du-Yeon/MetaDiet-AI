@@ -69,6 +69,7 @@ class Settings(BaseSettings):
     coaching_delivery: Literal['invoke', 'buffered_stream'] = 'invoke'
     compact_followup_prompt: bool = False
     brief_followup_answer: bool = False
+    followup_model: Literal['default', 'gemini-3.5-flash-lite'] = 'default'
     budget_pipeline: bool = False
     model_timeout_seconds: float = 30
     eval_model_timeout_seconds: float = 90

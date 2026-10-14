@@ -158,7 +158,8 @@ class DietTeam:
             lambda: get_chat_model(thinking_level='low' if self.first_coaching_mode == 'low' else None))
         self.coaching_model_factory = model_factory or (
             lambda: get_chat_model(thinking_level=None if settings.coaching_thinking_level == 'default'
-                                   else settings.coaching_thinking_level))
+                                   else settings.coaching_thinking_level,
+                                   model_name=None if settings.followup_model == 'default' else settings.followup_model))
         usage = state.get("execution_usage") or {}
         self.budget = ExecutionBudget(max_model_calls=settings.agent_max_model_calls,
             max_tool_calls=settings.agent_max_tool_calls,
@@ -588,7 +589,9 @@ class DietTeam:
             'first_direct' if direct and first_direct else 'followup_direct' if direct else 'supervisor'),
             reasoning=self.first_coaching_mode if direct and first_direct else (
                 get_settings().coaching_thinking_level if direct else 'default'), model_delivery=delivery,
-            answer_style='brief' if brief else 'default', model_name=get_settings().gemini_model)
+            answer_style='brief' if brief else 'default', model_name=(
+                get_settings().followup_model if direct and not first_direct and get_settings().followup_model != 'default'
+                else get_settings().gemini_model))
         self.config = {**(self.config or {}), 'metadata': {
             **(self.config or {}).get('metadata', {}), **route_metadata}}
         await emit_runtime_event('execution_route', **route_metadata)

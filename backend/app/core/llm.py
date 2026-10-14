@@ -23,10 +23,14 @@ class ConfiguredChatModel(Runnable):
 
     def __init__(self, *, role: str = "chat", temperature: float = 0,
                  max_tokens: int | None = None,
+                 model_name: str | None = None,
                  thinking_level: Literal['low', 'medium', 'high'] | None = None):
         if role not in {"chat", "vision", "eval"}:
             raise ValueError(f"Unknown model role: {role}")
         self.role = role
+        if model_name is not None and role != 'chat':
+            raise ValueError('Model override is only allowed for chat')
+        self.model_name = model_name
         if thinking_level not in {None, 'low', 'medium', 'high'}:
             raise ValueError(f'Unsupported thinking level: {thinking_level}')
         self.thinking_level = thinking_level
@@ -39,7 +43,7 @@ class ConfiguredChatModel(Runnable):
             settings = get_settings()
             if not settings.gemini_api_key.strip():
                 raise ValueError("Set GEMINI_API_KEY in backend/.env before calling Gemini")
-            model = {"chat": settings.gemini_model,
+            model = self.model_name or {"chat": settings.gemini_model,
                      "vision": settings.gemini_vision_model,
                      "eval": settings.gemini_eval_model}[self.role]
             self._provider = ChatGoogleGenerativeAI(

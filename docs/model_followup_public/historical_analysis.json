@@ -1,0 +1,441 @@
+{
+  "source_sha256": {
+    "before": "49d174e67297acb9362c85cf7c35f9016ab59b3bde438cbff292ae6e590c4fb8",
+    "after": "ff1fdfdd2d06542efebb9167827f728278226e65439a8cf2ef8e2d3e3f187202"
+  },
+  "all": {
+    "n": 200,
+    "model_ms": {
+      "n": 200,
+      "median": 2596.38,
+      "p95": 4378.37
+    },
+    "output_tokens": {
+      "n": 200,
+      "median": 109.5,
+      "p95": 362
+    },
+    "input_tokens": {
+      "n": 200,
+      "median": 2048.0,
+      "p95": 2056
+    }
+  },
+  "correlation_output_tokens_model_ms": 0.4557204350021522,
+  "output_tokens_semantics": "LangChain candidates_token_count + thoughts_token_count; NOT visible answer length.",
+  "correlation_visible_answer_chars_model_ms": 0.05654832649721483,
+  "visible_answer_chars": {
+    "n": 200,
+    "median": 172.5,
+    "p95": 217
+  },
+  "by_case": {
+    "confirmed": {
+      "n": 40,
+      "model_ms": {
+        "n": 40,
+        "median": 2632.66,
+        "p95": 3018.74
+      },
+      "output_tokens": {
+        "n": 40,
+        "median": 110.5,
+        "p95": 137
+      },
+      "input_tokens": {
+        "n": 40,
+        "median": 2051.5,
+        "p95": 2056
+      }
+    },
+    "deleted": {
+      "n": 40,
+      "model_ms": {
+        "n": 40,
+        "median": 2603.79,
+        "p95": 5572.65
+      },
+      "output_tokens": {
+        "n": 40,
+        "median": 108.0,
+        "p95": 410
+      },
+      "input_tokens": {
+        "n": 40,
+        "median": 1822.5,
+        "p95": 1827
+      }
+    },
+    "edited": {
+      "n": 40,
+      "model_ms": {
+        "n": 40,
+        "median": 2412.46,
+        "p95": 2981.7
+      },
+      "output_tokens": {
+        "n": 40,
+        "median": 108.5,
+        "p95": 136
+      },
+      "input_tokens": {
+        "n": 40,
+        "median": 2051.0,
+        "p95": 2057
+      }
+    },
+    "goal_changed": {
+      "n": 40,
+      "model_ms": {
+        "n": 40,
+        "median": 2702.69,
+        "p95": 3211.16
+      },
+      "output_tokens": {
+        "n": 40,
+        "median": 108.0,
+        "p95": 135
+      },
+      "input_tokens": {
+        "n": 40,
+        "median": 2051.5,
+        "p95": 2057
+      }
+    },
+    "prior_day_only": {
+      "n": 40,
+      "model_ms": {
+        "n": 40,
+        "median": 2750.73,
+        "p95": 4648.41
+      },
+      "output_tokens": {
+        "n": 40,
+        "median": 116.5,
+        "p95": 455
+      },
+      "input_tokens": {
+        "n": 40,
+        "median": 1823.5,
+        "p95": 1828
+      }
+    }
+  },
+  "slowest": [
+    {
+      "phase": "after",
+      "pair": 69,
+      "case": "deleted",
+      "total_ms": 22153.525100002298,
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 19.413093999999997
+      },
+      "model_tokens": {
+        "input_tokens": 1818,
+        "output_tokens": 99,
+        "total_tokens": 1917
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 348.929,
+        "budget_setup_enqueue": 353.637,
+        "budget_connection_wait": 703.126,
+        "budget_sql": 355.017,
+        "budget_commit": 704.182,
+        "budget_storage": 1764.974,
+        "db_read": 422.656,
+        "model_meal": 17143.653,
+        "graph_total": 20323.105,
+        "terminal_checkpoint": 217.487,
+        "response_snapshot": 71.181,
+        "public_stats": 299.319
+      },
+      "external_failures": null
+    },
+    {
+      "phase": "after",
+      "pair": 91,
+      "case": "deleted",
+      "total_ms": 16257.725899995421,
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 13.409433
+      },
+      "model_tokens": {
+        "input_tokens": 1822,
+        "output_tokens": 333,
+        "total_tokens": 2155
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 363.524,
+        "budget_setup_enqueue": 351.849,
+        "budget_connection_wait": 715.901,
+        "budget_sql": 354.654,
+        "budget_commit": 705.895,
+        "budget_storage": 1776.748,
+        "db_read": 381.349,
+        "model_meal": 11089.067,
+        "graph_total": 14306.332,
+        "terminal_checkpoint": 217.367,
+        "response_snapshot": 71.049,
+        "public_stats": 260.147
+      },
+      "external_failures": null
+    },
+    {
+      "phase": "after",
+      "pair": 88,
+      "case": "deleted",
+      "total_ms": 10776.328599997214,
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 8.026838
+      },
+      "model_tokens": {
+        "input_tokens": 1825,
+        "output_tokens": 414,
+        "total_tokens": 2239
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 348.968,
+        "budget_setup_enqueue": 351.862,
+        "budget_connection_wait": 701.401,
+        "budget_sql": 353.651,
+        "budget_commit": 702.363,
+        "budget_storage": 1757.696,
+        "db_read": 417.314,
+        "model_meal": 5572.654,
+        "graph_total": 8939.012,
+        "terminal_checkpoint": 214.798,
+        "response_snapshot": 71.227,
+        "public_stats": 284.917
+      },
+      "external_failures": null
+    },
+    {
+      "phase": "before",
+      "pair": 78,
+      "case": "prior_day_only",
+      "total_ms": 11419.54820000683,
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 8.434203
+      },
+      "model_tokens": {
+        "input_tokens": 1824,
+        "output_tokens": 536,
+        "total_tokens": 2360
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.07,
+        "budget_setup": 711.565,
+        "budget_connection_wait": 1067.922,
+        "budget_sql": 1071.521,
+        "budget_commit": 357.639,
+        "budget_storage": 2497.369,
+        "db_read": 423.173,
+        "model_meal": 5515.947,
+        "graph_total": 9678.797,
+        "terminal_checkpoint": 218.688,
+        "response_snapshot": 72.018,
+        "public_stats": 244.503
+      },
+      "external_failures": null
+    },
+    {
+      "phase": "after",
+      "pair": 48,
+      "case": "deleted",
+      "total_ms": 10360.241100002895,
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.556818
+      },
+      "model_tokens": {
+        "input_tokens": 1827,
+        "output_tokens": 469,
+        "total_tokens": 2296
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 348.81,
+        "budget_setup_enqueue": 351.391,
+        "budget_connection_wait": 700.72,
+        "budget_sql": 353.499,
+        "budget_commit": 702.987,
+        "budget_storage": 1757.478,
+        "db_read": 366.256,
+        "model_meal": 5105.107,
+        "graph_total": 8533.879,
+        "terminal_checkpoint": 215.895,
+        "response_snapshot": 70.99,
+        "public_stats": 319.7
+      },
+      "external_failures": null
+    },
+    {
+      "phase": "before",
+      "pair": 59,
+      "case": "prior_day_only",
+      "total_ms": 11220.966900000349,
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.914152
+      },
+      "model_tokens": {
+        "input_tokens": 1827,
+        "output_tokens": 498,
+        "total_tokens": 2325
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 355.414,
+        "budget_setup": 711.257,
+        "budget_connection_wait": 1066.962,
+        "budget_sql": 1081.992,
+        "budget_commit": 360.472,
+        "budget_storage": 2509.731,
+        "db_read": 431.886,
+        "model_meal": 5013.296,
+        "graph_total": 9197.055,
+        "terminal_checkpoint": 219.8,
+        "response_snapshot": 72.264,
+        "public_stats": 513.0
+      },
+      "external_failures": null
+    },
+    {
+      "phase": "after",
+      "pair": 70,
+      "case": "deleted",
+      "total_ms": 9875.531999990926,
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.1698509999999995
+      },
+      "model_tokens": {
+        "input_tokens": 1823,
+        "output_tokens": 410,
+        "total_tokens": 2233
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 349.235,
+        "budget_setup_enqueue": 353.026,
+        "budget_connection_wait": 702.908,
+        "budget_sql": 353.851,
+        "budget_commit": 702.3,
+        "budget_storage": 1759.341,
+        "db_read": 421.478,
+        "model_meal": 4790.949,
+        "graph_total": 8095.391,
+        "terminal_checkpoint": 215.512,
+        "response_snapshot": 71.075,
+        "public_stats": 331.002
+      },
+      "external_failures": null
+    },
+    {
+      "phase": "after",
+      "pair": 19,
+      "case": "prior_day_only",
+      "total_ms": 10385.23339999665,
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.1711659999999995
+      },
+      "model_tokens": {
+        "input_tokens": 1823,
+        "output_tokens": 455,
+        "total_tokens": 2278
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 348.915,
+        "budget_setup_enqueue": 350.971,
+        "budget_connection_wait": 700.405,
+        "budget_sql": 354.5,
+        "budget_commit": 701.263,
+        "budget_storage": 1756.443,
+        "db_read": 416.984,
+        "model_meal": 4648.413,
+        "graph_total": 8279.87,
+        "terminal_checkpoint": 214.871,
+        "response_snapshot": 71.249,
+        "public_stats": 667.472
+      },
+      "external_failures": null
+    },
+    {
+      "phase": "after",
+      "pair": 16,
+      "case": "prior_day_only",
+      "total_ms": 10015.556500002276,
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 7.10666
+      },
+      "model_tokens": {
+        "input_tokens": 1822,
+        "output_tokens": 446,
+        "total_tokens": 2268
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 356.882,
+        "budget_setup_enqueue": 357.802,
+        "budget_connection_wait": 715.231,
+        "budget_sql": 361.378,
+        "budget_commit": 705.296,
+        "budget_storage": 1782.416,
+        "db_read": 438.956,
+        "model_meal": 4553.333,
+        "graph_total": 8230.793,
+        "terminal_checkpoint": 214.188,
+        "response_snapshot": 71.146,
+        "public_stats": 307.517
+      },
+      "external_failures": null
+    },
+    {
+      "phase": "after",
+      "pair": 29,
+      "case": "deleted",
+      "total_ms": 10433.491900010267,
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.887247
+      },
+      "model_tokens": {
+        "input_tokens": 1820,
+        "output_tokens": 394,
+        "total_tokens": 2214
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 349.562,
+        "budget_setup_enqueue": 353.634,
+        "budget_connection_wait": 703.698,
+        "budget_sql": 353.999,
+        "budget_commit": 707.317,
+        "budget_storage": 1765.319,
+        "db_read": 413.087,
+        "model_meal": 4546.45,
+        "graph_total": 8208.686,
+        "terminal_checkpoint": 214.518,
+        "response_snapshot": 70.755,
+        "public_stats": 526.419
+      },
+      "external_failures": null
+    }
+  ],
+  "limitations": [
+    "Model stage includes SDK/network/provider/thinking/decode; historical logs do not split them.",
+    "Combined answer/reasoning token association does not explain the 17.14s outlier.",
+    "No observed retry in these 200 attempts; provider internal root cause unknown."
+  ]
+}

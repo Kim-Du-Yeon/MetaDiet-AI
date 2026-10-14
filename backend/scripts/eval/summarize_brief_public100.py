@@ -26,8 +26,9 @@ def gates(groups, grades, stages):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--complete-missing-judges', action='store_true')
+    parser.add_argument('--experiment', choices=['brief', 'model'], default='brief')
     args = parser.parse_args()
-    folder = ROOT / 'docs/brief_followup_public'
+    folder = ROOT / ('docs/model_followup_public' if args.experiment == 'model' else 'docs/brief_followup_public')
     reports, measured, grades, stages, primary = {}, {}, {}, {}, {}
     for phase in ('before', 'after'):
         path = folder / (phase + '.json')
@@ -41,10 +42,11 @@ def main():
         rows = report['rows']
         assert [r['pair'] for r in rows] == list(range(100))
         assert all((r.get('build') or {}).get('commit') == report['expected_commit'] for r in rows)
-        assert all(r.get('answer_style') == ('default' if phase == 'before' else 'brief')
+        assert all(r.get('answer_style') == ('brief' if phase == 'after' and args.experiment == 'brief' else 'default')
                    and 'budget_setup_enqueue' in r['stage_timings_ms'] for r in rows if r['status'] == 'completed')
         assert all((r.get('route'), r.get('reasoning'), r.get('model_delivery'), r.get('model_name')) == (
-            'followup_direct', 'low', 'invoke', 'gemini-3.8-flash') for r in rows if r['status'] == 'completed')
+            'followup_direct', 'low', 'invoke', 'gemini-3.5-flash-lite' if phase == 'after' and args.experiment == 'model'
+            else 'gemini-3.8-flash') for r in rows if r['status'] == 'completed')
         assert {r['index'] for r in judged['rows']} == set(range(100))
         reports[phase] = report
         measured[phase] = summarize(rows)
@@ -54,7 +56,8 @@ def main():
                          for k in ('model_meal', 'budget_storage', 'db_read', 'graph_total')}
         stages[phase]['output_tokens'] = distribution([(r.get('model_tokens') or {}).get('output_tokens') for r in rows])
     a, b = reports.values()
-    assert a['dataset_sha256'] == b['dataset_sha256'] and a['expected_commit'] == b['expected_commit']
+    assert a['dataset_sha256'] == b['dataset_sha256']
+    if args.experiment == 'brief': assert a['expected_commit'] == b['expected_commit']
     assert grades['before']['judge_model'] == grades['after']['judge_model']
     assert all(all(x[k] == y[k] for k in ('pair', 'case', 'question', 'expected_calories', 'expected_target'))
                for x, y in zip(a['rows'], b['rows']))
@@ -63,7 +66,7 @@ def main():
         for report in reports.values() for r in report['rows'] for v in
         (r.get('total_ms'), r.get('stage_timings_ms', {}).get('model_meal'))) and all(
         stages[p]['model_meal']['n'] == 100 for p in stages)
-    result = dict(measurement=measured, quality=grades, primary_quality=primary, stages=stages,
+    result = dict(experiment=args.experiment, measurement=measured, quality=grades, primary_quality=primary, stages=stages,
                   gates=checks, adopt=all(checks.values()),
                   limitations=['Sequential windows, 20 repeated synthetic cases, not independent users.',
                                'One automated same-provider judge; no clinical correctness claim.'])

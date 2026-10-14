@@ -60,7 +60,7 @@ def main():
     parser.add_argument('--probe',action='store_true',help='One separately recorded deployment warm-up, outside the 100')
     parser.add_argument('--folder', default='docs/budget_public')
     parser.add_argument('--expected-commit', default=COMMIT)
-    parser.add_argument('--experiment', choices=['budget', 'brief'], default='budget')
+    parser.add_argument('--experiment', choices=['budget', 'brief', 'model'], default='budget')
     args = parser.parse_args()
     FOLDER = ROOT / args.folder
     COMMIT = args.expected_commit
@@ -132,18 +132,23 @@ def main():
         row.update(pair=index,case=case,question=question,expected_calories=calories,expected_target=target,
             fresh=bool(match and tuple(int(v.replace(',','')) for v in match.groups())==(calories,target)),
             preflight_unavailable=unavailable,
-            mode='baseline' if args.phase=='before' else ('brief' if args.experiment=='brief' else 'pipeline'))
+            mode='baseline' if args.phase=='before' else (
+                'flash_lite' if args.experiment=='model' else 'brief' if args.experiment=='brief' else 'pipeline'))
         persist_capture(report,output,row,before,lambda:(meals(),strategies()))
         print(args.phase,index+1,row['status'],round(row['total_ms']),row['fresh'],flush=True)
         if row.get('build'):
             assert row['build']['commit'] == COMMIT, 'Build mismatch; evidence retained'
         stages = row['stage_timings_ms']
         if 'budget_setup' in stages or 'budget_setup_enqueue' in stages:
-            assert ('budget_setup_enqueue' in stages) == (args.experiment=='brief' or args.phase=='after'), 'Mode mismatch; evidence retained'
+            assert ('budget_setup_enqueue' in stages) == (args.experiment!='budget' or args.phase=='after'), 'Mode mismatch; evidence retained'
         if args.experiment == 'brief' and row['status'] == 'completed':
             assert row.get('answer_style') == ('brief' if args.phase=='after' else 'default'), 'Answer style mismatch; evidence retained'
             assert (row.get('route'), row.get('reasoning'), row.get('model_delivery'), row.get('model_name')) == (
                 'followup_direct', 'low', 'invoke', 'gemini-3.8-flash'), 'Model configuration mismatch; evidence retained'
+        if args.experiment == 'model' and row['status'] == 'completed':
+            assert row.get('answer_style') == 'default', 'Answer style mismatch; evidence retained'
+            assert (row.get('route'), row.get('reasoning'), row.get('model_delivery'), row.get('model_name')) == (
+                'followup_direct', 'low', 'invoke', 'gemini-3.8-flash' if args.phase=='before' else 'gemini-3.5-flash-lite'), 'Model configuration mismatch; evidence retained'
         # Missing timings on failures remain in the denominator and block adoption.
 
 if __name__ == '__main__': main()

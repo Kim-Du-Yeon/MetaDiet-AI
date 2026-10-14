@@ -20,15 +20,19 @@ def main():
                 'input_tokens': distribution([r['model_tokens']['input_tokens'] for r in selected])}
     timings = [r['stage_timings_ms']['model_meal'] for r in rows]
     outputs = [r['model_tokens']['output_tokens'] for r in rows]
+    chars = [len(r['answer']) for r in rows]
     result = {'source_sha256': hashes, 'all': group(rows),
               'correlation_output_tokens_model_ms': statistics.correlation(outputs, timings),
+              'output_tokens_semantics': 'LangChain candidates_token_count + thoughts_token_count; NOT visible answer length.',
+              'correlation_visible_answer_chars_model_ms': statistics.correlation(chars, timings),
+              'visible_answer_chars': distribution(chars),
               'by_case': {case: group([r for r in rows if r['case'] == case]) for case in sorted({r['case'] for r in rows})},
               'slowest': [{k: r.get(k) for k in ('phase', 'pair', 'case', 'total_ms', 'usage', 'model_tokens', 'stage_timings_ms', 'external_failures')}
                           for r in sorted(rows, key=lambda r: r['stage_timings_ms']['model_meal'], reverse=True)[:10]],
               'limitations': ['Model stage includes SDK/network/provider/thinking/decode; historical logs do not split them.',
-                              'Output length association does not explain the short-output 17.14s outlier.',
+                              'Combined answer/reasoning token association does not explain the 17.14s outlier.',
                               'No observed retry in these 200 attempts; provider internal root cause unknown.']}
-    folder = ROOT / 'docs/brief_followup_public'
+    folder = ROOT / 'docs/model_followup_public'
     folder.mkdir(exist_ok=True)
     path = folder / 'historical_analysis.json'
     assert not path.exists(), 'Refusing to overwrite evidence'
