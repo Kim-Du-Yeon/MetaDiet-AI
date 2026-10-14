@@ -13,6 +13,7 @@ services:
       - {key: ENABLE_SCHEDULER, value: "true"}
       - {key: SERVICE_TIMEZONE, value: Asia/Seoul}
       - {key: ENVIRONMENT, value: beta}
+      - {key: BUDGET_PIPELINE, value: "true"}
       - {key: RAG_USE_RERANK, value: "false"}
       - {key: RAG_CHUNKS_PATH, value: /app/app/rag/chunks.pkl}
       - {key: PINECONE_INDEX_NAME, value: diet-agent-rag}

@@ -10,6 +10,17 @@ from summarize_budget_pipeline100 import decision
 ROOT = Path(__file__).resolve().parents[3]
 
 
+def complete_missing_grades(primary, supplement):
+    """Only recover missing judge output; never replace a completed low grade."""
+    assert primary['source_sha256'] == supplement['source_sha256']
+    assert primary['judge'] == supplement['judge']
+    failed = {r['index'] for r in primary['rows'] if r['judge_status'] == 'failed'}
+    retry = supplement['rows']
+    assert {r['index'] for r in retry} == failed and len(retry) == len(failed)
+    recovered = {r['index']: r for r in retry}
+    return {**primary, 'rows': [recovered.get(r['index'], r) for r in primary['rows']]}
+
+
 def public_gates(base, candidate, storage, grades):
     gates = decision(base,candidate,storage,grades)
     gates['all_public_requests_safe_and_fresh'] = all(
@@ -26,13 +37,18 @@ def public_gates(base, candidate, storage, grades):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--folder', default='docs/budget_public')
+    parser.add_argument('--complete-missing-judges', action='store_true')
     args = parser.parse_args()
     folder = ROOT/args.folder
-    groups, grades, stages, reports, judges = {}, {}, {}, {}, {}
+    groups, grades, stages, reports, judges, primary_grades = {}, {}, {}, {}, {}, {}
     for phase,mode in [('before','baseline'),('after','pipeline')]:
         source = folder/(phase+'.json')
         data = json.loads(source.read_text(encoding='utf-8'))
         judged = json.loads((folder/(phase+'_quality.json')).read_text(encoding='utf-8'))
+        primary_grades[mode] = quality(judged['rows'])
+        supplement = folder/(phase+'_quality_retry.json')
+        if args.complete_missing_judges and supplement.exists():
+            judged = complete_missing_grades(judged, json.loads(supplement.read_text(encoding='utf-8')))
         assert judged['source_sha256'] == hashlib.sha256(source.read_bytes()).hexdigest()
         rows = data['rows']
         assert [r['pair'] for r in rows] == list(range(100))
@@ -57,7 +73,7 @@ def main():
             (r.get('total_ms'),r.get('stage_timings_ms',{}).get('budget_storage')))
         for data in reports.values() for r in data['rows'])
     result = dict(scope='public_serial_synthetic_100_per_condition',measurement=groups,stages=stages,judges=judges,
-        quality=grades,gates=gates,adopt=all(gates.values()),
+        quality=grades,primary_quality=primary_grades,gates=gates,adopt=all(gates.values()),
         limitations=['Sequential time windows, not randomized interleaving.',
                      'One synthetic account, one automated same-provider judge.',
                      'Warm serial requests; not cold-start, concurrency, or real-user percentiles.'])

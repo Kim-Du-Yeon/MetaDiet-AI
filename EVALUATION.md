@@ -1,5 +1,9 @@
 # 2026-10-09 upgrade verification
 
+## Public budget v2: adopted (2026-10-14)
+
+[Report and immutable evidence](docs/budget_public_v2/README.md): same b7f79ab deployment with bounded external retries, flag-only public comparison of100 attempts each. Both completed/fresh/no-write100/100, no failures/timeouts. Storage median2499.69→1761.55ms, total8378.44→7641.84ms; p9510017.56→10360.24ms (+3.4%). Five quality criteria100/100 each after separately documented recovery of10 missing baseline judge outputs (two504 batches). Original90/100 judge evidence is retained. Gates pass; Render pipeline=true adopted and codified in render.yaml.988 tests pass,1 existing skip. No natural service retries occurred; injected recovery tests are not a demonstrated production reliability gain.
+
 ## Public budget pipeline, 100 attempts per condition (2026-10-14)
 
 [Public report](docs/budget_public/README.md): identical public commit `f60c040`, configuration flag only, 100 attempts each. Completion/latest calorie-target reflection: baseline 99/100, candidate 100/100; meal/strategy unchanged 100/100 in both. Storage median 2497.04→1800.26ms (n=99/100), completed total median 8235.73→7806.99ms, p95 10987.28→10758.95ms. Five automated quality criteria each score 99/100→100/100 with all judge calls completed. One baseline Gemini 504 is preserved; strict complete-evidence gate fails, so no permanent enablement. Flag restored false, public old-path/freshness probe passed, fixture deleted. Backend 977 passed, 1 existing skipped. Public real-model/DB synthetic-account measurements remain separate from local isolated-DB results. Sequential time-window confounding remains.

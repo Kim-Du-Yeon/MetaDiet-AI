@@ -1,0 +1,251 @@
+{
+  "scope": "public_serial_synthetic_100_per_condition",
+  "measurement": {
+    "baseline": {
+      "attempts": 100,
+      "completed": 100,
+      "failed_or_blocked": 0,
+      "unexpected_proposals": 0,
+      "first_answer_ms_completed": {
+        "n": 100,
+        "median": 8305.94,
+        "p95": 9946.51
+      },
+      "total_ms_completed": {
+        "n": 100,
+        "median": 8378.44,
+        "p95": 10017.56
+      },
+      "duration_ms_all_attempts": {
+        "n": 100,
+        "median": 8378.44,
+        "p95": 10017.56
+      },
+      "model_calls_completed": {
+        "n": 100,
+        "median": 1.0,
+        "p95": 1
+      },
+      "fresh": 100,
+      "no_write": 100
+    },
+    "pipeline": {
+      "attempts": 100,
+      "completed": 100,
+      "failed_or_blocked": 0,
+      "unexpected_proposals": 0,
+      "first_answer_ms_completed": {
+        "n": 100,
+        "median": 7570.8,
+        "p95": 10288.14
+      },
+      "total_ms_completed": {
+        "n": 100,
+        "median": 7641.84,
+        "p95": 10360.24
+      },
+      "duration_ms_all_attempts": {
+        "n": 100,
+        "median": 7641.84,
+        "p95": 10360.24
+      },
+      "model_calls_completed": {
+        "n": 100,
+        "median": 1.0,
+        "p95": 1
+      },
+      "fresh": 100,
+      "no_write": 100
+    }
+  },
+  "stages": {
+    "baseline": {
+      "budget_storage": {
+        "n": 100,
+        "median": 2499.69,
+        "p95": 2521.3
+      },
+      "budget_pool_checkout": {
+        "n": 100,
+        "median": 355.72,
+        "p95": 371.15
+      },
+      "budget_setup": {
+        "n": 100,
+        "median": 710.4,
+        "p95": 717.08
+      },
+      "budget_setup_enqueue": {
+        "n": 0,
+        "median": null,
+        "p95": null
+      },
+      "budget_sql": {
+        "n": 100,
+        "median": 1071.86,
+        "p95": 1081.99
+      },
+      "budget_commit": {
+        "n": 100,
+        "median": 360.15,
+        "p95": 363.59
+      },
+      "db_read": {
+        "n": 100,
+        "median": 417.6,
+        "p95": 589.37
+      },
+      "model_meal": {
+        "n": 100,
+        "median": 2598.37,
+        "p95": 4090.07
+      },
+      "graph_total": {
+        "n": 100,
+        "median": 6538.06,
+        "p95": 8178.22
+      },
+      "terminal_checkpoint": {
+        "n": 100,
+        "median": 220.23,
+        "p95": 224.25
+      },
+      "response_snapshot": {
+        "n": 100,
+        "median": 72.21,
+        "p95": 73.23
+      },
+      "public_stats": {
+        "n": 100,
+        "median": 281.71,
+        "p95": 513.0
+      }
+    },
+    "pipeline": {
+      "budget_storage": {
+        "n": 100,
+        "median": 1761.55,
+        "p95": 1782.42
+      },
+      "budget_pool_checkout": {
+        "n": 100,
+        "median": 349.18,
+        "p95": 364.3
+      },
+      "budget_setup": {
+        "n": 0,
+        "median": null,
+        "p95": null
+      },
+      "budget_setup_enqueue": {
+        "n": 100,
+        "median": 352.75,
+        "p95": 357.13
+      },
+      "budget_sql": {
+        "n": 100,
+        "median": 354.65,
+        "p95": 361.19
+      },
+      "budget_commit": {
+        "n": 100,
+        "median": 702.62,
+        "p95": 707.62
+      },
+      "db_read": {
+        "n": 100,
+        "median": 422.61,
+        "p95": 654.8
+      },
+      "model_meal": {
+        "n": 100,
+        "median": 2574.09,
+        "p95": 4648.41
+      },
+      "graph_total": {
+        "n": 100,
+        "median": 5849.44,
+        "p95": 8230.79
+      },
+      "terminal_checkpoint": {
+        "n": 100,
+        "median": 215.9,
+        "p95": 220.17
+      },
+      "response_snapshot": {
+        "n": 100,
+        "median": 71.07,
+        "p95": 72.42
+      },
+      "public_stats": {
+        "n": 100,
+        "median": 299.91,
+        "p95": 444.62
+      }
+    }
+  },
+  "judges": {
+    "baseline": "gemini-3.1-pro-preview",
+    "pipeline": "gemini-3.1-pro-preview"
+  },
+  "quality": {
+    "baseline": {
+      "attempts": 100,
+      "judge_completed": 100,
+      "relevant": 100,
+      "actionable": 100,
+      "no_invented_intake": 100,
+      "no_false_save_claim": 100,
+      "concise": 100
+    },
+    "pipeline": {
+      "attempts": 100,
+      "judge_completed": 100,
+      "relevant": 100,
+      "actionable": 100,
+      "no_invented_intake": 100,
+      "no_false_save_claim": 100,
+      "concise": 100
+    }
+  },
+  "primary_quality": {
+    "baseline": {
+      "attempts": 100,
+      "judge_completed": 90,
+      "relevant": 90,
+      "actionable": 90,
+      "no_invented_intake": 90,
+      "no_false_save_claim": 90,
+      "concise": 90
+    },
+    "pipeline": {
+      "attempts": 100,
+      "judge_completed": 100,
+      "relevant": 100,
+      "actionable": 100,
+      "no_invented_intake": 100,
+      "no_false_save_claim": 100,
+      "concise": 100
+    }
+  },
+  "gates": {
+    "complete_timing_and_judge_evidence": true,
+    "storage_median_20_percent": true,
+    "total_median_5_percent": true,
+    "p95_not_10_percent_worse": true,
+    "completion_freshness_no_write": true,
+    "quality_nonregression": true,
+    "all_public_requests_safe_and_fresh": true,
+    "no_unexpected_proposals": true,
+    "complete_response_timings": true,
+    "all_attempt_median_5_percent": true,
+    "all_attempt_p95_not_10_percent_worse": true,
+    "valid_build_and_finite_timings": true
+  },
+  "adopt": true,
+  "limitations": [
+    "Sequential time windows, not randomized interleaving.",
+    "One synthetic account, one automated same-provider judge.",
+    "Warm serial requests; not cold-start, concurrency, or real-user percentiles."
+  ]
+}

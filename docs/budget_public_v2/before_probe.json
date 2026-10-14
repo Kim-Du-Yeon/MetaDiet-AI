@@ -1,0 +1,66 @@
+{
+  "scope": "public_serial_real_model_real_database_synthetic_fixture",
+  "phase": "before",
+  "expected_commit": "b7f79abf86def6453843349b3b2267e88f68b463",
+  "health": {
+    "status": "ok",
+    "build": {
+      "commit": "b7f79abf86def6453843349b3b2267e88f68b463",
+      "protocol": 2,
+      "delivery": "verified_buffered"
+    }
+  },
+  "started_at": "2026-10-14T10:34:24.577680+09:00",
+  "dataset_sha256": "e81f370a057d062be520a85ccd71e51fea9679ddc30a1039730b63cdc4660985",
+  "rows": [
+    {
+      "status": "completed",
+      "first_answer_ms": 9368.11850000231,
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 충분히 괜찮습니다. 밥은 평소 공기밥 기준 1공기(약 200g) 정도로 덜고, 나물과 샐러드 등 채소류를 접시의 절반 정도로 넉넉히 채워보세요. 고기나 생선 같은 단백질 반찬을 1~2가지 곁들이고, 튀김류나 양념이 진한 메뉴는 적당량만 덜어 드시면 균형 있게 즐기실 수 있습니다.",
+      "usage": {
+        "tool_calls": 2,
+        "model_calls": 1,
+        "elapsed_seconds": 6.298128
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 398.678,
+        "budget_setup": 710.71,
+        "budget_connection_wait": 1109.686,
+        "budget_sql": 1085.635,
+        "budget_commit": 360.399,
+        "budget_storage": 2556.001,
+        "db_read": 458.076,
+        "model_meal": 3307.752,
+        "graph_total": 7443.552,
+        "terminal_checkpoint": 220.656,
+        "response_snapshot": 72.58,
+        "public_stats": 263.553
+      },
+      "build": {
+        "commit": "b7f79abf86def6453843349b3b2267e88f68b463",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "38cbb883-5a30-4347-8db2-3dce93319ec9",
+      "route": "followup_direct",
+      "model_tokens": {
+        "input_tokens": 2054,
+        "output_tokens": 141,
+        "total_tokens": 2195
+      },
+      "reasoning": "low",
+      "model_delivery": "invoke",
+      "total_ms": 9440.101500003948,
+      "pair": 0,
+      "case": "confirmed",
+      "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+      "expected_calories": 600,
+      "expected_target": 2000,
+      "fresh": true,
+      "preflight_unavailable": [],
+      "mode": "baseline",
+      "no_write": true,
+      "postflight_verified": true
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'scripts/eval'))
-from summarize_budget_public100 import public_gates
+from summarize_budget_public100 import public_gates, complete_missing_grades
 import budget_public100
 
 
@@ -20,6 +20,17 @@ def evidence():
 
 def test_valid_public_improvement_passes():
     assert all(public_gates(*evidence()).values())
+
+
+def test_supplement_cannot_replace_completed_low_grade():
+    original = {'judge':'same','source_sha256':'same','rows':[
+        {'index':0,'judge_status':'completed','relevant':False},
+        {'index':1,'judge_status':'failed'}]}
+    retry = {'judge':'same','source_sha256':'same','rows':[{'index':1,'judge_status':'completed'}]}
+    assert complete_missing_grades(original,retry)['rows'][0]['relevant'] is False
+    retry['rows'][0]['index'] = 0
+    with pytest.raises(AssertionError):
+        complete_missing_grades(original,retry)
 
 
 @pytest.mark.parametrize('key',['completed','fresh','no_write'])
