@@ -160,7 +160,8 @@ class DietTeam:
             lambda: get_chat_model(thinking_level=None if settings.coaching_thinking_level == 'default'
                                    else settings.coaching_thinking_level,
                                    model_name=None if settings.followup_model == 'default' else settings.followup_model,
-                                   reuse_provider=settings.coaching_client_reuse))
+                                   reuse_provider=settings.coaching_client_reuse,
+                                   transport_timing=settings.coaching_transport_timing))
         usage = state.get("execution_usage") or {}
         self.budget = ExecutionBudget(max_model_calls=settings.agent_max_model_calls,
             max_tool_calls=settings.agent_max_tool_calls,

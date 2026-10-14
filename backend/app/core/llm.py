@@ -51,10 +51,12 @@ class ConfiguredChatModel(Runnable):
                  max_tokens: int | None = None,
                  model_name: str | None = None,
                  reuse_provider: bool = False,
+                 transport_timing: bool = False,
                  thinking_level: Literal['low', 'medium', 'high'] | None = None):
         if role not in {"chat", "vision", "eval"}:
             raise ValueError(f"Unknown model role: {role}")
         self.role = role
+        self.transport_timing = transport_timing
         if reuse_provider and role != 'chat':
             raise ValueError('Provider reuse is only allowed for chat')
         self.reuse_provider = reuse_provider
@@ -85,17 +87,22 @@ class ConfiguredChatModel(Runnable):
             timeout = settings.eval_model_timeout_seconds if self.role == 'eval' else settings.model_timeout_seconds
             key = (ChatGoogleGenerativeAI, hashlib.sha256(settings.gemini_api_key.encode()).digest(),
                    model, self.role, self.temperature, self.max_tokens, self.thinking_level,
-                   timeout, settings.model_max_retries)
+                   timeout, settings.model_max_retries, self.transport_timing)
             if loop is not None and _shared_provider is not None and (
                     _shared_provider.loop is loop and _shared_provider.key == key):
                 self._provider = _shared_provider.provider
                 self.provider_reused = True
                 return self._provider
+            transport_args = {}
+            if self.transport_timing:
+                from app.core.provider_transport import TimedTransport
+                transport_args = {'client_args': {'transport': TimedTransport()}}
             self._provider = ChatGoogleGenerativeAI(
                 model=model, api_key=settings.gemini_api_key,
                 temperature=self.temperature, max_tokens=self.max_tokens,
                 timeout=timeout,
                 max_retries=settings.model_max_retries,
+                **transport_args,
                 **({'thinking_level': self.thinking_level} if self.thinking_level is not None else {}),
             )
             if loop is not None and _shared_provider is None:

@@ -60,7 +60,7 @@ def main():
     parser.add_argument('--probe',action='store_true',help='One separately recorded deployment warm-up, outside the 100')
     parser.add_argument('--folder', default='docs/budget_public')
     parser.add_argument('--expected-commit', default=COMMIT)
-    parser.add_argument('--experiment', choices=['budget', 'brief', 'model', 'tool_free', 'sdk'], default='budget')
+    parser.add_argument('--experiment', choices=['budget', 'brief', 'model', 'tool_free', 'sdk', 'transport'], default='budget')
     args = parser.parse_args()
     FOLDER = ROOT / args.folder
     COMMIT = args.expected_commit
@@ -161,6 +161,11 @@ def main():
             assert row.get('client_reuse', False) == (args.phase == 'after'), 'Reuse configuration mismatch; evidence retained'
             if args.phase == 'after' and not args.probe:
                 assert row.get('provider_cache_hits', 0) >= 1, 'Warm client not reused; evidence retained'
+        if args.experiment == 'transport' and row['status'] == 'completed':
+            assert (row.get('route'), row.get('reasoning'), row.get('model_delivery'), row.get('model_name'), row.get('answer_style'), row.get('tool_policy'), row.get('client_reuse', False)) == (
+                'followup_direct', 'low', 'invoke' if args.phase == 'before' else 'buffered_stream',
+                'gemini-3.8-flash', 'default', 'read', False), 'Transport experiment configuration mismatch; evidence retained'
+            assert all(k in stages for k in ('transport_wait_headers', 'transport_receive_body')), 'Transport timings missing; evidence retained'
         # Missing timings on failures remain in the denominator and block adoption.
 
 if __name__ == '__main__': main()

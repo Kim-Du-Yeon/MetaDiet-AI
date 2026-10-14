@@ -67,6 +67,7 @@ class Settings(BaseSettings):
     first_coaching_mode: Literal['off', 'default', 'low'] = 'low'
     # Experimental native streaming remains buffered before final validation.
     coaching_delivery: Literal['invoke', 'buffered_stream'] = 'invoke'
+    coaching_transport_timing: bool = False
     compact_followup_prompt: bool = False
     brief_followup_answer: bool = False
     followup_model: Literal['default', 'gemini-3.5-flash-lite'] = 'default'
