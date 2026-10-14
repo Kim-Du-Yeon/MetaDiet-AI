@@ -159,7 +159,8 @@ class DietTeam:
         self.coaching_model_factory = model_factory or (
             lambda: get_chat_model(thinking_level=None if settings.coaching_thinking_level == 'default'
                                    else settings.coaching_thinking_level,
-                                   model_name=None if settings.followup_model == 'default' else settings.followup_model))
+                                   model_name=None if settings.followup_model == 'default' else settings.followup_model,
+                                   reuse_provider=settings.coaching_client_reuse))
         usage = state.get("execution_usage") or {}
         self.budget = ExecutionBudget(max_model_calls=settings.agent_max_model_calls,
             max_tool_calls=settings.agent_max_tool_calls,
@@ -593,7 +594,8 @@ class DietTeam:
                 get_settings().coaching_thinking_level if direct else 'default'), model_delivery=delivery,
             answer_style='brief' if brief else 'default', model_name=(
                 get_settings().followup_model if direct and not first_direct and get_settings().followup_model != 'default'
-                else get_settings().gemini_model), tool_policy='none' if tool_free else 'read' if direct else 'default')
+                else get_settings().gemini_model), tool_policy='none' if tool_free else 'read' if direct else 'default',
+                client_reuse=bool(direct and not first_direct and get_settings().coaching_client_reuse))
         self.config = {**(self.config or {}), 'metadata': {
             **(self.config or {}).get('metadata', {}), **route_metadata}}
         await emit_runtime_event('execution_route', **route_metadata)

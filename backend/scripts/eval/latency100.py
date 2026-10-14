@@ -57,7 +57,7 @@ def capture(token, payload):
                     row.update(status=event.get('execution_status','completed'),usage=event.get('execution_usage') or {},
                         stage_timings_ms=event.get('stage_timings_ms') or {},build=event.get('build'),
                         trace_id=event.get('trace_id'),route=event.get('route'))
-                    for key in ('model_tokens', 'model_first_token_ms', 'reasoning', 'model_delivery', 'external_failures', 'answer_style', 'model_name', 'tool_policy'):
+                    for key in ('model_tokens', 'model_first_token_ms', 'reasoning', 'model_delivery', 'external_failures', 'answer_style', 'model_name', 'tool_policy', 'client_reuse', 'provider_cache_hits', 'provider_constructions'):
                         if key in event: row[key] = event[key]
                     if 'answer' in event: row['answer']=event['answer']
                     if event.get('pending_proposal'):

@@ -280,6 +280,10 @@ async def _invoke_with_progress(graph, graph_input, config: dict, journal: Execu
                          "metadata": {**config.get("metadata", {}), "trace_id": str(trace_id),
                                       'build_commit': build['commit'], 'delivery': build['delivery']}}
     async def sink(kind: str, payload: dict):
+        if kind == 'sdk_provider_ready':
+            key = 'provider_cache_hits' if payload['reused'] else 'provider_constructions'
+            journal.diagnostics[key] = journal.diagnostics.get(key, 0) + 1
+            return
         if kind == 'external_failure':
             failures = journal.diagnostics.setdefault('external_failures', [])
             if len(failures) < 32:

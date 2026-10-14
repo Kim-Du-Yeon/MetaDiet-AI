@@ -1,10 +1,36 @@
 """Lazy Gemini models; importing the application never requires a Gemini key."""
 from typing import Any, Literal
+import asyncio
+import hashlib
+from dataclasses import dataclass
 
 from langchain_core.runnables import Runnable
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 from app.core.config import get_settings
+
+
+@dataclass(repr=False)
+class _SharedProvider:
+    loop: Any
+    key: tuple
+    provider: Any
+
+
+# One bounded slot, only for opted-in coaching. No messages or bound tools.
+_shared_provider: _SharedProvider | None = None
+
+
+async def close_shared_model_client():
+    """Shutdown in the owning loop, after in-flight requests have drained."""
+    global _shared_provider
+    entry = _shared_provider
+    if entry is None:
+        return
+    if entry.loop is not asyncio.get_running_loop():
+        return
+    _shared_provider = None
+    await entry.provider.aclose()
 
 
 def response_text(response: Any) -> str:
@@ -24,10 +50,14 @@ class ConfiguredChatModel(Runnable):
     def __init__(self, *, role: str = "chat", temperature: float = 0,
                  max_tokens: int | None = None,
                  model_name: str | None = None,
+                 reuse_provider: bool = False,
                  thinking_level: Literal['low', 'medium', 'high'] | None = None):
         if role not in {"chat", "vision", "eval"}:
             raise ValueError(f"Unknown model role: {role}")
         self.role = role
+        if reuse_provider and role != 'chat':
+            raise ValueError('Provider reuse is only allowed for chat')
+        self.reuse_provider = reuse_provider
         if model_name is not None and role != 'chat':
             raise ValueError('Model override is only allowed for chat')
         self.model_name = model_name
@@ -37,8 +67,10 @@ class ConfiguredChatModel(Runnable):
         self.temperature = temperature
         self.max_tokens = max_tokens
         self._provider = None
+        self.provider_reused = False
 
     def _client(self):
+        global _shared_provider
         if self._provider is None:
             settings = get_settings()
             if not settings.gemini_api_key.strip():
@@ -46,13 +78,28 @@ class ConfiguredChatModel(Runnable):
             model = self.model_name or {"chat": settings.gemini_model,
                      "vision": settings.gemini_vision_model,
                      "eval": settings.gemini_eval_model}[self.role]
+            try:
+                loop = asyncio.get_running_loop() if self.reuse_provider else None
+            except RuntimeError:
+                loop = None
+            timeout = settings.eval_model_timeout_seconds if self.role == 'eval' else settings.model_timeout_seconds
+            key = (ChatGoogleGenerativeAI, hashlib.sha256(settings.gemini_api_key.encode()).digest(),
+                   model, self.role, self.temperature, self.max_tokens, self.thinking_level,
+                   timeout, settings.model_max_retries)
+            if loop is not None and _shared_provider is not None and (
+                    _shared_provider.loop is loop and _shared_provider.key == key):
+                self._provider = _shared_provider.provider
+                self.provider_reused = True
+                return self._provider
             self._provider = ChatGoogleGenerativeAI(
                 model=model, api_key=settings.gemini_api_key,
                 temperature=self.temperature, max_tokens=self.max_tokens,
-                timeout=settings.eval_model_timeout_seconds if self.role == "eval" else settings.model_timeout_seconds,
+                timeout=timeout,
                 max_retries=settings.model_max_retries,
                 **({'thinking_level': self.thinking_level} if self.thinking_level is not None else {}),
             )
+            if loop is not None and _shared_provider is None:
+                _shared_provider = _SharedProvider(loop, key, self._provider)
         return self._provider
 
     def invoke(self, input, config=None, **kwargs):

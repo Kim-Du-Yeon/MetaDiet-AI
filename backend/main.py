@@ -34,9 +34,15 @@ async def combined_lifespan(application):
         scheduler_enabled = os.getenv("ENABLE_SCHEDULER", "true").lower() == "true"
         if scheduler_enabled:
             start_scheduler()
-        yield
-        if scheduler_enabled:
-            stop_scheduler()
+        try:
+            yield
+        finally:
+            try:
+                if scheduler_enabled:
+                    stop_scheduler()
+            finally:
+                from app.core.llm import close_shared_model_client
+                await close_shared_model_client()
 
 
 # 기존 lifespan 덮어쓰기 대신 combined로 교체

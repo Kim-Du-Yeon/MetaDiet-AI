@@ -158,6 +158,9 @@ def main():
             assert (row.get('route'), row.get('reasoning'), row.get('model_delivery'), row.get('model_name'), row.get('answer_style'), row.get('tool_policy')) == (
                 'followup_direct', 'low', 'invoke', 'gemini-3.8-flash', 'default', 'read'), 'Model configuration mismatch; evidence retained'
             assert all(k in stages for k in ('sdk_prepare_meal', 'tool_bind_meal', 'provider_roundtrip')), 'Phase timings missing; evidence retained'
+            assert row.get('client_reuse', False) == (args.phase == 'after'), 'Reuse configuration mismatch; evidence retained'
+            if args.phase == 'after' and not args.probe:
+                assert row.get('provider_cache_hits', 0) >= 1, 'Warm client not reused; evidence retained'
         # Missing timings on failures remain in the denominator and block adoption.
 
 if __name__ == '__main__': main()
