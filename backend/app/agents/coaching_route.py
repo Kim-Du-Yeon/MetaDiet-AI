@@ -2,6 +2,20 @@
 import re
 
 
+def followup_needs_tools(message):
+    """Only whole, ordinary advice requests can omit tools; unknown text keeps them."""
+    foods = (r'(?:일반식|(?:한식)?뷔페|샌드위치|밥(?:\s*(?:이랑|랑|과|하고)\s*계란)?|'
+             r'닭가슴살(?:\s*(?:이랑|랑|과|하고)\s*샐러드)?|계란|샐러드)')
+    question = (r'\s*(?:(?:그럼|그러면|아침에|점심에|저녁에)\s*)?'
+                r'(?:(?:한식)?뷔페\s*가서\s*)?(?:(?:편의점에서|일반식으로)\s*)?' + foods +
+                r'(?:\s*한\s*접시)?\s*(?:먹어도\s*(?:괜찮아|괜찮을까|괜찮나요|돼|될까)|'
+                r'먹는\s*건\s*(?:괜찮아|그런가))[.!?\s]*')
+    # Optional display-format request for verified current values, not arbitrary instructions.
+    header = (r'(?:첫\s*문장에\s*["“]오늘\s*섭취:\s*N\s*kcal,\s*하루\s*기준:\s*N\s*kcal["”]'
+              r'\s*형식으로\s*적어줘[.!?\s]*)?')
+    return re.fullmatch(question + header, message or '', re.I) is None
+
+
 def simple_recommendation(state):
     """Allow only a complete, unambiguous advice request; never strip unknown text."""
     if (state.get('requested_action') or state.get('pending_proposal')

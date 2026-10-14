@@ -60,7 +60,7 @@ def main():
     parser.add_argument('--probe',action='store_true',help='One separately recorded deployment warm-up, outside the 100')
     parser.add_argument('--folder', default='docs/budget_public')
     parser.add_argument('--expected-commit', default=COMMIT)
-    parser.add_argument('--experiment', choices=['budget', 'brief', 'model'], default='budget')
+    parser.add_argument('--experiment', choices=['budget', 'brief', 'model', 'tool_free'], default='budget')
     args = parser.parse_args()
     FOLDER = ROOT / args.folder
     COMMIT = args.expected_commit
@@ -133,7 +133,8 @@ def main():
             fresh=bool(match and tuple(int(v.replace(',','')) for v in match.groups())==(calories,target)),
             preflight_unavailable=unavailable,
             mode='baseline' if args.phase=='before' else (
-                'flash_lite' if args.experiment=='model' else 'brief' if args.experiment=='brief' else 'pipeline'))
+                'tool_free' if args.experiment=='tool_free' else 'flash_lite' if args.experiment=='model'
+                else 'brief' if args.experiment=='brief' else 'pipeline'))
         persist_capture(report,output,row,before,lambda:(meals(),strategies()))
         print(args.phase,index+1,row['status'],round(row['total_ms']),row['fresh'],flush=True)
         if row.get('build'):
@@ -149,6 +150,10 @@ def main():
             assert row.get('answer_style') == 'default', 'Answer style mismatch; evidence retained'
             assert (row.get('route'), row.get('reasoning'), row.get('model_delivery'), row.get('model_name')) == (
                 'followup_direct', 'low', 'invoke', 'gemini-3.8-flash' if args.phase=='before' else 'gemini-3.5-flash-lite'), 'Model configuration mismatch; evidence retained'
+        if args.experiment == 'tool_free' and row['status'] == 'completed':
+            assert (row.get('route'), row.get('reasoning'), row.get('model_delivery'), row.get('model_name'), row.get('answer_style')) == (
+                'followup_direct', 'low', 'invoke', 'gemini-3.8-flash', 'default'), 'Model configuration mismatch; evidence retained'
+            assert row.get('tool_policy') == ('none' if args.phase=='after' else 'read'), 'Tool policy mismatch; evidence retained'
         # Missing timings on failures remain in the denominator and block adoption.
 
 if __name__ == '__main__': main()

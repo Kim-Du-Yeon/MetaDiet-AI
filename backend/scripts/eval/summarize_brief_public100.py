@@ -12,23 +12,28 @@ ROOT = Path(__file__).resolve().parents[3]
 
 def gates(groups, grades, stages):
     a, b = (groups[p]['duration_ms_all_attempts'] for p in ('before', 'after'))
+    model_a, model_b = (stages[p]['model_meal']['median'] for p in ('before', 'after'))
+    valid_duration = all(isinstance(v, (int, float)) and math.isfinite(v) and v > 0
+                         for d in (a, b) for v in (d['median'], d['p95']))
+    valid_model = all(isinstance(v, (int, float)) and math.isfinite(v) and v > 0 for v in (model_a, model_b))
     return {
         'complete_safe_fresh': all(groups[p][k] == 100 for p in groups for k in ('completed', 'fresh', 'no_write')),
         'no_proposals': all(groups[p]['unexpected_proposals'] == 0 for p in groups),
         'complete_judge': all(grades[p]['judge_completed'] == 100 for p in grades),
         'quality_nonregression': all(grades['after'][k] >= grades['before'][k] for k in RUBRIC),
-        'all_attempt_median_5_percent': b['median'] <= .95 * a['median'],
-        'all_attempt_p95_nonregression': b['p95'] <= a['p95'],
-        'model_median_10_percent': stages['after']['model_meal']['median'] <= .9 * stages['before']['model_meal']['median'],
+        'all_attempt_median_5_percent': valid_duration and b['median'] <= .95 * a['median'],
+        'all_attempt_p95_nonregression': valid_duration and b['p95'] <= a['p95'],
+        'model_median_10_percent': valid_model and model_b <= .9 * model_a,
     }
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--complete-missing-judges', action='store_true')
-    parser.add_argument('--experiment', choices=['brief', 'model'], default='brief')
+    parser.add_argument('--experiment', choices=['brief', 'model', 'tool_free'], default='brief')
     args = parser.parse_args()
-    folder = ROOT / ('docs/model_followup_public' if args.experiment == 'model' else 'docs/brief_followup_public')
+    folder = ROOT / ('docs/tool_free_followup_public' if args.experiment == 'tool_free' else
+                     'docs/model_followup_public' if args.experiment == 'model' else 'docs/brief_followup_public')
     reports, measured, grades, stages, primary = {}, {}, {}, {}, {}
     for phase in ('before', 'after'):
         path = folder / (phase + '.json')
@@ -48,6 +53,11 @@ def main():
             'followup_direct', 'low', 'invoke', 'gemini-3.5-flash-lite' if phase == 'after' and args.experiment == 'model'
             else 'gemini-3.8-flash') for r in rows if r['status'] == 'completed')
         assert {r['index'] for r in judged['rows']} == set(range(100))
+        if args.experiment == 'tool_free':
+            # Frozen f42e4a3 baseline exposed read tools; this label was added later.
+            assert phase != 'before' or report['expected_commit'] == 'f42e4a379d1b785887a6a8fea2f4b7c67c9a7b3f'
+            assert all(r.get('tool_policy', 'read') == ('read' if phase=='before' else 'none')
+                       for r in rows if r['status'] == 'completed')
         reports[phase] = report
         measured[phase] = summarize(rows)
         grades[phase] = quality(judged['rows'])

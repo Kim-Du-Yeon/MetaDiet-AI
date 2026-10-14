@@ -579,19 +579,21 @@ class DietTeam:
                 "evidence": "식단 생성 없이 공식 근거 자체를 설명하는 질문 담당",
             }[role]
             delegates.append(AgentTool(f"delegate_{role}", description, Query, delegate, "delegate"))
-        from app.agents.coaching_route import simple_followup, simple_recommendation
+        from app.agents.coaching_route import simple_followup, simple_recommendation, followup_needs_tools
         first_direct = self.first_coaching_mode != 'off' and simple_recommendation(self.state)
         direct = context_verified and (simple_followup(self.state) or first_direct) and self.decision_client is None
         from app.agents.execution_stream import emit_runtime_event
         delivery = get_settings().coaching_delivery if direct else 'invoke'
         brief = direct and not first_direct and get_settings().brief_followup_answer
+        tool_free = (direct and not first_direct and not get_settings().followup_tools_enabled
+                     and not followup_needs_tools(self.state['message']))
         route_metadata = dict(route=(
             'first_direct' if direct and first_direct else 'followup_direct' if direct else 'supervisor'),
             reasoning=self.first_coaching_mode if direct and first_direct else (
                 get_settings().coaching_thinking_level if direct else 'default'), model_delivery=delivery,
             answer_style='brief' if brief else 'default', model_name=(
                 get_settings().followup_model if direct and not first_direct and get_settings().followup_model != 'default'
-                else get_settings().gemini_model))
+                else get_settings().gemini_model), tool_policy='none' if tool_free else 'read' if direct else 'default')
         self.config = {**(self.config or {}), 'metadata': {
             **(self.config or {}).get('metadata', {}), **route_metadata}}
         await emit_runtime_event('execution_route', **route_metadata)
@@ -617,7 +619,7 @@ class DietTeam:
                 request=json.dumps({'message': self.state['message'],
                     'recent_messages': [str(m)[:2000] for m in self.state.get('messages', [])[-10:]],
                     'verified_context': verified_context}, ensure_ascii=False),
-                tools=[tool for tool in self.tools('meal') if tool.effect == 'read'],
+                tools=[] if tool_free else [tool for tool in self.tools('meal') if tool.effect == 'read'],
                 allowed_tools=self.allowed, budget=self.budget, config=self.config,
                 agent_name='meal', context_verified=True, buffered_stream=delivery == 'buffered_stream')
         else:
