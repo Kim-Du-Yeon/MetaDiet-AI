@@ -12,7 +12,7 @@
 | 모델 호출 수 중앙값 / p95 | 1 / 1 | 1 / 1 |
 | 품질 5항목 | 각각 100/100 | 각각 100/100 |
 
-품질 judge 100건도 완료했으며 5항목 모두 유지했다. 속도 기준 미달로 `FOLLOWUP_TOOLS_ENABLED=true`, `FOLLOWUP_MODEL=default`로 복구했다. [사전 기준](PROTOCOL.md), [기존 원본](before.json), [후보 원본](after.json), [기존 품질](before_quality.json), [후보 품질](after_quality.json), [종합 판정](summary.json), [복구 공개 요청](rollback/before_probe.json).
+품질 judge 100건도 완료했으며 5항목 모두 유지했다. 속도 기준 미달로 `FOLLOWUP_TOOLS_ENABLED=true`, `FOLLOWUP_MODEL=default`로 복구했다. 새 코드 배포 0395fe5의 [최종 복구 공개 요청](rollback_new_build/before_probe.json)에서 원래 `read` 정책·3.8 모델·최신값·미저장을 확인했다. [사전 기준](PROTOCOL.md), [기존 원본](before.json), [후보 원본](after.json), [기존 품질](before_quality.json), [후보 품질](after_quality.json), [종합 판정](summary.json). 초기 설정 배포의 실패한 두 probe도 [작업 로그](WORK_LOG.md)에 보존한다.
 
 ## 실패 원인과 보완
 
