@@ -24,7 +24,7 @@ export default function MealProposalEditor({ proposal, busy, onRevise, onChanged
     <ul className="proposal__meals">{payload.meals.map((meal, index) => {
       const portion = meal.nutrition_metadata?.portion;
       return <li key={index}><div><strong>{portion?.display_name || meal.food_name}</strong>
-        <p>{portion ? `${portion.amount}${portion.unit} · ` : ''}{meal.quantity_g}g
+        <p>{portion && !portion.defaulted && portion.unit !== 'g' ? `${portion.amount}${portion.unit} · ` : ''}{meal.quantity_g}g{portion?.defaulted && ' (1인분)'}
           {portion?.defaulted && ' · 기본 분량으로 계산'}{portion?.representative && ' · 대표 기준·대략값'}</p>
         {portion?.basis_note && <p>{portion.basis_note}</p>}
         <p><strong>{meal.calories} kcal</strong> · 탄수화물 {meal.carbs_g}g · 단백질 {meal.protein_g}g · 지방 {meal.fat_g}g</p>

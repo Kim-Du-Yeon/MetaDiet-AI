@@ -3,6 +3,23 @@ from app.tools.simple_meals import PORTIONS, CATEGORY_DEFAULTS, parse_simple_mea
 from app.tools.food_catalog import FoodCatalog
 
 
+@pytest.mark.parametrize('message,grams,defaulted', [
+    ('김치찌개 간장불고기 밥 한공기 먹었어', [200, 200, 200], [True, True, False]),
+    ('김치찌개 간장불고기 200g 먹었어', [200, 200], [True, False]),
+    ('김치찌개 350g 간장 불고기 150g', [350, 150], [False, False]),
+    ('김치찌개 2인분 불고기 2인분', [400, 400], [False, False]),
+])
+@pytest.mark.asyncio
+async def test_stew_and_bulgogi_go_directly_to_editable_proposal(message, grams, defaulted):
+    parsed = parse_simple_meal(message)
+    assert parsed is not None
+    proposal = await calculate_simple_meal(parsed, FoodCatalog())
+    assert [m['quantity_g'] for m in proposal['meals']] == grams
+    assert [m['nutrition_metadata']['portion']['defaulted'] for m in proposal['meals']] == defaulted
+    assert all(m['calories'] > 0 for m in proposal['meals'])
+    assert proposal['meals'][0]['nutrition_metadata']['source_date'] == '2026-06-18'
+
+
 @pytest.mark.parametrize('message,grams', [
     ('고구마 사과 우유', [150, 200, 200]),
     ('계란후라이 식빵 두장 플레인 요거트', [50, 60, 100]),
@@ -95,7 +112,10 @@ async def test_ricepaper_uses_reviewed_dry_wrapper_not_name_only_outlier():
 
 
 @pytest.mark.asyncio
-async def test_fast_path_creates_only_pending_proposal_without_model_or_domain_write():
+@pytest.mark.parametrize('message', ['닭가슴살 밥 한공기 김치',
+    '오늘 점심에 김치찌개 간장불고기 200g 밥 한공기 먹었어',
+    '김치찌개 간장 불고기 밥 먹었어'])
+async def test_fast_path_creates_only_pending_proposal_without_model_or_domain_write(message):
     from unittest.mock import AsyncMock
     from app.agents.team import DietTeam
     repository = AsyncMock()
@@ -103,11 +123,12 @@ async def test_fast_path_creates_only_pending_proposal_without_model_or_domain_w
         'id': 'p', 'version': 1, 'payload': payload, 'kind': 'intake', 'status': 'pending'}
     def no_model():
         raise AssertionError('simple meals must not call the model')
-    team = DietTeam({'user_id': 'test', 'message': '닭가슴살 밥 한공기 김치', 'run_id': 'run'},
+    team = DietTeam({'user_id': 'test', 'message': message, 'run_id': 'run'},
                     model_factory=no_model, repository=repository, db=object())
     result = await team.execute()
     assert result['pending_proposal']['status'] == 'pending'
     assert result['execution_usage']['model_calls'] == 0
     assert result['execution_usage']['tool_calls'] == 2
     assert len(result['pending_meals']) == 3
+    assert result['food_selection'] is None
     repository.resolve.assert_not_called()

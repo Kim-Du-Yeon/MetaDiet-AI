@@ -12,6 +12,8 @@ from app.tools.food_groups import match_food_group
 
 # alias, exact catalog name, app serving grams, display unit, representative ID
 PORTIONS = [
+    (('김치찌개', '김치 찌개'), '김치찌개', 200, '인분', 'mfds:P123-208020300-0054'),
+    (('간장불고기', '간장 불고기', '소불고기', '소 불고기', '불고기'), '소불고기, 볶은것', 200, '인분', None),
     (('생 닭가슴살', '닭가슴살 생것'), '닭고기, 가슴, 생것', 100, '개', None),
     (('구운 닭가슴살', '닭가슴살 구운것'), '닭고기, 가슴, 구운것(팬)', 100, '개', None),
     (('삶은 닭가슴살', '닭가슴살', '닭 가슴살', '닭가슴', '달각슴살', '닭가슴샬', '닭가슴삶'), '닭고기, 가슴, 삶은것', 100, '개', None),
@@ -173,10 +175,12 @@ def parse_simple_meal(message, *, forced_meal_type=None, allow_unknown=False):
         grams = amount if unit == 'g' else amount * unit_grams.get(unit, serving)
         if not 0 < grams <= 10000:
             return None
-        approximate = canonical in CATEGORY_DEFAULTS or canonical.startswith('빵,') if canonical else False
+        approximate = canonical in CATEGORY_DEFAULTS or canonical.startswith('빵,') or canonical == '소불고기, 볶은것' if canonical else False
         basis_note = ('곰보빵(소보로) 유사 기준이며 실제 메론빵 제품값이 아니에요.' if '메론' in alias or '멜론' in alias
             else '일반 콤비네이션 피자 기준이며 브랜드 제품값이 아니에요.' if '도미노' in alias or '피자헛' in alias
             else '앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.' if approximate else '')
+        if food_id == 'mfds:P123-208020300-0054':
+            basis_note = '김치찌개 대표 기준·대략값이에요. 실제 제품·재료와 다를 수 있어요.'
         if group_match:
             approximate = True
             basis_note = f'{group.name} 음식군 대표값({canonical})으로 계산했어요. 실제 제품·재료와 다를 수 있어요.'

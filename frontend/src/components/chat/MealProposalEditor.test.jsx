@@ -22,6 +22,7 @@ test('portion edit requires server recalculation and sends units without client 
         amount: 1, unit: '공기', default_unit: '공기', unit_g: 200, defaulted: true } } },
   ] } }} onRevise={revise} onDecision={jest.fn()} />);
   expect(screen.getByText(/탄수화물 65g/)).toBeInTheDocument();
+  expect(screen.getByText(/200g \(1인분\)/)).toBeVisible();
   fireEvent.change(screen.getByLabelText('1번 음식 분량'), { target: { value: '1.5' } });
   expect(screen.getByRole('button', { name: '이대로 기록' })).toBeDisabled();
   fireEvent.click(screen.getByRole('button', { name: '수정한 분량 다시 계산' }));

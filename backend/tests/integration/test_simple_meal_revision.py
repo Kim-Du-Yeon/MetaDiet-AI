@@ -11,7 +11,8 @@ from app.tools.food_catalog import FoodCatalog
 
 @pytest.mark.parametrize('stale', [False, True])
 @pytest.mark.parametrize('message,amount,unit,grams', [('밥 한공기', 1.5, '공기', 300),
-    ('도미노피자', .5, '판', 400), ('물만두', 2, '회분', 300)])
+    ('도미노피자', .5, '판', 400), ('물만두', 2, '회분', 300),
+    ('김치찌개', 350, 'g', 350), ('간장불고기', 2, '인분', 400)])
 async def test_revision_recalculates_and_syncs_checkpoint_without_confirming(monkeypatch, stale, message, amount, unit, grams):
     payload = await calculate_simple_meal(parse_simple_meal(message), FoodCatalog())
     proposal_id = uuid4()

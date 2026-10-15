@@ -2,6 +2,8 @@
 import hashlib
 import logging
 import math
+from copy import deepcopy
+from app.tools.reviewed_foods import REVIEWED_FOODS
 from pydantic import Field, model_validator
 from app.schemas.proposals import StrictModel
 from app.tools.food_import import normalize_name
@@ -87,6 +89,7 @@ class FoodCatalog:
             self.rows[food_id] = {'food_id': food_id, 'name': name, 'normalized_name': normalize_name(name),
                 'source': 'csv', 'basis_g': 100, 'basis_text': '100g', 'manufacturer': '', 'nutrients': nutrients}
             self.legacy_ids[int(index)] = food_id
+        self.rows.update(deepcopy(REVIEWED_FOODS))
 
     async def search(self, query: str, limit: int = 20, *, kind: str = 'auto') -> list[dict]:
         normalized = normalize_name(query.strip())
