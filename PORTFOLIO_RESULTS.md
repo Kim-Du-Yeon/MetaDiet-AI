@@ -276,3 +276,6 @@ LangSmith에는 Supervisor 위임, 도구 호출, 재시도, 예산, HITL과 지
 ## 피드백 업무량 가시화: 담당자 필터와 미처리 건수
 
 관리자 피드백에 전체·미지정·담당자별 필터와 전체/선택 범위 미처리 건수를 추가했다. 접수·재현 중·보류를 미처리로 정의하고 완료 상태는 제외하며, 상태 필터와 미처리 집계 범위를 명확히 구분했다. 페이지에 보이는 행 수를 업무량으로 오인하지 않도록 전체 조건 건수를 별도 표시한다. 목록과 집계는 read-only Repeatable Read로 일관된 스냅샷에서 계산하며 JWT 관리자 검증과 no-store를 유지한다. 실제 PostgreSQL 임시 테이블로 상태·배정·필터·페이지 경계를 확인했고 운영 행은 변경하지 않았다. 백엔드1072 passed·기존1 skipped, 프론트87 passed/25 suites. [기능과 검증](docs/ADMIN_FEEDBACK.md).
+
+
+필터·집계 기능의 공개 API·웹 배포 커밋은 `ecda1c5`다. 실제 브라우저에서 미지정1건→관리자 배정 후 미지정0건/담당자1건→완료 상태 필터 시 미처리1건/목록0건→완료 저장 후 미처리0건/목록1건→새로고침 유지를 확인했다. 공개 담당자 필터 API도 미로그인401·일반 계정403이었다. 임시 계정·의견·이력은 검증 후 삭제했다. [검사 결과](docs/admin-feedback/filter-public-check.json), [완료 전 캡처](docs/admin-feedback/filter-pending-before.png), [완료 후 캡처](docs/admin-feedback/filter-pending-after.png). 이는 합성 기능 검증이며 실제 베타 사용자의 업무 처리 성과는 아니다.

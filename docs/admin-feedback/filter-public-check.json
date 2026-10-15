@@ -1,0 +1,80 @@
+{
+  "scope": "synthetic_public_functional_not_performance",
+  "authorization_http_statuses": {
+    "anonymous_list": 401,
+    "member_list": 403,
+    "anonymous_list_unassigned": 401,
+    "member_list_unassigned": 403,
+    "anonymous_list_assigned": 401,
+    "member_list_assigned": 403,
+    "anonymous_assignees": 401,
+    "member_assignees": 403,
+    "anonymous_detail": 401,
+    "member_detail": 403,
+    "anonymous_history": 401,
+    "member_history": 403,
+    "anonymous_update": 401,
+    "member_update": 403
+  },
+  "browser_saved_state_persisted": true,
+  "unauthorized_update_no_change": true,
+  "assignment_and_unassignment_audited": true,
+  "history_count": 2,
+  "build": "ecda1c5c42d1aecddc064c0ae6e990a55e972afe",
+  "synthetic_fixture_cleanup": "deleted",
+  "browser_filter_cases": [
+    {
+      "case": "initial_unassigned",
+      "global_pending": 1,
+      "selected_pending": 1,
+      "matched_total": 1
+    },
+    {
+      "case": "admin_before_assignment",
+      "global_pending": 1,
+      "selected_pending": 0,
+      "matched_total": 0
+    },
+    {
+      "case": "unassigned_after_assignment",
+      "global_pending": 1,
+      "selected_pending": 0,
+      "matched_total": 0
+    },
+    {
+      "case": "admin_bug_after_assignment",
+      "global_pending": 1,
+      "selected_pending": 1,
+      "matched_total": 1
+    },
+    {
+      "case": "admin_bug_resolved_filter_before_completion",
+      "global_pending": 1,
+      "selected_pending": 1,
+      "matched_total": 0
+    },
+    {
+      "case": "unassigned_bug_after_completion",
+      "global_pending": 0,
+      "selected_pending": 0,
+      "matched_total": 1
+    },
+    {
+      "case": "refresh_after_completion",
+      "global_pending": 0,
+      "selected_pending": 0,
+      "matched_total": 1
+    },
+    {
+      "case": "cleanup_and_refresh",
+      "global_pending": 0,
+      "selected_pending": 0,
+      "matched_total": 0
+    }
+  ],
+  "real_postgres_temp_table_all_five_statuses": true,
+  "pagination_independent_counts": true,
+  "empty_scope_counts_zero": true,
+  "read_only_snapshot_verified": true,
+  "actual_feedback_and_intake_unchanged": true
+}
