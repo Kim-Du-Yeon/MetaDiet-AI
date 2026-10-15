@@ -23,7 +23,8 @@ def prepare():
     email, password = f'feedback-check-{marker}@example.invalid', f'T!{uuid4().hex}a9'
     user = service_api('/auth/v1/admin/users', 'POST', {'email':email,'password':password,'email_confirm':True})
     # Persist the identity immediately so a subsequent failed request is recoverable.
-    ENV.write_text('ADMIN_FEEDBACK_AUTH_ID='+user['id']+'\n', encoding='utf-8')
+    ENV.write_text('ADMIN_FEEDBACK_AUTH_ID='+user['id']+'\nADMIN_FEEDBACK_EMAIL='+email+
+                   '\nADMIN_FEEDBACK_PASSWORD='+password+'\n', encoding='utf-8')
     token = service_api('/auth/v1/token?grant_type=password', 'POST', {'email':email,'password':password})['access_token']
     with ENV.open('a',encoding='utf-8') as output:
         output.write('ADMIN_FEEDBACK_TOKEN='+token+'\n')
@@ -80,10 +81,19 @@ def cleanup():
     import os
     token = os.environ.get('ADMIN_FEEDBACK_TOKEN')
     auth_id = os.environ['ADMIN_FEEDBACK_AUTH_ID']
+    if os.environ.get('ADMIN_FEEDBACK_PASSWORD'):
+        # Refreshing a token does not satisfy the app's recent password-auth rule.
+        token = service_api('/auth/v1/token?grant_type=password', 'POST', {
+            'email':os.environ['ADMIN_FEEDBACK_EMAIL'],
+            'password':os.environ['ADMIN_FEEDBACK_PASSWORD']})['access_token']
     if token:
         json_request(API+'/users/me',token=token,method='DELETE',payload={'confirmation':'DELETE'})
     else:
         service_api('/auth/v1/admin/users/'+auth_id,'DELETE')
+    feedback_id = os.environ.get('ADMIN_FEEDBACK_ID')
+    if feedback_id:
+        assert service_api('/rest/v1/beta_feedback?id=eq.'+feedback_id+'&select=id') == []
+    assert service_api('/rest/v1/users?auth_id=eq.'+auth_id+'&select=id') == []
     if ARTIFACT.exists():
         result=json.loads(ARTIFACT.read_text())
         result['synthetic_fixture_cleanup']='deleted'
