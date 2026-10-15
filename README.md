@@ -1,6 +1,6 @@
 # MetaDiet AI
 
-베타 사용자에게 공유하기: [사용 안내와 피드백 보내는 방법](docs/BETA_USER_GUIDE.md).
+베타 사용자에게 공유하기: [사용 안내·복사할 초대 문구·피드백 보내기](docs/BETA_USER_GUIDE.md) · [10~15분 테스트 시나리오·결과 양식](docs/BETA_TEST_SCENARIOS.md).
 
 운영자용: [관리자 피드백 검토·자동 갱신·오래된 미처리·담당자·이력](docs/ADMIN_FEEDBACK.md).
 
@@ -26,6 +26,7 @@ MetaDiet AI는 식사 기록, 체중·인바디 추세, 장기 목표와 영양 
 
 - 공개 베타 UI: [metadiet-web.onrender.com](https://metadiet-web.onrender.com)
 - 베타 사용·피드백 수집 안내: [BETA_USER_GUIDE.md](docs/BETA_USER_GUIDE.md)
+- 베타 테스트 시나리오·수정/제외/취소/확정·재로그인·피드백 확인: [BETA_TEST_SCENARIOS.md](docs/BETA_TEST_SCENARIOS.md)
 - 상세 구조: [ARCHITECTURE.md](ARCHITECTURE.md)
 - 평가 방법과 전체 원본 결과: [EVALUATION.md](EVALUATION.md)
 - 포트폴리오 핵심 결과: [PORTFOLIO_RESULTS.md](PORTFOLIO_RESULTS.md)
