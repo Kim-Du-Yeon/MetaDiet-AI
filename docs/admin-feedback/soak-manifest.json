@@ -1,0 +1,19 @@
+{
+  "application_base_commit": "3219bc0",
+  "harness_sha256": "0f700b105f34bdbb38f5b131476548685feb5d20b3ef346575d8f58a0d70e9a3",
+  "normal_condition": {
+    "sessions": 3,
+    "rounds_per_session": 100,
+    "minimum_seconds": 600,
+    "interval_seconds": 6,
+    "rows": 10000
+  },
+  "fault_conditions": [
+    "closed_connection",
+    "statement_timeout",
+    "close_after_update"
+  ],
+  "attempts_each_fault": 100,
+  "transport": "local ASGI, real Supabase JWT, remote private PostgreSQL schema",
+  "runtime_code_changed": false
+}

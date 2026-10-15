@@ -178,3 +178,5 @@ Ragas는 의존성 충돌을 피하기 위해 별도 평가 환경을 사용합�
 요청 단위 조회 결과 재사용, Supervisor·전문 Agent의 최신 컨텍스트 공유, 짧은 후속 답변과 한 줄 진행 표시를 적용했습니다. 통제 실험의 반복 DB 조회는 6→3회, 위임 코칭 모델 호출은 3→2회입니다. 일반 요청의 최신 DB 조회 3회와 사용자 확인 저장 정책은 유지합니다. [공개 측정·화면 캡처·실패 해결 기록](docs/coaching_performance/README.md).
 
 관리자 운영 검증: [동시 수정100회·1만 건 조회·자동 갱신 결과와 캡처](docs/admin-feedback/SCALE_CONCURRENCY.md).
+
+관리자 안정성 검증: [실제 인증 세션·10분 지속 조회·DB 연결 장애 복구](docs/admin-feedback/SOAK_RECOVERY.md).

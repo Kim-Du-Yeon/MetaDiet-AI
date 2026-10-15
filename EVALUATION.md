@@ -1,5 +1,9 @@
 # 2026-10-09 upgrade verification
 
+## Real Auth sessions and DB connection recovery (2026-10-15)
+
+[Final evidence and boundaries](docs/admin-feedback/SOAK_RECOVERY.md): 3 distinct Supabase password sessions, production JWT dependency without override, local ASGI/private remote PostgreSQL. 600-second read soak:100 attempts per session,300/300 correct,0 failures; median145.45ms/p95202.92ms. 100 three-writer races each returned200/409/409 and one winning audit. Three injected fault conditions100 each returned expected503 with unchanged data/audit, successful retry200 and duplicate409. All3 token refreshes passed. Expected503s are retained separately from normal failures. Harness review fixes preceded the final full rerun; initial evidence is preserved and excluded from final gating. Backend1084 passed/1 existing skip; no frontend/runtime change. Temporary Auth users/schemas removed; public API/web200. Not a Render soak, server restart, PITR or RTO/RPO test.
+
 ## Admin feedback concurrency and scale (2026-10-15)
 
 [Frozen cases, raw evidence and public functional scope](docs/admin-feedback/SCALE_CONCURRENCY.md): 100 queries each at 1,000/10,000 isolated real PostgreSQL rows passed; median138.15/163.87ms, p95179.34/216.73ms (local ASGI plus remote DB connection, not public latency). 100 two-writer races yielded one200/one409 and exactly one audit each. Snapshot consistency passed. Mocked frontend100 polling cycles over10,000 rows and public61-row functional checks passed separately. Backend1081 passed/1 existing skip; frontend92 passed/26 suites; build passed. No runtime change or speed-improvement claim.
