@@ -18,7 +18,7 @@ const AGENT_LABELS = {
   inbody:      "📊 인바디 분석",
   reporter:    "📋 주간 리포트",
   meal_plan:   "📋 식단 계획",
-  confirm:     "✅ 식단 확정",
+  confirm:     "식단 확인 처리",
   edit:        "✏️ 식단 수정",
 };
 

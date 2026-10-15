@@ -29,6 +29,15 @@ function Harness() {
       isInterrupted={interrupted} setIsInterrupted={setInterrupted} onStatsUpdate={setStats} /></>;
 }
 
+test('restored cancellation is not labeled as a confirmed meal', async () => {
+  getSessionRestore.mockResolvedValue({messages:[
+    {role:'assistant', content:'실제 섭취 기록을 취소했습니다.', agent_used:'confirm'},
+  ], pending_state:{}, pending_proposal:null});
+  render(<Harness />);
+  await screen.findByText('실제 섭취 기록을 취소했습니다.');
+  expect(screen.queryByText('✅ 식단 확정')).not.toBeInTheDocument();
+});
+
 test('unknown food can be excluded by buttons with retry instead of typed answer', async () => {
   getSessionRestore.mockResolvedValue({messages:[], pending_state:{}, food_selection:{mode:'meal_choices',id:'choice',items:[
     {index:1,query:'돼지바',quantity_g:70,generic_available:true}]}});
