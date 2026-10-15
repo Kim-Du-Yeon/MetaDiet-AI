@@ -1,0 +1,66 @@
+{
+  "scope": "free_Render_HTTPS_real_Postgres_synthetic_RSA_auth_not_Supabase",
+  "deployment_commit": "101dfa74721110a9fdd684fe1f74dbf2eb374d64",
+  "frozen_cases_sha256": "110877d733da9e147795014a221767960a7d09fc5d96a6f0d15f05b5a921f742",
+  "soak_seconds": 7200.015,
+  "all_soak_requests": {
+    "planned": 720,
+    "attempts": 720,
+    "passed": 720,
+    "failures": 0,
+    "not_attempted": 0,
+    "median_ms": 530.63,
+    "p95_ms": 753.94
+  },
+  "same_100_cases_three_sessions": {
+    "before_restart": {
+      "planned": 300,
+      "attempts": 300,
+      "passed": 300,
+      "failures": 0,
+      "not_attempted": 0,
+      "median_ms": 520.29,
+      "p95_ms": 747.64
+    },
+    "after_restart": {
+      "planned": 300,
+      "attempts": 300,
+      "passed": 300,
+      "failures": 0,
+      "not_attempted": 0,
+      "median_ms": 519.19,
+      "p95_ms": 724.48
+    }
+  },
+  "health_attempts": 120,
+  "health_failures": 0,
+  "race_rounds": 100,
+  "race_rounds_passed": 100,
+  "race_write_attempts": 300,
+  "restart_confirmed": true,
+  "old_connection_error_type": "AdminShutdown",
+  "restore_command_ms": 8318.328,
+  "restored_hash_match": true,
+  "post_restore_requests": {
+    "planned": 100,
+    "attempts": 100,
+    "passed": 100,
+    "failures": 0,
+    "not_attempted": 0,
+    "median_ms": 282.88,
+    "p95_ms": 397.01
+  },
+  "post_restore_write": {
+    "saved_status": 200,
+    "duplicate_status": 409,
+    "history_added": 1,
+    "version_advanced": true
+  },
+  "limitations": [
+    "synthetic RSA identities, not Supabase Auth sessions",
+    "30-second sampling cannot prove zero downtime",
+    "manual logical restore, no PITR/roles/ACL/full Supabase services",
+    "not Agent load, not saturation/capacity test, not an optimization comparison",
+    "raw phase planned=360 is an estimate; global720 complete, observed split369/351, matched cycles300/300"
+  ]
+}

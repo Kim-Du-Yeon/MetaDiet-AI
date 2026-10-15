@@ -81,7 +81,10 @@ def fingerprint(conn):
         from pg_constraint k join pg_class c on c.oid=k.conrelid join pg_namespace n on n.oid=c.relnamespace
         where n.nspname in ('public','auth') order by 1,2,3""").fetchall()
     indexes = conn.execute("select schemaname,tablename,indexname,indexdef from pg_indexes where schemaname in ('public','auth') order by 1,2,3").fetchall()
-    hashes['schema_sha256'] = hashlib.sha256(json.dumps([schema,indexes],default=str).encode()).hexdigest()
+    rls = conn.execute("""select n.nspname,c.relname,c.relrowsecurity,c.relforcerowsecurity
+        from pg_class c join pg_namespace n on n.oid=c.relnamespace
+        where c.relkind='r' and n.nspname in ('public','auth') order by 1,2""").fetchall()
+    hashes['schema_sha256'] = hashlib.sha256(json.dumps([schema,indexes,rls],default=str).encode()).hexdigest()
     return hashes
 
 

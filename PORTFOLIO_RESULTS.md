@@ -1,8 +1,8 @@
 # MetaDiet AI 포트폴리오 결과
 
-## 독립 Render 장시간·재해 복구 검증 준비 (2026-10-15)
+## 무료 Render 독립 2시간 부하·재시작·직접 복구 (2026-10-15)
 
-운영과 별도인2시간 HTTPS 부하·DB 재시작·백업 복구를 설계하고, 기존 API/DB를 차단하는 설정 사전 검사와 별도 Render Blueprint를 추가했다. 독립 Supabase 프로젝트가 없고 Free 활성2개 한도와 비용 도구UNAVAILABLE가 확인돼 유료 생성은 보류했다. 실제 부하0건·재시작0회·복원0회이며 완료 성과로 포함하지 않는다. Docker 엔진은 공식 시작 후에도 응답하지 않아, 공식 EDB 배포본의 pg_dump·pg_restore17.11을 대체 준비하고 버전을 확인했다. 실제 DB 백업·복원은 미실행이다. [준비물·비용 근거·실행 기준·미검증 범위](docs/admin-feedback/RENDER_RECOVERY_VALIDATION.md).
+독립 Supabase Free 프로젝트 제한으로 운영 자원을 건드리지 않고 별도 무료 Render 웹·PostgreSQL을 구성했다. 합성 1만 건·RSA 관리자 3세션으로 실제 HTTPS를 7200.015초 검사해 조회 720/720, 중앙값 530.63ms·p95 753.94ms였다. 실제 DB 재시작 후 시작 시각 변경과 기존 연결 AdminShutdown·새 연결 복구를 확인했다. 동시 수정 100라운드/300 PATCH에서 매번 성공 1·충돌 2·이력 1을 검증했다. 직접 dump 후 합성 행 손실·restore 명령 8.32초, 데이터/제약/인덱스/RLS hash 일치, 복원 후 조회 100/100과 쓰기·중복 충돌을 확인했다. 임시 경로 WinError 5는 pytest 공식 basetemp 옵션으로 해결했다. 백엔드 1106 passed·기존 1 skipped, 검증 자원 정지 완료다. 합성 인증·관리자 저장소 범위이며 Supabase Auth/PITR·Agent pool 복구나 무중단·운영 RPO=0을 입증하지 않는다. [원본·동일 사례 300/300 비교·캡처·Supabase 차이](docs/admin-feedback/RENDER_RECOVERY_VALIDATION.md).
 
 ## 실제 인증 세션·연결 장애 복구 검증 (2026-10-15)
 

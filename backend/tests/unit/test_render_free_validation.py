@@ -69,3 +69,24 @@ def test_validation_app_keeps_signature_and_admin_authorization(monkeypatch):
         response=client.get('/admin/feedback',headers={'Authorization':'Bearer '+token('admin@validation.invalid')})
         assert response.status_code==200 and response.headers['cache-control']=='no-store'
         assert 'd' not in client.get('/auth/v1/.well-known/jwks.json').json()['keys'][0]
+
+
+def test_fingerprint_detects_data_and_rls_changes_without_exporting_rows():
+    import json
+    module=common()
+    class Result:
+        def __init__(self,rows):self.rows=rows
+        def fetchall(self):return self.rows
+    class Connection:
+        changed=False
+        rls=True
+        def execute(self,query):
+            if 'row_to_json' in query:return Result([(json.dumps({'id':1,'comment':'private fixture','version':2 if self.changed else 1}),)])
+            if 'relrowsecurity' in query:return Result([('public','beta_feedback',self.rls,False)])
+            return Result([])
+    conn=Connection();before=module.fingerprint(conn)
+    assert 'private fixture' not in str(before)
+    conn.changed=True
+    assert module.fingerprint(conn)!=before
+    conn.changed=False;conn.rls=False
+    assert module.fingerprint(conn)!=before

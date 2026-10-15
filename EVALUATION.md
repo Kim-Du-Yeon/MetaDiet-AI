@@ -1,8 +1,8 @@
 # 2026-10-09 upgrade verification
 
-## Isolated Render multi-hour recovery validation: pending (2026-10-15)
+## Isolated free Render 2-hour recovery validation: completed (2026-10-15)
 
-[Readiness, guard and protocol](docs/admin-feedback/RENDER_RECOVERY_VALIDATION.md). Planned2h/3sessions/720HTTPS requests, real staging-only DB restart, separate logical backup/restore verification. Actual soak/restart/restore counts are all0: independent project and cost confirmation are pending. Existing two Free projects are not reused. Offline configuration guard and separate Blueprint are preparations, not performance or recovery evidence; previous600-second local-ASGI data is not relabeled as this run.
+[Evidence, scripts, captures and Supabase limits](docs/admin-feedback/RENDER_RECOVERY_VALIDATION.md). Independent free Render web/Postgres, synthetic10k rows and3 signed RSA identities:7200.015 seconds,720/720 public HTTPS queries, median530.63ms/p95753.94ms. Same100 frozen cases×3 per phase passed300/300 both sides of real DB restart; old persistent connection raised AdminShutdown, new connections recovered.100 three-way write races/300 PATCH passed200/409/409 with one audit row each. Manual pg_dump/restore after deliberate synthetic loss matched data/constraints/indexes/RLS hashes; restore command8318.328ms, post-restore queries100/100 plus write/version/conflict passed. Sampling captured no HTTP outage and cannot prove zero downtime/RTO. Not Supabase Auth/PITR, graph pool recovery, saturation or optimization evidence. Production untouched; validation web/DB suspended. Backend1106 passed/1existing skip.
 
 ## Real Auth sessions and DB connection recovery (2026-10-15)
 

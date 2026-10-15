@@ -1,4 +1,5 @@
-# Separate Blueprint. Never sync this file into the production Blueprint.
+# Separate validation Blueprint; never sync into the production Blueprint.
+# DB is created separately as free PostgreSQL, then identified and seeded locally.
 services:
   - type: web
     name: metadiet-api-validation
@@ -9,21 +10,18 @@ services:
     autoDeployTrigger: "off"
     dockerfilePath: ./backend/Dockerfile
     dockerContext: .
+    dockerCommand: python scripts/render_validation_app.py
     healthCheckPath: /health
     envVars:
-      - {key: ENABLE_SCHEDULER, value: "false"}
       - {key: ENVIRONMENT, value: validation}
-      - {key: SERVICE_TIMEZONE, value: Asia/Seoul}
+      - {key: ENABLE_SCHEDULER, value: "false"}
       - {key: LANGSMITH_TRACING, value: "false"}
-      - {key: LANGSMITH_HIDE_INPUTS, value: "true"}
-      - {key: LANGSMITH_HIDE_OUTPUTS, value: "true"}
-      - {key: RAG_USE_RERANK, value: "false"}
-      - {key: PINECONE_NAMESPACE, value: metadiet-validation}
-      - {key: GEMINI_API_KEY, sync: false}
-      - {key: PINECONE_API_KEY, sync: false}
-      - {key: SUPABASE_URL, sync: false}
-      - {key: SUPABASE_SERVICE_KEY, sync: false}
+      - {key: LANGCHAIN_TRACING_V2, value: "false"}
+      - {key: VALIDATION_DB_ID, sync: false}
+      - {key: VALIDATION_DB_NAME, value: metadiet_validation}
+      - {key: VALIDATION_DB_URL, sync: false}
+      - {key: VALIDATION_RUN_ID, sync: false}
+      - {key: VALIDATION_API_URL, sync: false}
+      - {key: VALIDATION_PUBLIC_JWK, sync: false}
       - {key: SUPABASE_JWT_SECRET, sync: false}
-      - {key: SUPABASE_DB_URL, sync: false}
       - {key: ADMIN_EMAILS, sync: false}
-      - {key: CORS_ORIGINS, sync: false}
