@@ -1,0 +1,33 @@
+{
+  "status": "not_executed_infrastructure_and_cost_confirmation_required",
+  "render_validation_service_exists": false,
+  "independent_validation_supabase_project_available": false,
+  "existing_project_reused": false,
+  "production_mutations": false,
+  "planned_duration_seconds": 7200,
+  "planned_sessions": 3,
+  "planned_interval_seconds": 30,
+  "planned_requests_per_session": 240,
+  "planned_requests_total": 720,
+  "actual_soak_attempts": 0,
+  "actual_database_restarts": 0,
+  "actual_backup_restores": 0,
+  "management_cost_tool_error": "UNAVAILABLE: get_cost was not returned by tools/list",
+  "docker_initial_error": "dockerDesktopLinuxEngine pipe missing",
+  "docker_start_command_completed": true,
+  "docker_ready_check": "engine_api_timeout_12s",
+  "cost_basis": "official public pricing estimate; not an organization-specific quote",
+  "paid_resources_created": false,
+  "offline_guard_tests_passed": 14,
+  "backend_regression_passed": 1098,
+  "existing_tests_skipped": 1,
+  "blueprint_locally_parsed": true,
+  "render_blueprint_server_validation_performed": false,
+  "backup_clients_ready": true,
+  "backup_client_versions": {
+    "pg_dump": "17.11",
+    "pg_restore": "17.11"
+  },
+  "backup_client_source": "https://www.enterprisedb.com/download-postgresql-binaries",
+  "backup_client_archive_sha256": "80379b2c04d51c30225532e0ae04509899141e9957ed096fe749d7fd9df8f82f"
+}

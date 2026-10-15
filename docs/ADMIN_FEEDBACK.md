@@ -200,3 +200,8 @@ API health와 웹 build-info가 모두 `021b115d17c73594dc0902e2e809bf5869ff7986
 ## 실제 인증 세션과 연결 장애 복구
 
 [검증 설계·결과·실패 처리·한계](admin-feedback/SOAK_RECOVERY.md). 실제 Supabase 로그인3개와 기존 JWT 검사 경로를 사용하고, 운영 장애를 유발하지 않도록 비공개 스키마에서 제한된 지속 부하와 연결 장애를 검증합니다. 공개 Render의 장시간 부하·DB 전체 재시작·백업 복구와는 구분합니다.
+
+
+## 별도 Render 환경의 수시간·복구 검증 준비
+
+[설정 사전 검사·독립 Blueprint·검사 절차·비용/인프라 조건](admin-feedback/RENDER_RECOVERY_VALIDATION.md). 아직 독립 환경을 생성하지 않아 실제 부하·재시작·백업 복구는 미실행입니다. 이전600초 격리 DB 결과와 구분합니다.

@@ -180,3 +180,5 @@ Ragas는 의존성 충돌을 피하기 위해 별도 평가 환경을 사용합�
 관리자 운영 검증: [동시 수정100회·1만 건 조회·자동 갱신 결과와 캡처](docs/admin-feedback/SCALE_CONCURRENCY.md).
 
 관리자 안정성 검증: [실제 인증 세션·10분 지속 조회·DB 연결 장애 복구](docs/admin-feedback/SOAK_RECOVERY.md).
+
+별도 환경 검증 준비(실행 대기): [Render 2시간 부하·DB 재시작·백업 복구 절차와 외부 조건](docs/admin-feedback/RENDER_RECOVERY_VALIDATION.md).

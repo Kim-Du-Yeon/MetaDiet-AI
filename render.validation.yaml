@@ -1,0 +1,29 @@
+# Separate Blueprint. Never sync this file into the production Blueprint.
+services:
+  - type: web
+    name: metadiet-api-validation
+    branch: main
+    runtime: docker
+    plan: free
+    region: singapore
+    autoDeployTrigger: "off"
+    dockerfilePath: ./backend/Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - {key: ENABLE_SCHEDULER, value: "false"}
+      - {key: ENVIRONMENT, value: validation}
+      - {key: SERVICE_TIMEZONE, value: Asia/Seoul}
+      - {key: LANGSMITH_TRACING, value: "false"}
+      - {key: LANGSMITH_HIDE_INPUTS, value: "true"}
+      - {key: LANGSMITH_HIDE_OUTPUTS, value: "true"}
+      - {key: RAG_USE_RERANK, value: "false"}
+      - {key: PINECONE_NAMESPACE, value: metadiet-validation}
+      - {key: GEMINI_API_KEY, sync: false}
+      - {key: PINECONE_API_KEY, sync: false}
+      - {key: SUPABASE_URL, sync: false}
+      - {key: SUPABASE_SERVICE_KEY, sync: false}
+      - {key: SUPABASE_JWT_SECRET, sync: false}
+      - {key: SUPABASE_DB_URL, sync: false}
+      - {key: ADMIN_EMAILS, sync: false}
+      - {key: CORS_ORIGINS, sync: false}

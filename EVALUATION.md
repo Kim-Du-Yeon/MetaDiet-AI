@@ -1,5 +1,9 @@
 # 2026-10-09 upgrade verification
 
+## Isolated Render multi-hour recovery validation: pending (2026-10-15)
+
+[Readiness, guard and protocol](docs/admin-feedback/RENDER_RECOVERY_VALIDATION.md). Planned2h/3sessions/720HTTPS requests, real staging-only DB restart, separate logical backup/restore verification. Actual soak/restart/restore counts are all0: independent project and cost confirmation are pending. Existing two Free projects are not reused. Offline configuration guard and separate Blueprint are preparations, not performance or recovery evidence; previous600-second local-ASGI data is not relabeled as this run.
+
 ## Real Auth sessions and DB connection recovery (2026-10-15)
 
 [Final evidence and boundaries](docs/admin-feedback/SOAK_RECOVERY.md): 3 distinct Supabase password sessions, production JWT dependency without override, local ASGI/private remote PostgreSQL. 600-second read soak:100 attempts per session,300/300 correct,0 failures; median145.45ms/p95202.92ms. 100 three-writer races each returned200/409/409 and one winning audit. Three injected fault conditions100 each returned expected503 with unchanged data/audit, successful retry200 and duplicate409. All3 token refreshes passed. Expected503s are retained separately from normal failures. Harness review fixes preceded the final full rerun; initial evidence is preserved and excluded from final gating. Backend1084 passed/1 existing skip; no frontend/runtime change. Temporary Auth users/schemas removed; public API/web200. Not a Render soak, server restart, PITR or RTO/RPO test.
