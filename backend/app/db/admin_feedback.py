@@ -6,7 +6,7 @@ from app.db.proposals import connection
 from app.db.feedback import FeedbackStorageUnavailable
 
 FeedbackStatus = Literal['received', 'reproducing', 'fixed', 'resolved', 'on_hold']
-SUMMARY = 'id, rating, category, left(comment, 100) as preview, status, version, created_at, updated_at'
+SUMMARY = 'id, rating, category, left(comment, 100) as preview, status, version, created_at, updated_at, assignee_id'
 DETAIL = 'id, rating, category, comment, status, version, admin_note, created_at, updated_at, assignee_id'
 UNSET = object()
 
@@ -28,19 +28,41 @@ class AdminFeedbackRepository:
     def __init__(self, connect=connection):
         self.connect = connect
 
-    async def list(self, *, status=None, category=None, limit=20, offset=0):
+    async def list(self, *, status=None, category=None, assignee=None, limit=20, offset=0):
         clauses, params = [], []
         for field, value in (('status', status), ('category', category)):
             if value is not None:
                 clauses.append(field + '=%s')
                 params.append(value)
+        if assignee == 'unassigned':
+            clauses.append('assignee_id is null')
+        elif assignee is not None:
+            clauses.append('assignee_id=%s')
+            params.append(assignee)
         where = ' where ' + ' and '.join(clauses) if clauses else ''
+        # Pending counts follow assignee/category, independently of the status filter.
+        pending_clauses, pending_params = [], []
+        if category is not None:
+            pending_clauses.append('category=%s'); pending_params.append(category)
+        if assignee == 'unassigned':
+            pending_clauses.append('assignee_id is null')
+        elif assignee is not None:
+            pending_clauses.append('assignee_id=%s'); pending_params.append(assignee)
+        pending_scope = ' and '.join(pending_clauses) or 'true'
+        matched_scope = ' and '.join(clauses) or 'true'
         try:
             async with self.connect() as conn:
+                await conn.execute('set transaction isolation level repeatable read, read only')
                 rows = await (await conn.execute(
                     f'select {SUMMARY} from beta_feedback{where} order by created_at desc, id desc limit %s offset %s',
                     (*params, limit + 1, offset))).fetchall()
-                return {'items': [public(row) for row in rows[:limit]], 'has_more': len(rows) > limit}
+                counts = await (await conn.execute(
+                    f'''select count(*) filter(where status in ('received','reproducing','on_hold')) as total_unprocessed,
+                        count(*) filter(where status in ('received','reproducing','on_hold') and {pending_scope}) as unprocessed,
+                        count(*) filter(where {matched_scope}) as matched_total from beta_feedback''',
+                    (*pending_params,*params))).fetchone()
+                return {'items': [public(row) for row in rows[:limit]], 'has_more': len(rows) > limit,
+                        'counts': counts}
         except Exception:
             raise FeedbackStorageUnavailable('피드백 목록을 불러오지 못했습니다.') from None
 

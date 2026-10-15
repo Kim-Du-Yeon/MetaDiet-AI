@@ -1,5 +1,5 @@
 """Administrator-only feedback review; never trace or log opinion bodies."""
-from typing import Annotated
+from typing import Annotated, Literal
 from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, Query, Response
 from pydantic import BaseModel, ConfigDict, Field
@@ -26,10 +26,11 @@ class FeedbackReview(BaseModel):
 @router.get('')
 async def list_feedback(_admin: str = Depends(get_current_admin),
                         status: FeedbackStatus | None = None, category: FeedbackCategory | None = None,
+                        assignee: UUID | Literal['unassigned'] | None = None,
                         limit: Annotated[int, Query(ge=1, le=100)] = 20,
                         offset: Annotated[int, Query(ge=0, le=100000)] = 0):
     try:
-        return await AdminFeedbackRepository().list(status=status, category=category, limit=limit, offset=offset)
+        return await AdminFeedbackRepository().list(status=status, category=category, assignee=assignee, limit=limit, offset=offset)
     except FeedbackStorageUnavailable:
         raise HTTPException(503, '피드백 목록을 불러오지 못했습니다. 잠시 후 다시 시도해주세요.') from None
 

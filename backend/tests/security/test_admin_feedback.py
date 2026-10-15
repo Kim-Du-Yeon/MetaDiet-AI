@@ -78,7 +78,7 @@ async def test_feedback_database_parameters_privacy_and_conflict():
         yield conn
     repo = AdminFeedbackRepository(connect)
     result = await repo.list(status='received',category='bug',limit=1,offset=20)
-    sql, params = conn.execute.call_args.args
+    sql, params = next(call.args for call in conn.execute.call_args_list if 'left(comment, 100)' in call.args[0])
     assert params == ('received','bug',2,20)
     assert 'left(comment, 100)' in sql and 'user_id' not in sql
     assert result['has_more'] is True and len(result['items']) == 1

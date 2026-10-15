@@ -2,7 +2,7 @@
 
 베타 사용자에게 공유하기: [사용 안내와 피드백 보내는 방법](docs/BETA_USER_GUIDE.md).
 
-운영자용: [관리자 피드백 검토·상태·담당자·변경 이력](docs/ADMIN_FEEDBACK.md).
+운영자용: [관리자 피드백 검토·담당자 필터·미처리 건수·변경 이력](docs/ADMIN_FEEDBACK.md).
 
 일반 음식 입력 개선: [김치찌개·불고기 기본 1인분과 직접 계산 카드](docs/DEFAULT_SERVING_FIX.md).
 

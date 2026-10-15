@@ -28,9 +28,9 @@ test('filters paginate, details render as text and failed updates preserve edits
   await screen.findByText('저장했습니다.');
   expect(updateAdminFeedback).toHaveBeenLastCalledWith('one',{version:1,status:'resolved',admin_note:'verified'});
   fireEvent.change(screen.getByLabelText('피드백 상태 필터'),{target:{value:'resolved'}});
-  await waitFor(()=>expect(getAdminFeedback).toHaveBeenLastCalledWith({status:'resolved',category:'',offset:0}));
+  await waitFor(()=>expect(getAdminFeedback).toHaveBeenLastCalledWith({status:'resolved',category:'',assignee:'',offset:0}));
   fireEvent.click(screen.getByRole('button',{name:'다음 페이지'}));
-  await waitFor(()=>expect(getAdminFeedback).toHaveBeenLastCalledWith({status:'resolved',category:'',offset:20}));
+  await waitFor(()=>expect(getAdminFeedback).toHaveBeenLastCalledWith({status:'resolved',category:'',assignee:'',offset:20}));
 });
 test('list failure can be retried and empty feedback is explicit',async()=>{
   getAdminFeedback.mockRejectedValueOnce(new Error('조회 실패')).mockResolvedValue({items:[],has_more:false});
@@ -79,4 +79,19 @@ test('assigns and unassigns with server identities and renders history as plain 
   fireEvent.click(screen.getByRole('button',{name:'변경 이력 보기'}));
   await screen.findByText('<b>plain</b>');
   expect(screen.getByText('<b>plain</b>').querySelector('b')).toBeNull();
+});
+
+
+test('assignee filter resets pagination and pending counts have an explicit scope',async()=>{
+  getAdminFeedback.mockResolvedValue({items:[row],has_more:true,counts:{total_unprocessed:7,unprocessed:3,matched_total:25}});
+  render(<AdminFeedback/>);
+  await screen.findByRole('button',{name:/button issue/});
+  fireEvent.click(screen.getByRole('button',{name:'다음 페이지'}));
+  await waitFor(()=>expect(getAdminFeedback).toHaveBeenLastCalledWith({status:'',category:'',assignee:'',offset:20}));
+  const select=await screen.findByLabelText('담당자 필터');
+  fireEvent.change(select,{target:{value:'unassigned'}});
+  await waitFor(()=>expect(getAdminFeedback).toHaveBeenLastCalledWith({status:'',category:'',assignee:'unassigned',offset:0}));
+  expect(screen.getByText('전체 미처리 7건')).toBeVisible();
+  expect(screen.getByText('선택 담당자·종류 미처리 3건')).toBeVisible();
+  expect(screen.getByText('현재 조건 25건')).toBeVisible();
 });

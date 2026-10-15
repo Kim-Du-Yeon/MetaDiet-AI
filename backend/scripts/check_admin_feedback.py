@@ -60,6 +60,8 @@ def probe():
     checks={}
     for name,path,method,payload in [
         ('list','/admin/feedback','GET',None),
+        ('list_unassigned','/admin/feedback?assignee=unassigned','GET',None),
+        ('list_assigned','/admin/feedback?assignee='+str(uuid4()),'GET',None),
         ('assignees','/admin/feedback/assignees','GET',None),
         ('detail','/admin/feedback/'+feedback_id,'GET',None),
         ('history','/admin/feedback/'+feedback_id+'/history','GET',None),

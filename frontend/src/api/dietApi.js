@@ -97,10 +97,11 @@ async function adminFeedbackRequest(path, options = {}) {
   return data;
 }
 
-export function getAdminFeedback({status = '', category = '', offset = 0} = {}) {
+export function getAdminFeedback({status = '', category = '', assignee = '', offset = 0} = {}) {
   const query = new URLSearchParams({limit:'20', offset:String(offset)});
   if (status) query.set('status', status);
   if (category) query.set('category', category);
+  if (assignee) query.set('assignee', assignee);
   return adminFeedbackRequest(`?${query}`);
 }
 export function getAdminFeedbackDetail(id) {
