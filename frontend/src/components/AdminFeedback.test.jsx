@@ -5,6 +5,7 @@ import {getAdminFeedback, getAdminFeedbackDetail, updateAdminFeedback, getAdminF
 jest.mock('../api/dietApi',()=>({getAdminFeedback:jest.fn(),getAdminFeedbackDetail:jest.fn(),updateAdminFeedback:jest.fn(),getAdminFeedbackAssignees:jest.fn(),getAdminFeedbackHistory:jest.fn()}));
 const row={id:'one',rating:4,category:'bug',preview:'button issue',status:'received',version:1,created_at:'2026-10-15T01:00:00Z',updated_at:'2026-10-15T01:00:00Z'};
 beforeEach(()=>{jest.resetAllMocks();getAdminFeedbackAssignees.mockResolvedValue({items:[{id:'admin',email:'admin@example.invalid'}]});getAdminFeedbackHistory.mockResolvedValue({items:[],has_more:false});});
+afterEach(()=>jest.useRealTimers());
 test('non-administrators see no feedback content',async()=>{
   getAdminFeedback.mockResolvedValue(null);
   const {container}=render(<AdminFeedback/>);
@@ -112,4 +113,20 @@ test('shows old pending badge and refreshes automatically without overwriting an
   expect(getAdminFeedback.mock.calls.length).toBe(before+1);
   expect(screen.getByLabelText('관리자 메모')).toHaveValue('unsaved note');
   unmount();jest.useRealTimers();
+});
+
+test('failed automatic refresh reports the error and recovers on the next interval',async()=>{
+  const {act}=require('@testing-library/react');
+  jest.useFakeTimers();
+  getAdminFeedback.mockResolvedValueOnce({items:[row],has_more:false})
+    .mockRejectedValueOnce(new Error('일시적인 조회 실패'))
+    .mockResolvedValue({items:[],has_more:false});
+  const {unmount}=render(<AdminFeedback/>);
+  await screen.findByRole('button',{name:/button issue/});
+  await act(async()=>jest.advanceTimersByTime(30000));
+  expect(screen.getByRole('alert')).toHaveTextContent('일시적인 조회 실패');
+  await act(async()=>jest.advanceTimersByTime(30000));
+  expect(screen.getByText('조건에 맞는 피드백이 없습니다.')).toBeVisible();
+  expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  unmount();
 });
