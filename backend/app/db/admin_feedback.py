@@ -1,6 +1,7 @@
 """Private feedback review, reached only after server administrator authorization."""
 from typing import Literal
 from uuid import UUID
+from datetime import datetime, timedelta, timezone
 from app.core.config import get_settings
 from app.db.proposals import connection
 from app.db.feedback import FeedbackStorageUnavailable
@@ -9,6 +10,14 @@ FeedbackStatus = Literal['received', 'reproducing', 'fixed', 'resolved', 'on_hol
 SUMMARY = 'id, rating, category, left(comment, 100) as preview, status, version, created_at, updated_at, assignee_id'
 DETAIL = 'id, rating, category, comment, status, version, admin_note, created_at, updated_at, assignee_id'
 UNSET = object()
+STALE_AFTER_DAYS = 7
+PENDING_STATUSES = {'received', 'reproducing', 'on_hold'}
+
+
+def feedback_is_stale(row, now):
+    created = row.get('created_at')
+    return bool(row.get('status') in PENDING_STATUSES and created is not None
+                and created <= now - timedelta(days=STALE_AFTER_DAYS))
 
 
 class InvalidAssignee(ValueError):
@@ -29,6 +38,8 @@ class AdminFeedbackRepository:
         self.connect = connect
 
     async def list(self, *, status=None, category=None, assignee=None, limit=20, offset=0):
+        now = datetime.now(timezone.utc)
+        stale_before = now - timedelta(days=STALE_AFTER_DAYS)
         clauses, params = [], []
         for field, value in (('status', status), ('category', category)):
             if value is not None:
@@ -59,10 +70,13 @@ class AdminFeedbackRepository:
                 counts = await (await conn.execute(
                     f'''select count(*) filter(where status in ('received','reproducing','on_hold')) as total_unprocessed,
                         count(*) filter(where status in ('received','reproducing','on_hold') and {pending_scope}) as unprocessed,
+                        count(*) filter(where status in ('received','reproducing','on_hold') and created_at<=%s) as total_stale,
+                        count(*) filter(where status in ('received','reproducing','on_hold') and created_at<=%s and {pending_scope}) as stale,
                         count(*) filter(where {matched_scope}) as matched_total from beta_feedback''',
-                    (*pending_params,*params))).fetchone()
-                return {'items': [public(row) for row in rows[:limit]], 'has_more': len(rows) > limit,
-                        'counts': counts}
+                    (*pending_params,stale_before,stale_before,*pending_params,*params))).fetchone()
+                return {'items': [{**public(row), 'is_stale': feedback_is_stale(row,now)} for row in rows[:limit]],
+                        'has_more': len(rows) > limit, 'counts': counts, 'stale_after_days': STALE_AFTER_DAYS,
+                        'refreshed_at': now.isoformat()}
         except Exception:
             raise FeedbackStorageUnavailable('피드백 목록을 불러오지 못했습니다.') from None
 

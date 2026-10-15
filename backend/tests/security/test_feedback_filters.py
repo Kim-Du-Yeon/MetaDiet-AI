@@ -43,7 +43,9 @@ async def test_count_scope_is_not_pagination_or_status_scope(assignee):
     expected_pending=('bug',) + ((assignee,) if assignee not in (None,'unassigned') else ())
     expected_list=('fixed','bug') + ((assignee,) if assignee not in (None,'unassigned') else ())
     assert list_params==(*expected_list,21,40)
-    assert count_params==(*expected_pending,*expected_list)
+    from datetime import datetime, timedelta
+    cutoff=datetime.fromisoformat(result['refreshed_at'])-timedelta(days=7)
+    assert count_params==(*expected_pending,cutoff,cutoff,*expected_pending,*expected_list)
     assert 'offset' not in count_sql and 'limit' not in count_sql
     assert "'received','reproducing','on_hold'" in count_sql
     assert ('assignee_id is null' in list_sql)==(assignee=='unassigned')

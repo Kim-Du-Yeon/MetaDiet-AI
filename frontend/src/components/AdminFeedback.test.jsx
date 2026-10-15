@@ -95,3 +95,21 @@ test('assignee filter resets pagination and pending counts have an explicit scop
   expect(screen.getByText('선택 담당자·종류 미처리 3건')).toBeVisible();
   expect(screen.getByText('현재 조건 25건')).toBeVisible();
 });
+
+
+test('shows old pending badge and refreshes automatically without overwriting an open editor',async()=>{
+  const {act}=require('@testing-library/react');
+  jest.useFakeTimers();
+  getAdminFeedback.mockResolvedValue({items:[{...row,is_stale:true}],has_more:false,counts:{total_unprocessed:1,unprocessed:1,matched_total:1,total_stale:1,stale:1}});
+  getAdminFeedbackDetail.mockResolvedValue({...row,comment:'old pending',admin_note:''});
+  const {unmount}=render(<AdminFeedback/>);
+  await screen.findByText('7일 이상 미처리');
+  expect(screen.getByText('선택 범위 오래된 미처리 1건')).toBeVisible();
+  fireEvent.click(screen.getByRole('button',{name:/button issue/}));
+  fireEvent.change(await screen.findByLabelText('관리자 메모'),{target:{value:'unsaved note'}});
+  const before=getAdminFeedback.mock.calls.length;
+  await act(async()=>jest.advanceTimersByTime(30000));
+  expect(getAdminFeedback.mock.calls.length).toBe(before+1);
+  expect(screen.getByLabelText('관리자 메모')).toHaveValue('unsaved note');
+  unmount();jest.useRealTimers();
+});
