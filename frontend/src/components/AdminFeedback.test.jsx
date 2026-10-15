@@ -130,3 +130,30 @@ test('failed automatic refresh reports the error and recovers on the next interv
   expect(screen.queryByRole('alert')).not.toBeInTheDocument();
   unmount();
 });
+
+test('100 refresh cycles keep filters, page size and an unsaved editor on a 10000-row fixture',async()=>{
+  const {act}=require('@testing-library/react');
+  jest.useFakeTimers();
+  const large=Array.from({length:10000},(_,index)=>({...row,id:String(index),preview:'scale fixture '+index,is_stale:index%2===0}));
+  getAdminFeedback.mockImplementation(async({offset})=>({items:large.slice(offset,offset+20),has_more:offset+20<large.length,
+    counts:{total_unprocessed:10000,unprocessed:10000,matched_total:10000,total_stale:5000,stale:5000}}));
+  getAdminFeedbackDetail.mockResolvedValue({...large[20],comment:'synthetic scale detail',admin_note:''});
+  const {container,unmount}=render(<AdminFeedback/>);
+  await screen.findByRole('button',{name:/scale fixture 0 /});
+  fireEvent.change(screen.getByLabelText('담당자 필터'),{target:{value:'unassigned'}});
+  await act(async()=>{});
+  fireEvent.change(screen.getByLabelText('피드백 종류 필터'),{target:{value:'bug'}});
+  await act(async()=>{});
+  fireEvent.click(screen.getByRole('button',{name:'다음 페이지'}));
+  fireEvent.click(await screen.findByRole('button',{name:/scale fixture 20 /}));
+  fireEvent.change(await screen.findByLabelText('관리자 메모'),{target:{value:'keep this draft'}});
+  const before=getAdminFeedback.mock.calls.length;
+  for(let index=0;index<100;index+=1){
+    await act(async()=>jest.advanceTimersByTime(30000));
+    expect(container.querySelectorAll('.admin-feedback__list > li')).toHaveLength(20);
+    expect(screen.getByLabelText('관리자 메모')).toHaveValue('keep this draft');
+    expect(getAdminFeedback).toHaveBeenLastCalledWith({status:'',category:'bug',assignee:'unassigned',offset:20});
+  }
+  expect(getAdminFeedback.mock.calls.length).toBe(before+100);
+  unmount();
+});

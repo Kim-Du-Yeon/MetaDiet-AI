@@ -1,5 +1,9 @@
 # 2026-10-09 upgrade verification
 
+## Admin feedback concurrency and scale (2026-10-15)
+
+[Frozen cases, raw evidence and public functional scope](docs/admin-feedback/SCALE_CONCURRENCY.md): 100 queries each at 1,000/10,000 isolated real PostgreSQL rows passed; median138.15/163.87ms, p95179.34/216.73ms (local ASGI plus remote DB connection, not public latency). 100 two-writer races yielded one200/one409 and exactly one audit each. Snapshot consistency passed. Mocked frontend100 polling cycles over10,000 rows and public61-row functional checks passed separately. Backend1081 passed/1 existing skip; frontend92 passed/26 suites; build passed. No runtime change or speed-improvement claim.
+
 ## Public budget v2: adopted (2026-10-14)
 
 [Report and immutable evidence](docs/budget_public_v2/README.md): same b7f79ab deployment with bounded external retries, flag-only public comparison of100 attempts each. Both completed/fresh/no-write100/100, no failures/timeouts. Storage median2499.69→1761.55ms, total8378.44→7641.84ms; p9510017.56→10360.24ms (+3.4%). Five quality criteria100/100 each after separately documented recovery of10 missing baseline judge outputs (two504 batches). Original90/100 judge evidence is retained. Gates pass; Render pipeline=true adopted and codified in render.yaml.988 tests pass,1 existing skip. No natural service retries occurred; injected recovery tests are not a demonstrated production reliability gain.

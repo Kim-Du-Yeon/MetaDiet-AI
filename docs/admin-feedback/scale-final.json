@@ -1,0 +1,2050 @@
+{
+  "scope": "synthetic_private_postgres_and_in_process_api_not_public_latency",
+  "dataset_sizes": [
+    1000,
+    10000
+  ],
+  "cases_sha256": "110877d733da9e147795014a221767960a7d09fc5d96a6f0d15f05b5a921f742",
+  "authentication": "synthetic admin dependency; public JWT policy checked separately",
+  "conditions": {
+    "1000": {
+      "attempts": 100,
+      "passed": 100,
+      "failed": 0,
+      "failure_rate": 0.0,
+      "median_ms": 138.15,
+      "p95_ms": 179.34,
+      "requests": [
+        {
+          "case": 0,
+          "ok": true,
+          "status": 200,
+          "ms": 143.959
+        },
+        {
+          "case": 1,
+          "ok": true,
+          "status": 200,
+          "ms": 144.997
+        },
+        {
+          "case": 2,
+          "ok": true,
+          "status": 200,
+          "ms": 158.371
+        },
+        {
+          "case": 3,
+          "ok": true,
+          "status": 200,
+          "ms": 133.777
+        },
+        {
+          "case": 4,
+          "ok": true,
+          "status": 200,
+          "ms": 134.137
+        },
+        {
+          "case": 5,
+          "ok": true,
+          "status": 200,
+          "ms": 132.356
+        },
+        {
+          "case": 6,
+          "ok": true,
+          "status": 200,
+          "ms": 138.409
+        },
+        {
+          "case": 7,
+          "ok": true,
+          "status": 200,
+          "ms": 143.929
+        },
+        {
+          "case": 8,
+          "ok": true,
+          "status": 200,
+          "ms": 137.883
+        },
+        {
+          "case": 9,
+          "ok": true,
+          "status": 200,
+          "ms": 143.175
+        },
+        {
+          "case": 10,
+          "ok": true,
+          "status": 200,
+          "ms": 140.459
+        },
+        {
+          "case": 11,
+          "ok": true,
+          "status": 200,
+          "ms": 139.506
+        },
+        {
+          "case": 12,
+          "ok": true,
+          "status": 200,
+          "ms": 129.212
+        },
+        {
+          "case": 13,
+          "ok": true,
+          "status": 200,
+          "ms": 144.075
+        },
+        {
+          "case": 14,
+          "ok": true,
+          "status": 200,
+          "ms": 151.158
+        },
+        {
+          "case": 15,
+          "ok": true,
+          "status": 200,
+          "ms": 137.48
+        },
+        {
+          "case": 16,
+          "ok": true,
+          "status": 200,
+          "ms": 130.58
+        },
+        {
+          "case": 17,
+          "ok": true,
+          "status": 200,
+          "ms": 140.916
+        },
+        {
+          "case": 18,
+          "ok": true,
+          "status": 200,
+          "ms": 125.477
+        },
+        {
+          "case": 19,
+          "ok": true,
+          "status": 200,
+          "ms": 150.111
+        },
+        {
+          "case": 20,
+          "ok": true,
+          "status": 200,
+          "ms": 133.223
+        },
+        {
+          "case": 21,
+          "ok": true,
+          "status": 200,
+          "ms": 126.427
+        },
+        {
+          "case": 22,
+          "ok": true,
+          "status": 200,
+          "ms": 142.911
+        },
+        {
+          "case": 23,
+          "ok": true,
+          "status": 200,
+          "ms": 138.657
+        },
+        {
+          "case": 24,
+          "ok": true,
+          "status": 200,
+          "ms": 121.826
+        },
+        {
+          "case": 25,
+          "ok": true,
+          "status": 200,
+          "ms": 147.225
+        },
+        {
+          "case": 26,
+          "ok": true,
+          "status": 200,
+          "ms": 145.549
+        },
+        {
+          "case": 27,
+          "ok": true,
+          "status": 200,
+          "ms": 126.964
+        },
+        {
+          "case": 28,
+          "ok": true,
+          "status": 200,
+          "ms": 122.193
+        },
+        {
+          "case": 29,
+          "ok": true,
+          "status": 200,
+          "ms": 138.407
+        },
+        {
+          "case": 30,
+          "ok": true,
+          "status": 200,
+          "ms": 133.645
+        },
+        {
+          "case": 31,
+          "ok": true,
+          "status": 200,
+          "ms": 123.099
+        },
+        {
+          "case": 32,
+          "ok": true,
+          "status": 200,
+          "ms": 125.418
+        },
+        {
+          "case": 33,
+          "ok": true,
+          "status": 200,
+          "ms": 128.118
+        },
+        {
+          "case": 34,
+          "ok": true,
+          "status": 200,
+          "ms": 130.123
+        },
+        {
+          "case": 35,
+          "ok": true,
+          "status": 200,
+          "ms": 128.517
+        },
+        {
+          "case": 36,
+          "ok": true,
+          "status": 200,
+          "ms": 172.278
+        },
+        {
+          "case": 37,
+          "ok": true,
+          "status": 200,
+          "ms": 141.447
+        },
+        {
+          "case": 38,
+          "ok": true,
+          "status": 200,
+          "ms": 145.259
+        },
+        {
+          "case": 39,
+          "ok": true,
+          "status": 200,
+          "ms": 141.855
+        },
+        {
+          "case": 40,
+          "ok": true,
+          "status": 200,
+          "ms": 115.198
+        },
+        {
+          "case": 41,
+          "ok": true,
+          "status": 200,
+          "ms": 122.909
+        },
+        {
+          "case": 42,
+          "ok": true,
+          "status": 200,
+          "ms": 136.787
+        },
+        {
+          "case": 43,
+          "ok": true,
+          "status": 200,
+          "ms": 134.186
+        },
+        {
+          "case": 44,
+          "ok": true,
+          "status": 200,
+          "ms": 111.337
+        },
+        {
+          "case": 45,
+          "ok": true,
+          "status": 200,
+          "ms": 128.506
+        },
+        {
+          "case": 46,
+          "ok": true,
+          "status": 200,
+          "ms": 151.808
+        },
+        {
+          "case": 47,
+          "ok": true,
+          "status": 200,
+          "ms": 129.625
+        },
+        {
+          "case": 48,
+          "ok": true,
+          "status": 200,
+          "ms": 125.644
+        },
+        {
+          "case": 49,
+          "ok": true,
+          "status": 200,
+          "ms": 119.763
+        },
+        {
+          "case": 50,
+          "ok": true,
+          "status": 200,
+          "ms": 128.127
+        },
+        {
+          "case": 51,
+          "ok": true,
+          "status": 200,
+          "ms": 140.463
+        },
+        {
+          "case": 52,
+          "ok": true,
+          "status": 200,
+          "ms": 133.029
+        },
+        {
+          "case": 53,
+          "ok": true,
+          "status": 200,
+          "ms": 128.259
+        },
+        {
+          "case": 54,
+          "ok": true,
+          "status": 200,
+          "ms": 132.391
+        },
+        {
+          "case": 55,
+          "ok": true,
+          "status": 200,
+          "ms": 131.85
+        },
+        {
+          "case": 56,
+          "ok": true,
+          "status": 200,
+          "ms": 129.83
+        },
+        {
+          "case": 57,
+          "ok": true,
+          "status": 200,
+          "ms": 136.36
+        },
+        {
+          "case": 58,
+          "ok": true,
+          "status": 200,
+          "ms": 128.793
+        },
+        {
+          "case": 59,
+          "ok": true,
+          "status": 200,
+          "ms": 131.211
+        },
+        {
+          "case": 60,
+          "ok": true,
+          "status": 200,
+          "ms": 143.479
+        },
+        {
+          "case": 61,
+          "ok": true,
+          "status": 200,
+          "ms": 135.855
+        },
+        {
+          "case": 62,
+          "ok": true,
+          "status": 200,
+          "ms": 151.324
+        },
+        {
+          "case": 63,
+          "ok": true,
+          "status": 200,
+          "ms": 163.709
+        },
+        {
+          "case": 64,
+          "ok": true,
+          "status": 200,
+          "ms": 181.02
+        },
+        {
+          "case": 65,
+          "ok": true,
+          "status": 200,
+          "ms": 148.485
+        },
+        {
+          "case": 66,
+          "ok": true,
+          "status": 200,
+          "ms": 181.556
+        },
+        {
+          "case": 67,
+          "ok": true,
+          "status": 200,
+          "ms": 149.02
+        },
+        {
+          "case": 68,
+          "ok": true,
+          "status": 200,
+          "ms": 135.432
+        },
+        {
+          "case": 69,
+          "ok": true,
+          "status": 200,
+          "ms": 137.118
+        },
+        {
+          "case": 70,
+          "ok": true,
+          "status": 200,
+          "ms": 149.245
+        },
+        {
+          "case": 71,
+          "ok": true,
+          "status": 200,
+          "ms": 141.003
+        },
+        {
+          "case": 72,
+          "ok": true,
+          "status": 200,
+          "ms": 166.318
+        },
+        {
+          "case": 73,
+          "ok": true,
+          "status": 200,
+          "ms": 198.874
+        },
+        {
+          "case": 74,
+          "ok": true,
+          "status": 200,
+          "ms": 179.337
+        },
+        {
+          "case": 75,
+          "ok": true,
+          "status": 200,
+          "ms": 174.285
+        },
+        {
+          "case": 76,
+          "ok": true,
+          "status": 200,
+          "ms": 213.099
+        },
+        {
+          "case": 77,
+          "ok": true,
+          "status": 200,
+          "ms": 182.986
+        },
+        {
+          "case": 78,
+          "ok": true,
+          "status": 200,
+          "ms": 153.865
+        },
+        {
+          "case": 79,
+          "ok": true,
+          "status": 200,
+          "ms": 146.421
+        },
+        {
+          "case": 80,
+          "ok": true,
+          "status": 200,
+          "ms": 148.153
+        },
+        {
+          "case": 81,
+          "ok": true,
+          "status": 200,
+          "ms": 158.149
+        },
+        {
+          "case": 82,
+          "ok": true,
+          "status": 200,
+          "ms": 165.982
+        },
+        {
+          "case": 83,
+          "ok": true,
+          "status": 200,
+          "ms": 159.2
+        },
+        {
+          "case": 84,
+          "ok": true,
+          "status": 200,
+          "ms": 161.423
+        },
+        {
+          "case": 85,
+          "ok": true,
+          "status": 200,
+          "ms": 143.054
+        },
+        {
+          "case": 86,
+          "ok": true,
+          "status": 200,
+          "ms": 130.568
+        },
+        {
+          "case": 87,
+          "ok": true,
+          "status": 200,
+          "ms": 152.863
+        },
+        {
+          "case": 88,
+          "ok": true,
+          "status": 200,
+          "ms": 118.511
+        },
+        {
+          "case": 89,
+          "ok": true,
+          "status": 200,
+          "ms": 135.88
+        },
+        {
+          "case": 90,
+          "ok": true,
+          "status": 200,
+          "ms": 127.069
+        },
+        {
+          "case": 91,
+          "ok": true,
+          "status": 200,
+          "ms": 141.27
+        },
+        {
+          "case": 92,
+          "ok": true,
+          "status": 200,
+          "ms": 136.833
+        },
+        {
+          "case": 93,
+          "ok": true,
+          "status": 200,
+          "ms": 131.241
+        },
+        {
+          "case": 94,
+          "ok": true,
+          "status": 200,
+          "ms": 146.943
+        },
+        {
+          "case": 95,
+          "ok": true,
+          "status": 200,
+          "ms": 148.88
+        },
+        {
+          "case": 96,
+          "ok": true,
+          "status": 200,
+          "ms": 134.14
+        },
+        {
+          "case": 97,
+          "ok": true,
+          "status": 200,
+          "ms": 136.975
+        },
+        {
+          "case": 98,
+          "ok": true,
+          "status": 200,
+          "ms": 129.544
+        },
+        {
+          "case": 99,
+          "ok": true,
+          "status": 200,
+          "ms": 132.461
+        }
+      ]
+    },
+    "10000": {
+      "attempts": 100,
+      "passed": 100,
+      "failed": 0,
+      "failure_rate": 0.0,
+      "median_ms": 163.87,
+      "p95_ms": 216.73,
+      "requests": [
+        {
+          "case": 0,
+          "ok": true,
+          "status": 200,
+          "ms": 164.304
+        },
+        {
+          "case": 1,
+          "ok": true,
+          "status": 200,
+          "ms": 161.97
+        },
+        {
+          "case": 2,
+          "ok": true,
+          "status": 200,
+          "ms": 153.527
+        },
+        {
+          "case": 3,
+          "ok": true,
+          "status": 200,
+          "ms": 158.317
+        },
+        {
+          "case": 4,
+          "ok": true,
+          "status": 200,
+          "ms": 171.17
+        },
+        {
+          "case": 5,
+          "ok": true,
+          "status": 200,
+          "ms": 188.303
+        },
+        {
+          "case": 6,
+          "ok": true,
+          "status": 200,
+          "ms": 143.101
+        },
+        {
+          "case": 7,
+          "ok": true,
+          "status": 200,
+          "ms": 161.27
+        },
+        {
+          "case": 8,
+          "ok": true,
+          "status": 200,
+          "ms": 161.385
+        },
+        {
+          "case": 9,
+          "ok": true,
+          "status": 200,
+          "ms": 163.992
+        },
+        {
+          "case": 10,
+          "ok": true,
+          "status": 200,
+          "ms": 146.623
+        },
+        {
+          "case": 11,
+          "ok": true,
+          "status": 200,
+          "ms": 148.896
+        },
+        {
+          "case": 12,
+          "ok": true,
+          "status": 200,
+          "ms": 164.998
+        },
+        {
+          "case": 13,
+          "ok": true,
+          "status": 200,
+          "ms": 130.978
+        },
+        {
+          "case": 14,
+          "ok": true,
+          "status": 200,
+          "ms": 144.89
+        },
+        {
+          "case": 15,
+          "ok": true,
+          "status": 200,
+          "ms": 145.702
+        },
+        {
+          "case": 16,
+          "ok": true,
+          "status": 200,
+          "ms": 142.363
+        },
+        {
+          "case": 17,
+          "ok": true,
+          "status": 200,
+          "ms": 141.261
+        },
+        {
+          "case": 18,
+          "ok": true,
+          "status": 200,
+          "ms": 155.682
+        },
+        {
+          "case": 19,
+          "ok": true,
+          "status": 200,
+          "ms": 144.618
+        },
+        {
+          "case": 20,
+          "ok": true,
+          "status": 200,
+          "ms": 161.053
+        },
+        {
+          "case": 21,
+          "ok": true,
+          "status": 200,
+          "ms": 135.593
+        },
+        {
+          "case": 22,
+          "ok": true,
+          "status": 200,
+          "ms": 167.969
+        },
+        {
+          "case": 23,
+          "ok": true,
+          "status": 200,
+          "ms": 156.119
+        },
+        {
+          "case": 24,
+          "ok": true,
+          "status": 200,
+          "ms": 142.089
+        },
+        {
+          "case": 25,
+          "ok": true,
+          "status": 200,
+          "ms": 143.404
+        },
+        {
+          "case": 26,
+          "ok": true,
+          "status": 200,
+          "ms": 133.161
+        },
+        {
+          "case": 27,
+          "ok": true,
+          "status": 200,
+          "ms": 143.658
+        },
+        {
+          "case": 28,
+          "ok": true,
+          "status": 200,
+          "ms": 139.766
+        },
+        {
+          "case": 29,
+          "ok": true,
+          "status": 200,
+          "ms": 154.098
+        },
+        {
+          "case": 30,
+          "ok": true,
+          "status": 200,
+          "ms": 144.101
+        },
+        {
+          "case": 31,
+          "ok": true,
+          "status": 200,
+          "ms": 151.358
+        },
+        {
+          "case": 32,
+          "ok": true,
+          "status": 200,
+          "ms": 162.545
+        },
+        {
+          "case": 33,
+          "ok": true,
+          "status": 200,
+          "ms": 167.469
+        },
+        {
+          "case": 34,
+          "ok": true,
+          "status": 200,
+          "ms": 164.078
+        },
+        {
+          "case": 35,
+          "ok": true,
+          "status": 200,
+          "ms": 149.442
+        },
+        {
+          "case": 36,
+          "ok": true,
+          "status": 200,
+          "ms": 164.342
+        },
+        {
+          "case": 37,
+          "ok": true,
+          "status": 200,
+          "ms": 181.936
+        },
+        {
+          "case": 38,
+          "ok": true,
+          "status": 200,
+          "ms": 157.902
+        },
+        {
+          "case": 39,
+          "ok": true,
+          "status": 200,
+          "ms": 144.036
+        },
+        {
+          "case": 40,
+          "ok": true,
+          "status": 200,
+          "ms": 475.69
+        },
+        {
+          "case": 41,
+          "ok": true,
+          "status": 200,
+          "ms": 243.773
+        },
+        {
+          "case": 42,
+          "ok": true,
+          "status": 200,
+          "ms": 153.941
+        },
+        {
+          "case": 43,
+          "ok": true,
+          "status": 200,
+          "ms": 179.473
+        },
+        {
+          "case": 44,
+          "ok": true,
+          "status": 200,
+          "ms": 180.91
+        },
+        {
+          "case": 45,
+          "ok": true,
+          "status": 200,
+          "ms": 168.041
+        },
+        {
+          "case": 46,
+          "ok": true,
+          "status": 200,
+          "ms": 166.267
+        },
+        {
+          "case": 47,
+          "ok": true,
+          "status": 200,
+          "ms": 149.899
+        },
+        {
+          "case": 48,
+          "ok": true,
+          "status": 200,
+          "ms": 182.827
+        },
+        {
+          "case": 49,
+          "ok": true,
+          "status": 200,
+          "ms": 166.875
+        },
+        {
+          "case": 50,
+          "ok": true,
+          "status": 200,
+          "ms": 159.78
+        },
+        {
+          "case": 51,
+          "ok": true,
+          "status": 200,
+          "ms": 189.984
+        },
+        {
+          "case": 52,
+          "ok": true,
+          "status": 200,
+          "ms": 170.55
+        },
+        {
+          "case": 53,
+          "ok": true,
+          "status": 200,
+          "ms": 189.453
+        },
+        {
+          "case": 54,
+          "ok": true,
+          "status": 200,
+          "ms": 174.019
+        },
+        {
+          "case": 55,
+          "ok": true,
+          "status": 200,
+          "ms": 177.719
+        },
+        {
+          "case": 56,
+          "ok": true,
+          "status": 200,
+          "ms": 145.769
+        },
+        {
+          "case": 57,
+          "ok": true,
+          "status": 200,
+          "ms": 171.217
+        },
+        {
+          "case": 58,
+          "ok": true,
+          "status": 200,
+          "ms": 183.974
+        },
+        {
+          "case": 59,
+          "ok": true,
+          "status": 200,
+          "ms": 163.541
+        },
+        {
+          "case": 60,
+          "ok": true,
+          "status": 200,
+          "ms": 168.917
+        },
+        {
+          "case": 61,
+          "ok": true,
+          "status": 200,
+          "ms": 154.327
+        },
+        {
+          "case": 62,
+          "ok": true,
+          "status": 200,
+          "ms": 222.699
+        },
+        {
+          "case": 63,
+          "ok": true,
+          "status": 200,
+          "ms": 175.764
+        },
+        {
+          "case": 64,
+          "ok": true,
+          "status": 200,
+          "ms": 171.007
+        },
+        {
+          "case": 65,
+          "ok": true,
+          "status": 200,
+          "ms": 162.809
+        },
+        {
+          "case": 66,
+          "ok": true,
+          "status": 200,
+          "ms": 175.641
+        },
+        {
+          "case": 67,
+          "ok": true,
+          "status": 200,
+          "ms": 170.95
+        },
+        {
+          "case": 68,
+          "ok": true,
+          "status": 200,
+          "ms": 166.877
+        },
+        {
+          "case": 69,
+          "ok": true,
+          "status": 200,
+          "ms": 202.016
+        },
+        {
+          "case": 70,
+          "ok": true,
+          "status": 200,
+          "ms": 216.73
+        },
+        {
+          "case": 71,
+          "ok": true,
+          "status": 200,
+          "ms": 215.382
+        },
+        {
+          "case": 72,
+          "ok": true,
+          "status": 200,
+          "ms": 220.277
+        },
+        {
+          "case": 73,
+          "ok": true,
+          "status": 200,
+          "ms": 200.324
+        },
+        {
+          "case": 74,
+          "ok": true,
+          "status": 200,
+          "ms": 184.884
+        },
+        {
+          "case": 75,
+          "ok": true,
+          "status": 200,
+          "ms": 165.79
+        },
+        {
+          "case": 76,
+          "ok": true,
+          "status": 200,
+          "ms": 166.47
+        },
+        {
+          "case": 77,
+          "ok": true,
+          "status": 200,
+          "ms": 148.261
+        },
+        {
+          "case": 78,
+          "ok": true,
+          "status": 200,
+          "ms": 161.779
+        },
+        {
+          "case": 79,
+          "ok": true,
+          "status": 200,
+          "ms": 154.101
+        },
+        {
+          "case": 80,
+          "ok": true,
+          "status": 200,
+          "ms": 165.116
+        },
+        {
+          "case": 81,
+          "ok": true,
+          "status": 200,
+          "ms": 159.953
+        },
+        {
+          "case": 82,
+          "ok": true,
+          "status": 200,
+          "ms": 182.57
+        },
+        {
+          "case": 83,
+          "ok": true,
+          "status": 200,
+          "ms": 229.158
+        },
+        {
+          "case": 84,
+          "ok": true,
+          "status": 200,
+          "ms": 157.986
+        },
+        {
+          "case": 85,
+          "ok": true,
+          "status": 200,
+          "ms": 177.543
+        },
+        {
+          "case": 86,
+          "ok": true,
+          "status": 200,
+          "ms": 170.004
+        },
+        {
+          "case": 87,
+          "ok": true,
+          "status": 200,
+          "ms": 157.764
+        },
+        {
+          "case": 88,
+          "ok": true,
+          "status": 200,
+          "ms": 159.628
+        },
+        {
+          "case": 89,
+          "ok": true,
+          "status": 200,
+          "ms": 197.87
+        },
+        {
+          "case": 90,
+          "ok": true,
+          "status": 200,
+          "ms": 193.596
+        },
+        {
+          "case": 91,
+          "ok": true,
+          "status": 200,
+          "ms": 195.705
+        },
+        {
+          "case": 92,
+          "ok": true,
+          "status": 200,
+          "ms": 163.755
+        },
+        {
+          "case": 93,
+          "ok": true,
+          "status": 200,
+          "ms": 156.538
+        },
+        {
+          "case": 94,
+          "ok": true,
+          "status": 200,
+          "ms": 149.781
+        },
+        {
+          "case": 95,
+          "ok": true,
+          "status": 200,
+          "ms": 147.264
+        },
+        {
+          "case": 96,
+          "ok": true,
+          "status": 200,
+          "ms": 165.39
+        },
+        {
+          "case": 97,
+          "ok": true,
+          "status": 200,
+          "ms": 155.137
+        },
+        {
+          "case": 98,
+          "ok": true,
+          "status": 200,
+          "ms": 158.844
+        },
+        {
+          "case": 99,
+          "ok": true,
+          "status": 200,
+          "ms": 164.12
+        }
+      ]
+    }
+  },
+  "races": [
+    {
+      "case": 0,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 1,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 2,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 3,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 4,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 5,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 6,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 7,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 8,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 9,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 10,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 11,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 12,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 13,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 14,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 15,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 16,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 17,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 18,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 19,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 20,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 21,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 22,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 23,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 24,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 25,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 26,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 27,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 28,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 29,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 30,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 31,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 32,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 33,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 34,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 35,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 36,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 37,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 38,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 39,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 40,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 41,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 42,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 43,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 44,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 45,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 46,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 47,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 48,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 49,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 50,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 51,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 52,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 53,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 54,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 55,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 56,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 57,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 58,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 59,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 60,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 61,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 62,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 63,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 64,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 65,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 66,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 67,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 68,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 69,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 70,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 71,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 72,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 73,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 74,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 75,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 76,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 77,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 78,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 79,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 80,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 81,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 82,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 83,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 84,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 85,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 86,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 87,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 88,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 89,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 90,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 91,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 92,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 93,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 94,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 95,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 96,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 97,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 98,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    },
+    {
+      "case": 99,
+      "http_statuses": [
+        200,
+        409
+      ],
+      "ok": true
+    }
+  ],
+  "diagnostics": [],
+  "stage": "snapshot",
+  "cleanup": true,
+  "concurrency": {
+    "planned_rounds": 100,
+    "completed_rounds": 100,
+    "write_attempts": 200,
+    "passed": 100,
+    "failed_rounds": 0,
+    "timeout_rounds": 0,
+    "expected_conflicts": 100
+  },
+  "snapshot": {
+    "writer_success": true,
+    "same_response_keeps_snapshot": true,
+    "next_refresh_sees_change": true
+  }
+}
