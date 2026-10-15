@@ -24,5 +24,13 @@
 
 대표 기준이 없는 음식은 기존 기입·제외·취소 흐름을 사용한다. 이번 변경으로 모든 미등록 음식의 영양값을 생성하지 않는다. 별도 정확한 제품 찾기 기능은 유지한다.
 
+## 공개 배포 확인
+
+- main `0f87f1700dc6a9a2d0b3aeaffe4f8d624f70fb41` 푸시 후 Render Auto-Deploy / Live를 확인했다. API health 및 웹 build-info가 같은 커밋을 반환했다.
+- 별도 임시 계정의 공개 API에서 명시한 200g 보존·기본 200g/1인분·제조사 선택 없음·확정 전 미저장·취소·pending 복원을 확인했다.
+- 김치찌개350g/불고기2인분400g으로 수정하고 밥을 제외했다. 김치찌개는 서버에서171.5kcal로 재계산됐고, 확정을 두 번 요청해도 실제 기록은2행만 저장됐다. 확정 후 복원에서 pending이 사라졌다. 임시 계정과 데이터는 계정 삭제 endpoint로 정리했다. [비식별 기능 검증 결과](default-serving-public.json).
+- 웹의 배포 번들 `main.e3d10c55.js`에 `(1인분)` 문구가 포함됐다. 실제 번들의 유니코드 escape를 고려해 검증했다. 최초 확인 명령의 PowerShell 인용 오류는 [공식 here-string 규칙](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_quoting_rules)으로 수정했다.
+- 브라우저는 로그아웃 상태였다. 따라서 이번 공개 검증은 **API 흐름 및 배포 번들 확인**이며 로그인 후 브라우저 전체 조작을 완료했다고 주장하지 않는다. 카드 렌더링·수정·제외는 프론트 회귀 테스트로 확인했다.
+
 원본 출처: [식약처 영양성분 다운로드 이력](https://various.foodsafetykorea.go.kr/nutrient/general/down/historyList.do).
 테스트 구성 참고: [pytest parametrization 공식 문서](https://docs.pytest.org/en/stable/how-to/parametrize.html).
