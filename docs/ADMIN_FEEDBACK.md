@@ -34,7 +34,7 @@
 
 백엔드 전체 **1063 passed·기존1 skipped**, 프론트 전체 **24 suites / 82 passed**, production build 성공. 권한·필터 검증·404·409·503·SQL 파라미터·오류 내용 비노출, HTML 원문 안전 표시·오류 후 입력 유지·필터·페이지 이동·지연 응답 무시·임시 계정 정리 재인증을 확인했습니다. 일반 조회는 기존 API를 유지합니다.
 
-공개 기능 검증은 `backend/venv/Scripts/python.exe backend/scripts/check_admin_feedback.py prepare`로 표시된 합성 피드백을 만든 뒤 관리자 브라우저에서 확인합니다. 상태를 재검증 완료로 바꾸고 메모에 `Browser verification completed`를 저장한 후 `probe`로 미로그인·일반 계정 차단과 상태 영속화를 확인합니다. 마지막에 `cleanup`으로 이번 임시 계정과 합성 피드백을 정리합니다. 자격 증명은 git에서 제외한 env에만 보관하며 출력·문서에 포함하지 않습니다. 실제 사용자 의견은 수정하지 않습니다.
+공개 기능 검증은 `backend/venv/Scripts/python.exe backend/scripts/check_admin_feedback.py prepare`로 표시된 합성 피드백을 만든 뒤 관리자 브라우저에서 확인합니다. 담당자를 선택하고 재현 중 상태·메모를 저장한 뒤 새로고침으로 유지되는지 확인합니다. 이어 담당자를 미지정으로 해제하고 상태를 재검증 완료, 메모를 `Browser verification completed`로 저장합니다. 지정·해제 두 이력을 읽고 `probe`로 미로그인·일반 계정 차단과 상태·이력 영속화를 확인합니다. 마지막에 `cleanup`으로 이번 임시 계정과 합성 피드백을 정리합니다. 자격 증명은 git에서 제외한 env에만 보관하며 출력·문서에 포함하지 않습니다. 실제 사용자 의견은 수정하지 않습니다.
 
 이 검증은 기능·권한 확인이며 속도·정확도 성능 비교나 실제 사용자 성과가 아닙니다.
 
@@ -81,4 +81,29 @@ API health와 웹 build-info가 모두 `b4856edfade59d4337882508cf9d9b4d527d70a0
 
 개발 도구에서 Windows 기본 cp949로 UTF-8 소스를 읽어 UnicodeDecodeError가 발생했습니다. 소스는 변경되지 않았고, 명시적 UTF-8 및 프로젝트 Python의 `-X utf8`로 재실행했습니다. [Python Windows UTF-8 모드](https://docs.python.org/3/using/windows.html).
 
-전체 회귀: **백엔드1068 passed·기존1 skipped / 프론트25 suites·84 passed / production build 성공**. 공개 브라우저 검증 결과는 배포 완료 후 아래에 기록합니다.
+전체 회귀: **백엔드1068 passed·기존1 skipped / 프론트25 suites·86 passed / production build 성공**. 공개 브라우저 검증도 아래와 같이 완료했습니다.
+
+
+추가 검증에서 Windows 기본 pytest 임시 경로의 WinError5 권한 오류가 발생했다. 애플리케이션 테스트 실패가 아니라 tmp_path 생성 실패였으며, 프로젝트 내 전용 `--basetemp`를 지정해 동일11건이 통과했다. 기존 테스트를 제거하거나 스킵하지 않았다. [pytest 임시 디렉터리 공식 문서](https://docs.pytest.org/en/stable/how-to/tmp_path.html).
+
+
+### 담당자·이력 공개 배포 결과
+
+API health와 웹 build-info가 모두 기능 커밋 `6432b4af8d383d4e05c3b1ff2c7c34c6825c30c4`임을 확인했습니다. Render main 자동 배포 후 로그인된 실제 관리자 브라우저에서 표시된 합성 의견 한 건만 검증했습니다.
+
+| 확인 | 결과 |
+|---|---|
+| 담당자 지정 | 허용된 관리자 선택, 재현 중·메모 저장, 버전1→2 |
+| 새로고침 | 지정 담당자·메모·버전2 유지 |
+| 이력 | 변경자·시각·상태·배정·메모 전후 표시, 메모 펼쳐보기 정상 |
+| 담당자 해제 | 미지정·재검증 완료·최종 메모 저장, 버전2→3 |
+| 최종 새로고침 | 미지정·최종 메모·버전3 유지 |
+| 공개 API 권한 | 목록·상세·담당자·이력·변경: 미로그인401 / 일반 계정403 |
+| 저장·이력 검증 | 지정·해제 이력2건, 권한 없는 변경 시도 후 저장값 유지 |
+| 정리 | 이번 임시 계정·피드백·이력 삭제, DB 잔여 행 없음 확인 |
+
+[비식별 기능 검증 결과](admin-feedback/assignment-public-check.json). 실제 사용자 의견이나 기존 섭취 기록은 변경하지 않았습니다. 이력 이전 페이지 이동·접기/재열기·늦은 응답·실패 재시도는 자동 테스트로 검증했으며 공개 브라우저 표본은 이력2건입니다. 여러 관리자가 동시에 클릭하는 공개 부하 테스트나 처리 알림 발송은 이번 범위에 포함하지 않았습니다.
+
+![담당자 해제와 이력 진입 화면](admin-feedback/assignment-history.png)
+
+캡처는 검증 당시 저장 성공 화면이며 이메일과 개인 목표를 제외했습니다. 합성 피드백은 검증 후 삭제했습니다. 기존 변경을 소급 복원하지 않는 점과 직접 SQL 작업은 감사 대상이 아닌 점은 위 데이터 범위를 따릅니다.

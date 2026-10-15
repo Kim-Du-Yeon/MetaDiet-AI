@@ -1,0 +1,27 @@
+{
+  "scope": "synthetic_public_functional_not_performance",
+  "authorization_http_statuses": {
+    "anonymous_list": 401,
+    "member_list": 403,
+    "anonymous_assignees": 401,
+    "member_assignees": 403,
+    "anonymous_detail": 401,
+    "member_detail": 403,
+    "anonymous_history": 401,
+    "member_history": 403,
+    "anonymous_update": 401,
+    "member_update": 403
+  },
+  "browser_saved_state_persisted": true,
+  "unauthorized_update_no_change": true,
+  "assignment_and_unassignment_audited": true,
+  "history_count": 2,
+  "build": "6432b4af8d383d4e05c3b1ff2c7c34c6825c30c4",
+  "synthetic_fixture_cleanup": "deleted",
+  "real_postgres_rollback_on_audit_failure": true,
+  "legacy_assignment_preserved": true,
+  "history_cursor_checked": true,
+  "existing_feedback_preserved_during_migration": true,
+  "history_rls_and_client_grants_verified": true,
+  "browser_refresh_assignment_and_clear_persisted": true
+}
