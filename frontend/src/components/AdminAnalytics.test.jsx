@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import AdminAnalytics from "./AdminAnalytics";
 import { getAdminAnalytics } from "../api/dietApi";
+jest.mock('./AdminFeedback',()=>()=>null);
 
 jest.mock("../api/dietApi", () => ({ getAdminAnalytics: jest.fn() }));
 

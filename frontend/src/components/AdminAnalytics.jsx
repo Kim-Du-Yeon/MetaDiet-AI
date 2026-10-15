@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAdminAnalytics } from "../api/dietApi";
+import AdminFeedback from './AdminFeedback';
 
 const percent = (value) => `${Math.round((value || 0) * 100)}%`;
 const seconds = (value) => value ? `${(value / 1000).toFixed(1)}초` : "-";
@@ -31,7 +32,7 @@ export default function AdminAnalytics() {
     ["응답 지연 p95", seconds(data.agent.latency_p95_ms)],
   ];
   return (
-    <section className="settings-card admin-analytics" aria-labelledby="admin-analytics-title">
+    <><section className="settings-card admin-analytics" aria-labelledby="admin-analytics-title">
       <div className="analytics-heading">
         <div><p className="settings-eyebrow">BETA OPERATIONS</p><h2 id="admin-analytics-title">제품 운영 지표</h2></div>
         <select aria-label="조회 기간" value={days} onChange={(event) => setDays(Number(event.target.value))}>
@@ -43,6 +44,6 @@ export default function AdminAnalytics() {
       ))}</div>
       <p className="analytics-privacy">대화 내용과 건강 수치는 수집하지 않고 단계·성공 여부·지연만 집계합니다.</p>
       <p className="analytics-privacy">전환율은 선택 기간에 가입한 계정의 현재 완료 상태입니다. 응답 완료율은 브라우저 수신 기준이며 답변 정확도를 뜻하지 않습니다. 삭제된 계정은 집계에서 제외됩니다.</p>
-    </section>
+    </section><AdminFeedback /></>
   );
 }

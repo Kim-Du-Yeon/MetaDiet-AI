@@ -48,6 +48,8 @@ import json, asyncio, time, logging
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Diet Agent API", version="1.0.0", lifespan=lifespan)
+from app.api.routes.admin_feedback import router as admin_feedback_router
+app.include_router(admin_feedback_router)
 sb  = get_supabase()
 
 app.add_middleware(

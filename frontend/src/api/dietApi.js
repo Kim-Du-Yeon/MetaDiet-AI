@@ -83,6 +83,33 @@ export async function getAdminAnalytics(days = 7) {
   return data;
 }
 
+async function adminFeedbackRequest(path, options = {}) {
+  const res = notifyAuthExpired(await fetch(`${BASE_URL}/admin/feedback${path}`, {
+    ...options, cache: 'no-store', headers: authHeaders({'Content-Type':'application/json'}),
+  }));
+  if (res.status === 403 && !options.method) return null;
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) {
+    const error = new Error(typeof data.detail === 'string' ? data.detail : '피드백을 처리하지 못했습니다. 다시 시도해주세요.');
+    error.status = res.status;
+    throw error;
+  }
+  return data;
+}
+
+export function getAdminFeedback({status = '', category = '', offset = 0} = {}) {
+  const query = new URLSearchParams({limit:'20', offset:String(offset)});
+  if (status) query.set('status', status);
+  if (category) query.set('category', category);
+  return adminFeedbackRequest(`?${query}`);
+}
+export function getAdminFeedbackDetail(id) {
+  return adminFeedbackRequest(`/${encodeURIComponent(id)}`);
+}
+export function updateAdminFeedback(id, payload) {
+  return adminFeedbackRequest(`/${encodeURIComponent(id)}`, {method:'PATCH', body:JSON.stringify(payload)});
+}
+
 function newStreamRunId() {
   return window.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
