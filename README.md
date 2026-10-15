@@ -1,5 +1,7 @@
 # MetaDiet AI
 
+베타 사용자에게 공유하기: [사용 안내와 피드백 보내는 방법](docs/BETA_USER_GUIDE.md).
+
 일반 음식 입력 개선: [김치찌개·불고기 기본 1인분과 직접 계산 카드](docs/DEFAULT_SERVING_FIX.md).
 
 외부 호출 계측: [새 공개100쌍·오류·품질·복구](docs/transport_public/README.md). 연결32.55ms/TLS16.89ms보다 헤더 대기2749.39ms가 컸습니다. 스트리밍은 전체 중앙값 **8.384→8.455초**, p95 **10.421→11.375초**로 개선되지 않아 복구했습니다. 양쪽 품질·최신값100/100, 후보500 오류1건은 제한 재시도로 복구했습니다.
@@ -21,6 +23,7 @@ SDK 준비 분리 실험: [새 공개 전후100건·품질·복구·원본](docs
 MetaDiet AI는 식사 기록, 체중·인바디 추세, 장기 목표와 영양 근거를 함께 사용하는 **LangGraph 기반 멀티에이전트 식단 코칭 서비스**입니다. 자연어와 사진 입력을 분석하되 실제 저장과 전략 변경은 사용자가 확인한 proposal만 반영합니다.
 
 - 공개 베타 UI: [metadiet-web.onrender.com](https://metadiet-web.onrender.com)
+- 베타 사용·피드백 수집 안내: [BETA_USER_GUIDE.md](docs/BETA_USER_GUIDE.md)
 - 상세 구조: [ARCHITECTURE.md](ARCHITECTURE.md)
 - 평가 방법과 전체 원본 결과: [EVALUATION.md](EVALUATION.md)
 - 포트폴리오 핵심 결과: [PORTFOLIO_RESULTS.md](PORTFOLIO_RESULTS.md)
