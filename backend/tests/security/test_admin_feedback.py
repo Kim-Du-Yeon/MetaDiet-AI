@@ -86,7 +86,8 @@ async def test_feedback_database_parameters_privacy_and_conflict():
     assert await repo.update(feedback_id,version=2,status='resolved',admin_note="' SQL",admin_auth_id='admin') is None
     sql, params = conn.execute.call_args.args
     assert 'where id=%s and version=%s' in sql
-    assert params == ('resolved',"' SQL",'admin',feedback_id,2)
+    assert params == (feedback_id,2)
+    assert 'for update' in sql
     assert "' SQL" not in sql
 
 

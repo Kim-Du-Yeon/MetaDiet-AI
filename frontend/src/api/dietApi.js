@@ -106,6 +106,13 @@ export function getAdminFeedback({status = '', category = '', offset = 0} = {}) 
 export function getAdminFeedbackDetail(id) {
   return adminFeedbackRequest(`/${encodeURIComponent(id)}`);
 }
+export function getAdminFeedbackAssignees() {
+  return adminFeedbackRequest('/assignees');
+}
+export function getAdminFeedbackHistory(id, beforeVersion = null) {
+  const query = beforeVersion ? `?before_version=${beforeVersion}` : '';
+  return adminFeedbackRequest(`/${encodeURIComponent(id)}/history${query}`);
+}
 export function updateAdminFeedback(id, payload) {
   return adminFeedbackRequest(`/${encodeURIComponent(id)}`, {method:'PATCH', body:JSON.stringify(payload)});
 }

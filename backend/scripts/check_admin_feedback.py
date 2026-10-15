@@ -60,17 +60,27 @@ def probe():
     checks={}
     for name,path,method,payload in [
         ('list','/admin/feedback','GET',None),
+        ('assignees','/admin/feedback/assignees','GET',None),
         ('detail','/admin/feedback/'+feedback_id,'GET',None),
+        ('history','/admin/feedback/'+feedback_id+'/history','GET',None),
         ('update','/admin/feedback/'+feedback_id,'PATCH',{'version':1,'status':'resolved','admin_note':'unauthorized'}),
     ]:
         checks['anonymous_'+name]=status(path,method=method,payload=payload)
         checks['member_'+name]=status(path,token=token,method=method,payload=payload)
         assert checks['anonymous_'+name]==401
         assert checks['member_'+name]==403
-    row=service_api('/rest/v1/beta_feedback?id=eq.'+feedback_id+'&select=status,version,admin_note')[0]
-    assert row['status']=='resolved' and row['version']>=2 and row['admin_note']=='Browser verification completed'
+    row=service_api('/rest/v1/beta_feedback?id=eq.'+feedback_id+'&select=status,version,admin_note,assignee_id')[0]
+    assert row['status']=='resolved' and row['version']>=3 and row['admin_note']=='Browser verification completed'
+    assert row['assignee_id'] is None
+    history=service_api('/rest/v1/beta_feedback_history?feedback_id=eq.'+feedback_id+
+        '&select=version,actor_auth_id,before_assignee_id,after_assignee_id&order=version.asc')
+    assert len(history)==row['version']-1
+    assert any(item['after_assignee_id'] is not None for item in history)
+    assert history[-1]['before_assignee_id'] is not None and history[-1]['after_assignee_id'] is None
+    assert all(item['actor_auth_id'] is not None for item in history)
     result={'scope':'synthetic_public_functional_not_performance','authorization_http_statuses':checks,
             'browser_saved_state_persisted':True,'unauthorized_update_no_change':True,
+            'assignment_and_unassignment_audited':True,'history_count':len(history),
             'build':json_request(API+'/health')['build']['commit']}
     ARTIFACT.parent.mkdir(parents=True,exist_ok=True)
     ARTIFACT.write_text(json.dumps(result,indent=2)+'\n',encoding='utf-8')
@@ -93,6 +103,7 @@ def cleanup():
     feedback_id = os.environ.get('ADMIN_FEEDBACK_ID')
     if feedback_id:
         assert service_api('/rest/v1/beta_feedback?id=eq.'+feedback_id+'&select=id') == []
+        assert service_api('/rest/v1/beta_feedback_history?feedback_id=eq.'+feedback_id+'&select=id') == []
     assert service_api('/rest/v1/users?auth_id=eq.'+auth_id+'&select=id') == []
     if ARTIFACT.exists():
         result=json.loads(ARTIFACT.read_text())

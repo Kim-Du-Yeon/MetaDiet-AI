@@ -12,7 +12,7 @@ def test_probe_cleanup_reauthenticates_instead_of_refreshing_old_token(monkeypat
     for key,value in {'AUTH_ID':'fixture-auth','TOKEN':'old-token','ID':'fixture-feedback',
                       'EMAIL':'fixture@example.invalid','PASSWORD':'test-only-password'}.items():
         monkeypatch.setenv('ADMIN_FEEDBACK_'+key,value)
-    service = Mock(side_effect=[{'access_token':'fresh-password-token'},[],[]])
+    service = Mock(side_effect=[{'access_token':'fresh-password-token'},[],[],[]])
     delete = Mock(return_value={'status':'deleted'})
     monkeypatch.setattr(probe, 'service_api', service)
     monkeypatch.setattr(probe, 'json_request', delete)
