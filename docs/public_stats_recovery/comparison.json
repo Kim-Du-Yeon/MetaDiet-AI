@@ -1,0 +1,198 @@
+{
+  "scope": "public real model/DB synthetic fixed account, concurrency=4; not browser paint",
+  "dataset_sha256": "780285bc17b98be20ca3db3741a4a247a3f6df41494c52687ff26d10cf2d20dd",
+  "before": {
+    "attempts": 100,
+    "statuses": {
+      "completed": 75,
+      "blocked": 25
+    },
+    "external_error_attempts": 3,
+    "evidence_policy_holds": 25,
+    "runtime_blocked": 0,
+    "fresh_numeric_match": 75,
+    "no_domain_writes": true,
+    "first_progress": {
+      "observed": 100,
+      "missing": 0,
+      "median_ms": 297.63,
+      "p95_ms": 750.513,
+      "max_ms": 1061.152
+    },
+    "completion_all_attempts": {
+      "observed": 100,
+      "missing": 0,
+      "median_ms": 24848.736,
+      "p95_ms": 30708.839,
+      "max_ms": 34129.772
+    },
+    "model_calls_mean": 2.97,
+    "by_case": {
+      "0": {
+        "statuses": {
+          "completed": 25
+        },
+        "completion": {
+          "observed": 25,
+          "missing": 0,
+          "median_ms": 18945.041,
+          "p95_ms": 22427.853,
+          "max_ms": 24884.409
+        }
+      },
+      "1": {
+        "statuses": {
+          "blocked": 25
+        },
+        "completion": {
+          "observed": 25,
+          "missing": 0,
+          "median_ms": 26295.738,
+          "p95_ms": 29812.986,
+          "max_ms": 30708.839
+        }
+      },
+      "2": {
+        "statuses": {
+          "completed": 25
+        },
+        "completion": {
+          "observed": 25,
+          "missing": 0,
+          "median_ms": 20474.205,
+          "p95_ms": 25386.84,
+          "max_ms": 26279.088
+        }
+      },
+      "3": {
+        "statuses": {
+          "completed": 25
+        },
+        "completion": {
+          "observed": 25,
+          "missing": 0,
+          "median_ms": 27231.131,
+          "p95_ms": 33538.887,
+          "max_ms": 34129.772
+        }
+      }
+    },
+    "stats_correct": 100,
+    "stats_missing_or_wrong": 0,
+    "stats_error_attempts": 1,
+    "stats_latency": {
+      "observed": 100,
+      "missing": 0,
+      "median_ms": 303.763,
+      "p95_ms": 757.103
+    }
+  },
+  "after": {
+    "attempts": 100,
+    "statuses": {
+      "completed": 75,
+      "blocked": 25
+    },
+    "external_error_attempts": 0,
+    "evidence_policy_holds": 25,
+    "runtime_blocked": 0,
+    "fresh_numeric_match": 75,
+    "no_domain_writes": true,
+    "first_progress": {
+      "observed": 100,
+      "missing": 0,
+      "median_ms": 332.201,
+      "p95_ms": 806.895,
+      "max_ms": 1349.985
+    },
+    "completion_all_attempts": {
+      "observed": 100,
+      "missing": 0,
+      "median_ms": 23945.059,
+      "p95_ms": 29607.687,
+      "max_ms": 33287.541
+    },
+    "model_calls_mean": 2.96,
+    "by_case": {
+      "0": {
+        "statuses": {
+          "completed": 25
+        },
+        "completion": {
+          "observed": 25,
+          "missing": 0,
+          "median_ms": 18738.817,
+          "p95_ms": 21431.208,
+          "max_ms": 23725.554
+        }
+      },
+      "1": {
+        "statuses": {
+          "blocked": 25
+        },
+        "completion": {
+          "observed": 25,
+          "missing": 0,
+          "median_ms": 27110.671,
+          "p95_ms": 32330.563,
+          "max_ms": 33287.541
+        }
+      },
+      "2": {
+        "statuses": {
+          "completed": 25
+        },
+        "completion": {
+          "observed": 25,
+          "missing": 0,
+          "median_ms": 22129.124,
+          "p95_ms": 26537.27,
+          "max_ms": 29841.618
+        }
+      },
+      "3": {
+        "statuses": {
+          "completed": 25
+        },
+        "completion": {
+          "observed": 25,
+          "missing": 0,
+          "median_ms": 27857.463,
+          "p95_ms": 29607.687,
+          "max_ms": 30017.225
+        }
+      }
+    },
+    "stats_correct": 100,
+    "stats_missing_or_wrong": 0,
+    "stats_error_attempts": 0,
+    "stats_latency": {
+      "observed": 100,
+      "missing": 0,
+      "median_ms": 599.599,
+      "p95_ms": 1189.666
+    }
+  },
+  "safety_gate_passed": true,
+  "stats_speed_improved": false,
+  "freshness": {
+    "before": {
+      "attempts": 100,
+      "correct": 84,
+      "request_errors": 3,
+      "stats_missing": 13,
+      "median_ms": 1779.94,
+      "p95_ms": 3543.621,
+      "fixture_restored": true
+    },
+    "after": {
+      "attempts": 100,
+      "correct": 100,
+      "request_errors": 0,
+      "stats_missing": 0,
+      "median_ms": 2398.17,
+      "p95_ms": 2821.392,
+      "fixture_restored": true
+    }
+  }
+}

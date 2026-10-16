@@ -1,0 +1,80 @@
+[
+  {
+    "index": 40,
+    "request_id": "6cef04b3-099c-4d61-9106-9e5a31ae0d25",
+    "trace_id": "4c673393-77bc-409c-91d1-8bb0f6e731f8",
+    "external_failures": [
+      {
+        "operation": "public_stats",
+        "error_type": "ReadError",
+        "retry": true
+      },
+      {
+        "operation": "public_stats",
+        "error_type": "ReadError",
+        "retry": false
+      }
+    ],
+    "stage_timings_ms": {
+      "budget_pool_checkout": 577.465,
+      "budget_setup_enqueue": 568.942,
+      "budget_connection_wait": 1147.548,
+      "budget_sql": 589.5,
+      "budget_commit": 1304.343,
+      "budget_storage": 3041.909,
+      "db_read": 468.748,
+      "sdk_prepare_supervisor": 459.976,
+      "tool_bind_supervisor": 0.593,
+      "model_budget_supervisor": 350.452,
+      "provider_roundtrip": 13048.026,
+      "model_supervisor": 4772.684,
+      "sdk_prepare_meal": 453.536,
+      "tool_bind_meal": 3.69,
+      "model_budget_meal": 373.643,
+      "model_meal": 8275.517,
+      "graph_total": 18341.81,
+      "terminal_checkpoint": 450.371,
+      "response_snapshot": 146.059,
+      "public_stats": 1339.739
+    }
+  },
+  {
+    "index": 38,
+    "request_id": "c9a54711-5522-445b-882f-4f5e099929b6",
+    "trace_id": "03d4d8aa-fbdd-4676-93ef-5d818ca76239",
+    "external_failures": [
+      {
+        "operation": "public_stats",
+        "error_type": "ReadError",
+        "retry": true
+      },
+      {
+        "operation": "public_stats",
+        "error_type": "ReadError",
+        "retry": false
+      }
+    ],
+    "stage_timings_ms": {
+      "budget_pool_checkout": 630.667,
+      "budget_setup_enqueue": 606.225,
+      "budget_connection_wait": 1237.806,
+      "budget_sql": 577.679,
+      "budget_commit": 1125.053,
+      "budget_storage": 2941.068,
+      "db_read": 596.035,
+      "sdk_prepare_supervisor": 568.276,
+      "tool_bind_supervisor": 1.361,
+      "model_budget_supervisor": 408.939,
+      "provider_roundtrip": 18608.983,
+      "model_supervisor": 11972.09,
+      "sdk_prepare_meal": 699.441,
+      "tool_bind_meal": 5.053,
+      "model_budget_meal": 353.388,
+      "model_meal": 6637.044,
+      "graph_total": 24419.823,
+      "terminal_checkpoint": 449.973,
+      "response_snapshot": 145.508,
+      "public_stats": 1412.569
+    }
+  }
+]

@@ -1,5 +1,9 @@
 # 2026-10-09 upgrade status
 
+## Final statistics transport isolation (2026-10-16)
+
+`app/db/public_stats.py` reads final intake/target statistics through request-local async HTTP clients, with one fresh-client retry for transient read failures, per-I/O timeouts and a15-second overall deadline. Each attempt reuses its connection for the two read-only queries; concurrent requests do not share or reset the synchronous Supabase SDK connection. Cancellation closes the transport. Authenticated internal-owner/service-date filters and unavailable-versus-real-zero behavior remain unchanged. No health-data cache, schema or write-path change. The two reads are not an atomic database snapshot. [Evidence and connection-cost tradeoff](docs/public_stats_recovery/README.md).
+
 ## Request-correlated startup diagnostics (2026-10-16)
 
 Chat transport sends a stable UUID X-Request-ID matching stream_run_id and a new X-Attempt-ID on reconnect. A pure ASGI middleware validates/echoes these non-authorizing IDs, measures response headers/first body, and propagates ContextVar correlation into synchronous auth dependencies, preparation logs and LangSmith invocation metadata. Browser event/console diagnostics measure fetch/headers/progress and double-rAF presentation opportunities (not guaranteed pixel paint). No text/health/token values enter these diagnostics. See [frozen public startup evaluation](docs/request_startup/README.md).

@@ -1,5 +1,7 @@
 # 요청 ID 기반 시작 지연 분석
 
+후속 작업: 이 보고서에서 남긴 통계 ReadError는 [별도 공개 상담·상태 변경 전후100건 검증과 연결 복구](../public_stats_recovery/README.md)에서 보완했다. 아래 수치는 당시 실험 결과 그대로 보존한다.
+
 ## 계측 경계
 
 클라이언트가 생성한 UUID를 `stream_run_id`와 `X-Request-ID`로 공유한다. 재연결은 같은 요청 ID와 새 `X-Attempt-ID`를 사용한다. 서버는 UUID 형식만 받아들이며 형식이 잘못되면 새 ID를 생성한다. ID는 인증이나 권한의 근거가 아니다. API 응답 헤더, 고정 이름의 준비 구간 로그와 LangSmith invocation metadata에 연결한다. 대화 원문·이메일·건강 수치·토큰은 새 계측에 넣지 않는다.

@@ -25,6 +25,18 @@ def summary(report):
     return result
 
 
+def freshness_summary(report):
+    rows = report['rows']
+    assert len(rows) == 100 and len({r['index'] for r in rows}) == 100
+    assert report['restored_original_values']
+    times = sorted(row['total_ms'] for row in rows)
+    return {'attempts':100, 'correct':sum(row['correct'] for row in rows),
+            'request_errors':sum('error_type' in row for row in rows),
+            'stats_missing':sum(row.get('stats_available') is False for row in rows),
+            'median_ms':round(statistics.median(times),3), 'p95_ms':round(times[94],3),
+            'fixture_restored':True}
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--folder', default='docs/public_stats_recovery')
@@ -44,6 +56,14 @@ def main():
     # Reliability recovery is the objective. Do not label a slower result a speed win.
     result['stats_speed_improved'] = (a['stats_latency']['median_ms'] < b['stats_latency']['median_ms']
                                      and a['stats_latency']['p95_ms'] < b['stats_latency']['p95_ms'])
+    freshness = [folder/f'{phase}_freshness100.json' for phase in ('before','after')]
+    if all(path.exists() for path in freshness):
+        old, new = [json.loads(path.read_text(encoding='utf-8')) for path in freshness]
+        assert old['dataset_sha256'] == new['dataset_sha256']
+        result['freshness'] = {'before':freshness_summary(old), 'after':freshness_summary(new)}
+        result['safety_gate_passed'] = (result['safety_gate_passed']
+            and result['freshness']['after']['correct'] >= result['freshness']['before']['correct']
+            and result['freshness']['after']['request_errors'] <= result['freshness']['before']['request_errors'])
     (folder/'comparison.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps(result,ensure_ascii=False))
 

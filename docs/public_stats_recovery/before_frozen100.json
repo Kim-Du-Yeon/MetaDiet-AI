@@ -1,0 +1,5141 @@
+{
+  "scope": "public real model/DB synthetic fixed account, concurrency=4; not browser paint",
+  "dataset_sha256": "780285bc17b98be20ca3db3741a4a247a3f6df41494c52687ff26d10cf2d20dd",
+  "expected": [
+    0,
+    2325
+  ],
+  "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+  "rows": [
+    {
+      "status": "completed",
+      "first_answer_ms": 18382.189799973276,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal\n\n점심으로는 하루 목표 에너지의 약 3분의 1 수준인 700~800 kcal 정도의 균형 잡힌 한식 식단을 추천합니다. 쌀밥 한 공기(200g)에 닭가슴살 구이나 생선구이 등 단백질 반찬, 그리고 신선한 쌈채소나 나물 반찬을 곁들여 보세요. 충분한 단백질과 식이섬유를 함께 챙기시면 포만감이 오래 유지되어 오후 시간 활력을 지키는 데 도움이 됩니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 14.855591
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 1309.195,
+        "budget_setup_enqueue": 570.056,
+        "budget_connection_wait": 1880.068,
+        "budget_sql": 1203.014,
+        "budget_commit": 1955.434,
+        "budget_storage": 5038.987,
+        "db_read": 611.224,
+        "sdk_prepare_supervisor": 604.103,
+        "tool_bind_supervisor": 0.481,
+        "model_budget_supervisor": 972.779,
+        "provider_roundtrip": 8267.974,
+        "model_supervisor": 3422.899,
+        "sdk_prepare_meal": 689.256,
+        "tool_bind_meal": 4.453,
+        "model_budget_meal": 355.919,
+        "model_meal": 4845.808,
+        "graph_total": 15955.297,
+        "terminal_checkpoint": 221.232,
+        "response_snapshot": 71.262,
+        "public_stats": 334.637
+      },
+      "response_headers_ms": 724.1519999806769,
+      "first_event_ms": 724.1904999827966,
+      "first_progress_ms": 724.1912999888882,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "2d0bb5cd-fea8-4d34-9ef2-92ce98b60e89",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3571,
+        "output_tokens": 744,
+        "total_tokens": 4315
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 18453.049500007182,
+      "index": 0,
+      "case": 0,
+      "request_id": "8d65a4a5-0099-46aa-bd5d-d047313c5849",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 25275.1631999854,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 5,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 4,
+        "elapsed_seconds": 21.402095000000003
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 1571.496,
+        "budget_setup_enqueue": 854.732,
+        "budget_connection_wait": 2427.53,
+        "budget_sql": 983.775,
+        "budget_commit": 2372.922,
+        "budget_storage": 5785.875,
+        "sdk_prepare_goal": 705.284,
+        "tool_bind_goal": 11.471,
+        "model_budget_goal": 2397.215,
+        "provider_roundtrip": 14861.213,
+        "model_goal": 14861.441,
+        "db_read": 510.716,
+        "graph_total": 22682.211,
+        "terminal_checkpoint": 586.761,
+        "response_snapshot": 143.839,
+        "public_stats": 701.82
+      },
+      "response_headers_ms": 302.0977000123821,
+      "first_event_ms": 302.34190000919625,
+      "first_progress_ms": 302.3441999685019,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "273d838d-3f37-46fe-9afb-e9e0f88e0823",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 5037,
+        "output_tokens": 1448,
+        "total_tokens": 6485
+      },
+      "provider_constructions": 1,
+      "total_ms": 25345.816500019282,
+      "index": 1,
+      "case": 1,
+      "request_id": "249b0139-c9b1-4c6e-b81e-fdaf801ea5b0",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 25293.22809999576,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 충분히 괜찮습니다. 밥은 1공기(약 200g) 분량으로 조절하시고, 기름진 튀김이나 전보다는 나물류, 쌈채소와 함께 두부나 수육 등 양질의 단백질 위주로 접시를 채워보세요. 국물 요리는 건더기 위주로 드시면 염분과 열량을 자연스럽게 관리하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 20.326197
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 1476.933,
+        "budget_setup_enqueue": 601.328,
+        "budget_connection_wait": 2079.202,
+        "budget_sql": 1535.465,
+        "budget_commit": 1161.751,
+        "budget_storage": 4776.882,
+        "db_read": 1044.951,
+        "sdk_prepare_supervisor": 603.405,
+        "tool_bind_supervisor": 86.482,
+        "model_budget_supervisor": 359.505,
+        "provider_roundtrip": 14494.806,
+        "model_supervisor": 8675.84,
+        "sdk_prepare_meal": 565.991,
+        "tool_bind_meal": 3.883,
+        "model_budget_meal": 381.581,
+        "model_meal": 5819.118,
+        "graph_total": 22586.979,
+        "terminal_checkpoint": 436.993,
+        "response_snapshot": 72.563,
+        "public_stats": 556.245
+      },
+      "response_headers_ms": 512.7789999824017,
+      "first_event_ms": 512.8220000187866,
+      "first_progress_ms": 512.8231000271626,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "4d618319-0913-4627-8e91-69a7a7c5a75d",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3683,
+        "output_tokens": 1105,
+        "total_tokens": 4788
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 25367.39969998598,
+      "index": 2,
+      "case": 2,
+      "request_id": "a5d0c191-157e-4949-af93-cda1a7dc5f59",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 29170.398399990518,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal\n\n현재 등록된 오늘 및 최근 식사 기록과 체중 측정 이력이 없어 장기 추세를 평가하기에는 데이터가 부족합니다(미기록은 실제 결식을 의미하지 않습니다). \n\n현재 감량 목표(82kg → 75kg)에 맞춰 설정된 단백질 기준(약 116g, 체중당 약 1.4g)은 규칙적으로 충족할 경우 근손실 예방에 적절한 수준입니다. 다만 실제 섭취량이 지나치게 부족해지면 근손실 위험이 커질 수 있으므로, 평소 식사와 체중을 꾸준히 기록하며 추세를 점검해 보시길 권장합니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 22.664277
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 2385.178,
+        "budget_setup_enqueue": 900.046,
+        "budget_connection_wait": 3286.558,
+        "budget_sql": 879.247,
+        "budget_commit": 1681.157,
+        "budget_storage": 5847.714,
+        "sdk_prepare_supervisor": 669.623,
+        "tool_bind_supervisor": 1.27,
+        "model_budget_supervisor": 439.812,
+        "provider_roundtrip": 15655.97,
+        "model_supervisor": 4517.372,
+        "sdk_prepare_goal": 440.207,
+        "tool_bind_goal": 88.553,
+        "model_budget_goal": 702.156,
+        "model_goal": 11138.827,
+        "db_read": 1086.15,
+        "graph_total": 24637.381,
+        "terminal_checkpoint": 504.797,
+        "response_snapshot": 1840.949,
+        "public_stats": 318.36
+      },
+      "response_headers_ms": 750.4729999927804,
+      "first_event_ms": 750.511699996423,
+      "first_progress_ms": 750.5125999450684,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "c1253580-e2a9-43af-9999-6608b6c2d480",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4317,
+        "output_tokens": 1467,
+        "total_tokens": 5784
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 29250.96339994343,
+      "index": 3,
+      "case": 3,
+      "request_id": "9a2e5097-fba2-4967-b1b7-a5de9a43586b",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 18854.044699983206,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심 식사로는 복합 탄수화물과 양질의 단백질, 채소가 균형을 이루는 한식 백반(예: 잡곡밥과 생선구이 또는 두부조림, 나물 반찬)을 추천합니다. 기름진 튀김류나 짠 국물 대신 담백한 구이·찜 위주와 건더기 위주로 섭취하시면 오후 에너지를 안정적으로 유지하는 데 도움이 됩니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 16.248348999999997
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 576.887,
+        "budget_setup_enqueue": 564.121,
+        "budget_connection_wait": 1141.796,
+        "budget_sql": 601.659,
+        "budget_commit": 1789.568,
+        "budget_storage": 3533.718,
+        "db_read": 481.974,
+        "sdk_prepare_supervisor": 694.087,
+        "tool_bind_supervisor": 0.839,
+        "model_budget_supervisor": 356.412,
+        "provider_roundtrip": 11316.592,
+        "model_supervisor": 4268.502,
+        "sdk_prepare_meal": 566.274,
+        "tool_bind_meal": 2.595,
+        "model_budget_meal": 1061.541,
+        "model_meal": 7048.254,
+        "graph_total": 17136.939,
+        "terminal_checkpoint": 219.22,
+        "response_snapshot": 71.308,
+        "public_stats": 249.392
+      },
+      "response_headers_ms": 318.5879999655299,
+      "first_event_ms": 318.69370001368225,
+      "first_progress_ms": 318.6948000220582,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "fadc0b9a-5eec-4cbf-b108-cc9ac5a7f807",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3581,
+        "output_tokens": 1238,
+        "total_tokens": 4819
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 18923.479299992323,
+      "index": 4,
+      "case": 0,
+      "request_id": "94a431af-5a0e-47ee-b173-e5d706027a24",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 25030.706299992744,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 나물이나 쌈 채소를 풍성하게 담고, 기름기가 적은 단백질(수육, 두부, 생선 등)과 적정량의 밥(약 한 공기) 위주로 구성해 보세요. 전, 튀김, 볶음류 등 기름진 반찬이나 달콤한 양념 위주의 메뉴는 섭취량만 가볍게 조절하시면 부담 없이 균형 잡힌 식사를 하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 22.108655
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 1062.087,
+        "budget_setup_enqueue": 653.265,
+        "budget_connection_wait": 1716.315,
+        "budget_sql": 611.568,
+        "budget_commit": 2394.603,
+        "budget_storage": 4722.912,
+        "db_read": 486.115,
+        "sdk_prepare_supervisor": 424.137,
+        "tool_bind_supervisor": 1.297,
+        "model_budget_supervisor": 371.198,
+        "provider_roundtrip": 16280.221,
+        "model_supervisor": 9369.184,
+        "sdk_prepare_meal": 542.891,
+        "tool_bind_meal": 3.057,
+        "model_budget_meal": 883.78,
+        "model_meal": 6911.237,
+        "graph_total": 23101.87,
+        "terminal_checkpoint": 218.166,
+        "response_snapshot": 71.387,
+        "public_stats": 307.432
+      },
+      "response_headers_ms": 291.2243999890052,
+      "first_event_ms": 291.2845000391826,
+      "first_progress_ms": 291.2861999939196,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "51fc8760-08ca-492b-87ea-2816d751bb37",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3691,
+        "output_tokens": 2027,
+        "total_tokens": 5718
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 25114.73690002458,
+      "index": 6,
+      "case": 2,
+      "request_id": "e9808b27-68e9-4713-abda-f9322f74f6d8",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 27294.627199997194,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 4,
+        "elapsed_seconds": 23.990786
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 912.625,
+        "budget_setup_enqueue": 1451.498,
+        "budget_connection_wait": 2365.598,
+        "budget_sql": 1037.562,
+        "budget_commit": 1821.409,
+        "budget_storage": 5225.35,
+        "sdk_prepare_goal": 606.483,
+        "tool_bind_goal": 11.54,
+        "model_budget_goal": 1123.305,
+        "provider_roundtrip": 17644.063,
+        "model_goal": 17644.346,
+        "db_read": 850.144,
+        "graph_total": 25010.034,
+        "terminal_checkpoint": 362.881,
+        "response_snapshot": 288.466,
+        "public_stats": 324.304
+      },
+      "response_headers_ms": 334.6643000259064,
+      "first_event_ms": 334.81680002296343,
+      "first_progress_ms": 334.8181000328623,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "dd4e2f43-1af9-4156-b2f2-c1345c5df6b2",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 5226,
+        "output_tokens": 1688,
+        "total_tokens": 6914
+      },
+      "provider_constructions": 1,
+      "total_ms": 28109.64660003083,
+      "index": 5,
+      "case": 1,
+      "request_id": "c802f4cd-b87c-4568-abd4-59865903a3b8",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 26474.23400002299,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n현재 최근 식사 기록과 확정된 체중·인바디 측정 이력이 없어 목표 진행 추세와 근손실 위험을 수치로 평가하기 위한 데이터가 부족한 상태입니다(기록이 없다고 해서 섭취를 하지 않으셨다는 의미는 아닙니다).\n\n체중 감량 중 근손실을 예방하기 위해서는 하루 권장 단백질(약 116g)을 끼니마다 나누어 챙겨 드시고, 극단적인 절식 없이 설정된 칼로리 기준을 지켜주시는 것이 안전합니다. 식사와 체중 변화를 꾸준히 기록해 주시면 보다 정밀한 진행 분석과 코칭을 도와드리겠습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 22.957664
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 848.809,
+        "budget_setup_enqueue": 882.674,
+        "budget_connection_wait": 1732.836,
+        "budget_sql": 851.889,
+        "budget_commit": 1682.548,
+        "budget_storage": 4268.128,
+        "sdk_prepare_supervisor": 473.159,
+        "tool_bind_supervisor": 0.964,
+        "model_budget_supervisor": 350.602,
+        "provider_roundtrip": 16863.516,
+        "model_supervisor": 5067.238,
+        "sdk_prepare_goal": 685.94,
+        "tool_bind_goal": 2.492,
+        "model_budget_goal": 758.452,
+        "model_goal": 11796.497,
+        "db_read": 812.314,
+        "graph_total": 23855.467,
+        "terminal_checkpoint": 575.974,
+        "response_snapshot": 145.036,
+        "public_stats": 305.871
+      },
+      "response_headers_ms": 337.2302000061609,
+      "first_event_ms": 337.27399999042973,
+      "first_progress_ms": 337.27530000032857,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "47668e56-5b5e-4f40-b385-e5b29218a3d8",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4287,
+        "output_tokens": 1794,
+        "total_tokens": 6081
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 26541.706799995154,
+      "index": 7,
+      "case": 3,
+      "request_id": "0b61ec4a-f0f2-4125-965f-9e70aba64b7c",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 21005.326399987098,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심으로는 밥 1공기에 닭가슴살, 두부, 생선구이 등 양질의 단백질 반찬과 채소 나물 또는 샐러드를 곁들인 균형 잡힌 한식을 추천합니다. 복합 탄수화물과 충분한 단백질, 식이섬유를 함께 섭취하시면 포만감을 오래 유지하고 오후 에너지를 안정적으로 유지하는 데 도움이 됩니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 16.906094000000003
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 580.783,
+        "budget_setup_enqueue": 567.889,
+        "budget_connection_wait": 1149.452,
+        "budget_sql": 567.469,
+        "budget_commit": 1119.848,
+        "budget_storage": 2837.24,
+        "db_read": 942.098,
+        "sdk_prepare_supervisor": 504.958,
+        "tool_bind_supervisor": 0.47,
+        "model_budget_supervisor": 371.293,
+        "provider_roundtrip": 12378.109,
+        "model_supervisor": 5557.496,
+        "sdk_prepare_meal": 561.556,
+        "tool_bind_meal": 32.336,
+        "model_budget_meal": 355.445,
+        "model_meal": 6820.781,
+        "graph_total": 18569.22,
+        "terminal_checkpoint": 245.799,
+        "response_snapshot": 72.022,
+        "public_stats": 300.122
+      },
+      "response_headers_ms": 277.56089996546507,
+      "first_event_ms": 277.60339999804273,
+      "first_progress_ms": 277.6044000056572,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "7a26eb9e-4c92-4b81-9c1f-b10f2b7bef39",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3582,
+        "output_tokens": 1188,
+        "total_tokens": 4770
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 21068.372100009583,
+      "index": 8,
+      "case": 0,
+      "request_id": "98625333-2a50-4264-b2ed-588267952e67",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 19990.965300006792,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 접시의 절반은 나물과 신선한 채소로 채우고, 기름기가 적은 수육·생선·두부 등 단백질 찬을 곁들이시면 좋습니다. 밥이나 양념이 강한 조림·튀김류는 과식하기 쉬우므로 한 공기 분량 내로 조절하여 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 16.649483
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 578.407,
+        "budget_setup_enqueue": 567.393,
+        "budget_connection_wait": 1146.691,
+        "budget_sql": 571.96,
+        "budget_commit": 1121.116,
+        "budget_storage": 2840.289,
+        "db_read": 705.653,
+        "sdk_prepare_supervisor": 670.511,
+        "tool_bind_supervisor": 1.118,
+        "model_budget_supervisor": 377.169,
+        "provider_roundtrip": 12081.382,
+        "model_supervisor": 4711.932,
+        "sdk_prepare_meal": 609.398,
+        "tool_bind_meal": 86.881,
+        "model_budget_meal": 351.797,
+        "model_meal": 7369.623,
+        "graph_total": 17827.963,
+        "terminal_checkpoint": 226.951,
+        "response_snapshot": 71.877,
+        "public_stats": 534.508
+      },
+      "response_headers_ms": 268.056400003843,
+      "first_event_ms": 268.1025000056252,
+      "first_progress_ms": 268.1045000208542,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "548ef2bd-bec3-4cc4-8dd1-009e88a49654",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3686,
+        "output_tokens": 1203,
+        "total_tokens": 4889
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 20064.79719997151,
+      "index": 10,
+      "case": 2,
+      "request_id": "092d3ecb-c1bf-4271-bf83-d968b36c7cf5",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 23886.834000004455,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 5,
+        "elapsed_seconds": 20.769512
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 981.43,
+        "budget_setup_enqueue": 988.753,
+        "budget_connection_wait": 1971.808,
+        "budget_sql": 999.434,
+        "budget_commit": 2005.759,
+        "budget_storage": 4977.977,
+        "sdk_prepare_goal": 706.883,
+        "tool_bind_goal": 2.426,
+        "model_budget_goal": 1050.094,
+        "provider_roundtrip": 13818.181,
+        "model_goal": 13818.465,
+        "db_read": 1526.635,
+        "graph_total": 21763.624,
+        "terminal_checkpoint": 220.026,
+        "response_snapshot": 71.678,
+        "public_stats": 526.715
+      },
+      "response_headers_ms": 318.1604000274092,
+      "first_event_ms": 318.36690002819523,
+      "first_progress_ms": 318.3683000388555,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "1cda76e2-67e1-4191-a05f-365615c9119f",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 5111,
+        "output_tokens": 1197,
+        "total_tokens": 6308
+      },
+      "provider_constructions": 1,
+      "total_ms": 23961.82810002938,
+      "index": 9,
+      "case": 1,
+      "request_id": "80d72fc7-613d-4c70-bf9c-b06978ed9f3d",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 24810.75280002551,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심 메뉴로는 복합 탄수화물과 양질의 단백질, 채소가 균형 있게 어우러진 생선구이 백반이나 닭가슴살 샐러드 비빔밥을 추천합니다. 밥 한 공기 분량에 주단백질 반찬과 신선한 나물이나 채소를 곁들이시면 오후 활동에 필요한 에너지를 안정적으로 얻으실 수 있습니다. 국물 요리를 함께 드실 때는 국물보다는 건더기 위주로 섭취하시면 염분 조절에 도움이 됩니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 21.424256
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 559.164,
+        "budget_setup_enqueue": 563.696,
+        "budget_connection_wait": 1123.775,
+        "budget_sql": 570.367,
+        "budget_commit": 1125.695,
+        "budget_storage": 2820.475,
+        "db_read": 477.64,
+        "sdk_prepare_supervisor": 533.793,
+        "tool_bind_supervisor": 0.752,
+        "model_budget_supervisor": 351.844,
+        "provider_roundtrip": 17345.141,
+        "model_supervisor": 7145.212,
+        "sdk_prepare_meal": 590.671,
+        "tool_bind_meal": 4.232,
+        "model_budget_meal": 353.043,
+        "model_meal": 10200.097,
+        "graph_total": 22468.059,
+        "terminal_checkpoint": 220.639,
+        "response_snapshot": 70.975,
+        "public_stats": 290.83
+      },
+      "response_headers_ms": 896.3727000518702,
+      "first_event_ms": 896.400400029961,
+      "first_progress_ms": 896.4014000375755,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "1af0c518-e05a-41f8-8308-7be1e75d6839",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3578,
+        "output_tokens": 1018,
+        "total_tokens": 4596
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 24884.4086000463,
+      "index": 12,
+      "case": 0,
+      "request_id": "cda29fad-780f-4b72-981f-beeb1730038e",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 31045.847599976696,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n현재 최근 식사 기록과 체중 측정 데이터가 없어 목표 진행률과 체중 변화 추세를 정량적으로 평가하기에는 정보가 부족합니다. 미기록이 식사를 거르셨다는 의미는 아니지만, 만약 섭취량이 지나치게 부족해질 경우 근손실 위험이 발생할 수 있으므로 설정된 기준(단백질 약 116g 포함)에 맞춰 규칙적으로 식사를 챙겨주시는 것이 안전합니다. 앞으로 꾸준히 식사와 체중을 기록해 주시면 더욱 정확하게 진행 상황과 근손실 위험을 분석해 드리겠습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 27.265441000000003
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 1212.428,
+        "budget_setup_enqueue": 877.789,
+        "budget_connection_wait": 2091.668,
+        "budget_sql": 898.497,
+        "budget_commit": 2352.59,
+        "budget_storage": 5343.493,
+        "sdk_prepare_supervisor": 658.365,
+        "tool_bind_supervisor": 1.332,
+        "model_budget_supervisor": 403.697,
+        "provider_roundtrip": 19250.615,
+        "model_supervisor": 5887.647,
+        "sdk_prepare_goal": 509.324,
+        "tool_bind_goal": 2.446,
+        "model_budget_goal": 736.235,
+        "model_goal": 13363.187,
+        "db_read": 1620.851,
+        "graph_total": 28130.249,
+        "terminal_checkpoint": 219.507,
+        "response_snapshot": 71.389,
+        "public_stats": 224.616
+      },
+      "response_headers_ms": 716.4230999769643,
+      "first_event_ms": 716.4651000057347,
+      "first_progress_ms": 716.4660000125878,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "997ce5c8-8806-45e2-8369-b7dd688698e1",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4355,
+        "output_tokens": 1931,
+        "total_tokens": 6286
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 31109.510599984787,
+      "index": 11,
+      "case": 3,
+      "request_id": "fa855544-cebd-4712-91ac-cc85b017bce6",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 26854.619099991396,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 5,
+        "elapsed_seconds": 22.339918
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 980.414,
+        "budget_setup_enqueue": 988.746,
+        "budget_connection_wait": 1970.686,
+        "budget_sql": 1003.339,
+        "budget_commit": 1980.618,
+        "budget_storage": 4955.538,
+        "sdk_prepare_goal": 717.109,
+        "tool_bind_goal": 5.271,
+        "model_budget_goal": 1058.512,
+        "provider_roundtrip": 16091.546,
+        "model_goal": 16091.806,
+        "db_read": 921.142,
+        "graph_total": 23488.407,
+        "terminal_checkpoint": 216.909,
+        "response_snapshot": 71.289,
+        "public_stats": 1946.312
+      },
+      "response_headers_ms": 287.3461000272073,
+      "first_event_ms": 287.3713999870233,
+      "first_progress_ms": 287.37209999235347,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "8d2c5527-ed05-4682-bcf7-809b155be817",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 5141,
+        "output_tokens": 1250,
+        "total_tokens": 6391
+      },
+      "external_failures": [
+        {
+          "operation": "public_stats",
+          "error_type": "ReadError",
+          "retry": true
+        }
+      ],
+      "provider_constructions": 1,
+      "total_ms": 26927.246000035666,
+      "index": 13,
+      "case": 1,
+      "request_id": "3b2d327e-2c0a-441f-82d0-7b460b97749f",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 26206.23790001264,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 충분히 괜찮습니다. 밥은 평소처럼 한 공기(약 200g) 정도로 조절하시고, 나물·채소류와 함께 기름기가 적은 단백질(수육, 두부, 생선구이 등) 위주로 접시를 구성해 보세요. 튀김이나 양념이 강한 볶음류는 적당량만 덜어 드시면 균형 잡힌 식사를 유지하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 22.924872999999998
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 578.547,
+        "budget_setup_enqueue": 570.623,
+        "budget_connection_wait": 1150.059,
+        "budget_sql": 575.235,
+        "budget_commit": 1125.146,
+        "budget_storage": 2851.012,
+        "db_read": 389.962,
+        "sdk_prepare_supervisor": 662.149,
+        "tool_bind_supervisor": 1.249,
+        "model_budget_supervisor": 351.678,
+        "provider_roundtrip": 18772.553,
+        "model_supervisor": 11344.627,
+        "sdk_prepare_meal": 588.156,
+        "tool_bind_meal": 5.317,
+        "model_budget_meal": 378.71,
+        "model_meal": 7428.079,
+        "graph_total": 23763.652,
+        "terminal_checkpoint": 222.17,
+        "response_snapshot": 73.415,
+        "public_stats": 230.208
+      },
+      "response_headers_ms": 327.28069997392595,
+      "first_event_ms": 327.3308000061661,
+      "first_progress_ms": 327.3320000153035,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "a4870cb6-845a-4431-bd1c-ec89dcbe4ae5",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3688,
+        "output_tokens": 1903,
+        "total_tokens": 5591
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 26279.088100010995,
+      "index": 14,
+      "case": 2,
+      "request_id": "51a817ba-5de2-4667-b96a-1736d98d5265",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 19602.966699982062,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심으로는 밥 한 공기(약 200g)에 닭가슴살이나 생선구이 같은 양질의 단백질, 그리고 식이섬유가 풍부한 채소 반찬을 곁들인 한식 백반을 추천합니다. 균형 잡힌 식사를 챙기시면 오후 동안 안정적인 에너지를 유지하고 불필요한 간식 섭취를 줄이는 데 도움이 됩니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 17.040135
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 558.638,
+        "budget_setup_enqueue": 565.049,
+        "budget_connection_wait": 1124.607,
+        "budget_sql": 571.346,
+        "budget_commit": 1125.732,
+        "budget_storage": 2822.263,
+        "db_read": 511.736,
+        "sdk_prepare_supervisor": 588.548,
+        "tool_bind_supervisor": 0.582,
+        "model_budget_supervisor": 351.393,
+        "provider_roundtrip": 12947.394,
+        "model_supervisor": 5226.855,
+        "sdk_prepare_meal": 422.382,
+        "tool_bind_meal": 94.398,
+        "model_budget_meal": 356.214,
+        "model_meal": 7720.875,
+        "graph_total": 17952.477,
+        "terminal_checkpoint": 217.13,
+        "response_snapshot": 72.103,
+        "public_stats": 246.169
+      },
+      "response_headers_ms": 280.272200005129,
+      "first_event_ms": 280.31810000538826,
+      "first_progress_ms": 280.3190999547951,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "574522b8-1c32-4ca7-a07b-59bf4e9992a4",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3582,
+        "output_tokens": 1201,
+        "total_tokens": 4783
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 19670.398999995086,
+      "index": 16,
+      "case": 0,
+      "request_id": "337e124d-b0c8-48c6-80b4-d42d17e39cb6",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 34054.5940999873,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다. (단, 현재 기록된 식사가 없어 0 kcal로 표시된 것이며 실제 미섭취를 의미하지는 않습니다.)\n\n현재 최근 식사 기록과 확정된 체중 측정 이력이 없어 장기 추세(28~42일) 평가를 위한 데이터가 부족한 상태입니다. \n\n목표 체중(82kg → 75kg 감량)을 기준으로 현재 하루 권장 단백질은 약 116g(체중당 약 1.4g)으로 설정되어 있어 감량 중 근손실 예방에 적절한 수준입니다. 다만 실제 섭취량이 부족하거나 극단적인 절식이 이어지면 근손실 위험이 커질 수 있으므로, 식사와 체중을 꾸준히 기록하며 적정 단백질과 영양 섭취를 유지해 주시기 바랍니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 4,
+        "elapsed_seconds": 30.450903
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 951.787,
+        "budget_setup_enqueue": 951.661,
+        "budget_connection_wait": 1904.911,
+        "budget_sql": 1541.402,
+        "budget_commit": 1994.923,
+        "budget_storage": 5443.808,
+        "sdk_prepare_supervisor": 561.92,
+        "tool_bind_supervisor": 3.03,
+        "model_budget_supervisor": 409.501,
+        "provider_roundtrip": 20151.639,
+        "model_supervisor": 5782.45,
+        "sdk_prepare_goal": 493.377,
+        "tool_bind_goal": 1.76,
+        "model_budget_goal": 1204.854,
+        "model_goal": 14369.484,
+        "db_read": 3759.214,
+        "graph_total": 31782.468,
+        "terminal_checkpoint": 218.985,
+        "response_snapshot": 410.502,
+        "public_stats": 497.897
+      },
+      "response_headers_ms": 289.0217999811284,
+      "first_event_ms": 289.06540002208203,
+      "first_progress_ms": 289.06619996996596,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "c4b84fc5-0e92-4d9d-99e1-0731ca7517b4",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 6529,
+        "output_tokens": 1595,
+        "total_tokens": 8124
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "external_failures": [
+        {
+          "operation": "profile_intake_read",
+          "error_type": "ReadError",
+          "retry": true
+        }
+      ],
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 34129.771600011736,
+      "index": 15,
+      "case": 3,
+      "request_id": "b66d54fe-542a-4370-8a0a-17e82ae0f4ab",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 17171.21000000043,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 드시던 1공기 분량 정도로 담고, 기름진 부침이나 튀김류보다는 나물, 쌈채소, 두부나 살코기 위주의 단백질 반찬을 넉넉히 채워 드시면 좋습니다. 국물은 건더기 위주로 드시면 염분과 열량을 부담 없이 관리하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 14.216574000000001
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 564.141,
+        "budget_setup_enqueue": 578.231,
+        "budget_connection_wait": 1143.366,
+        "budget_sql": 567.875,
+        "budget_commit": 1123.613,
+        "budget_storage": 2835.382,
+        "db_read": 1303.036,
+        "sdk_prepare_supervisor": 670.76,
+        "tool_bind_supervisor": 1.093,
+        "model_budget_supervisor": 368.782,
+        "provider_roundtrip": 9057.881,
+        "model_supervisor": 4120.348,
+        "sdk_prepare_meal": 607.931,
+        "tool_bind_meal": 86.45,
+        "model_budget_meal": 353.274,
+        "model_meal": 4937.678,
+        "graph_total": 15316.359,
+        "terminal_checkpoint": 220.144,
+        "response_snapshot": 71.525,
+        "public_stats": 438.211
+      },
+      "response_headers_ms": 280.8684000046924,
+      "first_event_ms": 280.91070003574714,
+      "first_progress_ms": 280.9115999843925,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "b7cf6d93-4016-4220-86e5-53111f04e0bc",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3686,
+        "output_tokens": 988,
+        "total_tokens": 4674
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 17245.719800004736,
+      "index": 18,
+      "case": 2,
+      "request_id": "ea18f93c-e04a-4029-85e0-4560dd4c5871",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 27295.24589999346,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 5,
+        "elapsed_seconds": 23.341583
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 2151.234,
+        "budget_setup_enqueue": 1019.657,
+        "budget_connection_wait": 3172.5,
+        "budget_sql": 1660.954,
+        "budget_commit": 2599.321,
+        "budget_storage": 7433.614,
+        "sdk_prepare_goal": 675.55,
+        "tool_bind_goal": 1.772,
+        "model_budget_goal": 1551.46,
+        "provider_roundtrip": 14912.102,
+        "model_goal": 14912.362,
+        "db_read": 665.973,
+        "graph_total": 24217.71,
+        "terminal_checkpoint": 218.622,
+        "response_snapshot": 721.467,
+        "public_stats": 276.196
+      },
+      "response_headers_ms": 1003.3129000221379,
+      "first_event_ms": 1003.3684000372887,
+      "first_progress_ms": 1003.3695999882184,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "0697cb64-3b80-4df5-8b92-ea5f3cbb6f58",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 5043,
+        "output_tokens": 1384,
+        "total_tokens": 6427
+      },
+      "provider_constructions": 1,
+      "total_ms": 27358.2824000041,
+      "index": 17,
+      "case": 1,
+      "request_id": "b8238572-1aa4-441a-8d63-1dbfc235ddfa",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 26935.810599999968,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n현재 최근 식사와 체중 측정 기록이 없어 목표 진행 추세를 평가하기 위한 데이터가 부족한 상태입니다(미기록이 실제 미섭취를 의미하지는 않습니다). 현재 계획된 단백질 목표(약 116g)는 체중 감량 시 근손실을 예방하기에 적절하지만, 실제 섭취가 불규칙하거나 과도한 결손이 발생하면 근손실 위험이 높아질 수 있습니다. 근육량을 지키면서 안정적으로 감량을 이어가기 위해 끼니별 단백질 섭취와 함께 식사 및 체중을 꾸준히 기록해 주시기 바랍니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 24.331136
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 846.525,
+        "budget_setup_enqueue": 1619.208,
+        "budget_connection_wait": 2467.783,
+        "budget_sql": 864.056,
+        "budget_commit": 2167.482,
+        "budget_storage": 5500.119,
+        "sdk_prepare_supervisor": 706.368,
+        "tool_bind_supervisor": 1.215,
+        "model_budget_supervisor": 373.628,
+        "provider_roundtrip": 16484.637,
+        "model_supervisor": 4344.948,
+        "sdk_prepare_goal": 570.709,
+        "tool_bind_goal": 87.792,
+        "model_budget_goal": 751.861,
+        "model_goal": 12139.964,
+        "db_read": 991.046,
+        "graph_total": 25238.709,
+        "terminal_checkpoint": 218.987,
+        "response_snapshot": 71.37,
+        "public_stats": 259.207
+      },
+      "response_headers_ms": 300.1292999833822,
+      "first_event_ms": 300.1759999897331,
+      "first_progress_ms": 300.17729999963194,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "e423a2c4-d93e-4b5a-95a1-a9185f78a036",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4350,
+        "output_tokens": 1790,
+        "total_tokens": 6140
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 27005.051399988588,
+      "index": 19,
+      "case": 3,
+      "request_id": "d500817c-fd43-461a-b032-3654113bfe4c",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 20290.50519998418,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal.\n\n점심으로는 포만감을 오래 유지할 수 있도록 잡곡밥에 기름기가 적은 생선구이나 두부구이 등 단백질 반찬, 그리고 다양한 채소를 곁들인 정식을 추천합니다. 식사하실 때 식이섬유가 풍부한 채소를 먼저 섭취하시면 혈당의 급격한 상승과 과식을 예방하는 데 도움이 됩니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 16.833883999999998
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 581.79,
+        "budget_setup_enqueue": 709.273,
+        "budget_connection_wait": 1291.934,
+        "budget_sql": 574.006,
+        "budget_commit": 1133.256,
+        "budget_storage": 2999.707,
+        "db_read": 1128.855,
+        "sdk_prepare_supervisor": 707.132,
+        "tool_bind_supervisor": 0.548,
+        "model_budget_supervisor": 356.476,
+        "provider_roundtrip": 11689.838,
+        "model_supervisor": 3834.346,
+        "sdk_prepare_meal": 570.005,
+        "tool_bind_meal": 90.47,
+        "model_budget_meal": 349.604,
+        "model_meal": 7855.615,
+        "graph_total": 17713.032,
+        "terminal_checkpoint": 219.512,
+        "response_snapshot": 71.784,
+        "public_stats": 968.815
+      },
+      "response_headers_ms": 434.57599997054785,
+      "first_event_ms": 434.6250999951735,
+      "first_progress_ms": 434.626100002788,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "ac4335b1-66fa-41c4-b58f-338c8c22ed5d",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3576,
+        "output_tokens": 1198,
+        "total_tokens": 4774
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 20365.11429998791,
+      "index": 20,
+      "case": 0,
+      "request_id": "8c95083f-bfd2-4935-bd75-644232171a61",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 16943.289099959657,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 충분히 괜찮습니다. 나물이나 쌈채소 등 채소 반찬을 접시에 넉넉히 담고, 수육·생선구이·두부 같은 단백질 반찬과 밥 한 공기 분량을 곁들이시면 균형 잡힌 식사가 가능합니다. 튀김이나 달고 짠 양념 반찬, 국물류만 과하지 않게 조절해 드시면 좋습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 14.199238999999999
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 560.852,
+        "budget_setup_enqueue": 564.097,
+        "budget_connection_wait": 1125.915,
+        "budget_sql": 578.514,
+        "budget_commit": 1154.348,
+        "budget_storage": 2859.281,
+        "db_read": 430.187,
+        "sdk_prepare_supervisor": 656.235,
+        "tool_bind_supervisor": 1.12,
+        "model_budget_supervisor": 362.758,
+        "provider_roundtrip": 9878.903,
+        "model_supervisor": 4792.111,
+        "sdk_prepare_meal": 715.967,
+        "tool_bind_meal": 4.081,
+        "model_budget_meal": 351.178,
+        "model_meal": 5086.996,
+        "graph_total": 15115.087,
+        "terminal_checkpoint": 227.751,
+        "response_snapshot": 73.113,
+        "public_stats": 418.947
+      },
+      "response_headers_ms": 263.3821999770589,
+      "first_event_ms": 263.47740000346676,
+      "first_progress_ms": 263.47849995363504,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "4ad36a39-5f1a-4a7a-91cf-6deea7b385a4",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3685,
+        "output_tokens": 1269,
+        "total_tokens": 4954
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 17016.070699959528,
+      "index": 22,
+      "case": 2,
+      "request_id": "bd07af0c-6565-4baf-a339-dc93ad4edcc5",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 27514.62819997687,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 6,
+        "elapsed_seconds": 24.791967
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 1044.045,
+        "budget_setup_enqueue": 1065.332,
+        "budget_connection_wait": 2111.038,
+        "budget_sql": 1692.574,
+        "budget_commit": 2105.834,
+        "budget_storage": 5910.39,
+        "sdk_prepare_goal": 537.881,
+        "tool_bind_goal": 1.561,
+        "model_budget_goal": 2015.567,
+        "provider_roundtrip": 17985.146,
+        "model_goal": 17985.458,
+        "db_read": 715.091,
+        "graph_total": 25690.48,
+        "terminal_checkpoint": 218.316,
+        "response_snapshot": 71.587,
+        "public_stats": 298.17
+      },
+      "response_headers_ms": 277.35190000385046,
+      "first_event_ms": 277.4076999630779,
+      "first_progress_ms": 277.4088999722153,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "c4f728a6-02dd-419f-a282-f77c9ba4540e",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 7127,
+        "output_tokens": 1530,
+        "total_tokens": 8657
+      },
+      "provider_constructions": 1,
+      "total_ms": 27585.791399993468,
+      "index": 21,
+      "case": 1,
+      "request_id": "28c0153a-1346-4aa7-88a1-a61b9636b785",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 16487.356500001624,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심으로는 단백질과 복합 탄수화물, 식이섬유가 고루 갖춰진 균형 잡힌 식단을 추천합니다. 예를 들어 잡곡밥 한 공기에 닭가슴살구이나 두부구이 같은 담백한 단백질, 신선한 샐러드나 나물 반찬을 곁들이시면 포만감을 오래 유지하면서 건강하게 에너지를 채우실 수 있습니다. 식사 후 필요하실 때 편하게 기록을 남겨주시면 남은 식단도 함께 맞춰 도와드리겠습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 13.600000999999999
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 577.478,
+        "budget_setup_enqueue": 566.154,
+        "budget_connection_wait": 1144.531,
+        "budget_sql": 573.547,
+        "budget_commit": 1128.291,
+        "budget_storage": 2846.847,
+        "db_read": 466.075,
+        "sdk_prepare_supervisor": 518.599,
+        "tool_bind_supervisor": 0.696,
+        "model_budget_supervisor": 372.167,
+        "provider_roundtrip": 9586.445,
+        "model_supervisor": 3983.391,
+        "sdk_prepare_meal": 441.656,
+        "tool_bind_meal": 89.66,
+        "model_budget_meal": 357.316,
+        "model_meal": 5603.19,
+        "graph_total": 14461.24,
+        "terminal_checkpoint": 224.181,
+        "response_snapshot": 71.644,
+        "public_stats": 395.787
+      },
+      "response_headers_ms": 475.36400001263246,
+      "first_event_ms": 475.41829996043816,
+      "first_progress_ms": 475.419599970337,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "c5f9c6c0-f0db-46a6-9411-c92f2a824bb9",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3570,
+        "output_tokens": 1080,
+        "total_tokens": 4650
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 16544.045999995433,
+      "index": 24,
+      "case": 0,
+      "request_id": "25a30b3d-a804-4db6-8add-1332c5e11cc6",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 31159.133000008296,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal.\n\n현재 최근 식사 기록과 체중 측정 데이터가 부족하여 장기적인 목표 진행 추세를 평가하기는 어렵습니다(기록이 없는 것이 미섭취를 의미하지는 않습니다). 감량 중 근손실 위험을 줄이기 위해서는 설정된 하루 단백질(약 116g)과 기준 칼로리를 극단적인 결핍 없이 규칙적으로 채우는 것이 중요하므로, 식사와 체중을 꾸준히 기록하며 추세를 확인해 보시길 권장합니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 28.535959
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 887.347,
+        "budget_setup_enqueue": 1333.797,
+        "budget_connection_wait": 2222.534,
+        "budget_sql": 865.08,
+        "budget_commit": 2240.999,
+        "budget_storage": 5329.37,
+        "sdk_prepare_supervisor": 510.938,
+        "tool_bind_supervisor": 1.023,
+        "model_budget_supervisor": 392.193,
+        "provider_roundtrip": 20776.553,
+        "model_supervisor": 5303.717,
+        "sdk_prepare_goal": 594.739,
+        "tool_bind_goal": 1.765,
+        "model_budget_goal": 710.922,
+        "model_goal": 15473.05,
+        "db_read": 1449.783,
+        "graph_total": 29445.554,
+        "terminal_checkpoint": 216.775,
+        "response_snapshot": 71.234,
+        "public_stats": 280.952
+      },
+      "response_headers_ms": 292.6263000117615,
+      "first_event_ms": 292.67220001202077,
+      "first_progress_ms": 292.6735000219196,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "e16f0041-013c-4ebc-96c2-0fe648c812ba",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4356,
+        "output_tokens": 1742,
+        "total_tokens": 6098
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 31228.537800023332,
+      "index": 23,
+      "case": 3,
+      "request_id": "178eaf71-4e9a-4d40-980e-2404bf678f30",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 24270.59059997555,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal.\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 쌈채소나 나물류 등 채소를 먼저 충분히 담고, 밥은 평소 드시던 한 공기 분량에 맞춰 드시면 균형 잡힌 식사가 됩니다. 튀김이나 기름진 양념 요리보다는 구이나 조림, 담백한 단백질 위주로 한 접시에 먹을 만큼만 덜어 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 19.509039
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 578.93,
+        "budget_setup_enqueue": 1180.702,
+        "budget_connection_wait": 1760.438,
+        "budget_sql": 597.825,
+        "budget_commit": 1124.031,
+        "budget_storage": 3482.793,
+        "db_read": 471.397,
+        "sdk_prepare_supervisor": 577.276,
+        "tool_bind_supervisor": 1.153,
+        "model_budget_supervisor": 370.43,
+        "provider_roundtrip": 15334.042,
+        "model_supervisor": 7793.843,
+        "sdk_prepare_meal": 616.781,
+        "tool_bind_meal": 5.222,
+        "model_budget_meal": 352.588,
+        "model_meal": 7540.359,
+        "graph_total": 21742.841,
+        "terminal_checkpoint": 549.83,
+        "response_snapshot": 145.485,
+        "public_stats": 262.544
+      },
+      "response_headers_ms": 236.7134999949485,
+      "first_event_ms": 236.76250001881272,
+      "first_progress_ms": 236.7637999705039,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "9868cda9-8291-47ab-89be-d8c5561d21e1",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3690,
+        "output_tokens": 1451,
+        "total_tokens": 5141
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 24339.085099985823,
+      "index": 26,
+      "case": 2,
+      "request_id": "4743887c-1dcd-4918-a27e-fb155ab88822",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 25443.078399985097,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 5,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 5,
+        "elapsed_seconds": 22.538737
+      },
+      "stage_timings_ms": {
+        "budget_pool_checkout": 953.43,
+        "budget_setup_enqueue": 999.752,
+        "budget_connection_wait": 1954.48,
+        "budget_sql": 1597.458,
+        "budget_commit": 2351.901,
+        "budget_storage": 5904.586,
+        "sdk_prepare_goal": 674.28,
+        "tool_bind_goal": 3.24,
+        "model_budget_goal": 1127.987,
+        "provider_roundtrip": 15739.83,
+        "model_goal": 15740.057,
+        "db_read": 560.471,
+        "graph_total": 23528.386,
+        "terminal_checkpoint": 287.667,
+        "response_snapshot": 71.032,
+        "public_stats": 404.299
+      },
+      "response_headers_ms": 297.0385999651626,
+      "first_event_ms": 297.13699995772913,
+      "first_progress_ms": 297.1379999653436,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "dbecf171-0dcb-4160-8ae7-8a941c6edc49",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 4969,
+        "output_tokens": 1304,
+        "total_tokens": 6273
+      },
+      "provider_constructions": 1,
+      "total_ms": 25507.331700006034,
+      "index": 25,
+      "case": 1,
+      "request_id": "ca4dc1ec-61b2-47ad-8520-02f782072678",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 24787.01120003825,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal\n\n현재 최근 7일간의 식사 기록과 체중 측정 이력이 없어 목표 진행 속도와 체중 추세를 분석하기 위한 데이터가 부족합니다. 미기록 식사가 실제 미섭취를 의미하지는 않으나, 장기간 단백질 섭취가 누락되거나 극단적인 절식이 이어질 경우 감량 과정에서 근손실 위험이 커질 수 있습니다. 현재 설정된 단백질 목표(약 116g)를 안정적으로 채우면서 규칙적인 식사와 체중 기록을 남겨주시면 보다 정밀한 진행 평가를 도와드릴 수 있습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 22.081824999999995
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.329,
+        "public_stats": 259.743
+      },
+      "response_headers_ms": 423.08109998703003,
+      "first_event_ms": 423.1256000348367,
+      "first_progress_ms": 423.1265999842435,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "5850290a-c2f1-43f2-9891-c35bf598af10",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4342,
+        "output_tokens": 1752,
+        "total_tokens": 6094
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 25255.155500024557,
+      "index": 27,
+      "case": 3,
+      "request_id": "e26840db-33a6-418d-a495-03e0bf9f3114",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 19351.39899997739,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심 식사로는 복합 탄수화물과 양질의 단백질, 채소가 골고루 포함된 균형 잡힌 메뉴를 추천합니다. 잡곡밥에 생선구이나 기름기 적은 살코기 반찬, 나물류를 곁들인 한식 정식 또는 닭가슴살과 채소를 곁들인 덮밥이나 샐러드 볼을 선택해 보세요. 이러한 식단은 오후 활동을 위한 에너지를 안정적으로 유지하고 포만감을 오래 지키는 데 도움이 됩니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 16.7355
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 70.985,
+        "public_stats": 243.654
+      },
+      "response_headers_ms": 315.1054999907501,
+      "first_event_ms": 315.14829996740445,
+      "first_progress_ms": 315.1491999742575,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "74e39258-3761-4ec4-9896-640e83df4477",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3580,
+        "output_tokens": 1189,
+        "total_tokens": 4769
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 19807.612699980382,
+      "index": 28,
+      "case": 0,
+      "request_id": "5fd72c3d-53b8-4151-8f4b-46ea03757a91",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 24729.856799996924,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 충분히 괜찮습니다. 나물, 채소 샐러드와 수육·생선·두부 같은 양질의 단백질 위주로 접시를 먼저 채우고, 밥이나 전·튀김류는 적정량만 덜어 드시면 균형 잡힌 식사를 유지할 수 있습니다. 국물류는 건더기 위주로 섭취하여 나트륨 부담을 줄여보세요.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 20.655126
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 70.86,
+        "public_stats": 432.509
+      },
+      "response_headers_ms": 252.75019998662174,
+      "first_event_ms": 252.7974999975413,
+      "first_progress_ms": 252.7985000051558,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "5b1ade2d-16af-418b-b599-7c31fb4775be",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3688,
+        "output_tokens": 1422,
+        "total_tokens": 5110
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 25386.83969998965,
+      "index": 30,
+      "case": 2,
+      "request_id": "49502ad8-15a5-4bb1-b7ce-66015ff68ab8",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 25266.24509994872,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 5,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 5,
+        "elapsed_seconds": 21.202348999999998
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 72.175,
+        "public_stats": 447.962
+      },
+      "response_headers_ms": 374.31419995846227,
+      "first_event_ms": 374.35089994687587,
+      "first_progress_ms": 374.3517999537289,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "f1147e79-2d23-4d60-a449-249ebbd04e35",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 4988,
+        "output_tokens": 1289,
+        "total_tokens": 6277
+      },
+      "provider_constructions": 1,
+      "total_ms": 26018.228899978567,
+      "index": 29,
+      "case": 1,
+      "request_id": "dd8d23fd-5487-4bfa-825c-acd36c6049c4",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 17460.42989997659,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심으로는 포만감을 오래 유지하고 균형을 잡을 수 있는 잡곡밥 1공기(200g)에 닭가슴살이나 생선구이 같은 단백질 반찬, 신선한 채소 샐러드를 곁들인 백반 형태를 추천합니다. 기름기가 적은 조리법을 선택하시고, 식사 시 채소를 먼저 섭취하시면 혈당 상승을 완만하게 하고 과식을 예방하는 데 도움이 됩니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 14.250340999999999
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.975,
+        "public_stats": 297.675
+      },
+      "response_headers_ms": 268.97630002349615,
+      "first_event_ms": 269.0286000142805,
+      "first_progress_ms": 269.0298000234179,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "3ab51de7-8d09-4bfa-9d3a-eb224315fa3e",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3576,
+        "output_tokens": 865,
+        "total_tokens": 4441
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 17977.29619999882,
+      "index": 32,
+      "case": 0,
+      "request_id": "6a3e99e4-33cc-46c1-b486-fdc14ac1c92c",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 27991.246499994304,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal\n\n현재 확정된 최근 식사와 체중 측정 기록이 없어 목표 진행 추세와 근손실 위험을 정밀하게 평가하기에는 데이터가 부족합니다(미기록 식사가 실제 섭취량 0을 의미하지는 않습니다). 근손실을 예방하며 목표 체중(75kg)으로 감량하기 위해서는 현재 설정된 일일 단백질 목표(약 116g)를 규칙적으로 섭취해 주시는 것이 중요합니다. 앞으로 식사와 체중을 꾸준히 기록해 주시면 축적된 데이터를 바탕으로 보다 정확한 추세 분석과 코칭을 도와드리겠습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 25.386649
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.273,
+        "public_stats": 259.302
+      },
+      "response_headers_ms": 269.83790000667796,
+      "first_event_ms": 269.9393999646418,
+      "first_progress_ms": 269.9406999745406,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "e6dc90f1-0f6a-41c5-bbca-4f9ec06215d4",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4380,
+        "output_tokens": 1743,
+        "total_tokens": 6123
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 28471.208499977365,
+      "index": 31,
+      "case": 3,
+      "request_id": "df837739-5cae-4f8d-8019-befa7f693b08",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 24412.590899970382,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 드시는 양만큼 담고, 쌈채소나 나물 반찬과 함께 수육·생선구이 등 기름기가 적은 단백질 위주로 접시를 구성해 보세요. 튀김, 전, 단 양념 위주의 반찬과 찌개 국물만 과하지 않게 조절하시면 균형 잡힌 식사를 충분히 유지하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 21.569433
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.215,
+        "public_stats": 258.042
+      },
+      "response_headers_ms": 291.5952999610454,
+      "first_event_ms": 291.63579997839406,
+      "first_progress_ms": 291.63679998600855,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "b94dd4fa-f8e4-4d24-8db6-af3f94b3b1d4",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3686,
+        "output_tokens": 1413,
+        "total_tokens": 5099
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 24883.064699999522,
+      "index": 34,
+      "case": 2,
+      "request_id": "cf145139-e394-41a7-9caf-07582b475fd3",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 28289.02820002986,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 5,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 5,
+        "elapsed_seconds": 24.631831
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.088,
+        "public_stats": 279.062
+      },
+      "response_headers_ms": 306.9197000004351,
+      "first_event_ms": 306.9565999903716,
+      "first_progress_ms": 306.95749999722466,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "2d5d9871-3127-46a8-90f1-08e6600a3926",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 7199,
+        "output_tokens": 1480,
+        "total_tokens": 8679
+      },
+      "provider_constructions": 1,
+      "total_ms": 28781.52240003692,
+      "index": 33,
+      "case": 1,
+      "request_id": "bac38e5b-8be1-489a-acf1-1b7207cc2413",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 24402.252800005954,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal\n\n**1. 최근 식사 및 체중 추세**\n- **식사 기록**: 오늘 및 최근 등록된 확정 식사 기록이 없습니다. (미기록이 실제 미섭취를 의미하는 것은 아니므로, 정확한 관리를 위해 식사를 꾸준히 기록해 주시는 것이 좋습니다.)\n- **체중 추세 및 진행도**: 체중 및 인바디 측정 데이터가 아직 등록되지 않아 28~42일 주기의 체중 변화 추세와 목표 진행 속도를 평가하기에는 데이터가 부족한 상태입니다.\n\n**2. 근손실 위험 검토 및 권장사항**\n- 현재 체중 감량(82kg → 75kg) 목표 설정 기준으로 하루 단백질 권장량은 약 116g(체중당 약 1.4g 수준)입니다.\n- 급격한 절식이나 단백질 섭취 부족은 체중 감량 시 근손실 위험을 높일 수 있으므로, 매 끼니 양질의 단백질을 균등하게 섭취하시는 것을 권장합니다.\n- 정기적인 체중 측정(주 1~2회 일정한 시간대)과 함께 식사 기록을 남겨주시면 보다 정밀한 추세 평가와 맞춤 코칭을 제공해 드릴 수 있습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 21.583618
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.168,
+        "public_stats": 530.484
+      },
+      "response_headers_ms": 287.1758000110276,
+      "first_event_ms": 287.21899999072775,
+      "first_progress_ms": 287.2198999975808,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "178b753e-4af1-4b47-9e9e-c88bd8fb17de",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4357,
+        "output_tokens": 1673,
+        "total_tokens": 6030
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 25167.422499973327,
+      "index": 35,
+      "case": 3,
+      "request_id": "5ed5f4a0-7d34-4ddd-bd32-d4fb702a8a51",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 20995.68009999348,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심으로는 잡곡밥에 생선구이나 기름기 적은 육류, 다양한 채소 반찬을 곁들인 균형 잡힌 한식 백반을 추천합니다. 식사 시 채소와 단백질을 먼저 섭취하시면 포만감을 오래 유지하고 안정적인 에너지를 공급하는 데 도움이 됩니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 18.040615000000003
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 675.622,
+        "public_stats": 433.867
+      },
+      "response_headers_ms": 292.0917999581434,
+      "first_event_ms": 292.14469995349646,
+      "first_progress_ms": 292.14589996263385,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "074270a4-d839-4029-8822-cc30885bc819",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3574,
+        "output_tokens": 1222,
+        "total_tokens": 4796
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 22427.852799999528,
+      "index": 36,
+      "case": 0,
+      "request_id": "72dc3f0d-7863-46b3-9a69-aeb9efb54567",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 20416.683399991598,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥 등 탄수화물은 평소 드시던 분량으로 조절하고, 나물과 쌈 채소류를 먼저 풍성하게 담은 뒤 담백한 단백질 반찬을 곁들여 보세요. 기름진 튀김류나 떡·과자 같은 후식은 과식하기 쉬우므로 한 접시에 알맞은 양을 미리 덜어 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 17.468702
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.077,
+        "public_stats": 304.55
+      },
+      "response_headers_ms": 296.7789000249468,
+      "first_event_ms": 296.8167000217363,
+      "first_progress_ms": 296.81760002858937,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "bd68f66d-8fe4-491b-8924-c4ccee9e2961",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3694,
+        "output_tokens": 1366,
+        "total_tokens": 5060
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 20933.271799993236,
+      "index": 38,
+      "case": 2,
+      "request_id": "1522ba92-3219-4202-8365-38f62be85d8a",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 28267.391000001226,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 4,
+        "elapsed_seconds": 24.475558
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 436.369,
+        "public_stats": 745.604
+      },
+      "response_headers_ms": 431.36709998361766,
+      "first_event_ms": 431.4355999813415,
+      "first_progress_ms": 431.43649998819456,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "64f27508-fe1a-41ad-9a76-fcaa4ee3b1ab",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 5112,
+        "output_tokens": 1894,
+        "total_tokens": 7006
+      },
+      "provider_constructions": 1,
+      "total_ms": 29593.289499985985,
+      "index": 37,
+      "case": 1,
+      "request_id": "2a9cb925-934f-4c00-b4b7-ab78ed0b0355",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 23562.98250000691,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n현재 등록된 최근 식사 기록이 없고(미기록 상태이며 실제 미섭취를 의미하지는 않습니다), 체중 측정 이력 또한 없어 목표 진행 추세를 구체적으로 평가하기에는 데이터가 부족한 상태입니다. \n\n감량 목표(82kg → 75kg) 진행 중 근손실 위험을 줄이려면 하루 권장 칼로리(2325 kcal)와 목표 단백질(약 116g)을 끼니마다 나누어 규칙적으로 섭취하시고, 주 2~3회 이상의 근력 운동과 정기적인 체중 기록을 병행해 주시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 19.770643999999997
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.493,
+        "public_stats": 584.243
+      },
+      "response_headers_ms": 271.0565999732353,
+      "first_event_ms": 271.16689999820665,
+      "first_progress_ms": 271.16870001191273,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "707e9b9c-2f11-4cc7-a335-3ffc0b8fb9eb",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4314,
+        "output_tokens": 1340,
+        "total_tokens": 5654
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 24361.930400016718,
+      "index": 39,
+      "case": 3,
+      "request_id": "d3c182e6-f0a9-4d35-bc4c-2c60f214547e",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 20910.68470000755,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n아직 기록된 식사가 없으므로, 점심은 하루 에너지의 약 30~35%에 해당하는 700~800 kcal 수준으로 균형 있게 구성하는 것을 추천합니다. 잡곡밥 한 공기에 단백질 급원(닭가슴살, 생선구이, 소고기 우둔살, 두부 등)과 풍부한 채소 반찬을 곁들인 한식 식단을 구성해 보세요. 외식 시에는 채소와 단백질 비중이 높은 비빔밥(양념장 조절)이나 샤브샤브를 선택하시면 든든하면서도 부담 없는 식사가 됩니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 17.884466
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 141.771,
+        "public_stats": 495.608
+      },
+      "response_headers_ms": 265.23280004039407,
+      "first_event_ms": 265.2741000056267,
+      "first_progress_ms": 265.27530001476407,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "4893fd2b-7338-42e9-81ff-606d0437641b",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3572,
+        "output_tokens": 1204,
+        "total_tokens": 4776
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 21749.81300003128,
+      "index": 40,
+      "case": 0,
+      "request_id": "cf7f10dc-e49f-4f8c-a372-69fed675ddb9",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 18925.256600021385,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 접시의 절반은 쌈채소와 나물류로 채우고, 밥과 단백질 반찬(제육볶음, 생선, 두부 등)을 적정량 덜어 한 접시 위주로 식사해 보세요. 국물 섭취를 줄이고 튀김이나 달콤한 후식류만 가볍게 조절하시면 균형 잡힌 식사를 하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 16.050018
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.478,
+        "public_stats": 517.276
+      },
+      "response_headers_ms": 284.2293999856338,
+      "first_event_ms": 284.267200040631,
+      "first_progress_ms": 284.26819999003783,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "1f91cf07-429a-46a9-855f-02d95819d288",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3688,
+        "output_tokens": 1158,
+        "total_tokens": 4846
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 19659.869400027674,
+      "index": 42,
+      "case": 2,
+      "request_id": "585784b5-34d1-4a19-82c2-7f78e9d90761",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 18983.338899968658,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal.\n\n점심으로는 잡곡밥에 생선구이나 두부구이 등 기름기가 적은 단백질과 신선한 채소 반찬을 곁들인 균형 잡힌 한식 식사를 추천합니다. 채소 반찬을 먼저 섭취해 포만감을 높이고, 국물 요리를 드신다면 건더기 위주로 드셔보세요.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 14.775343999999999
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 361.499,
+        "public_stats": 520.052
+      },
+      "response_headers_ms": 521.0854999604635,
+      "first_event_ms": 521.1336999782361,
+      "first_progress_ms": 521.134999988135,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "66b4307c-4460-45a3-b0aa-0d807c9ac332",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3576,
+        "output_tokens": 1056,
+        "total_tokens": 4632
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 20133.86649999302,
+      "index": 44,
+      "case": 0,
+      "request_id": "4c56d2a8-9f11-4e67-94e6-d915a2a1f88a",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 28010.552800027654,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 5,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 5,
+        "elapsed_seconds": 24.277048999999998
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 72.248,
+        "public_stats": 310.27
+      },
+      "response_headers_ms": 316.8596000177786,
+      "first_event_ms": 316.9116000062786,
+      "first_progress_ms": 316.91350002074614,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "73ea8422-0d19-4a8f-aa67-a79c66cc52c2",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 4973,
+        "output_tokens": 1555,
+        "total_tokens": 6528
+      },
+      "provider_constructions": 1,
+      "total_ms": 28578.494400018826,
+      "index": 41,
+      "case": 1,
+      "request_id": "9ff8ee89-42ce-429f-b218-f1772fa5c97c",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 32337.258699990343,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다. (현재 등록된 식사 기록이 없어 0 kcal로 조회되며, 이는 미섭취가 아닌 미기록 상태일 수 있습니다.)\n\n**1. 식사 및 체중 추세 검토**\n* **식사 기록:** 최근 7일간 확정된 식사 기록이 없어 실제 섭취 추세를 확인하기 어렵습니다.\n* **체중 및 체성분:** 확정된 인바디/체중 측정 이력이 없어 28~42일 기준의 목표 달성 진행률을 평가하기에 데이터가 부족한 상태입니다.\n\n**2. 근손실 위험 및 목표 진행 안내**\n* 체성분 변화 추이를 직접 확인할 수는 없으나, 현재 설정된 하루 단백질 목표(116.25g)는 체중 82kg 기준 약 1.4g/kg으로 감량 중 근손실 예방에 적절한 수준입니다.\n* 급격한 굶기나 과도한 절식은 근손실 위험을 높일 수 있으므로 하루 기준치(2,325 kcal)에 맞춰 균형 있게 섭취해 주시고, 식사 기록과 주기적인 체중 측정을 남겨주시면 보다 정확한 모니터링을 도와드릴 수 있습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 28.290771999999997
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 72.252,
+        "public_stats": 412.43
+      },
+      "response_headers_ms": 649.883099948056,
+      "first_event_ms": 649.9323999742046,
+      "first_progress_ms": 649.9332999810576,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "b4362403-2419-4040-9d81-d0f63c9d4377",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4342,
+        "output_tokens": 1808,
+        "total_tokens": 6150
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 33538.88670000015,
+      "index": 43,
+      "case": 3,
+      "request_id": "a2206013-d3fc-4eb7-8db0-ffa7950d2f6a",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 21605.295899964403,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서도 쌈채소나 나물류, 기름기가 적은 단백질 반찬(수육, 두부, 생선 등)을 먼저 채워 드시면 충분히 좋은 선택이 됩니다. 밥은 평소 드시는 양만큼만 덜고 튀김류나 전류, 나트륨이 높은 찌개 국물 위주의 섭취만 가볍게 조절해 주시면 균형 잡힌 식사를 하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 18.139508
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 72.737,
+        "public_stats": 282.695
+      },
+      "response_headers_ms": 1061.1112999613397,
+      "first_event_ms": 1061.1513999756426,
+      "first_progress_ms": 1061.1522999824956,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "cde36e9a-17ab-475b-abcf-496b52a69d1e",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3689,
+        "output_tokens": 1147,
+        "total_tokens": 4836
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 22117.8192999796,
+      "index": 46,
+      "case": 2,
+      "request_id": "07b34b48-2770-404b-8261-7278af64abcd",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 28988.395099993795,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 5,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 6,
+        "elapsed_seconds": 25.642110000000002
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 73.734,
+        "public_stats": 272.878
+      },
+      "response_headers_ms": 460.2148999692872,
+      "first_event_ms": 460.25569998892024,
+      "first_progress_ms": 460.2565999957733,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "5f848920-622e-4b0b-ab0e-d58500ff13b6",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 6800,
+        "output_tokens": 1579,
+        "total_tokens": 8379
+      },
+      "provider_constructions": 1,
+      "total_ms": 29812.98649997916,
+      "index": 45,
+      "case": 1,
+      "request_id": "d14ca30f-cd67-4cf3-b217-36fb89ebe841",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 26680.353600007948,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n현재 등록된 최근 식사 및 체중 측정 기록이 없어 장기적인 체중 추세와 목표 진행 상태를 정량적으로 평가하기에는 데이터가 부족합니다. 다만, 기록이 없는 상태가 실제로 식사를 하지 않으셨다는 의미는 아니므로 식사를 하셨다면 기록을 남겨주시는 것이 좋습니다. \n\n체중 감량(82kg → 75kg) 중 근손실 위험을 줄이기 위해서는 하루 권장 단백질(약 116g)을 끼니마다 나누어 꾸준히 섭취하시고, 극단적인 절식 대신 목표 칼로리(2325 kcal)에 맞춘 규칙적인 식사를 유지해 주시기 바랍니다. 정확한 추세 파악을 위해 주기적인 체중 측정과 식사 기록을 권장합니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 23.690807
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.29,
+        "public_stats": 279.942
+      },
+      "response_headers_ms": 482.1170000359416,
+      "first_event_ms": 482.16800001682714,
+      "first_progress_ms": 482.1692000259645,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "b44c2b54-9bcb-4fdd-81d1-66cb12f995fe",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4245,
+        "output_tokens": 1714,
+        "total_tokens": 5959
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 27231.1311000376,
+      "index": 47,
+      "case": 3,
+      "request_id": "001afe41-336e-4b15-a6ab-99b34ae3e9e8",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 21538.35919999983,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심으로는 포만감을 오래 유지하고 근육량을 지킬 수 있도록 현미밥이나 잡곡밥 반 공기(약 100~150g)에 닭가슴살, 생선구이, 두부 같은 양질의 단백질과 신선한 채소를 곁들인 식단을 추천합니다. 국물 요리를 드신다면 염분 조절을 위해 건더기 위주로 드시고, 튀김류나 당류가 많은 양념은 피하는 것이 좋습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 18.683903
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.045,
+        "public_stats": 300.44
+      },
+      "response_headers_ms": 516.0831999965012,
+      "first_event_ms": 516.1227000062354,
+      "first_progress_ms": 516.1235999548808,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "a98debe9-bcd6-4d23-8cdb-1db6bff9e276",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3566,
+        "output_tokens": 1300,
+        "total_tokens": 4866
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 22052.525999955833,
+      "index": 48,
+      "case": 0,
+      "request_id": "9fac7986-805d-4978-9dc0-63e096b47835",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 19954.601800011005,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 5,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 17.365515000000002
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.446,
+        "public_stats": 284.193
+      },
+      "response_headers_ms": 272.85359997767955,
+      "first_event_ms": 272.89089997066185,
+      "first_progress_ms": 272.891599975992,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "494a916a-f87e-415b-ba8a-ceeb7ad5e5e7",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 3018,
+        "output_tokens": 1050,
+        "total_tokens": 4068
+      },
+      "provider_constructions": 1,
+      "total_ms": 20458.528899995144,
+      "index": 49,
+      "case": 1,
+      "request_id": "a46e20b2-16b4-42de-b559-0addea67b0b6",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 19761.182100046426,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서도 나물이나 쌈채소 등 채소류와 두부·수육·생선 같은 단백질 반찬 위주로 접시를 채우고 밥 양을 조절하시면 충분히 드셔도 괜찮습니다. 다만 튀김이나 볶음류, 달콤한 양념 반찬과 후식은 과식하기 쉬우므로 한 접시에 적정량을 덜어 천천히 식사하시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 17.069667999999997
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.277,
+        "public_stats": 286.506
+      },
+      "response_headers_ms": 310.14800001867115,
+      "first_event_ms": 310.1870000245981,
+      "first_progress_ms": 310.1882000337355,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "f0bb341e-1914-43eb-91f3-0297a3504414",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3694,
+        "output_tokens": 1234,
+        "total_tokens": 4928
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 20262.03790004365,
+      "index": 50,
+      "case": 2,
+      "request_id": "5b292472-0d92-4db0-ac48-574869381258",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 18692.143099964596,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal.\n\n점심으로는 에너지를 고르게 보충할 수 있도록 잡곡밥 한 공기에 닭가슴살구이나 생선구이 같은 양질의 단백질, 그리고 신선한 채소 반찬을 곁들인 균형 잡힌 백반 식단을 추천합니다. 식사 시 식이섬유가 풍부한 채소를 먼저 드시면 혈당을 완만하게 올리고 포만감을 안정적으로 유지하는 데 도움이 됩니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 15.918396
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.376,
+        "public_stats": 289.196
+      },
+      "response_headers_ms": 453.2743999734521,
+      "first_event_ms": 453.3200999721885,
+      "first_progress_ms": 453.3211999805644,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "ea03880f-9a9e-45c0-acc3-6c3dabc0686e",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3563,
+        "output_tokens": 1011,
+        "total_tokens": 4574
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 19191.683600016404,
+      "index": 52,
+      "case": 0,
+      "request_id": "7ee034d1-fe2b-4414-a581-3115582e0689",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 29899.29079997819,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다. (현재 등록된 식사 기록이 없는 상태이며, 미기록이 0 kcal 섭취를 의미하는 것은 아닙니다.)\n\n**1. 식사 및 체중 추세 확인**\n* 최근 7일간의 식사 기록과 체중·인바디 측정 이력이 등록되어 있지 않아 추세를 평가하기 위한 데이터가 부족합니다.\n\n**2. 목표 진행 및 근손실 위험 검토**\n* **목표 설정:** 체중 82kg에서 75kg 감량을 목표로 하며, 하루 기준 2325 kcal와 단백질 116.25g(체중 1kg당 약 1.4g)으로 설정되어 있어 감량 시 근육량을 보존하기에 적절한 구성입니다.\n* **근손실 위험도:** 현재 실제 섭취량과 체중 변화 데이터가 없어 정확한 근손실 위험 평가가 어렵습니다. 단백질 섭취 부족이나 지나친 절식이 지속될 경우 근손실 위험이 커질 수 있으므로, 평소 단백질 목표량을 꾸준히 충족하는 것이 중요합니다.\n* **권장 사항:** 안정적인 목표 진행과 근손실 예방을 위해 매일의 식사 기록과 정기적인 체중 측정을 이어가 보시길 권장합니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 26.796932000000005
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.517,
+        "public_stats": 248.275
+      },
+      "response_headers_ms": 261.5190999931656,
+      "first_event_ms": 261.5547999739647,
+      "first_progress_ms": 261.5555999800563,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "b366bf3f-0aaa-441d-b002-c184c1f8a0ed",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4361,
+        "output_tokens": 2024,
+        "total_tokens": 6385
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 30369.279199978337,
+      "index": 51,
+      "case": 3,
+      "request_id": "bcdb011d-a70d-4fd3-a23f-879ac6d5ccf7",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 24445.97060000524,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 5,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 20.630346000000003
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 143.058,
+        "public_stats": 781.266
+      },
+      "response_headers_ms": 296.62580002332106,
+      "first_event_ms": 296.6616000048816,
+      "first_progress_ms": 296.66290001478046,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "0dfb0c44-a5d5-4859-bb69-32aaf9087050",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 3084,
+        "output_tokens": 1458,
+        "total_tokens": 4542
+      },
+      "provider_constructions": 1,
+      "total_ms": 25552.458000020124,
+      "index": 53,
+      "case": 1,
+      "request_id": "c45831a4-1253-43e7-9620-ef63ea49d4d4",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 19268.676699954085,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 충분히 건강하게 식단을 관리하실 수 있습니다. 접시를 채우실 때 밥은 평소 섭취량(한 공기 내외)으로 담고, 신선한 쌈채소와 나물류를 먼저 넉넉히 담은 뒤 기름기 적은 고기나 두부, 생선 등 단백질 찬을 곁들여 보세요. 튀김이나 전, 당류가 많은 양념 반찬과 후식(떡, 식혜 등) 섭취만 적절히 조절하시면 든든하고 균형 잡힌 한 끼가 됩니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 15.900240999999998
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 143.532,
+        "public_stats": 852.314
+      },
+      "response_headers_ms": 290.44289997546,
+      "first_event_ms": 290.4801999684423,
+      "first_progress_ms": 290.48109997529536,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "d7bf0668-90dc-478e-9326-dc9061f1c743",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3691,
+        "output_tokens": 1265,
+        "total_tokens": 4956
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 20413.45359996194,
+      "index": 54,
+      "case": 2,
+      "request_id": "87951d15-01c4-40af-a04b-13b15dbf869c",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 16964.70730000874,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심 식사로는 잡곡밥에 생선구이나 두부, 닭가슴살 등 기름기가 적은 단백질 찬과 신선한 채소 반찬을 곁들인 한식 정식을 추천합니다. 오후 활동에 필요한 에너지를 안정적으로 채우고 포만감을 오래 유지할 수 있도록, 튀김이나 자극적인 소스 대신 굽거나 찐 담백한 조리법 위주로 선택해 보세요.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 14.357451
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 70.977,
+        "public_stats": 323.618
+      },
+      "response_headers_ms": 284.8888000007719,
+      "first_event_ms": 284.98639998724684,
+      "first_progress_ms": 284.98779999790713,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "c1fc2c66-e0ee-4c0d-b4a1-d29736c7c6a5",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3586,
+        "output_tokens": 1035,
+        "total_tokens": 4621
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 17493.490999971982,
+      "index": 56,
+      "case": 0,
+      "request_id": "f8fcd670-ee95-45b3-9c93-9190e7727062",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 26430.526600044686,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal\n\n현재 확정된 최근 식사 기록과 체중·인바디 측정 이력이 등록되지 않아, 목표 진행 속도와 체중 추세를 정량적으로 평가하기에는 데이터가 부족한 상태입니다(미기록은 실제 미섭취를 의미하지 않으므로 식사 후 기록을 남겨주시면 정확한 분석이 가능합니다).\n\n현재 설정된 전략의 단백질 목표는 116.25g(체중 82kg 기준 약 1.4g/kg)으로 감량 중 근손실을 예방하기에 적절한 수준입니다. 다만 실제 섭취량이 목표에 크게 미달하거나 불규칙하게 결식할 경우 근손실 위험이 커질 수 있으므로, 매 끼니 단백질을 균등하게 챙기며 정기적인 체중 기록을 병행해 주시기 바랍니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 23.852366000000004
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 70.994,
+        "public_stats": 252.712
+      },
+      "response_headers_ms": 281.7475000047125,
+      "first_event_ms": 281.78960003424436,
+      "first_progress_ms": 281.7905000410974,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "44f2efa6-bf22-4e26-b9f4-9ac836790cd3",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4361,
+        "output_tokens": 1609,
+        "total_tokens": 5970
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 26896.72740001697,
+      "index": 55,
+      "case": 3,
+      "request_id": "5926b93c-5aa2-42b4-b97f-815254c5a7e7",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 19179.9571000156,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal.\n\n한식뷔페에서 일반식을 드셔도 괜찮으며, 채소와 단백질 위주로 먼저 접시를 구성하시면 균형 잡힌 식사가 가능합니다. 밥은 평소 드시는 한 공기(약 200g) 분량을 유지하고, 기름진 튀김이나 단 양념 위주의 요리보다는 나물과 살코기·생선구이를 중심으로 담아보세요.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 16.376038
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.306,
+        "public_stats": 292.183
+      },
+      "response_headers_ms": 326.3347999891266,
+      "first_event_ms": 326.38899999437854,
+      "first_progress_ms": 326.39020000351593,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "86be6207-5a05-4477-8603-1fd7808f70c2",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3687,
+        "output_tokens": 1147,
+        "total_tokens": 4834
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 19685.719400004018,
+      "index": 58,
+      "case": 2,
+      "request_id": "c568453d-ada3-4ed9-b5e7-de04a3d63bca",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 25360.93520000577,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 5,
+        "elapsed_seconds": 22.710923
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.087,
+        "public_stats": 304.655
+      },
+      "response_headers_ms": 274.8159000184387,
+      "first_event_ms": 274.864399980288,
+      "first_progress_ms": 274.86529998714104,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "271f8f85-2d30-4dc9-b848-4b3f7362f224",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 5009,
+        "output_tokens": 1835,
+        "total_tokens": 6844
+      },
+      "provider_constructions": 1,
+      "total_ms": 25888.38720001513,
+      "index": 57,
+      "case": 1,
+      "request_id": "6c556210-e616-42b9-a79f-50ee027d29cb",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 16280.79670004081,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심으로는 밥 한 공기 분량의 복합 탄수화물과 닭가슴살·생선·두부 등 단백질 위주의 메인 반찬, 그리고 충분한 채소를 곁들인 한식 일반식을 추천합니다. 아직 기록된 식사가 없으므로 과식을 피하고 포만감이 오래 유지되도록 단백질과 식이섬유를 고루 챙겨 드시는 것이 좋습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 12.99983
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 72.816,
+        "public_stats": 202.032
+      },
+      "response_headers_ms": 260.8217000379227,
+      "first_event_ms": 260.86850004503503,
+      "first_progress_ms": 260.8695000526495,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "8754bbf1-adfe-41bf-b4d8-b32622402a22",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3571,
+        "output_tokens": 791,
+        "total_tokens": 4362
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 16707.676400023047,
+      "index": 60,
+      "case": 0,
+      "request_id": "ba0bdce3-b80a-4e4d-9bc7-8613bde44bfa",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 27614.204699988477,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal\n\n현재 확정된 최근 식사 기록과 체중 측정 데이터가 없어 구체적인 체중 변화 추세나 목표 진행 상태를 정밀하게 평가하기는 어렵습니다(기록이 없는 상태가 식사를 하지 않으셨음을 의미하는 것은 아닙니다). \n\n현재 설정된 단백질 목표(하루 약 116g, 체중 대비 약 1.4g/kg)는 다이어트 중 근손실 예방에 적절한 수준이므로, 식사를 거르지 않고 목표 영양을 꾸준히 기록하며 섭취해 주시는 것이 중요합니다. 주기적으로 체중과 식단을 기록해 주시면 보다 정확한 근손실 위험 검토와 맞춤 관리가 가능합니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 4,
+        "elapsed_seconds": 24.517041
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 72.42,
+        "public_stats": 194.675
+      },
+      "response_headers_ms": 274.0924999816343,
+      "first_event_ms": 274.15860001929104,
+      "first_progress_ms": 274.1599999717437,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "cbba4c98-c98c-42f9-95d0-eebf03c7eb44",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 6393,
+        "output_tokens": 1582,
+        "total_tokens": 7975
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 28028.234799974598,
+      "index": 59,
+      "case": 3,
+      "request_id": "48f6c928-3c20-4a0e-9328-e5251a717b47",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 27246.845600020606,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 5,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 6,
+        "elapsed_seconds": 23.129016
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 70.881,
+        "public_stats": 297.39
+      },
+      "response_headers_ms": 361.30649998085573,
+      "first_event_ms": 361.3531999872066,
+      "first_progress_ms": 361.3545999978669,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "77d00ee2-97c7-48d4-9376-33d82b2dfb3c",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 6765,
+        "output_tokens": 1368,
+        "total_tokens": 8133
+      },
+      "provider_constructions": 1,
+      "total_ms": 27778.355000016745,
+      "index": 61,
+      "case": 1,
+      "request_id": "6d080da5-3044-4a01-964d-c8f4ebb23303",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 21349.66299997177,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 충분히 괜찮습니다. 나물이나 샐러드 같은 채소류와 기름기가 적은 단백질 반찬(생선구이, 수육, 두부 등)을 우선으로 담고 밥은 평소 한 공기 분량으로 조절해 보세요. 튀김, 전, 찌개의 국물 섭취만 적당히 덜어내시면 부담 없이 균형 잡힌 식사를 하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 17.642774000000003
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 70.916,
+        "public_stats": 356.603
+      },
+      "response_headers_ms": 295.8714999840595,
+      "first_event_ms": 295.924499980174,
+      "first_progress_ms": 295.92599999159575,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "6f55d0ef-a1a7-4d97-8423-ae8b0582d6e1",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3684,
+        "output_tokens": 1511,
+        "total_tokens": 5195
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 21935.86539995158,
+      "index": 62,
+      "case": 2,
+      "request_id": "254fc0fd-a739-40b0-915e-04e2127d0989",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 18002.87180003943,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심으로는 잡곡밥 한 공기에 닭가슴살이나 두부, 생선구이 같은 양질의 단백질과 신선한 나물이나 채소를 곁들인 균형 잡힌 백반 식단을 추천합니다. 튀김이나 자극적인 양념류 대신 굽거나 찐 조리법을 선택하시면 충분한 포만감을 유지하면서도 건강하게 에너지를 채우실 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 14.892180999999999
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.26,
+        "public_stats": 382.044
+      },
+      "response_headers_ms": 380.04499999806285,
+      "first_event_ms": 380.099700007122,
+      "first_progress_ms": 380.1013000193052,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "2aba2568-b1c1-44cd-a74e-13bb2e039512",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3576,
+        "output_tokens": 911,
+        "total_tokens": 4487
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 18607.173900003545,
+      "index": 64,
+      "case": 0,
+      "request_id": "0f7193f7-cebb-4968-bbd6-741b6ffed99e",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 27763.08439997956,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다. (현재 등록된 식사 기록이 없어 0 kcal로 조회되며, 이는 실제 미섭취를 의미하지 않습니다.)\n\n**1. 최근 식사 및 체중 추세**\n* **식사 기록**: 최근 7일 및 오늘의 확정된 식사 기록이 없어 현재 실제 섭취 패턴을 분석하기 어렵습니다.\n* **체중 추세**: 28~42일 간격의 확정 체중 및 인바디 측정 데이터가 부족하여 현재 감량 속도와 진행 상태를 수치로 평가하기는 어렵습니다.\n\n**2. 목표 진행 및 근손실 위험 검토**\n* 현재 설정된 감량 전략(하루 2,325 kcal, 단백질 약 116g)은 체중 82kg에서 75kg으로 안전하게 감량하도록 설계되어 있습니다.\n* 실제 섭취 기록이 누락되어 심한 절식이 지속되거나 단백질 섭취가 권장량에 못 미칠 경우 근손실 위험이 높아질 수 있습니다. \n* 정확한 체중 추세 평가와 근손실 예방을 위해 매 끼니 식사 기록과 주기적인 체중 측정을 권장합니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 24.39992
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 70.899,
+        "public_stats": 295.965
+      },
+      "response_headers_ms": 283.96729996893555,
+      "first_event_ms": 284.02570000616834,
+      "first_progress_ms": 284.0269000153057,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "89cca10a-4730-4fd7-b88f-b9b96dc8690f",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4385,
+        "output_tokens": 1949,
+        "total_tokens": 6334
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 28274.027000006754,
+      "index": 63,
+      "case": 3,
+      "request_id": "9d4dcef0-d1a8-414c-be78-477f08b06523",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 19504.14739997359,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 나물이나 쌈채소, 두부·생선·수육 등 담백한 단백질 위주로 접시를 먼저 채우고 밥 양을 평소 수준으로 조절하시면 균형 잡힌 식사가 가능합니다. 양념이 강한 고기나 튀김류, 떡·면 같은 정제 탄수화물 위주의 메뉴만 적정량 덜어 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 16.588269
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 70.542,
+        "public_stats": 288.734
+      },
+      "response_headers_ms": 298.06850000750273,
+      "first_event_ms": 298.12089999904856,
+      "first_progress_ms": 298.1222000089474,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "4414a9eb-5318-40c8-b167-fdd85995f9a1",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3680,
+        "output_tokens": 1275,
+        "total_tokens": 4955
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 20008.911699987948,
+      "index": 66,
+      "case": 2,
+      "request_id": "577337e8-e71d-4ce1-9c5b-c37280939be6",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 23810.60649995925,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 5,
+        "elapsed_seconds": 20.615104000000002
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.254,
+        "public_stats": 295.192
+      },
+      "response_headers_ms": 275.07460000924766,
+      "first_event_ms": 275.1196000026539,
+      "first_progress_ms": 275.1204000087455,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "3dd12ef7-c292-492a-91e7-e2fd73b778af",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 5028,
+        "output_tokens": 1199,
+        "total_tokens": 6227
+      },
+      "provider_constructions": 1,
+      "total_ms": 24309.446199971717,
+      "index": 65,
+      "case": 1,
+      "request_id": "6bece663-dcea-4fc0-9445-bc96da222214",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 18225.066200015135,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal\n\n점심으로는 복합 탄수화물과 양질의 단백질, 식이섬유가 균형을 이루는 한식 백반(밥 1공기, 생선구이나 기름기 적은 육류 반찬, 나물류)을 추천합니다. 식사 시 채소와 단백질 위주로 먼저 섭취하시면 포만감을 오래 유지하면서 오후 활동에 필요한 에너지를 안정적으로 공급받으실 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 15.031012
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.311,
+        "public_stats": 334.82
+      },
+      "response_headers_ms": 879.3936999863945,
+      "first_event_ms": 879.418500000611,
+      "first_progress_ms": 879.4192000059411,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "3e281f4a-da9e-4766-905b-68aba51e782a",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3561,
+        "output_tokens": 1109,
+        "total_tokens": 4670
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 18777.50929998001,
+      "index": 68,
+      "case": 0,
+      "request_id": "260f4fb7-036f-470a-b38e-b3347eee25bc",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 25234.766000008676,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다. (현재 등록된 오늘 식사 기록이 없으며, 미기록이 미섭취를 의미하지는 않습니다.)\n\n**1. 최근 식사 및 체중 추세**\n- 최근 7일간의 식사 기록과 인바디/체중 측정 이력이 충분하지 않아 장기적인 체중 변화 추세를 정량적으로 판정하기에는 데이터가 부족한 상태입니다.\n\n**2. 목표 진행 및 근손실 위험 검토**\n- **목표 칼로리 및 단백질:** 현재 82kg에서 75kg 감량을 위한 일일 목표 칼로리는 2,325 kcal이며, 권장 단백질은 약 116g입니다.\n- **근손실 예방 안내:** 급격한 절식은 체지방과 함께 제지방(근육량)의 손실을 유발하기 쉽습니다. 근손실을 방지하기 위해서는 하루 권장 단백질(약 116g)을 끼니마다 나누어 균형 있게 섭취하고, 적절한 근력 운동을 병행하는 것이 좋습니다.\n\n식사와 체중을 꾸준히 기록해 주시면 축적된 데이터를 바탕으로 보다 정밀한 진행 평가와 피드백을 제공해 드릴 수 있습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 22.353878
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.402,
+        "public_stats": 244.112
+      },
+      "response_headers_ms": 389.00220004143193,
+      "first_event_ms": 389.0444000135176,
+      "first_progress_ms": 389.0454000211321,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "9843cfd4-6269-4020-a20a-fefad0fbf6f9",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4343,
+        "output_tokens": 1656,
+        "total_tokens": 5999
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 25692.84960004734,
+      "index": 67,
+      "case": 3,
+      "request_id": "ce4ada15-24e6-4df6-8ccd-210441702f03",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 19952.546500018798,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서도 나물, 쌈 채소와 함께 두부, 생선, 살코기 등 단백질 위주로 접시를 채우신다면 훌륭한 식단 관리가 가능합니다. 밥은 평소 드시는 한 공기 정량을 유지하시고, 전이나 튀김, 단 양념 요리는 소량만 덜어 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 16.911293999999998
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 70.881,
+        "public_stats": 299.228
+      },
+      "response_headers_ms": 307.3735000216402,
+      "first_event_ms": 307.4176000081934,
+      "first_progress_ms": 307.4192000203766,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "c8ded476-439d-455e-85d8-0b2695656114",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3684,
+        "output_tokens": 1363,
+        "total_tokens": 5047
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 20474.204800033476,
+      "index": 70,
+      "case": 2,
+      "request_id": "237e0e0a-3afb-48a3-9b28-ca11bba8647f",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 25595.353699987754,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 5,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 4,
+        "elapsed_seconds": 22.869189
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.0,
+        "public_stats": 283.004
+      },
+      "response_headers_ms": 437.2966999653727,
+      "first_event_ms": 446.35919999564067,
+      "first_progress_ms": 446.3611000101082,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "eef06c7a-7b81-4a8f-b110-901ea2a91a5b",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 4977,
+        "output_tokens": 1555,
+        "total_tokens": 6532
+      },
+      "provider_constructions": 1,
+      "total_ms": 26094.473899982404,
+      "index": 69,
+      "case": 1,
+      "request_id": "69efa2ae-326f-4009-86df-8d0b8d646954",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 21471.912799985148,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal.\n\n점심 식사로는 지속적인 포만감과 에너지 공급을 돕는 잡곡밥에 생선구이나 닭가슴살, 두부 등 담백한 단백질 반찬과 다양한 채소 나물류를 곁들인 균형 잡힌 백반 식단을 추천합니다. 튀김류나 당류가 많은 가공식품 대신 식이섬유와 양질의 단백질 위주로 구성하시면 오후 시간대 활력을 유지하고 체중을 관리하는 데 효과적입니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 18.317118
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.033,
+        "public_stats": 314.76
+      },
+      "response_headers_ms": 301.104000012856,
+      "first_event_ms": 301.1574000120163,
+      "first_progress_ms": 301.15870002191514,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "e251eb6b-ffc1-403f-902e-144e30e5ddbc",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3580,
+        "output_tokens": 1264,
+        "total_tokens": 4844
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 22004.76650003111,
+      "index": 72,
+      "case": 0,
+      "request_id": "7aaed22b-2ced-4df8-b72c-7f985ae55d1e",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 27924.297099991236,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다. (현재 확정 기록 기준이며, 미기록이 실제 섭취량이 0임을 의미하지는 않습니다.)\n\n**1. 최근 식사 및 체중 추세**\n- 현재 등록된 최근 식사 기록과 체중 측정 이력이 없어 장기적인 체중 변화 추세를 평가하기에는 데이터가 부족한 상태입니다. 추세 평가를 위해서는 최소 4주(28일) 이상의 정기적인 체중 및 식사 기록이 필요합니다.\n\n**2. 목표 진행 및 근손실 위험 검토**\n- **목표 진행**: 현재 체중 82kg에서 75kg 감량을 목표로 하루 2325 kcal 기준이 설정되어 있습니다. \n- **근손실 위험**: 체중 감량 중 급격한 절식이나 단백질 부족은 근손실을 유발할 수 있습니다. 현재 설정된 하루 단백질 목표량(약 116g, 체중당 약 1.4g)을 매끼 균형 있게 섭취하고, 식사를 거르지 않도록 유의해 주세요.\n\n식사와 체중을 꾸준히 기록해 주시면 보다 정밀한 진행 상황과 맞춤 관리를 도와드릴 수 있습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 24.625721
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 714.994,
+        "public_stats": 305.959
+      },
+      "response_headers_ms": 307.20939999446273,
+      "first_event_ms": 307.2517999680713,
+      "first_progress_ms": 307.25359998177737,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "cad38318-d2b5-41de-a1c1-445e2e9b45ed",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4319,
+        "output_tokens": 1690,
+        "total_tokens": 6009
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 29259.87469998654,
+      "index": 71,
+      "case": 3,
+      "request_id": "dbd1264c-61fd-4770-b6f3-013d7b9c0975",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 18075.194699980784,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 한 공기 분량을 넘지 않도록 담고, 나물과 샐러드 등 채소류와 기름기가 적은 단백질(수육, 생선구이, 두부 등)을 우선으로 접시를 채워보세요. 튀김이나 전, 양념이 진한 고기류는 맛보는 정도로 소량씩만 덜어 드시면 하루 기준 내에서 균형 잡힌 식사를 하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 14.036767000000001
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.057,
+        "public_stats": 268.309
+      },
+      "response_headers_ms": 275.370399991516,
+      "first_event_ms": 275.4133999696933,
+      "first_progress_ms": 275.4142999765463,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "f1e41d0c-9251-42b9-aaf0-ede210fd59b2",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3696,
+        "output_tokens": 1067,
+        "total_tokens": 4763
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 18556.952899962198,
+      "index": 74,
+      "case": 2,
+      "request_id": "51bc9a7e-1866-4e11-bcab-95c9628253b4",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 23707.091599993873,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 5,
+        "elapsed_seconds": 19.837788
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 91.273,
+        "public_stats": 1602.446
+      },
+      "response_headers_ms": 497.21890001092106,
+      "first_event_ms": 497.27450002683327,
+      "first_progress_ms": 497.27579997852445,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "4e3767d1-db5c-4deb-ac15-0596c0e02d7d",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 5092,
+        "output_tokens": 1266,
+        "total_tokens": 6358
+      },
+      "provider_constructions": 1,
+      "total_ms": 25961.750300019048,
+      "index": 73,
+      "case": 1,
+      "request_id": "4ddb7f5e-5946-4ab2-b08d-6074b8d347ce",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 17138.84580001468,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심으로는 포만감을 오래 유지할 수 있도록 잡곡밥과 함께 생선구이, 닭가슴살, 두부 등 양질의 단백질과 신선한 채소 반찬을 곁들인 한식 백반을 추천합니다. 외식을 하신다면 탄수화물, 단백질, 채소가 균형 있게 구성된 덮밥류나 든든한 샐러드 볼을 선택해 보세요.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 14.604136
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.21,
+        "public_stats": 251.42
+      },
+      "response_headers_ms": 238.85230004088953,
+      "first_event_ms": 238.88990003615618,
+      "first_progress_ms": 238.89070004224777,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "c572bc83-9b05-4bcd-bbee-5dbc65fad87e",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3584,
+        "output_tokens": 1023,
+        "total_tokens": 4607
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 17604.16799999075,
+      "index": 76,
+      "case": 0,
+      "request_id": "57786bb9-a393-4878-826a-c49b0765eb0f",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 26545.630600012373,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다. (기록되지 않은 식사는 섭취하지 않았음을 의미하지 않습니다.)\n\n현재 최근 식사 기록과 인바디/체중 측정 이력이 등록되어 있지 않아, 체중 감량 진행 속도와 체중 추세를 정밀하게 평가하기에는 데이터가 부족한 상태입니다. \n\n근손실 위험을 방지하고 안전하게 목표(82kg → 75kg)를 달성하려면, 하루 권장 열량(2325 kcal)을 과도하게 밑도는 극단적인 절식을 피하고 현재 목표에 설정된 단백질(약 116g, 체중 kg당 약 1.4g 수준)을 끼니마다 나누어 챙겨 드시는 것이 좋습니다. 정확한 모니터링을 위해 식사와 체중을 꾸준히 기록해 주시기 바랍니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 22.339209000000004
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 75.934,
+        "public_stats": 302.976
+      },
+      "response_headers_ms": 463.5842000134289,
+      "first_event_ms": 463.64750002976507,
+      "first_progress_ms": 463.6492000427097,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "87c284db-7d93-402f-bf45-f3e2839146e0",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4360,
+        "output_tokens": 1401,
+        "total_tokens": 5761
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "external_failures": [
+        {
+          "operation": "profile_intake_read",
+          "error_type": "ReadError",
+          "retry": true
+        }
+      ],
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 27069.719700026326,
+      "index": 75,
+      "case": 3,
+      "request_id": "56d36af4-16fb-4ed4-87b0-932fca1b0e30",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 22824.118899996392,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 5,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 5,
+        "elapsed_seconds": 20.138567
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 143.576,
+        "public_stats": 373.224
+      },
+      "response_headers_ms": 279.35029997024685,
+      "first_event_ms": 279.3906999868341,
+      "first_progress_ms": 279.3921999982558,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "d50be3c4-441f-4993-a339-8f82739f250f",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 4959,
+        "output_tokens": 1177,
+        "total_tokens": 6136
+      },
+      "provider_constructions": 1,
+      "total_ms": 23547.833599965088,
+      "index": 77,
+      "case": 1,
+      "request_id": "3581e8b9-5488-4bc9-a887-4ca2315cde6a",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 18048.257899994496,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식으로 식사하셔도 괜찮습니다. 밥은 평소 한 공기 분량 정도로 담고, 다양한 나물과 채소류를 접시의 절반 정도 채운 뒤 두부나 살코기, 생선 등 단백질 반찬을 곁들이시면 영양 균형을 잘 맞출 수 있습니다. 튀김이나 당분이 많은 조림 반찬, 식후 단 음료 및 디저트만 적당히 조절해 보세요.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 15.158379
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 72.06,
+        "public_stats": 352.282
+      },
+      "response_headers_ms": 260.9188000205904,
+      "first_event_ms": 260.97300002584234,
+      "first_progress_ms": 260.97420003497973,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "a2c6d47b-013a-45bc-a9e8-73c40762a76a",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3674,
+        "output_tokens": 1106,
+        "total_tokens": 4780
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 18617.59839998558,
+      "index": 78,
+      "case": 2,
+      "request_id": "63381e0b-d8a4-4bf4-b53e-853df64a075a",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 17705.583100032527,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심으로는 복합 탄수화물과 양질의 단백질, 식이섬유가 균형을 이루는 한식 백반이나 나물 비빔밥, 또는 단백질 포케 등을 추천합니다. 밥 한 공기 분량에 닭가슴살·생선구이·두부 등 단백질 주찬과 채소를 골고루 곁들여 약 700~800 kcal 내외로 든든히 드시면 오후 에너지를 안정적으로 채우실 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 15.098147999999998
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.588,
+        "public_stats": 346.376
+      },
+      "response_headers_ms": 334.34320002561435,
+      "first_event_ms": 334.4133000355214,
+      "first_progress_ms": 334.4149000477046,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "c4559d86-88a8-4156-9e12-8369e1ab55cd",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3578,
+        "output_tokens": 1065,
+        "total_tokens": 4643
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 18256.753900030162,
+      "index": 80,
+      "case": 0,
+      "request_id": "4f7e7cbc-dce9-4f9e-b622-0008f4193fa3",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 26242.446399992332,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n현재 오늘 및 최근 7일간 등록된 식사 기록과 체중 측정 이력이 없어, 목표 진행 상황과 실제 섭취 추세를 평가하기 위한 데이터가 부족한 상태입니다(미기록은 실제 섭취가 없음을 의미하지 않습니다). \n\n근손실 위험을 줄이면서 안전하게 감량(현재 82kg → 목표 75kg)하려면 설정된 기준 칼로리와 단백질(하루 116.25g)을 규칙적으로 섭취하는 것이 중요합니다. 정확한 추세 분석과 근손실 예방 검토를 위해 식사를 꾸준히 기록해 주시고 정기적으로 체중을 측정해 주시기 바랍니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 23.058759
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 70.844,
+        "public_stats": 291.979
+      },
+      "response_headers_ms": 275.2706999890506,
+      "first_event_ms": 275.3135999664664,
+      "first_progress_ms": 275.3145999740809,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "a1f40a07-b81a-4543-99d5-e0b0ae1c43d1",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4433,
+        "output_tokens": 1740,
+        "total_tokens": 6173
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 27583.274099975824,
+      "index": 79,
+      "case": 3,
+      "request_id": "7f197ed7-274e-46d2-a81e-d23c02f9a5bf",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 21320.24149998324,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 충분히 괜찮습니다. 밥은 평소 드시는 한 공기 분량을 넘지 않도록 담고, 나물이나 쌈채소 같은 채소류와 살코기 위주의 단백질 반찬을 중심으로 식판을 구성해 보세요. 기름에 볶거나 튀긴 음식은 소량만 덜고, 국물 요리는 건더기 위주로 드시면 열량과 나트륨 부담을 줄일 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 17.792191
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 73.799,
+        "public_stats": 291.381
+      },
+      "response_headers_ms": 460.1694999728352,
+      "first_event_ms": 460.21859999746084,
+      "first_progress_ms": 460.2197999483906,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "64723744-fd15-41f6-b19f-8df7239a1c0f",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3686,
+        "output_tokens": 1388,
+        "total_tokens": 5074
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 21831.870599999093,
+      "index": 82,
+      "case": 2,
+      "request_id": "eb5bff72-091e-4c5b-b1ac-1321bc27e7c3",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 28746.058400021866,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 4,
+        "elapsed_seconds": 25.988180999999997
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 72.447,
+        "public_stats": 296.514
+      },
+      "response_headers_ms": 441.70910003595054,
+      "first_event_ms": 442.8019000333734,
+      "first_progress_ms": 442.8036999888718,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "a61c6ac4-8e99-445b-bed6-8dd032cb8cdd",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 5105,
+        "output_tokens": 1737,
+        "total_tokens": 6842
+      },
+      "provider_constructions": 1,
+      "total_ms": 29276.51260001585,
+      "index": 81,
+      "case": 1,
+      "request_id": "c34f9c57-bfb8-49b6-9cc5-ff194d293f2e",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 18427.402299945243,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심으로는 잡곡밥에 생선구이나 두부구이 등 양질의 단백질, 그리고 신선한 나물이나 채소를 곁들인 균형 잡힌 백반 식사를 추천합니다. 식사 시 채소와 단백질을 먼저 천천히 드시고 국물은 건더기 위주로 섭취하시면 안정적인 포만감을 오래 유지할 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 15.910967
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.251,
+        "public_stats": 302.046
+      },
+      "response_headers_ms": 254.4105999986641,
+      "first_event_ms": 254.45249996846542,
+      "first_progress_ms": 254.45339997531846,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "106ed0c8-7484-460a-807e-499f120310cc",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3586,
+        "output_tokens": 1206,
+        "total_tokens": 4792
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 18945.04069996765,
+      "index": 84,
+      "case": 0,
+      "request_id": "95cb015d-934c-422f-b182-6522f6b76439",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 25284.84659997048,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n현재 등록된 최근 식사 기록과 체중 측정 이력이 없어 장기 추세와 진행률을 정밀하게 평가하기에는 데이터가 부족합니다(미기록은 실제 결식을 의미하지 않습니다). 감량 목표(82kg → 75kg) 중 근손실 위험을 줄이려면 설정된 하루 단백질 목표량(약 116g)을 꾸준히 섭취하시면서 식사와 체중을 지속해서 기록해 추세를 점검하는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 21.014715
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.378,
+        "public_stats": 283.663
+      },
+      "response_headers_ms": 235.9384999726899,
+      "first_event_ms": 235.99129996728152,
+      "first_progress_ms": 235.992299974896,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "b99ae56a-4f62-4421-80bd-fd4d6f44538c",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4356,
+        "output_tokens": 1676,
+        "total_tokens": 6032
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 25785.105300019495,
+      "index": 83,
+      "case": 3,
+      "request_id": "de1badd3-1fe2-46ab-846b-bb8ea9748f95",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 23927.905799995642,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 5,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 5,
+        "elapsed_seconds": 20.355121
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 142.19,
+        "public_stats": 302.245
+      },
+      "response_headers_ms": 568.7187999719754,
+      "first_event_ms": 568.7651999760419,
+      "first_progress_ms": 568.7664999859408,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "3ce500db-0476-49f3-a57c-a420b8c76764",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 4985,
+        "output_tokens": 1396,
+        "total_tokens": 6381
+      },
+      "provider_constructions": 1,
+      "total_ms": 25387.296599976253,
+      "index": 85,
+      "case": 1,
+      "request_id": "7fdce101-2be3-482b-aaef-28bfdce28a69",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 18855.394700018223,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다. 한식뷔페에서 일반식을 드셔도 충분히 괜찮습니다. 밥은 평소처럼 한 공기 분량으로 담고, 나물류 등 채소 반찬과 기름기가 적은 단백질(수육, 생선구이, 두부 등) 위주로 접시를 구성해 보세요. 튀김이나 양념이 강한 메뉴는 맛을 보는 정도로 가볍게 곁들이시면 부담 없이 식사하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 15.397972
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.369,
+        "public_stats": 300.609
+      },
+      "response_headers_ms": 327.8402000432834,
+      "first_event_ms": 327.87780003855005,
+      "first_progress_ms": 327.8785000438802,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "becae0ff-7d9e-4a45-b830-d76f1048f57c",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3687,
+        "output_tokens": 1362,
+        "total_tokens": 5049
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 19370.42890000157,
+      "index": 86,
+      "case": 2,
+      "request_id": "bfcac9b9-3a62-4674-bb04-f76ed23afacc",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 18178.00209997222,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n현재 기록된 섭취량이 없으므로, 점심에는 밥 한 공기(200g) 정도의 복합 탄수화물에 생선구이나 두부구이 등 담백한 단백질, 신선한 채소 반찬을 곁들인 균형 잡힌 식사를 추천합니다. 식사 후 실제로 드신 메뉴와 양을 기록해 주시면 남은 하루 식단을 더욱 알맞게 조율해 드릴 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 15.152694
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.59,
+        "public_stats": 363.83
+      },
+      "response_headers_ms": 248.83220001356676,
+      "first_event_ms": 248.87289997423068,
+      "first_progress_ms": 248.87439998565242,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "3720a1d7-5b23-439b-a8ab-38bc369de24f",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3570,
+        "output_tokens": 1166,
+        "total_tokens": 4736
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 18755.48270001309,
+      "index": 88,
+      "case": 0,
+      "request_id": "398a246a-19ea-4a60-ba20-92b486820eb7",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 25988.718800013885,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal\n\n현재 최근 식사 기록과 인바디/체중 측정 이력이 등록되어 있지 않아 체중 추세와 근손실 위험을 정밀하게 평가하기에는 데이터가 부족합니다(미기록은 실제 섭취가 없었다는 의미는 아닙니다). 목표 감량 시 근손실을 예방하려면 설정된 하루 단백질 목표(약 116g)를 매 끼니 고르게 섭취하시고, 정기적인 식사 및 체중 기록을 남겨 추세를 점검해 보시길 권장합니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 21.727759
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 96.684,
+        "public_stats": 276.973
+      },
+      "response_headers_ms": 304.4804999954067,
+      "first_event_ms": 304.523800034076,
+      "first_progress_ms": 304.5247999834828,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "bfbd344d-7739-4517-9f39-03345b1d997d",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4317,
+        "output_tokens": 1472,
+        "total_tokens": 5789
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 26505.28209999902,
+      "index": 87,
+      "case": 3,
+      "request_id": "23a4e7cc-b460-4c96-b299-68b17302f243",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 20202.641299983952,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다. 한식뷔페에서도 밥과 채소 반찬, 기름기가 적은 단백질 위주로 한 접시에 적정량만 덜어 드신다면 일반식으로 식사하셔도 괜찮습니다. 튀김이나 전, 달콤한 양념류는 소량만 담고 국물은 건더기 위주로 드시면서 과식을 조절해 보세요.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 16.904191
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.19,
+        "public_stats": 541.814
+      },
+      "response_headers_ms": 280.1196000073105,
+      "first_event_ms": 280.17119999276474,
+      "first_progress_ms": 280.1725000026636,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "47bdc126-8276-4e0e-b86a-ce4cb10def29",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3692,
+        "output_tokens": 1484,
+        "total_tokens": 5176
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 20958.16569996532,
+      "index": 90,
+      "case": 2,
+      "request_id": "d4d2ca77-23aa-441d-98b9-a88340897f7c",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 25549.247600021772,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 5,
+        "elapsed_seconds": 22.261387
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.002,
+        "public_stats": 536.188
+      },
+      "response_headers_ms": 263.8540000189096,
+      "first_event_ms": 263.89519998338073,
+      "first_progress_ms": 263.8960999902338,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "64265029-0320-4356-af90-632ce15d5cea",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 5183,
+        "output_tokens": 1645,
+        "total_tokens": 6828
+      },
+      "provider_constructions": 1,
+      "total_ms": 26295.737700012978,
+      "index": 89,
+      "case": 1,
+      "request_id": "d142e451-9eb3-4627-a029-540636995ffe",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 18134.51389997499,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심 식사로는 잡곡밥에 기름기 적은 단백질(닭가슴살, 두부, 생선구이 등)과 풍성한 나물·채소를 곁들인 균형 잡힌 한식 식단을 추천합니다. 식이섬유와 양질의 단백질을 충분히 섭취하시면 포만감을 오래 유지하면서 오후 활동에 필요한 에너지를 안정적으로 공급할 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 15.527122
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.41,
+        "public_stats": 757.103
+      },
+      "response_headers_ms": 237.47130000265315,
+      "first_event_ms": 237.51820001052693,
+      "first_progress_ms": 237.51920001814142,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "a3d42883-b419-4f5c-a8b9-6acbd5448739",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3570,
+        "output_tokens": 1091,
+        "total_tokens": 4661
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 19107.007800019346,
+      "index": 92,
+      "case": 0,
+      "request_id": "a030c9e8-978e-4ef2-8464-ee8133406da9",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 31054.55170001369,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n현재 등록된 최근 식사 및 체중 측정 이력이 없어 목표 진행 속도와 체중 추세를 평가하기에는 데이터가 부족합니다(기록되지 않은 식사가 실제 섭취량이 없음을 의미하지는 않습니다). 현재 계획된 단백질 목표(116.25g)를 꾸준히 채우지 못하거나 과도한 열량 결손이 장기간 지속되면 근손실 위험이 높아질 수 있습니다. 근손실을 예방하면서 건강하게 감량하기 위해 매끼 단백질을 챙겨 드시고 식사와 체중을 지속적으로 기록해 주시기 바랍니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 4,
+        "elapsed_seconds": 27.414626
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 70.956,
+        "public_stats": 514.422
+      },
+      "response_headers_ms": 270.3250999911688,
+      "first_event_ms": 270.37849999032915,
+      "first_progress_ms": 270.38010000251234,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "cf13fb53-f4e8-4fbd-90d2-f3e211472c31",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 6393,
+        "output_tokens": 1984,
+        "total_tokens": 8377
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 32322.128299972974,
+      "index": 91,
+      "case": 3,
+      "request_id": "a7cbb20e-24ed-4dee-8645-68d619086049",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 19945.171399973333,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 과식을 예방하기 위해 나물과 쌈채소 등 채소류와 담백한 단백질 반찬 위주로 먼저 접시를 채우고, 밥이나 전·튀김류는 평소 1인분 분량만큼만 덜어 드시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 17.098881000000002
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.407,
+        "public_stats": 328.293
+      },
+      "response_headers_ms": 275.3199999569915,
+      "first_event_ms": 275.35619999980554,
+      "first_progress_ms": 275.35700000589713,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "b28f67e5-1258-43d4-ba61-418f99a043cb",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3691,
+        "output_tokens": 1171,
+        "total_tokens": 4862
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 20485.608899965882,
+      "index": 94,
+      "case": 2,
+      "request_id": "492ee8dd-bfec-46f8-a2b2-3379d91a0959",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 29086.687800008804,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 4,
+        "elapsed_seconds": 24.887058000000003
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 70.987,
+        "public_stats": 479.008
+      },
+      "response_headers_ms": 920.4776000115089,
+      "first_event_ms": 921.1440000217408,
+      "first_progress_ms": 921.1455000331625,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "7caa6a15-4fa3-4abe-970c-00d4ec4fbbc7",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 5103,
+        "output_tokens": 1734,
+        "total_tokens": 6837
+      },
+      "provider_constructions": 1,
+      "total_ms": 29771.932500007097,
+      "index": 93,
+      "case": 1,
+      "request_id": "295a9bcc-2011-4d86-929b-5d9287fb8074",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 25225.10500001954,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n현재 최근 식사 기록과 체중 측정 이력이 없어 장기 추세 및 목표 달성률을 정량적으로 평가하기에는 데이터가 부족합니다(식사 미기록이 0 kcal 섭취를 의미하는 것은 아닙니다). \n\n현재 설정된 감량 목표(82kg → 75kg) 중 근손실 위험을 줄이려면 목표 기준에 맞춘 단백질(하루 약 116g)을 충분히 섭취하시고, 식사와 체중을 꾸준히 기록해 추세를 점검해 보시는 것을 권장합니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 21.759351000000002
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.213,
+        "public_stats": 418.215
+      },
+      "response_headers_ms": 308.3605000283569,
+      "first_event_ms": 308.4070000331849,
+      "first_progress_ms": 308.40790004003793,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "414e5d6e-1a04-4238-ba29-e53736ed675f",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4395,
+        "output_tokens": 1695,
+        "total_tokens": 6090
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 25860.23180000484,
+      "index": 95,
+      "case": 3,
+      "request_id": "ab794891-e71a-489c-9c43-24bf67f59d25",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 16460.86120000109,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n점심에는 밥 한 공기 분량의 복합 탄수화물에 닭가슴살, 달걀, 생선 등 손바닥 크기 정도의 단백질 반찬을 곁들이시는 것을 추천합니다. 여기에 샐러드나 나물 등 식이섬유가 풍부한 채소를 함께 드시면 포만감을 오래 유지하면서 오후 활동에 필요한 에너지를 안정적으로 보충할 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 12.873833999999999
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 70.969,
+        "public_stats": 263.277
+      },
+      "response_headers_ms": 527.650999953039,
+      "first_event_ms": 527.7285999618471,
+      "first_progress_ms": 527.7295999694616,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "a1e7fefc-46ea-42b5-8c34-7f0da09fb88c",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3561,
+        "output_tokens": 839,
+        "total_tokens": 4400
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 16926.109399995767,
+      "index": 96,
+      "case": 0,
+      "request_id": "45f52090-f899-461d-b5b8-8d8a24aa017f",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 17232.922099996358,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 식판에 나물과 쌈 채소를 먼저 넉넉히 담고, 수육·생선·두부 같은 기름기가 적은 단백질 반찬과 밥 반 공기 위주로 구성해 보세요. 양념이 강한 볶음류나 튀김·전류는 적당량만 덜어 천천히 드시면 칼로리 부담 없이 균형 잡힌 식사를 하실 수 있습니다.",
+      "usage": {
+        "tool_calls": 3,
+        "delegations": {
+          "meal": 1
+        },
+        "model_calls": 2,
+        "elapsed_seconds": 14.650459999999999
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.003,
+        "public_stats": 319.905
+      },
+      "response_headers_ms": 292.65449999365956,
+      "first_event_ms": 292.69759997259825,
+      "first_progress_ms": 292.6984999794513,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "e5071828-e379-4b11-98a3-fbfac22aa136",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 3687,
+        "output_tokens": 1132,
+        "total_tokens": 4819
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 17756.285799958277,
+      "index": 98,
+      "case": 2,
+      "request_id": "78f636ea-af81-4ef2-a08f-9b6cc50a31d4",
+      "fresh_numeric_match": true
+    },
+    {
+      "status": "blocked",
+      "first_answer_ms": 30256.275399995502,
+      "answer": "공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.",
+      "usage": {
+        "tool_calls": 7,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 6,
+        "elapsed_seconds": 27.662962
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 71.41,
+        "public_stats": 236.657
+      },
+      "response_headers_ms": 281.49359999224544,
+      "first_event_ms": 281.5466999891214,
+      "first_progress_ms": 281.5476999967359,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "caac2f8e-0d9d-4513-ae48-7b08b2a3fb03",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "read_only_goal_direct",
+      "model_tokens": {
+        "input_tokens": 9570,
+        "output_tokens": 1956,
+        "total_tokens": 11526
+      },
+      "provider_constructions": 1,
+      "total_ms": 30708.83880002657,
+      "index": 97,
+      "case": 1,
+      "request_id": "8a79c468-8d07-4c4b-9d54-bf1d11935861",
+      "fresh_numeric_match": false
+    },
+    {
+      "status": "completed",
+      "first_answer_ms": 24314.146500022616,
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2325 kcal입니다.\n\n현재 등록된 최근 식사 기록과 인바디 체중 측정 이력이 없어 목표 달성 진행도 및 근손실 위험을 직접 평가하기에는 데이터가 부족합니다(미기록 식사가 있는 경우 섭취량 0을 의미하지는 않습니다). \n\n근손실 없이 안전하게 감량을 이어가기 위해 매일의 식단을 꾸준히 기록해 주시고, 4~6주 주기로 체중을 측정하여 기록해 주시면 추세를 검토해 맞춤 안내를 드리겠습니다.",
+      "usage": {
+        "tool_calls": 6,
+        "delegations": {
+          "goal": 1
+        },
+        "model_calls": 3,
+        "elapsed_seconds": 21.701453
+      },
+      "stage_timings_ms": {
+        "response_snapshot": 78.017,
+        "public_stats": 289.188
+      },
+      "response_headers_ms": 285.9148000134155,
+      "first_event_ms": 285.96140001900494,
+      "first_progress_ms": 285.96260002814233,
+      "build": {
+        "commit": "368ee2e5b2cec4993759b5df44897f8bfca0076b",
+        "protocol": 2,
+        "delivery": "verified_buffered"
+      },
+      "trace_id": "53f3ec53-5e60-4b16-9ac0-e85b98b38548",
+      "public_stats": {
+        "today_calories": 0,
+        "target_calories": 2325
+      },
+      "route": "supervisor",
+      "model_tokens": {
+        "input_tokens": 4428,
+        "output_tokens": 1751,
+        "total_tokens": 6179
+      },
+      "reasoning": "default",
+      "model_delivery": "invoke",
+      "answer_style": "default",
+      "model_name": "gemini-3.8-flash",
+      "tool_policy": "default",
+      "client_reuse": false,
+      "provider_constructions": 2,
+      "total_ms": 24814.40819997806,
+      "index": 99,
+      "case": 3,
+      "request_id": "86290008-4cad-4c21-af73-8bf775c8d36e",
+      "fresh_numeric_match": true
+    }
+  ],
+  "domain_unchanged": true
+}
