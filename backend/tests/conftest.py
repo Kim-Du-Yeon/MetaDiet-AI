@@ -102,6 +102,13 @@ def fake_sb(monkeypatch):
 
     fake = FakeSupabase()
     monkeypatch.setattr(main_module, "sb", fake)
+    # Keep the real statistics parser/retry boundary while mocking its HTTP I/O.
+    from app.db import public_stats
+    real_client = httpx.AsyncClient
+    def stats_client(**kwargs):
+        return real_client(transport=httpx.MockTransport(lambda request: httpx.Response(
+            200, json=fake.tables.get(request.url.path.rsplit('/', 1)[-1], []))), **kwargs)
+    monkeypatch.setattr(public_stats, '_new_client', stats_client)
     return fake
 
 

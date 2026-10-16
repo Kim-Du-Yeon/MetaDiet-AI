@@ -59,6 +59,7 @@ def capture(token, payload):
                     for key in ('external_failures', 'stage_timings_ms', 'build', 'trace_id'):
                         if key in event: row[key] = event[key]
                 elif event['type']=='completed':
+                    row['public_stats'] = {key: event[key] for key in ('today_calories', 'target_calories') if key in event}
                     row.update(status=event.get('execution_status','completed'),usage=event.get('execution_usage') or {},
                         stage_timings_ms=event.get('stage_timings_ms') or {},build=event.get('build'),
                         trace_id=event.get('trace_id'),route=event.get('route'))

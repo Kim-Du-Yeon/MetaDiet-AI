@@ -486,18 +486,8 @@ async def _completed_payload(graph, config, run_id):
 
 
 async def _public_stats(user_id):
-    if not user_id:
-        return {}
-    def read():
-        meals = sb.table("meal_logs").select("calories").eq("user_id", user_id).eq("log_date", service_today().isoformat()).execute().data
-        strategy = sb.table("diet_strategies").select("daily_calories").eq("user_id", user_id).eq("is_active", True).limit(1).execute().data
-        return {"today_calories": sum(float(m["calories"]) for m in meals), "target_calories": strategy[0]["daily_calories"]} if strategy else {}
-    try:
-        from app.core.external_retry import retry_external
-        return await asyncio.wait_for(retry_external(lambda: asyncio.to_thread(read),
-            operation='public_stats'), timeout=15)
-    except Exception:
-        return {}  # Unavailable is not zero; retain the UI's last known values.
+    from app.db.public_stats import read_public_stats
+    return await read_public_stats(user_id)
 
 
 @app.post("/chat")

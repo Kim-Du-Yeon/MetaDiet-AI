@@ -23,8 +23,10 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument('phase', choices=['before', 'after'])
     p.add_argument('--expected-commit', required=True)
+    p.add_argument('--folder', default='docs/request_startup')
     args = p.parse_args()
-    folder = ROOT / 'docs/request_startup'
+    folder = ROOT / args.folder
+    folder.mkdir(parents=True, exist_ok=True)
     output = folder / f'{args.phase}_frozen100.json'
     assert not output.exists(), 'Do not overwrite evidence'
     load_env(ROOT/'backend/.env')
