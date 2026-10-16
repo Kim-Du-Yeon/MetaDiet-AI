@@ -239,9 +239,9 @@ def _repair_implausible_inbody(user_id: str, inbody_data: dict, measured_date: s
     return inbody_data
 
 
-def _initial_state(req: ChatRequest, user_id: str, run_id: str | None = None) -> dict:
+def _initial_state(req: ChatRequest, user_id: str, run_id: str | None = None, *, thread_id: str | None = None) -> dict:
     return {
-        "thread_id": req.thread_id, "run_id": run_id or str(uuid4()),
+        "thread_id": thread_id if thread_id is not None else req.thread_id, "run_id": run_id or str(uuid4()),
         "requested_action": req.requested_action, "tool_policy": req.tool_policy,
         "pending_proposal": None, "proposal_decision": None, "proposal_result": None,
         "execution_usage": {}, "execution_status": "running", "execution_error": None, "agent_events": [],
@@ -575,8 +575,9 @@ async def chat(req: ChatRequest, current_user: str = Depends(get_current_user)):
                                    "stream_run_id": stream_run_id, 'stream_protocol': req.stream_protocol}}
 
         try:
+            actual_thread = config['configurable']['thread_id'].removeprefix(f'{current_user}_')
             async for chunk in _run_and_stream(
-                    graph, _initial_state(req, current_user, stream_run_id), config, stream_run_id, req.after_seq):
+                    graph, _initial_state(req, current_user, stream_run_id, thread_id=actual_thread), config, stream_run_id, req.after_seq):
                 yield chunk
         except Exception as e:
             print(f"=== [chat] 오류 유형: {type(e).__name__} ===")
@@ -733,6 +734,13 @@ async def restore_session(thread_id: str, current_user: str = Depends(get_curren
         messages = await asyncio.to_thread(read_messages)
     except Exception:
         messages = []
+    if not messages and sv.get('execution_status') == 'completed' and sv.get('response'):
+        # Recover legacy rotated-thread saves from this owner's checkpoint only.
+        # Never load a different thread's history or rerun the model to restore UI.
+        if sv.get('message'):
+            messages.append({'role':'user', 'content':str(sv['message'])[:12000]})
+        messages.append({'role':'assistant', 'content':str(sv['response'])[:12000],
+                         'agent_used':sv.get('agent_used')})
     stats = await _public_stats(current_user)
     active_pending = proposal is not None
     return {
