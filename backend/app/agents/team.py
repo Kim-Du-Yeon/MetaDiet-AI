@@ -690,7 +690,8 @@ TOOL_NAMES = {"read_profile", "read_intake", "read_measurements", "assess_goal_p
 
 
 async def team_node(state, config=None):
-    from app.agents.execution_stream import measure_stage
+    from app.agents.execution_stream import measure_stage, emit_runtime_event
+    await emit_runtime_event('budget_preparing')
     if state.get("requested_action") == "weekly_review":
         from app.agents.weekly_deep import weekly_deep_node
         return await weekly_deep_node(state, config)

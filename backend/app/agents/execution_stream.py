@@ -115,6 +115,10 @@ _TOOL_PHASES = {
 
 
 def progress_for_runtime_event(kind: str, **payload: Any) -> dict[str, Any] | None:
+    if kind == 'budget_preparing':
+        return {'phase': 'budget_preparation', 'label': '실행 한도와 저장 상태를 확인 중입니다.'}
+    if kind == 'model_preparing':
+        return {'phase': 'model_preparation', 'label': '상담 모델과 도구를 준비 중입니다.'}
     if kind == "coaching_context_ready" or (kind == "model_started" and payload.get("context_verified")):
         return {"phase": "coaching_context", "label": "확인한 기록을 바탕으로 답변 준비 중"}
     if kind == "model_started" and payload.get("agent") == "supervisor":

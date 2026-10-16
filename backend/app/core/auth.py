@@ -10,6 +10,7 @@ Authorization 헤더의 Supabase JWT를 직접 검증해서 user_id를 도출한
      이 매핑이 없으면 로그인은 성공해도 모든 데이터 조회가 빈 결과를 반환한다.
 """
 import time
+import logging
 from dataclasses import dataclass
 
 import jwt
@@ -151,10 +152,15 @@ def get_active_auth_id(token: str = Depends(oauth2_scheme)) -> str:
 
 def get_current_user(auth_id: str = Depends(get_current_auth_id)) -> str:
     """auth_id -> users.id 매핑. 프로필(users row)이 있어야 하는 일반 엔드포인트용."""
-    rows = (
-        get_supabase().table("users").select("id")
-        .eq("auth_id", auth_id).limit(1).execute().data
-    )
+    started = time.perf_counter()
+    try:
+        rows = (
+            get_supabase().table("users").select("id")
+            .eq("auth_id", auth_id).limit(1).execute().data
+        )
+    finally:
+        logging.getLogger(__name__).warning('chat_preparation stage=auth_profile elapsed_ms=%.3f',
+            (time.perf_counter() - started) * 1000)
     if not rows:
         raise _UNAUTHORIZED("프로필이 없는 사용자입니다. 먼저 회원가입을 완료하세요.")
     return rows[0]["id"]

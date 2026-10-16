@@ -1,0 +1,32 @@
+{
+  "scope": "synthetic 20ms lock only; not public model latency, quality or fresh-record evidence",
+  "baseline": "ea2964b",
+  "results": {
+    "before": {
+      "attempts": 100,
+      "failures_timeouts": 0,
+      "unchanged_terminal": 100,
+      "first_frame": {
+        "median_ms": 30.39,
+        "p95_ms": 31.333
+      },
+      "completion": {
+        "median_ms": 30.45,
+        "p95_ms": 31.412
+      }
+    },
+    "after": {
+      "attempts": 100,
+      "failures_timeouts": 0,
+      "unchanged_terminal": 100,
+      "first_frame": {
+        "median_ms": 0.038,
+        "p95_ms": 0.102
+      },
+      "completion": {
+        "median_ms": 30.519,
+        "p95_ms": 31.472
+      }
+    }
+  }
+}

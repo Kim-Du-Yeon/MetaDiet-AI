@@ -274,6 +274,7 @@ def _v2(config):
 
 
 async def _invoke_with_progress(graph, graph_input, config: dict, journal: ExecutionEventJournal):
+    invocation_started = time.perf_counter()
     from app.agents.execution_stream import measure_stage
     # Each actual invocation gets a distinct LangSmith root span, including Pod recovery.
     trace_id = uuid4()
@@ -282,6 +283,10 @@ async def _invoke_with_progress(graph, graph_input, config: dict, journal: Execu
                          "metadata": {**config.get("metadata", {}), "trace_id": str(trace_id),
                                       'build_commit': build['commit'], 'delivery': build['delivery']}}
     async def sink(kind: str, payload: dict):
+        if kind == 'model_started' and 'first_model_started_ms' not in journal.diagnostics:
+            elapsed = (time.perf_counter() - invocation_started) * 1000
+            journal.diagnostics['first_model_started_ms'] = round(elapsed, 3)
+            logging.getLogger(__name__).warning('chat_preparation stage=first_model_started elapsed_ms=%.3f', elapsed)
         if kind == 'sdk_provider_ready':
             key = 'provider_cache_hits' if payload['reused'] else 'provider_constructions'
             journal.diagnostics[key] = journal.diagnostics.get(key, 0) + 1
@@ -307,6 +312,8 @@ async def _invoke_with_progress(graph, graph_input, config: dict, journal: Execu
         if kind == 'stage_timing':
             stage = payload['stage']
             journal.timings[stage] = round(journal.timings.get(stage, 0) + payload['elapsed_ms'], 3)
+            if stage.startswith(('sdk_prepare_', 'tool_bind_', 'model_budget_', 'budget_storage')):
+                logging.getLogger(__name__).warning('chat_preparation stage=%s elapsed_ms=%.3f', stage, payload['elapsed_ms'])
             return
         progress = progress_for_runtime_event(kind, **payload)
         if progress:
@@ -507,7 +514,12 @@ async def chat(req: ChatRequest, current_user: str = Depends(get_current_user)):
                     yield _sse(event)
                 return
 
-        snap = await graph.aget_state(config)
+        preparation_started = time.perf_counter()
+        try:
+            snap = await graph.aget_state(config)
+        finally:
+            logging.getLogger(__name__).warning('chat_preparation stage=checkpoint_restore elapsed_ms=%.3f',
+                (time.perf_counter() - preparation_started) * 1000)
         sv_now = _sv(snap)
         if (_v2(config) and (req.stream_reconnect or req.after_seq > 0)
                 and sv_now.get('run_id') != stream_run_id):

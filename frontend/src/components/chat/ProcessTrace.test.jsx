@@ -2,6 +2,17 @@ import { render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ProcessTrace from "./ProcessTrace";
 
+test('shows an immediate honest waiting state before the first server event', () => {
+  const {rerender} = render(<ProcessTrace running steps={[]} />);
+  expect(screen.getByRole('status')).toHaveTextContent('서버 응답을 기다리는 중');
+  expect(screen.queryByText('요청 의도 분석 중')).not.toBeInTheDocument();
+  rerender(<ProcessTrace running steps={[{phase:'checkpoint_restore',label:'저장된 대화 상태를 확인 중입니다.'}]} />);
+  expect(screen.queryByText(/서버 응답을 기다리는 중/)).not.toBeInTheDocument();
+  expect(screen.getByText('저장된 대화 상태를 확인 중입니다.')).toBeInTheDocument();
+  rerender(<ProcessTrace running={false} steps={[]} />);
+  expect(screen.queryByRole('status')).not.toBeInTheDocument();
+});
+
 test("shows only real streamed execution steps and marks the active step", () => {
   render(<ProcessTrace running steps={[
     { phase: "intent", label: "요청 의도 분석 중" },

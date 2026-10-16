@@ -448,7 +448,7 @@ export default function ChatInterface({
               {msg.role === "assistant" && <ProcessTrace steps={msg.progressSteps || (msg.streaming ? progressSteps : [])} running={Boolean(msg.streaming)} />}
               {msg.role === 'assistant' ? <AnswerContent content={msg.content} streaming={msg.streaming} />
                 : <p style={{ margin: 0, whiteSpace: 'pre-wrap', lineHeight: 1.6 }}>{msg.content}</p>}
-              {msg.streaming && <span style={styles.cursor}>▊</span>}
+              {msg.streaming && msg.content && <span style={styles.cursor}>▊</span>}
               {msg.agentUsed && !msg.streaming && <p style={styles.agentLabel}>{AGENT_LABELS[msg.agentUsed] || msg.agentUsed}</p>}
             </div>
           </div>
