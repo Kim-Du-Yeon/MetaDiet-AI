@@ -8,6 +8,7 @@ import MealChoiceCards from './MealChoiceCards';
 import ProcessTrace from "./ProcessTrace";
 import AnswerContent from './AnswerContent';
 import CoachingActions from './CoachingActions';
+import { intakeReceipt } from './intakeReceipt';
 import "./ChatInterface.css";
 
 const USER_ID = "17691249-f22f-4447-a6e4-fca7a8e57cc8";
@@ -204,11 +205,11 @@ export default function ChatInterface({
         await resumeChat(USER_ID, threadId, action === "confirm" ? "확정" : "취소", handleToken, handleDone,
           { proposal_id: approval.id, version: approval.version, action }, handleProgress);
       } else {
-        await decideProposal(approval, action);
+        const resolved = await decideProposal(approval, action);
         setApproval(null);
         setFoodSelection(null); setPendingState(EMPTY_PENDING_STATE); setIsInterrupted(false);
         setMessages(prev => [...prev, { role: "assistant", content: action === "confirm"
-          ? (approval.kind === "intake" ? "섭취 기록을 저장했습니다." : "인바디 측정값을 저장했습니다. 새 목표 전략 검토를 요청할 수 있습니다.")
+          ? (approval.kind === "intake" ? intakeReceipt(resolved?.payload ? resolved : approval) : "인바디 측정값을 저장했습니다. 새 목표 전략 검토를 요청할 수 있습니다.")
           : "제안을 취소했습니다.", streaming: false }]);
         const restored = await getSessionRestore(threadId);
         setBudget({ calories: restored.today_calories, target: restored.target_calories });

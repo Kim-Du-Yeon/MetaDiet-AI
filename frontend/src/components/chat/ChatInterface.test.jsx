@@ -67,6 +67,20 @@ test('restored external meal proposal confirms directly without resuming a finis
   fireEvent.click(await screen.findByRole('button',{name:'이대로 기록'}));
   await waitFor(() => expect(decideProposal).toHaveBeenCalledTimes(1));
   expect(resumeChat).not.toHaveBeenCalled();
+  await screen.findByText('섭취 기록을 저장했습니다.');
+  expect(screen.getByText('합계 300 kcal')).toBeInTheDocument();
+  expect(screen.getByText(/밥 · 200g · 300 kcal/)).toBeInTheDocument();
+});
+
+test('failed confirmation keeps proposal and does not show a saved receipt', async () => {
+  getSessionRestore.mockResolvedValue({messages:[],pending_state:{},proposal_decision_mode:'direct',pending_proposal:{id:'p',version:1,kind:'intake',payload:{
+    log_date:'2026-10-13',meals:[{food_name:'밥',quantity_g:200,calories:300,carbs_g:65,protein_g:5,fat_g:1,source:'csv'}]}}});
+  decideProposal.mockRejectedValueOnce(new Error('저장 실패'));
+  render(<Harness />);
+  fireEvent.click(await screen.findByRole('button',{name:'이대로 기록'}));
+  await screen.findAllByText('저장 실패');
+  expect(screen.queryByText('섭취 기록을 저장했습니다.')).not.toBeInTheDocument();
+  expect(screen.getByRole('button',{name:'이대로 기록'})).toBeEnabled();
 });
 
 test("renders streamed backend phases with the completed answer", async () => {

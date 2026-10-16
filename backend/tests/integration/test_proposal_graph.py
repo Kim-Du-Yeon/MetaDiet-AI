@@ -3,6 +3,25 @@ from langgraph.checkpoint.memory import MemorySaver
 from app.agents.graph import build_graph
 
 
+async def test_intake_approval_summary_uses_resolved_meals(monkeypatch):
+    import app.agents.approval as approval
+    proposal = {'id': 'p1', 'version': 1, 'kind': 'intake'}
+    repo = AsyncMock()
+    repo.resolve.return_value = {**proposal, 'status': 'confirmed', 'payload': {
+        'log_date': '2026-10-16', 'meals': [{'food_name': '제육볶음', 'quantity_g': 300,
+            'calories': 600, 'meal_type': 'breakfast'}]}}
+    monkeypatch.setattr(approval, 'ProposalRepository', lambda: repo)
+    state = {'user_id': 'u1', 'pending_proposal': proposal, 'message': '확정'}
+    result = await approval.approval_node(state)
+    assert '2026-10-16 · 아침' in result['response']
+    assert '제육볶음 · 300g · 600 kcal' in result['response']
+    assert '합계 600 kcal' in result['response']
+    repo.resolve.return_value = {**proposal, 'status': 'cancelled'}
+    cancelled = await approval.approval_node({**state, 'message': '취소'})
+    assert '제육볶음' not in cancelled['response']
+    assert '저장했습니다' not in cancelled['response']
+
+
 async def test_production_graph_pauses_before_approval_and_resumes_without_llm(monkeypatch):
     import app.agents.team as team
     import app.agents.approval as approval
