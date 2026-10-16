@@ -1,0 +1,5669 @@
+{
+  "scope": "synthetic_real_DietTeam_and_Gemini_read_only_catalog_memory_proposals",
+  "started_at_utc": "2026-10-16T02:57:41.226777+00:00",
+  "runtime_commit": "c408bf06e06f3966ad977668883e47307b1e372b",
+  "dataset_sha256": "777d033d04784180e9895472811a8474e791a61c463f0f3e6ecc65c95dfd4f8e",
+  "planned": 100,
+  "concurrency": 2,
+  "model": "gemini-3.8-flash",
+  "requested_action": "record_only",
+  "application_db_access": "blocked",
+  "domain_writes": 0,
+  "proposal_repository": "memory_only",
+  "rows": [
+    {
+      "id": 1,
+      "category": "밥류",
+      "food": "밥",
+      "message": "오늘 점심에 밥 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "멥쌀, 백미, 밥",
+          "food_id": null,
+          "quantity_g": 200,
+          "portion": {
+            "display_name": "밥",
+            "amount": 1,
+            "unit": "공기",
+            "unit_g": 200,
+            "default_unit": "공기",
+            "defaulted": true,
+            "unit_grams": {
+              "공기": 200,
+              "회분": 200,
+              "인분": 200
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.9060000000172295,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "멥쌀, 백미, 밥",
+          "meal_type": "lunch",
+          "quantity_g": 200.0,
+          "calories": 292.0,
+          "protein_g": 5.3,
+          "carbs_g": 63.4,
+          "fat_g": 0.7,
+          "sodium_mg": 0.0,
+          "source": "csv",
+          "food_id": "csv:cef90c9133f4c4d1e4f3d850",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "밥",
+              "amount": 1,
+              "unit": "공기",
+              "unit_g": 200,
+              "default_unit": "공기",
+              "defaulted": true,
+              "unit_grams": {
+                "공기": 200,
+                "회분": 200,
+                "인분": 200
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.927
+    },
+    {
+      "id": 2,
+      "category": "밥류",
+      "food": "현미밥",
+      "message": "오늘 점심에 현미밥 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "멥쌀, 현미, 밥",
+          "food_id": null,
+          "quantity_g": 200,
+          "portion": {
+            "display_name": "현미밥",
+            "amount": 1,
+            "unit": "공기",
+            "unit_g": 200,
+            "default_unit": "공기",
+            "defaulted": true,
+            "unit_grams": {
+              "공기": 200,
+              "회분": 200,
+              "인분": 200
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.3909999999741558,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "멥쌀, 현미, 밥",
+          "meal_type": "lunch",
+          "quantity_g": 200.0,
+          "calories": 332.0,
+          "protein_g": 6.9,
+          "carbs_g": 70.7,
+          "fat_g": 1.9,
+          "sodium_mg": 0.0,
+          "source": "csv",
+          "food_id": "csv:deac1220a778f366eb503483",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "현미밥",
+              "amount": 1,
+              "unit": "공기",
+              "unit_g": 200,
+              "default_unit": "공기",
+              "defaulted": true,
+              "unit_grams": {
+                "공기": 200,
+                "회분": 200,
+                "인분": 200
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.4
+    },
+    {
+      "id": 3,
+      "category": "밥류",
+      "food": "잡곡밥",
+      "message": "오늘 점심에 잡곡밥 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 3.876
+    },
+    {
+      "id": 4,
+      "category": "밥류",
+      "food": "김밥",
+      "message": "오늘 점심에 김밥 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 3.771
+    },
+    {
+      "id": 5,
+      "category": "밥류",
+      "food": "참치김밥",
+      "message": "오늘 점심에 참치김밥 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 3.838
+    },
+    {
+      "id": 6,
+      "category": "밥류",
+      "food": "비빔밥",
+      "message": "오늘 점심에 비빔밥 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 3.908
+    },
+    {
+      "id": 7,
+      "category": "밥류",
+      "food": "돌솥비빔밥",
+      "message": "오늘 점심에 돌솥비빔밥 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 6.406
+    },
+    {
+      "id": 8,
+      "category": "밥류",
+      "food": "김치볶음밥",
+      "message": "오늘 점심에 김치볶음밥 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "볶음밥, 새우 볶음밥",
+          "food_id": null,
+          "quantity_g": 300,
+          "portion": {
+            "display_name": "김치볶음밥",
+            "amount": 1,
+            "unit": "회분",
+            "unit_g": 300,
+            "default_unit": "회분",
+            "defaulted": true,
+            "unit_grams": {
+              "회분": 300,
+              "인분": 300
+            },
+            "basis_note": "볶음밥 음식군 대표값(볶음밥, 새우 볶음밥)으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+            "food_group": "볶음밥",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.2960000000020955,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "볶음밥, 새우 볶음밥",
+          "meal_type": "lunch",
+          "quantity_g": 300.0,
+          "calories": 495.0,
+          "protein_g": 11.5,
+          "carbs_g": 89.9,
+          "fat_g": 10.1,
+          "sodium_mg": 1110.0,
+          "source": "csv",
+          "food_id": "csv:fd6e6715829c58786c275d2b",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "김치볶음밥",
+              "amount": 1,
+              "unit": "회분",
+              "unit_g": 300,
+              "default_unit": "회분",
+              "defaulted": true,
+              "unit_grams": {
+                "회분": 300,
+                "인분": 300
+              },
+              "basis_note": "볶음밥 음식군 대표값(볶음밥, 새우 볶음밥)으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+              "food_group": "볶음밥",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.288
+    },
+    {
+      "id": 9,
+      "category": "밥류",
+      "food": "새우볶음밥",
+      "message": "오늘 점심에 새우볶음밥 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "볶음밥, 새우 볶음밥",
+          "food_id": null,
+          "quantity_g": 300,
+          "portion": {
+            "display_name": "새우볶음밥",
+            "amount": 1,
+            "unit": "회분",
+            "unit_g": 300,
+            "default_unit": "회분",
+            "defaulted": true,
+            "unit_grams": {
+              "회분": 300,
+              "인분": 300
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.28200000000651926,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "볶음밥, 새우 볶음밥",
+          "meal_type": "lunch",
+          "quantity_g": 300.0,
+          "calories": 495.0,
+          "protein_g": 11.5,
+          "carbs_g": 89.9,
+          "fat_g": 10.1,
+          "sodium_mg": 1110.0,
+          "source": "csv",
+          "food_id": "csv:fd6e6715829c58786c275d2b",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "새우볶음밥",
+              "amount": 1,
+              "unit": "회분",
+              "unit_g": 300,
+              "default_unit": "회분",
+              "defaulted": true,
+              "unit_grams": {
+                "회분": 300,
+                "인분": 300
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.29
+    },
+    {
+      "id": 10,
+      "category": "밥류",
+      "food": "오므라이스",
+      "message": "오늘 점심에 오므라이스 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 1.958
+    },
+    {
+      "id": 11,
+      "category": "국찌개",
+      "food": "김치찌개",
+      "message": "오늘 점심에 김치찌개 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "김치찌개",
+          "food_id": "mfds:P123-208020300-0054",
+          "quantity_g": 200,
+          "portion": {
+            "display_name": "김치찌개",
+            "amount": 1,
+            "unit": "인분",
+            "unit_g": 200,
+            "default_unit": "인분",
+            "defaulted": true,
+            "unit_grams": {
+              "인분": 200,
+              "회분": 200
+            },
+            "basis_note": "김치찌개 대표 기준·대략값이에요. 실제 제품·재료와 다를 수 있어요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.375,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "김치찌개",
+          "meal_type": "lunch",
+          "quantity_g": 200.0,
+          "calories": 98.0,
+          "protein_g": 8.2,
+          "carbs_g": 10.5,
+          "fat_g": 2.5,
+          "sodium_mg": 826.0,
+          "source": "mfds",
+          "food_id": "mfds:P123-208020300-0054",
+          "nutrition_metadata": {
+            "food_kind": "product",
+            "manufacturer": "(주)푸르샨식품",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "serving_text": "200ml(g)",
+            "package_text": "500g",
+            "source_date": "2026-06-18",
+            "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/down/historyList.do",
+            "catalog_version": "reviewed-app-2026-10-15",
+            "portion": {
+              "display_name": "김치찌개",
+              "amount": 1,
+              "unit": "인분",
+              "unit_g": 200,
+              "default_unit": "인분",
+              "defaulted": true,
+              "unit_grams": {
+                "인분": 200,
+                "회분": 200
+              },
+              "basis_note": "김치찌개 대표 기준·대략값이에요. 실제 제품·재료와 다를 수 있어요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.367
+    },
+    {
+      "id": 12,
+      "category": "국찌개",
+      "food": "된장찌개",
+      "message": "오늘 점심에 된장찌개 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 10.227
+    },
+    {
+      "id": 13,
+      "category": "국찌개",
+      "food": "순두부찌개",
+      "message": "오늘 점심에 순두부찌개 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 5.604
+    },
+    {
+      "id": 14,
+      "category": "국찌개",
+      "food": "부대찌개",
+      "message": "오늘 점심에 부대찌개 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 6.669
+    },
+    {
+      "id": 15,
+      "category": "국찌개",
+      "food": "청국장",
+      "message": "오늘 점심에 청국장 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 5.807
+    },
+    {
+      "id": 16,
+      "category": "국찌개",
+      "food": "미역국",
+      "message": "오늘 점심에 미역국 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 6.351
+    },
+    {
+      "id": 17,
+      "category": "국찌개",
+      "food": "소고기무국",
+      "message": "오늘 점심에 소고기무국 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 2.529
+    },
+    {
+      "id": 18,
+      "category": "국찌개",
+      "food": "콩나물국",
+      "message": "오늘 점심에 콩나물국 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 5.452
+    },
+    {
+      "id": 19,
+      "category": "국찌개",
+      "food": "육개장",
+      "message": "오늘 점심에 육개장 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 1.862
+    },
+    {
+      "id": 20,
+      "category": "국찌개",
+      "food": "설렁탕",
+      "message": "오늘 점심에 설렁탕 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 4.924
+    },
+    {
+      "id": 21,
+      "category": "고기류",
+      "food": "제육볶음",
+      "message": "오늘 점심에 제육볶음 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "돼지고기볶음(제육볶음)",
+          "food_id": "mfds:D110-465000000-0001",
+          "quantity_g": 200,
+          "portion": {
+            "display_name": "제육볶음",
+            "amount": 1,
+            "unit": "인분",
+            "unit_g": 200,
+            "default_unit": "인분",
+            "defaulted": true,
+            "unit_grams": {
+              "인분": 200,
+              "회분": 200
+            },
+            "basis_note": "식약처 가정식 제육볶음 대표값·대략값이에요. 1인분은 앱 기본 200g이며 수정할 수 있어요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.264999999984866,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "돼지고기볶음(제육볶음)",
+          "meal_type": "lunch",
+          "quantity_g": 200.0,
+          "calories": 390.0,
+          "protein_g": 24.3,
+          "carbs_g": 9.5,
+          "fat_g": 28.4,
+          "sodium_mg": 1002.0,
+          "source": "mfds",
+          "food_id": "mfds:D110-465000000-0001",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "source_date": "2026-08-28",
+            "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D110-465000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+            "catalog_version": "reviewed-app-2026-10-16",
+            "portion": {
+              "display_name": "제육볶음",
+              "amount": 1,
+              "unit": "인분",
+              "unit_g": 200,
+              "default_unit": "인분",
+              "defaulted": true,
+              "unit_grams": {
+                "인분": 200,
+                "회분": 200
+              },
+              "basis_note": "식약처 가정식 제육볶음 대표값·대략값이에요. 1인분은 앱 기본 200g이며 수정할 수 있어요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.267
+    },
+    {
+      "id": 22,
+      "category": "고기류",
+      "food": "간장불고기",
+      "message": "오늘 점심에 간장불고기 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "소불고기, 볶은것",
+          "food_id": null,
+          "quantity_g": 200,
+          "portion": {
+            "display_name": "간장불고기",
+            "amount": 1,
+            "unit": "인분",
+            "unit_g": 200,
+            "default_unit": "인분",
+            "defaulted": true,
+            "unit_grams": {
+              "인분": 200,
+              "회분": 200
+            },
+            "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.2970000000204891,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "소불고기, 볶은것",
+          "meal_type": "lunch",
+          "quantity_g": 200.0,
+          "calories": 372.0,
+          "protein_g": 20.7,
+          "carbs_g": 13.5,
+          "fat_g": 26.2,
+          "sodium_mg": 936.0,
+          "source": "csv",
+          "food_id": "csv:bdcaa7f0f5257e2e4e9ec916",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "간장불고기",
+              "amount": 1,
+              "unit": "인분",
+              "unit_g": 200,
+              "default_unit": "인분",
+              "defaulted": true,
+              "unit_grams": {
+                "인분": 200,
+                "회분": 200
+              },
+              "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.294
+    },
+    {
+      "id": 23,
+      "category": "고기류",
+      "food": "소불고기",
+      "message": "오늘 점심에 소불고기 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "소불고기, 볶은것",
+          "food_id": null,
+          "quantity_g": 200,
+          "portion": {
+            "display_name": "소불고기",
+            "amount": 1,
+            "unit": "인분",
+            "unit_g": 200,
+            "default_unit": "인분",
+            "defaulted": true,
+            "unit_grams": {
+              "인분": 200,
+              "회분": 200
+            },
+            "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.29699999999138527,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "소불고기, 볶은것",
+          "meal_type": "lunch",
+          "quantity_g": 200.0,
+          "calories": 372.0,
+          "protein_g": 20.7,
+          "carbs_g": 13.5,
+          "fat_g": 26.2,
+          "sodium_mg": 936.0,
+          "source": "csv",
+          "food_id": "csv:bdcaa7f0f5257e2e4e9ec916",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "소불고기",
+              "amount": 1,
+              "unit": "인분",
+              "unit_g": 200,
+              "default_unit": "인분",
+              "defaulted": true,
+              "unit_grams": {
+                "인분": 200,
+                "회분": 200
+              },
+              "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.287
+    },
+    {
+      "id": 24,
+      "category": "고기류",
+      "food": "삼겹살",
+      "message": "오늘 점심에 삼겹살 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "돼지고기, 삼겹살, 구운것(팬)",
+          "food_id": null,
+          "quantity_g": 100,
+          "portion": {
+            "display_name": "삼겹살",
+            "amount": 1,
+            "unit": "회분",
+            "unit_g": 100,
+            "default_unit": "회분",
+            "defaulted": true,
+            "unit_grams": {
+              "회분": 100,
+              "인분": 100
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.26600000000325963,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "돼지고기, 삼겹살, 구운것(팬)",
+          "meal_type": "lunch",
+          "quantity_g": 100.0,
+          "calories": 484.0,
+          "protein_g": 22.8,
+          "carbs_g": 0.0,
+          "fat_g": 41.2,
+          "sodium_mg": 80.0,
+          "source": "csv",
+          "food_id": "csv:f8be30956771d4f085625c0f",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "삼겹살",
+              "amount": 1,
+              "unit": "회분",
+              "unit_g": 100,
+              "default_unit": "회분",
+              "defaulted": true,
+              "unit_grams": {
+                "회분": 100,
+                "인분": 100
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.27
+    },
+    {
+      "id": 25,
+      "category": "고기류",
+      "food": "수육",
+      "message": "오늘 점심에 수육 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 3.653
+    },
+    {
+      "id": 26,
+      "category": "고기류",
+      "food": "보쌈",
+      "message": "오늘 점심에 보쌈 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 5.581
+    },
+    {
+      "id": 27,
+      "category": "고기류",
+      "food": "닭가슴살",
+      "message": "오늘 점심에 닭가슴살 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "닭고기, 가슴, 삶은것",
+          "food_id": null,
+          "quantity_g": 100,
+          "portion": {
+            "display_name": "닭가슴살",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 100,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 100,
+              "회분": 100,
+              "인분": 100
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.29699999999138527,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "닭고기, 가슴, 삶은것",
+          "meal_type": "lunch",
+          "quantity_g": 100.0,
+          "calories": 127.0,
+          "protein_g": 28.1,
+          "carbs_g": 0.0,
+          "fat_g": 0.9,
+          "sodium_mg": 40.0,
+          "source": "csv",
+          "food_id": "csv:cd654811eae047f62e118abe",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "닭가슴살",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 100,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 100,
+                "회분": 100,
+                "인분": 100
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.298
+    },
+    {
+      "id": 28,
+      "category": "고기류",
+      "food": "닭볶음탕",
+      "message": "오늘 점심에 닭볶음탕 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 1.95
+    },
+    {
+      "id": 29,
+      "category": "고기류",
+      "food": "갈비찜",
+      "message": "오늘 점심에 갈비찜 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 3.552
+    },
+    {
+      "id": 30,
+      "category": "고기류",
+      "food": "돈까스",
+      "message": "오늘 점심에 돈까스 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 2.153
+    },
+    {
+      "id": 31,
+      "category": "생선해산물",
+      "food": "고등어구이",
+      "message": "오늘 점심에 고등어구이 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "고등어, 구운것",
+          "food_id": null,
+          "quantity_g": 100,
+          "portion": {
+            "display_name": "고등어구이",
+            "amount": 1,
+            "unit": "회분",
+            "unit_g": 100,
+            "default_unit": "회분",
+            "defaulted": true,
+            "unit_grams": {
+              "회분": 100,
+              "인분": 100
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.28200000000651926,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "고등어, 구운것",
+          "meal_type": "lunch",
+          "quantity_g": 100.0,
+          "calories": 264.0,
+          "protein_g": 25.2,
+          "carbs_g": 0.4,
+          "fat_g": 22.4,
+          "sodium_mg": 120.0,
+          "source": "csv",
+          "food_id": "csv:ae55613be8e0b1ab24566abe",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "고등어구이",
+              "amount": 1,
+              "unit": "회분",
+              "unit_g": 100,
+              "default_unit": "회분",
+              "defaulted": true,
+              "unit_grams": {
+                "회분": 100,
+                "인분": 100
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.285
+    },
+    {
+      "id": 32,
+      "category": "생선해산물",
+      "food": "연어구이",
+      "message": "오늘 점심에 연어구이 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 5.359
+    },
+    {
+      "id": 33,
+      "category": "생선해산물",
+      "food": "갈치구이",
+      "message": "오늘 점심에 갈치구이 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 2.128
+    },
+    {
+      "id": 34,
+      "category": "생선해산물",
+      "food": "조기구이",
+      "message": "오늘 점심에 조기구이 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 5.164
+    },
+    {
+      "id": 35,
+      "category": "생선해산물",
+      "food": "삼치구이",
+      "message": "오늘 점심에 삼치구이 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 1.972
+    },
+    {
+      "id": 36,
+      "category": "생선해산물",
+      "food": "생선까스",
+      "message": "오늘 점심에 생선까스 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 3.609
+    },
+    {
+      "id": 37,
+      "category": "생선해산물",
+      "food": "참치회",
+      "message": "오늘 점심에 참치회 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 3.649
+    },
+    {
+      "id": 38,
+      "category": "생선해산물",
+      "food": "새우구이",
+      "message": "오늘 점심에 새우구이 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 5.112
+    },
+    {
+      "id": 39,
+      "category": "생선해산물",
+      "food": "오징어볶음",
+      "message": "오늘 점심에 오징어볶음 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 1.893
+    },
+    {
+      "id": 40,
+      "category": "생선해산물",
+      "food": "쭈꾸미볶음",
+      "message": "오늘 점심에 쭈꾸미볶음 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 5.751
+    },
+    {
+      "id": 41,
+      "category": "반찬류",
+      "food": "계란후라이",
+      "message": "오늘 점심에 계란후라이 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "달걀, 부침(달걀프라이)",
+          "food_id": null,
+          "quantity_g": 50,
+          "portion": {
+            "display_name": "계란후라이",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 50,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 50,
+              "회분": 50,
+              "인분": 50
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.2659999999741558,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "달걀, 부침(달걀프라이)",
+          "meal_type": "lunch",
+          "quantity_g": 50.0,
+          "calories": 103.0,
+          "protein_g": 7.6,
+          "carbs_g": 1.9,
+          "fat_g": 6.7,
+          "sodium_mg": 81.0,
+          "source": "csv",
+          "food_id": "csv:b157ce27cfe5daabc5e3e29e",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "계란후라이",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 50,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 50,
+                "회분": 50,
+                "인분": 50
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.257
+    },
+    {
+      "id": 42,
+      "category": "반찬류",
+      "food": "삶은계란",
+      "message": "오늘 점심에 삶은계란 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "달걀, 삶은것",
+          "food_id": null,
+          "quantity_g": 50,
+          "portion": {
+            "display_name": "삶은계란",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 50,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 50,
+              "회분": 50,
+              "인분": 50
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.28100000001722947,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "달걀, 삶은것",
+          "meal_type": "lunch",
+          "quantity_g": 50.0,
+          "calories": 72.5,
+          "protein_g": 6.7,
+          "carbs_g": 0.7,
+          "fat_g": 4.3,
+          "sodium_mg": 64.0,
+          "source": "csv",
+          "food_id": "csv:1d46be1c767a3fc994d496d3",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "삶은계란",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 50,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 50,
+                "회분": 50,
+                "인분": 50
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.276
+    },
+    {
+      "id": 43,
+      "category": "반찬류",
+      "food": "계란찜",
+      "message": "오늘 점심에 계란찜 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 1.953
+    },
+    {
+      "id": 44,
+      "category": "반찬류",
+      "food": "계란말이",
+      "message": "오늘 점심에 계란말이 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 3.99
+    },
+    {
+      "id": 45,
+      "category": "반찬류",
+      "food": "두부",
+      "message": "오늘 점심에 두부 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "두부",
+          "food_id": null,
+          "quantity_g": 100,
+          "portion": {
+            "display_name": "두부",
+            "amount": 1,
+            "unit": "회분",
+            "unit_g": 100,
+            "default_unit": "회분",
+            "defaulted": true,
+            "unit_grams": {
+              "회분": 100,
+              "인분": 100
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.29699999999138527,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "두부",
+          "meal_type": "lunch",
+          "quantity_g": 100.0,
+          "calories": 97.0,
+          "protein_g": 9.6,
+          "carbs_g": 3.8,
+          "fat_g": 4.6,
+          "sodium_mg": 1.0,
+          "source": "csv",
+          "food_id": "csv:3b1eddf75bb863c1d03db4b3",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "두부",
+              "amount": 1,
+              "unit": "회분",
+              "unit_g": 100,
+              "default_unit": "회분",
+              "defaulted": true,
+              "unit_grams": {
+                "회분": 100,
+                "인분": 100
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.288
+    },
+    {
+      "id": 46,
+      "category": "반찬류",
+      "food": "두부조림",
+      "message": "오늘 점심에 두부조림 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 4.239
+    },
+    {
+      "id": 47,
+      "category": "반찬류",
+      "food": "배추김치",
+      "message": "오늘 점심에 배추김치 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "김치, 배추 김치",
+          "food_id": null,
+          "quantity_g": 40,
+          "portion": {
+            "display_name": "배추김치",
+            "amount": 1,
+            "unit": "회분",
+            "unit_g": 40,
+            "default_unit": "회분",
+            "defaulted": true,
+            "unit_grams": {
+              "회분": 40,
+              "인분": 40
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.3129999999946449,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "김치, 배추 김치",
+          "meal_type": "lunch",
+          "quantity_g": 40.0,
+          "calories": 15.2,
+          "protein_g": 0.8,
+          "carbs_g": 2.6,
+          "fat_g": 0.2,
+          "sodium_mg": 220.4,
+          "source": "csv",
+          "food_id": "csv:5e4235f1f26bce88c8533900",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "배추김치",
+              "amount": 1,
+              "unit": "회분",
+              "unit_g": 40,
+              "default_unit": "회분",
+              "defaulted": true,
+              "unit_grams": {
+                "회분": 40,
+                "인분": 40
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.316
+    },
+    {
+      "id": 48,
+      "category": "반찬류",
+      "food": "깍두기",
+      "message": "오늘 점심에 깍두기 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "김치, 깍두기",
+          "food_id": null,
+          "quantity_g": 40,
+          "portion": {
+            "display_name": "깍두기",
+            "amount": 1,
+            "unit": "회분",
+            "unit_g": 40,
+            "default_unit": "회분",
+            "defaulted": true,
+            "unit_grams": {
+              "회분": 40,
+              "인분": 40
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.25,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "김치, 깍두기",
+          "meal_type": "lunch",
+          "quantity_g": 40.0,
+          "calories": 16.0,
+          "protein_g": 0.5,
+          "carbs_g": 3.3,
+          "fat_g": 0.1,
+          "sodium_mg": 209.2,
+          "source": "csv",
+          "food_id": "csv:af45fb891a04a59d5d4f8bc7",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "깍두기",
+              "amount": 1,
+              "unit": "회분",
+              "unit_g": 40,
+              "default_unit": "회분",
+              "defaulted": true,
+              "unit_grams": {
+                "회분": 40,
+                "인분": 40
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.255
+    },
+    {
+      "id": 49,
+      "category": "반찬류",
+      "food": "시금치나물",
+      "message": "오늘 점심에 시금치나물 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 3.644
+    },
+    {
+      "id": 50,
+      "category": "반찬류",
+      "food": "콩나물무침",
+      "message": "오늘 점심에 콩나물무침 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 4.06
+    },
+    {
+      "id": 51,
+      "category": "분식패스트푸드",
+      "food": "라면",
+      "message": "오늘 점심에 라면 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "라면, 조리후",
+          "food_id": null,
+          "quantity_g": 500,
+          "portion": {
+            "display_name": "라면",
+            "amount": 1,
+            "unit": "회분",
+            "unit_g": 500,
+            "default_unit": "회분",
+            "defaulted": true,
+            "unit_grams": {
+              "회분": 500,
+              "인분": 500
+            },
+            "basis_note": "라면 음식군 대표값(라면, 조리후)으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+            "food_group": "라면",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.39000000001396984,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "라면, 조리후",
+          "meal_type": "lunch",
+          "quantity_g": 500.0,
+          "calories": 505.0,
+          "protein_g": 10.9,
+          "carbs_g": 80.9,
+          "fat_g": 15.2,
+          "sodium_mg": 1840.0,
+          "source": "csv",
+          "food_id": "csv:42b97ac25a05560b4fcf5830",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "라면",
+              "amount": 1,
+              "unit": "회분",
+              "unit_g": 500,
+              "default_unit": "회분",
+              "defaulted": true,
+              "unit_grams": {
+                "회분": 500,
+                "인분": 500
+              },
+              "basis_note": "라면 음식군 대표값(라면, 조리후)으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+              "food_group": "라면",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.395
+    },
+    {
+      "id": 52,
+      "category": "분식패스트푸드",
+      "food": "떡볶이",
+      "message": "오늘 점심에 떡볶이 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 5.662
+    },
+    {
+      "id": 53,
+      "category": "분식패스트푸드",
+      "food": "순대",
+      "message": "오늘 점심에 순대 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 1.948
+    },
+    {
+      "id": 54,
+      "category": "분식패스트푸드",
+      "food": "군만두",
+      "message": "오늘 점심에 군만두 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "만두, 군만두",
+          "food_id": null,
+          "quantity_g": 150,
+          "portion": {
+            "display_name": "군만두",
+            "amount": 5,
+            "unit": "개",
+            "unit_g": 30,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 30,
+              "회분": 150,
+              "인분": 150
+            },
+            "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.2960000000020955,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "만두, 군만두",
+          "meal_type": "lunch",
+          "quantity_g": 150.0,
+          "calories": 445.5,
+          "protein_g": 14.6,
+          "carbs_g": 42.6,
+          "fat_g": 24.0,
+          "sodium_mg": 523.5,
+          "source": "csv",
+          "food_id": "csv:76ad05b4080d5e7eecca8f44",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "군만두",
+              "amount": 5,
+              "unit": "개",
+              "unit_g": 30,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 30,
+                "회분": 150,
+                "인분": 150
+              },
+              "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.291
+    },
+    {
+      "id": 55,
+      "category": "분식패스트푸드",
+      "food": "물만두",
+      "message": "오늘 점심에 물만두 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "만두, 물만두",
+          "food_id": null,
+          "quantity_g": 150,
+          "portion": {
+            "display_name": "물만두",
+            "amount": 10,
+            "unit": "개",
+            "unit_g": 15,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 15,
+              "회분": 150,
+              "인분": 150
+            },
+            "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.29699999999138527,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "만두, 물만두",
+          "meal_type": "lunch",
+          "quantity_g": 150.0,
+          "calories": 232.5,
+          "protein_g": 10.5,
+          "carbs_g": 24.6,
+          "fat_g": 10.2,
+          "sodium_mg": 330.0,
+          "source": "csv",
+          "food_id": "csv:0fe03b53e1994ed7ccda600b",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "물만두",
+              "amount": 10,
+              "unit": "개",
+              "unit_g": 15,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 15,
+                "회분": 150,
+                "인분": 150
+              },
+              "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.287
+    },
+    {
+      "id": 56,
+      "category": "분식패스트푸드",
+      "food": "김치만두",
+      "message": "오늘 점심에 김치만두 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "만두, 김치 만두",
+          "food_id": null,
+          "quantity_g": 150,
+          "portion": {
+            "display_name": "김치만두",
+            "amount": 5,
+            "unit": "개",
+            "unit_g": 30,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 30,
+              "회분": 150,
+              "인분": 150
+            },
+            "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.2970000000204891,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "만두, 김치 만두",
+          "meal_type": "lunch",
+          "quantity_g": 150.0,
+          "calories": 235.5,
+          "protein_g": 9.3,
+          "carbs_g": 30.4,
+          "fat_g": 8.5,
+          "sodium_mg": 586.5,
+          "source": "csv",
+          "food_id": "csv:5f257a913d5547f7dbeec657",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "김치만두",
+              "amount": 5,
+              "unit": "개",
+              "unit_g": 30,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 30,
+                "회분": 150,
+                "인분": 150
+              },
+              "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.303
+    },
+    {
+      "id": 57,
+      "category": "분식패스트푸드",
+      "food": "햄버거",
+      "message": "오늘 점심에 햄버거 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "햄버거, 소고기패티, 토마토, 양상추, 양파",
+          "food_id": null,
+          "quantity_g": 200,
+          "portion": {
+            "display_name": "햄버거",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 200,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 200,
+              "회분": 200,
+              "인분": 200
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.2970000000204891,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "햄버거, 소고기패티, 토마토, 양상추, 양파",
+          "meal_type": "lunch",
+          "quantity_g": 200.0,
+          "calories": 458.0,
+          "protein_g": 19.1,
+          "carbs_g": 36.0,
+          "fat_g": 26.5,
+          "sodium_mg": 756.0,
+          "source": "csv",
+          "food_id": "csv:4cc00afa4226112631ef39a0",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "햄버거",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 200,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 200,
+                "회분": 200,
+                "인분": 200
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.3
+    },
+    {
+      "id": 58,
+      "category": "분식패스트푸드",
+      "food": "치즈버거",
+      "message": "오늘 점심에 치즈버거 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "햄버거, 소고기패티, 토마토, 양상추, 양파",
+          "food_id": null,
+          "quantity_g": 200,
+          "portion": {
+            "display_name": "치즈버거",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 200,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 200,
+              "회분": 200,
+              "인분": 200
+            },
+            "basis_note": "버거 음식군 대표값(햄버거, 소고기패티, 토마토, 양상추, 양파)으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+            "food_group": "버거",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.23399999999674037,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "햄버거, 소고기패티, 토마토, 양상추, 양파",
+          "meal_type": "lunch",
+          "quantity_g": 200.0,
+          "calories": 458.0,
+          "protein_g": 19.1,
+          "carbs_g": 36.0,
+          "fat_g": 26.5,
+          "sodium_mg": 756.0,
+          "source": "csv",
+          "food_id": "csv:4cc00afa4226112631ef39a0",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "치즈버거",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 200,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 200,
+                "회분": 200,
+                "인분": 200
+              },
+              "basis_note": "버거 음식군 대표값(햄버거, 소고기패티, 토마토, 양상추, 양파)으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+              "food_group": "버거",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.23
+    },
+    {
+      "id": 59,
+      "category": "분식패스트푸드",
+      "food": "피자",
+      "message": "오늘 점심에 피자 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "피자, 콤비네이션 피자, 냉동, 전자레인지 조리",
+          "food_id": null,
+          "quantity_g": 200,
+          "portion": {
+            "display_name": "피자",
+            "amount": 2,
+            "unit": "조각",
+            "unit_g": 100,
+            "default_unit": "조각",
+            "defaulted": true,
+            "unit_grams": {
+              "조각": 100,
+              "판": 800,
+              "회분": 200,
+              "인분": 200
+            },
+            "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.32800000000861473,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "피자, 콤비네이션 피자, 냉동, 전자레인지 조리",
+          "meal_type": "lunch",
+          "quantity_g": 200.0,
+          "calories": 564.0,
+          "protein_g": 28.0,
+          "carbs_g": 69.3,
+          "fat_g": 19.5,
+          "sodium_mg": 1096.0,
+          "source": "csv",
+          "food_id": "csv:98698ed933f2293b465af79b",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "피자",
+              "amount": 2,
+              "unit": "조각",
+              "unit_g": 100,
+              "default_unit": "조각",
+              "defaulted": true,
+              "unit_grams": {
+                "조각": 100,
+                "판": 800,
+                "회분": 200,
+                "인분": 200
+              },
+              "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.329
+    },
+    {
+      "id": 60,
+      "category": "분식패스트푸드",
+      "food": "치킨",
+      "message": "오늘 점심에 치킨 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "닭고기, 살코기, 튀긴것(튀김옷)",
+          "food_id": null,
+          "quantity_g": 150,
+          "portion": {
+            "display_name": "치킨",
+            "amount": 1,
+            "unit": "회분",
+            "unit_g": 150,
+            "default_unit": "회분",
+            "defaulted": true,
+            "unit_grams": {
+              "회분": 150,
+              "인분": 150
+            },
+            "basis_note": "치킨 음식군 대표값(닭고기, 살코기, 튀긴것(튀김옷))으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+            "food_group": "치킨",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.28100000001722947,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "닭고기, 살코기, 튀긴것(튀김옷)",
+          "meal_type": "lunch",
+          "quantity_g": 150.0,
+          "calories": 433.5,
+          "protein_g": 33.8,
+          "carbs_g": 14.1,
+          "fat_g": 26.0,
+          "sodium_mg": 438.0,
+          "source": "csv",
+          "food_id": "csv:5b1cba506c81449965d78051",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "치킨",
+              "amount": 1,
+              "unit": "회분",
+              "unit_g": 150,
+              "default_unit": "회분",
+              "defaulted": true,
+              "unit_grams": {
+                "회분": 150,
+                "인분": 150
+              },
+              "basis_note": "치킨 음식군 대표값(닭고기, 살코기, 튀긴것(튀김옷))으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+              "food_group": "치킨",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.283
+    },
+    {
+      "id": 61,
+      "category": "빵류",
+      "food": "식빵",
+      "message": "오늘 점심에 식빵 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "빵, 식빵, 우유",
+          "food_id": null,
+          "quantity_g": 30,
+          "portion": {
+            "display_name": "식빵",
+            "amount": 1,
+            "unit": "장",
+            "unit_g": 30,
+            "default_unit": "장",
+            "defaulted": true,
+            "unit_grams": {
+              "장": 30,
+              "회분": 30,
+              "인분": 30
+            },
+            "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.29699999999138527,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "빵, 식빵, 우유",
+          "meal_type": "lunch",
+          "quantity_g": 30.0,
+          "calories": 85.2,
+          "protein_g": 2.7,
+          "carbs_g": 14.4,
+          "fat_g": 1.8,
+          "sodium_mg": 144.0,
+          "source": "csv",
+          "food_id": "csv:0b39bd81fbf7d46f325795aa",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "식빵",
+              "amount": 1,
+              "unit": "장",
+              "unit_g": 30,
+              "default_unit": "장",
+              "defaulted": true,
+              "unit_grams": {
+                "장": 30,
+                "회분": 30,
+                "인분": 30
+              },
+              "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.288
+    },
+    {
+      "id": 62,
+      "category": "빵류",
+      "food": "소보로빵",
+      "message": "오늘 점심에 소보로빵 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "빵, 곰보빵",
+          "food_id": null,
+          "quantity_g": 80,
+          "portion": {
+            "display_name": "소보로빵",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 80,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 80,
+              "회분": 80,
+              "인분": 80
+            },
+            "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.29699999999138527,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "빵, 곰보빵",
+          "meal_type": "lunch",
+          "quantity_g": 80.0,
+          "calories": 332.0,
+          "protein_g": 7.6,
+          "carbs_g": 49.2,
+          "fat_g": 11.6,
+          "sodium_mg": 245.6,
+          "source": "csv",
+          "food_id": "csv:9b2e99a82ce988735d70c8e9",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "소보로빵",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 80,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 80,
+                "회분": 80,
+                "인분": 80
+              },
+              "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.297
+    },
+    {
+      "id": 63,
+      "category": "빵류",
+      "food": "단팥빵",
+      "message": "오늘 점심에 단팥빵 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "빵, 팥빵",
+          "food_id": null,
+          "quantity_g": 80,
+          "portion": {
+            "display_name": "단팥빵",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 80,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 80,
+              "회분": 80,
+              "인분": 80
+            },
+            "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.3289999999979045,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "빵, 팥빵",
+          "meal_type": "lunch",
+          "quantity_g": 80.0,
+          "calories": 202.4,
+          "protein_g": 6.1,
+          "carbs_g": 38.8,
+          "fat_g": 2.5,
+          "sodium_mg": 144.0,
+          "source": "csv",
+          "food_id": "csv:be9cbc75059732b6bf732829",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "단팥빵",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 80,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 80,
+                "회분": 80,
+                "인분": 80
+              },
+              "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.328
+    },
+    {
+      "id": 64,
+      "category": "빵류",
+      "food": "크림빵",
+      "message": "오늘 점심에 크림빵 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "빵, 크림빵",
+          "food_id": null,
+          "quantity_g": 80,
+          "portion": {
+            "display_name": "크림빵",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 80,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 80,
+              "회분": 80,
+              "인분": 80
+            },
+            "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.2960000000020955,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "빵, 크림빵",
+          "meal_type": "lunch",
+          "quantity_g": 80.0,
+          "calories": 303.2,
+          "protein_g": 6.9,
+          "carbs_g": 43.2,
+          "fat_g": 11.4,
+          "sodium_mg": 272.0,
+          "source": "csv",
+          "food_id": "csv:c755857159bff34cb83222ff",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "크림빵",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 80,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 80,
+                "회분": 80,
+                "인분": 80
+              },
+              "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.288
+    },
+    {
+      "id": 65,
+      "category": "빵류",
+      "food": "베이글",
+      "message": "오늘 점심에 베이글 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "빵, 베이글",
+          "food_id": null,
+          "quantity_g": 100,
+          "portion": {
+            "display_name": "베이글",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 100,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 100,
+              "회분": 100,
+              "인분": 100
+            },
+            "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.3289999999979045,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "빵, 베이글",
+          "meal_type": "lunch",
+          "quantity_g": 100.0,
+          "calories": 291.0,
+          "protein_g": 9.3,
+          "carbs_g": 57.6,
+          "fat_g": 2.5,
+          "sodium_mg": 565.0,
+          "source": "csv",
+          "food_id": "csv:6d2b98b9390bf5ba42ce25df",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "베이글",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 100,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 100,
+                "회분": 100,
+                "인분": 100
+              },
+              "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.325
+    },
+    {
+      "id": 66,
+      "category": "빵류",
+      "food": "크루아상",
+      "message": "오늘 점심에 크루아상 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "빵, 크루아상",
+          "food_id": null,
+          "quantity_g": 60,
+          "portion": {
+            "display_name": "크루아상",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 60,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 60,
+              "회분": 60,
+              "인분": 60
+            },
+            "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.2960000000020955,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "빵, 크루아상",
+          "meal_type": "lunch",
+          "quantity_g": 60.0,
+          "calories": 274.2,
+          "protein_g": 5.1,
+          "carbs_g": 28.3,
+          "fat_g": 15.6,
+          "sodium_mg": 248.4,
+          "source": "csv",
+          "food_id": "csv:bf642c8f94e7df0237601cd6",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "크루아상",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 60,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 60,
+                "회분": 60,
+                "인분": 60
+              },
+              "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.296
+    },
+    {
+      "id": 67,
+      "category": "빵류",
+      "food": "모닝빵",
+      "message": "오늘 점심에 모닝빵 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "빵, 모닝빵",
+          "food_id": null,
+          "quantity_g": 30,
+          "portion": {
+            "display_name": "모닝빵",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 30,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 30,
+              "회분": 30,
+              "인분": 30
+            },
+            "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.26600000000325963,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "빵, 모닝빵",
+          "meal_type": "lunch",
+          "quantity_g": 30.0,
+          "calories": 94.8,
+          "protein_g": 2.7,
+          "carbs_g": 17.7,
+          "fat_g": 1.5,
+          "sodium_mg": 78.0,
+          "source": "csv",
+          "food_id": "csv:dcff511cf3b56c4c5ddecff5",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "모닝빵",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 30,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 30,
+                "회분": 30,
+                "인분": 30
+              },
+              "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.266
+    },
+    {
+      "id": 68,
+      "category": "빵류",
+      "food": "카스테라",
+      "message": "오늘 점심에 카스테라 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "빵, 카스텔라",
+          "food_id": null,
+          "quantity_g": 80,
+          "portion": {
+            "display_name": "카스테라",
+            "amount": 1,
+            "unit": "회분",
+            "unit_g": 80,
+            "default_unit": "회분",
+            "defaulted": true,
+            "unit_grams": {
+              "회분": 80,
+              "인분": 80
+            },
+            "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.25,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "빵, 카스텔라",
+          "meal_type": "lunch",
+          "quantity_g": 80.0,
+          "calories": 244.8,
+          "protein_g": 5.5,
+          "carbs_g": 47.6,
+          "fat_g": 3.0,
+          "sodium_mg": 64.8,
+          "source": "csv",
+          "food_id": "csv:0ee4bc535516e8f5fddeb0f5",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "카스테라",
+              "amount": 1,
+              "unit": "회분",
+              "unit_g": 80,
+              "default_unit": "회분",
+              "defaulted": true,
+              "unit_grams": {
+                "회분": 80,
+                "인분": 80
+              },
+              "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.247
+    },
+    {
+      "id": 69,
+      "category": "빵류",
+      "food": "도넛",
+      "message": "오늘 점심에 도넛 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "빵, 도넛, 링",
+          "food_id": null,
+          "quantity_g": 60,
+          "portion": {
+            "display_name": "도넛",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 60,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 60,
+              "회분": 60,
+              "인분": 60
+            },
+            "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.264999999984866,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "빵, 도넛, 링",
+          "meal_type": "lunch",
+          "quantity_g": 60.0,
+          "calories": 255.6,
+          "protein_g": 4.4,
+          "carbs_g": 24.4,
+          "fat_g": 15.6,
+          "sodium_mg": 216.0,
+          "source": "csv",
+          "food_id": "csv:d0356c18d6e1e1b464ee56f0",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "도넛",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 60,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 60,
+                "회분": 60,
+                "인분": 60
+              },
+              "basis_note": "앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.266
+    },
+    {
+      "id": 70,
+      "category": "빵류",
+      "food": "메론빵",
+      "message": "오늘 점심에 메론빵 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "빵, 곰보빵",
+          "food_id": null,
+          "quantity_g": 80,
+          "portion": {
+            "display_name": "메론빵",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 80,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 80,
+              "회분": 80,
+              "인분": 80
+            },
+            "basis_note": "곰보빵(소보로) 유사 기준이며 실제 메론빵 제품값이 아니에요.",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.29699999999138527,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "빵, 곰보빵",
+          "meal_type": "lunch",
+          "quantity_g": 80.0,
+          "calories": 332.0,
+          "protein_g": 7.6,
+          "carbs_g": 49.2,
+          "fat_g": 11.6,
+          "sodium_mg": 245.6,
+          "source": "csv",
+          "food_id": "csv:9b2e99a82ce988735d70c8e9",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "메론빵",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 80,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 80,
+                "회분": 80,
+                "인분": 80
+              },
+              "basis_note": "곰보빵(소보로) 유사 기준이며 실제 메론빵 제품값이 아니에요.",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.298
+    },
+    {
+      "id": 71,
+      "category": "과일류",
+      "food": "사과",
+      "message": "오늘 점심에 사과 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "사과, 생것",
+          "food_id": null,
+          "quantity_g": 200,
+          "portion": {
+            "display_name": "사과",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 200,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 200,
+              "회분": 200,
+              "인분": 200
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.45300000000861473,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "사과, 생것",
+          "meal_type": "lunch",
+          "quantity_g": 200.0,
+          "calories": 104.0,
+          "protein_g": 0.5,
+          "carbs_g": 27.9,
+          "fat_g": 0.1,
+          "sodium_mg": 0.0,
+          "source": "csv",
+          "food_id": "csv:6c66af695f8fc48e2f0c48ee",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "사과",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 200,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 200,
+                "회분": 200,
+                "인분": 200
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.456
+    },
+    {
+      "id": 72,
+      "category": "과일류",
+      "food": "바나나",
+      "message": "오늘 점심에 바나나 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "바나나, 생것",
+          "food_id": null,
+          "quantity_g": 100,
+          "portion": {
+            "display_name": "바나나",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 100,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 100,
+              "회분": 100,
+              "인분": 100
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.25,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "바나나, 생것",
+          "meal_type": "lunch",
+          "quantity_g": 100.0,
+          "calories": 77.0,
+          "protein_g": 1.1,
+          "carbs_g": 20.0,
+          "fat_g": 0.2,
+          "sodium_mg": 0.0,
+          "source": "csv",
+          "food_id": "csv:6c175b24938a7e6336f1fab3",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "바나나",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 100,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 100,
+                "회분": 100,
+                "인분": 100
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.25
+    },
+    {
+      "id": 73,
+      "category": "과일류",
+      "food": "귤",
+      "message": "오늘 점심에 귤 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "귤, 온주밀감, 생것",
+          "food_id": null,
+          "quantity_g": 80,
+          "portion": {
+            "display_name": "귤",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 80,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 80,
+              "회분": 80,
+              "인분": 80
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.2960000000020955,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "귤, 온주밀감, 생것",
+          "meal_type": "lunch",
+          "quantity_g": 80.0,
+          "calories": 31.2,
+          "protein_g": 0.4,
+          "carbs_g": 8.0,
+          "fat_g": 0.1,
+          "sodium_mg": 1.6,
+          "source": "csv",
+          "food_id": "csv:eb6a74e70cb274fe3946153a",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "귤",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 80,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 80,
+                "회분": 80,
+                "인분": 80
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.293
+    },
+    {
+      "id": 74,
+      "category": "과일류",
+      "food": "딸기",
+      "message": "오늘 점심에 딸기 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "딸기, 개량종, 생것",
+          "food_id": null,
+          "quantity_g": 20,
+          "portion": {
+            "display_name": "딸기",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 20,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 20,
+              "회분": 20,
+              "인분": 20
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.29699999999138527,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "딸기, 개량종, 생것",
+          "meal_type": "lunch",
+          "quantity_g": 20.0,
+          "calories": 7.2,
+          "protein_g": 0.2,
+          "carbs_g": 1.8,
+          "fat_g": 0.0,
+          "sodium_mg": 2.6,
+          "source": "csv",
+          "food_id": "csv:2febc325b0ab041d17115fad",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "딸기",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 20,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 20,
+                "회분": 20,
+                "인분": 20
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.286
+    },
+    {
+      "id": 75,
+      "category": "과일류",
+      "food": "포도",
+      "message": "오늘 점심에 포도 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 5.23
+    },
+    {
+      "id": 76,
+      "category": "과일류",
+      "food": "수박",
+      "message": "오늘 점심에 수박 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 1.915
+    },
+    {
+      "id": 77,
+      "category": "과일류",
+      "food": "배",
+      "message": "오늘 점심에 배 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 5.149
+    },
+    {
+      "id": 78,
+      "category": "과일류",
+      "food": "복숭아",
+      "message": "오늘 점심에 복숭아 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 1.84
+    },
+    {
+      "id": 79,
+      "category": "과일류",
+      "food": "키위",
+      "message": "오늘 점심에 키위 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 6.865
+    },
+    {
+      "id": 80,
+      "category": "과일류",
+      "food": "방울토마토",
+      "message": "오늘 점심에 방울토마토 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "토마토, 방울토마토, 생것",
+          "food_id": null,
+          "quantity_g": 15,
+          "portion": {
+            "display_name": "방울토마토",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 15,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 15,
+              "회분": 15,
+              "인분": 15
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.28099999998812564,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "토마토, 방울토마토, 생것",
+          "meal_type": "lunch",
+          "quantity_g": 15.0,
+          "calories": 3.8,
+          "protein_g": 0.1,
+          "carbs_g": 0.9,
+          "fat_g": 0.0,
+          "sodium_mg": 0.8,
+          "source": "csv",
+          "food_id": "csv:177245f4668477f69476d763",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "방울토마토",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 15,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 15,
+                "회분": 15,
+                "인분": 15
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.277
+    },
+    {
+      "id": 81,
+      "category": "채소견과곡물",
+      "food": "고구마",
+      "message": "오늘 점심에 고구마 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "고구마, 찐것",
+          "food_id": null,
+          "quantity_g": 150,
+          "portion": {
+            "display_name": "고구마",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 150,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 150,
+              "회분": 150,
+              "인분": 150
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.29699999999138527,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "고구마, 찐것",
+          "meal_type": "lunch",
+          "quantity_g": 150.0,
+          "calories": 244.5,
+          "protein_g": 1.6,
+          "carbs_g": 59.1,
+          "fat_g": 0.2,
+          "sodium_mg": 9.0,
+          "source": "csv",
+          "food_id": "csv:f3ee6d1ba92dd28b87ab5a2d",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "고구마",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 150,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 150,
+                "회분": 150,
+                "인분": 150
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.287
+    },
+    {
+      "id": 82,
+      "category": "채소견과곡물",
+      "food": "감자",
+      "message": "오늘 점심에 감자 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "감자, 대지, 찐것",
+          "food_id": null,
+          "quantity_g": 150,
+          "portion": {
+            "display_name": "감자",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 150,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 150,
+              "회분": 150,
+              "인분": 150
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.25,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "감자, 대지, 찐것",
+          "meal_type": "lunch",
+          "quantity_g": 150.0,
+          "calories": 120.0,
+          "protein_g": 3.2,
+          "carbs_g": 27.3,
+          "fat_g": 0.1,
+          "sodium_mg": 3.0,
+          "source": "csv",
+          "food_id": "csv:a5cee850e9453f49b108d2e7",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "감자",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 150,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 150,
+                "회분": 150,
+                "인분": 150
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.255
+    },
+    {
+      "id": 83,
+      "category": "채소견과곡물",
+      "food": "오트밀",
+      "message": "오늘 점심에 오트밀 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "귀리, 오트밀",
+          "food_id": null,
+          "quantity_g": 30,
+          "portion": {
+            "display_name": "오트밀",
+            "amount": 1,
+            "unit": "회분",
+            "unit_g": 30,
+            "default_unit": "회분",
+            "defaulted": true,
+            "unit_grams": {
+              "회분": 30,
+              "인분": 30
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.28200000000651926,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "귀리, 오트밀",
+          "meal_type": "lunch",
+          "quantity_g": 30.0,
+          "calories": 114.6,
+          "protein_g": 4.0,
+          "carbs_g": 19.5,
+          "fat_g": 2.5,
+          "sodium_mg": 1.2,
+          "source": "csv",
+          "food_id": "csv:65c445406b067253ace76b57",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "오트밀",
+              "amount": 1,
+              "unit": "회분",
+              "unit_g": 30,
+              "default_unit": "회분",
+              "defaulted": true,
+              "unit_grams": {
+                "회분": 30,
+                "인분": 30
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.278
+    },
+    {
+      "id": 84,
+      "category": "채소견과곡물",
+      "food": "아몬드",
+      "message": "오늘 점심에 아몬드 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "아몬드, 말린것",
+          "food_id": null,
+          "quantity_g": 20,
+          "portion": {
+            "display_name": "아몬드",
+            "amount": 1,
+            "unit": "회분",
+            "unit_g": 20,
+            "default_unit": "회분",
+            "defaulted": true,
+            "unit_grams": {
+              "회분": 20,
+              "인분": 20
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.28099999998812564,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "아몬드, 말린것",
+          "meal_type": "lunch",
+          "quantity_g": 20.0,
+          "calories": 116.2,
+          "protein_g": 4.7,
+          "carbs_g": 4.0,
+          "fat_g": 10.0,
+          "sodium_mg": 1.2,
+          "source": "csv",
+          "food_id": "csv:3d739c0ef70519a283c34d83",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "아몬드",
+              "amount": 1,
+              "unit": "회분",
+              "unit_g": 20,
+              "default_unit": "회분",
+              "defaulted": true,
+              "unit_grams": {
+                "회분": 20,
+                "인분": 20
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.272
+    },
+    {
+      "id": 85,
+      "category": "채소견과곡물",
+      "food": "호두",
+      "message": "오늘 점심에 호두 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "호두, 말린것",
+          "food_id": null,
+          "quantity_g": 20,
+          "portion": {
+            "display_name": "호두",
+            "amount": 1,
+            "unit": "회분",
+            "unit_g": 20,
+            "default_unit": "회분",
+            "defaulted": true,
+            "unit_grams": {
+              "회분": 20,
+              "인분": 20
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.28100000001722947,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "호두, 말린것",
+          "meal_type": "lunch",
+          "quantity_g": 20.0,
+          "calories": 137.6,
+          "protein_g": 3.1,
+          "carbs_g": 1.6,
+          "fat_g": 14.4,
+          "sodium_mg": 0.6,
+          "source": "csv",
+          "food_id": "csv:0145a3b1ea39d12d1029293b",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "호두",
+              "amount": 1,
+              "unit": "회분",
+              "unit_g": 20,
+              "default_unit": "회분",
+              "defaulted": true,
+              "unit_grams": {
+                "회분": 20,
+                "인분": 20
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.282
+    },
+    {
+      "id": 86,
+      "category": "채소견과곡물",
+      "food": "땅콩",
+      "message": "오늘 점심에 땅콩 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "땅콩, 볶은것",
+          "food_id": null,
+          "quantity_g": 20,
+          "portion": {
+            "display_name": "땅콩",
+            "amount": 1,
+            "unit": "회분",
+            "unit_g": 20,
+            "default_unit": "회분",
+            "defaulted": true,
+            "unit_grams": {
+              "회분": 20,
+              "인분": 20
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.26500000001396984,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "땅콩, 볶은것",
+          "meal_type": "lunch",
+          "quantity_g": 20.0,
+          "calories": 113.4,
+          "protein_g": 5.7,
+          "carbs_g": 4.0,
+          "fat_g": 9.2,
+          "sodium_mg": 0.8,
+          "source": "csv",
+          "food_id": "csv:62add61ff78b747913563477",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "땅콩",
+              "amount": 1,
+              "unit": "회분",
+              "unit_g": 20,
+              "default_unit": "회분",
+              "defaulted": true,
+              "unit_grams": {
+                "회분": 20,
+                "인분": 20
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.27
+    },
+    {
+      "id": 87,
+      "category": "채소견과곡물",
+      "food": "브로콜리",
+      "message": "오늘 점심에 브로콜리 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "브로콜리, 데친것",
+          "food_id": null,
+          "quantity_g": 80,
+          "portion": {
+            "display_name": "브로콜리",
+            "amount": 1,
+            "unit": "회분",
+            "unit_g": 80,
+            "default_unit": "회분",
+            "defaulted": true,
+            "unit_grams": {
+              "회분": 80,
+              "인분": 80
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.26600000000325963,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "브로콜리, 데친것",
+          "meal_type": "lunch",
+          "quantity_g": 80.0,
+          "calories": 22.4,
+          "protein_g": 2.2,
+          "carbs_g": 4.3,
+          "fat_g": 0.2,
+          "sodium_mg": 3.2,
+          "source": "csv",
+          "food_id": "csv:0a1bbbd28fad6e72c7bbc6b2",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "브로콜리",
+              "amount": 1,
+              "unit": "회분",
+              "unit_g": 80,
+              "default_unit": "회분",
+              "defaulted": true,
+              "unit_grams": {
+                "회분": 80,
+                "인분": 80
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.275
+    },
+    {
+      "id": 88,
+      "category": "채소견과곡물",
+      "food": "오이",
+      "message": "오늘 점심에 오이 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "오이, 다다기, 생것",
+          "food_id": null,
+          "quantity_g": 150,
+          "portion": {
+            "display_name": "오이",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 150,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 150,
+              "회분": 150,
+              "인분": 150
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.28200000000651926,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "오이, 다다기, 생것",
+          "meal_type": "lunch",
+          "quantity_g": 150.0,
+          "calories": 19.5,
+          "protein_g": 1.6,
+          "carbs_g": 4.2,
+          "fat_g": 0.1,
+          "sodium_mg": 4.5,
+          "source": "csv",
+          "food_id": "csv:bbf2ae1262d55b36b2c7e67d",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "오이",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 150,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 150,
+                "회분": 150,
+                "인분": 150
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.287
+    },
+    {
+      "id": 89,
+      "category": "채소견과곡물",
+      "food": "당근",
+      "message": "오늘 점심에 당근 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "당근, 뿌리, 생것",
+          "food_id": null,
+          "quantity_g": 100,
+          "portion": {
+            "display_name": "당근",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 100,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 100,
+              "회분": 100,
+              "인분": 100
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.2960000000020955,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "당근, 뿌리, 생것",
+          "meal_type": "lunch",
+          "quantity_g": 100.0,
+          "calories": 31.0,
+          "protein_g": 1.0,
+          "carbs_g": 7.0,
+          "fat_g": 0.1,
+          "sodium_mg": 23.0,
+          "source": "csv",
+          "food_id": "csv:c673115926674bf755706ea3",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "당근",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 100,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 100,
+                "회분": 100,
+                "인분": 100
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.286
+    },
+    {
+      "id": 90,
+      "category": "채소견과곡물",
+      "food": "샐러드",
+      "message": "오늘 점심에 샐러드 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 2.046
+    },
+    {
+      "id": 91,
+      "category": "음료디저트",
+      "food": "우유",
+      "message": "오늘 점심에 우유 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "우유",
+          "food_id": null,
+          "quantity_g": 200,
+          "portion": {
+            "display_name": "우유",
+            "amount": 1,
+            "unit": "컵",
+            "unit_g": 200,
+            "default_unit": "컵",
+            "defaulted": true,
+            "unit_grams": {
+              "컵": 200,
+              "회분": 200,
+              "인분": 200
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.3129999999946449,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "우유",
+          "meal_type": "lunch",
+          "quantity_g": 200.0,
+          "calories": 134.0,
+          "protein_g": 6.2,
+          "carbs_g": 9.7,
+          "fat_g": 7.7,
+          "sodium_mg": 80.0,
+          "source": "csv",
+          "food_id": "csv:2b7e75051be2c51a0337cb5b",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "우유",
+              "amount": 1,
+              "unit": "컵",
+              "unit_g": 200,
+              "default_unit": "컵",
+              "defaulted": true,
+              "unit_grams": {
+                "컵": 200,
+                "회분": 200,
+                "인분": 200
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.309
+    },
+    {
+      "id": 92,
+      "category": "음료디저트",
+      "food": "저지방우유",
+      "message": "오늘 점심에 저지방우유 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "우유, 저지방우유",
+          "food_id": null,
+          "quantity_g": 200,
+          "portion": {
+            "display_name": "저지방우유",
+            "amount": 1,
+            "unit": "컵",
+            "unit_g": 200,
+            "default_unit": "컵",
+            "defaulted": true,
+            "unit_grams": {
+              "컵": 200,
+              "회분": 200,
+              "인분": 200
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.42199999999138527,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "우유, 저지방우유",
+          "meal_type": "lunch",
+          "quantity_g": 200.0,
+          "calories": 92.0,
+          "protein_g": 6.5,
+          "carbs_g": 9.9,
+          "fat_g": 2.9,
+          "sodium_mg": 80.0,
+          "source": "csv",
+          "food_id": "csv:675bafa346544bcc556609dd",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "저지방우유",
+              "amount": 1,
+              "unit": "컵",
+              "unit_g": 200,
+              "default_unit": "컵",
+              "defaulted": true,
+              "unit_grams": {
+                "컵": 200,
+                "회분": 200,
+                "인분": 200
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.43
+    },
+    {
+      "id": 93,
+      "category": "음료디저트",
+      "food": "플레인요거트",
+      "message": "오늘 점심에 플레인요거트 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "요구르트, 호상, 플레인",
+          "food_id": null,
+          "quantity_g": 100,
+          "portion": {
+            "display_name": "플레인요거트",
+            "amount": 1,
+            "unit": "회분",
+            "unit_g": 100,
+            "default_unit": "회분",
+            "defaulted": true,
+            "unit_grams": {
+              "회분": 100,
+              "인분": 100
+            },
+            "basis_note": "",
+            "representative": false,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.26500000001396984,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "요구르트, 호상, 플레인",
+          "meal_type": "lunch",
+          "quantity_g": 100.0,
+          "calories": 86.0,
+          "protein_g": 4.5,
+          "carbs_g": 9.7,
+          "fat_g": 3.2,
+          "sodium_mg": 56.0,
+          "source": "csv",
+          "food_id": "csv:8471985b2f94289e8c9857e0",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "플레인요거트",
+              "amount": 1,
+              "unit": "회분",
+              "unit_g": 100,
+              "default_unit": "회분",
+              "defaulted": true,
+              "unit_grams": {
+                "회분": 100,
+                "인분": 100
+              },
+              "basis_note": "",
+              "representative": false,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.271
+    },
+    {
+      "id": 94,
+      "category": "음료디저트",
+      "food": "아메리카노",
+      "message": "오늘 점심에 아메리카노 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "커피, 아메리카노(2샷)",
+          "food_id": null,
+          "quantity_g": 200,
+          "portion": {
+            "display_name": "아메리카노",
+            "amount": 1,
+            "unit": "컵",
+            "unit_g": 200,
+            "default_unit": "컵",
+            "defaulted": true,
+            "unit_grams": {
+              "컵": 200,
+              "회분": 200,
+              "인분": 200
+            },
+            "basis_note": "아메리카노 음식군 대표값(커피, 아메리카노(2샷))으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+            "food_group": "아메리카노",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.3120000000053551,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "커피, 아메리카노(2샷)",
+          "meal_type": "lunch",
+          "quantity_g": 200.0,
+          "calories": 4.0,
+          "protein_g": 0.0,
+          "carbs_g": 1.0,
+          "fat_g": 0.0,
+          "sodium_mg": 0.0,
+          "source": "csv",
+          "food_id": "csv:743e9b37b45631d92cfa2c3c",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "아메리카노",
+              "amount": 1,
+              "unit": "컵",
+              "unit_g": 200,
+              "default_unit": "컵",
+              "defaulted": true,
+              "unit_grams": {
+                "컵": 200,
+                "회분": 200,
+                "인분": 200
+              },
+              "basis_note": "아메리카노 음식군 대표값(커피, 아메리카노(2샷))으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+              "food_group": "아메리카노",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.308
+    },
+    {
+      "id": 95,
+      "category": "음료디저트",
+      "food": "카페라떼",
+      "message": "오늘 점심에 카페라떼 먹었어",
+      "outcome": "error",
+      "parser_route": "model_fallback",
+      "parsed_items": [],
+      "error_type": "ChatGoogleGenerativeAIError",
+      "usage": {
+        "model_calls": 1,
+        "tool_calls": 0
+      },
+      "memory_proposals_created": 0,
+      "core_wall_seconds": 3.408
+    },
+    {
+      "id": 96,
+      "category": "음료디저트",
+      "food": "오렌지주스",
+      "message": "오늘 점심에 오렌지주스 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "오렌지 주스",
+          "food_id": null,
+          "quantity_g": 200,
+          "portion": {
+            "display_name": "오렌지주스",
+            "amount": 1,
+            "unit": "컵",
+            "unit_g": 200,
+            "default_unit": "컵",
+            "defaulted": true,
+            "unit_grams": {
+              "컵": 200,
+              "회분": 200,
+              "인분": 200
+            },
+            "basis_note": "주스 음식군 대표값(오렌지 주스)으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+            "food_group": "주스",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.28200000000651926,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "오렌지 주스",
+          "meal_type": "lunch",
+          "quantity_g": 200.0,
+          "calories": 72.0,
+          "protein_g": 1.2,
+          "carbs_g": 19.0,
+          "fat_g": 0.1,
+          "sodium_mg": 4.0,
+          "source": "csv",
+          "food_id": "csv:8e4613f45209013d70193f56",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "오렌지주스",
+              "amount": 1,
+              "unit": "컵",
+              "unit_g": 200,
+              "default_unit": "컵",
+              "defaulted": true,
+              "unit_grams": {
+                "컵": 200,
+                "회분": 200,
+                "인분": 200
+              },
+              "basis_note": "주스 음식군 대표값(오렌지 주스)으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+              "food_group": "주스",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.279
+    },
+    {
+      "id": 97,
+      "category": "음료디저트",
+      "food": "콜라",
+      "message": "오늘 점심에 콜라 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "탄산 음료, 콜라",
+          "food_id": null,
+          "quantity_g": 200,
+          "portion": {
+            "display_name": "콜라",
+            "amount": 1,
+            "unit": "컵",
+            "unit_g": 200,
+            "default_unit": "컵",
+            "defaulted": true,
+            "unit_grams": {
+              "컵": 200,
+              "회분": 200,
+              "인분": 200
+            },
+            "basis_note": "탄산 음식군 대표값(탄산 음료, 콜라)으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+            "food_group": "탄산",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.2970000000204891,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "탄산 음료, 콜라",
+          "meal_type": "lunch",
+          "quantity_g": 200.0,
+          "calories": 76.0,
+          "protein_g": 0.0,
+          "carbs_g": 18.9,
+          "fat_g": 0.0,
+          "sodium_mg": 4.0,
+          "source": "csv",
+          "food_id": "csv:a52108df44924b7202b4a246",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "콜라",
+              "amount": 1,
+              "unit": "컵",
+              "unit_g": 200,
+              "default_unit": "컵",
+              "defaulted": true,
+              "unit_grams": {
+                "컵": 200,
+                "회분": 200,
+                "인분": 200
+              },
+              "basis_note": "탄산 음식군 대표값(탄산 음료, 콜라)으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+              "food_group": "탄산",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.293
+    },
+    {
+      "id": 98,
+      "category": "음료디저트",
+      "food": "제로콜라",
+      "message": "오늘 점심에 제로콜라 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "탄산 음료, 저칼로리콜라",
+          "food_id": null,
+          "quantity_g": 200,
+          "portion": {
+            "display_name": "제로콜라",
+            "amount": 1,
+            "unit": "컵",
+            "unit_g": 200,
+            "default_unit": "컵",
+            "defaulted": true,
+            "unit_grams": {
+              "컵": 200,
+              "회분": 200,
+              "인분": 200
+            },
+            "basis_note": "제로 탄산 음식군 대표값(탄산 음료, 저칼로리콜라)으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+            "food_group": "제로 탄산",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.28100000001722947,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "탄산 음료, 저칼로리콜라",
+          "meal_type": "lunch",
+          "quantity_g": 200.0,
+          "calories": 4.0,
+          "protein_g": 0.2,
+          "carbs_g": 0.6,
+          "fat_g": 0.1,
+          "sodium_mg": 16.0,
+          "source": "csv",
+          "food_id": "csv:fa984e8e78bb1aa59b80a174",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "제로콜라",
+              "amount": 1,
+              "unit": "컵",
+              "unit_g": 200,
+              "default_unit": "컵",
+              "defaulted": true,
+              "unit_grams": {
+                "컵": 200,
+                "회분": 200,
+                "인분": 200
+              },
+              "basis_note": "제로 탄산 음식군 대표값(탄산 음료, 저칼로리콜라)으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+              "food_group": "제로 탄산",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.282
+    },
+    {
+      "id": 99,
+      "category": "음료디저트",
+      "food": "바닐라아이스크림",
+      "message": "오늘 점심에 바닐라아이스크림 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "아이스크림, 바닐라맛",
+          "food_id": null,
+          "quantity_g": 70,
+          "portion": {
+            "display_name": "바닐라아이스크림",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 70,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 70,
+              "회분": 70,
+              "인분": 70
+            },
+            "basis_note": "아이스크림 음식군 대표값(아이스크림, 바닐라맛)으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+            "food_group": "아이스크림",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.3129999999946449,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "아이스크림, 바닐라맛",
+          "meal_type": "lunch",
+          "quantity_g": 70.0,
+          "calories": 125.3,
+          "protein_g": 3.5,
+          "carbs_g": 15.6,
+          "fat_g": 5.5,
+          "sodium_mg": 49.0,
+          "source": "csv",
+          "food_id": "csv:377b7e679e7f9227139a07e7",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "바닐라아이스크림",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 70,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 70,
+                "회분": 70,
+                "인분": 70
+              },
+              "basis_note": "아이스크림 음식군 대표값(아이스크림, 바닐라맛)으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+              "food_group": "아이스크림",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.307
+    },
+    {
+      "id": 100,
+      "category": "음료디저트",
+      "food": "돼지바아이스크림",
+      "message": "오늘 점심에 돼지바아이스크림 먹었어",
+      "outcome": "auto_card",
+      "parser_route": "deterministic",
+      "parsed_items": [
+        {
+          "canonical": "아이스크림, 바닐라맛",
+          "food_id": null,
+          "quantity_g": 70,
+          "portion": {
+            "display_name": "돼지바아이스크림",
+            "amount": 1,
+            "unit": "개",
+            "unit_g": 70,
+            "default_unit": "개",
+            "defaulted": true,
+            "unit_grams": {
+              "개": 70,
+              "회분": 70,
+              "인분": 70
+            },
+            "basis_note": "아이스크림 음식군 대표값(아이스크림, 바닐라맛)으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+            "food_group": "아이스크림",
+            "representative": true,
+            "policy_version": "simple-v4"
+          }
+        }
+      ],
+      "usage": {
+        "model_calls": 0,
+        "tool_calls": 2,
+        "elapsed_seconds": 0.2960000000020955,
+        "validation_attempts": 0,
+        "replans": 0
+      },
+      "response": "기본 분량으로 계산했어요. 실제 드신 양과 다르면 카드에서 수정해주세요. 확인 전에는 저장되지 않습니다.",
+      "meals": [
+        {
+          "food_name": "아이스크림, 바닐라맛",
+          "meal_type": "lunch",
+          "quantity_g": 70.0,
+          "calories": 125.3,
+          "protein_g": 3.5,
+          "carbs_g": 15.6,
+          "fat_g": 5.5,
+          "sodium_mg": 49.0,
+          "source": "csv",
+          "food_id": "csv:377b7e679e7f9227139a07e7",
+          "nutrition_metadata": {
+            "food_kind": "standard",
+            "manufacturer": "",
+            "basis_g": 100,
+            "basis_text": "100g",
+            "portion": {
+              "display_name": "돼지바아이스크림",
+              "amount": 1,
+              "unit": "개",
+              "unit_g": 70,
+              "default_unit": "개",
+              "defaulted": true,
+              "unit_grams": {
+                "개": 70,
+                "회분": 70,
+                "인분": 70
+              },
+              "basis_note": "아이스크림 음식군 대표값(아이스크림, 바닐라맛)으로 계산했어요. 실제 제품·재료와 다를 수 있어요.",
+              "food_group": "아이스크림",
+              "representative": true,
+              "policy_version": "simple-v4"
+            }
+          }
+        }
+      ],
+      "food_selection": null,
+      "events": [
+        {
+          "type": "simple_meal_calculated",
+          "items_count": 1
+        }
+      ],
+      "one_food_item": true,
+      "memory_proposals_created": 1,
+      "core_wall_seconds": 0.295
+    }
+  ],
+  "summary": {
+    "planned": 100,
+    "completed_attempts": 100,
+    "not_attempted": 0,
+    "auto_card_count": 57,
+    "auto_card_rate_planned": 0.57,
+    "outcomes": {
+      "auto_card": 57,
+      "error": 43
+    }
+  },
+  "limitations": [
+    "one attempt for each of100 distinct synthetic foods; not a population success rate",
+    "core Agent only; HTTP/UI/checkpointer/durable budget writes excluded",
+    "record_only food tools; coaching prefetch disabled and no profile/intake DB access",
+    "auto_card means a pending editable quote, not correct identity or nutrient accuracy",
+    "no speed improvement/p95 comparison or end-to-end public performance claim"
+  ],
+  "categories": {
+    "밥류": {
+      "planned": 10,
+      "completed_attempts": 10,
+      "not_attempted": 0,
+      "auto_card_count": 4,
+      "auto_card_rate_planned": 0.4,
+      "outcomes": {
+        "auto_card": 4,
+        "error": 6
+      }
+    },
+    "국찌개": {
+      "planned": 10,
+      "completed_attempts": 10,
+      "not_attempted": 0,
+      "auto_card_count": 1,
+      "auto_card_rate_planned": 0.1,
+      "outcomes": {
+        "auto_card": 1,
+        "error": 9
+      }
+    },
+    "고기류": {
+      "planned": 10,
+      "completed_attempts": 10,
+      "not_attempted": 0,
+      "auto_card_count": 5,
+      "auto_card_rate_planned": 0.5,
+      "outcomes": {
+        "auto_card": 5,
+        "error": 5
+      }
+    },
+    "생선해산물": {
+      "planned": 10,
+      "completed_attempts": 10,
+      "not_attempted": 0,
+      "auto_card_count": 1,
+      "auto_card_rate_planned": 0.1,
+      "outcomes": {
+        "auto_card": 1,
+        "error": 9
+      }
+    },
+    "반찬류": {
+      "planned": 10,
+      "completed_attempts": 10,
+      "not_attempted": 0,
+      "auto_card_count": 5,
+      "auto_card_rate_planned": 0.5,
+      "outcomes": {
+        "auto_card": 5,
+        "error": 5
+      }
+    },
+    "분식패스트푸드": {
+      "planned": 10,
+      "completed_attempts": 10,
+      "not_attempted": 0,
+      "auto_card_count": 8,
+      "auto_card_rate_planned": 0.8,
+      "outcomes": {
+        "auto_card": 8,
+        "error": 2
+      }
+    },
+    "빵류": {
+      "planned": 10,
+      "completed_attempts": 10,
+      "not_attempted": 0,
+      "auto_card_count": 10,
+      "auto_card_rate_planned": 1.0,
+      "outcomes": {
+        "auto_card": 10
+      }
+    },
+    "과일류": {
+      "planned": 10,
+      "completed_attempts": 10,
+      "not_attempted": 0,
+      "auto_card_count": 5,
+      "auto_card_rate_planned": 0.5,
+      "outcomes": {
+        "auto_card": 5,
+        "error": 5
+      }
+    },
+    "채소견과곡물": {
+      "planned": 10,
+      "completed_attempts": 10,
+      "not_attempted": 0,
+      "auto_card_count": 9,
+      "auto_card_rate_planned": 0.9,
+      "outcomes": {
+        "auto_card": 9,
+        "error": 1
+      }
+    },
+    "음료디저트": {
+      "planned": 10,
+      "completed_attempts": 10,
+      "not_attempted": 0,
+      "auto_card_count": 9,
+      "auto_card_rate_planned": 0.9,
+      "outcomes": {
+        "auto_card": 9,
+        "error": 1
+      }
+    }
+  },
+  "finished_at_utc": "2026-10-16T02:59:25.411028+00:00",
+  "evaluation_completed": true
+}

@@ -1,5 +1,8 @@
 # MetaDiet AI
 
+일반 음식 100종 점검: [자동 카드 57건·모델 결제 오류 43건·원인과 보완 계획](docs/food_catalog/COMMON_FOODS_100.md).
+
+
 베타 사용자에게 공유하기: [사용 안내·복사할 초대 문구·피드백 보내기](docs/BETA_USER_GUIDE.md) · [10~15분 테스트 시나리오·결과 양식](docs/BETA_TEST_SCENARIOS.md).
 
 제육볶음 입력 개선: [식약처 가정식 대표값·기본 200g·기입 질문 제거와 검증](docs/food_catalog/JEYUK_DEFAULT.md).
