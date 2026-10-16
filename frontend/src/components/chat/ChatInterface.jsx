@@ -16,6 +16,7 @@ const USER_ID = "17691249-f22f-4447-a6e4-fca7a8e57cc8";
 const AGENT_LABELS = {
   diet_logger: "🍽️ 식단 기록",
   strategy:    "💡 전략 추천",
+  goal:        "🎯 목표 검토",
   inbody:      "📊 인바디 분석",
   reporter:    "📋 주간 리포트",
   meal_plan:   "📋 식단 계획",
@@ -176,7 +177,9 @@ export default function ChatInterface({
   };
 
   const handleProgress = (event) => {
-    const step = { phase: event.phase || "progress", label: event.label || "처리 중", tool: event.tool };
+    const step = { phase: event.phase || "progress", label: event.label || "처리 중", tool: event.tool,
+      requestId:event.requestId, attemptId:event.attemptId, requestStartedAt:event.requestStartedAt,
+      receivedAt:event.receivedAt, local:event.local };
     const previous = progressRef.current;
     const last = previous[previous.length - 1];
     const next = last?.phase === step.phase && last?.label === step.label

@@ -1,6 +1,25 @@
-import { render, screen } from "@testing-library/react";
+import { act, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ProcessTrace from "./ProcessTrace";
+
+test('correlates presentation opportunity after two animation frames without reporting pixel paint', () => {
+  const frames = [];
+  const raf = jest.spyOn(window, 'requestAnimationFrame').mockImplementation(cb => {frames.push(cb); return frames.length;});
+  const cancel = jest.spyOn(window, 'cancelAnimationFrame').mockImplementation(() => {});
+  const log = jest.spyOn(console, 'info').mockImplementation(() => {});
+  const listener = jest.fn();
+  window.addEventListener('metadiet:request-timing', listener);
+  const steps = [{phase:'request_wait',label:'대기',requestId:'r',requestStartedAt:performance.now(),local:true}];
+  const {unmount} = render(<ProcessTrace running steps={steps} />);
+  expect(listener).not.toHaveBeenCalled();
+  act(() => frames.shift()());
+  expect(listener).not.toHaveBeenCalled();
+  act(() => frames.shift()());
+  expect(listener.mock.calls[0][0].detail).toMatchObject({request_id:'r',stage:'local_paint_opportunity'});
+  unmount();
+  window.removeEventListener('metadiet:request-timing', listener);
+  raf.mockRestore(); cancel.mockRestore(); log.mockRestore();
+});
 
 test('shows an immediate honest waiting state before the first server event', () => {
   const {rerender} = render(<ProcessTrace running steps={[]} />);

@@ -27,6 +27,9 @@ test("transport failure reconnects once with the same stream run id", async () =
   const first = JSON.parse(global.fetch.mock.calls[0][1].body);
   const second = JSON.parse(global.fetch.mock.calls[1][1].body);
   expect(second.stream_run_id).toBe(first.stream_run_id);
+  expect(global.fetch.mock.calls[0][1].headers['X-Request-ID']).toBe(first.stream_run_id);
+  expect(global.fetch.mock.calls[1][1].headers['X-Request-ID']).toBe(first.stream_run_id);
+  expect(global.fetch.mock.calls[1][1].headers['X-Attempt-ID']).not.toBe(global.fetch.mock.calls[0][1].headers['X-Attempt-ID']);
   expect(second.after_seq).toBe(0);
   expect(done).toHaveBeenCalledWith(completed);
 });

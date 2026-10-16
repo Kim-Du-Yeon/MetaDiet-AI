@@ -1,6 +1,5 @@
 """Cross-process serialization of checkpoint mutations for a conversation."""
 import json
-import logging
 import time
 from contextlib import asynccontextmanager
 from app.db.proposals import connection
@@ -37,8 +36,8 @@ async def serialized_stream(factory, user_id: str, thread_id: str):
         'label': '요청을 받았어요. 대화 실행 순서를 확인 중입니다.'}, ensure_ascii=False) + '\n\n'
     try:
         async with conversation_lock(user_id, thread_id):
-            logging.getLogger(__name__).warning('chat_preparation stage=conversation_lock elapsed_ms=%.3f',
-                (time.perf_counter() - started) * 1000)
+            from app.core.request_timing import timing
+            timing('conversation_lock', (time.perf_counter() - started) * 1000)
             yield 'data: ' + json.dumps({'type': 'progress', 'phase': 'checkpoint_restore',
                 'label': '저장된 대화 상태를 확인 중입니다.'}, ensure_ascii=False) + '\n\n'
             async for event in factory():

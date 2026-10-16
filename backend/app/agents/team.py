@@ -552,6 +552,29 @@ class DietTeam:
                             'validation_attempts': 0, 'replans': 0}}
         verified_context = await self.coaching_context()
         context_verified = bool(verified_context and verified_context.get("scope") == "fresh_current_request")
+        # Explicit read-only goal reviews need the goal specialist's existing read tools,
+        # not a model round trip to choose the already named specialist.
+        message = self.state.get('message', '')
+        read_only_goal = (self.decision_client is None and not self.delegations.get('goal', 0)
+            and not self.state.get('pending_proposal') and not self.state.get('awaiting_confirmation')
+            and '기록은 변경하지 마' in message
+            and bool(re.search(r'목표\s*(?:검토|진행)|근손실\s*위험', message)))
+        if read_only_goal:
+            from app.agents.execution_stream import emit_runtime_event
+            if self.budget.persist:
+                await self.budget.persist('delegate:goal')
+            self.delegations['goal'] = 1
+            await emit_runtime_event('execution_route', route='read_only_goal_direct')
+            await emit_runtime_event('delegated', agent='goal')
+            result = await run_agent(model=self.model_factory(),
+                instruction=BASE_INSTRUCTION + '\n담당: goal\n' + ROLE_INSTRUCTIONS['goal'] +
+                    '\n읽기 전용 목표 검토입니다. 최신 기록을 조회하고 필요한 영양 근거를 검토하세요. 기록이나 전략을 변경하지 마세요.',
+                request=json.dumps({'message':message, 'recent_messages':
+                    [str(m)[:2000] for m in self.state.get('messages', [])[-10:]]}, ensure_ascii=False),
+                tools=[tool for tool in self.tools('goal') if tool.effect == 'read'],
+                allowed_tools=self.allowed, budget=self.budget, config=self.config, agent_name='goal')
+            self.events.extend({**event, 'agent':'goal'} for event in result.events)
+            return await self.finalize_result(result, 'goal')
         roles = self.delegate_roles()
         delegates = []
         for role in roles:

@@ -1,4 +1,5 @@
 import { consumeEventStream } from "./eventStream";
+import { reportRequestTiming } from './requestTiming';
 export const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
 
 // 인증은 Authorization 헤더(Supabase JWT)가 담당한다. 아래 함수들의 `userId`
@@ -119,27 +120,39 @@ export function updateAdminFeedback(id, payload) {
 }
 
 function newStreamRunId() {
-  return window.crypto?.randomUUID?.() || `${Date.now()}-${Math.random().toString(16).slice(2)}`;
+  return analyticsUuid();
 }
 
 async function postEventStream(path, body, onToken, onDone, onProgress) {
   const streamRunId = newStreamRunId();
+  const started = performance.now();
+  const progressTiming = {firstSeen:false};
+  onProgress?.({phase:'request_wait', label:'상담 요청을 처리하고 있어요. 서버 응답을 기다리는 중입니다.',
+    requestId:streamRunId, requestStartedAt:started, receivedAt:started, local:true});
   let afterSeq = 0;
   for (let attempt = 0; attempt < 2; attempt += 1) {
+    const attemptId = analyticsUuid();
+    const ids = {requestId:streamRunId, attemptId};
+    reportRequestTiming(ids, 'fetch_start', started);
     try {
       const response = await fetch(`${BASE_URL}${path}`, {
         method: "POST",
-        headers: authHeaders({ "Content-Type": "application/json" }),
+        headers: authHeaders({ "Content-Type": "application/json", 'X-Request-ID':streamRunId, 'X-Attempt-ID':attemptId }),
         body: JSON.stringify({ ...body, stream_run_id: streamRunId, after_seq: afterSeq,
           ...(path === '/chat' ? { stream_protocol: 2, stream_reconnect: attempt > 0 } : {}) }),
       });
+      reportRequestTiming(ids, 'response_headers', started, {status:response.status});
       await consumeEventStream(response, data => {
-        if (data.type === "progress") onProgress?.(data);
+        if (data.type === "progress") {
+          if (!progressTiming.firstSeen) { progressTiming.firstSeen = true; reportRequestTiming(ids, 'first_server_progress', started); }
+          onProgress?.({...data, requestId:streamRunId, attemptId, requestStartedAt:started, receivedAt:performance.now()});
+        }
         if (data.type === "token" || data.type === "answer_delta") onToken(data.content);
-        if (data.type === "done" || data.type === "completed") onDone(data);
+        if (data.type === "done" || data.type === "completed") { reportRequestTiming(ids, 'completed', started); onDone(data); }
       }, { afterSeq });
       return;
     } catch (error) {
+      reportRequestTiming(ids, 'attempt_failed', started, {error_type:error.name});
       afterSeq = error.lastSeq ?? afterSeq;
       const retryable = error instanceof TypeError || error.message.includes("완전히");
       if (attempt === 1 || !retryable) throw error;

@@ -38,12 +38,17 @@ def capture(token, payload):
     started = time.perf_counter()
     row = {'status':'failed','first_answer_ms':None,'answer':'','usage':{},'stage_timings_ms':{}}
     req = request.Request(API+'/chat',data=json.dumps(payload).encode(),method='POST',
-                          headers={'Authorization':'Bearer '+token,'Content-Type':'application/json'})
+                          headers={'Authorization':'Bearer '+token,'Content-Type':'application/json',
+                                   'X-Request-ID':payload.get('stream_run_id', str(uuid4())), 'X-Attempt-ID':str(uuid4())})
     try:
         with request.urlopen(req,timeout=180) as response:
+            row['response_headers_ms'] = (time.perf_counter()-started)*1000
             for line in response:
                 if not line.startswith(b'data:'): continue
                 event = json.loads(line[5:])
+                row.setdefault('first_event_ms', (time.perf_counter()-started)*1000)
+                if event['type'] == 'progress':
+                    row.setdefault('first_progress_ms', (time.perf_counter()-started)*1000)
                 if event['type']=='started':
                     row.update(build=event.get('build'), trace_id=event.get('trace_id'))
                 if event['type']=='answer_delta':

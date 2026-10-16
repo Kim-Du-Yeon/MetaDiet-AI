@@ -60,8 +60,13 @@ def main():
     parser.add_argument('--probe',action='store_true',help='One separately recorded deployment warm-up, outside the 100')
     parser.add_argument('--folder', default='docs/budget_public')
     parser.add_argument('--expected-commit', default=COMMIT)
-    parser.add_argument('--experiment', choices=['budget', 'brief', 'model', 'tool_free', 'sdk', 'transport'], default='budget')
+    parser.add_argument('--experiment', choices=['budget', 'brief', 'model', 'tool_free', 'sdk', 'transport', 'startup'], default='budget')
     args = parser.parse_args()
+    if args.experiment == 'startup':
+        QUESTIONS[:] = ['점심 추천해줘. 조언만 하고 기록은 변경하지 마.',
+            '감량과 근육 유지를 위해 목표 검토와 영양 근거 검토를 함께 해줘. 기록은 변경하지 마.',
+            '그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 기록은 변경하지 마.',
+            '최근 식사와 체중 추세를 확인하고 목표 진행과 근손실 위험을 검토해줘. 기록은 변경하지 마.']
     FOLDER = ROOT / args.folder
     COMMIT = args.expected_commit
     load_env(ROOT/'backend/.env')

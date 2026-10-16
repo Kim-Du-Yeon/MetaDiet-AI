@@ -48,6 +48,8 @@ import json, asyncio, time, logging
 logger = logging.getLogger(__name__)
 
 app = FastAPI(title="Diet Agent API", version="1.0.0", lifespan=lifespan)
+from app.core.request_timing import RequestTimingMiddleware, request_ids, timing as request_timing
+app.add_middleware(RequestTimingMiddleware)
 from app.api.routes.admin_feedback import router as admin_feedback_router
 app.include_router(admin_feedback_router)
 sb  = get_supabase()
@@ -56,6 +58,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins(),
     allow_credentials=True, allow_methods=["*"], allow_headers=["*"],
+    expose_headers=['X-Request-ID', 'X-Attempt-ID'],
 )
 
 
@@ -280,13 +283,13 @@ async def _invoke_with_progress(graph, graph_input, config: dict, journal: Execu
     trace_id = uuid4()
     build = build_info()
     invocation_config = {**config, "run_id": trace_id,
-                         "metadata": {**config.get("metadata", {}), "trace_id": str(trace_id),
+                         "metadata": {**config.get("metadata", {}), **request_ids.get(), "trace_id": str(trace_id),
                                       'build_commit': build['commit'], 'delivery': build['delivery']}}
     async def sink(kind: str, payload: dict):
         if kind == 'model_started' and 'first_model_started_ms' not in journal.diagnostics:
             elapsed = (time.perf_counter() - invocation_started) * 1000
             journal.diagnostics['first_model_started_ms'] = round(elapsed, 3)
-            logging.getLogger(__name__).warning('chat_preparation stage=first_model_started elapsed_ms=%.3f', elapsed)
+            request_timing('first_model_started', elapsed)
         if kind == 'sdk_provider_ready':
             key = 'provider_cache_hits' if payload['reused'] else 'provider_constructions'
             journal.diagnostics[key] = journal.diagnostics.get(key, 0) + 1
@@ -313,7 +316,7 @@ async def _invoke_with_progress(graph, graph_input, config: dict, journal: Execu
             stage = payload['stage']
             journal.timings[stage] = round(journal.timings.get(stage, 0) + payload['elapsed_ms'], 3)
             if stage.startswith(('sdk_prepare_', 'tool_bind_', 'model_budget_', 'budget_storage')):
-                logging.getLogger(__name__).warning('chat_preparation stage=%s elapsed_ms=%.3f', stage, payload['elapsed_ms'])
+                request_timing(stage, payload['elapsed_ms'])
             return
         progress = progress_for_runtime_event(kind, **payload)
         if progress:
@@ -518,8 +521,7 @@ async def chat(req: ChatRequest, current_user: str = Depends(get_current_user)):
         try:
             snap = await graph.aget_state(config)
         finally:
-            logging.getLogger(__name__).warning('chat_preparation stage=checkpoint_restore elapsed_ms=%.3f',
-                (time.perf_counter() - preparation_started) * 1000)
+            request_timing('checkpoint_restore', (time.perf_counter() - preparation_started) * 1000)
         sv_now = _sv(snap)
         if (_v2(config) and (req.stream_reconnect or req.after_seq > 0)
                 and sv_now.get('run_id') != stream_run_id):
