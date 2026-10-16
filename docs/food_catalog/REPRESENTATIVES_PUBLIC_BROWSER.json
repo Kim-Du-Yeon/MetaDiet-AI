@@ -1,0 +1,86 @@
+{
+  "verified_on": "2026-10-16",
+  "scope": "public_browser_functional_synthetic_input_no_confirm",
+  "initial_runtime_commit": "d2b65400e7f0bead98e0e737bdda6686a5216462",
+  "patched_runtime_commit": "1d48676d921bc76ebc83c2931f61feb403276818",
+  "input": "오늘 점심에 김치 찌개 간장불고기 김치볶음밥 먹었어",
+  "initial_reload_failed": true,
+  "root_cause": "App recreated date-based thread ID on reload; active thread pointer existed only in React state",
+  "fix": "auth-owner scoped sessionStorage opaque thread pointer; restore-before-chat gate; ignore previous-owner async callbacks",
+  "patched_steps": [
+    {
+      "step": "default_portions",
+      "grams": [
+        200,
+        200,
+        300
+      ],
+      "total_kcal": 995,
+      "manual_nutrition_or_manufacturer_selection": false
+    },
+    {
+      "step": "revise_first_portion",
+      "amount": 1.5,
+      "unit": "인분",
+      "grams": [
+        300,
+        200,
+        300
+      ],
+      "total_kcal": 1056
+    },
+    {
+      "step": "exclude_bulgogi",
+      "grams": [
+        300,
+        300
+      ],
+      "total_kcal": 684,
+      "excluded": [
+        "간장불고기"
+      ]
+    },
+    {
+      "step": "reload_pending",
+      "version": 4,
+      "grams": [
+        300,
+        300
+      ],
+      "total_kcal": 684,
+      "excluded_preserved": true
+    },
+    {
+      "step": "cancel_button",
+      "message": "실제 섭취 기록을 취소했습니다.",
+      "pending_card_removed": true
+    },
+    {
+      "step": "reload_cancelled",
+      "pending_card_absent": true,
+      "conversation_preserved": true
+    }
+  ],
+  "confirmed_intake_unchanged": true,
+  "confirm_button_clicked": false,
+  "initial_orphan_cleanup": {
+    "synthetic_pending_cancelled_via_existing_repository": 1,
+    "confirmed_intake_unchanged": true,
+    "not_counted_as_browser_cancel": true
+  },
+  "verification": {
+    "frontend_suites_passed": 28,
+    "frontend_tests_passed": 99,
+    "frontend_exit_code": 0,
+    "build_exit_code": 0,
+    "jest_cache_drive": "D",
+    "jest_test_timeout_ms": 15000
+  },
+  "limits": [
+    "functional browser smoke, not 100-case accuracy/latency evidence",
+    "no token streaming/model coaching verification",
+    "no browser close/login/logout flow claimed",
+    "storage blocked or cleared cannot preserve pointer",
+    "no private user IDs, tokens, goals or actual intake published"
+  ]
+}

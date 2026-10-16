@@ -1,5 +1,10 @@
 # 2026-10-09 upgrade verification
 
+## Public browser representative flow and thread recovery (2026-10-16)
+
+[Evidence and captures](docs/food_catalog/REPRESENTATIVES_PUBLIC_BROWSER.md): API/web d2b6540 initially verified; default grams200/200/300,total995; revise1056,exclude684. Reload exposed date-based thread reset. Patched owner-scoped tab-session pointer and stale-owner UI callback guards; public API/web1d48676 verified. Same V4/modified grams/exclusions/684 restored on reload, actual cancel and reload-without-pending passed, intake fingerprint unchanged. Frontend99 tests/28 suites and build passed. Functional synthetic browser smoke, not speed/accuracy or actual user outcome evidence.
+
+
 ## Common-food representative coverage, frozen100 (2026-10-16)
 
 [Evidence and limits](docs/food_catalog/COMMON_REPRESENTATIVES_IMPROVEMENT.md): same100 distinct synthetic foods,100 attempts each condition. Automatic pending quote57→100; candidate0 model calls/errors/domain writes. Baseline43 model failures came from depleted prepaid credits (HTTP402); this is coverage expansion, not nutrient accuracy, normal-provider final success or latency improvement. Registry47 representatives/106 input forms,40 official generic dish rows plus7 CSV links. Exact dish/ingredient collision, mixed quantities and product approval regressions included.

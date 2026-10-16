@@ -1,5 +1,8 @@
 # MetaDiet AI
 
+공개 브라우저 검증: [최신 배포·기본 분량·수정·제외·취소·새로고침 복구와 캡처](docs/food_catalog/REPRESENTATIVES_PUBLIC_BROWSER.md).
+
+
 일반 음식 자동 입력 보강: [동일 100종 자동 카드 57→100건·대표 연결·잘못된 대체 수정·크레딧 한계](docs/food_catalog/COMMON_REPRESENTATIVES_IMPROVEMENT.md).
 
 
