@@ -27,3 +27,12 @@ async def test_goal_change_without_readonly_instruction_retains_supervisor():
     result = await team.execute()
     assert result['agent_used'] == 'supervisor'
     assert 'delegate_goal' in str(model.schemas)
+
+
+async def test_readonly_trend_without_explicit_evidence_request_retains_supervisor():
+    model = Model([AIMessage(content='추세 검토 결과입니다.')])
+    team = DietTeam({'user_id':'u1','message':'최근 식사와 체중 추세를 확인하고 목표 진행과 근손실 위험을 검토해줘. 기록은 변경하지 마.'},
+        model_factory=lambda:model, repository=AsyncMock(), db=object())
+    result = await team.execute()
+    assert result['agent_used'] == 'supervisor'
+    assert 'delegate_goal' in str(model.schemas)

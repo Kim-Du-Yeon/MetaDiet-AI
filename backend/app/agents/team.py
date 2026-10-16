@@ -558,6 +558,7 @@ class DietTeam:
         read_only_goal = (self.decision_client is None and not self.delegations.get('goal', 0)
             and not self.state.get('pending_proposal') and not self.state.get('awaiting_confirmation')
             and '기록은 변경하지 마' in message
+            and '영양 근거' in message
             and bool(re.search(r'목표\s*(?:검토|진행)|근손실\s*위험', message)))
         if read_only_goal:
             from app.agents.execution_stream import emit_runtime_event
