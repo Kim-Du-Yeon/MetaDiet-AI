@@ -1,0 +1,47 @@
+{
+  "scope": "single live browser functional smoke, not performance comparison",
+  "rows": [
+    {
+      "request_id": "07f273fd-de51-4ffa-abaa-17b4f0e1b5a4",
+      "attempt_id": "dd67ca98-15d6-4405-85ed-0e60761a463f",
+      "stage": "fetch_start",
+      "elapsed_ms": 0.2,
+      "visibility": "visible"
+    },
+    {
+      "request_id": "07f273fd-de51-4ffa-abaa-17b4f0e1b5a4",
+      "stage": "local_paint_opportunity",
+      "elapsed_ms": 16.9,
+      "visibility": "visible"
+    },
+    {
+      "request_id": "07f273fd-de51-4ffa-abaa-17b4f0e1b5a4",
+      "attempt_id": "dd67ca98-15d6-4405-85ed-0e60761a463f",
+      "stage": "response_headers",
+      "elapsed_ms": 828.1,
+      "visibility": "visible",
+      "status": 200
+    },
+    {
+      "request_id": "07f273fd-de51-4ffa-abaa-17b4f0e1b5a4",
+      "attempt_id": "dd67ca98-15d6-4405-85ed-0e60761a463f",
+      "stage": "first_server_progress",
+      "elapsed_ms": 829.1,
+      "visibility": "visible"
+    },
+    {
+      "request_id": "07f273fd-de51-4ffa-abaa-17b4f0e1b5a4",
+      "attempt_id": "dd67ca98-15d6-4405-85ed-0e60761a463f",
+      "stage": "server_progress_paint_opportunity",
+      "elapsed_ms": 866.4,
+      "visibility": "visible"
+    },
+    {
+      "request_id": "07f273fd-de51-4ffa-abaa-17b4f0e1b5a4",
+      "attempt_id": "dd67ca98-15d6-4405-85ed-0e60761a463f",
+      "stage": "completed",
+      "elapsed_ms": 25725.7,
+      "visibility": "visible"
+    }
+  ]
+}

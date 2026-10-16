@@ -1,5 +1,11 @@
 # 2026-10-09 upgrade status
 
+## Request-correlated startup diagnostics (2026-10-16)
+
+Chat transport sends a stable UUID X-Request-ID matching stream_run_id and a new X-Attempt-ID on reconnect. A pure ASGI middleware validates/echoes these non-authorizing IDs, measures response headers/first body, and propagates ContextVar correlation into synchronous auth dependencies, preparation logs and LangSmith invocation metadata. Browser event/console diagnostics measure fetch/headers/progress and double-rAF presentation opportunities (not guaranteed pixel paint). No text/health/token values enter these diagnostics. See [frozen public startup evaluation](docs/request_startup/README.md).
+
+An explicit read-only goal review naming nutrition evidence can route directly to the existing goal specialist when no proposal/approval or prior goal delegation is pending. It exposes read tools only and shares durable budget/delegation counters and final evidence guards. Requests without explicit evidence review and write/ambiguous requests retain Supervisor handling. No cross-request health-data cache was introduced. The initially broader candidate regressed, so only the narrowed condition was retained after the public100-pair gate.
+
 ## First recommendation optimization (2026-10-13)
 
 `simple_recommendation` uses a full-message allowlist for simple today breakfast/lunch/dinner advice. Only fresh verified request context enables direct read-only meal execution. `FIRST_COACHING_MODE=low` removes Supervisor delegation and uses low thinking; `default` retains provider reasoning, `off` restores delegation. Complex plans, mutations, pending approvals and failed context reads keep the existing path. No cross-request intake cache. [Evidence and rollback](docs/first_coaching/README.md).

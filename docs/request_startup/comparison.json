@@ -1,0 +1,158 @@
+{
+  "scope": "public synthetic API4 fixed questions x25; concurrency4; no browser-paint comparison",
+  "before": {
+    "attempts": 100,
+    "statuses": {
+      "completed": 75,
+      "blocked": 25
+    },
+    "external_error_attempts": 7,
+    "evidence_policy_holds": 25,
+    "runtime_blocked": 0,
+    "fresh_numeric_match": 75,
+    "no_domain_writes": true,
+    "first_progress": {
+      "observed": 100,
+      "missing": 0,
+      "median_ms": 368.824,
+      "p95_ms": 847.873,
+      "max_ms": 1249.235
+    },
+    "completion_all_attempts": {
+      "observed": 100,
+      "missing": 0,
+      "median_ms": 25232.76,
+      "p95_ms": 40950.551,
+      "max_ms": 93349.347
+    },
+    "model_calls_mean": 3.27,
+    "by_case": {
+      "0": {
+        "statuses": {
+          "completed": 25
+        },
+        "completion": {
+          "observed": 25,
+          "missing": 0,
+          "median_ms": 18906.64,
+          "p95_ms": 25386.844,
+          "max_ms": 25708.396
+        }
+      },
+      "1": {
+        "statuses": {
+          "blocked": 25
+        },
+        "completion": {
+          "observed": 25,
+          "missing": 0,
+          "median_ms": 34859.545,
+          "p95_ms": 51150.713,
+          "max_ms": 93349.347
+        }
+      },
+      "2": {
+        "statuses": {
+          "completed": 25
+        },
+        "completion": {
+          "observed": 25,
+          "missing": 0,
+          "median_ms": 19205.008,
+          "p95_ms": 28242.526,
+          "max_ms": 32396.95
+        }
+      },
+      "3": {
+        "statuses": {
+          "completed": 25
+        },
+        "completion": {
+          "observed": 25,
+          "missing": 0,
+          "median_ms": 26995.173,
+          "p95_ms": 30615.025,
+          "max_ms": 31308.734
+        }
+      }
+    }
+  },
+  "after": {
+    "attempts": 100,
+    "statuses": {
+      "completed": 75,
+      "blocked": 25
+    },
+    "external_error_attempts": 2,
+    "evidence_policy_holds": 25,
+    "runtime_blocked": 0,
+    "fresh_numeric_match": 75,
+    "no_domain_writes": true,
+    "first_progress": {
+      "observed": 100,
+      "missing": 0,
+      "median_ms": 319.824,
+      "p95_ms": 884.71,
+      "max_ms": 1390.968
+    },
+    "completion_all_attempts": {
+      "observed": 100,
+      "missing": 0,
+      "median_ms": 24875.066,
+      "p95_ms": 30428.442,
+      "max_ms": 33975.795
+    },
+    "model_calls_mean": 2.81,
+    "by_case": {
+      "0": {
+        "statuses": {
+          "completed": 25
+        },
+        "completion": {
+          "observed": 25,
+          "missing": 0,
+          "median_ms": 19202.457,
+          "p95_ms": 22595.463,
+          "max_ms": 25353.836
+        }
+      },
+      "1": {
+        "statuses": {
+          "blocked": 25
+        },
+        "completion": {
+          "observed": 25,
+          "missing": 0,
+          "median_ms": 26311.86,
+          "p95_ms": 30732.67,
+          "max_ms": 33975.795
+        }
+      },
+      "2": {
+        "statuses": {
+          "completed": 25
+        },
+        "completion": {
+          "observed": 25,
+          "missing": 0,
+          "median_ms": 21475.073,
+          "p95_ms": 28309.017,
+          "max_ms": 31485.895
+        }
+      },
+      "3": {
+        "statuses": {
+          "completed": 25
+        },
+        "completion": {
+          "observed": 25,
+          "missing": 0,
+          "median_ms": 28318.261,
+          "p95_ms": 31008.441,
+          "max_ms": 33649.844
+        }
+      }
+    }
+  },
+  "candidate_gate_passed": true
+}

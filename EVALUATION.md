@@ -1,5 +1,9 @@
 # 2026-10-09 upgrade verification
 
+## Request-correlated startup, public frozen100 pairs (2026-10-16)
+
+[Protocol, raw rows, rejected pilot and browser evidence](docs/request_startup/README.md). Same4 synthetic cases×25, concurrency4, real public API/model/DB, all failures/holds retained. Completion median25.233→24.875s/p9540.951→30.428s; mean model calls3.27→2.81. First progress p950.848→0.885s, max1.249→1.391s: original20s pre-progress delay not reproduced. Both numeric-match75/100 (75/75 answered,25 evidence holds), HTTP/capture failures0, external-error attempts7→2, domain snapshots unchanged. Narrowed explicit read-only goal/evidence direct route passed the stored candidate gate; initial broader pilot regressed and was not adopted. Browser double-rAF16.9ms and server progress829.1ms are single functional observations, not a100-browser performance comparison or guaranteed pixel paint. Request/attempt UUID verified across browser, Render and production LangSmith root metadata. Reused development cases, not independent quality/clinical or real-user evidence. Backend1347 passed/1existing skip, frontend104/build passed.
+
 ## Public browser representative flow and thread recovery (2026-10-16)
 
 [Evidence and captures](docs/food_catalog/REPRESENTATIVES_PUBLIC_BROWSER.md): API/web d2b6540 initially verified; default grams200/200/300,total995; revise1056,exclude684. Reload exposed date-based thread reset. Patched owner-scoped tab-session pointer and stale-owner UI callback guards; public API/web1d48676 verified. Same V4/modified grams/exclusions/684 restored on reload, actual cancel and reload-without-pending passed, intake fingerprint unchanged. Frontend99 tests/28 suites and build passed. Functional synthetic browser smoke, not speed/accuracy or actual user outcome evidence.

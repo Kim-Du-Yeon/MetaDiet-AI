@@ -1,5 +1,7 @@
 # MetaDiet AI
 
+요청 시작 지연 계측: [요청 ID·브라우저 표시 기회·API/Agent 연결·공개 고정 평가](docs/request_startup/README.md).
+
 공개 브라우저 검증: [최신 배포·기본 분량·수정·제외·취소·새로고침 복구와 캡처](docs/food_catalog/REPRESENTATIVES_PUBLIC_BROWSER.md).
 
 

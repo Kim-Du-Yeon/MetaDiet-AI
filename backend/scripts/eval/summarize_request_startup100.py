@@ -20,6 +20,9 @@ def summarize(report):
             'p95_ms':round(values[math.ceil(.95*len(values))-1],3) if values else None,
             'max_ms':round(max(values),3) if values else None}
     return {'attempts':100, 'statuses':dict(collections.Counter(r['status'] for r in rows)),
+        'external_error_attempts':sum(bool(r.get('external_failures')) for r in rows),
+        'evidence_policy_holds':sum('근거 기준을 통과하지 못해' in r.get('answer','') for r in rows),
+        'runtime_blocked':sum(r['status']=='blocked' and '근거 기준을 통과하지 못해' not in r.get('answer','') for r in rows),
         'fresh_numeric_match':sum(r['fresh_numeric_match'] for r in rows),
         'no_domain_writes':report['domain_unchanged'],
         'first_progress':metric('first_progress_ms'), 'completion_all_attempts':metric('total_ms'),
@@ -39,7 +42,10 @@ def main():
         and a['completion_all_attempts']['p95_ms'] <= b['completion_all_attempts']['p95_ms']
         and a['fresh_numeric_match'] >= b['fresh_numeric_match']
         and a['statuses'].get('failed',0) <= b['statuses'].get('failed',0)
-        and a['statuses'].get('blocked',0) <= b['statuses'].get('blocked',0))
+        and a['statuses'].get('blocked',0) <= b['statuses'].get('blocked',0)
+        and a['external_error_attempts'] <= b['external_error_attempts']
+        and a['first_progress']['missing'] == 0
+        and a['first_progress']['p95_ms'] <= 1.2 * b['first_progress']['p95_ms'])
     (FOLDER/'comparison.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps(result,ensure_ascii=False))
 
