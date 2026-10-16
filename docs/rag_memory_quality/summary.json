@@ -1,0 +1,310 @@
+{
+  "scope": "live Pinecone retrieval using frozen cached Gemini query vectors; generation/judging blocked402",
+  "identity": "f002499e0bedd8262e36a7a4286d1ec375d1ae96c7728a4c8606cb038636fd52",
+  "unique_questions": 40,
+  "fact_groups": 20,
+  "attempts_per_condition": 120,
+  "results": {
+    "dense_fallback": {
+      "attempts": 120,
+      "completed": 120,
+      "failures": 0,
+      "page_hit_rate": 0.75,
+      "supported_correct_rate": null,
+      "judge_coverage": 0.0,
+      "grounded_rate": 1.0,
+      "completed_p50_seconds": 0.41988110000966117,
+      "completed_p95_seconds": 0.5396896000020206,
+      "all_attempt_p95_seconds": 0.5396896000020206,
+      "source_hit": 1.0,
+      "page_hit": 0.75,
+      "delivered_page_hit": 0.75,
+      "excerpt_hit": 0.75,
+      "grounded": 1.0,
+      "mean_mrr": 0.625,
+      "languages": {
+        "en": {
+          "source_hit": 1.0,
+          "page_hit": 0.75,
+          "delivered_page_hit": 0.75,
+          "excerpt_hit": 0.75,
+          "grounded": 1.0
+        },
+        "ko": {
+          "source_hit": 1.0,
+          "page_hit": 0.75,
+          "delivered_page_hit": 0.75,
+          "excerpt_hit": 0.75,
+          "grounded": 1.0
+        }
+      },
+      "peak_process_rss_bytes": 137347072,
+      "peak_end_private_bytes": 106242048
+    },
+    "hybrid": {
+      "attempts": 120,
+      "completed": 120,
+      "failures": 0,
+      "page_hit_rate": 0.8,
+      "supported_correct_rate": null,
+      "judge_coverage": 0.0,
+      "grounded_rate": 1.0,
+      "completed_p50_seconds": 0.49046599998837337,
+      "completed_p95_seconds": 0.7248269999981858,
+      "all_attempt_p95_seconds": 0.7248269999981858,
+      "source_hit": 1.0,
+      "page_hit": 0.8,
+      "delivered_page_hit": 0.8,
+      "excerpt_hit": 0.775,
+      "grounded": 1.0,
+      "mean_mrr": 0.5604166666666667,
+      "languages": {
+        "en": {
+          "source_hit": 1.0,
+          "page_hit": 0.7,
+          "delivered_page_hit": 0.7,
+          "excerpt_hit": 0.7,
+          "grounded": 1.0
+        },
+        "ko": {
+          "source_hit": 1.0,
+          "page_hit": 0.9,
+          "delivered_page_hit": 0.9,
+          "excerpt_hit": 0.85,
+          "grounded": 1.0
+        }
+      },
+      "peak_process_rss_bytes": 724791296,
+      "peak_end_private_bytes": 833040384
+    }
+  },
+  "page_hit_delta": -0.050000000000000044,
+  "excerpt_hit_delta": -0.025000000000000022,
+  "retrieval_development_screen_passed": true,
+  "answer_quality_comparison": null,
+  "statistical_noninferiority_claim": false,
+  "differences": [
+    {
+      "id": "energy_balance-ko",
+      "dense_page_hit": false,
+      "hybrid_page_hit": true,
+      "acceptable_evidence": [
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "pdf_pages": [
+            48
+          ],
+          "core_excerpt": "섭취 에너지 = 소비 에너지"
+        }
+      ],
+      "dense_sources": [
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 79
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 44
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 73
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 342
+        }
+      ],
+      "hybrid_sources": [
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 48
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 44
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 47
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 73
+        }
+      ]
+    },
+    {
+      "id": "eer_rounding-ko",
+      "dense_page_hit": false,
+      "hybrid_page_hit": true,
+      "acceptable_evidence": [
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "pdf_pages": [
+            44
+          ],
+          "core_excerpt": "100 kcal"
+        }
+      ],
+      "dense_sources": [
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 64
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 64
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 69
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 62
+        }
+      ],
+      "hybrid_sources": [
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 64
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 64
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 69
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 44
+        }
+      ]
+    },
+    {
+      "id": "activity_reference-ko",
+      "dense_page_hit": false,
+      "hybrid_page_hit": true,
+      "acceptable_evidence": [
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "pdf_pages": [
+            44
+          ],
+          "core_excerpt": "저활동적"
+        }
+      ],
+      "dense_sources": [
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 68
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 67
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 59
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 79
+        }
+      ],
+      "hybrid_sources": [
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 68
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 67
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 59
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 44
+        }
+      ]
+    },
+    {
+      "id": "comorbidity_screen-en",
+      "dense_page_hit": true,
+      "hybrid_page_hit": false,
+      "acceptable_evidence": [
+        {
+          "source": "guideline2022_vol8.pdf",
+          "pdf_pages": [
+            4
+          ],
+          "core_excerpt": "이상지질혈증"
+        }
+      ],
+      "dense_sources": [
+        {
+          "source": "guideline2022_vol8.pdf",
+          "page": 5
+        },
+        {
+          "source": "guideline2022_vol8.pdf",
+          "page": 4
+        },
+        {
+          "source": "guideline2022_vol8.pdf",
+          "page": 5
+        },
+        {
+          "source": "guideline2022_vol8.pdf",
+          "page": 10
+        }
+      ],
+      "hybrid_sources": [
+        {
+          "source": "WHO_carbohydrate_2023.pdf",
+          "page": 33
+        },
+        {
+          "source": "WHO_sugars_2015.pdf",
+          "page": 14
+        },
+        {
+          "source": "guideline2022_vol8.pdf",
+          "page": 5
+        },
+        {
+          "source": "WHO_total_fat_2023.pdf",
+          "page": 62
+        }
+      ]
+    }
+  ],
+  "memory": {
+    "elapsed_seconds": 7200.016000000003,
+    "attempts": 720,
+    "failures": 0,
+    "memory_errors": 0,
+    "started_at_utc": "2026-10-16T08:14:43.564246+00:00",
+    "ended_at_utc": "2026-10-16T10:14:43.445964+00:00",
+    "screen": {
+      "passed": true,
+      "gates": {
+        "duration": true,
+        "workload": true,
+        "failure_rate": true,
+        "sample_coverage": true,
+        "headroom": true,
+        "warmed_growth": true,
+        "no_local_tokenizer": true,
+        "no_memory_errors": true
+      },
+      "warmed_private_growth_bytes": 2269184
+    }
+  }
+}

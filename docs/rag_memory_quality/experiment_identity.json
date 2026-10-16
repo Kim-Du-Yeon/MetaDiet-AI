@@ -1,0 +1,25 @@
+{
+  "git_base": "3a5d2aa0b8f88e52582af0184535186fa2261cc9",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.10",
+  "manual_six_report_configuration_audit": true,
+  "corpus_sha256": "bd33b40f73cb45c8791e4a4c71bb8dc0593013205f2978bba17610f4f1ccbc6a",
+  "query_vectors_sha256": "52cca3fc4b4e06fe90e45654fd2f99552c5efaaa7f2460775d78dc218a653a8a",
+  "frozen_input_sha256": "d5886559b0b1e66ae3398102491a0b3674f6789f969e2e8d0ae2f794a1c1f452",
+  "code_sha256": {
+    "backend\\app\\rag\\retriever.py": "afef09a8924b764e818bf37998fb621c0270a45dae748f54302d7bcc4f001873",
+    "backend\\app\\core\\embeddings.py": "704987123bda7d2746d0c32288649d1dc1d773629297cbfb798e7e016265a69c",
+    "backend\\scripts\\eval\\rag_memory_quality.py": "4a8bcea2d3e36ec4b3533daf853fb1837c2743bb85cf555bca949145d874f08f",
+    "backend\\scripts\\eval\\analyze_rag_memory_quality.py": "bac8800518c3715d0355ec9f416b45dd2dcd639eeb426330035df9858d89e9a3",
+    "backend\\scripts\\eval\\rag_validation_support.py": "3f8bdcacad32a9396c5e5673b734ef5461b8ee818bfe0175d3969dd59ec036a2"
+  },
+  "versions": {
+    "numpy": "2.4.6",
+    "pinecone": "7.3.0",
+    "kiwipiepy": "0.23.2",
+    "langchain-core": "1.6.8",
+    "langchain-pinecone": "0.2.13",
+    "google-genai": "2.29.0"
+  },
+  "known_hardening_deferred": "Analyzer identity does not automatically bind corpus/configuration or soak identity; manually checked this run. Runtime soak began before final added minimum workload screen; final analysis uses stricter gate."
+}

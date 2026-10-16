@@ -1,0 +1,246 @@
+{
+  "scope": "Windows Job Object512MiB private-commit cap; guard input injected; not Linux/Render cgroup or full API",
+  "identity": "f002499e0bedd8262e36a7a4286d1ec375d1ae96c7728a4c8606cb038636fd52",
+  "started_at_utc": "2026-10-16T08:11:43.715381+00:00",
+  "planned_seconds": 7200,
+  "interval_seconds": 20,
+  "concurrency": 2,
+  "attempts": 6,
+  "failures": 6,
+  "memory_errors": 0,
+  "samples": [
+    {
+      "elapsed_seconds": 4.01600000000326,
+      "rss_bytes": 122253312,
+      "peak_rss_bytes": 122253312,
+      "private_bytes": 101519360,
+      "kiwi_loaded": false,
+      "bm25_loaded": false
+    },
+    {
+      "elapsed_seconds": 20.43800000002375,
+      "rss_bytes": 122490880,
+      "peak_rss_bytes": 122490880,
+      "private_bytes": 102682624,
+      "kiwi_loaded": false,
+      "bm25_loaded": false
+    },
+    {
+      "elapsed_seconds": 40.42200000002049,
+      "rss_bytes": 122572800,
+      "peak_rss_bytes": 122572800,
+      "private_bytes": 102682624,
+      "kiwi_loaded": false,
+      "bm25_loaded": false
+    }
+  ],
+  "errors": [
+    {
+      "attempt": 0,
+      "error_type": "ClientError",
+      "http_status": 402,
+      "stack": [
+        {
+          "file": "_base.py",
+          "line": 401,
+          "function": "__get_result"
+        },
+        {
+          "file": "__init__.py",
+          "line": 473,
+          "function": "__call__"
+        },
+        {
+          "file": "_api_client.py",
+          "line": 1521,
+          "function": "_request_once"
+        },
+        {
+          "file": "errors.py",
+          "line": 173,
+          "function": "raise_for_response"
+        },
+        {
+          "file": "errors.py",
+          "line": 202,
+          "function": "raise_error"
+        }
+      ]
+    },
+    {
+      "attempt": 1,
+      "error_type": "ClientError",
+      "http_status": 402,
+      "stack": [
+        {
+          "file": "_base.py",
+          "line": 401,
+          "function": "__get_result"
+        },
+        {
+          "file": "__init__.py",
+          "line": 473,
+          "function": "__call__"
+        },
+        {
+          "file": "_api_client.py",
+          "line": 1521,
+          "function": "_request_once"
+        },
+        {
+          "file": "errors.py",
+          "line": 173,
+          "function": "raise_for_response"
+        },
+        {
+          "file": "errors.py",
+          "line": 202,
+          "function": "raise_error"
+        }
+      ]
+    },
+    {
+      "attempt": 2,
+      "error_type": "ClientError",
+      "http_status": 402,
+      "stack": [
+        {
+          "file": "_base.py",
+          "line": 401,
+          "function": "__get_result"
+        },
+        {
+          "file": "__init__.py",
+          "line": 473,
+          "function": "__call__"
+        },
+        {
+          "file": "_api_client.py",
+          "line": 1521,
+          "function": "_request_once"
+        },
+        {
+          "file": "errors.py",
+          "line": 173,
+          "function": "raise_for_response"
+        },
+        {
+          "file": "errors.py",
+          "line": 202,
+          "function": "raise_error"
+        }
+      ]
+    },
+    {
+      "attempt": 3,
+      "error_type": "ClientError",
+      "http_status": 402,
+      "stack": [
+        {
+          "file": "_base.py",
+          "line": 401,
+          "function": "__get_result"
+        },
+        {
+          "file": "__init__.py",
+          "line": 473,
+          "function": "__call__"
+        },
+        {
+          "file": "_api_client.py",
+          "line": 1521,
+          "function": "_request_once"
+        },
+        {
+          "file": "errors.py",
+          "line": 173,
+          "function": "raise_for_response"
+        },
+        {
+          "file": "errors.py",
+          "line": 202,
+          "function": "raise_error"
+        }
+      ]
+    },
+    {
+      "attempt": 4,
+      "error_type": "ClientError",
+      "http_status": 402,
+      "stack": [
+        {
+          "file": "_base.py",
+          "line": 401,
+          "function": "__get_result"
+        },
+        {
+          "file": "__init__.py",
+          "line": 473,
+          "function": "__call__"
+        },
+        {
+          "file": "_api_client.py",
+          "line": 1521,
+          "function": "_request_once"
+        },
+        {
+          "file": "errors.py",
+          "line": 173,
+          "function": "raise_for_response"
+        },
+        {
+          "file": "errors.py",
+          "line": 202,
+          "function": "raise_error"
+        }
+      ]
+    },
+    {
+      "attempt": 5,
+      "error_type": "ClientError",
+      "http_status": 402,
+      "stack": [
+        {
+          "file": "_base.py",
+          "line": 401,
+          "function": "__get_result"
+        },
+        {
+          "file": "__init__.py",
+          "line": 473,
+          "function": "__call__"
+        },
+        {
+          "file": "_api_client.py",
+          "line": 1521,
+          "function": "_request_once"
+        },
+        {
+          "file": "errors.py",
+          "line": 173,
+          "function": "raise_for_response"
+        },
+        {
+          "file": "errors.py",
+          "line": 202,
+          "function": "raise_error"
+        }
+      ]
+    }
+  ],
+  "passed": false,
+  "elapsed_seconds": 40.42200000002049,
+  "screen": {
+    "passed": false,
+    "gates": {
+      "duration": false,
+      "failure_rate": false,
+      "sample_coverage": false,
+      "headroom": true,
+      "warmed_growth": false,
+      "no_local_tokenizer": true,
+      "no_memory_errors": true
+    },
+    "warmed_private_growth_bytes": null
+  }
+}

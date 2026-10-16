@@ -1,0 +1,23 @@
+{
+  "docker": {
+    "sandbox": "Docker Linux pipe permission denied",
+    "elevated_version_timeout_seconds": 30,
+    "elevated_image_list_timeout_seconds": 30,
+    "desktop_start": "already running"
+  },
+  "windows_initial_attempts": [
+    {
+      "command": "soak",
+      "exit_code": 1,
+      "memory_mib": 512,
+      "error": "OpenBLAS error: Memory allocation still failed after 10 retries"
+    },
+    {
+      "command": "quality smoke",
+      "exit_code": 1,
+      "memory_mib": 512,
+      "error": "OpenBLAS error: Memory allocation still failed after 10 retries"
+    }
+  ],
+  "resolution_attempt": "Bound OPENBLAS_NUM_THREADS/OMP_NUM_THREADS/MKL_NUM_THREADS to1 before NumPy import; only evaluator environment"
+}
