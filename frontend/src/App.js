@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { supabase } from "./lib/supabaseClient";
 import { setToken } from "./api/dietApi";
 import Auth from "./components/Auth";
@@ -7,6 +7,7 @@ import CalendarView from "./components/calendar/CalendarView";
 import Dashboard from "./components/dashboard/Dashboard";
 import Setup from "./components/Setup";
 import Settings from "./components/Settings";
+import { useConversationThread } from "./lib/useConversationThread";
 import "./App.css";
 
 const INITIAL_MESSAGES = [
@@ -17,11 +18,6 @@ const INITIAL_MESSAGES = [
   },
 ];
 
-function generateThreadId() {
-  const today = new Date().toISOString().split("T")[0];
-  return `chat_${today}`;
-}
-
 export default function App() {
   const [session, setSession] = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
@@ -30,10 +26,28 @@ export default function App() {
   const [setupDone, setSetupDone] = useState(false);
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
 
-  const [threadId, setThreadId] = useState(generateThreadId);
+  const [threadId, setThreadId, threadReady] = useConversationThread(session?.user?.id);
   // 직전에 완료된 thread_id 보관 → 타임 트래블에서 이전 세션 조회용
   const [prevThreadId, setPrevThreadId] = useState(null);
   const [isInterrupted, setIsInterrupted] = useState(false);
+  const ownerId = session?.user?.id || null;
+  const latestOwner = useRef(ownerId);
+  latestOwner.current = ownerId;
+  const chatSetters = useMemo(() => {
+    const owned = setter => value => {
+      if (latestOwner.current === ownerId) setter(value);
+    };
+    return { messages: owned(setMessages), stats: owned(setTodayStats),
+      previousThread: owned(setPrevThreadId), interrupted: owned(setIsInterrupted) };
+  }, [ownerId]);
+
+  useEffect(() => {
+    setMessages(INITIAL_MESSAGES);
+    setPrevThreadId(null);
+    setIsInterrupted(false);
+    setTodayStats(null);
+    setSetupDone(false);
+  }, [session?.user?.id]);
 
   const handleAccountDeleted = () => {
     setToken(null);
@@ -66,7 +80,7 @@ export default function App() {
     };
   }, []);
 
-  if (authLoading) {
+  if (authLoading || (session && !threadReady)) {
     return <main className="app-loading" role="status" aria-live="polite">
       <span className="app-loading__eyebrow">MetaDiet AI</span>
       <strong>안전하게 세션을 확인하는 중입니다.</strong>
@@ -131,15 +145,15 @@ export default function App() {
       <div className="content">
         {activeTab === "chat" && (
           <ChatInterface
-            onStatsUpdate={setTodayStats}
+            onStatsUpdate={chatSetters.stats}
             messages={messages}
-            setMessages={setMessages}
+            setMessages={chatSetters.messages}
             threadId={threadId}
             setThreadId={setThreadId}
             prevThreadId={prevThreadId}
-            setPrevThreadId={setPrevThreadId}
+            setPrevThreadId={chatSetters.previousThread}
             isInterrupted={isInterrupted}
-            setIsInterrupted={setIsInterrupted}
+            setIsInterrupted={chatSetters.interrupted}
           />
         )}
         {activeTab === "calendar" && <CalendarView />}
