@@ -12,6 +12,8 @@ from app.tools.food_groups import match_food_group
 
 # alias, exact catalog name, app serving grams, display unit, representative ID
 PORTIONS = [
+    (('돼지고기볶음(제육볶음)', '돼지고기볶음', '돼지고기 볶음', '매운 제육볶음', '매운제육볶음', '제육볶음', '제육 볶음', '제육'),
+        '돼지고기볶음(제육볶음)', 200, '인분', 'mfds:D110-465000000-0001'),
     (('김치찌개', '김치 찌개'), '김치찌개', 200, '인분', 'mfds:P123-208020300-0054'),
     (('간장불고기', '간장 불고기', '소불고기', '소 불고기', '불고기'), '소불고기, 볶은것', 200, '인분', None),
     (('생 닭가슴살', '닭가슴살 생것'), '닭고기, 가슴, 생것', 100, '개', None),
@@ -181,6 +183,8 @@ def parse_simple_meal(message, *, forced_meal_type=None, allow_unknown=False):
             else '앱 대표 기준으로 계산했어요. 제품·크기에 따라 달라요.' if approximate else '')
         if food_id == 'mfds:P123-208020300-0054':
             basis_note = '김치찌개 대표 기준·대략값이에요. 실제 제품·재료와 다를 수 있어요.'
+        if food_id == 'mfds:D110-465000000-0001':
+            basis_note = '식약처 가정식 제육볶음 대표값·대략값이에요. 1인분은 앱 기본 200g이며 수정할 수 있어요.'
         if group_match:
             approximate = True
             basis_note = f'{group.name} 음식군 대표값({canonical})으로 계산했어요. 실제 제품·재료와 다를 수 있어요.'
