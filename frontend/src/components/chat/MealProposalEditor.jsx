@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import MealNutritionFacts from './MealNutritionFacts';
 
 const mealTypes = { breakfast: '아침', lunch: '점심', dinner: '저녁', snack: '간식' };
 export default function MealProposalEditor({ proposal, busy, onRevise, onChanged, budget }) {
@@ -24,16 +25,19 @@ export default function MealProposalEditor({ proposal, busy, onRevise, onChanged
     <ul className="proposal__meals">{payload.meals.map((meal, index) => {
       const portion = meal.nutrition_metadata?.portion;
       return <li key={index}><div><strong>{portion?.display_name || meal.food_name}</strong>
-        <p>{portion && !portion.defaulted && portion.unit !== 'g' ? `${portion.amount}${portion.unit} · ` : ''}{meal.quantity_g}g{portion?.defaulted && ' (1인분)'}
-          {portion?.defaulted && ' · 기본 분량으로 계산'}{portion?.representative && ' · 대표 기준·대략값'}</p>
-        {portion?.basis_note && <p>{portion.basis_note}</p>}
-        <p><strong>{meal.calories} kcal</strong> · 탄수화물 {meal.carbs_g}g · 단백질 {meal.protein_g}g · 지방 {meal.fat_g}g</p>
+        <div className="meal-preview__badges">
+          <span className="meal-preview__serving">{portion?.defaulted ? `1인분 · ${meal.quantity_g}g` : `${portion && portion.unit !== 'g' ? `${portion.amount}${portion.unit} · ` : ''}${meal.quantity_g}g`}</span>
+          {editable && <span className="meal-preview__editable">아래에서 분량 수정 가능</span>}
+          {portion?.representative && <span className="meal-preview__estimate">대표 기준 · 대략값</span>}
+        </div>
+        {portion?.defaulted && <p className="meal-preview__default-note">앱 기본 분량으로 계산했어요.</p>}
+        <MealNutritionFacts meal={meal} />
         {editable && <><button type="button" className="proposal__secondary" disabled={busy} aria-label={`${index + 1}번 음식 ${draft.items[index].exclude ? '제외 취소' : '제외하기'}`} onClick={() => change({ ...draft, items: draft.items.map((item, i) => { if (i !== index) return item; const { exclude, ...rest } = item; return exclude ? rest : { ...rest, exclude: true }; }) })}>{draft.items[index].exclude ? '제외 취소' : '제외하기'}</button>{draft.items[index].exclude && <p>제외 예정 · 다시 계산하면 합계에서 빠져요.</p>}<div className="meal-preview__portion"><label>분량<input aria-label={`${index + 1}번 음식 분량`} type="number" min="0.01" max="10000" step="any"
           disabled={busy || draft.items[index].exclude} value={draft.items[index].amount} onChange={e => change({ ...draft, items: draft.items.map((item, i) => i === index ? { ...item, amount: Number(e.target.value) } : item) })} /></label>
           <label>단위<select aria-label={`${index + 1}번 음식 단위`} disabled={busy || draft.items[index].exclude} value={draft.items[index].unit}
             onChange={e => change({ ...draft, items: draft.items.map((item, i) => i === index ? { ...item, unit: e.target.value } : item) })}>
             {[...new Set(['g', ...(portion?.unit_grams ? Object.keys(portion.unit_grams) : portion?.default_unit ? [portion.default_unit, '회분', '인분'] : [])])].map(unit => <option key={unit}>{unit}</option>)}</select></label></div></>}
-        <details><summary>출처·상세 정보</summary><small>{meal.food_name} · {({ csv: '국가표준식품성분표', mfds: '식약처', user_label: '사용자 영양표' })[meal.source] || meal.source}
+        <details><summary>출처·상세 정보</summary>{portion?.basis_note && <p>{portion.basis_note}</p>}<small>{meal.food_name} · {({ csv: '국가표준식품성분표', mfds: '식약처', user_label: '사용자 영양표' })[meal.source] || meal.source}
           {meal.nutrition_metadata?.manufacturer && ` · ${meal.nutrition_metadata.manufacturer}`} · 나트륨 {meal.sodium_mg ?? '미입력'}mg</small></details></div></li>;
     })}</ul>
     {excluded.length > 0 && <p role="status">기록에서 제외: {excluded.join(', ')}. 합계에도 포함되지 않았어요.</p>}

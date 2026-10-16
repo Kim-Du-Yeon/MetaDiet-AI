@@ -10,7 +10,8 @@ test('approximate product basis is visible and pizza slice/whole units are edita
           unit_g: 100, representative: true, basis_note: '일반 피자 기준이며 브랜드 제품값이 아니에요.',
           unit_grams: { 조각: 100, 판: 800, 회분: 200 } } } },
   ] } }} onRevise={jest.fn()} onDecision={jest.fn()} />);
-  expect(screen.getByText('일반 피자 기준이며 브랜드 제품값이 아니에요.')).toBeVisible();
+  fireEvent.click(screen.getByText('출처·상세 정보'));
+  expect(screen.getByText('일반 피자 기준이며 브랜드 제품값이 아니에요.')).toBeInTheDocument();
   expect(screen.getByRole('option', { name: '판' })).toBeInTheDocument();
 });
 
@@ -21,8 +22,10 @@ test('portion edit requires server recalculation and sends units without client 
       protein_g: 5, carbs_g: 65, fat_g: 1, source: 'csv', nutrition_metadata: { portion: {
         amount: 1, unit: '공기', default_unit: '공기', unit_g: 200, defaulted: true } } },
   ] } }} onRevise={revise} onDecision={jest.fn()} />);
-  expect(screen.getByText(/탄수화물 65g/)).toBeInTheDocument();
-  expect(screen.getByText(/200g \(1인분\)/)).toBeVisible();
+  expect(screen.getByLabelText('탄수화물 65g')).toBeVisible();
+  expect(screen.getByText('1인분 · 200g')).toBeVisible();
+  expect(screen.getByText('아래에서 분량 수정 가능')).toBeVisible();
+  expect(screen.getByLabelText('밥 영양정보')).toBeVisible();
   fireEvent.change(screen.getByLabelText('1번 음식 분량'), { target: { value: '1.5' } });
   expect(screen.getByRole('button', { name: '이대로 기록' })).toBeDisabled();
   fireEvent.click(screen.getByRole('button', { name: '수정한 분량 다시 계산' }));

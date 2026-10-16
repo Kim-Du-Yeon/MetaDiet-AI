@@ -28,3 +28,15 @@
 .meal-preview input, .meal-preview select { padding: 10px; border: 1px solid #cedbd5; border-radius: 8px; background: white; max-width: 100%; }
 .meal-preview .proposal__meals li { display: block; padding: 16px; border: 1px solid #dde7e2; border-radius: 12px; margin-bottom: 10px; }
 .meal-preview p { line-height: 1.65; margin: 6px 0; }
+.meal-preview__badges { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 12px 0 6px; }
+.meal-preview__badges span { padding: 6px 10px; border-radius: 8px; font-size: 12px; }
+.meal-preview__serving { background: #e8f3ed; color: #155b42; font-weight: 800; }
+.meal-preview__editable { border: 1px solid #b8d4c6; color: #215e48; font-weight: 700; }
+.meal-preview__estimate, .meal-preview__default-note { color: #596d63; font-size: 12px; }
+.meal-nutrition { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin: 14px 0; }
+.meal-nutrition > div { min-width: 0; border: 1px solid #e0e9e4; border-radius: 10px; padding: 12px; background: #f7faf8; }
+.meal-nutrition dt { font-size: 12px; color: #52665b; margin-bottom: 6px; }
+.meal-nutrition dd { margin: 0; font-size: 20px; font-weight: 800; line-height: 1.3; overflow-wrap: anywhere; }
+.meal-nutrition dd small { font-size: 12px; font-weight: 500; margin-left: 4px; }
+.meal-nutrition .meal-nutrition__energy { background: #eaf4ee; border-color: #c7ded0; color: #155b42; }
+@media (max-width: 480px) { .meal-nutrition { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
