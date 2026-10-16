@@ -1,0 +1,1464 @@
+{
+  "version": "common-representatives-v1",
+  "reviewed_on": "2026-10-16",
+  "serving_policy": "App defaults; not universal measured portions. Explicit grams win.",
+  "foods": [
+    {
+      "aliases": [
+        "잡곡밥",
+        "잡곡 밥"
+      ],
+      "canonical": "잡곡밥",
+      "food_id": "mfds:D101-032000000-0001",
+      "serving_g": 200,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(잡곡밥)·대략값이에요. 1인분은 앱 기본 200g이며 수정할 수 있어요.",
+      "unit_grams": {
+        "공기": 200
+      }
+    },
+    {
+      "aliases": [
+        "김밥"
+      ],
+      "canonical": "김밥",
+      "food_id": "mfds:D101-007000000-0001",
+      "serving_g": 250,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(김밥)·대략값이에요. 1인분은 앱 기본 250g이며 수정할 수 있어요.",
+      "unit_grams": {
+        "줄": 250
+      }
+    },
+    {
+      "aliases": [
+        "참치김밥",
+        "참치 김밥"
+      ],
+      "canonical": "김밥_참치",
+      "food_id": "mfds:D101-007450000-0001",
+      "serving_g": 250,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(김밥_참치)·대략값이에요. 1인분은 앱 기본 250g이며 수정할 수 있어요.",
+      "unit_grams": {
+        "줄": 250
+      }
+    },
+    {
+      "aliases": [
+        "비빔밥"
+      ],
+      "canonical": "비빔밥",
+      "food_id": "mfds:D101-018000000-0001",
+      "serving_g": 400,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(비빔밥)·대략값이에요. 1인분은 앱 기본 400g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "돌솥비빔밥",
+        "돌솥 비빔밥"
+      ],
+      "canonical": "비빔밥_돌솥",
+      "food_id": "mfds:D101-018130000-0001",
+      "serving_g": 400,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(비빔밥_돌솥)·대략값이에요. 1인분은 앱 기본 400g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "오므라이스"
+      ],
+      "canonical": "오므라이스",
+      "food_id": "mfds:D101-028000000-0001",
+      "serving_g": 300,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(오므라이스)·대략값이에요. 1인분은 앱 기본 300g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "김치볶음밥",
+        "김치 볶음밥"
+      ],
+      "canonical": "볶음밥_김치",
+      "food_id": "mfds:D101-017070000-0001",
+      "serving_g": 300,
+      "unit": "인분",
+      "food_group": "볶음밥",
+      "basis_note": "공식 일반 음식 대표값(볶음밥_김치)·대략값이에요. 1인분은 앱 기본 300g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "볶음밥"
+      ],
+      "canonical": "볶음밥",
+      "food_id": "mfds:D101-017000000-0001",
+      "serving_g": 300,
+      "unit": "인분",
+      "food_group": "볶음밥",
+      "basis_note": "공식 일반 음식 대표값(볶음밥)·대략값이에요. 1인분은 앱 기본 300g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "김치찌개",
+        "김치 찌개"
+      ],
+      "canonical": "김치찌개",
+      "food_id": "mfds:D306-266000000-0001",
+      "serving_g": 200,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(김치찌개)·대략값이에요. 1인분은 앱 기본 200g이며 수정할 수 있어요.",
+      "unit_grams": {
+        "그릇": 200
+      }
+    },
+    {
+      "aliases": [
+        "된장찌개",
+        "된장 찌개"
+      ],
+      "canonical": "된장찌개",
+      "food_id": "mfds:D106-275000000-0001",
+      "serving_g": 200,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(된장찌개)·대략값이에요. 1인분은 앱 기본 200g이며 수정할 수 있어요.",
+      "unit_grams": {
+        "그릇": 200
+      }
+    },
+    {
+      "aliases": [
+        "순두부찌개",
+        "순두부 찌개"
+      ],
+      "canonical": "순두부찌개_김치",
+      "food_id": "mfds:D106-291030000-0001",
+      "serving_g": 300,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(순두부찌개_김치)·대략값이에요. 1인분은 앱 기본 300g이며 수정할 수 있어요. 김치가 들어간 순두부찌개 기준이에요.",
+      "unit_grams": {
+        "그릇": 300
+      }
+    },
+    {
+      "aliases": [
+        "부대찌개",
+        "부대 찌개"
+      ],
+      "canonical": "부대찌개",
+      "food_id": "mfds:D106-284000000-0001",
+      "serving_g": 300,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(부대찌개)·대략값이에요. 1인분은 앱 기본 300g이며 수정할 수 있어요.",
+      "unit_grams": {
+        "그릇": 300
+      }
+    },
+    {
+      "aliases": [
+        "청국장",
+        "청국장찌개",
+        "청국장 찌개"
+      ],
+      "canonical": "청국장찌개",
+      "food_id": "mfds:D106-297000000-0001",
+      "serving_g": 200,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(청국장찌개)·대략값이에요. 1인분은 앱 기본 200g이며 수정할 수 있어요.",
+      "unit_grams": {
+        "그릇": 200
+      }
+    },
+    {
+      "aliases": [
+        "미역국",
+        "미역 국"
+      ],
+      "canonical": "미역국",
+      "food_id": "mfds:D105-223000000-0001",
+      "serving_g": 300,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(미역국)·대략값이에요. 1인분은 앱 기본 300g이며 수정할 수 있어요.",
+      "unit_grams": {
+        "그릇": 300
+      }
+    },
+    {
+      "aliases": [
+        "소고기무국",
+        "소고기 무국",
+        "쇠고기무국"
+      ],
+      "canonical": "무국_소고기",
+      "food_id": "mfds:D105-219240000-0001",
+      "serving_g": 300,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(무국_소고기)·대략값이에요. 1인분은 앱 기본 300g이며 수정할 수 있어요.",
+      "unit_grams": {
+        "그릇": 300
+      }
+    },
+    {
+      "aliases": [
+        "콩나물국",
+        "콩나물 국"
+      ],
+      "canonical": "콩나물국",
+      "food_id": "mfds:D105-253000000-0001",
+      "serving_g": 300,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(콩나물국)·대략값이에요. 1인분은 앱 기본 300g이며 수정할 수 있어요.",
+      "unit_grams": {
+        "그릇": 300
+      }
+    },
+    {
+      "aliases": [
+        "육개장"
+      ],
+      "canonical": "육개장",
+      "food_id": "mfds:D105-245000000-0001",
+      "serving_g": 400,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(육개장)·대략값이에요. 1인분은 앱 기본 400g이며 수정할 수 있어요.",
+      "unit_grams": {
+        "그릇": 400
+      }
+    },
+    {
+      "aliases": [
+        "설렁탕"
+      ],
+      "canonical": "설렁탕",
+      "food_id": "mfds:D105-231000000-0001",
+      "serving_g": 400,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(설렁탕)·대략값이에요. 1인분은 앱 기본 400g이며 수정할 수 있어요.",
+      "unit_grams": {
+        "그릇": 400
+      }
+    },
+    {
+      "aliases": [
+        "닭볶음탕",
+        "닭 볶음탕",
+        "닭도리탕"
+      ],
+      "canonical": "닭볶음탕",
+      "food_id": "mfds:D111-514000000-0001",
+      "serving_g": 250,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(닭볶음탕)·대략값이에요. 1인분은 앱 기본 250g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "갈비찜",
+        "소갈비찜",
+        "소 갈비찜"
+      ],
+      "canonical": "소갈비찜",
+      "food_id": "mfds:D407-333000000-0001",
+      "serving_g": 200,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(소갈비찜)·대략값이에요. 1인분은 앱 기본 200g이며 수정할 수 있어요. 소갈비찜 기준이에요."
+    },
+    {
+      "aliases": [
+        "돈까스",
+        "돈가스",
+        "돈 카츠",
+        "돈카츠",
+        "돈까쓰"
+      ],
+      "canonical": "돈가스",
+      "food_id": "mfds:D312-550000000-0002",
+      "serving_g": 200,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(돈가스)·대략값이에요. 1인분은 앱 기본 200g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "연어구이",
+        "연어 구이"
+      ],
+      "canonical": "연어구이",
+      "food_id": "mfds:D308-388000000-0001",
+      "serving_g": 100,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(연어구이)·대략값이에요. 1인분은 앱 기본 100g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "갈치구이",
+        "갈치 구이"
+      ],
+      "canonical": "갈치구이",
+      "food_id": "mfds:D408-355000000-0001",
+      "serving_g": 100,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(갈치구이)·대략값이에요. 1인분은 앱 기본 100g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "조기구이",
+        "조기 구이"
+      ],
+      "canonical": "조기구이",
+      "food_id": "mfds:D108-399000000-0001",
+      "serving_g": 100,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(조기구이)·대략값이에요. 1인분은 앱 기본 100g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "삼치구이",
+        "삼치 구이"
+      ],
+      "canonical": "삼치구이",
+      "food_id": "mfds:D108-383000000-0001",
+      "serving_g": 100,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(삼치구이)·대략값이에요. 1인분은 앱 기본 100g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "생선까스",
+        "생선가스",
+        "생선 까스"
+      ],
+      "canonical": "생선까스",
+      "food_id": "mfds:D312-559000000-0001",
+      "serving_g": 150,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(생선까스)·대략값이에요. 1인분은 앱 기본 150g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "새우구이",
+        "새우 구이"
+      ],
+      "canonical": "새우구이",
+      "food_id": "mfds:D108-384000000-0001",
+      "serving_g": 100,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(새우구이)·대략값이에요. 1인분은 앱 기본 100g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "오징어볶음",
+        "오징어 볶음"
+      ],
+      "canonical": "오징어볶음",
+      "food_id": "mfds:D110-488000000-0001",
+      "serving_g": 200,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(오징어볶음)·대략값이에요. 1인분은 앱 기본 200g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "쭈꾸미볶음",
+        "쭈꾸미 볶음",
+        "주꾸미볶음",
+        "주꾸미 볶음"
+      ],
+      "canonical": "주꾸미볶음",
+      "food_id": "mfds:D310-493000000-0001",
+      "serving_g": 200,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(주꾸미볶음)·대략값이에요. 1인분은 앱 기본 200g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "계란찜",
+        "계란 찜",
+        "달걀찜",
+        "달걀 찜"
+      ],
+      "canonical": "달걀찜",
+      "food_id": "mfds:D407-317000000-0001",
+      "serving_g": 150,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(달걀찜)·대략값이에요. 1인분은 앱 기본 150g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "계란말이",
+        "계란 말이",
+        "달걀말이",
+        "달걀 말이"
+      ],
+      "canonical": "달걀말이",
+      "food_id": "mfds:D109-416000000-0001",
+      "serving_g": 100,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(달걀말이)·대략값이에요. 1인분은 앱 기본 100g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "두부조림",
+        "두부 조림"
+      ],
+      "canonical": "두부조림",
+      "food_id": "mfds:D111-517000000-0001",
+      "serving_g": 100,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(두부조림)·대략값이에요. 1인분은 앱 기본 100g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "시금치나물",
+        "시금치 나물",
+        "시금치무침"
+      ],
+      "canonical": "시금치나물",
+      "food_id": "mfds:D113-586000000-0001",
+      "serving_g": 50,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(시금치나물)·대략값이에요. 1인분은 앱 기본 50g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "콩나물무침",
+        "콩나물 무침"
+      ],
+      "canonical": "콩나물무침",
+      "food_id": "mfds:D113-597000000-0001",
+      "serving_g": 50,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(콩나물무침)·대략값이에요. 1인분은 앱 기본 50g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "떡볶이"
+      ],
+      "canonical": "떡볶이",
+      "food_id": "mfds:D110-467000000-0001",
+      "serving_g": 200,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(떡볶이)·대략값이에요. 1인분은 앱 기본 200g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "순대"
+      ],
+      "canonical": "순대",
+      "food_id": "mfds:D107-337000000-0001",
+      "serving_g": 200,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(순대)·대략값이에요. 1인분은 앱 기본 200g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "샐러드",
+        "채소샐러드",
+        "채소 샐러드",
+        "야채샐러드",
+        "야채 샐러드"
+      ],
+      "canonical": "샐러드_채소",
+      "food_id": "mfds:D114-640320000-0001",
+      "serving_g": 100,
+      "unit": "인분",
+      "food_group": "일반 조리 음식",
+      "basis_note": "공식 일반 음식 대표값(샐러드_채소)·대략값이에요. 1인분은 앱 기본 100g이며 수정할 수 있어요. 드레싱이 포함될 수 있는 채소 샐러드 대표값이에요."
+    },
+    {
+      "aliases": [
+        "카페라떼",
+        "카페 라떼",
+        "카페라테",
+        "라떼"
+      ],
+      "canonical": "카페라떼",
+      "food_id": "mfds:D420-762000000-0001",
+      "serving_g": 200,
+      "unit": "컵",
+      "food_group": "음료",
+      "basis_note": "공식 일반 음식 대표값(카페라떼)·대략값이에요. 1컵은 앱 기본 200g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "크림스파게티",
+        "크림 스파게티",
+        "크림파스타",
+        "크림 파스타"
+      ],
+      "canonical": "스파게티_크림소스",
+      "food_id": "mfds:D303-161480000-0001",
+      "serving_g": 300,
+      "unit": "인분",
+      "food_group": "파스타",
+      "basis_note": "공식 일반 음식 대표값(스파게티_크림소스)·대략값이에요. 1인분은 앱 기본 300g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "스파게티",
+        "파스타"
+      ],
+      "canonical": "스파게티",
+      "food_id": "mfds:D403-161000000-0001",
+      "serving_g": 300,
+      "unit": "인분",
+      "food_group": "파스타",
+      "basis_note": "공식 일반 음식 대표값(스파게티)·대략값이에요. 1인분은 앱 기본 300g이며 수정할 수 있어요."
+    },
+    {
+      "aliases": [
+        "수육",
+        "돼지수육",
+        "돼지 수육",
+        "보쌈"
+      ],
+      "canonical": "돼지고기, 앞다리, 수육용, 삶은것",
+      "food_id": "csv:7b4e07ba5ed18d3bb35103b6",
+      "serving_g": 200,
+      "unit": "인분",
+      "food_group": "일반 음식",
+      "basis_note": "앱 대표 기준·대략값으로 계산했어요. 1인분은 기본 200g이며 수정할 수 있어요. 돼지고기 앞다리 수육 기준이며 보쌈 김치·쌈장은 포함하지 않아요."
+    },
+    {
+      "aliases": [
+        "참치회",
+        "참치 회"
+      ],
+      "canonical": "다랑어, 참다랑어, 붉은살, 생것",
+      "food_id": "csv:5e51a5b3209babbee0b665bc",
+      "serving_g": 100,
+      "unit": "인분",
+      "food_group": "일반 음식",
+      "basis_note": "앱 대표 기준·대략값으로 계산했어요. 1인분은 기본 100g이며 수정할 수 있어요. 참다랑어 붉은살 기준이에요. 부위에 따라 달라요."
+    },
+    {
+      "aliases": [
+        "포도"
+      ],
+      "canonical": "포도, 캠벨얼리, 생것",
+      "food_id": "csv:8dd750e562d70d40b5b4a02e",
+      "serving_g": 150,
+      "unit": "인분",
+      "food_group": "일반 음식",
+      "basis_note": "앱 대표 기준·대략값으로 계산했어요. 1인분은 기본 150g이며 수정할 수 있어요. 캠벨얼리 가식부 기준이에요."
+    },
+    {
+      "aliases": [
+        "수박"
+      ],
+      "canonical": "수박, 적육질, 생것",
+      "food_id": "csv:f24da6c05d582a308965cccd",
+      "serving_g": 200,
+      "unit": "조각",
+      "food_group": "일반 음식",
+      "basis_note": "앱 대표 기준·대략값으로 계산했어요. 1조각은 기본 200g이며 수정할 수 있어요. 껍질을 제외한 가식부 기준이에요."
+    },
+    {
+      "aliases": [
+        "배"
+      ],
+      "canonical": "배, 생것",
+      "food_id": "csv:e854c74acbf6017251a0f739",
+      "serving_g": 300,
+      "unit": "개",
+      "food_group": "일반 음식",
+      "basis_note": "앱 대표 기준·대략값으로 계산했어요. 1개은 기본 300g이며 수정할 수 있어요. 가식부 기준이에요."
+    },
+    {
+      "aliases": [
+        "복숭아"
+      ],
+      "canonical": "복숭아, 백도, 생것",
+      "food_id": "csv:b0524c48709950572f495b18",
+      "serving_g": 150,
+      "unit": "개",
+      "food_group": "일반 음식",
+      "basis_note": "앱 대표 기준·대략값으로 계산했어요. 1개은 기본 150g이며 수정할 수 있어요. 백도 가식부 기준이에요."
+    },
+    {
+      "aliases": [
+        "키위",
+        "키위프루트"
+      ],
+      "canonical": "키위, 그린, 생것",
+      "food_id": "csv:d6e1073970b96b1869c76c5e",
+      "serving_g": 100,
+      "unit": "개",
+      "food_group": "일반 음식",
+      "basis_note": "앱 대표 기준·대략값으로 계산했어요. 1개은 기본 100g이며 수정할 수 있어요. 그린 키위 가식부 기준이에요."
+    }
+  ],
+  "catalog_rows": [
+    {
+      "food_id": "mfds:D101-032000000-0001",
+      "name": "잡곡밥",
+      "normalized_name": "잡곡밥",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D101-032000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D101-032000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 146.0,
+        "protein_g": 5.3,
+        "carbs_g": 29.33,
+        "fat_g": 0.87,
+        "sodium_mg": 3.0
+      }
+    },
+    {
+      "food_id": "mfds:D101-007000000-0001",
+      "name": "김밥",
+      "normalized_name": "김밥",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D101-007000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D101-007000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 140.0,
+        "protein_g": 4.84,
+        "carbs_g": 19.98,
+        "fat_g": 4.55,
+        "sodium_mg": 307.0
+      }
+    },
+    {
+      "food_id": "mfds:D101-007450000-0001",
+      "name": "김밥_참치",
+      "normalized_name": "김밥_참치",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D101-007450000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D101-007450000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 174.0,
+        "protein_g": 7.0,
+        "carbs_g": 20.26,
+        "fat_g": 7.22,
+        "sodium_mg": 335.0
+      }
+    },
+    {
+      "food_id": "mfds:D101-018000000-0001",
+      "name": "비빔밥",
+      "normalized_name": "비빔밥",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D101-018000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D101-018000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 142.0,
+        "protein_g": 6.86,
+        "carbs_g": 18.84,
+        "fat_g": 4.32,
+        "sodium_mg": 232.0
+      }
+    },
+    {
+      "food_id": "mfds:D101-018130000-0001",
+      "name": "비빔밥_돌솥",
+      "normalized_name": "비빔밥_돌솥",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D101-018130000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D101-018130000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 147.0,
+        "protein_g": 5.39,
+        "carbs_g": 24.68,
+        "fat_g": 2.95,
+        "sodium_mg": 337.0
+      }
+    },
+    {
+      "food_id": "mfds:D101-028000000-0001",
+      "name": "오므라이스",
+      "normalized_name": "오므라이스",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D101-028000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D101-028000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 173.0,
+        "protein_g": 6.5,
+        "carbs_g": 20.54,
+        "fat_g": 7.23,
+        "sodium_mg": 433.0
+      }
+    },
+    {
+      "food_id": "mfds:D101-017070000-0001",
+      "name": "볶음밥_김치",
+      "normalized_name": "볶음밥_김치",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D101-017070000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D101-017070000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 167.0,
+        "protein_g": 5.32,
+        "carbs_g": 15.74,
+        "fat_g": 9.18,
+        "sodium_mg": 470.0
+      }
+    },
+    {
+      "food_id": "mfds:D101-017000000-0001",
+      "name": "볶음밥",
+      "normalized_name": "볶음밥",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D101-017000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D101-017000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 183.0,
+        "protein_g": 5.56,
+        "carbs_g": 33.97,
+        "fat_g": 2.76,
+        "sodium_mg": 212.0
+      }
+    },
+    {
+      "food_id": "mfds:D306-266000000-0001",
+      "name": "김치찌개",
+      "normalized_name": "김치찌개",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D306-266000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D306-266000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 61.0,
+        "protein_g": 3.77,
+        "carbs_g": 2.98,
+        "fat_g": 3.75,
+        "sodium_mg": 491.0
+      }
+    },
+    {
+      "food_id": "mfds:D106-275000000-0001",
+      "name": "된장찌개",
+      "normalized_name": "된장찌개",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D106-275000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D106-275000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 46.0,
+        "protein_g": 3.38,
+        "carbs_g": 4.44,
+        "fat_g": 1.63,
+        "sodium_mg": 318.0
+      }
+    },
+    {
+      "food_id": "mfds:D106-291030000-0001",
+      "name": "순두부찌개_김치",
+      "normalized_name": "순두부찌개_김치",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D106-291030000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D106-291030000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 35.0,
+        "protein_g": 2.98,
+        "carbs_g": 2.17,
+        "fat_g": 1.59,
+        "sodium_mg": 151.0
+      }
+    },
+    {
+      "food_id": "mfds:D106-284000000-0001",
+      "name": "부대찌개",
+      "normalized_name": "부대찌개",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D106-284000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D106-284000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 123.0,
+        "protein_g": 5.86,
+        "carbs_g": 10.27,
+        "fat_g": 6.49,
+        "sodium_mg": 239.0
+      }
+    },
+    {
+      "food_id": "mfds:D106-297000000-0001",
+      "name": "청국장찌개",
+      "normalized_name": "청국장찌개",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D106-297000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D106-297000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 47.0,
+        "protein_g": 5.03,
+        "carbs_g": 1.92,
+        "fat_g": 2.11,
+        "sodium_mg": 242.0
+      }
+    },
+    {
+      "food_id": "mfds:D105-223000000-0001",
+      "name": "미역국",
+      "normalized_name": "미역국",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D105-223000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D105-223000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 12.0,
+        "protein_g": 0.65,
+        "carbs_g": 0.87,
+        "fat_g": 0.61,
+        "sodium_mg": 168.0
+      }
+    },
+    {
+      "food_id": "mfds:D105-219240000-0001",
+      "name": "무국_소고기",
+      "normalized_name": "무국_소고기",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D105-219240000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D105-219240000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 15.0,
+        "protein_g": 1.33,
+        "carbs_g": 1.1,
+        "fat_g": 0.64,
+        "sodium_mg": 166.0
+      }
+    },
+    {
+      "food_id": "mfds:D105-253000000-0001",
+      "name": "콩나물국",
+      "normalized_name": "콩나물국",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D105-253000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D105-253000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 6.0,
+        "protein_g": 0.74,
+        "carbs_g": 0.61,
+        "fat_g": 0.09,
+        "sodium_mg": 219.0
+      }
+    },
+    {
+      "food_id": "mfds:D105-245000000-0001",
+      "name": "육개장",
+      "normalized_name": "육개장",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D105-245000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D105-245000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 30.0,
+        "protein_g": 3.68,
+        "carbs_g": 1.49,
+        "fat_g": 0.99,
+        "sodium_mg": 201.0
+      }
+    },
+    {
+      "food_id": "mfds:D105-231000000-0001",
+      "name": "설렁탕",
+      "normalized_name": "설렁탕",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D105-231000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D105-231000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 24.0,
+        "protein_g": 4.26,
+        "carbs_g": 0.36,
+        "fat_g": 0.58,
+        "sodium_mg": 22.0
+      }
+    },
+    {
+      "food_id": "mfds:D111-514000000-0001",
+      "name": "닭볶음탕",
+      "normalized_name": "닭볶음탕",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D111-514000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D111-514000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 111.0,
+        "protein_g": 11.91,
+        "carbs_g": 8.52,
+        "fat_g": 3.22,
+        "sodium_mg": 376.0
+      }
+    },
+    {
+      "food_id": "mfds:D407-333000000-0001",
+      "name": "소갈비찜",
+      "normalized_name": "소갈비찜",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D407-333000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D407-333000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 111.0,
+        "protein_g": 5.38,
+        "carbs_g": 6.45,
+        "fat_g": 7.08,
+        "sodium_mg": 291.0
+      }
+    },
+    {
+      "food_id": "mfds:D312-550000000-0002",
+      "name": "돈가스",
+      "normalized_name": "돈가스",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D312-550000000-0002",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D312-550000000-0002&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 280.0,
+        "protein_g": 13.85,
+        "carbs_g": 15.89,
+        "fat_g": 17.94,
+        "sodium_mg": 343.0
+      }
+    },
+    {
+      "food_id": "mfds:D308-388000000-0001",
+      "name": "연어구이",
+      "normalized_name": "연어구이",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D308-388000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D308-388000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 234.0,
+        "protein_g": 24.78,
+        "carbs_g": 0.2,
+        "fat_g": 14.94,
+        "sodium_mg": 158.0
+      }
+    },
+    {
+      "food_id": "mfds:D408-355000000-0001",
+      "name": "갈치구이",
+      "normalized_name": "갈치구이",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D408-355000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D408-355000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 147.0,
+        "protein_g": 12.65,
+        "carbs_g": 0.88,
+        "fat_g": 9.81,
+        "sodium_mg": 338.0
+      }
+    },
+    {
+      "food_id": "mfds:D108-399000000-0001",
+      "name": "조기구이",
+      "normalized_name": "조기구이",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D108-399000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D108-399000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 177.0,
+        "protein_g": 19.33,
+        "carbs_g": 0.44,
+        "fat_g": 10.86,
+        "sodium_mg": 1364.0
+      }
+    },
+    {
+      "food_id": "mfds:D108-383000000-0001",
+      "name": "삼치구이",
+      "normalized_name": "삼치구이",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D108-383000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D108-383000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 178.0,
+        "protein_g": 21.42,
+        "carbs_g": 1.45,
+        "fat_g": 9.57,
+        "sodium_mg": 217.0
+      }
+    },
+    {
+      "food_id": "mfds:D312-559000000-0001",
+      "name": "생선까스",
+      "normalized_name": "생선까스",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D312-559000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D312-559000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 327.0,
+        "protein_g": 12.17,
+        "carbs_g": 23.28,
+        "fat_g": 20.55,
+        "sodium_mg": 394.0
+      }
+    },
+    {
+      "food_id": "mfds:D108-384000000-0001",
+      "name": "새우구이",
+      "normalized_name": "새우구이",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D108-384000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D108-384000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 145.0,
+        "protein_g": 23.41,
+        "carbs_g": 2.82,
+        "fat_g": 4.44,
+        "sodium_mg": 330.0
+      }
+    },
+    {
+      "food_id": "mfds:D110-488000000-0001",
+      "name": "오징어볶음",
+      "normalized_name": "오징어볶음",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D110-488000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D110-488000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 128.0,
+        "protein_g": 9.85,
+        "carbs_g": 7.43,
+        "fat_g": 6.52,
+        "sodium_mg": 310.0
+      }
+    },
+    {
+      "food_id": "mfds:D310-493000000-0001",
+      "name": "주꾸미볶음",
+      "normalized_name": "주꾸미볶음",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D310-493000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D310-493000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 106.0,
+        "protein_g": 9.16,
+        "carbs_g": 11.41,
+        "fat_g": 2.6,
+        "sodium_mg": 459.0
+      }
+    },
+    {
+      "food_id": "mfds:D407-317000000-0001",
+      "name": "달걀찜",
+      "normalized_name": "달걀찜",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D407-317000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D407-317000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 119.0,
+        "protein_g": 11.1,
+        "carbs_g": 1.66,
+        "fat_g": 7.01,
+        "sodium_mg": 871.0
+      }
+    },
+    {
+      "food_id": "mfds:D109-416000000-0001",
+      "name": "달걀말이",
+      "normalized_name": "달걀말이",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D109-416000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D109-416000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 193.0,
+        "protein_g": 17.21,
+        "carbs_g": 1.45,
+        "fat_g": 13.21,
+        "sodium_mg": 449.0
+      }
+    },
+    {
+      "food_id": "mfds:D111-517000000-0001",
+      "name": "두부조림",
+      "normalized_name": "두부조림",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D111-517000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D111-517000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 143.0,
+        "protein_g": 9.64,
+        "carbs_g": 4.4,
+        "fat_g": 9.66,
+        "sodium_mg": 161.0
+      }
+    },
+    {
+      "food_id": "mfds:D113-586000000-0001",
+      "name": "시금치나물",
+      "normalized_name": "시금치나물",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D113-586000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D113-586000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 69.0,
+        "protein_g": 3.74,
+        "carbs_g": 3.36,
+        "fat_g": 4.46,
+        "sodium_mg": 136.0
+      }
+    },
+    {
+      "food_id": "mfds:D113-597000000-0001",
+      "name": "콩나물무침",
+      "normalized_name": "콩나물무침",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D113-597000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D113-597000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 69.0,
+        "protein_g": 3.86,
+        "carbs_g": 3.2,
+        "fat_g": 4.54,
+        "sodium_mg": 387.0
+      }
+    },
+    {
+      "food_id": "mfds:D110-467000000-0001",
+      "name": "떡볶이",
+      "normalized_name": "떡볶이",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D110-467000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D110-467000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 144.0,
+        "protein_g": 3.51,
+        "carbs_g": 25.96,
+        "fat_g": 2.96,
+        "sodium_mg": 391.0
+      }
+    },
+    {
+      "food_id": "mfds:D107-337000000-0001",
+      "name": "순대",
+      "normalized_name": "순대",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D107-337000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D107-337000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 187.0,
+        "protein_g": 2.75,
+        "carbs_g": 35.73,
+        "fat_g": 3.64,
+        "sodium_mg": 604.0
+      }
+    },
+    {
+      "food_id": "mfds:D114-640320000-0001",
+      "name": "샐러드_채소",
+      "normalized_name": "샐러드_채소",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D114-640320000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D114-640320000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 145.0,
+        "protein_g": 1.16,
+        "carbs_g": 5.1,
+        "fat_g": 13.35,
+        "sodium_mg": 74.0
+      }
+    },
+    {
+      "food_id": "mfds:D420-762000000-0001",
+      "name": "카페라떼",
+      "normalized_name": "카페라떼",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D420-762000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D420-762000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 38.0,
+        "protein_g": 1.7,
+        "carbs_g": 3.57,
+        "fat_g": 1.83,
+        "sodium_mg": 20.0
+      }
+    },
+    {
+      "food_id": "mfds:D303-161480000-0001",
+      "name": "스파게티_크림소스",
+      "normalized_name": "스파게티_크림소스",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D303-161480000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D303-161480000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 209.0,
+        "carbs_g": 18.44,
+        "protein_g": 5.45,
+        "fat_g": 12.65,
+        "sodium_mg": 258.0
+      }
+    },
+    {
+      "food_id": "mfds:D403-161000000-0001",
+      "name": "스파게티",
+      "normalized_name": "스파게티",
+      "source": "mfds",
+      "food_kind": "standard",
+      "manufacturer": "",
+      "basis_g": 100,
+      "basis_text": "100g",
+      "source_code": "D403-161000000-0001",
+      "source_date": "2026-08-28",
+      "source_url": "https://various.foodsafetykorea.go.kr/nutrient/general/food/detail.do?searchFoodCd=D403-161000000-0001&searchMonthCd=AVG&searchRegionCd=ZZ",
+      "catalog_version": "reviewed-common-2026-10-16",
+      "nutrients": {
+        "calories": 138.0,
+        "carbs_g": 21.11,
+        "protein_g": 4.1,
+        "fat_g": 3.95,
+        "sodium_mg": 52.0
+      }
+    }
+  ]
+}

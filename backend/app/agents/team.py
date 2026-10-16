@@ -288,14 +288,15 @@ class DietTeam:
         # A model's tentative standard classification must not hide registered products.
         if not result and kind == 'standard':
             result = await self.food_catalog.search(query)
-        if any(item.get('source') == 'mfds' for item in result):
+        products = [item for item in result
+                    if item.get('source') == 'mfds' and item.get('food_kind') != 'standard']
+        if products:
             from app.tools.food_catalog import normalize_name
             if normalize_name(query) not in normalize_name(self.state.get('message', '')):
                 raise ToolFeedback('unrequested_product', '사용자가 말하지 않은 유사 제품이나 음식은 추가하지 마세요. 이미 조회한 제품 선택 카드로 확인을 요청하세요.', retryable=False)
         self.food_ids.update(item['food_id'] for item in result)
-        if len(result) > 1 or any(item.get('source') == 'mfds' for item in result):
+        if len(result) > 1 or products:
             self.ambiguous_food_ids.update(item['food_id'] for item in result)
-        products = [item for item in result if item.get('source') == 'mfds']
         selections = re.findall(r'제품\s*선택\s*:\s*([\w:-]+)', self.state.get('message', ''))
         existing_sets = [{c['food_id'] for c in item['candidates']} for item in self.food_selection['items']]
         if products and not any(item['food_id'] in selections for item in products) and {p['food_id'] for p in products} not in existing_sets:
@@ -323,7 +324,11 @@ class DietTeam:
             food_id = self.food_catalog.legacy_ids.get(food_id, '')
         if food_id not in self.food_ids and not user_selected:
             raise ValueError("Search and select an offered food_id first")
-        if (food_id in self.ambiguous_food_ids or str(food_id).startswith('mfds:')) and not user_selected:
+        catalog_rows = getattr(self.food_catalog, 'rows', {})
+        known_standard = (isinstance(catalog_rows, dict)
+                          and catalog_rows.get(food_id, {}).get('food_kind') == 'standard')
+        if (food_id in self.ambiguous_food_ids
+                or (str(food_id).startswith('mfds:') and not known_standard)) and not user_selected:
             for item in self.food_selection['items']:
                 if any(candidate['food_id'] == food_id for candidate in item['candidates']):
                     item['quantity_g'] = args.quantity_g

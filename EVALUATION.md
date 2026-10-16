@@ -1,5 +1,10 @@
 # 2026-10-09 upgrade verification
 
+## Common-food representative coverage, frozen100 (2026-10-16)
+
+[Evidence and limits](docs/food_catalog/COMMON_REPRESENTATIVES_IMPROVEMENT.md): same100 distinct synthetic foods,100 attempts each condition. Automatic pending quote57→100; candidate0 model calls/errors/domain writes. Baseline43 model failures came from depleted prepaid credits (HTTP402); this is coverage expansion, not nutrient accuracy, normal-provider final success or latency improvement. Registry47 representatives/106 input forms,40 official generic dish rows plus7 CSV links. Exact dish/ingredient collision, mixed quantities and product approval regressions included.
+
+
 ## Isolated free Render 2-hour recovery validation: completed (2026-10-15)
 
 [Evidence, scripts, captures and Supabase limits](docs/admin-feedback/RENDER_RECOVERY_VALIDATION.md). Independent free Render web/Postgres, synthetic10k rows and3 signed RSA identities:7200.015 seconds,720/720 public HTTPS queries, median530.63ms/p95753.94ms. Same100 frozen cases×3 per phase passed300/300 both sides of real DB restart; old persistent connection raised AdminShutdown, new connections recovered.100 three-way write races/300 PATCH passed200/409/409 with one audit row each. Manual pg_dump/restore after deliberate synthetic loss matched data/constraints/indexes/RLS hashes; restore command8318.328ms, post-restore queries100/100 plus write/version/conflict passed. Sampling captured no HTTP outage and cannot prove zero downtime/RTO. Not Supabase Auth/PITR, graph pool recovery, saturation or optimization evidence. Production untouched; validation web/DB suspended. Backend1106 passed/1existing skip.

@@ -4,6 +4,7 @@ import logging
 import math
 from copy import deepcopy
 from app.tools.reviewed_foods import REVIEWED_FOODS
+from app.tools.common_representatives import REPRESENTATIVE_FOODS
 from pydantic import Field, model_validator
 from app.schemas.proposals import StrictModel
 from app.tools.food_import import normalize_name
@@ -20,6 +21,8 @@ STANDARD_ALIASES = {
     '구운삼겹살': '돼지고기, 삼겹살, 구운것(팬)', '고등어구이': '고등어, 구운것',
     '구운고등어': '고등어, 구운것', '닭가슴살': '닭고기, 가슴, 삶은것',
 }
+STANDARD_ALIASES.update({normalize_name(alias): food['canonical']
+                        for food in REPRESENTATIVE_FOODS for alias in food['aliases']})
 
 
 class LabelNutrition(StrictModel):
@@ -100,8 +103,10 @@ class FoodCatalog:
         standards = [row for row in self.rows.values()
                      if row['source'] == 'csv' or row.get('food_kind') == 'standard'] if kind != 'product' else []
         target = STANDARD_ALIASES.get(normalized) if kind != 'product' else None
-        preferred = [row for row in standards if row['normalized_name'] == normalized
-                     or (target and row['name'] == target)]
+        # A reviewed dish alias can deliberately override a same-named raw
+        # ingredient (청국장 -> 청국장찌개). Exact raw names must not win it back.
+        preferred = ([row for row in standards if row['name'] == target] if target else [])
+        preferred = preferred or [row for row in standards if row['normalized_name'] == normalized]
         local = preferred or [row for row in standards if normalized in row['normalized_name']]
         # Generic foods cannot be displaced by an exact manufacturer-product name.
         remote = await self.repository.search(normalized, limit) if self.repository and kind != 'standard' and not local and not target else []

@@ -72,7 +72,7 @@ class NoDomainDB:
     def table(self,*args,**kwargs):raise AssertionError('unexpected_domain_database_access')
 
 
-async def run(concurrency=2):
+async def run(concurrency=2, output=OUTPUT):
     # Only this child process; never alter the deployment's configuration.
     from dotenv import load_dotenv
     load_dotenv(ROOT/'backend/.env')
@@ -87,6 +87,11 @@ async def run(concurrency=2):
     report={'scope':'synthetic_real_DietTeam_and_Gemini_read_only_catalog_memory_proposals',
         'started_at_utc':datetime.now(timezone.utc).isoformat(),'runtime_commit':commit,'dataset_sha256':digest,
         'planned':100,'concurrency':concurrency,'model':settings.gemini_model,
+        'runtime_file_sha256': {name: hashlib.sha256((ROOT/name).read_bytes()).hexdigest()
+            for name in ['backend/app/tools/simple_meals.py', 'backend/app/tools/food_groups.py',
+                         'backend/app/tools/reviewed_foods.py', 'backend/app/tools/food_catalog.py',
+                         'backend/app/agents/team.py', 'backend/app/tools/common_representatives.py',
+                         'backend/app/tools/common_representatives.json']},
         'requested_action':'record_only','application_db_access':'blocked','domain_writes':0,
         'proposal_repository':'memory_only','rows':[],'summary':summarize([],100),
         'limitations':['one attempt for each of100 distinct synthetic foods; not a population success rate',
@@ -99,7 +104,7 @@ async def run(concurrency=2):
         report['summary']=summarize(report['rows'],100)
         report['categories']={cat:summarize([r for r in report['rows'] if r['category']==cat],10)
             for cat in dict.fromkeys(c['category'] for c in cases)}
-        OUTPUT.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+        output.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     semaphore=asyncio.Semaphore(concurrency)
     async def attempt(case):
         async with semaphore:
@@ -125,7 +130,12 @@ async def run(concurrency=2):
                 row['events']=result.get('agent_events',[])
                 row['one_food_item']=len(row['meals'])==1
             except (TimeoutError,asyncio.TimeoutError):row['outcome']='timeout'
-            except Exception as exc:row['error_type']=type(exc).__name__
+            except Exception as exc:
+                row['error_type']=type(exc).__name__
+                # Never publish raw provider exceptions; they can contain credentials.
+                if 'prepayment credits are depleted' in str(exc).lower():
+                    row['error_reason']='model_prepaid_credits_depleted'
+                    row['http_status']=402
             finally:
                 if team is not None:
                     row.setdefault('usage',{'model_calls':team.budget.model_calls,'tool_calls':team.budget.tool_calls})
@@ -143,6 +153,8 @@ async def run(concurrency=2):
 
 if __name__=='__main__':
     parser=argparse.ArgumentParser();parser.add_argument('--concurrency',type=int,choices=[1,2],default=2)
+    parser.add_argument('--output',type=Path,default=OUTPUT,
+                        help='Use a separate file for a candidate; preserve baseline evidence.')
     args=parser.parse_args()
     if sys.platform=='win32':asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    raise SystemExit(0 if asyncio.run(run(args.concurrency)) else 1)
+    raise SystemExit(0 if asyncio.run(run(args.concurrency,args.output)) else 1)

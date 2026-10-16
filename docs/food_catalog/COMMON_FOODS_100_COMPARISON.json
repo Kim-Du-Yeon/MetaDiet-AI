@@ -1,0 +1,36 @@
+{
+  "dataset_sha256": "777d033d04784180e9895472811a8474e791a61c463f0f3e6ecc65c95dfd4f8e",
+  "before": {
+    "planned": 100,
+    "completed_attempts": 100,
+    "not_attempted": 0,
+    "auto_card_count": 57,
+    "auto_card_rate_planned": 0.57,
+    "outcomes": {
+      "auto_card": 57,
+      "error": 43
+    }
+  },
+  "after": {
+    "planned": 100,
+    "completed_attempts": 100,
+    "not_attempted": 0,
+    "auto_card_count": 100,
+    "auto_card_rate_planned": 1.0,
+    "outcomes": {
+      "auto_card": 100
+    }
+  },
+  "model_independent_path_before": 57,
+  "model_independent_path_after": 100,
+  "model_calls_after": 0,
+  "provider_probe_after": {
+    "http_status": 402,
+    "reason": "prepayment credits are depleted",
+    "resolved": false
+  },
+  "writes": 0,
+  "accuracy_claim": false,
+  "public_end_to_end_claim": false,
+  "latency_improvement_claim": false
+}

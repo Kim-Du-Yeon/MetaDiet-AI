@@ -9,6 +9,7 @@ from zoneinfo import ZoneInfo
 from app.core.service_clock import service_today
 from app.schemas.proposals import MealProposal
 from app.tools.food_groups import match_food_group
+from app.tools.common_representatives import REPRESENTATIVE_FOODS, REPRESENTATIVE_BY_CANONICAL
 
 # alias, exact catalog name, app serving grams, display unit, representative ID
 PORTIONS = [
@@ -80,6 +81,13 @@ CATEGORY_DEFAULTS = {
     '만두, 고기 만두': (5, {'개': 30, '회분': 150, '인분': 150}),
 }
 COUNTS = {'한': 1, '하나': 1, '두': 2, '둘': 2, '세': 3, '네': 4, '다섯': 5, '여섯': 6, '반': .5}
+# Reviewed registry overrides legacy aliases while keeping old catalog IDs readable.
+_reviewed_aliases = {alias for food in REPRESENTATIVE_FOODS for alias in food['aliases']}
+PORTIONS = [(tuple(alias for alias in aliases if alias not in _reviewed_aliases),
+             canonical, serving, unit, food_id)
+            for aliases, canonical, serving, unit, food_id in PORTIONS]
+PORTIONS.extend((tuple(food['aliases']), food['canonical'], food['serving_g'],
+                 food['unit'], food['food_id']) for food in REPRESENTATIVE_FOODS)
 # Longer aliases must win: 계란후라이 must not be consumed as 계란.
 ALIASES = sorted(((alias, canonical, serving, unit, food_id)
     for aliases, canonical, serving, unit, food_id in PORTIONS for alias in aliases),
@@ -154,10 +162,13 @@ def parse_simple_meal(message, *, forced_meal_type=None, allow_unknown=False):
         alias, canonical, serving, default_unit, food_id = matched
         text = text[len(alias):].lstrip()
         default_amount, unit_grams = CATEGORY_DEFAULTS.get(canonical, (1, {default_unit: serving, '회분': serving, '인분': serving}))
+        representative = REPRESENTATIVE_BY_CANONICAL.get(canonical)
+        if representative:
+            unit_grams = {**unit_grams, **representative.get('unit_grams', {})}
         if group_match:
             group, _, unit_grams = group_match
             default_amount = group.count
-        quantity = re.match(r'((?:\d+(?:\.\d+)?)|하나|한|둘|두|세|네|다섯|여섯|반)\s*(g|그램|공기|개|회분|인분|장|컵|조각|판)', text, re.I)
+        quantity = re.match(r'((?:\d+(?:\.\d+)?)|하나|한|둘|두|세|네|다섯|여섯|반)\s*(g|그램|공기|개|회분|인분|장|컵|조각|판|줄|그릇)', text, re.I)
         amount, unit, defaulted = default_amount, default_unit, True
         if quantity:
             amount = COUNTS.get(quantity[1])
@@ -188,13 +199,17 @@ def parse_simple_meal(message, *, forced_meal_type=None, allow_unknown=False):
         if group_match:
             approximate = True
             basis_note = f'{group.name} 음식군 대표값({canonical})으로 계산했어요. 실제 제품·재료와 다를 수 있어요.'
+        if representative:
+            approximate = True
+            basis_note = representative['basis_note']
         items.append({'canonical': canonical, 'food_id': food_id, 'quantity_g': grams,
             **({'unresolved': True} if canonical is None else {}),
             'portion': {'display_name': TYPO_DISPLAY.get(alias, alias),
                 'amount': amount, 'unit': unit, 'unit_g': serving,
                 'default_unit': default_unit, 'defaulted': defaulted,
                 'unit_grams': unit_grams, 'basis_note': basis_note,
-                **({'food_group': group.name} if group_match else {}),
+                **({'food_group': group.name} if group_match else
+                   {'food_group': representative['food_group']} if representative else {}),
                 'representative': bool(food_id) or approximate, 'policy_version': 'simple-v4'}})
         text = re.sub(r'^(?:그리고\s+|이랑\s*|랑\s*|하고\s*|와\s*|과\s*)', '', text)
         if len(items) > 30:
@@ -216,7 +231,7 @@ async def calculate_simple_meal(parsed, catalog):
                 raise ValueError('reviewed_standard_unavailable')
             food_id = exact[0]['food_id']
         quote = await catalog.lookup(food_id, item['quantity_g'])
-        if item['food_id'] and re.sub(r'\s+', '', quote['food_name']) != item['canonical']:
+        if item['food_id'] and re.sub(r'\s+', '', quote['food_name']) != re.sub(r'\s+', '', item['canonical']):
             raise ValueError('representative_identity_mismatch')
         quote['nutrition_metadata']['portion'] = item['portion']
         quote['meal_type'] = parsed['meal_type']

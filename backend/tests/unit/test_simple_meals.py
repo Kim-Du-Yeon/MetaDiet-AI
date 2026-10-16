@@ -17,7 +17,10 @@ async def test_stew_and_bulgogi_go_directly_to_editable_proposal(message, grams,
     assert [m['quantity_g'] for m in proposal['meals']] == grams
     assert [m['nutrition_metadata']['portion']['defaulted'] for m in proposal['meals']] == defaulted
     assert all(m['calories'] > 0 for m in proposal['meals'])
-    assert proposal['meals'][0]['nutrition_metadata']['source_date'] == '2026-06-18'
+    assert proposal['meals'][0]['nutrition_metadata']['source_date'] == '2026-08-28'
+    assert proposal['meals'][0]['food_id'] == 'mfds:D306-266000000-0001'
+    assert proposal['meals'][0]['nutrition_metadata']['food_kind'] == 'standard'
+    assert not proposal['meals'][0]['nutrition_metadata']['manufacturer']
 
 
 @pytest.mark.parametrize('message,grams', [

@@ -1,5 +1,8 @@
 # MetaDiet AI
 
+일반 음식 자동 입력 보강: [동일 100종 자동 카드 57→100건·대표 연결·잘못된 대체 수정·크레딧 한계](docs/food_catalog/COMMON_REPRESENTATIVES_IMPROVEMENT.md).
+
+
 일반 음식 100종 점검: [자동 카드 57건·모델 결제 오류 43건·원인과 보완 계획](docs/food_catalog/COMMON_FOODS_100.md).
 
 

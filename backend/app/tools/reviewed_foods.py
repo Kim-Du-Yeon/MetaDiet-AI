@@ -3,6 +3,9 @@
 These are approximate app representatives, not the user's actual brand.
 Keep provenance even when the compact UI hides manufacturer details.
 """
+from app.tools.common_representatives import REPRESENTATIVE_ROWS
+
+
 REVIEWED_FOODS = {
     'mfds:D110-465000000-0001': {
         'food_id': 'mfds:D110-465000000-0001', 'name': '돼지고기볶음(제육볶음)',
@@ -26,3 +29,6 @@ REVIEWED_FOODS = {
                       'fat_g': 1.24, 'sodium_mg': 413.0},
     },
 }
+
+# Retain older pinned IDs so existing proposals/records remain readable.
+REVIEWED_FOODS.update(REPRESENTATIVE_ROWS)

@@ -16,7 +16,14 @@ async def test_food_family_without_registered_exact_name_makes_quote(name, grams
     assert not parsed['items'][0].get('unresolved')
     result = await calculate_simple_meal(parsed, FoodCatalog())
     meal = result['meals'][0]
-    assert meal['quantity_g'] == grams and meal['source'] == 'csv'
+    assert meal['quantity_g'] == grams
+    expected_ids = {'김치볶음밥': 'mfds:D101-017070000-0001',
+                    '크림스파게티': 'mfds:D303-161480000-0001'}
+    if name in expected_ids:
+        assert meal['food_id'] == expected_ids[name]
+        assert meal['nutrition_metadata']['food_kind'] == 'standard'
+    else:
+        assert meal['source'] == 'csv'
     assert meal['nutrition_metadata']['portion']['display_name'] == name
     if name != '플레인요거트':
         assert meal['nutrition_metadata']['portion']['food_group']
