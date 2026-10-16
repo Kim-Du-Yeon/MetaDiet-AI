@@ -245,7 +245,7 @@ export default function ChatInterface({
 
   const sendMessage = async (selection) => {
     const request = typeof selection?.request === "string" ? selection.request : input;
-    if (!request.trim() || isLoading) return;
+    if (!request.trim() || isLoading || restoreStatus !== 'ready') return;
     resetProgress();
     const userMsg = request.trim();
     const activeFoodEntry = foodEntry;
@@ -593,9 +593,9 @@ export default function ChatInterface({
           onKeyDown={(e) => e.key==="Enter" && sendMessage()}
           placeholder={isInterrupted ? "확정 / 수정 / 취소 입력..." : "오늘 뭐 드셨어요?"}
           style={{ ...styles.input, borderColor: isInterrupted?"#4CAF50": isRolledBack?"#FF9800":"#ddd" }}
-          disabled={isLoading}
+          disabled={isLoading || restoreStatus !== 'ready'}
         />
-        <button onClick={sendMessage} disabled={isLoading||!input.trim()} style={styles.sendBtn}>
+        <button onClick={sendMessage} disabled={isLoading||restoreStatus !== 'ready'||!input.trim()} style={styles.sendBtn}>
           {isInterrupted ? "확인" : "전송"}
         </button>
       </div>

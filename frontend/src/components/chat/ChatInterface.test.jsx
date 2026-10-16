@@ -29,6 +29,12 @@ function Harness() {
       isInterrupted={interrupted} setIsInterrupted={setInterrupted} onStatsUpdate={setStats} /></>;
 }
 
+test('restoring a session prevents submission before history can replace the active turn', () => {
+  getSessionRestore.mockImplementationOnce(() => new Promise(() => {}));
+  render(<Harness />);
+  expect(screen.getByRole('textbox',{name:'식단 코치에게 메시지 보내기'})).toBeDisabled();
+});
+
 test('restored cancellation is not labeled as a confirmed meal', async () => {
   getSessionRestore.mockResolvedValue({messages:[
     {role:'assistant', content:'실제 섭취 기록을 취소했습니다.', agent_used:'confirm'},
@@ -91,6 +97,7 @@ test("renders streamed backend phases with the completed answer", async () => {
     onDone({ agent_used: "strategy", awaiting_confirmation: false, trace_id: "actual-root-span" });
   });
   render(<Harness />);
+  await waitFor(() => expect(screen.getByPlaceholderText("오늘 뭐 드셨어요?")).toBeEnabled());
   fireEvent.change(screen.getByPlaceholderText("오늘 뭐 드셨어요?"), { target: { value: "저녁 추천해줘" } });
   fireEvent.click(screen.getByRole("button", { name: "전송" }));
 
@@ -167,6 +174,7 @@ test("empty chat suggestions prepare a request without sending it", async () => 
 test("keeps the conversation usable when a streamed request is interrupted", async () => {
   sendChatMessage.mockRejectedValue(new Error("네트워크 연결이 끊어졌습니다."));
   render(<Harness />);
+  await waitFor(() => expect(screen.getByPlaceholderText("오늘 뭐 드셨어요?")).toBeEnabled());
   fireEvent.change(screen.getByPlaceholderText("오늘 뭐 드셨어요?"), { target: { value: "저녁 추천해줘" } });
   fireEvent.click(screen.getByRole("button", { name: "전송" }));
 

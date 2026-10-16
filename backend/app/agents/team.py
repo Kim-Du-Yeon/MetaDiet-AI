@@ -379,7 +379,8 @@ class DietTeam:
         self.evidence_search_status = 'grounded' if result.get('grounded') else 'insufficient_evidence'
         from app.agents.execution_stream import emit_runtime_event
         await emit_runtime_event('evidence_search_result', status=self.evidence_search_status,
-                                 document_count=len(result.get('docs') or []))
+                                 document_count=len(result.get('docs') or []),
+                                 retrieval_mode=result.get('retrieval_mode', 'unknown'))
         if not result.get("grounded"):
             response = {"grounded": False, 'status':'insufficient_evidence', "evidence": []}
             self.evidence_cache[query] = response

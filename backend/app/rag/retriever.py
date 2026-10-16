@@ -19,6 +19,7 @@ cross-lingual: 코퍼스가 영어 문서뿐이라 한국어 질의는 그대로
 """
 import pickle, re, json, asyncio
 import hashlib
+import logging
 from threading import RLock
 from pathlib import Path
 from pinecone import Pinecone, ServerlessSpec
@@ -66,7 +67,7 @@ def _get_kiwi():
     global _kiwi
     if _kiwi is None:
         from kiwipiepy import Kiwi
-        _kiwi = Kiwi()
+        _kiwi = Kiwi(num_workers=1)
     return _kiwi
 
 
@@ -130,12 +131,35 @@ def _get_bm25():
         return _load_bm25()
 
 
+def _memory_limit_bytes() -> int | None:
+    """Read container hard limits; never use host RAM as the container budget."""
+    limits = []
+    for path in ("/sys/fs/cgroup/memory.max",
+                 "/sys/fs/cgroup/memory/memory.limit_in_bytes"):
+        try:
+            value = int(Path(path).read_text(encoding="ascii").strip())
+            if 0 < value < 2**60:
+                limits.append(value)
+        except (OSError, ValueError):
+            continue
+    return min(limits) if limits else None
+
+
 def _load_bm25():
     """청크 캐시(chunks.pkl)에서 BM25 sparse 검색기 lazy 로드. 없으면 None(폴백)."""
     global _bm25, _bm25_loaded
     if _bm25_loaded:
         return _bm25
     _bm25_loaded = True
+    limit = _memory_limit_bytes()
+    if limit is not None and limit <= 512 * 1024 * 1024:
+        # Kiwi's measured initialization alone exceeds this container budget.
+        # Keep remote dense retrieval and its grounding gate available.
+        logging.getLogger(__name__).warning(
+            "rag_sparse_unavailable reason=memory_budget limit_bytes=%s", limit
+        )
+        _bm25 = None
+        return None
     try:
         from langchain_community.retrievers import BM25Retriever
         with open(settings.get_chunks_path(), "rb") as f:
@@ -330,6 +354,7 @@ async def retrieve(query: str, k: int = 4, max_docs: int = 4,
         "grounded":  grounded,
         "max_score": max_score,
         "docs":      docs,
+        "retrieval_mode": "hybrid" if use_hybrid and _bm25 is not None else "dense_fallback" if use_hybrid else "dense",
     }
 
 
