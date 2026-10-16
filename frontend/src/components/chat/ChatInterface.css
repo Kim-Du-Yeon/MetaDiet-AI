@@ -29,3 +29,9 @@
   .chat-starters { padding: 14px; }
   .chat-starters div { display: grid; }
 }
+.coaching-review { margin: 12px 20px; padding: 18px; border: 1px solid #cbded5; border-radius: 16px; background: #f2f8f5; color: #244239; }
+.coaching-review p { line-height: 1.6; }
+.coaching-review button { min-height: 44px; margin: 4px 8px 4px 0; padding: 8px 16px; border: 1px solid #b4ccc0; border-radius: 10px; background: white; color: #205740; cursor: pointer; }
+.coaching-review button:disabled { opacity: .5; cursor: default; }
+.coaching-review label { display: grid; gap: 8px; }
+.coaching-review textarea { box-sizing: border-box; width: 100%; min-height: 96px; padding: 12px; border: 1px solid #b4ccc0; border-radius: 10px; font: inherit; }

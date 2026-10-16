@@ -83,7 +83,7 @@ food_id나 내부 도구명을 답변에 쓰거나 사용자에게 ID 입력을 
 전날 과식을 이유로 근거 없는 고정 칼로리 차감을 하지 마세요.
 일반적인 후속 코칭 질문은 결론과 실천 방법을 2~4문장으로 답하세요. 사용자가 상세 분석을 요청하지 않으면 목표·섭취량 표와 이전 답변을 반복하지 마세요. 새 영양 수치나 근거 없는 고정 비율을 만들지 마세요.
 propose 도구는 저장 완료가 아니라 사용자 확인이 필요한 제안을 만듭니다.
-실패 피드백을 받아 허용된 대안 또는 질문으로 진행하세요. 근거가 없으면 그 한계를 밝히세요.
+실패 피드백을 받아 허용된 대안으로 진행하세요. 검색 실패나 근거 부족이어도 확인된 기록 분석은 제공하고 새로운 수치 변경만 보류하세요. 식사 누락을 단정하거나 이미 확인한 정보를 다시 입력하라고 요구하지 마세요. 필요한 측정 기록이 부족한 경우 추가 입력은 선택이며 화면의 입력·건너뛰기 버튼으로 제공됩니다.
 기록과 계획이 함께 요청되면 기록 제안을 먼저 만들고, 확정된 뒤 계획을 진행하도록 설명하세요.
 질병·임신·미성년자 등 일반 성인 체중관리 범위를 벗어나면 개별 처방을 제안하지 마세요.
 """
@@ -176,6 +176,9 @@ class DietTeam:
         self.evidence = {}
         self.evidence_cache = {}
         self.evidence_search_attempted = False
+        self.evidence_search_status = None
+        self.measurements = None
+        self.goal_assessment = None
         self.food_search_cache = {}
         self.food_catalog = None
         self.ambiguous_food_ids = set()
@@ -241,7 +244,8 @@ class DietTeam:
         return self.intake
 
     async def read_measurements(self, args):
-        return await self.rows("inbody_logs", user_id=self.state["user_id"])
+        self.measurements = await self.rows("inbody_logs", user_id=self.state["user_id"])
+        return self.measurements
 
     async def assess_goal_progress(self, args):
         if not self.profile:
@@ -250,7 +254,9 @@ class DietTeam:
             return {"status": "not_applicable", "automatic_calorie_adjustment_kcal": 0}
         from app.core.goal_policy import assess_weight_trend
         measurements = await self.rows("inbody_logs", user_id=self.state["user_id"])
-        return assess_weight_trend(measurements)
+        self.goal_assessment = assess_weight_trend(measurements)
+        self.measurements = measurements
+        return self.goal_assessment
 
     async def read_recent_intake(self, args):
         def execute():
@@ -346,12 +352,36 @@ class DietTeam:
         query = " ".join(args.query.split())
         if query in self.evidence_cache:
             return self.evidence_cache[query]
+        if self.evidence_search_status == 'search_unavailable':
+            return {'grounded':False, 'status':'search_unavailable', 'evidence':[],
+                    'instruction':'이번 요청에서는 검색을 다시 시도하지 말고 확인된 기록을 분석하세요.'}
         # Translation may make a nested LLM call. Count that call conservatively.
         if re.search(r"[가-힣]", query):
             await self.budget.reserve("model")
-        result = await retrieve(query, k=4)
+        try:
+            result = await retrieve(query, k=4)
+        except Exception as exc:
+            from app.agents.execution_stream import emit_runtime_event
+            self.evidence_search_status = 'search_unavailable'
+            known_errors = {
+                'Gemini RAG build is not activated; rebuild and select activation.json settings':'activation_missing',
+                'RAG manifest does not match the configured Gemini embedding build':'activation_mismatch',
+                'Pinecone dimension mismatch; use a separate compatible index':'dimension_mismatch',
+                'Select a rebuilt metadiet-gemini- namespace; legacy vectors are incompatible':'namespace_mismatch',
+            }
+            code = known_errors.get(str(exc),'retrieval_error')
+            logging.getLogger(__name__).warning('evidence_search_unavailable error_type=%s error_code=%s',type(exc).__name__,code)
+            await emit_runtime_event('evidence_search_result', status='search_unavailable', error_type=type(exc).__name__,error_code=code)
+            response = {'grounded':False, 'status':'search_unavailable', 'evidence':[],
+                        'instruction':'검색 도구를 사용할 수 없습니다. 같은 검색을 반복하지 말고 확인된 기록 분석을 제공하고 수치 변경만 보류하세요.'}
+            self.evidence_cache[query] = response
+            return response
+        self.evidence_search_status = 'grounded' if result.get('grounded') else 'insufficient_evidence'
+        from app.agents.execution_stream import emit_runtime_event
+        await emit_runtime_event('evidence_search_result', status=self.evidence_search_status,
+                                 document_count=len(result.get('docs') or []))
         if not result.get("grounded"):
-            response = {"grounded": False, "evidence": []}
+            response = {"grounded": False, 'status':'insufficient_evidence', "evidence": []}
             self.evidence_cache[query] = response
             return response
         found = []
@@ -682,23 +712,26 @@ class DietTeam:
                 self.proposal = None
         import time
         response = result.content
+        coaching_review = None
         if self.food_selection['items'] and not self.proposal:
             response = '일반 음식은 식품성분표의 표준값으로 계산합니다. 제품 확인이 필요한 항목은 아래 카드에서 선택해주세요. 선택 후 전체 식사 확인 카드를 검토해야 저장됩니다.'
         if self.unresolved_foods and not self.proposal:
             response += '\n\n미등록 항목은 영양정보 기입 또는 제외를 선택할 수 있습니다. 원하지 않으면 취소해주세요.'
-        if result.status == "completed" and self.evidence_search_attempted and not self.evidence and not self.proposal:
-            response = ("공식 문서 검색 결과가 근거 기준을 통과하지 못해 특정 비율이나 칼로리 수치가 포함된 "
-                        "권고는 보류했습니다. 기록되지 않은 식사 내역을 먼저 알려주시면, 확정된 목표와 "
-                        "식품성분표 수치를 사용해 식단 제안을 다시 계산하겠습니다.")
+        if self.evidence_search_attempted and not self.evidence and not self.proposal:
+            from app.agents.coaching_review import build_review
+            response, coaching_review = build_review(profile=self.profile, intake=self.intake,
+                measurements=self.measurements, assessment=self.goal_assessment,
+                reason=self.evidence_search_status or 'search_unavailable')
         elif (result.status == "completed" and self.evidence_search_attempted and self.evidence
               and not self.proposal and _meal_allocation_is_unsupported(response, self.evidence)):
-            response = ("검색된 공식 문서에서 저녁 등 끼니별 고정 에너지 배분 비율을 확인하지 못해 "
-                        "특정 비율이나 그 비율에서 계산한 칼로리 권고는 보류했습니다. 점심·간식처럼 "
-                        "아직 기록되지 않은 섭취가 있다면 먼저 알려주세요. 확인된 하루 목표와 실제 섭취량, "
-                        "식품성분표 수치를 바탕으로 저녁 식단을 다시 계산하겠습니다.")
+            from app.agents.coaching_review import build_review
+            response, coaching_review = build_review(profile=self.profile, intake=self.intake,
+                measurements=self.measurements, assessment=self.goal_assessment, reason='unsupported_claim')
+        if coaching_review is None and not proposal and (self.goal_assessment or {}).get('status') == 'insufficient_data':
+            coaching_review = {'reason':'measurement_history_missing', 'optional_input':'measurements'}
         if proposal and not self.proposal:
             response += "\n\n기존 확인 대기 제안은 유지됩니다. 확정·수정·취소를 선택해주세요."
-        return {"response": response, "agent_used": agent_name, "pending_proposal": proposal,
+        return {"response": response, "coaching_review":coaching_review, "agent_used": agent_name, "pending_proposal": proposal,
             "food_selection": self.food_selection if self.food_selection['items'] and not self.proposal else None,
             "pending_meals": proposal["payload"].get("meals") if proposal else None,
             "plan_date": proposal["payload"].get("log_date") if proposal else None,

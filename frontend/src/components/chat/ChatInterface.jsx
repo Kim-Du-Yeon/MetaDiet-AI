@@ -8,6 +8,7 @@ import MealChoiceCards from './MealChoiceCards';
 import ProcessTrace from "./ProcessTrace";
 import AnswerContent from './AnswerContent';
 import CoachingActions from './CoachingActions';
+import CoachingReview from './CoachingReview';
 import { intakeReceipt } from './intakeReceipt';
 import "./ChatInterface.css";
 
@@ -54,6 +55,7 @@ export default function ChatInterface({
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [budget, setBudget] = useState(null);
+  const [coachingReview, setCoachingReview] = useState(null);
   const [approval, setApproval] = useState(null);
   const [foodSelection, setFoodSelection] = useState(null);
   const [showNutritionLabel, setShowNutritionLabel] = useState(false);
@@ -111,6 +113,7 @@ export default function ChatInterface({
       });
       setApproval(restored.pending_proposal ? { ...restored.pending_proposal, channel: restored.proposal_decision_mode === 'direct' || restored.pending_proposal.payload?.meals?.some(meal => meal.nutrition_metadata?.button_resolution) || restored.pending_proposal.payload?.meals?.every(meal => meal.source === "user_label") ? "upload" : "chat" } : null);
       setFoodSelection(restored.food_selection || null);
+      setCoachingReview(restored.coaching_review || null);
       setIsInterrupted(!!restored.interrupted);
       if (restored.today_calories !== undefined && restored.target_calories !== undefined) {
         setBudget({ calories: restored.today_calories, target: restored.target_calories });
@@ -144,6 +147,7 @@ export default function ChatInterface({
 
   const handleDone = (meta) => {
     setFoodSelection(meta.food_selection || null);
+    setCoachingReview(meta.coaching_review || null);
     lastTraceRef.current = meta.trace_id || null;
     setApproval(meta.pending_proposal ? { ...meta.pending_proposal, channel: "chat" } : null);
     setMessages((prev) => {
@@ -510,6 +514,8 @@ export default function ChatInterface({
       {showFoodSearch && <FoodProductSearch contextRequest={foodSelection?.request} onClose={() => setShowFoodSearch(false)} onSelect={selection => { setShowFoodSearch(false); sendMessage(selection); }} />}
       {showNutritionLabel && <NutritionLabelForm threadId={threadId} onClose={() => setShowNutritionLabel(false)} onProposal={proposal => { setApproval({ ...proposal, channel: "upload" }); setShowNutritionLabel(false); }} />}
       {approval && <ProposalCard proposal={approval} busy={isLoading} onDecision={handleProposalDecision} onRevise={handleMeasurementRevision} budget={budget} />}
+      {!approval && restoreStatus === 'ready' && <CoachingReview details={coachingReview} busy={isLoading}
+        onProvide={value => sendMessage({request:value})} />}
       {!approval && restoreStatus === 'ready' && <CoachingActions busy={isLoading} onRecommend={sendMessage} />}
       {approvalError && <div role="alert" style={{ color: "#b42318", margin: 12 }}>{approvalError}
         <button disabled={isLoading} onClick={restoreSession}>최신 제안 다시 불러오기</button></div>}

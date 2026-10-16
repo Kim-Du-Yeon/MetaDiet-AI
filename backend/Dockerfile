@@ -13,6 +13,8 @@ WORKDIR /app
 COPY backend/requirements.txt ./requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 COPY --chown=app:app backend/ ./
+COPY --chown=app:app backend/app/rag/release/ ./app/rag/
+RUN python -c "import json,hashlib,pathlib; p=pathlib.Path('app/rag'); m=json.loads((p/'activation.json').read_text()); assert hashlib.sha256((p/'chunks.pkl').read_bytes()).hexdigest()==m['chunks_sha256']"
 COPY --chown=app:app docs/nutrition/ /docs/nutrition/
 COPY --chown=app:app supabase/migrations/20261008233749_agent_proposals.sql ./migrations/20261008233749_agent_proposals.sql
 RUN mkdir -p /app/artifacts && chown app:app /app/artifacts

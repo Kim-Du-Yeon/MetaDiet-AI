@@ -245,7 +245,7 @@ def _initial_state(req: ChatRequest, user_id: str, run_id: str | None = None) ->
         "requested_action": req.requested_action, "tool_policy": req.tool_policy,
         "pending_proposal": None, "proposal_decision": None, "proposal_result": None,
         "execution_usage": {}, "execution_status": "running", "execution_error": None, "agent_events": [],
-        "food_selection": None,
+        "food_selection": None, "coaching_review":None,
         "user_id": user_id, "message": req.message,
         "intent": "", "response": "", "messages": req.messages[-10:] if req.messages else [],
         "agent_used": "", "today_calories": 0.0, "today_protein": 0.0,
@@ -298,6 +298,11 @@ async def _invoke_with_progress(graph, graph_input, config: dict, journal: Execu
             failures = journal.diagnostics.setdefault('external_failures', [])
             if len(failures) < 32:
                 failures.append(payload)
+            return
+        if kind == 'evidence_search_result':
+            results = journal.diagnostics.setdefault('evidence_search_results', [])
+            if len(results) < 16:
+                results.append(payload)
             return
         if kind == 'execution_route':
             journal.diagnostics.update(payload)
@@ -467,6 +472,7 @@ async def _stream(graph, config: dict, run_id: str, after_seq: int = 0):
         yield _sse({'type':'completed','agent_used':sv.get('agent_used',''),**stats,'pending_meals':pending,
             'pending_proposal':sv.get('pending_proposal'),'run_id':run_id,'trace_id':sv.get('trace_id'),'seq':100000,
             'food_selection': sv.get('food_selection'),
+            'coaching_review':sv.get('coaching_review'),
             'execution_usage':sv.get('execution_usage'),'awaiting_confirmation':sv.get('awaiting_confirmation',False),
             'stage_timings_ms': timings,
             **(journal.diagnostics if journal else sv.get('response_diagnostics') or {}),
@@ -736,6 +742,7 @@ async def restore_session(thread_id: str, current_user: str = Depends(get_curren
         "proposal_decision_mode": 'direct' if proposal and ((sv.get('food_selection') or {}).get('resolution_request') or
             any((meal.get('nutrition_metadata') or {}).get('button_resolution') for meal in proposal.get('payload', {}).get('meals', []))) else 'chat',
         "food_selection": sv.get('food_selection') if not active_pending else None,
+        "coaching_review":sv.get('coaching_review'),
         "pending_state": {
             "pending_meals": sv.get("pending_meals") if active_pending else None,
             "awaiting_confirmation": active_pending,
