@@ -1,5 +1,9 @@
 # 2026-10-09 upgrade status
 
+## Container memory and evidence failure boundary (2026-10-16)
+
+The committed, hashed Gemini release corpus and activation manifest are copied to the deployed RAG path. Before local sparse initialization, the retriever reads cgroup v2/v1 hard memory limits. At ≤512MiB it avoids importing/building BM25 and Kiwi and uses the existing remote dense fallback, preserving dual queries and the grounding threshold. Larger/unrestricted hosts retain hybrid retrieval; Kiwi uses one worker. Search diagnostics distinguish tool failure from ungrounded results and report the actual retrieval mode. The final coaching gate preserves facts read this request while withholding unsupported new numerical targets. Optional measurement input never bypasses proposals or confirmation. [Incident and limitations](docs/coaching_review/README.md).
+
 ## Final statistics transport isolation (2026-10-16)
 
 `app/db/public_stats.py` reads final intake/target statistics through request-local async HTTP clients, with one fresh-client retry for transient read failures, per-I/O timeouts and a15-second overall deadline. Each attempt reuses its connection for the two read-only queries; concurrent requests do not share or reset the synchronous Supabase SDK connection. Cancellation closes the transport. Authenticated internal-owner/service-date filters and unavailable-versus-real-zero behavior remain unchanged. No health-data cache, schema or write-path change. The two reads are not an atomic database snapshot. [Evidence and connection-cost tradeoff](docs/public_stats_recovery/README.md).

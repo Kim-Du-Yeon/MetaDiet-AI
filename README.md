@@ -1,5 +1,7 @@
 # MetaDiet AI
 
+운영 메모리 장애·근거 보류 개선: [실제 OOM 이벤트, 100쌍 토크나이저 실험, 512MB 보호 및 기록 분석 유지](docs/coaching_review/README.md).
+
 통계 조회 연결 복구: [ReadError 원인 범위·공개 상담/최신값 전후100건·배포·브라우저 확인](docs/public_stats_recovery/README.md). 상태 변경 통계 반환84→100/100, 누락13→0건·요청 실패3→0건. 정상 통계 중앙값은0.304→0.600초로 늘어 신뢰성과 비용을 함께 기록했습니다.
 
 요청 시작 지연 계측: [요청 ID·브라우저 표시 기회·API/Agent 연결·공개 고정 평가](docs/request_startup/README.md).

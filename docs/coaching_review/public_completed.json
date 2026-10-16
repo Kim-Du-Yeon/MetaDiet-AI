@@ -1,0 +1,39 @@
+{
+  "request_id": "a78e5ffc-e398-4d8b-8af1-d6ce54a788ed",
+  "status": "completed",
+  "optional_measurements": true,
+  "evidence_search_results": [
+    {
+      "status": "grounded",
+      "retrieval_mode": "dense_fallback",
+      "document_count": 4
+    }
+  ],
+  "tool_events": [
+    {
+      "type": "tool_succeeded",
+      "tool": "read_profile"
+    },
+    {
+      "type": "tool_succeeded",
+      "tool": "read_intake"
+    },
+    {
+      "type": "tool_succeeded",
+      "tool": "read_recent_intake"
+    },
+    {
+      "type": "tool_succeeded",
+      "tool": "read_measurements"
+    },
+    {
+      "type": "tool_succeeded",
+      "tool": "assess_goal_progress"
+    },
+    {
+      "type": "tool_succeeded",
+      "tool": "search_evidence"
+    }
+  ],
+  "proposal_created": false
+}

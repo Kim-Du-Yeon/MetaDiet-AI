@@ -1,0 +1,13 @@
+{
+  "trace_id": "fa5c4802-84e0-455c-b750-9bb2162550e9",
+  "start_utc": "2026-10-16T04:34:58.955645+00:00",
+  "end_utc": "2026-10-16T04:35:41.275657+00:00",
+  "build_commit": "ea2964b0460c050db35749f7f2c3d2824fccffd7",
+  "execution_status": "completed",
+  "profile_intake_measurements_progress_recent_reads": "all tool_succeeded",
+  "evidence_tool_attempts": 3,
+  "evidence_tool_results": ["tool_failed", "tool_failed", "tool_failed"],
+  "historical_exception_details": "not recorded; root trace had no unhandled error; inputs/outputs remain hidden",
+  "deployment_investigation": "activation.json absent from tracked backend RAG files at the historical commit; runtime loader requires it; selected build directory ignored",
+  "health_values_and_raw_conversation": "omitted"
+}

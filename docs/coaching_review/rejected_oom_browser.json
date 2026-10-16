@@ -1,0 +1,22 @@
+{
+  "build": "31a81b1eddaf4c758199abf65dc980f39479dc00",
+  "request_id": "ce3c5bcf-fad3-4655-a60b-75ae400cbf2b",
+  "scope": "single actual browser functional verification; not a performance benchmark",
+  "browser": {
+    "first_progress_ms": 901.6,
+    "connection_failure_ms": 34966.4,
+    "retry_failure_ms": 35078.1
+  },
+  "render_events": [
+    {
+      "at_kst": "2026-10-16T16:28:00+09:00",
+      "message": "Ran out of memory (used over 512MB) while running your code."
+    },
+    {
+      "at_kst": "2026-10-16T16:29:00+09:00",
+      "message": "Service recovered"
+    }
+  ],
+  "domain_write_actions": 0,
+  "conclusion": "Process-level OOM; no Python exception proves the exact allocation. Kiwi isolated initialization exceeds the budget; memory leak not established."
+}
