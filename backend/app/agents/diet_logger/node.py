@@ -134,7 +134,8 @@ async def diet_logger_node(state: AgentState) -> dict:
     today_meals    = today_data["today_meals"]
     recent_context = extract_messages_context(state.get("messages", []))
 
-    parse_resp = await llm.ainvoke(PARSE_PROMPT.format_messages(
+    parse_model = get_chat_model(temperature=0, task='extraction') if get_settings().model_routing_enabled else llm
+    parse_resp = await parse_model.ainvoke(PARSE_PROMPT.format_messages(
         message=state["message"],
         logged_meals=logged_meals if logged_meals else "없음",
         recent_context=recent_context,

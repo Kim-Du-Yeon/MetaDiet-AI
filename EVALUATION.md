@@ -1,5 +1,27 @@
 # 2026-10-09 upgrade verification
 
+## Purpose routing evaluation protocol (2026-10-19)
+
+[Model-role table/image, frozen cases, raw attempts and gate](docs/model_routing/README.md).
+Same100 cases/condition: production-prompt extraction25, actual legacy
+classification25 (including deterministic heuristics/pending), production-prompt
+query translation25, live DietTeam follow-up coaching25 with synthetic fresh
+reads. Alternating paired order; all failures retained. Per-task checks supplement
+overall p50/p95, failure and token-rate cost estimates. Pro rubric evaluation is
+distinct from Ragas metrics and unavailable on the inspected free-tier quota;
+missing judge or usage blocks deployment. Repeated development templates are
+not independent real-user or clinical accuracy evidence. Initial credential and
+reasoning/contract-mismatch exploratory rows are preserved separately, excluded
+from the final comparison. Production routing remains disabled pending gates.
+
+Final v2 three-worker frozen100-pair attempt capture completed. Baseline17/100
+and candidate74/100 completed; baseline successes were17 zero-model heuristics,
+candidate adds57 Lite generations. Flash daily free quota20 and unavailable Pro
+prevent a valid normal-generation speed/quality/freshness/cost comparison. Both
+coaching0/25 completed; unknown failed-call costs remain unknown. Gate=false;
+no deployment/enablement. Raw values and normalized RateLimit exception labels
+are retained separately. [Merged200 attempts](docs/model_routing/summary.json).
+
 ## Statistics read recovery, matched public100 pairs (2026-10-16)
 
 [Raw400 attempts, methodology, failures and browser proof](docs/public_stats_recovery/README.md). Two separate public synthetic comparisons: coaching4 cases×25 per condition and state-changing restore5 cases×20 per condition, concurrency4. Coaching latest numeric75/100 (75/75 answered,25 evidence holds) both; final stats100/100 both, recovered stats-error attempts1→0, all external-error attempts3→0. Total median24.849→23.945s/p9530.709→29.608s is an observation, not an isolated causal speed claim. Normal stats median0.304→0.600s/p950.757→1.190s increased with isolated connections. Restore current-value correctness84→100/100; missing stats13→0, request errors3→0; median1.780→2.398s/p953.544→2.821s. Failures retained. Safety gate passed; speed gate false. Exact historical socket/server root cause remains unknown; connection/retry/cancellation isolation adopted for reliability. API/web2c1162d and one actual read-only browser/reload checked, fixture cleaned. Backend1358 passed/1existing skip, frontend104/build passed. Synthetic repeated cases are not real-user or clinical accuracy evidence.

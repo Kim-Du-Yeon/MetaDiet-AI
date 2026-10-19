@@ -48,6 +48,7 @@ class ConfiguredChatModel(Runnable):
     """Keep provider construction lazy while preserving native tools and tracing."""
 
     def __init__(self, *, role: str = "chat", temperature: float = 0,
+                 task: str = "agent",
                  max_tokens: int | None = None,
                  model_name: str | None = None,
                  reuse_provider: bool = False,
@@ -55,6 +56,12 @@ class ConfiguredChatModel(Runnable):
                  thinking_level: Literal['low', 'medium', 'high'] | None = None):
         if role not in {"chat", "vision", "eval"}:
             raise ValueError(f"Unknown model role: {role}")
+        if task not in {'agent', 'extraction', 'classification', 'query_translation'}:
+            raise ValueError(f"Unknown model task: {task}")
+        if role != 'chat' and task != 'agent':
+            raise ValueError('Bounded task routing is only allowed for chat')
+        self.task = task
+        self._selection = None
         self.role = role
         self.transport_timing = transport_timing
         if reuse_provider and role != 'chat':
@@ -71,15 +78,26 @@ class ConfiguredChatModel(Runnable):
         self._provider = None
         self.provider_reused = False
 
+    def selection_metadata(self) -> dict:
+        """Fixed-purpose labels and selected model ID only; never user content/keys."""
+        if self._selection is not None:
+            return dict(self._selection)
+        settings = get_settings()
+        routed = (self.role == 'chat' and self.task != 'agent' and
+                  getattr(settings, 'model_routing_enabled', False) and self.model_name is None)
+        model = self.model_name or (settings.gemini_simple_model if routed else {
+            'chat': settings.gemini_model, 'vision': settings.gemini_vision_model,
+            'eval': settings.gemini_eval_model}[self.role])
+        return {'model_name': model, 'model_task': self.task, 'model_routing': bool(routed)}
+
     def _client(self):
         global _shared_provider
         if self._provider is None:
             settings = get_settings()
             if not settings.gemini_api_key.strip():
                 raise ValueError("Set GEMINI_API_KEY in backend/.env before calling Gemini")
-            model = self.model_name or {"chat": settings.gemini_model,
-                     "vision": settings.gemini_vision_model,
-                     "eval": settings.gemini_eval_model}[self.role]
+            self._selection = self.selection_metadata()
+            model = self._selection['model_name']
             try:
                 loop = asyncio.get_running_loop() if self.reuse_provider else None
             except RuntimeError:

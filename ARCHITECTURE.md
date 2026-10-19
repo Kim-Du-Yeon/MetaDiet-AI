@@ -1,5 +1,17 @@
 # 2026-10-09 upgrade status
 
+## Purpose-scoped model routing (2026-10-19, disabled pending evaluation)
+
+`ConfiguredChatModel(task=...)` uses `GEMINI_SIMPLE_MODEL` only for extraction,
+classification and query translation when `MODEL_ROUTING_ENABLED=true`.
+Tool-using DietTeam/weekly supervisors, specialists and online validation retain
+`GEMINI_MODEL`; Vision and offline judges retain independent role settings.
+Legacy extraction routes only parsing, and legacy classification is distinct
+from active model-led delegation. Deterministic representative-food calculation,
+approval writes, embeddings, namespace and HITL are unchanged. Explicit model
+overrides/injected test factories retain precedence. Fixed-task selection adds no
+router LLM call. [Model table, env contract and gated evidence](docs/model_routing/README.md).
+
 ## Container memory and evidence failure boundary (2026-10-16)
 
 The committed, hashed Gemini release corpus and activation manifest are copied to the deployed RAG path. Before local sparse initialization, the retriever reads cgroup v2/v1 hard memory limits. At ≤512MiB it avoids importing/building BM25 and Kiwi and uses the existing remote dense fallback, preserving dual queries and the grounding threshold. Larger/unrestricted hosts retain hybrid retrieval; Kiwi uses one worker. Search diagnostics distinguish tool failure from ungrounded results and report the actual retrieval mode. The final coaching gate preserves facts read this request while withholding unsupported new numerical targets. Optional measurement input never bypasses proposals or confirmation. [Incident and limitations](docs/coaching_review/README.md).

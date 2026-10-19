@@ -109,6 +109,10 @@ async def run_agent(*, model, instruction: str, request: str,
     async with measure_stage('sdk_prepare_' + agent_name):
         if isinstance(model, ConfiguredChatModel):
             model.prepare()
+            selection = model.selection_metadata()
+            config = {**(config or {}), 'metadata': {
+                **(config or {}).get('metadata', {}), **selection}}
+            await emit_runtime_event('model_selected', **selection)
             await emit_runtime_event('sdk_provider_ready', reused=model.provider_reused)
     async with measure_stage('tool_bind_' + agent_name):
         bound = model.bind_tools([tool.schema() for tool in available.values()]) if available else model

@@ -3,7 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState, extract_messages_context
 from app.core.config import get_settings
 
-llm = get_chat_model(temperature=0)
+llm = get_chat_model(temperature=0, task='classification')
 
 SUPERVISOR_PROMPT = ChatPromptTemplate.from_messages([
     ("system", """당신은 식단 AI Agent의 Supervisor입니다.
