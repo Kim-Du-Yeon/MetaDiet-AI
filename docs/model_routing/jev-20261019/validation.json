@@ -1,0 +1,25 @@
+{
+  "scope": "matched_router_only_and_saved_decision_replay_not_new_live_measurement",
+  "report_sha256_utf8_lf": "878b1ace5ccb3ef638254fa0c85faf64058d88d1748ba6aa7980ac31842728de",
+  "attempts_per_condition": 100,
+  "exact_pairs": true,
+  "replay_matching": 100,
+  "returned_models": {
+    "jev-1.13.0": 100
+  },
+  "all_usage_available": true,
+  "router_jev_cost_estimate_usd": 0.00176148,
+  "pricing": {
+    "checked": "2026-10-19",
+    "usd_per_million_input": 0.042,
+    "output": "free",
+    "source": "https://docs.typesafe.ai/models"
+  },
+  "scope_exclusions": [
+    "Downstream Gemini generation",
+    "Ragas",
+    "latest actual intake reflection",
+    "Real-user or clinical accuracy",
+    "Provider invoice or infrastructure cost"
+  ]
+}

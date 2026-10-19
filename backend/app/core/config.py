@@ -61,6 +61,7 @@ class Settings(BaseSettings):
     gemini_model: str = "gemini-3.8-flash"
     # Roll out only after a matched >=100-case live comparison passes.
     model_routing_enabled: bool = False
+    prompt_release: str = 'v1'
     gemini_simple_model: str = "gemini-3.1-flash-lite"
     gemini_vision_model: str = "gemini-3.8-flash"
     gemini_eval_model: str = "gemini-3.1-pro-preview"

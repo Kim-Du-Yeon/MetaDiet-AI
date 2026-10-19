@@ -1,0 +1,702 @@
+[
+  {
+    "id": "route-000",
+    "task": "extraction",
+    "text": "닭가슴살 100g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-001",
+    "task": "classification",
+    "text": "문장: 오늘 닭가슴살 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-002",
+    "task": "query_translation",
+    "text": "닭가슴살 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-003",
+    "task": "extraction",
+    "text": "앞선 기록은 닭가슴살100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-004",
+    "task": "query_translation",
+    "text": "앞 문장에서는 닭가슴살의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-005",
+    "task": "extraction",
+    "text": "밥 110g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-006",
+    "task": "classification",
+    "text": "문장: 오늘 밥 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-007",
+    "task": "query_translation",
+    "text": "밥 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-008",
+    "task": "extraction",
+    "text": "앞선 기록은 밥100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-009",
+    "task": "classification",
+    "text": "앞 문장에서는 밥의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-010",
+    "task": "extraction",
+    "text": "김치 120g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-011",
+    "task": "classification",
+    "text": "문장: 오늘 김치 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-012",
+    "task": "query_translation",
+    "text": "김치 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-013",
+    "task": "extraction",
+    "text": "앞선 기록은 김치100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-014",
+    "task": "query_translation",
+    "text": "앞 문장에서는 김치의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-015",
+    "task": "extraction",
+    "text": "제육볶음 130g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-016",
+    "task": "classification",
+    "text": "문장: 오늘 제육볶음 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-017",
+    "task": "query_translation",
+    "text": "제육볶음 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-018",
+    "task": "extraction",
+    "text": "앞선 기록은 제육볶음100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-019",
+    "task": "classification",
+    "text": "앞 문장에서는 제육볶음의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-020",
+    "task": "extraction",
+    "text": "김치찌개 140g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-021",
+    "task": "classification",
+    "text": "문장: 오늘 김치찌개 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-022",
+    "task": "query_translation",
+    "text": "김치찌개 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-023",
+    "task": "extraction",
+    "text": "앞선 기록은 김치찌개100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-024",
+    "task": "query_translation",
+    "text": "앞 문장에서는 김치찌개의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-025",
+    "task": "extraction",
+    "text": "계란후라이 150g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-026",
+    "task": "classification",
+    "text": "문장: 오늘 계란후라이 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-027",
+    "task": "query_translation",
+    "text": "계란후라이 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-028",
+    "task": "extraction",
+    "text": "앞선 기록은 계란후라이100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-029",
+    "task": "classification",
+    "text": "앞 문장에서는 계란후라이의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-030",
+    "task": "extraction",
+    "text": "만두 160g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-031",
+    "task": "classification",
+    "text": "문장: 오늘 만두 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-032",
+    "task": "query_translation",
+    "text": "만두 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-033",
+    "task": "extraction",
+    "text": "앞선 기록은 만두100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-034",
+    "task": "query_translation",
+    "text": "앞 문장에서는 만두의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-035",
+    "task": "extraction",
+    "text": "피자 170g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-036",
+    "task": "classification",
+    "text": "문장: 오늘 피자 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-037",
+    "task": "query_translation",
+    "text": "피자 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-038",
+    "task": "extraction",
+    "text": "앞선 기록은 피자100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-039",
+    "task": "classification",
+    "text": "앞 문장에서는 피자의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-040",
+    "task": "extraction",
+    "text": "소보로빵 180g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-041",
+    "task": "classification",
+    "text": "문장: 오늘 소보로빵 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-042",
+    "task": "query_translation",
+    "text": "소보로빵 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-043",
+    "task": "extraction",
+    "text": "앞선 기록은 소보로빵100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-044",
+    "task": "query_translation",
+    "text": "앞 문장에서는 소보로빵의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-045",
+    "task": "extraction",
+    "text": "고구마 190g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-046",
+    "task": "classification",
+    "text": "문장: 오늘 고구마 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-047",
+    "task": "query_translation",
+    "text": "고구마 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-048",
+    "task": "extraction",
+    "text": "앞선 기록은 고구마100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-049",
+    "task": "classification",
+    "text": "앞 문장에서는 고구마의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-050",
+    "task": "extraction",
+    "text": "닭가슴살 200g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-051",
+    "task": "classification",
+    "text": "문장: 오늘 닭가슴살 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-052",
+    "task": "query_translation",
+    "text": "닭가슴살 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-053",
+    "task": "extraction",
+    "text": "앞선 기록은 닭가슴살100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-054",
+    "task": "query_translation",
+    "text": "앞 문장에서는 닭가슴살의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-055",
+    "task": "extraction",
+    "text": "밥 210g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-056",
+    "task": "classification",
+    "text": "문장: 오늘 밥 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-057",
+    "task": "query_translation",
+    "text": "밥 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-058",
+    "task": "extraction",
+    "text": "앞선 기록은 밥100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-059",
+    "task": "classification",
+    "text": "앞 문장에서는 밥의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-060",
+    "task": "extraction",
+    "text": "김치 220g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-061",
+    "task": "classification",
+    "text": "문장: 오늘 김치 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-062",
+    "task": "query_translation",
+    "text": "김치 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-063",
+    "task": "extraction",
+    "text": "앞선 기록은 김치100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-064",
+    "task": "query_translation",
+    "text": "앞 문장에서는 김치의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-065",
+    "task": "extraction",
+    "text": "제육볶음 230g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-066",
+    "task": "classification",
+    "text": "문장: 오늘 제육볶음 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-067",
+    "task": "query_translation",
+    "text": "제육볶음 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-068",
+    "task": "extraction",
+    "text": "앞선 기록은 제육볶음100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-069",
+    "task": "classification",
+    "text": "앞 문장에서는 제육볶음의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-070",
+    "task": "extraction",
+    "text": "김치찌개 240g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-071",
+    "task": "classification",
+    "text": "문장: 오늘 김치찌개 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-072",
+    "task": "query_translation",
+    "text": "김치찌개 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-073",
+    "task": "extraction",
+    "text": "앞선 기록은 김치찌개100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-074",
+    "task": "query_translation",
+    "text": "앞 문장에서는 김치찌개의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-075",
+    "task": "extraction",
+    "text": "계란후라이 250g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-076",
+    "task": "classification",
+    "text": "문장: 오늘 계란후라이 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-077",
+    "task": "query_translation",
+    "text": "계란후라이 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-078",
+    "task": "extraction",
+    "text": "앞선 기록은 계란후라이100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-079",
+    "task": "classification",
+    "text": "앞 문장에서는 계란후라이의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-080",
+    "task": "extraction",
+    "text": "만두 260g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-081",
+    "task": "classification",
+    "text": "문장: 오늘 만두 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-082",
+    "task": "query_translation",
+    "text": "만두 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-083",
+    "task": "extraction",
+    "text": "앞선 기록은 만두100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-084",
+    "task": "query_translation",
+    "text": "앞 문장에서는 만두의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-085",
+    "task": "extraction",
+    "text": "피자 270g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-086",
+    "task": "classification",
+    "text": "문장: 오늘 피자 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-087",
+    "task": "query_translation",
+    "text": "피자 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-088",
+    "task": "extraction",
+    "text": "앞선 기록은 피자100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-089",
+    "task": "classification",
+    "text": "앞 문장에서는 피자의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-090",
+    "task": "extraction",
+    "text": "소보로빵 280g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-091",
+    "task": "classification",
+    "text": "문장: 오늘 소보로빵 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-092",
+    "task": "query_translation",
+    "text": "소보로빵 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-093",
+    "task": "extraction",
+    "text": "앞선 기록은 소보로빵100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-094",
+    "task": "query_translation",
+    "text": "앞 문장에서는 소보로빵의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  },
+  {
+    "id": "route-095",
+    "task": "extraction",
+    "text": "고구마 290g 먹었어. 음식명과 양만 추출해.",
+    "preferred_band": "fast",
+    "group": "clear_extract"
+  },
+  {
+    "id": "route-096",
+    "task": "classification",
+    "text": "문장: 오늘 고구마 먹었어. 식사 기록인지 조언인지 분류해.",
+    "preferred_band": "fast",
+    "group": "clear_classify"
+  },
+  {
+    "id": "route-097",
+    "task": "query_translation",
+    "text": "고구마 관련 영양 지침을 찾는 짧은 영어 검색어로 번역해.",
+    "preferred_band": "fast",
+    "group": "clear_translate"
+  },
+  {
+    "id": "route-098",
+    "task": "extraction",
+    "text": "앞선 기록은 고구마100g과 밥200g이고 정정은 첫 항목만150g이다. 그 뒤 첫 음식의 절반만 먹었다. 중간 정정을 반영해 최종 음식과 g를 추출해.",
+    "preferred_band": "standard",
+    "group": "context_extract"
+  },
+  {
+    "id": "route-099",
+    "task": "classification",
+    "text": "앞 문장에서는 고구마의 일반적인 섭취 근거를 묻고 다음 문장에서는 무조건 좋다는 전제를 취소했다. 서로 모순된 전제를 제거하고 의도와 근거 질의를 구분해 처리해.",
+    "preferred_band": "standard",
+    "group": "conflicting_context"
+  }
+]

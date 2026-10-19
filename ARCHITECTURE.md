@@ -1,5 +1,18 @@
 # 2026-10-09 upgrade status
 
+## Prompt releases and isolated Jev experiment (2026-10-19)
+
+`app/core/prompts.py` loads eight primary templates from packaged `v1.json` selected
+by `PROMPT_RELEASE` at process startup. IDs/versions/content hashes are validated;
+runtime/model trace metadata carries release/bundle/system-instruction hashes.
+Prompt text and user health values are not added to this metadata. Other inline,
+OCR and library-internal prompts remain outside this registry. Restart for rollback.
+
+The Jev model selector exists only under `scripts/eval`; production does not import it.
+Deterministic writes/HITL, tool-agent, vision and evaluator routes stay locked.
+100-case comparison did not justify production adoption; see
+[results and limitations](docs/model_routing/JEV_COMPARISON.md).
+
 ## Purpose-scoped model routing (2026-10-19, disabled pending evaluation)
 
 `ConfiguredChatModel(task=...)` uses `GEMINI_SIMPLE_MODEL` only for extraction,

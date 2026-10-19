@@ -10,6 +10,7 @@ diet_logger/node.py
   interrupt_before=["confirm"] → 사용자 확인 대기 → resume → confirm_node 실행
 """
 from app.core.llm import get_chat_model
+from app.core.prompts import get_prompt
 from langchain_core.prompts import ChatPromptTemplate
 from app.schemas.models import AgentState, extract_messages_context
 from app.core.config import get_settings
@@ -22,22 +23,7 @@ import json, re
 llm = get_chat_model(temperature=0)
 
 PARSE_PROMPT = ChatPromptTemplate.from_messages([
-    ("system", """사용자가 먹은 음식을 파싱해서 JSON 배열로만 응답하세요.
-각 항목: {{"food_name": "음식명", "quantity_g": 숫자, "meal_type": "breakfast|lunch|dinner|snack"}}
-
-[오늘 이미 기록된 끼니 (참고용)]: {logged_meals}
-[최근 대화 맥락]: {recent_context}
-
-규칙:
-- 현재 사용자 메시지에 새로 말한 음식만 파싱하세요.
-- 최근 대화 맥락의 음식은 사용자가 "그거", "아까 말한 것", "위 음식"처럼 명시적으로 참조할 때만 사용하세요.
-- 현재 메시지가 "점심 쌀밥 100g, 닭가슴살 200g"이면 이전 아침/간식 기록을 절대 포함하지 마세요.
-- 사용자가 명시한 음식은 이미 기록된 끼니여도 반드시 파싱 (중복 여부는 사용자가 결정)
-- 오타 교정 (예: "달각슴살" → "닭가슴살")
-- meal_type: 명시 없으면 미기록 끼니로 추정
-- 양 없으면 일반 1인분으로 추정
-- 반드시 1개 이상 반환 (빈 배열 금지)
-JSON 외 텍스트 금지."""),
+    ("system", get_prompt('legacy.food_extraction')),
     ("human", "{message}")
 ])
 

@@ -98,14 +98,17 @@ class ConfiguredChatModel(Runnable):
                 raise ValueError("Set GEMINI_API_KEY in backend/.env before calling Gemini")
             self._selection = self.selection_metadata()
             model = self._selection['model_name']
+            from app.core.prompts import prompt_metadata
+            prompt_info = prompt_metadata()
             try:
                 loop = asyncio.get_running_loop() if self.reuse_provider else None
             except RuntimeError:
                 loop = None
             timeout = settings.eval_model_timeout_seconds if self.role == 'eval' else settings.model_timeout_seconds
             key = (ChatGoogleGenerativeAI, hashlib.sha256(settings.gemini_api_key.encode()).digest(),
-                   model, self.role, self.temperature, self.max_tokens, self.thinking_level,
-                   timeout, settings.model_max_retries, self.transport_timing)
+                   model, self.role, self.task, self.temperature, self.max_tokens, self.thinking_level,
+                   timeout, settings.model_max_retries, self.transport_timing,
+                   prompt_info['prompt_bundle_sha256'])
             if loop is not None and _shared_provider is not None and (
                     _shared_provider.loop is loop and _shared_provider.key == key):
                 self._provider = _shared_provider.provider
@@ -117,6 +120,7 @@ class ConfiguredChatModel(Runnable):
                 transport_args = {'client_args': {'transport': TimedTransport()}}
             self._provider = ChatGoogleGenerativeAI(
                 model=model, api_key=settings.gemini_api_key,
+                metadata={**prompt_info,'model_task':self.task,'model_role':self.role},
                 temperature=self.temperature, max_tokens=self.max_tokens,
                 timeout=timeout,
                 max_retries=settings.model_max_retries,

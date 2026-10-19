@@ -1,5 +1,7 @@
 # MetaDiet AI
 
+모델 선택 비교와 프롬프트 관리: [규칙·Jev 각 100건 결과와 채택 보류](docs/model_routing/JEV_COMPARISON.md) · [프롬프트 v1·해시·환경변수·복구](docs/prompt_versioning/README.md).
+
 모델 라우팅: [역할별 모델 선정표·원본 이미지·환경변수·동일 사례 비교 및 채택 조건](docs/model_routing/README.md). 기본 비활성이며 Pro 평가 완료와 작업별 품질 검증 전에는 운영에 활성화하지 않습니다.
 
 독립 검증: [2시간 메모리720건·원격/하이브리드각120건·402 제외 범위와 원본](docs/rag_memory_quality/README.md). 메모리 중앙값100.19→102.35MiB, 검색 근거 페이지 적중75%/80%로 동등 품질을 주장하지 않습니다.

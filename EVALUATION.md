@@ -1,5 +1,15 @@
 # 2026-10-09 upgrade verification
 
+## Jev model-selection experiment (2026-10-19)
+
+[Frozen 100 cases per condition, raw 200 attempts and saved-decision replay](docs/model_routing/JEV_COMPARISON.md).
+Rules/Jev router-only median: 0.040/559.231ms; p95: 0.067/792.422ms.
+Jev accepted 57, low-confidence fallback 43, transport failures 0; all remain in denominator.
+Developer preferred-tier agreement 60/97 includes fallback and is NOT answer accuracy.
+Downstream generation/freshness/Ragas remain unverified due existing quotas. No adoption.
+[Primary prompt releases](docs/prompt_versioning/README.md) pin exact baseline text;
+any future prompt quality comparison still requires at least 100 attempts per condition.
+
 ## Purpose routing evaluation protocol (2026-10-19)
 
 [Model-role table/image, frozen cases, raw attempts and gate](docs/model_routing/README.md).
