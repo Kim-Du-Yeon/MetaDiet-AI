@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-19",
+  "deployed_commit": "19bd2597ba741b46302c7d5efdf9b20d78f24c11",
+  "scope": "functional_live_browser_verification_not_performance_evaluation",
+  "backend_tests": {
+    "passed": 1461,
+    "preexisting_skipped": 1,
+    "warnings": 3
+  },
+  "frontend_tests": {
+    "passed": 126,
+    "suites": 35
+  },
+  "production_build": "passed",
+  "checks": {
+    "plain_dinner_source_toggle": true,
+    "no_search_explanation": true,
+    "record_totals_match_header": true,
+    "explicit_search_before_fix": "incorrectly_disabled",
+    "explicit_search_same_request_after_fix": "cited_one_known_document",
+    "excerpt_toggle": true,
+    "original_link_opened": true,
+    "latest_answer_restore_after_reload": true,
+    "intake_mutations_performed": false
+  },
+  "source": {
+    "document": "KDRI_2025_vol2.pdf",
+    "page": "8.0",
+    "url": "https://kns.or.kr/fileroom/fileroom_view.asp?BoardID=Kdr&idx=167"
+  },
+  "limitations": [
+    "Only latest answer basis is restored from checkpoint; older history metadata is not persisted per message.",
+    "Citation presence is not an automatic proof of claim correctness.",
+    "Only current intake/active targets are shown; recent intake/measurement inputs not all represented.",
+    "Functional checks are not 100-case speed or quality comparisons."
+  ]
+}

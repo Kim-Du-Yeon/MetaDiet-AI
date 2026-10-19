@@ -1,4 +1,4 @@
-답변 출처·기록 근거 표시: [설계·기업용 챗봇 사례·테스트·검증 한계](docs/food_catalog/ANSWER_BASIS.md).
+답변 출처·기록 근거 표시: [공개 배포·저녁 추천 브라우저 검증·검색 정책 오류 수정·캡처](docs/food_catalog/answer-basis-20261019/README.md).
 
 식사 변경 응답 최적화: [집계·버전 동봉·격리 PostgreSQL 전후 120건씩·정합성·실패/복구](docs/food_catalog/intake-snapshot-20261019/README.md). 정상 흐름 HTTP 4→1회, 합성 데이터 준비 p95 772.977→157.741ms. 운영 성능과 구분.
 

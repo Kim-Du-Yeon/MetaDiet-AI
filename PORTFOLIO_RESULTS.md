@@ -1,4 +1,4 @@
-답변 근거 표시(로컬 구현): [요청별 기록·목표 스냅샷과 명시적 문서 인용, 검증·한계](docs/food_catalog/ANSWER_BASIS.md). 공개 배포·실제 모델 검증 전.
+답변 근거 표시 공개 검증: [출처·기록 근거·검색 금지 오분류 수정·실제 브라우저 캡처](docs/food_catalog/answer-basis-20261019/README.md). API·웹 19bd2597 반영, 일반 추천과 공식 지침 검색·인용·원문·새로고침 확인. 백엔드 1,461 passed / 기존 1 skipped, 프론트126 passed·빌드 성공. 기능 검증이며 속도·정확도 비교 결과와 구분.
 
 식사 변경 응답 최적화: [집계·버전 동봉·격리 PostgreSQL 전후 120건씩·정합성·실패/복구](docs/food_catalog/intake-snapshot-20261019/README.md). 정상 흐름 HTTP 4→1회, 합성 데이터 준비 p95 772.977→157.741ms. 운영 성능과 구분.
 
