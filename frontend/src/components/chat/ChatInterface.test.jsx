@@ -1,13 +1,13 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import ChatInterface from "./ChatInterface";
-import { sendChatMessage, getSessionRestore, trackProductEvent, resolveMealChoices, decideProposal, resumeChat } from "../../api/dietApi";
+import { sendChatMessage, getSessionRestore, trackProductEvent, resolveMealChoices, decideProposal, resumeChat, nutritionLookup, reviseMeal } from "../../api/dietApi";
 
 jest.mock("../../api/dietApi", () => ({
   sendChatMessage: jest.fn(), uploadImage: jest.fn(), resumeChat: jest.fn(),
   getChatHistory: jest.fn(), rollbackToCheckpoint: jest.fn(), nutritionLookup: jest.fn(),
   decideProposal: jest.fn(), reviseMeasurement: jest.fn(), getSessionRestore: jest.fn(),
-  trackProductEvent: jest.fn(), resolveMealChoices:jest.fn(),
+  trackProductEvent: jest.fn(), resolveMealChoices:jest.fn(), reviseMeal:jest.fn(),
 }));
 
 beforeEach(() => {
@@ -100,6 +100,17 @@ test('failed confirmation keeps proposal and does not show a saved receipt', asy
   await screen.findAllByText('저장 실패');
   expect(screen.queryByText('섭취 기록을 저장했습니다.')).not.toBeInTheDocument();
   expect(screen.getByRole('button',{name:'이대로 기록'})).toBeEnabled();
+  expect(screen.queryByRole('button',{name:'점심 추천'})).not.toBeInTheDocument();
+});
+
+test('chat confirmation shows recommendations only with server-confirmed intake metadata', async () => {
+  const payload = {log_date:'2026-10-19',meals:[{food_name:'밥',quantity_g:200,calories:300,carbs_g:65,protein_g:5,fat_g:1,source:'csv'}]};
+  getSessionRestore.mockResolvedValue({messages:[],pending_state:{},pending_proposal:{id:'p',version:1,kind:'intake',payload}});
+  resumeChat.mockImplementation(async (_user,_thread,_message,_token,done)=>done({answer:'실제 섭취 기록을 확정했습니다.',intake_confirmed:true,pending_proposal:null}));
+  render(<Harness />);
+  fireEvent.click(await screen.findByRole('button',{name:'이대로 기록'}));
+  await screen.findByRole('button',{name:'점심 추천'});
+  expect(screen.getByRole('button',{name:'저녁 추천'})).toBeVisible();
 });
 
 test("renders streamed backend phases with the completed answer", async () => {
@@ -123,15 +134,41 @@ test("renders streamed backend phases with the completed answer", async () => {
 });
 
 test('completed snapshot replaces partial text and recommendation buttons use the direct request', async () => {
+  getSessionRestore.mockResolvedValue({messages:[],pending_state:{},proposal_decision_mode:'direct',pending_proposal:{id:'p',version:1,kind:'intake',payload:{log_date:'2026-10-19',meals:[{food_name:'밥',quantity_g:200,calories:300,carbs_g:65,protein_g:5,fat_g:1,source:'csv'}]}}});
+  decideProposal.mockResolvedValue({status:'confirmed'});
   sendChatMessage.mockImplementation(async (_user, _message, onToken, onDone) => {
     onToken('중간 답변');
     onDone({ answer: '**최종 답변**', execution_status: 'completed' });
   });
   render(<Harness />);
+  fireEvent.click(await screen.findByRole('button', {name:'이대로 기록'}));
   fireEvent.click(await screen.findByRole('button', { name: '점심 추천' }));
   await screen.findByText('최종 답변');
   expect(screen.queryByText('중간 답변')).not.toBeInTheDocument();
   expect(sendChatMessage.mock.calls[0][1]).toBe('점심 추천해줘');
+});
+
+test('initial screen hides product and recommendation shortcuts', async () => {
+  render(<Harness />);
+  await waitFor(() => expect(screen.getByPlaceholderText('오늘 뭐 드셨어요?')).toBeEnabled());
+  expect(screen.queryByRole('button',{name:'제품 영양표 입력'})).not.toBeInTheDocument();
+  expect(screen.queryByRole('button',{name:'제품을 정확히 입력'})).not.toBeInTheDocument();
+  expect(screen.queryByRole('button',{name:'점심 추천'})).not.toBeInTheDocument();
+  expect(screen.queryByRole('button',{name:'저녁 추천'})).not.toBeInTheDocument();
+  expect(screen.queryByRole('button',{name:'오늘 저녁 추천받기'})).not.toBeInTheDocument();
+});
+
+test('product tools are optional inside intake card and cancellation never shows recommendations', async () => {
+  getSessionRestore.mockResolvedValue({messages:[],pending_state:{},proposal_decision_mode:'direct',pending_proposal:{id:'p',version:1,kind:'intake',payload:{log_date:'2026-10-19',meals:[{food_name:'밥',quantity_g:200,calories:300,carbs_g:65,protein_g:5,fat_g:1,source:'csv'}]}}});
+  decideProposal.mockResolvedValue({status:'cancelled'});
+  render(<Harness />);
+  fireEvent.click(await screen.findByRole('button',{name:'정확한 제품으로 변경 (선택)'}));
+  const {within} = require('@testing-library/react');
+  expect(within(screen.getByRole('region',{name:'확인 대기 제안'})).getByRole('button',{name:'제품 영양표 입력'})).toBeVisible();
+  expect(screen.getByRole('button',{name:'이대로 기록'})).toBeDisabled();
+  fireEvent.click(screen.getByRole('button',{name:'취소',exact:true}));
+  await screen.findByText('제안을 취소했습니다.');
+  expect(screen.queryByRole('button',{name:'점심 추천'})).not.toBeInTheDocument();
 });
 
 test("restores recent messages and a pending proposal without rerunning chat", async () => {
@@ -176,11 +213,32 @@ test("shows a restore status and recovers the screen without rerunning a complet
   expect(sendChatMessage).not.toHaveBeenCalled();
 });
 
-test("empty chat suggestions prepare a request without sending it", async () => {
+test("empty chat explains free text input without sending or suggesting a meal", async () => {
   render(<Harness />);
-  fireEvent.click(await screen.findByRole("button", { name: "오늘 저녁 추천받기" }));
+  await screen.findByText(/제육볶음이랑 밥 먹었어/);
+  expect(screen.getByLabelText("식단 코치에게 메시지 보내기")).toHaveValue("");
+  expect(sendChatMessage).not.toHaveBeenCalled();
+});
 
-  expect(screen.getByLabelText("식단 코치에게 메시지 보내기")).toHaveValue("오늘 저녁 식단을 추천해줘");
+test('exact product replacement keeps the other meal and does not confirm or rerun Agent', async () => {
+  const payload = {log_date:'2026-10-19',meals:[
+    {food_id:'csv:rice',food_name:'밥',quantity_g:200,calories:300,carbs_g:65,protein_g:5,fat_g:1,source:'csv',meal_type:'lunch'},
+    {food_id:'csv:chicken',food_name:'닭가슴살',quantity_g:100,calories:160,carbs_g:0,protein_g:30,fat_g:4,source:'csv',meal_type:'lunch'}]};
+  getSessionRestore.mockResolvedValue({messages:[],pending_state:{},pending_proposal:{id:'p',version:1,kind:'intake',payload}});
+  nutritionLookup.mockResolvedValue({results:[{status:'ambiguous',candidates:[{food_id:'mfds:P1',name:'정확한 제품',manufacturer:'검증 제조사'}]}]});
+  reviseMeal.mockResolvedValue({id:'p2',version:2,kind:'intake',payload:{...payload,meals:[payload.meals[0],{...payload.meals[1],food_id:'mfds:P1',food_name:'정확한 제품',source:'mfds'}]}});
+  render(<Harness />);
+  fireEvent.click(await screen.findByRole('button',{name:'정확한 제품으로 변경 (선택)'}));
+  expect(screen.getByLabelText('1번 음식 분량')).toBeDisabled();
+  fireEvent.change(screen.getByLabelText('변경할 음식'),{target:{value:'1'}});
+  fireEvent.click(screen.getByRole('button',{name:'제품을 정확히 입력'}));
+  expect(screen.getByLabelText('먹은 양 (g)')).toHaveValue(100);
+  fireEvent.click(screen.getByRole('button',{name:'제품 검색'}));
+  fireEvent.click(await screen.findByRole('button',{name:'이 제품 선택'}));
+  await screen.findByText('정확한 제품');
+  expect(reviseMeal.mock.calls[0][1]).toEqual({log_date:payload.log_date,meal_type:null,
+    items:[{amount:200,unit:'g'},{food_id:'mfds:P1',amount:100,unit:'g'}]});
+  expect(decideProposal).not.toHaveBeenCalled();
   expect(sendChatMessage).not.toHaveBeenCalled();
 });
 

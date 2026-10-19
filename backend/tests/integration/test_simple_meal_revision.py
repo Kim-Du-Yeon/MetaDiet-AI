@@ -9,6 +9,45 @@ from app.tools.simple_meals import parse_simple_meal, calculate_simple_meal
 from app.tools.food_catalog import FoodCatalog
 
 
+@pytest.mark.parametrize('replacement', ['label', 'food_id'])
+@pytest.mark.parametrize('existing_label', [False, True])
+async def test_product_replacement_preserves_other_foods_and_waits_for_confirmation(monkeypatch, replacement, existing_label):
+    payload = await calculate_simple_meal(parse_simple_meal('밥 닭가슴살'), FoodCatalog())
+    if existing_label:
+        from app.tools.food_catalog import LabelNutrition, quote_label
+        payload['meals'][0] = {**quote_label(LabelNutrition(food_name='이미 확인한 제품',basis_g=100,quantity_g=200,
+            calories=180,carbs_g=30,protein_g=10,fat_g=2)), 'meal_type':'lunch'}
+    identity = uuid4()
+    old = dict(id=str(identity),version=1,kind='intake',status='pending',thread_id='t',payload=payload)
+    repo, graph = AsyncMock(), AsyncMock()
+    repo.get.return_value = old
+    repo.create.side_effect = lambda owner, thread, value, key, **kw: {**old,'version':2,'payload':value}
+    graph.aget_state.return_value = SimpleNamespace(values={'pending_proposal':old})
+    @asynccontextmanager
+    async def lock(*args):
+        yield
+    monkeypatch.setattr(main,'ProposalRepository',lambda:repo)
+    monkeypatch.setattr(main,'get_graph',lambda:graph)
+    monkeypatch.setattr(main,'conversation_lock',lock)
+    edit = {'amount':100,'unit':'g'}
+    if replacement == 'label':
+        edit['label'] = dict(food_name='검증 제품',basis_g=100,quantity_g=100,calories=150,protein_g=20,carbs_g=10,fat_g=3)
+    else:
+        edit['food_id'] = payload['meals'][1]['food_id']
+    req = main.MealRevision(version=1,log_date=payload['log_date'],meal_type=None,
+        items=[{'amount':200,'unit':'g'},edit])
+    result = await main.revise_meal(identity,req,'owner')
+    assert len(result['payload']['meals']) == 2
+    assert result['payload']['meals'][0]['calories'] == payload['meals'][0]['calories']
+    assert result['payload']['log_date'] == payload['log_date']
+    assert result['payload']['meals'][1]['quantity_g'] == 100
+    if replacement == 'label':
+        assert result['payload']['meals'][1]['source'] == 'user_label'
+        assert result['payload']['meals'][1]['calories'] == 150
+    repo.resolve.assert_not_called()
+    assert repo.create.call_args.kwargs['replaces'] == (str(identity),1)
+
+
 @pytest.mark.parametrize('stale', [False, True])
 @pytest.mark.parametrize('message,amount,unit,grams', [('밥 한공기', 1.5, '공기', 300),
     ('도미노피자', .5, '판', 400), ('물만두', 2, '회분', 300),

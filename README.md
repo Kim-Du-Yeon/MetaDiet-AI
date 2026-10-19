@@ -1,5 +1,7 @@
 # MetaDiet AI
 
+식사 입력 화면 정리: [제품 기능은 확인 카드 안으로·추천은 기록 완료 후·검증과 캡처](docs/food_catalog/contextual-actions-20261019/README.md).
+
 장소가 붙은 식사 입력·제외 UX 수정: [한식뷔페 음식 분리·일부 제외·기록 없이 닫기·검증 근거](docs/food_catalog/place-context-20261019/README.md).
 
 유료 계층 v1 고정 비교: [동일100쌍·Pro50건·속도/품질/최신값/비용·제한 적용](docs/model_routing/tier1-v1-20261019/README.md). 중앙값4.226→2.010초, p95 7.050→5.158초, 생성 비용55.88% 감소. 양쪽 계약검사100/100·합성 최신값25/25, 사전 채택 기준 통과.

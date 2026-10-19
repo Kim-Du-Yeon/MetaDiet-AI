@@ -472,6 +472,8 @@ async def _stream(graph, config: dict, run_id: str, after_seq: int = 0):
         yield _sse({'type':'completed','agent_used':sv.get('agent_used',''),**stats,'pending_meals':pending,
             'pending_proposal':sv.get('pending_proposal'),'run_id':run_id,'trace_id':sv.get('trace_id'),'seq':100000,
             'food_selection': sv.get('food_selection'),
+            'intake_confirmed': (sv.get('proposal_result') or {}).get('status') == 'confirmed'
+                and (sv.get('proposal_result') or {}).get('kind') == 'intake',
             'coaching_review':sv.get('coaching_review'),
             'execution_usage':sv.get('execution_usage'),'awaiting_confirmation':sv.get('awaiting_confirmation',False),
             'stage_timings_ms': timings,
@@ -907,11 +909,16 @@ async def revise_weight(proposal_id: UUID, req: WeightRevision, current_user: st
         raise HTTPException(409, str(exc)) from exc
 
 
+from app.tools.food_catalog import LabelNutrition
+
+
 class MealPortionEdit(BaseModel):
     model_config = ConfigDict(extra='forbid', allow_inf_nan=False)
     amount: float = Field(gt=0, le=10000)
     unit: str = Field(max_length=10)
     exclude: bool = False
+    food_id: str | None = Field(default=None, min_length=1, max_length=200)
+    label: LabelNutrition | None = None
 
 
 class MealRevision(BaseModel):
@@ -943,6 +950,24 @@ async def revise_meal(proposal_id: UUID, req: MealRevision, current_user: str = 
             portion = dict((meal.get('nutrition_metadata') or {}).get('portion') or {})
             if edit.exclude:
                 excluded.append(portion.get('display_name') or meal['food_name'])
+                continue
+            if edit.food_id or edit.label:
+                if edit.unit != 'g' or (edit.food_id and edit.label):
+                    raise HTTPException(422, '제품 교체는 g 기준으로 하나의 출처를 선택해주세요.')
+                if edit.label:
+                    from app.tools.food_catalog import quote_label
+                    if edit.amount != edit.label.quantity_g:
+                        raise HTTPException(422, '먹은 양이 일치하지 않습니다.')
+                    quote = quote_label(edit.label)
+                else:
+                    quote = await catalog.lookup(edit.food_id, edit.amount)
+                quote['meal_type'] = req.meal_type or meal['meal_type']
+                quote['nutrition_metadata']['replaced_food_name'] = meal['food_name']
+                revised.append(quote)
+                continue
+            if meal['source'] == 'user_label' and edit.unit == 'g' and edit.amount == meal['quantity_g']:
+                revised.append({**meal, 'nutrition_metadata': dict(meal.get('nutrition_metadata') or {}),
+                    'meal_type': req.meal_type or meal['meal_type']})
                 continue
             unit_grams = portion.get('unit_grams') or ({portion['default_unit']: portion['unit_g'],
                 '회분': portion['unit_g'], '인분': portion['unit_g']} if portion.get('unit_g') else {})

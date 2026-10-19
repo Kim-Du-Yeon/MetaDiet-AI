@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { sendChatMessage, uploadImage, resumeChat, getChatHistory, getSessionRestore, rollbackToCheckpoint, nutritionLookup, decideProposal, reviseMeal, reviseMeasurement, trackProductEvent, resolveMealChoices } from "../../api/dietApi";
 import ProposalCard from "./ProposalCard";
-import NutritionLabelForm from "./NutritionLabelForm";
 import FoodProductSearch from "./FoodProductSearch";
 import ProductChoiceCards from "./ProductChoiceCards";
 import MealChoiceCards from './MealChoiceCards';
@@ -58,7 +57,7 @@ export default function ChatInterface({
   const [coachingReview, setCoachingReview] = useState(null);
   const [approval, setApproval] = useState(null);
   const [foodSelection, setFoodSelection] = useState(null);
-  const [showNutritionLabel, setShowNutritionLabel] = useState(false);
+  const [showNextCoaching, setShowNextCoaching] = useState(false);
   const [showFoodSearch, setShowFoodSearch] = useState(false);
   const [approvalError, setApprovalError] = useState("");
   const [progressSteps, setProgressSteps] = useState([]);
@@ -148,6 +147,7 @@ export default function ChatInterface({
   const lastTraceRef = useRef(null);
 
   const handleDone = (meta) => {
+    if (meta.intake_confirmed === true) setShowNextCoaching(true);
     setFoodSelection(meta.food_selection || null);
     setCoachingReview(meta.coaching_review || null);
     lastTraceRef.current = meta.trace_id || null;
@@ -215,6 +215,7 @@ export default function ChatInterface({
           { proposal_id: approval.id, version: approval.version, action }, handleProgress);
       } else {
         const resolved = await decideProposal(approval, action);
+        if (action === 'confirm' && approval.kind === 'intake' && resolved?.status === 'confirmed') setShowNextCoaching(true);
         setApproval(null);
         setFoodSelection(null); setPendingState(EMPTY_PENDING_STATE); setIsInterrupted(false);
         setMessages(prev => [...prev, { role: "assistant", content: action === "confirm"
@@ -242,6 +243,18 @@ export default function ChatInterface({
       setApproval({ ...revised, channel: isMeal ? approval.channel : "upload" });
     }
     catch (error) { setApprovalError(error.message); }
+    finally { setIsLoading(false); }
+  };
+
+  const replaceProduct = async (index, replacement) => {
+    setIsLoading(true); setApprovalError('');
+    try {
+      const payload = approval.payload;
+      const revised = await reviseMeal(approval, {log_date:payload.log_date, meal_type:null,
+        items:payload.meals.map((meal,i)=>i === index ? replacement : {amount:meal.quantity_g,unit:'g'})});
+      setApproval({...revised,channel:approval.channel});
+      setPendingState({pending_meals:revised.payload.meals,awaiting_confirmation:true,plan_date:revised.payload.log_date});
+    } catch (error) { setApprovalError(error.message); throw error; }
     finally { setIsLoading(false); }
   };
 
@@ -462,14 +475,7 @@ export default function ChatInterface({
             </div>
           </div>
         ))}
-        {restoreStatus === "ready" && messages.length <= 1 && <section className="chat-starters" aria-label="빠른 시작">
-          <p>무엇을 도와드릴까요?</p>
-          <div>
-            <button type="button" onClick={() => setInput("오늘 저녁 식단을 추천해줘")}>오늘 저녁 추천받기</button>
-            <button type="button" onClick={() => setInput("오늘 먹은 기록을 요약해줘")}>오늘 기록 확인하기</button>
-            <button type="button" onClick={() => setInput("최근 체중 추세와 목표를 점검해줘")}>목표 진행 확인하기</button>
-          </div>
-        </section>}
+        {restoreStatus === "ready" && messages.length <= 1 && <p className="chat-starters">“제육볶음이랑 밥 먹었어”처럼 입력하세요. 기본 분량으로 계산하고 카드에서 수정할 수 있어요.</p>}
         <div ref={bottomRef} />
       </div>
 
@@ -504,21 +510,15 @@ export default function ChatInterface({
         </div>
       )}
 
-      <div className="chat-actions" aria-label="정확한 제품 입력">
-        <button type="button" disabled={isLoading || !!approval || restoreStatus !== "ready"} onClick={() => setShowNutritionLabel(true)}>제품 영양표 입력</button>
-        <button type="button" disabled={isLoading || !!approval || restoreStatus !== "ready"} onClick={() => setShowFoodSearch(true)}>제품을 정확히 입력</button>
-        {!!approval && <p className="chat-actions__status">현재 제안을 확인하거나 취소한 뒤 입력할 수 있어요.</p>}
-      </div>
       {foodSelection?.mode === 'meal_choices' && !approval && <MealChoiceCards key={foodSelection.id} selection={foodSelection} busy={isLoading}
         error={approvalError} onResolve={choices => resolveChoices(choices)} onCancel={() => resolveChoices([], true)} />}
       {foodSelection && foodSelection.mode !== 'meal_choices' && !approval && <ProductChoiceCards key={JSON.stringify(foodSelection)} selection={foodSelection} busy={isLoading}
         onSelect={sendMessage} onSearch={() => setShowFoodSearch(true)} />}
       {showFoodSearch && <FoodProductSearch contextRequest={foodSelection?.request} onClose={() => setShowFoodSearch(false)} onSelect={selection => { setShowFoodSearch(false); sendMessage(selection); }} />}
-      {showNutritionLabel && <NutritionLabelForm threadId={threadId} onClose={() => setShowNutritionLabel(false)} onProposal={proposal => { setApproval({ ...proposal, channel: "upload" }); setShowNutritionLabel(false); }} />}
-      {approval && <ProposalCard proposal={approval} busy={isLoading} onDecision={handleProposalDecision} onRevise={handleMeasurementRevision} budget={budget} />}
+      {approval && <ProposalCard proposal={approval} busy={isLoading} onDecision={handleProposalDecision} onRevise={handleMeasurementRevision} budget={budget} onReplaceProduct={replaceProduct} />}
       {!approval && restoreStatus === 'ready' && <CoachingReview details={coachingReview} busy={isLoading}
         onProvide={value => sendMessage({request:value})} />}
-      {!approval && restoreStatus === 'ready' && <CoachingActions busy={isLoading} onRecommend={sendMessage} />}
+      {showNextCoaching && !approval && !foodSelection && restoreStatus === 'ready' && <CoachingActions busy={isLoading} onRecommend={sendMessage} />}
       {approvalError && <div role="alert" style={{ color: "#b42318", margin: 12 }}>{approvalError}
         <button disabled={isLoading} onClick={restoreSession}>최신 제안 다시 불러오기</button></div>}
       {foodEntry && (
