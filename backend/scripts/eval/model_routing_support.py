@@ -69,3 +69,9 @@ def deployment_gate(baseline, candidate, *, judge_complete, by_task=None):
         candidate['mean_cost_usd'] <= baseline['mean_cost_usd'] * .9 and
         candidate['p50_ms'] <= baseline['p50_ms'] * .95 and
         candidate['p95_ms'] <= baseline['p95_ms'] * 1.05)
+def require_prompt_v1(metadata):
+    """Reject prompt drift before this fixed-v1 comparison sends any model call."""
+    if (metadata.get('prompt_release') != 'v1' or metadata.get('prompt_bundle_sha256') !=
+            '4c40f46e4c2aa01b5ba7c78f456cff11b11907a4730e697288f796694ec7a741'):
+        raise ValueError('This comparison requires the unchanged prompt v1 bundle')
+    return dict(metadata)

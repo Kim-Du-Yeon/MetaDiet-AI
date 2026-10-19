@@ -59,3 +59,13 @@ def test_retry_seconds_cannot_be_mistaken_for_http402():
     class GoogleRateLimitError(Exception): pass
     assert safe_error(GoogleRateLimitError('retry delay81402 seconds'))['reason']=='quota_exhausted'
     assert safe_error(Exception('network retry81402 seconds'))['reason']=='provider_or_parse_error'
+def test_v1_comparison_rejects_changed_prompt_bundle_before_generation():
+    from scripts.eval.model_routing_support import require_prompt_v1
+    import pytest
+    expected = {'prompt_release': 'v1', 'prompt_bundle_sha256':
+        '4c40f46e4c2aa01b5ba7c78f456cff11b11907a4730e697288f796694ec7a741'}
+    assert require_prompt_v1(expected) == expected
+    for changed in [dict(expected, prompt_release='v2'),
+                    dict(expected, prompt_bundle_sha256='0' * 64)]:
+        with pytest.raises(ValueError, match='v1'):
+            require_prompt_v1(changed)

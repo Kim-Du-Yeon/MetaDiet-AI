@@ -1,0 +1,37 @@
+{
+  "scope": "local_isolated_processes_not_render_deployment",
+  "v2_is_temporary_fixture": true,
+  "real_credentials_inherited": false,
+  "passed": true,
+  "steps": [
+    {
+      "release": "v1",
+      "returncode": 0,
+      "prompt_release": "v1",
+      "prompt_bundle_sha256": "4c40f46e4c2aa01b5ba7c78f456cff11b11907a4730e697288f796694ec7a741",
+      "prompt_scope": "registered_primary_templates",
+      "effective_system_sha256": "14106af6c42e10fb55d36af2a4df2e40db39279ffe57e80f58c56bdbc78dc961"
+    },
+    {
+      "release": "v2",
+      "returncode": 0,
+      "prompt_release": "v2",
+      "prompt_bundle_sha256": "1c5b6e64e2216117ad225a559d7205bc741be7548b33660a7fc684481483aaf7",
+      "prompt_scope": "registered_primary_templates",
+      "effective_system_sha256": "0503ccf7354b7688adc80a7a23c118ac2cbb1fee60da2aa3e21f070ace1c90bc"
+    },
+    {
+      "release": "v1",
+      "returncode": 0,
+      "prompt_release": "v1",
+      "prompt_bundle_sha256": "4c40f46e4c2aa01b5ba7c78f456cff11b11907a4730e697288f796694ec7a741",
+      "prompt_scope": "registered_primary_templates",
+      "effective_system_sha256": "14106af6c42e10fb55d36af2a4df2e40db39279ffe57e80f58c56bdbc78dc961"
+    },
+    {
+      "release": "v999",
+      "returncode": 2,
+      "error_type": "release_rejected"
+    }
+  ]
+}

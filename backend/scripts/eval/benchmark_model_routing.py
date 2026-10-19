@@ -26,7 +26,8 @@ from app.core.llm import get_chat_model
 from app.agents.team import DietTeam
 from app.agents.supervisor import node as supervisor_node
 from app.agents.diet_logger.node import PARSE_PROMPT, _filter_current_message_items
-from scripts.eval.model_routing_support import estimate_cost, summarize, deployment_gate, PRICES, evaluation_key
+from scripts.eval.model_routing_support import estimate_cost, summarize, deployment_gate, PRICES, evaluation_key, require_prompt_v1
+from app.core.prompts import prompt_metadata, get_prompt
 
 
 class Quality(BaseModel):
@@ -139,7 +140,7 @@ async def attempt(case, enabled, settings):
                 row['deterministic_no_model'] = True
         else:
             result = await model.ainvoke([
-                {'role':'system','content':'다음 질문을 영어 학술 검색에 적합한 검색 쿼리 1줄로 번역하세요. 영어 쿼리만 출력, 다른 텍스트 금지.'},
+                {'role':'system','content':get_prompt('rag.query_translation')},
                 {'role':'user','content':case['question']}],config=config)
             answer = result.content
             row.update(status='completed',answer=answer,quality=bool(answer.strip()) and
@@ -165,6 +166,7 @@ async def main():
     args = parser.parse_args()
     if args.shards < 1 or not 0 <= args.shard < args.shards:
         parser.error('Invalid shard partition')
+    pinned_prompt = require_prompt_v1(prompt_metadata())
     folder = args.output_dir
     folder.mkdir(parents=True,exist_ok=True)
     target = folder/'paired.json'
@@ -179,6 +181,7 @@ async def main():
     candidate = settings.model_copy(update={'model_routing_enabled':True})
     report = {'scope':'synthetic_task_boundary_live_models_not_public_e2e',
         'protocol':'task-balanced-pair-order-v2', 'shard':args.shard, 'shards':args.shards,
+        'prompt_metadata': pinned_prompt,
         'model_config':{k:getattr(settings,k) for k in ('gemini_model','gemini_simple_model','gemini_eval_model')},
         'credential_source':'explicit_env_file' if args.env_file else 'process_settings',
         'cases_sha256':hashlib.sha256(frozen.encode()).hexdigest(),

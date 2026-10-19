@@ -1,5 +1,14 @@
 # 2026-10-09 upgrade verification
 
+## Fixed-v1 comparison readiness (2026-10-19)
+
+[Preflight, unchanged frozen100 identity and isolated restart drill](docs/model_routing/v1-recheck-20261019/README.md).
+Flash429 dailyFreeTier20, Lite200, Pro429FreeTier. New comparison attempts0 per
+condition; no valid speed/quality/freshness/cost conclusion or deployment. Existing
+200-attempt evidence remains historical. Guard v1 bundle before model calls;
+local synthetic v1→v2→v1 restores baseline hashes and unknown release is rejected.
+This is not a public Render restart or generated-answer quality validation.
+
 ## Jev model-selection experiment (2026-10-19)
 
 [Frozen 100 cases per condition, raw 200 attempts and saved-decision replay](docs/model_routing/JEV_COMPARISON.md).
