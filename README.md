@@ -1,3 +1,5 @@
+선택적 RAG 설계: [단순 추천은 상시 검색을 강제하지 않고, 근거 요청은 검색 가능한 경로로·질문/실행 단계/출처 원본 캡처](docs/food_catalog/selective-rag-20261019/README.md).
+
 답변 출처·기록 근거 표시: [공개 배포·저녁 추천 브라우저 검증·검색 정책 오류 수정·캡처](docs/food_catalog/answer-basis-20261019/README.md).
 
 식사 변경 응답 최적화: [집계·버전 동봉·격리 PostgreSQL 전후 120건씩·정합성·실패/복구](docs/food_catalog/intake-snapshot-20261019/README.md). 정상 흐름 HTTP 4→1회, 합성 데이터 준비 p95 772.977→157.741ms. 운영 성능과 구분.

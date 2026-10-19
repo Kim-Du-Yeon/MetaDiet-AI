@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-19",
+  "deployed_commit": "19bd2597ba741b46302c7d5efdf9b20d78f24c11",
+  "capture_type": "Live public-service reproduction, not the original user screenshots.",
+  "prompts": {
+    "simple": "저녁 추천",
+    "evidence": "오늘 먹은 걸 고려해서 저녁 추천해줘. 감량하면서 근육도 지키고 싶은데, 왜 그 메뉴가 좋은지 믿을 만한 자료도 찾아서 알려줘."
+  },
+  "observations": {
+    "simple": {
+      "visible_steps": 7,
+      "retrieval_step_present": false,
+      "cited_passages": 0
+    },
+    "evidence": {
+      "visible_steps": 12,
+      "delegation_step_present": true,
+      "retrieval_step_present": true,
+      "cited_passages": 2,
+      "distinct_documents": 1,
+      "document": "s12970-017-0177-8.pdf",
+      "pages": [
+        "4.0",
+        "1.0"
+      ]
+    }
+  },
+  "privacy": "Confirmed food list and target/intake tables excluded. Captured prompt, execution-status display, and public document references only.",
+  "evaluation_scope": "Two functional demonstrations, not speed/quality evidence. Step counts are not model reasoning steps or a performance metric.",
+  "screenshots": [
+    {
+      "file": "evidence-question-trace.jpg",
+      "width_px": 850,
+      "height_px": 492,
+      "bytes": 33887,
+      "sha256": "2e61af2c0d5f4878d193bd2d589c6ee57516c72510d9627597cc74609cc8fe90",
+      "format": "JPEG",
+      "processing": "Original browser screenshot bytes. No resize, upscale, recompression, or stitching."
+    },
+    {
+      "file": "evidence-sources.jpg",
+      "width_px": 572,
+      "height_px": 469,
+      "bytes": 26142,
+      "sha256": "0f6820cbc718840d91269e30f61e790e2117596d17031d73e2a30d91867f53ca",
+      "format": "JPEG",
+      "processing": "Original browser screenshot bytes. No resize, upscale, recompression, or stitching."
+    },
+    {
+      "file": "simple-question-trace.jpg",
+      "width_px": 850,
+      "height_px": 312,
+      "bytes": 17011,
+      "sha256": "159feff2e1b5d668aa11e89ea26581047d8363d56447b8e84027e70e748ae0b3",
+      "format": "JPEG",
+      "processing": "Original browser screenshot bytes. No resize, upscale, recompression, or stitching."
+    },
+    {
+      "file": "simple-sources.jpg",
+      "width_px": 572,
+      "height_px": 253,
+      "bytes": 18639,
+      "sha256": "18033f477604469adb35a4c5409f6bee8484c7f90e46230410e55660edcf1fd2",
+      "format": "JPEG",
+      "processing": "Original browser screenshot bytes. No resize, upscale, recompression, or stitching."
+    }
+  ]
+}

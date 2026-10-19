@@ -1,3 +1,5 @@
+선택적 RAG 설계와 원본 캡처: [단순 저녁 추천 / 자연스러운 근거 요청·질문·실행 단계·출처](docs/food_catalog/selective-rag-20261019/README.md). 매번 RAG를 강제하지 않는 설계이며 검색 도구의 하드 차단은 아님. 두 공개 기능 재현이며 성능 비교와 구분.
+
 답변 근거 표시 공개 검증: [출처·기록 근거·검색 금지 오분류 수정·실제 브라우저 캡처](docs/food_catalog/answer-basis-20261019/README.md). API·웹 19bd2597 반영, 일반 추천과 공식 지침 검색·인용·원문·새로고침 확인. 백엔드 1,461 passed / 기존 1 skipped, 프론트126 passed·빌드 성공. 기능 검증이며 속도·정확도 비교 결과와 구분.
 
 식사 변경 응답 최적화: [집계·버전 동봉·격리 PostgreSQL 전후 120건씩·정합성·실패/복구](docs/food_catalog/intake-snapshot-20261019/README.md). 정상 흐름 HTTP 4→1회, 합성 데이터 준비 p95 772.977→157.741ms. 운영 성능과 구분.
