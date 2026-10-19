@@ -1,0 +1,21 @@
+{
+  "prompt": {
+    "prompt_release": "v1",
+    "prompt_bundle_sha256": "4c40f46e4c2aa01b5ba7c78f456cff11b11907a4730e697288f796694ec7a741",
+    "prompt_scope": "registered_primary_templates"
+  },
+  "cases_count": 100,
+  "cases_reference": "docs/model_routing/final-v2-shard0/frozen.json",
+  "exact_cases_match": true,
+  "cases_sha256_utf8_lf": "ce673458ab20bbd6130f3c86748f74a2ff77c2fdaeafa891d0fdda1bc7c60710",
+  "source_sha256_utf8_lf": {
+    "backend/scripts/eval/benchmark_model_routing.py": "433a42df8dcb8465d17812784fc255948d716f0e192d61ac7af32e27e579c49d",
+    "backend/scripts/eval/model_routing_support.py": "4addde0140af117c52e8ef3e3e3abe030ae4ed77b6a2a56f9fbfd49ddf2304c2",
+    "backend/scripts/eval/verify_prompt_restart.py": "100c19815b397d9ca7cc04dff871885984a3502bafd7203108bcc9dd7c8740ee",
+    "backend/app/prompts/releases/v1.json": "fb49a3104fbb2a933bad03459158814de15f5ad5ef9a853b64ff290d55b82f9a"
+  },
+  "new_live_attempts_per_condition": 0,
+  "deployment_gate": false,
+  "blocker": "standard_and_judge_project_quota",
+  "scope": "prepared_not_executed_comparison"
+}

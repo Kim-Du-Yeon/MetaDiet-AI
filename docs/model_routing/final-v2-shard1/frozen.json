@@ -1,0 +1,1041 @@
+[
+  {
+    "id": "case-000",
+    "task": "extraction",
+    "question": "오늘 아침 닭가슴살 100g 먹었어",
+    "gold": {
+      "food_name": "닭가슴살",
+      "quantity_g": 100,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-001",
+    "task": "classification",
+    "question": "닭가슴살 200g 먹었어",
+    "context": [],
+    "pending": false,
+    "gold": "diet_logger"
+  },
+  {
+    "id": "case-002",
+    "task": "query_translation",
+    "question": "감량 중 단백질 섭취에 대한 공식 지침",
+    "gold": [
+      "protein"
+    ]
+  },
+  {
+    "id": "case-003",
+    "task": "agent",
+    "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 600,
+    "target": 2000,
+    "change": "confirmed"
+  },
+  {
+    "id": "case-004",
+    "task": "extraction",
+    "question": "오늘 아침 밥 200g 먹었어",
+    "gold": {
+      "food_name": "밥",
+      "quantity_g": 200,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-005",
+    "task": "classification",
+    "question": "오늘 점심에 김치찌개랑 공기밥 먹었어",
+    "context": [],
+    "pending": false,
+    "gold": "diet_logger"
+  },
+  {
+    "id": "case-006",
+    "task": "query_translation",
+    "question": "근력 운동과 근육 유지에 대한 공식 지침",
+    "gold": [
+      "muscle"
+    ]
+  },
+  {
+    "id": "case-007",
+    "task": "agent",
+    "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 600,
+    "target": 2000,
+    "change": "confirmed"
+  },
+  {
+    "id": "case-008",
+    "task": "extraction",
+    "question": "오늘 아침 김치 40g 먹었어",
+    "gold": {
+      "food_name": "김치",
+      "quantity_g": 40,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-009",
+    "task": "classification",
+    "question": "방금 아메리카노 한 잔 마셨어",
+    "context": [],
+    "pending": false,
+    "gold": "diet_logger"
+  },
+  {
+    "id": "case-010",
+    "task": "query_translation",
+    "question": "나트륨 섭취 기준에 대한 공식 지침",
+    "gold": [
+      "sodium"
+    ]
+  },
+  {
+    "id": "case-011",
+    "task": "agent",
+    "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 600,
+    "target": 2000,
+    "change": "confirmed"
+  },
+  {
+    "id": "case-012",
+    "task": "extraction",
+    "question": "오늘 아침 제육볶음 200g 먹었어",
+    "gold": {
+      "food_name": "제육볶음",
+      "quantity_g": 200,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-013",
+    "task": "classification",
+    "question": "내일 하루 식단 좀 짜줘",
+    "context": [],
+    "pending": false,
+    "gold": "meal_plan"
+  },
+  {
+    "id": "case-014",
+    "task": "query_translation",
+    "question": "식이섬유와 채소 섭취에 대한 공식 지침",
+    "gold": [
+      "fiber",
+      "fibre"
+    ]
+  },
+  {
+    "id": "case-015",
+    "task": "agent",
+    "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 600,
+    "target": 2000,
+    "change": "confirmed"
+  },
+  {
+    "id": "case-016",
+    "task": "extraction",
+    "question": "오늘 아침 김치찌개 200g 먹었어",
+    "gold": {
+      "food_name": "김치찌개",
+      "quantity_g": 200,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-017",
+    "task": "classification",
+    "question": "다이어트용으로 하루치 식단 계획 세워줘",
+    "context": [],
+    "pending": false,
+    "gold": "meal_plan"
+  },
+  {
+    "id": "case-018",
+    "task": "query_translation",
+    "question": "식사 에너지 균형에 대한 공식 지침",
+    "gold": [
+      "energy",
+      "calori"
+    ]
+  },
+  {
+    "id": "case-019",
+    "task": "agent",
+    "question": "그럼 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 600,
+    "target": 2000,
+    "change": "confirmed"
+  },
+  {
+    "id": "case-020",
+    "task": "extraction",
+    "question": "오늘 아침 닭가슴살 200g 먹었어",
+    "gold": {
+      "food_name": "닭가슴살",
+      "quantity_g": 200,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-021",
+    "task": "classification",
+    "question": "단백질은 하루에 얼마나 먹어야 해?",
+    "context": [],
+    "pending": false,
+    "gold": "strategy"
+  },
+  {
+    "id": "case-022",
+    "task": "query_translation",
+    "question": "감량 중 단백질 섭취에 대한 공식 지침을 찾아줘",
+    "gold": [
+      "protein"
+    ]
+  },
+  {
+    "id": "case-023",
+    "task": "agent",
+    "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 850,
+    "target": 2000,
+    "change": "edited"
+  },
+  {
+    "id": "case-024",
+    "task": "extraction",
+    "question": "오늘 아침 밥 400g 먹었어",
+    "gold": {
+      "food_name": "밥",
+      "quantity_g": 400,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-025",
+    "task": "classification",
+    "question": "지금 칼로리 남았는데 뭐 먹으면 좋을까?",
+    "context": [],
+    "pending": false,
+    "gold": "strategy"
+  },
+  {
+    "id": "case-026",
+    "task": "query_translation",
+    "question": "근력 운동과 근육 유지에 대한 공식 지침을 찾아줘",
+    "gold": [
+      "muscle"
+    ]
+  },
+  {
+    "id": "case-027",
+    "task": "agent",
+    "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 850,
+    "target": 2000,
+    "change": "edited"
+  },
+  {
+    "id": "case-028",
+    "task": "extraction",
+    "question": "오늘 아침 김치 80g 먹었어",
+    "gold": {
+      "food_name": "김치",
+      "quantity_g": 80,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-029",
+    "task": "classification",
+    "question": "살 빼려면 탄수화물 줄이는 게 맞아?",
+    "context": [],
+    "pending": false,
+    "gold": "strategy"
+  },
+  {
+    "id": "case-030",
+    "task": "query_translation",
+    "question": "나트륨 섭취 기준에 대한 공식 지침을 찾아줘",
+    "gold": [
+      "sodium"
+    ]
+  },
+  {
+    "id": "case-031",
+    "task": "agent",
+    "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 850,
+    "target": 2000,
+    "change": "edited"
+  },
+  {
+    "id": "case-032",
+    "task": "extraction",
+    "question": "오늘 아침 제육볶음 400g 먹었어",
+    "gold": {
+      "food_name": "제육볶음",
+      "quantity_g": 400,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-033",
+    "task": "classification",
+    "question": "응 확정해줘",
+    "context": [
+      {
+        "role": "assistant",
+        "content": "내일 식단 제안: 아침 오트밀, 점심 닭가슴살 샐러드, 저녁 연어구이. 확정하시겠어요?"
+      }
+    ],
+    "pending": true,
+    "gold": "confirm"
+  },
+  {
+    "id": "case-034",
+    "task": "query_translation",
+    "question": "식이섬유와 채소 섭취에 대한 공식 지침을 찾아줘",
+    "gold": [
+      "fiber",
+      "fibre"
+    ]
+  },
+  {
+    "id": "case-035",
+    "task": "agent",
+    "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 850,
+    "target": 2000,
+    "change": "edited"
+  },
+  {
+    "id": "case-036",
+    "task": "extraction",
+    "question": "오늘 아침 김치찌개 400g 먹었어",
+    "gold": {
+      "food_name": "김치찌개",
+      "quantity_g": 400,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-037",
+    "task": "classification",
+    "question": "ok 그대로 기록",
+    "context": [
+      {
+        "role": "assistant",
+        "content": "오늘 식단 제안을 드렸습니다. 확정할까요?"
+      }
+    ],
+    "pending": true,
+    "gold": "confirm"
+  },
+  {
+    "id": "case-038",
+    "task": "query_translation",
+    "question": "식사 에너지 균형에 대한 공식 지침을 찾아줘",
+    "gold": [
+      "energy",
+      "calori"
+    ]
+  },
+  {
+    "id": "case-039",
+    "task": "agent",
+    "question": "그럼 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 850,
+    "target": 2000,
+    "change": "edited"
+  },
+  {
+    "id": "case-040",
+    "task": "extraction",
+    "question": "오늘 아침 닭가슴살 300g 먹었어",
+    "gold": {
+      "food_name": "닭가슴살",
+      "quantity_g": 300,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-041",
+    "task": "classification",
+    "question": "점심을 치킨샐러드로 바꿔줘",
+    "context": [
+      {
+        "role": "assistant",
+        "content": "내일 식단 제안: 점심 닭가슴살 샐러드 ... 확정하시겠어요?"
+      }
+    ],
+    "pending": true,
+    "gold": "confirm"
+  },
+  {
+    "id": "case-042",
+    "task": "query_translation",
+    "question": "감량 중 단백질 섭취에 대한 공식 지침을 찾아줘을 찾아줘",
+    "gold": [
+      "protein"
+    ]
+  },
+  {
+    "id": "case-043",
+    "task": "agent",
+    "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 0,
+    "target": 2000,
+    "change": "deleted"
+  },
+  {
+    "id": "case-044",
+    "task": "extraction",
+    "question": "오늘 아침 밥 600g 먹었어",
+    "gold": {
+      "food_name": "밥",
+      "quantity_g": 600,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-045",
+    "task": "classification",
+    "question": "아까 기록한 저녁 메뉴 삭제해줘",
+    "context": [],
+    "pending": false,
+    "gold": "edit"
+  },
+  {
+    "id": "case-046",
+    "task": "query_translation",
+    "question": "근력 운동과 근육 유지에 대한 공식 지침을 찾아줘을 찾아줘",
+    "gold": [
+      "muscle"
+    ]
+  },
+  {
+    "id": "case-047",
+    "task": "agent",
+    "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 0,
+    "target": 2000,
+    "change": "deleted"
+  },
+  {
+    "id": "case-048",
+    "task": "extraction",
+    "question": "오늘 아침 김치 120g 먹었어",
+    "gold": {
+      "food_name": "김치",
+      "quantity_g": 120,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-049",
+    "task": "classification",
+    "question": "어제 저장한 점심 칼로리 좀 수정해줘",
+    "context": [],
+    "pending": false,
+    "gold": "edit"
+  },
+  {
+    "id": "case-050",
+    "task": "query_translation",
+    "question": "나트륨 섭취 기준에 대한 공식 지침을 찾아줘을 찾아줘",
+    "gold": [
+      "sodium"
+    ]
+  },
+  {
+    "id": "case-051",
+    "task": "agent",
+    "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 0,
+    "target": 2000,
+    "change": "deleted"
+  },
+  {
+    "id": "case-052",
+    "task": "extraction",
+    "question": "오늘 아침 제육볶음 600g 먹었어",
+    "gold": {
+      "food_name": "제육볶음",
+      "quantity_g": 600,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-053",
+    "task": "classification",
+    "question": "인바디 결과 분석해서 전략 업데이트 해줘",
+    "context": [],
+    "pending": false,
+    "gold": "inbody"
+  },
+  {
+    "id": "case-054",
+    "task": "query_translation",
+    "question": "식이섬유와 채소 섭취에 대한 공식 지침을 찾아줘을 찾아줘",
+    "gold": [
+      "fiber",
+      "fibre"
+    ]
+  },
+  {
+    "id": "case-055",
+    "task": "agent",
+    "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 0,
+    "target": 2000,
+    "change": "deleted"
+  },
+  {
+    "id": "case-056",
+    "task": "extraction",
+    "question": "오늘 아침 김치찌개 600g 먹었어",
+    "gold": {
+      "food_name": "김치찌개",
+      "quantity_g": 600,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-057",
+    "task": "classification",
+    "question": "요즘 목표 달성률이 어느 정도 돼?",
+    "context": [],
+    "pending": false,
+    "gold": "goal_manager"
+  },
+  {
+    "id": "case-058",
+    "task": "query_translation",
+    "question": "식사 에너지 균형에 대한 공식 지침을 찾아줘을 찾아줘",
+    "gold": [
+      "energy",
+      "calori"
+    ]
+  },
+  {
+    "id": "case-059",
+    "task": "agent",
+    "question": "그럼 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 0,
+    "target": 2000,
+    "change": "deleted"
+  },
+  {
+    "id": "case-060",
+    "task": "extraction",
+    "question": "오늘 아침 닭가슴살 400g 먹었어",
+    "gold": {
+      "food_name": "닭가슴살",
+      "quantity_g": 400,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-061",
+    "task": "classification",
+    "question": "목표 체중을 다시 설정하고 싶어요",
+    "context": [],
+    "pending": false,
+    "gold": "goal_manager"
+  },
+  {
+    "id": "case-062",
+    "task": "query_translation",
+    "question": "감량 중 단백질 섭취에 대한 공식 지침을 찾아줘을 찾아줘을 찾아줘",
+    "gold": [
+      "protein"
+    ]
+  },
+  {
+    "id": "case-063",
+    "task": "agent",
+    "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 600,
+    "target": 1800,
+    "change": "goal_changed"
+  },
+  {
+    "id": "case-064",
+    "task": "extraction",
+    "question": "오늘 아침 밥 800g 먹었어",
+    "gold": {
+      "food_name": "밥",
+      "quantity_g": 800,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-065",
+    "task": "classification",
+    "question": "지금 감량 속도면 목표 기간 안에 도착할 수 있을까?",
+    "context": [],
+    "pending": false,
+    "gold": "goal_manager"
+  },
+  {
+    "id": "case-066",
+    "task": "query_translation",
+    "question": "근력 운동과 근육 유지에 대한 공식 지침을 찾아줘을 찾아줘을 찾아줘",
+    "gold": [
+      "muscle"
+    ]
+  },
+  {
+    "id": "case-067",
+    "task": "agent",
+    "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 600,
+    "target": 1800,
+    "change": "goal_changed"
+  },
+  {
+    "id": "case-068",
+    "task": "extraction",
+    "question": "오늘 아침 김치 160g 먹었어",
+    "gold": {
+      "food_name": "김치",
+      "quantity_g": 160,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-069",
+    "task": "classification",
+    "question": "목표 체중까지 얼마나 남았어?",
+    "context": [],
+    "pending": false,
+    "gold": "goal_manager"
+  },
+  {
+    "id": "case-070",
+    "task": "query_translation",
+    "question": "나트륨 섭취 기준에 대한 공식 지침을 찾아줘을 찾아줘을 찾아줘",
+    "gold": [
+      "sodium"
+    ]
+  },
+  {
+    "id": "case-071",
+    "task": "agent",
+    "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 600,
+    "target": 1800,
+    "change": "goal_changed"
+  },
+  {
+    "id": "case-072",
+    "task": "extraction",
+    "question": "오늘 아침 제육볶음 800g 먹었어",
+    "gold": {
+      "food_name": "제육볶음",
+      "quantity_g": 800,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-073",
+    "task": "classification",
+    "question": "증량 목표로 바꿨는데 목표 진행 상황 알려줘",
+    "context": [],
+    "pending": false,
+    "gold": "goal_manager"
+  },
+  {
+    "id": "case-074",
+    "task": "query_translation",
+    "question": "식이섬유와 채소 섭취에 대한 공식 지침을 찾아줘을 찾아줘을 찾아줘",
+    "gold": [
+      "fiber",
+      "fibre"
+    ]
+  },
+  {
+    "id": "case-075",
+    "task": "agent",
+    "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 600,
+    "target": 1800,
+    "change": "goal_changed"
+  },
+  {
+    "id": "case-076",
+    "task": "extraction",
+    "question": "오늘 아침 김치찌개 800g 먹었어",
+    "gold": {
+      "food_name": "김치찌개",
+      "quantity_g": 800,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-077",
+    "task": "classification",
+    "question": "이번 주 식단 리포트 보여줘",
+    "context": [],
+    "pending": false,
+    "gold": "reporter"
+  },
+  {
+    "id": "case-078",
+    "task": "query_translation",
+    "question": "식사 에너지 균형에 대한 공식 지침을 찾아줘을 찾아줘을 찾아줘",
+    "gold": [
+      "energy",
+      "calori"
+    ]
+  },
+  {
+    "id": "case-079",
+    "task": "agent",
+    "question": "그럼 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 600,
+    "target": 1800,
+    "change": "goal_changed"
+  },
+  {
+    "id": "case-080",
+    "task": "extraction",
+    "question": "오늘 아침 닭가슴살 500g 먹었어",
+    "gold": {
+      "food_name": "닭가슴살",
+      "quantity_g": 500,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-081",
+    "task": "classification",
+    "question": "최근 한 달 단백질 섭취 통계 알려줘",
+    "context": [],
+    "pending": false,
+    "gold": "reporter"
+  },
+  {
+    "id": "case-082",
+    "task": "query_translation",
+    "question": "감량 중 단백질 섭취에 대한 공식 지침을 찾아줘을 찾아줘을 찾아줘을 찾아줘",
+    "gold": [
+      "protein"
+    ]
+  },
+  {
+    "id": "case-083",
+    "task": "agent",
+    "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 0,
+    "target": 1900,
+    "change": "new_day"
+  },
+  {
+    "id": "case-084",
+    "task": "extraction",
+    "question": "오늘 아침 밥 1000g 먹었어",
+    "gold": {
+      "food_name": "밥",
+      "quantity_g": 1000,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-085",
+    "task": "classification",
+    "question": "그거 그대로 기록해줘",
+    "context": [
+      {
+        "role": "user",
+        "content": "저녁에 연어 150g이랑 현미밥 먹을 예정이야"
+      },
+      {
+        "role": "assistant",
+        "content": "연어와 현미밥 좋은 선택이에요."
+      }
+    ],
+    "pending": false,
+    "gold": "diet_logger"
+  },
+  {
+    "id": "case-086",
+    "task": "query_translation",
+    "question": "근력 운동과 근육 유지에 대한 공식 지침을 찾아줘을 찾아줘을 찾아줘을 찾아줘",
+    "gold": [
+      "muscle"
+    ]
+  },
+  {
+    "id": "case-087",
+    "task": "agent",
+    "question": "그럼 샌드위치 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 0,
+    "target": 1900,
+    "change": "new_day"
+  },
+  {
+    "id": "case-088",
+    "task": "extraction",
+    "question": "오늘 아침 김치 200g 먹었어",
+    "gold": {
+      "food_name": "김치",
+      "quantity_g": 200,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-089",
+    "task": "classification",
+    "question": "위에서 말한 저녁으로 기록",
+    "context": [
+      {
+        "role": "user",
+        "content": "저녁은 삼겹살 200g 먹었어"
+      }
+    ],
+    "pending": false,
+    "gold": "diet_logger"
+  },
+  {
+    "id": "case-090",
+    "task": "query_translation",
+    "question": "나트륨 섭취 기준에 대한 공식 지침을 찾아줘을 찾아줘을 찾아줘을 찾아줘",
+    "gold": [
+      "sodium"
+    ]
+  },
+  {
+    "id": "case-091",
+    "task": "agent",
+    "question": "밥이랑 계란 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 0,
+    "target": 1900,
+    "change": "new_day"
+  },
+  {
+    "id": "case-092",
+    "task": "extraction",
+    "question": "오늘 아침 제육볶음 1000g 먹었어",
+    "gold": {
+      "food_name": "제육볶음",
+      "quantity_g": 1000,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-093",
+    "task": "classification",
+    "question": "미국 대통령이 누구야?",
+    "context": [],
+    "pending": false,
+    "gold": "off_topic"
+  },
+  {
+    "id": "case-094",
+    "task": "query_translation",
+    "question": "식이섬유와 채소 섭취에 대한 공식 지침을 찾아줘을 찾아줘을 찾아줘을 찾아줘",
+    "gold": [
+      "fiber",
+      "fibre"
+    ]
+  },
+  {
+    "id": "case-095",
+    "task": "agent",
+    "question": "닭가슴살이랑 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 0,
+    "target": 1900,
+    "change": "new_day"
+  },
+  {
+    "id": "case-096",
+    "task": "extraction",
+    "question": "오늘 아침 김치찌개 1000g 먹었어",
+    "gold": {
+      "food_name": "김치찌개",
+      "quantity_g": 1000,
+      "meal_type": "breakfast"
+    },
+    "context": [
+      {
+        "role": "user",
+        "content": "어제는 사과를 먹었어"
+      }
+    ]
+  },
+  {
+    "id": "case-097",
+    "task": "classification",
+    "question": "오늘 날씨 어때?",
+    "context": [],
+    "pending": false,
+    "gold": "off_topic"
+  },
+  {
+    "id": "case-098",
+    "task": "query_translation",
+    "question": "식사 에너지 균형에 대한 공식 지침을 찾아줘을 찾아줘을 찾아줘을 찾아줘",
+    "gold": [
+      "energy",
+      "calori"
+    ]
+  },
+  {
+    "id": "case-099",
+    "task": "agent",
+    "question": "그럼 샐러드 먹어도 괜찮아? 첫 문장에 \"오늘 섭취: N kcal, 하루 기준: N kcal\" 형식으로 적어줘.",
+    "calories": 0,
+    "target": 1900,
+    "change": "new_day"
+  }
+]

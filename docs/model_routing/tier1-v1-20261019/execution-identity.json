@@ -1,0 +1,24 @@
+{
+  "captured_at": "2026-10-19T11:25:37.553153+09:00",
+  "base_commit": "9c0f802ea5c87684672e1be2b02d545d9d6bb02e",
+  "python": "3.12.10",
+  "packages": {
+    "langchain-core": "1.6.8",
+    "langchain-google-genai": "4.4.0",
+    "google-genai": "2.29.0",
+    "httpx": "0.28.1"
+  },
+  "source_sha256_utf8_lf": {
+    "backend/scripts/eval/benchmark_model_routing.py": "e02e8c122f67e5de800a0092db3d04bb4546ca2cecfdca732f89e22ee3fdd7c2",
+    "backend/scripts/eval/model_routing_support.py": "1e93ec3893b0786ebb1d79e1df437f0ea67e5885288b8d2c6ac99f085c973c83",
+    "backend/scripts/eval/analyze_model_routing.py": "d475749e72d8e70b1be7c57f69b57a50d7fcf4dcfea690629c175847c7003626",
+    "backend/app/core/llm.py": "a54b9f9d1fcee159d503ef57bc0b29e67aa12b591de3ae8c87cc88d9b35fde72",
+    "backend/app/core/prompts.py": "ff2b3ec8260e7f05bce71b84162a9d5ba1189282e95d2a77641e51cb296e094b",
+    "backend/app/prompts/releases/v1.json": "fb49a3104fbb2a933bad03459158814de15f5ad5ef9a853b64ff290d55b82f9a"
+  },
+  "workers": 3,
+  "interval_seconds_per_worker": 2,
+  "credential_source": "explicit_ignored_env_file_no_values_recorded",
+  "analysis_final_sha256_utf8_lf": "a2ab2cdfe4d85d180f370ffe4f045f33649cc8375e1fd7ac788823c5886256c2",
+  "source_note": "Launch-time sources preserved; benchmark snapshot is executed-benchmark.py.txt. Post-review changes only strengthen analysis/prompt/cost adoption validation; request generation and saved trials unchanged."
+}

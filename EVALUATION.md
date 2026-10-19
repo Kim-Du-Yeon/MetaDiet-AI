@@ -1,5 +1,56 @@
 # 2026-10-09 upgrade verification
 
+## Tier1 fixed-v1 matched100 pairs (2026-10-19)
+
+[Raw200 generation attempts,50 Pro rubric calls, gate and limitations](docs/model_routing/tier1-v1-20261019/README.md).
+Both100/100 completed and contract-quality pass; synthetic coaching freshness25/25 each.
+Median4.226→2.010s, p95 7.050→5.158s, generation token estimate$0.10900125→
+$0.04809125. Separate judges$0.152650/$0.152634; all usage complete; gate=true.
+Three workers,2s intervals, identical frozen cases and pinned v1. No failed trial
+replacement. Repeated developer templates are not real-user/clinical accuracy;
+Pro rubric is not Ragas. Same-model coaching median4.410→4.495s did not improve.
+
+## Fixed-v1 comparison readiness (2026-10-19)
+
+[Preflight, unchanged frozen100 identity and isolated restart drill](docs/model_routing/v1-recheck-20261019/README.md).
+Flash429 dailyFreeTier20, Lite200, Pro429FreeTier. New comparison attempts0 per
+condition; no valid speed/quality/freshness/cost conclusion or deployment. Existing
+200-attempt evidence remains historical. Guard v1 bundle before model calls;
+local synthetic v1→v2→v1 restores baseline hashes and unknown release is rejected.
+This is not a public Render restart or generated-answer quality validation.
+
+## Jev model-selection experiment (2026-10-19)
+
+[Frozen 100 cases per condition, raw 200 attempts and saved-decision replay](docs/model_routing/JEV_COMPARISON.md).
+Rules/Jev router-only median: 0.040/559.231ms; p95: 0.067/792.422ms.
+Jev accepted 57, low-confidence fallback 43, transport failures 0; all remain in denominator.
+Developer preferred-tier agreement 60/97 includes fallback and is NOT answer accuracy.
+Downstream generation/freshness/Ragas remain unverified due existing quotas. No adoption.
+[Primary prompt releases](docs/prompt_versioning/README.md) pin exact baseline text;
+any future prompt quality comparison still requires at least 100 attempts per condition.
+
+## Purpose routing evaluation protocol (2026-10-19)
+
+[Model-role table/image, frozen cases, raw attempts and gate](docs/model_routing/README.md).
+Same100 cases/condition: production-prompt extraction25, actual legacy
+classification25 (including deterministic heuristics/pending), production-prompt
+query translation25, live DietTeam follow-up coaching25 with synthetic fresh
+reads. Alternating paired order; all failures retained. Per-task checks supplement
+overall p50/p95, failure and token-rate cost estimates. Pro rubric evaluation is
+distinct from Ragas metrics and unavailable on the inspected free-tier quota;
+missing judge or usage blocks deployment. Repeated development templates are
+not independent real-user or clinical accuracy evidence. Initial credential and
+reasoning/contract-mismatch exploratory rows are preserved separately, excluded
+from the final comparison. Production routing remains disabled pending gates.
+
+Final v2 three-worker frozen100-pair attempt capture completed. Baseline17/100
+and candidate74/100 completed; baseline successes were17 zero-model heuristics,
+candidate adds57 Lite generations. Flash daily free quota20 and unavailable Pro
+prevent a valid normal-generation speed/quality/freshness/cost comparison. Both
+coaching0/25 completed; unknown failed-call costs remain unknown. Gate=false;
+no deployment/enablement. Raw values and normalized RateLimit exception labels
+are retained separately. [Merged200 attempts](docs/model_routing/summary.json).
+
 ## Statistics read recovery, matched public100 pairs (2026-10-16)
 
 [Raw400 attempts, methodology, failures and browser proof](docs/public_stats_recovery/README.md). Two separate public synthetic comparisons: coaching4 cases×25 per condition and state-changing restore5 cases×20 per condition, concurrency4. Coaching latest numeric75/100 (75/75 answered,25 evidence holds) both; final stats100/100 both, recovered stats-error attempts1→0, all external-error attempts3→0. Total median24.849→23.945s/p9530.709→29.608s is an observation, not an isolated causal speed claim. Normal stats median0.304→0.600s/p950.757→1.190s increased with isolated connections. Restore current-value correctness84→100/100; missing stats13→0, request errors3→0; median1.780→2.398s/p953.544→2.821s. Failures retained. Safety gate passed; speed gate false. Exact historical socket/server root cause remains unknown; connection/retry/cancellation isolation adopted for reliability. API/web2c1162d and one actual read-only browser/reload checked, fixture cleaned. Backend1358 passed/1existing skip, frontend104/build passed. Synthetic repeated cases are not real-user or clinical accuracy evidence.

@@ -105,10 +105,18 @@ async def run_agent(*, model, instruction: str, request: str,
         raise ValueError("Duplicate tool names")
     from app.agents.execution_stream import emit_runtime_event, measure_stage
     from app.core.llm import ConfiguredChatModel
+    from app.core.prompts import prompt_metadata
+    import hashlib
+    config = {**(config or {}), 'metadata': {**(config or {}).get('metadata', {}),
+        **prompt_metadata(), 'system_instruction_sha256': hashlib.sha256(instruction.encode()).hexdigest()}}
     await emit_runtime_event('model_preparing', agent=agent_name)
     async with measure_stage('sdk_prepare_' + agent_name):
         if isinstance(model, ConfiguredChatModel):
             model.prepare()
+            selection = model.selection_metadata()
+            config = {**(config or {}), 'metadata': {
+                **(config or {}).get('metadata', {}), **selection}}
+            await emit_runtime_event('model_selected', **selection)
             await emit_runtime_event('sdk_provider_ready', reused=model.provider_reused)
     async with measure_stage('tool_bind_' + agent_name):
         bound = model.bind_tools([tool.schema() for tool in available.values()]) if available else model

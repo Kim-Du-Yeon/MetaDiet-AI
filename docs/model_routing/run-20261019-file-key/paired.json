@@ -1,0 +1,281 @@
+{
+  "scope": "synthetic_task_boundary_live_models_not_public_e2e",
+  "credential_source": "explicit_env_file",
+  "cases_sha256": "4833ddacc1cd2ce157ffd8de82523c40ce6647616e11ca8ea09fa61138e0afc9",
+  "prices_date": "2026-10-19",
+  "prices_per_million": {
+    "gemini-3.8-flash": [
+      0.75,
+      3.75,
+      0.075
+    ],
+    "gemini-3.1-flash-lite": [
+      0.25,
+      1.5,
+      0.025
+    ],
+    "gemini-3.1-pro-preview": [
+      2.0,
+      12.0,
+      0.2
+    ]
+  },
+  "judge_status": "pending",
+  "rows": [
+    {
+      "case_id": "case-000",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": {
+        "foods": [
+          {
+            "name": "닭가슴살",
+            "grams": 100.0
+          }
+        ]
+      },
+      "ms": 13492.982600000687,
+      "usage": [
+        {
+          "input_tokens": 46,
+          "output_tokens": 16,
+          "total_tokens": 62,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 9.45e-05
+    },
+    {
+      "case_id": "case-000",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "foods": [
+          {
+            "name": "닭가슴살",
+            "grams": 100.0
+          }
+        ]
+      },
+      "ms": 3577.674600004684,
+      "usage": [
+        {
+          "input_tokens": 46,
+          "output_tokens": 165,
+          "total_tokens": 211,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 127
+          }
+        }
+      ],
+      "cost_usd": 0.000259
+    },
+    {
+      "case_id": "case-001",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "record"
+      },
+      "ms": 2505.3907000110485,
+      "usage": [
+        {
+          "input_tokens": 44,
+          "output_tokens": 127,
+          "total_tokens": 171,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 116
+          }
+        }
+      ],
+      "cost_usd": 0.0002015
+    },
+    {
+      "case_id": "case-001",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": {
+        "intent": "record"
+      },
+      "ms": 7207.052699988708,
+      "usage": [
+        {
+          "input_tokens": 44,
+          "output_tokens": 99,
+          "total_tokens": 143,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 94
+          }
+        }
+      ],
+      "cost_usd": 0.00040425
+    },
+    {
+      "case_id": "case-002",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": "guidelines for dietary protein intake during weight loss energy restriction",
+      "ms": 6968.853499973193,
+      "usage": [
+        {
+          "input_tokens": 52,
+          "output_tokens": 11,
+          "total_tokens": 63,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 8.025e-05
+    },
+    {
+      "case_id": "case-002",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "\"official guidelines for protein intake during weight loss\"",
+      "ms": 2254.2512000072747,
+      "usage": [
+        {
+          "input_tokens": 52,
+          "output_tokens": 137,
+          "total_tokens": 189,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 127
+          }
+        }
+      ],
+      "cost_usd": 0.0002185
+    },
+    {
+      "case_id": "case-003",
+      "task": "agent",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 드시던 반 공기에서 한 공기 정도로 담고, 기름진 튀김이나 양념육 대신 나물, 쌈채소, 두부나 구이류 단백질 위주로 접시를 채우시면 균형 있게 드실 수 있습니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 6791.806199995335,
+      "usage": [
+        {
+          "input_tokens": 1411,
+          "output_tokens": 97,
+          "total_tokens": 1508,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.001422
+    },
+    {
+      "case_id": "case-003",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 괜찮으며, 남은 기준 칼로리(1400 kcal) 내에서 충분히 조절 가능합니다. 밥은 평소 공기 기준(약 200g)으로 담고 기름진 튀김이나 전보다는 나물, 쌈채소, 두부나 구운 육류 위주로 덜어 드시면 식사량 관리에 도움이 됩니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 4677.218299999367,
+      "usage": [
+        {
+          "input_tokens": 1411,
+          "output_tokens": 116,
+          "total_tokens": 1527,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00149325
+    },
+    {
+      "case_id": "case-004",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": {
+        "foods": [
+          {
+            "name": "밥",
+            "grams": 200.0
+          }
+        ]
+      },
+      "ms": 8533.52180001093,
+      "usage": [
+        {
+          "input_tokens": 43,
+          "output_tokens": 13,
+          "total_tokens": 56,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 8.1e-05
+    }
+  ],
+  "limitations": [
+    "25 cases per task; repeated templates are not 100 distinct user intents.",
+    "Extraction/classification test the bounded contract, not the full legacy graph.",
+    "Translation keyword checks do not prove downstream retrieval quality.",
+    "Coaching uses live DietTeam with synthetic fresh reads, not actual users.",
+    "Cost is token-rate estimate including thought/cache tokens, not invoiced spend."
+  ]
+}

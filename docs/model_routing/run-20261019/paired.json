@@ -1,0 +1,151 @@
+{
+  "scope": "synthetic_task_boundary_live_models_not_public_e2e",
+  "cases_sha256": "4833ddacc1cd2ce157ffd8de82523c40ce6647616e11ca8ea09fa61138e0afc9",
+  "prices_date": "2026-10-19",
+  "prices_per_million": {
+    "gemini-3.8-flash": [
+      0.75,
+      3.75,
+      0.075
+    ],
+    "gemini-3.1-flash-lite": [
+      0.25,
+      1.5,
+      0.025
+    ],
+    "gemini-3.1-pro-preview": [
+      2.0,
+      12.0,
+      0.2
+    ]
+  },
+  "judge_status": "pending",
+  "rows": [
+    {
+      "case_id": "case-000",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "ChatGoogleGenerativeAIError",
+        "reason": "credits_depleted"
+      },
+      "ms": 1686.4211999927647,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-000",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "error": {
+        "type": "ChatGoogleGenerativeAIError",
+        "reason": "credits_depleted"
+      },
+      "ms": 1409.1591999749653,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-001",
+      "task": "classification",
+      "condition": "routing",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "error": {
+        "type": "ChatGoogleGenerativeAIError",
+        "reason": "credits_depleted"
+      },
+      "ms": 1464.72490002634,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-001",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "ChatGoogleGenerativeAIError",
+        "reason": "credits_depleted"
+      },
+      "ms": 1429.8574000131339,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-002",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "ChatGoogleGenerativeAIError",
+        "reason": "credits_depleted"
+      },
+      "ms": 1600.831699965056,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-002",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "error": {
+        "type": "ChatGoogleGenerativeAIError",
+        "reason": "credits_depleted"
+      },
+      "ms": 1452.9180999961682,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-003",
+      "task": "agent",
+      "condition": "routing",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "ChatGoogleGenerativeAIError",
+        "reason": "credits_depleted"
+      },
+      "ms": 1282.663499994669,
+      "usage": [],
+      "cost_usd": null
+    }
+  ],
+  "limitations": [
+    "25 cases per task; repeated templates are not 100 distinct user intents.",
+    "Extraction/classification test the bounded contract, not the full legacy graph.",
+    "Translation keyword checks do not prove downstream retrieval quality.",
+    "Coaching uses live DietTeam with synthetic fresh reads, not actual users.",
+    "Cost is token-rate estimate including thought/cache tokens, not invoiced spend."
+  ]
+}

@@ -1,5 +1,13 @@
 # MetaDiet AI
 
+유료 계층 v1 고정 비교: [동일100쌍·Pro50건·속도/품질/최신값/비용·제한 적용](docs/model_routing/tier1-v1-20261019/README.md). 중앙값4.226→2.010초, p95 7.050→5.158초, 생성 비용55.88% 감소. 양쪽 계약검사100/100·합성 최신값25/25, 사전 채택 기준 통과.
+
+이전 무료 계층 점검: [당시 quota 차단 근거·프롬프트 재시작 복구](docs/model_routing/v1-recheck-20261019/README.md). 이후 Tier1 비교는 위 새 결과를 따릅니다.
+
+모델 선택 비교와 프롬프트 관리: [규칙·Jev 각 100건 결과와 채택 보류](docs/model_routing/JEV_COMPARISON.md) · [프롬프트 v1·해시·환경변수·복구](docs/prompt_versioning/README.md).
+
+모델 라우팅: [역할별 모델 선정표·원본 이미지·환경변수·동일 사례 비교 및 채택 조건](docs/model_routing/README.md). 기본 비활성이며 Pro 평가 완료와 작업별 품질 검증 전에는 운영에 활성화하지 않습니다.
+
 독립 검증: [2시간 메모리720건·원격/하이브리드각120건·402 제외 범위와 원본](docs/rag_memory_quality/README.md). 메모리 중앙값100.19→102.35MiB, 검색 근거 페이지 적중75%/80%로 동등 품질을 주장하지 않습니다.
 
 운영 메모리 장애·근거 보류 개선: [실제 OOM 이벤트, 100쌍 토크나이저 실험, 512MB 보호 및 기록 분석 유지](docs/coaching_review/README.md).

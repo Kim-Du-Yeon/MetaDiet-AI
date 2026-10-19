@@ -1,0 +1,72 @@
+{
+  "created_at": "2026-10-19T02:15:35.419909+00:00",
+  "scope": "minimal_availability_checks_not_performance_evidence",
+  "credential_source": "ignored_env_file",
+  "prompt": {
+    "prompt_release": "v1",
+    "prompt_bundle_sha256": "4c40f46e4c2aa01b5ba7c78f456cff11b11907a4730e697288f796694ec7a741",
+    "prompt_scope": "registered_primary_templates"
+  },
+  "models": [
+    {
+      "role": "standard",
+      "model": "gemini-3.8-flash",
+      "http_status": 200,
+      "usage": {
+        "promptTokenCount": 2,
+        "candidatesTokenCount": 1,
+        "totalTokenCount": 54,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 2
+          }
+        ],
+        "thoughtsTokenCount": 51,
+        "serviceTier": "standard"
+      },
+      "has_answer": true,
+      "elapsed_ms": 2197.61
+    },
+    {
+      "role": "simple",
+      "model": "gemini-3.1-flash-lite",
+      "http_status": 200,
+      "usage": {
+        "promptTokenCount": 2,
+        "candidatesTokenCount": 1,
+        "totalTokenCount": 3,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 2
+          }
+        ],
+        "serviceTier": "standard"
+      },
+      "has_answer": true,
+      "elapsed_ms": 669.24
+    },
+    {
+      "role": "judge",
+      "model": "gemini-3.1-pro-preview",
+      "http_status": 200,
+      "usage": {
+        "promptTokenCount": 2,
+        "candidatesTokenCount": 1,
+        "totalTokenCount": 95,
+        "promptTokensDetails": [
+          {
+            "modality": "TEXT",
+            "tokenCount": 2
+          }
+        ],
+        "thoughtsTokenCount": 92,
+        "serviceTier": "standard"
+      },
+      "has_answer": true,
+      "elapsed_ms": 3419.56
+    }
+  ],
+  "availability_gate": true
+}

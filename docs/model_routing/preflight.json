@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-19",
+  "scope": "sanitized_capture_of_minimal_http_preflight_tool_outputs",
+  "credential_source": "backend_ignored_env_file",
+  "keys_or_raw_error_bodies_saved": false,
+  "models": [
+    {"model": "gemini-3.8-flash", "http_status": 200, "credits_depleted": false,
+      "usage": {"promptTokenCount": 2, "candidatesTokenCount": 1, "thoughtsTokenCount": 70, "totalTokenCount": 73}},
+    {"model": "gemini-3.1-flash-lite", "http_status": 200, "credits_depleted": false,
+      "usage": {"promptTokenCount": 2, "candidatesTokenCount": 1, "totalTokenCount": 3}},
+    {"model": "gemini-3.1-pro-preview", "http_status": 429, "status": "RESOURCE_EXHAUSTED",
+      "credits_depleted": false,
+      "confirmed_retry": {"http_status": 429, "retry_delay": "82735s",
+        "quota_ids": ["GenerateContentInputTokensPerModelPerMinute-FreeTier",
+          "GenerateRequestsPerMinutePerProjectPerModel-FreeTier",
+          "GenerateRequestsPerDayPerProjectPerModel-FreeTier",
+          "GenerateContentInputTokensPerModelPerDay-FreeTier"]}}
+  ],
+  "credential_diagnosis": {"file_key_present": true, "inherited_key_present": true,
+    "inherited_matches_file": false,
+    "fix": "explicit --env-file credential for eval only; process env unchanged"},
+  "flash_quota_during_comparison": {"http_status": 429, "status": "RESOURCE_EXHAUSTED",
+    "quota_id": "GenerateRequestsPerDayPerProjectPerModel-FreeTier",
+    "quota_metric": "generativelanguage.googleapis.com/generate_content_free_tier_requests",
+    "quota_value": "20", "model": "gemini-3.8-flash", "retry_delay": "81792s"},
+  "sources": ["https://ai.google.dev/gemini-api/docs/rate-limits",
+    "https://ai.google.dev/gemini-api/docs/pricing", "https://saurabh-kumar.com/python-dotenv/"]
+}

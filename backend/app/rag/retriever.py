@@ -24,6 +24,7 @@ from threading import RLock
 from pathlib import Path
 from pinecone import Pinecone, ServerlessSpec
 from app.core.llm import get_chat_model
+from app.core.prompts import get_prompt
 from app.core.embeddings import GeminiEmbeddings
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_pinecone import PineconeVectorStore
@@ -34,10 +35,10 @@ settings = get_settings()
 
 embeddings = GeminiEmbeddings()
 
-_translate_llm = get_chat_model(temperature=0)
+_translate_llm = get_chat_model(temperature=0, task='query_translation')
 _KOREAN_RE = re.compile(r"[가-힣]")
 _TRANSLATE_PROMPT = ChatPromptTemplate.from_messages([
-    ("system", "다음 질문을 영어 학술 검색에 적합한 검색 쿼리 1줄로 번역하세요. 영어 쿼리만 출력, 다른 텍스트 금지."),
+    ("system", get_prompt('rag.query_translation')),
     ("human", "{query}"),
 ])
 

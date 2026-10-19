@@ -1,0 +1,50 @@
+[
+  {
+    "id": "team.base",
+    "source": "backend/app/agents/team.py",
+    "constant": "BASE_INSTRUCTION",
+    "sha256": "14106af6c42e10fb55d36af2a4df2e40db39279ffe57e80f58c56bdbc78dc961"
+  },
+  {
+    "id": "team.role.meal",
+    "source": "backend/app/agents/team.py",
+    "constant": "ROLE_INSTRUCTIONS",
+    "sha256": "79ae127184046a6350ebe5fd3a15b3c1e1af91460af5ec6cad4521dc6fcb7e78"
+  },
+  {
+    "id": "team.role.goal",
+    "source": "backend/app/agents/team.py",
+    "constant": "ROLE_INSTRUCTIONS",
+    "sha256": "286e4cc89eef0dad270f0dc57c4a55a72361ffb1c313dd0b95003675b0095aff"
+  },
+  {
+    "id": "team.role.evidence",
+    "source": "backend/app/agents/team.py",
+    "constant": "ROLE_INSTRUCTIONS",
+    "sha256": "03fdbef4bef24d58ba55f8308a6436d54422b282694c4df7d86b8c10b2f1ab69"
+  },
+  {
+    "id": "team.compact_followup",
+    "source": "backend/app/agents/team.py",
+    "constant": "COMPACT_FOLLOWUP_INSTRUCTION",
+    "sha256": "4e45616624ede3cf57f17391e19a168a92b0129a23fa2c2cc86e0ca323397fc6"
+  },
+  {
+    "id": "legacy.intent_classification",
+    "source": "backend/app/agents/supervisor/node.py",
+    "constant": "SUPERVISOR_PROMPT",
+    "sha256": "771222e7e54f2fe0199072d6995c9beadf386918ed9b95cd51daa431f599ab20"
+  },
+  {
+    "id": "legacy.food_extraction",
+    "source": "backend/app/agents/diet_logger/node.py",
+    "constant": "PARSE_PROMPT",
+    "sha256": "718176d51a8c2d34ce1c0b32f4afda13b3fa51d033e4ac73b78dab72d3013c4f"
+  },
+  {
+    "id": "rag.query_translation",
+    "source": "backend/app/rag/retriever.py",
+    "constant": "_TRANSLATE_PROMPT",
+    "sha256": "b34cdcb49ef64b79e264bbf3bf49434809196a3a9e33082ee1ec54ef0f235523"
+  }
+]

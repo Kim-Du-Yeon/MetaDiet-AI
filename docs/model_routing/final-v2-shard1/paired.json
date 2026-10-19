@@ -1,0 +1,1497 @@
+{
+  "scope": "synthetic_task_boundary_live_models_not_public_e2e",
+  "protocol": "task-balanced-pair-order-v2",
+  "shard": 1,
+  "shards": 3,
+  "model_config": {
+    "gemini_model": "gemini-3.8-flash",
+    "gemini_simple_model": "gemini-3.1-flash-lite",
+    "gemini_eval_model": "gemini-3.1-pro-preview"
+  },
+  "credential_source": "explicit_env_file",
+  "cases_sha256": "ce673458ab20bbd6130f3c86748f74a2ff77c2fdaeafa891d0fdda1bc7c60710",
+  "prices_date": "2026-10-19",
+  "prices_per_million": {
+    "gemini-3.8-flash": [
+      0.75,
+      3.75,
+      0.075
+    ],
+    "gemini-3.1-flash-lite": [
+      0.25,
+      1.5,
+      0.025
+    ],
+    "gemini-3.1-pro-preview": [
+      2.0,
+      12.0,
+      0.2
+    ]
+  },
+  "judge_status": "unavailable_or_not_run",
+  "rows": [
+    {
+      "case_id": "case-001",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": {
+        "intent": "diet_logger"
+      },
+      "actual_route": "diet_logger",
+      "deterministic_no_model": true,
+      "ms": 0.09570003021508455,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-001",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "diet_logger"
+      },
+      "actual_route": "diet_logger",
+      "deterministic_no_model": true,
+      "ms": 0.19319995772093534,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-004",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "밥",
+          "quantity_g": 200,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 1959.2908999766223,
+      "usage": [
+        {
+          "input_tokens": 306,
+          "output_tokens": 31,
+          "total_tokens": 337,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.000123
+    },
+    {
+      "case_id": "case-004",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 1484.186299960129,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-007",
+      "task": "agent",
+      "condition": "routing",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 2907.0967999869026,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-007",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 2788.501500035636,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-010",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleAPIError",
+        "reason": "provider_or_parse_error"
+      },
+      "ms": 29710.187699995004,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-010",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "official guidelines for sodium intake recommendations",
+      "ms": 2195.026900037192,
+      "usage": [
+        {
+          "input_tokens": 50,
+          "output_tokens": 6,
+          "total_tokens": 56,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 2.15e-05
+    },
+    {
+      "case_id": "case-013",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "meal_plan"
+      },
+      "actual_route": "meal_plan",
+      "deterministic_no_model": true,
+      "ms": 0.2093000221066177,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-013",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": {
+        "intent": "meal_plan"
+      },
+      "actual_route": "meal_plan",
+      "deterministic_no_model": true,
+      "ms": 0.17850002041086555,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-016",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 1266.9408000074327,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-016",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "김치찌개",
+          "quantity_g": 200,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 1887.266899982933,
+      "usage": [
+        {
+          "input_tokens": 308,
+          "output_tokens": 34,
+          "total_tokens": 342,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.000128
+    },
+    {
+      "case_id": "case-019",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleAPIError",
+        "reason": "provider_or_parse_error"
+      },
+      "ms": 31665.626000030898,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-019",
+      "task": "agent",
+      "condition": "routing",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 2943.7305000028573,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-022",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "official guidelines for protein intake during weight loss",
+      "ms": 1962.215700012166,
+      "usage": [
+        {
+          "input_tokens": 55,
+          "output_tokens": 8,
+          "total_tokens": 63,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 2.575e-05
+    },
+    {
+      "case_id": "case-022",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 1542.6301000406966,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-025",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 1546.2025000015274,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-025",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "strategy"
+      },
+      "actual_route": "strategy",
+      "ms": 1804.0551000158302,
+      "usage": [
+        {
+          "input_tokens": 707,
+          "output_tokens": 1,
+          "total_tokens": 708,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00017825
+    },
+    {
+      "case_id": "case-028",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "김치",
+          "quantity_g": 80,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 1951.3137000030838,
+      "usage": [
+        {
+          "input_tokens": 305,
+          "output_tokens": 31,
+          "total_tokens": 336,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00012275
+    },
+    {
+      "case_id": "case-028",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 1301.517000014428,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-031",
+      "task": "agent",
+      "condition": "routing",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 3118.25920001138,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-031",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 2791.4007999934256,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-034",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 1576.3948999810964,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-034",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "official dietary guidelines for dietary fiber and vegetable intake",
+      "ms": 2508.3801000146195,
+      "usage": [
+        {
+          "input_tokens": 55,
+          "output_tokens": 9,
+          "total_tokens": 64,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 2.725e-05
+    },
+    {
+      "case_id": "case-037",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "confirm"
+      },
+      "actual_route": "confirm",
+      "ms": 1868.9943999634124,
+      "usage": [
+        {
+          "input_tokens": 718,
+          "output_tokens": 1,
+          "total_tokens": 719,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.000181
+    },
+    {
+      "case_id": "case-037",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 1476.7161999479868,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-040",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 1743.4101999970153,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-040",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "닭가슴살",
+          "quantity_g": 300,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 2117.486100003589,
+      "usage": [
+        {
+          "input_tokens": 309,
+          "output_tokens": 34,
+          "total_tokens": 343,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00012825
+    },
+    {
+      "case_id": "case-043",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 2621.8823999515735,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-043",
+      "task": "agent",
+      "condition": "routing",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 2905.401800002437,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-046",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "official guidelines for resistance training and muscle maintenance",
+      "ms": 2692.6391000160947,
+      "usage": [
+        {
+          "input_tokens": 56,
+          "output_tokens": 8,
+          "total_tokens": 64,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 2.6e-05
+    },
+    {
+      "case_id": "case-046",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 1720.1653000083752,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-049",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": {
+        "intent": "edit"
+      },
+      "actual_route": "edit",
+      "deterministic_no_model": true,
+      "ms": 0.2001000102609396,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-049",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "edit"
+      },
+      "actual_route": "edit",
+      "deterministic_no_model": true,
+      "ms": 0.1306000049225986,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-052",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "제육볶음",
+          "quantity_g": 600,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 2686.598000000231,
+      "usage": [
+        {
+          "input_tokens": 308,
+          "output_tokens": 34,
+          "total_tokens": 342,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.000128
+    },
+    {
+      "case_id": "case-052",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 6723.793499986641,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-055",
+      "task": "agent",
+      "condition": "routing",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 2909.9910999648273,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-055",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 3124.505899962969,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-058",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 1389.5280999713577,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-058",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "official guidelines on dietary energy balance",
+      "ms": 2023.9025999908336,
+      "usage": [
+        {
+          "input_tokens": 54,
+          "output_tokens": 6,
+          "total_tokens": 60,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 2.25e-05
+    },
+    {
+      "case_id": "case-061",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "goal_manager"
+      },
+      "actual_route": "goal_manager",
+      "deterministic_no_model": true,
+      "ms": 0.1561000244691968,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-061",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": {
+        "intent": "goal_manager"
+      },
+      "actual_route": "goal_manager",
+      "deterministic_no_model": true,
+      "ms": 0.31289999606087804,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-064",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 1981.1957000056282,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-064",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "밥",
+          "quantity_g": 800,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 3524.3924999958836,
+      "usage": [
+        {
+          "input_tokens": 306,
+          "output_tokens": 31,
+          "total_tokens": 337,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.000123
+    },
+    {
+      "case_id": "case-067",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 2851.209699991159,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-067",
+      "task": "agent",
+      "condition": "routing",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 3108.620500017423,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-070",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "official guidelines for daily sodium intake recommendations",
+      "ms": 4198.316499998327,
+      "usage": [
+        {
+          "input_tokens": 59,
+          "output_tokens": 7,
+          "total_tokens": 66,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 2.525e-05
+    },
+    {
+      "case_id": "case-070",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 2624.641000002157,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-073",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": {
+        "intent": "goal_manager"
+      },
+      "actual_route": "goal_manager",
+      "deterministic_no_model": true,
+      "ms": 0.1640000264160335,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-073",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "goal_manager"
+      },
+      "actual_route": "goal_manager",
+      "deterministic_no_model": true,
+      "ms": 3.907900012563914,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-076",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "김치찌개",
+          "quantity_g": 800,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 2476.580699963961,
+      "usage": [
+        {
+          "input_tokens": 308,
+          "output_tokens": 34,
+          "total_tokens": 342,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.000128
+    },
+    {
+      "case_id": "case-076",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 1625.0939999590628,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-079",
+      "task": "agent",
+      "condition": "routing",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 3115.133200015407,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-079",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 3181.69650004711,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-082",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "credits_depleted"
+      },
+      "ms": 1750.1898999908008,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-082",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "\"official guidelines for protein intake during weight loss\"",
+      "ms": 1962.548199982848,
+      "usage": [
+        {
+          "input_tokens": 64,
+          "output_tokens": 10,
+          "total_tokens": 74,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 3.1e-05
+    },
+    {
+      "case_id": "case-085",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "diet_logger"
+      },
+      "actual_route": "diet_logger",
+      "ms": 2286.1705999821424,
+      "usage": [
+        {
+          "input_tokens": 731,
+          "output_tokens": 3,
+          "total_tokens": 734,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00018725
+    },
+    {
+      "case_id": "case-085",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 1633.060599968303,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-088",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 2391.2182999774814,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-088",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "김치",
+          "quantity_g": 200,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 2162.0310999569483,
+      "usage": [
+        {
+          "input_tokens": 306,
+          "output_tokens": 32,
+          "total_tokens": 338,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.0001245
+    },
+    {
+      "case_id": "case-091",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 2763.4201000328176,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-091",
+      "task": "agent",
+      "condition": "routing",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 2774.8127999948338,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-094",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "official dietary guidelines for dietary fiber and vegetable intake",
+      "ms": 1792.998599994462,
+      "usage": [
+        {
+          "input_tokens": 64,
+          "output_tokens": 9,
+          "total_tokens": 73,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 2.95e-05
+    },
+    {
+      "case_id": "case-094",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 1423.0752000003122,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-097",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "failed",
+      "quality": false,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "error": {
+        "type": "GoogleRateLimitError",
+        "reason": "quota_exhausted"
+      },
+      "ms": 1510.4350000037812,
+      "usage": [],
+      "cost_usd": null
+    },
+    {
+      "case_id": "case-097",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "off_topic"
+      },
+      "actual_route": "off_topic",
+      "ms": 2163.9908000361174,
+      "usage": [
+        {
+          "input_tokens": 700,
+          "output_tokens": 3,
+          "total_tokens": 703,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.0001795
+    }
+  ],
+  "limitations": [
+    "25 cases per task; repeated templates are not 100 distinct user intents.",
+    "Extraction reuses the production prompt/parser; classification executes actual legacy routing nodes, not domain writes.",
+    "Translation keyword checks do not prove downstream retrieval quality.",
+    "Coaching uses live DietTeam with synthetic fresh reads, not actual users.",
+    "Cost is token-rate estimate including thought/cache tokens, not invoiced spend."
+  ],
+  "judge_rows": [],
+  "summary": {
+    "baseline": {
+      "attempts": 33,
+      "completed": 5,
+      "failure_rate": 0.8484848484848485,
+      "quality_rate": 0.15151515151515152,
+      "freshness_attempts": 8,
+      "freshness_passes": 0,
+      "p50_ms": 1633.060599968303,
+      "p95_ms": 29710.187699995004,
+      "cost_complete": false,
+      "known_cost_usd": 0,
+      "mean_cost_usd": null
+    },
+    "routing": {
+      "attempts": 33,
+      "completed": 25,
+      "failure_rate": 0.24242424242424243,
+      "quality_rate": 0.7575757575757576,
+      "freshness_attempts": 8,
+      "freshness_passes": 0,
+      "p50_ms": 2163.9908000361174,
+      "p95_ms": 3524.3924999958836,
+      "cost_complete": false,
+      "known_cost_usd": 0.00194025,
+      "mean_cost_usd": null
+    }
+  },
+  "by_task": {
+    "extraction": {
+      "baseline": {
+        "attempts": 8,
+        "completed": 0,
+        "failure_rate": 1.0,
+        "quality_rate": 0.0,
+        "freshness_attempts": 0,
+        "freshness_passes": 0,
+        "p50_ms": 1684.252099978039,
+        "p95_ms": 6723.793499986641,
+        "cost_complete": false,
+        "known_cost_usd": 0,
+        "mean_cost_usd": null
+      },
+      "routing": {
+        "attempts": 8,
+        "completed": 8,
+        "failure_rate": 0.0,
+        "quality_rate": 1.0,
+        "freshness_attempts": 0,
+        "freshness_passes": 0,
+        "p50_ms": 2139.7585999802686,
+        "p95_ms": 3524.3924999958836,
+        "cost_complete": true,
+        "known_cost_usd": 0.0010054999999999999,
+        "mean_cost_usd": 0.00012568749999999999
+      }
+    },
+    "classification": {
+      "baseline": {
+        "attempts": 9,
+        "completed": 5,
+        "failure_rate": 0.4444444444444444,
+        "quality_rate": 0.5555555555555556,
+        "freshness_attempts": 0,
+        "freshness_passes": 0,
+        "p50_ms": 0.31289999606087804,
+        "p95_ms": 1633.060599968303,
+        "cost_complete": false,
+        "known_cost_usd": 0,
+        "mean_cost_usd": null
+      },
+      "routing": {
+        "attempts": 9,
+        "completed": 9,
+        "failure_rate": 0.0,
+        "quality_rate": 1.0,
+        "freshness_attempts": 0,
+        "freshness_passes": 0,
+        "p50_ms": 3.907900012563914,
+        "p95_ms": 2286.1705999821424,
+        "cost_complete": true,
+        "known_cost_usd": 0.000726,
+        "mean_cost_usd": 8.066666666666666e-05
+      }
+    },
+    "query_translation": {
+      "baseline": {
+        "attempts": 8,
+        "completed": 0,
+        "failure_rate": 1.0,
+        "quality_rate": 0.0,
+        "freshness_attempts": 0,
+        "freshness_passes": 0,
+        "p50_ms": 1648.2800999947358,
+        "p95_ms": 29710.187699995004,
+        "cost_complete": false,
+        "known_cost_usd": 0,
+        "mean_cost_usd": null
+      },
+      "routing": {
+        "attempts": 8,
+        "completed": 8,
+        "failure_rate": 0.0,
+        "quality_rate": 1.0,
+        "freshness_attempts": 0,
+        "freshness_passes": 0,
+        "p50_ms": 2109.4647500140127,
+        "p95_ms": 4198.316499998327,
+        "cost_complete": true,
+        "known_cost_usd": 0.00020875,
+        "mean_cost_usd": 2.609375e-05
+      }
+    },
+    "agent": {
+      "baseline": {
+        "attempts": 8,
+        "completed": 0,
+        "failure_rate": 1.0,
+        "quality_rate": 0.0,
+        "freshness_attempts": 8,
+        "freshness_passes": 0,
+        "p50_ms": 2821.3052499922924,
+        "p95_ms": 31665.626000030898,
+        "cost_complete": false,
+        "known_cost_usd": 0,
+        "mean_cost_usd": null
+      },
+      "routing": {
+        "attempts": 8,
+        "completed": 0,
+        "failure_rate": 1.0,
+        "quality_rate": 0.0,
+        "freshness_attempts": 8,
+        "freshness_passes": 0,
+        "p50_ms": 2926.8607999838423,
+        "p95_ms": 3118.25920001138,
+        "cost_complete": false,
+        "known_cost_usd": 0,
+        "mean_cost_usd": null
+      }
+    }
+  },
+  "deployment_gate": false
+}

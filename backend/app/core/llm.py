@@ -48,6 +48,7 @@ class ConfiguredChatModel(Runnable):
     """Keep provider construction lazy while preserving native tools and tracing."""
 
     def __init__(self, *, role: str = "chat", temperature: float = 0,
+                 task: str = "agent",
                  max_tokens: int | None = None,
                  model_name: str | None = None,
                  reuse_provider: bool = False,
@@ -55,6 +56,12 @@ class ConfiguredChatModel(Runnable):
                  thinking_level: Literal['low', 'medium', 'high'] | None = None):
         if role not in {"chat", "vision", "eval"}:
             raise ValueError(f"Unknown model role: {role}")
+        if task not in {'agent', 'extraction', 'classification', 'query_translation'}:
+            raise ValueError(f"Unknown model task: {task}")
+        if role != 'chat' and task != 'agent':
+            raise ValueError('Bounded task routing is only allowed for chat')
+        self.task = task
+        self._selection = None
         self.role = role
         self.transport_timing = transport_timing
         if reuse_provider and role != 'chat':
@@ -71,23 +78,37 @@ class ConfiguredChatModel(Runnable):
         self._provider = None
         self.provider_reused = False
 
+    def selection_metadata(self) -> dict:
+        """Fixed-purpose labels and selected model ID only; never user content/keys."""
+        if self._selection is not None:
+            return dict(self._selection)
+        settings = get_settings()
+        routed = (self.role == 'chat' and self.task != 'agent' and
+                  getattr(settings, 'model_routing_enabled', False) and self.model_name is None)
+        model = self.model_name or (settings.gemini_simple_model if routed else {
+            'chat': settings.gemini_model, 'vision': settings.gemini_vision_model,
+            'eval': settings.gemini_eval_model}[self.role])
+        return {'model_name': model, 'model_task': self.task, 'model_routing': bool(routed)}
+
     def _client(self):
         global _shared_provider
         if self._provider is None:
             settings = get_settings()
             if not settings.gemini_api_key.strip():
                 raise ValueError("Set GEMINI_API_KEY in backend/.env before calling Gemini")
-            model = self.model_name or {"chat": settings.gemini_model,
-                     "vision": settings.gemini_vision_model,
-                     "eval": settings.gemini_eval_model}[self.role]
+            self._selection = self.selection_metadata()
+            model = self._selection['model_name']
+            from app.core.prompts import prompt_metadata
+            prompt_info = prompt_metadata()
             try:
                 loop = asyncio.get_running_loop() if self.reuse_provider else None
             except RuntimeError:
                 loop = None
             timeout = settings.eval_model_timeout_seconds if self.role == 'eval' else settings.model_timeout_seconds
             key = (ChatGoogleGenerativeAI, hashlib.sha256(settings.gemini_api_key.encode()).digest(),
-                   model, self.role, self.temperature, self.max_tokens, self.thinking_level,
-                   timeout, settings.model_max_retries, self.transport_timing)
+                   model, self.role, self.task, self.temperature, self.max_tokens, self.thinking_level,
+                   timeout, settings.model_max_retries, self.transport_timing,
+                   prompt_info['prompt_bundle_sha256'])
             if loop is not None and _shared_provider is not None and (
                     _shared_provider.loop is loop and _shared_provider.key == key):
                 self._provider = _shared_provider.provider
@@ -99,6 +120,7 @@ class ConfiguredChatModel(Runnable):
                 transport_args = {'client_args': {'transport': TimedTransport()}}
             self._provider = ChatGoogleGenerativeAI(
                 model=model, api_key=settings.gemini_api_key,
+                metadata={**prompt_info,'model_task':self.task,'model_role':self.role},
                 temperature=self.temperature, max_tokens=self.max_tokens,
                 timeout=timeout,
                 max_retries=settings.model_max_retries,

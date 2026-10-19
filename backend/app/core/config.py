@@ -59,8 +59,12 @@ class Settings(BaseSettings):
     jev_model: str = "jev-1.13.0"
     gemini_api_key: str = ""
     gemini_model: str = "gemini-3.8-flash"
+    # Roll out only after a matched >=100-case live comparison passes.
+    model_routing_enabled: bool = False
+    prompt_release: str = 'v1'
+    gemini_simple_model: str = "gemini-3.1-flash-lite"
     gemini_vision_model: str = "gemini-3.8-flash"
-    gemini_eval_model: str = "gemini-3.8-flash"
+    gemini_eval_model: str = "gemini-3.1-pro-preview"
     # Only verified read-only follow-ups; 'default' omits the provider override.
     coaching_thinking_level: Literal['default', 'low'] = 'low'
     # off=Supervisor, default=direct/provider default, low=direct/low reasoning.

@@ -86,3 +86,10 @@ def test_role_and_nonrunning_loop_cannot_share_provider(provider_factory):
     with pytest.raises(ValueError): llm.get_chat_model(role='eval', reuse_provider=True)
     with pytest.raises(ValueError): llm.get_chat_model(role='vision', reuse_provider=True)
     assert llm.get_chat_model(reuse_provider=True)._client() is not llm.get_chat_model(reuse_provider=True)._client()
+
+
+async def test_different_tasks_do_not_reuse_stale_provider_trace_metadata(provider_factory):
+    first=llm.get_chat_model(task='classification',reuse_provider=True)._client()
+    second=llm.get_chat_model(task='query_translation',reuse_provider=True)._client()
+    assert first is not second
+    assert second.kwargs['metadata']['model_task']=='query_translation'
