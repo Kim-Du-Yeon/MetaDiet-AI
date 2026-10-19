@@ -71,3 +71,18 @@ backend\venv\Scripts\python.exe backend/scripts/eval/check_intake_snapshot_trans
 - [Psycopg transaction context와 rollback](https://www.psycopg.org/psycopg3/docs/basic/transactions.html)
 - [Pydantic Settings](https://docs.pydantic.dev/latest/concepts/pydantic_settings/)
 - [Docker Desktop 시작](https://docs.docker.com/desktop/setup/install/windows-install/#start-docker-desktop)
+
+## 공개 배포·브라우저 검증
+
+웹 build-info와 API health가 모두 `6b8d1ec1fd352597782201269c3aec0aa9faa41b`를 반환했다. Render API 배포 `dep-dbarr1rrjlhs73cuakv0`는 Live, 소요 1m22s로 확인했다.
+
+공개 로그인 브라우저에서 검증용 밥 13g 한 건을 저장한 뒤 캘린더에서 26g으로 수정했다. 사용자 새로고침 없이 행 분량·일/월 캘린더·상단 집계가 갱신됐고 변경 중 진행 안내와 탭/날짜 이동 제한도 확인했다. 채팅으로 돌아오자 ‘수정된 섭취 기록’과 ‘저장 당시 내역’ 안내가 표시됐다. 기존 실제 기록은 수정하지 않았다.
+
+![공개 브라우저 검증용 수정 기록](live-mutated-row.png)
+![공개 브라우저 수정된 기록 안내](live-modified-receipt.png)
+
+실행 직전 확인을 받은 뒤 검증용 26g 한 건만 삭제했다. 새로고침 없이 상단·캘린더가 검증 전 값으로 복원됐고 채팅에도 삭제 상태가 표시됐다. 기존 실제 기록 두 건은 유지됐으며 검증용 활성 기록은 남기지 않았다. 대화에는 저장 당시 요약과 삭제 안내가 남는다.
+
+![공개 브라우저 삭제된 검증 기록 안내](live-deleted-receipt.png)
+
+공개 화면 검증은 한 건이며 120사례 성능 평가와 분리한다. 브라우저의 네트워크 요청 수나 paint 지연은 별도 수집하지 않았다. 4→1회는 고정 비교 및 자동 테스트의 요청 수다. 삭제 확인 과정에서 브라우저 조작 도구의 CDP 확인이 한 차례 타임아웃됐으나 재삭제하지 않고 현재 UI를 확인했고 정상 삭제·복원을 확인했다. 이 도구 지연을 앱의 성능 수치로 사용하지 않았다.
