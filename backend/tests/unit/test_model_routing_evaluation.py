@@ -69,3 +69,12 @@ def test_v1_comparison_rejects_changed_prompt_bundle_before_generation():
                     dict(expected, prompt_bundle_sha256='0' * 64)]:
         with pytest.raises(ValueError, match='v1'):
             require_prompt_v1(changed)
+
+
+def test_judge_cost_is_separate_and_missing_usage_does_not_become_free():
+    from scripts.eval.model_routing_support import summarize_judge_cost
+    rows = [{'condition': 'baseline', 'cost_usd': .03},
+            {'condition': 'routing', 'cost_usd': None}]
+    report = summarize_judge_cost(rows)
+    assert report['baseline'] == {'attempts': 1, 'known_cost_usd': .03, 'cost_complete': True}
+    assert report['routing'] == {'attempts': 1, 'known_cost_usd': 0, 'cost_complete': False}

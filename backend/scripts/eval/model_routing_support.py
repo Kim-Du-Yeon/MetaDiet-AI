@@ -75,3 +75,11 @@ def require_prompt_v1(metadata):
             '4c40f46e4c2aa01b5ba7c78f456cff11b11907a4730e697288f796694ec7a741'):
         raise ValueError('This comparison requires the unchanged prompt v1 bundle')
     return dict(metadata)
+
+
+def summarize_judge_cost(rows):
+    return {mode: {'attempts': len(items),
+                   'known_cost_usd': sum(row.get('cost_usd') or 0 for row in items),
+                   'cost_complete': bool(items) and all(row.get('cost_usd') is not None for row in items)}
+            for mode in ('baseline', 'routing')
+            for items in [[row for row in rows if row['condition'] == mode]]}

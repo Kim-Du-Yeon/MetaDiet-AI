@@ -1,5 +1,15 @@
 # 2026-10-09 upgrade verification
 
+## Tier1 fixed-v1 matched100 pairs (2026-10-19)
+
+[Raw200 generation attempts,50 Pro rubric calls, gate and limitations](docs/model_routing/tier1-v1-20261019/README.md).
+Both100/100 completed and contract-quality pass; synthetic coaching freshness25/25 each.
+Median4.226→2.010s, p95 7.050→5.158s, generation token estimate$0.10900125→
+$0.04809125. Separate judges$0.152650/$0.152634; all usage complete; gate=true.
+Three workers,2s intervals, identical frozen cases and pinned v1. No failed trial
+replacement. Repeated developer templates are not real-user/clinical accuracy;
+Pro rubric is not Ragas. Same-model coaching median4.410→4.495s did not improve.
+
 ## Fixed-v1 comparison readiness (2026-10-19)
 
 [Preflight, unchanged frozen100 identity and isolated restart drill](docs/model_routing/v1-recheck-20261019/README.md).

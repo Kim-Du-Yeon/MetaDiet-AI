@@ -1,6 +1,8 @@
 # MetaDiet AI
 
-v1 고정 비교 재개 점검: [현재 quota 차단 근거·프롬프트 재시작 복구·재개 조건](docs/model_routing/v1-recheck-20261019/README.md). 새100건 비교와 운영 적용은 Flash·Pro 한도 해소 전 보류합니다.
+유료 계층 v1 고정 비교: [동일100쌍·Pro50건·속도/품질/최신값/비용·제한 적용](docs/model_routing/tier1-v1-20261019/README.md). 중앙값4.226→2.010초, p95 7.050→5.158초, 생성 비용55.88% 감소. 양쪽 계약검사100/100·합성 최신값25/25, 사전 채택 기준 통과.
+
+이전 무료 계층 점검: [당시 quota 차단 근거·프롬프트 재시작 복구](docs/model_routing/v1-recheck-20261019/README.md). 이후 Tier1 비교는 위 새 결과를 따릅니다.
 
 모델 선택 비교와 프롬프트 관리: [규칙·Jev 각 100건 결과와 채택 보류](docs/model_routing/JEV_COMPARISON.md) · [프롬프트 v1·해시·환경변수·복구](docs/prompt_versioning/README.md).
 

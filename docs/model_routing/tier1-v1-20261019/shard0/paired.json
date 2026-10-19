@@ -1,0 +1,2391 @@
+{
+  "scope": "synthetic_task_boundary_live_models_not_public_e2e",
+  "protocol": "task-balanced-pair-order-v2",
+  "shard": 0,
+  "shards": 3,
+  "prompt_metadata": {
+    "prompt_release": "v1",
+    "prompt_bundle_sha256": "4c40f46e4c2aa01b5ba7c78f456cff11b11907a4730e697288f796694ec7a741",
+    "prompt_scope": "registered_primary_templates"
+  },
+  "model_config": {
+    "gemini_model": "gemini-3.8-flash",
+    "gemini_simple_model": "gemini-3.1-flash-lite",
+    "gemini_eval_model": "gemini-3.1-pro-preview"
+  },
+  "credential_source": "explicit_env_file",
+  "cases_sha256": "ce673458ab20bbd6130f3c86748f74a2ff77c2fdaeafa891d0fdda1bc7c60710",
+  "prices_date": "2026-10-19",
+  "prices_per_million": {
+    "gemini-3.8-flash": [
+      0.75,
+      3.75,
+      0.075
+    ],
+    "gemini-3.1-flash-lite": [
+      0.25,
+      1.5,
+      0.025
+    ],
+    "gemini-3.1-pro-preview": [
+      2.0,
+      12.0,
+      0.2
+    ]
+  },
+  "judge_status": "completed",
+  "rows": [
+    {
+      "case_id": "case-000",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": [
+        {
+          "food_name": "닭가슴살",
+          "quantity_g": 100,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 4056.0779999941587,
+      "usage": [
+        {
+          "input_tokens": 309,
+          "output_tokens": 143,
+          "total_tokens": 452,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 99
+          }
+        }
+      ],
+      "cost_usd": 0.000768
+    },
+    {
+      "case_id": "case-000",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "닭가슴살",
+          "quantity_g": 100,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 1931.426500028465,
+      "usage": [
+        {
+          "input_tokens": 309,
+          "output_tokens": 34,
+          "total_tokens": 343,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00012825
+    },
+    {
+      "case_id": "case-003",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal\n\n한식뷔페에서 일반식을 드셔도 충분히 괜찮습니다. 밥은 평소 드시던 반 공기에서 한 공기 정도로 담고, 나물과 채소 반찬, 기름기가 적은 단백질 위주로 접시를 채우시면 균형 있게 즐기실 수 있습니다. 양념이 강하거나 튀긴 반찬은 적당량 덜어 드시면 목표 칼로리 내에서 편안하게 식사하실 수 있습니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 3847.119099984411,
+      "usage": [
+        {
+          "input_tokens": 1411,
+          "output_tokens": 122,
+          "total_tokens": 1533,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00151575
+    },
+    {
+      "case_id": "case-003",
+      "task": "agent",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal입니다. \n\n한식뷔페에서 일반식을 드셔도 괜찮습니다. 밥은 평소 드시는 적정량으로 담고 신선한 나물과 채소 위주로 접시를 채우되, 튀김이나 양념육 대신 담백한 단백질 위주로 조절해 드시면 균형 있게 식사하실 수 있습니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 6986.257100012153,
+      "usage": [
+        {
+          "input_tokens": 1411,
+          "output_tokens": 493,
+          "total_tokens": 1904,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 394
+          }
+        }
+      ],
+      "cost_usd": 0.002907
+    },
+    {
+      "case_id": "case-006",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "official guidelines for resistance training and muscle maintenance",
+      "ms": 2179.296099988278,
+      "usage": [
+        {
+          "input_tokens": 50,
+          "output_tokens": 8,
+          "total_tokens": 58,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 2.45e-05
+    },
+    {
+      "case_id": "case-006",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": "official guidelines resistance training muscle maintenance",
+      "ms": 6717.220799997449,
+      "usage": [
+        {
+          "input_tokens": 50,
+          "output_tokens": 366,
+          "total_tokens": 416,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 360
+          }
+        }
+      ],
+      "cost_usd": 0.00141
+    },
+    {
+      "case_id": "case-009",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": {
+        "intent": "diet_logger"
+      },
+      "actual_route": "diet_logger",
+      "deterministic_no_model": true,
+      "ms": 0.15300000086426735,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-009",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "diet_logger"
+      },
+      "actual_route": "diet_logger",
+      "deterministic_no_model": true,
+      "ms": 0.3659999929368496,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-012",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "제육볶음",
+          "quantity_g": 200,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 1729.6003000228666,
+      "usage": [
+        {
+          "input_tokens": 308,
+          "output_tokens": 34,
+          "total_tokens": 342,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.000128
+    },
+    {
+      "case_id": "case-012",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": [
+        {
+          "food_name": "제육볶음",
+          "quantity_g": 200,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 4704.506999987643,
+      "usage": [
+        {
+          "input_tokens": 308,
+          "output_tokens": 123,
+          "total_tokens": 431,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 92
+          }
+        }
+      ],
+      "cost_usd": 0.00069225
+    },
+    {
+      "case_id": "case-015",
+      "task": "agent",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal.\n\n닭가슴살과 샐러드는 단백질과 식이섬유를 충분히 채울 수 있어 다이어트 식단으로 매우 훌륭한 선택입니다. 현재 섭취 여유량이 충분하므로, 드레싱을 적당량 곁들이거나 고구마·현미밥 같은 복합 탄수화물을 소량 함께 구성하시면 영양 균형과 포만감을 더 오래 유지할 수 있습니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 5734.256000025198,
+      "usage": [
+        {
+          "input_tokens": 1411,
+          "output_tokens": 115,
+          "total_tokens": 1526,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.0014895
+    },
+    {
+      "case_id": "case-015",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 2000 kcal.\n\n닭가슴살과 샐러드는 양질의 단백질과 식이섬유를 충분히 섭취할 수 있어 다이어트 식단으로 아주 좋습니다. 현재 섭취 여유량이 충분하므로, 포만감과 에너지 유지를 위해 고구마나 현미밥 같은 복합 탄수화물을 소량 곁들여 균형을 맞춰 드시는 것을 추천합니다. 드레싱은 올리브유나 발사믹 등 가벼운 종류로 적당량 조절해 드시면 더욱 좋습니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 4797.729299985804,
+      "usage": [
+        {
+          "input_tokens": 1411,
+          "output_tokens": 137,
+          "total_tokens": 1548,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.001572
+    },
+    {
+      "case_id": "case-018",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": "\"dietary guidelines\" \"energy balance\" recommendations",
+      "ms": 6750.142699980643,
+      "usage": [
+        {
+          "input_tokens": 48,
+          "output_tokens": 361,
+          "total_tokens": 409,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 351
+          }
+        }
+      ],
+      "cost_usd": 0.00138975
+    },
+    {
+      "case_id": "case-018",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "official guidelines on dietary energy balance",
+      "ms": 1828.3769999979995,
+      "usage": [
+        {
+          "input_tokens": 48,
+          "output_tokens": 6,
+          "total_tokens": 54,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 2.1e-05
+    },
+    {
+      "case_id": "case-021",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "strategy"
+      },
+      "actual_route": "strategy",
+      "ms": 1790.619500039611,
+      "usage": [
+        {
+          "input_tokens": 705,
+          "output_tokens": 1,
+          "total_tokens": 706,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00017775
+    },
+    {
+      "case_id": "case-021",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": {
+        "intent": "strategy"
+      },
+      "actual_route": "strategy",
+      "ms": 4594.124600000214,
+      "usage": [
+        {
+          "input_tokens": 705,
+          "output_tokens": 192,
+          "total_tokens": 897,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 191
+          }
+        }
+      ],
+      "cost_usd": 0.00124875
+    },
+    {
+      "case_id": "case-024",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": [
+        {
+          "food_name": "밥",
+          "quantity_g": 400,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 4295.5930000171065,
+      "usage": [
+        {
+          "input_tokens": 306,
+          "output_tokens": 159,
+          "total_tokens": 465,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 118
+          }
+        }
+      ],
+      "cost_usd": 0.00082575
+    },
+    {
+      "case_id": "case-024",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "밥",
+          "quantity_g": 400,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 1866.5797999710776,
+      "usage": [
+        {
+          "input_tokens": 306,
+          "output_tokens": 31,
+          "total_tokens": 337,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.000123
+    },
+    {
+      "case_id": "case-027",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n현재 섭취량을 고려할 때 점심이나 식사로 샌드위치를 드셔도 충분히 괜찮습니다. 통곡물 빵이나 닭가슴살, 채소가 풍부한 샌드위치를 선택하고 마요네즈 등 고칼로리 소스를 조절하시면 더욱 균형 잡힌 식단 관리가 가능합니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 3610.579099971801,
+      "usage": [
+        {
+          "input_tokens": 1409,
+          "output_tokens": 98,
+          "total_tokens": 1507,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00142425
+    },
+    {
+      "case_id": "case-027",
+      "task": "agent",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal\n\n현재 기준 칼로리 여유가 충분하므로 점심으로 샌드위치를 드셔도 괜찮습니다. 닭가슴살, 달걀 등 단백질과 채소가 풍부하게 들어간 샌드위치를 선택하고 소스는 가볍게 조절하시면 균형 잡힌 식사로 더욱 좋습니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 4542.269600031432,
+      "usage": [
+        {
+          "input_tokens": 1409,
+          "output_tokens": 91,
+          "total_tokens": 1500,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.001398
+    },
+    {
+      "case_id": "case-030",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "official guidelines for daily sodium intake recommendations",
+      "ms": 1648.4651999780908,
+      "usage": [
+        {
+          "input_tokens": 53,
+          "output_tokens": 7,
+          "total_tokens": 60,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 2.375e-05
+    },
+    {
+      "case_id": "case-030",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": "dietary sodium intake official guidelines and recommendations",
+      "ms": 6042.951699986588,
+      "usage": [
+        {
+          "input_tokens": 53,
+          "output_tokens": 368,
+          "total_tokens": 421,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 360
+          }
+        }
+      ],
+      "cost_usd": 0.00141975
+    },
+    {
+      "case_id": "case-033",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": {
+        "intent": "confirm"
+      },
+      "actual_route": "confirm",
+      "deterministic_no_model": true,
+      "ms": 0.146100006531924,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-033",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "confirm"
+      },
+      "actual_route": "confirm",
+      "deterministic_no_model": true,
+      "ms": 0.20299997413530946,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-036",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "김치찌개",
+          "quantity_g": 400,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 2009.459299966693,
+      "usage": [
+        {
+          "input_tokens": 308,
+          "output_tokens": 34,
+          "total_tokens": 342,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.000128
+    },
+    {
+      "case_id": "case-036",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": [
+        {
+          "food_name": "김치찌개",
+          "quantity_g": 400,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 3542.216699977871,
+      "usage": [
+        {
+          "input_tokens": 308,
+          "output_tokens": 133,
+          "total_tokens": 441,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 99
+          }
+        }
+      ],
+      "cost_usd": 0.00072975
+    },
+    {
+      "case_id": "case-039",
+      "task": "agent",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal. \n\n현재 섭취 여유가 충분하므로 샐러드를 드셔도 아주 좋습니다. 채소만 섭취하면 에너지가 부족할 수 있으니 닭가슴살, 달걀, 두부 등 단백질 급원을 곁들여 든든하게 챙겨보세요.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 6161.194699991029,
+      "usage": [
+        {
+          "input_tokens": 1408,
+          "output_tokens": 422,
+          "total_tokens": 1830,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 333
+          }
+        }
+      ],
+      "cost_usd": 0.0026385
+    },
+    {
+      "case_id": "case-039",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 850 kcal, 하루 기준: 2000 kcal로, 가벼우면서도 포만감을 주는 샐러드는 훌륭한 선택입니다. 닭가슴살, 달걀, 두부 등 단백질 토핑을 함께 곁들이시면 영양 균형과 든든함을 오래 유지할 수 있습니다. 드레싱은 당류와 지방이 과해지지 않도록 가볍게 곁들여 드시는 것을 권장합니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 7049.771399993915,
+      "usage": [
+        {
+          "input_tokens": 1408,
+          "output_tokens": 480,
+          "total_tokens": 1888,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 372
+          }
+        }
+      ],
+      "cost_usd": 0.002856
+    },
+    {
+      "case_id": "case-042",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": "dietary protein intake recommendations guidelines for weight loss",
+      "ms": 5453.619299980346,
+      "usage": [
+        {
+          "input_tokens": 58,
+          "output_tokens": 342,
+          "total_tokens": 400,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 333
+          }
+        }
+      ],
+      "cost_usd": 0.001326
+    },
+    {
+      "case_id": "case-042",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "official guidelines for protein intake during weight loss",
+      "ms": 1981.3881000154652,
+      "usage": [
+        {
+          "input_tokens": 58,
+          "output_tokens": 8,
+          "total_tokens": 66,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 2.65e-05
+    },
+    {
+      "case_id": "case-045",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "edit"
+      },
+      "actual_route": "edit",
+      "deterministic_no_model": true,
+      "ms": 0.1509999856352806,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-045",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": {
+        "intent": "edit"
+      },
+      "actual_route": "edit",
+      "deterministic_no_model": true,
+      "ms": 0.12939999578520656,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-048",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": [
+        {
+          "food_name": "김치",
+          "quantity_g": 120,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 3678.3628999837674,
+      "usage": [
+        {
+          "input_tokens": 306,
+          "output_tokens": 119,
+          "total_tokens": 425,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 87
+          }
+        }
+      ],
+      "cost_usd": 0.00067575
+    },
+    {
+      "case_id": "case-048",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "김치",
+          "quantity_g": 120,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 2174.485400028061,
+      "usage": [
+        {
+          "input_tokens": 306,
+          "output_tokens": 32,
+          "total_tokens": 338,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.0001245
+    },
+    {
+      "case_id": "case-051",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal입니다. 밥과 계란은 탄수화물과 양질의 단백질을 고루 챙길 수 있는 좋은 조합입니다. 계란프라이 조리 시 기름 사용량을 적당히 조절하시고, 채소 반찬을 곁들여 드시면 비타민과 식이섬유까지 균형 있게 채우실 수 있습니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 5884.590599976946,
+      "usage": [
+        {
+          "input_tokens": 1395,
+          "output_tokens": 442,
+          "total_tokens": 1837,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 347
+          }
+        }
+      ],
+      "cost_usd": 0.00270375
+    },
+    {
+      "case_id": "case-051",
+      "task": "agent",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 2000 kcal\n\n밥과 계란의 조합은 탄수화물과 양질의 단백질을 균형 있게 챙길 수 있어 식사로 아주 좋습니다. 계란은 프라이나 삶은 달걀 등으로 1~2개 곁들이시고, 식이섬유와 비타민을 보충하기 위해 김치나 나물, 샐러드 같은 채소 반찬을 함께 드시면 더욱 균형 잡힌 식사가 됩니다. 조리 시 기름 사용량만 적절히 조절해 주시면 체중 관리 중에도 안심하고 드실 수 있습니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 4479.222900001332,
+      "usage": [
+        {
+          "input_tokens": 1395,
+          "output_tokens": 141,
+          "total_tokens": 1536,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.001575
+    },
+    {
+      "case_id": "case-054",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "official dietary guidelines for dietary fiber and vegetable intake",
+      "ms": 4142.128500039689,
+      "usage": [
+        {
+          "input_tokens": 58,
+          "output_tokens": 9,
+          "total_tokens": 67,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 2.8e-05
+    },
+    {
+      "case_id": "case-054",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": "official dietary guidelines for dietary fiber and vegetable intake",
+      "ms": 6294.829600024968,
+      "usage": [
+        {
+          "input_tokens": 58,
+          "output_tokens": 341,
+          "total_tokens": 399,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 332
+          }
+        }
+      ],
+      "cost_usd": 0.00132225
+    },
+    {
+      "case_id": "case-057",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": {
+        "intent": "goal_manager"
+      },
+      "actual_route": "goal_manager",
+      "deterministic_no_model": true,
+      "ms": 0.13489997945725918,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-057",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "goal_manager"
+      },
+      "actual_route": "goal_manager",
+      "deterministic_no_model": true,
+      "ms": 0.13399997260421515,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-060",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "닭가슴살",
+          "quantity_g": 400,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 1951.1462000082247,
+      "usage": [
+        {
+          "input_tokens": 309,
+          "output_tokens": 34,
+          "total_tokens": 343,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00012825
+    },
+    {
+      "case_id": "case-060",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": [
+        {
+          "food_name": "닭가슴살",
+          "quantity_g": 400,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 3739.8186000064015,
+      "usage": [
+        {
+          "input_tokens": 309,
+          "output_tokens": 125,
+          "total_tokens": 434,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 94
+          }
+        }
+      ],
+      "cost_usd": 0.0007005
+    },
+    {
+      "case_id": "case-063",
+      "task": "agent",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다.\n\n한식뷔페에서 일반식을 드셔도 괜찮으며, 밥은 평소 공기 기준(약 200g)으로 담고 나물·채소류와 기름기가 적은 단백질 반찬 위주로 구성하시면 좋습니다. 튀김이나 양념육, 당류가 많은 후식 대신 담백한 구이나 찜 위주로 덜어 드시면 목표 열량 내에서 건강하게 식사하실 수 있습니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 4666.669300000649,
+      "usage": [
+        {
+          "input_tokens": 1411,
+          "output_tokens": 121,
+          "total_tokens": 1532,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.001512
+    },
+    {
+      "case_id": "case-063",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다. \n\n한식뷔페에서도 밥과 반찬의 구성을 조절하시면 충분히 드셔도 괜찮습니다. 밥은 평소 공기밥 기준(약 200g)으로 반 공기에서 한 공기 정도로 담고, 기름진 볶음이나 튀김류 대신 나물, 쌈채소, 생선이나 수육 같은 단백질 위주로 접시를 구성해 보세요. 국물 요리는 건더기 위주로 드시면 남은 하루 기준 칼로리 안에서 균형 있게 식사하실 수 있습니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 4410.267999977805,
+      "usage": [
+        {
+          "input_tokens": 1411,
+          "output_tokens": 145,
+          "total_tokens": 1556,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.001602
+    },
+    {
+      "case_id": "case-066",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": "resistance training muscle mass maintenance official guidelines recommendations",
+      "ms": 5138.446900004055,
+      "usage": [
+        {
+          "input_tokens": 59,
+          "output_tokens": 299,
+          "total_tokens": 358,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 291
+          }
+        }
+      ],
+      "cost_usd": 0.0011655
+    },
+    {
+      "case_id": "case-066",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "official guidelines for resistance training and muscle maintenance",
+      "ms": 2058.3598000230268,
+      "usage": [
+        {
+          "input_tokens": 59,
+          "output_tokens": 8,
+          "total_tokens": 67,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 2.675e-05
+    },
+    {
+      "case_id": "case-069",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "goal_manager"
+      },
+      "actual_route": "goal_manager",
+      "deterministic_no_model": true,
+      "ms": 0.15609996626153588,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-069",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": {
+        "intent": "goal_manager"
+      },
+      "actual_route": "goal_manager",
+      "deterministic_no_model": true,
+      "ms": 0.12649997370317578,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-072",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": [
+        {
+          "food_name": "제육볶음",
+          "quantity_g": 800,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 3778.744100010954,
+      "usage": [
+        {
+          "input_tokens": 308,
+          "output_tokens": 128,
+          "total_tokens": 436,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 97
+          }
+        }
+      ],
+      "cost_usd": 0.000711
+    },
+    {
+      "case_id": "case-072",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "제육볶음",
+          "quantity_g": 800,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 2409.3595999875106,
+      "usage": [
+        {
+          "input_tokens": 308,
+          "output_tokens": 34,
+          "total_tokens": 342,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.000128
+    },
+    {
+      "case_id": "case-075",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal.\n\n닭가슴살과 샐러드는 양질의 단백질과 식이섬유를 보충할 수 있어 현재 목표에 아주 적합한 식단입니다. 드레싱은 가볍게 곁들이고 통곡물이나 고구마 같은 복합 탄수화물을 소량 더해주시면 균형 잡힌 식사를 하실 수 있습니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 6527.692999981809,
+      "usage": [
+        {
+          "input_tokens": 1411,
+          "output_tokens": 471,
+          "total_tokens": 1882,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 372
+          }
+        }
+      ],
+      "cost_usd": 0.0028245
+    },
+    {
+      "case_id": "case-075",
+      "task": "agent",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 600 kcal, 하루 기준: 1800 kcal입니다.\n\n현재 하루 기준 대비 여유가 충분하므로 양질의 단백질과 식이섬유를 챙길 수 있는 닭가슴살 샐러드는 훌륭한 선택입니다. 에너지가 부족하지 않도록 고구마나 통곡물 빵 같은 탄수화물, 올리브유 등 건강한 지방을 소량 곁들여 균형 있게 드시는 것을 추천합니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 5772.370099963155,
+      "usage": [
+        {
+          "input_tokens": 1411,
+          "output_tokens": 485,
+          "total_tokens": 1896,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 374
+          }
+        }
+      ],
+      "cost_usd": 0.002877
+    },
+    {
+      "case_id": "case-078",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "\"official guidelines for dietary energy balance\"",
+      "ms": 1900.1236999756657,
+      "usage": [
+        {
+          "input_tokens": 57,
+          "output_tokens": 8,
+          "total_tokens": 65,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 2.625e-05
+    },
+    {
+      "case_id": "case-078",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": "\"dietary guidelines\" \"energy balance\" recommendations",
+      "ms": 5572.410899971146,
+      "usage": [
+        {
+          "input_tokens": 57,
+          "output_tokens": 339,
+          "total_tokens": 396,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 329
+          }
+        }
+      ],
+      "cost_usd": 0.001314
+    },
+    {
+      "case_id": "case-081",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": {
+        "intent": "reporter"
+      },
+      "actual_route": "reporter",
+      "deterministic_no_model": true,
+      "ms": 0.12350000906735659,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-081",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "reporter"
+      },
+      "actual_route": "reporter",
+      "deterministic_no_model": true,
+      "ms": 0.4494000459089875,
+      "usage": [],
+      "cost_usd": 0.0
+    },
+    {
+      "case_id": "case-084",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "밥",
+          "quantity_g": 1000,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 2555.827300006058,
+      "usage": [
+        {
+          "input_tokens": 307,
+          "output_tokens": 32,
+          "total_tokens": 339,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00012475
+    },
+    {
+      "case_id": "case-084",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": [
+        {
+          "food_name": "밥",
+          "quantity_g": 1000,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 5719.3399000098,
+      "usage": [
+        {
+          "input_tokens": 307,
+          "output_tokens": 335,
+          "total_tokens": 642,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 293
+          }
+        }
+      ],
+      "cost_usd": 0.0014865
+    },
+    {
+      "case_id": "case-087",
+      "task": "agent",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal.\n\n샌드위치는 단백질과 채소를 균형 있게 섭취할 수 있어 좋은 선택입니다. 닭가슴살이나 달걀, 채소가 풍부하게 들어간 구성을 고르고 마요네즈 등 고열량 소스만 가볍게 조절하시면 부담 없이 드실 수 있습니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 4712.079300021287,
+      "usage": [
+        {
+          "input_tokens": 1398,
+          "output_tokens": 87,
+          "total_tokens": 1485,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00137475
+    },
+    {
+      "case_id": "case-087",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal\n\n샌드위치는 단백질과 채소가 고루 들어간 구성을 선택하신다면 한 끼 식사로 충분히 좋습니다. 닭가슴살, 달걀, 로스트비프 등 기름기가 적은 단백질 위주에 마요네즈나 당류가 많은 소스를 줄이고 채소를 곁들여 드시는 것을 권장합니다. 혹시 이전에 드신 식사가 아직 기록되지 않았다면 하루 기준 내에서 조절해 보세요.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 6777.22889999859,
+      "usage": [
+        {
+          "input_tokens": 1398,
+          "output_tokens": 353,
+          "total_tokens": 1751,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 234
+          }
+        }
+      ],
+      "cost_usd": 0.00237225
+    },
+    {
+      "case_id": "case-090",
+      "task": "query_translation",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": "official guidelines dietary sodium intake recommendations",
+      "ms": 4887.735099997371,
+      "usage": [
+        {
+          "input_tokens": 62,
+          "output_tokens": 319,
+          "total_tokens": 381,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 313
+          }
+        }
+      ],
+      "cost_usd": 0.00124275
+    },
+    {
+      "case_id": "case-090",
+      "task": "query_translation",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": "official guidelines for daily sodium intake recommendations",
+      "ms": 1905.9562000329606,
+      "usage": [
+        {
+          "input_tokens": 62,
+          "output_tokens": 7,
+          "total_tokens": 69,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 2.6e-05
+    },
+    {
+      "case_id": "case-093",
+      "task": "classification",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": {
+        "intent": "off_topic"
+      },
+      "actual_route": "off_topic",
+      "ms": 1976.5340999583714,
+      "usage": [
+        {
+          "input_tokens": 701,
+          "output_tokens": 3,
+          "total_tokens": 704,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00017975
+    },
+    {
+      "case_id": "case-093",
+      "task": "classification",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": {
+        "intent": "off_topic"
+      },
+      "actual_route": "off_topic",
+      "ms": 2626.2027000193484,
+      "usage": [
+        {
+          "input_tokens": 701,
+          "output_tokens": 54,
+          "total_tokens": 755,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 51
+          }
+        }
+      ],
+      "cost_usd": 0.00072825
+    },
+    {
+      "case_id": "case-096",
+      "task": "extraction",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.8-flash",
+      "answer": [
+        {
+          "food_name": "김치찌개",
+          "quantity_g": 1000,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 3468.8890999532305,
+      "usage": [
+        {
+          "input_tokens": 309,
+          "output_tokens": 125,
+          "total_tokens": 434,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 93
+          }
+        }
+      ],
+      "cost_usd": 0.0007005
+    },
+    {
+      "case_id": "case-096",
+      "task": "extraction",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": false,
+      "fresh_applicable": false,
+      "model": "gemini-3.1-flash-lite",
+      "answer": [
+        {
+          "food_name": "김치찌개",
+          "quantity_g": 1000,
+          "meal_type": "breakfast"
+        }
+      ],
+      "ms": 2414.953100029379,
+      "usage": [
+        {
+          "input_tokens": 309,
+          "output_tokens": 35,
+          "total_tokens": 344,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00012975
+    },
+    {
+      "case_id": "case-099",
+      "task": "agent",
+      "condition": "baseline",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal\n\n네, 샐러드는 비타민과 식이섬유를 보충하기에 아주 좋은 선택입니다. 다만 채소만으로는 단백질이나 에너지가 부족할 수 있으니 닭가슴살, 달걀, 두부 같은 단백질 식품을 곁들여 균형 있게 드시는 것을 권장합니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 3494.0413999720477,
+      "usage": [
+        {
+          "input_tokens": 1397,
+          "output_tokens": 90,
+          "total_tokens": 1487,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00138525
+    },
+    {
+      "case_id": "case-099",
+      "task": "agent",
+      "condition": "routing",
+      "status": "completed",
+      "quality": true,
+      "fresh": true,
+      "fresh_applicable": true,
+      "model": "gemini-3.8-flash",
+      "answer": "오늘 섭취: 0 kcal, 하루 기준: 1900 kcal\n\n샐러드는 가볍고 식이섬유가 풍부해 드셔도 아주 좋습니다. 다만 채소 위주로만 드시면 포만감이 오래가지 않고 단백질이 부족할 수 있으니 닭가슴살, 달걀, 두부 등의 단백질 토핑을 곁들이시는 것을 권장합니다. 드레싱은 당류와 지방 함량이 높을 수 있으므로 가볍게 뿌려 드시면 체중 관리에 더욱 효과적입니다.",
+      "model_calls": 1,
+      "no_write": true,
+      "ms": 3959.714900003746,
+      "usage": [
+        {
+          "input_tokens": 1397,
+          "output_tokens": 120,
+          "total_tokens": 1517,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00149775
+    }
+  ],
+  "limitations": [
+    "25 cases per task; repeated templates are not 100 distinct user intents.",
+    "Extraction reuses the production prompt/parser; classification executes actual legacy routing nodes, not domain writes.",
+    "Translation keyword checks do not prove downstream retrieval quality.",
+    "Coaching uses live DietTeam with synthetic fresh reads, not actual users.",
+    "Cost is token-rate estimate including thought/cache tokens, not invoiced spend."
+  ],
+  "judge_rows": [
+    {
+      "case_id": "case-003",
+      "condition": "baseline",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 233,
+          "output_tokens": 506,
+          "total_tokens": 739,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 476
+          }
+        }
+      ],
+      "ms": 5418.280699988827,
+      "cost_usd": 0.006538
+    },
+    {
+      "case_id": "case-003",
+      "condition": "routing",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 209,
+          "output_tokens": 416,
+          "total_tokens": 625,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 386
+          }
+        }
+      ],
+      "ms": 5535.7482000254095,
+      "cost_usd": 0.00541
+    },
+    {
+      "case_id": "case-015",
+      "condition": "routing",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 225,
+          "output_tokens": 295,
+          "total_tokens": 520,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 252
+          }
+        }
+      ],
+      "ms": 5458.460199995898,
+      "cost_usd": 0.00399
+    },
+    {
+      "case_id": "case-015",
+      "condition": "baseline",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 247,
+          "output_tokens": 462,
+          "total_tokens": 709,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 432
+          }
+        }
+      ],
+      "ms": 6609.516499971505,
+      "cost_usd": 0.006038
+    },
+    {
+      "case_id": "case-027",
+      "condition": "baseline",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 207,
+          "output_tokens": 427,
+          "total_tokens": 634,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 397
+          }
+        }
+      ],
+      "ms": 5925.86159997154,
+      "cost_usd": 0.005538
+    },
+    {
+      "case_id": "case-027",
+      "condition": "routing",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 200,
+          "output_tokens": 489,
+          "total_tokens": 689,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 446
+          }
+        }
+      ],
+      "ms": 6671.960900013801,
+      "cost_usd": 0.006268
+    },
+    {
+      "case_id": "case-039",
+      "condition": "routing",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 196,
+          "output_tokens": 390,
+          "total_tokens": 586,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 360
+          }
+        }
+      ],
+      "ms": 6333.45899998676,
+      "cost_usd": 0.005072
+    },
+    {
+      "case_id": "case-039",
+      "condition": "baseline",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 213,
+          "output_tokens": 437,
+          "total_tokens": 650,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 407
+          }
+        }
+      ],
+      "ms": 6014.605199976359,
+      "cost_usd": 0.00567
+    },
+    {
+      "case_id": "case-051",
+      "condition": "baseline",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 196,
+          "output_tokens": 400,
+          "total_tokens": 596,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 370
+          }
+        }
+      ],
+      "ms": 6235.4856000165455,
+      "cost_usd": 0.005192
+    },
+    {
+      "case_id": "case-051",
+      "condition": "routing",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 245,
+          "output_tokens": 502,
+          "total_tokens": 747,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 472
+          }
+        }
+      ],
+      "ms": 6541.511500021443,
+      "cost_usd": 0.006514
+    },
+    {
+      "case_id": "case-063",
+      "condition": "routing",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 231,
+          "output_tokens": 564,
+          "total_tokens": 795,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 521
+          }
+        }
+      ],
+      "ms": 6925.833699991927,
+      "cost_usd": 0.00723
+    },
+    {
+      "case_id": "case-063",
+      "condition": "baseline",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 255,
+          "output_tokens": 493,
+          "total_tokens": 748,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 450
+          }
+        }
+      ],
+      "ms": 6526.263700041454,
+      "cost_usd": 0.006426
+    },
+    {
+      "case_id": "case-075",
+      "condition": "baseline",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 209,
+          "output_tokens": 468,
+          "total_tokens": 677,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 438
+          }
+        }
+      ],
+      "ms": 7914.787699992303,
+      "cost_usd": 0.006034
+    },
+    {
+      "case_id": "case-075",
+      "condition": "routing",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 221,
+          "output_tokens": 506,
+          "total_tokens": 727,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 476
+          }
+        }
+      ],
+      "ms": 6537.089799996465,
+      "cost_usd": 0.006514
+    },
+    {
+      "case_id": "case-087",
+      "condition": "routing",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 193,
+          "output_tokens": 456,
+          "total_tokens": 649,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 413
+          }
+        }
+      ],
+      "ms": 8147.876399976667,
+      "cost_usd": 0.005858
+    },
+    {
+      "case_id": "case-087",
+      "condition": "baseline",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 226,
+          "output_tokens": 497,
+          "total_tokens": 723,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 467
+          }
+        }
+      ],
+      "ms": 6165.213699976448,
+      "cost_usd": 0.006416
+    },
+    {
+      "case_id": "case-099",
+      "condition": "baseline",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 196,
+          "output_tokens": 437,
+          "total_tokens": 633,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 394
+          }
+        }
+      ],
+      "ms": 6095.884100010153,
+      "cost_usd": 0.005636
+    },
+    {
+      "case_id": "case-099",
+      "condition": "routing",
+      "status": "completed",
+      "relevant": true,
+      "actionable": true,
+      "no_invented_intake": true,
+      "no_false_save_claim": true,
+      "model": "gemini-3.1-pro-preview",
+      "usage": [
+        {
+          "input_tokens": 226,
+          "output_tokens": 446,
+          "total_tokens": 672,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 416
+          }
+        }
+      ],
+      "ms": 6131.559500005096,
+      "cost_usd": 0.005804
+    }
+  ],
+  "judge_cost": {
+    "baseline": {
+      "attempts": 9,
+      "known_cost_usd": 0.053488,
+      "cost_complete": true
+    },
+    "routing": {
+      "attempts": 9,
+      "known_cost_usd": 0.05266,
+      "cost_complete": true
+    }
+  },
+  "summary": {
+    "baseline": {
+      "attempts": 34,
+      "completed": 34,
+      "failure_rate": 0.0,
+      "quality_rate": 1.0,
+      "freshness_attempts": 9,
+      "freshness_passes": 9,
+      "p50_ms": 4352.930499997456,
+      "p95_ms": 6777.22889999859,
+      "cost_complete": true,
+      "known_cost_usd": 0.03811275,
+      "mean_cost_usd": 0.0011209632352941177
+    },
+    "routing": {
+      "attempts": 34,
+      "completed": 34,
+      "failure_rate": 0.0,
+      "quality_rate": 1.0,
+      "freshness_attempts": 9,
+      "freshness_passes": 9,
+      "p50_ms": 1995.423699991079,
+      "p95_ms": 6161.194699991029,
+      "cost_complete": true,
+      "known_cost_usd": 0.01897225,
+      "mean_cost_usd": 0.0005580073529411764
+    }
+  },
+  "by_task": {
+    "extraction": {
+      "baseline": {
+        "attempts": 9,
+        "completed": 9,
+        "failure_rate": 0.0,
+        "quality_rate": 1.0,
+        "freshness_attempts": 0,
+        "freshness_passes": 0,
+        "p50_ms": 3778.744100010954,
+        "p95_ms": 5719.3399000098,
+        "cost_complete": true,
+        "known_cost_usd": 0.00729,
+        "mean_cost_usd": 0.00081
+      },
+      "routing": {
+        "attempts": 9,
+        "completed": 9,
+        "failure_rate": 0.0,
+        "quality_rate": 1.0,
+        "freshness_attempts": 0,
+        "freshness_passes": 0,
+        "p50_ms": 2009.459299966693,
+        "p95_ms": 2555.827300006058,
+        "cost_complete": true,
+        "known_cost_usd": 0.0011425,
+        "mean_cost_usd": 0.00012694444444444445
+      }
+    },
+    "classification": {
+      "baseline": {
+        "attempts": 8,
+        "completed": 8,
+        "failure_rate": 0.0,
+        "quality_rate": 1.0,
+        "freshness_attempts": 0,
+        "freshness_passes": 0,
+        "p50_ms": 0.1404999929945916,
+        "p95_ms": 4594.124600000214,
+        "cost_complete": true,
+        "known_cost_usd": 0.001977,
+        "mean_cost_usd": 0.000247125
+      },
+      "routing": {
+        "attempts": 8,
+        "completed": 8,
+        "failure_rate": 0.0,
+        "quality_rate": 1.0,
+        "freshness_attempts": 0,
+        "freshness_passes": 0,
+        "p50_ms": 0.2844999835360795,
+        "p95_ms": 1976.5340999583714,
+        "cost_complete": true,
+        "known_cost_usd": 0.0003575,
+        "mean_cost_usd": 4.46875e-05
+      }
+    },
+    "query_translation": {
+      "baseline": {
+        "attempts": 8,
+        "completed": 8,
+        "failure_rate": 0.0,
+        "quality_rate": 1.0,
+        "freshness_attempts": 0,
+        "freshness_passes": 0,
+        "p50_ms": 5807.681299978867,
+        "p95_ms": 6750.142699980643,
+        "cost_complete": true,
+        "known_cost_usd": 0.01059,
+        "mean_cost_usd": 0.00132375
+      },
+      "routing": {
+        "attempts": 8,
+        "completed": 8,
+        "failure_rate": 0.0,
+        "quality_rate": 1.0,
+        "freshness_attempts": 0,
+        "freshness_passes": 0,
+        "p50_ms": 1943.672150024213,
+        "p95_ms": 4142.128500039689,
+        "cost_complete": true,
+        "known_cost_usd": 0.00020275,
+        "mean_cost_usd": 2.534375e-05
+      }
+    },
+    "agent": {
+      "baseline": {
+        "attempts": 9,
+        "completed": 9,
+        "failure_rate": 0.0,
+        "quality_rate": 1.0,
+        "freshness_attempts": 9,
+        "freshness_passes": 9,
+        "p50_ms": 4797.729299985804,
+        "p95_ms": 7049.771399993915,
+        "cost_complete": true,
+        "known_cost_usd": 0.01825575,
+        "mean_cost_usd": 0.0020284166666666666
+      },
+      "routing": {
+        "attempts": 9,
+        "completed": 9,
+        "failure_rate": 0.0,
+        "quality_rate": 1.0,
+        "freshness_attempts": 9,
+        "freshness_passes": 9,
+        "p50_ms": 4712.079300021287,
+        "p95_ms": 6986.257100012153,
+        "cost_complete": true,
+        "known_cost_usd": 0.0172695,
+        "mean_cost_usd": 0.0019188333333333334
+      }
+    }
+  },
+  "deployment_gate": false
+}

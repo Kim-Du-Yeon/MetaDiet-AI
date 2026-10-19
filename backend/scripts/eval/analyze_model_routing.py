@@ -7,7 +7,7 @@ from pathlib import Path
 import sys
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[2]))
-from scripts.eval.model_routing_support import summarize, deployment_gate
+from scripts.eval.model_routing_support import summarize, deployment_gate, summarize_judge_cost, require_prompt_v1
 
 
 def text_sha256(raw):
@@ -31,6 +31,9 @@ def combine(reports,cases):
     if first['protocol']!='task-balanced-pair-order-v2' or any(
         any(r[k]!=first[k] for k in identity) for r in reports):
         raise ValueError('Mixed experiment identity')
+    if any(r.get('prompt_metadata') != first.get('prompt_metadata') for r in reports):
+        raise ValueError('Mixed prompt identity')
+    require_prompt_v1(first.get('prompt_metadata') or {})
     indices = {c['id']:i for i,c in enumerate(cases)}
     tasks = {c['id']:c['task'] for c in cases}
     if len(indices)!=100 or len(cases)!=100:
@@ -56,14 +59,28 @@ def combine(reports,cases):
     summary = {mode:summarize(items) for mode,items in groups.items()}
     by_task = {task:{mode:summarize([r for r in items if r['task']==task])
         for mode,items in groups.items()} for task in sorted(set(tasks.values()))}
-    judge_complete = all(r['judge_status']=='completed' for r in reports)
+    judges = [row for report in reports for row in report.get('judge_rows', [])]
+    expected_judges = {(c['id'], mode) for c in cases if c['task']=='agent' for mode in ('baseline', 'routing')}
+    judge_pairs = [(row['case_id'], row['condition']) for row in judges]
+    judge_complete = (all(r['judge_status']=='completed' for r in reports) and
+        len(judge_pairs)==len(expected_judges) and set(judge_pairs)==expected_judges and
+        all(row['status']=='completed' for row in judges))
+    judge_cost = summarize_judge_cost(judges)
+    judge_cost_complete = all(group['cost_complete'] for group in judge_cost.values())
     return {'scope':'same_frozen100_cases_per_condition_three_independent_workers',
         'protocol':first['protocol'],'cases_sha256':first['cases_sha256'],
-        'model_config':first['model_config'],'summary':summary,'by_task':by_task,
+        'model_config':first['model_config'],'prompt_metadata':first.get('prompt_metadata'),
+        'summary':summary,'by_task':by_task,
+        'judge_rows': judges, 'judge_cost': judge_cost,
+        'judge_cost_complete': judge_cost_complete,
+        'generation_plus_judge_cost_usd': {mode:
+            summary[mode]['known_cost_usd'] + judge_cost[mode]['known_cost_usd']
+            if summary[mode]['cost_complete'] and judge_cost[mode]['cost_complete'] else None
+            for mode in ('baseline', 'routing')},
         'error_reasons':{mode:dict(Counter(r.get('normalized_error') or (r.get('error') or {}).get('reason',r['status'])
             for r in items if r['status']!='completed')) for mode,items in groups.items()},
         'judge_complete':judge_complete,
-        'deployment_gate':deployment_gate(summary['baseline'],summary['routing'],
+        'deployment_gate':judge_cost_complete and deployment_gate(summary['baseline'],summary['routing'],
             judge_complete=judge_complete,by_task=by_task),
         'rows':sorted(rows,key=lambda r:(r['case_id'],r['condition'])),
         'limitations':['Synthetic development tasks, not real-user or clinical quality.',
