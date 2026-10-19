@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { supabase } from "./lib/supabaseClient";
-import { setToken } from "./api/dietApi";
+import { setToken, getSessionRestore } from "./api/dietApi";
 import Auth from "./components/Auth";
 import ChatInterface from "./components/chat/ChatInterface";
 import CalendarView from "./components/calendar/CalendarView";
@@ -25,6 +25,7 @@ export default function App() {
   const [todayStats, setTodayStats] = useState(null);
   const [setupDone, setSetupDone] = useState(false);
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
+  const refreshSequence = useRef(0);
 
   const [threadId, setThreadId, threadReady] = useConversationThread(session?.user?.id);
   // 직전에 완료된 thread_id 보관 → 타임 트래블에서 이전 세션 조회용
@@ -40,6 +41,19 @@ export default function App() {
     return { messages: owned(setMessages), stats: owned(setTodayStats),
       previousThread: owned(setPrevThreadId), interrupted: owned(setIsInterrupted) };
   }, [ownerId]);
+
+  const refreshIntake = async () => {
+    const sequence = ++refreshSequence.current;
+    const restored = await getSessionRestore(threadId);
+    if (latestOwner.current !== ownerId || sequence !== refreshSequence.current) return;
+    if (restored.today_calories === undefined || restored.target_calories === undefined) {
+      throw new Error('기록은 변경됐지만 오늘 섭취량을 갱신하지 못했습니다. 다시 확인해주세요.');
+    }
+    setTodayStats({calories:restored.today_calories,target:restored.target_calories});
+    if (restored.messages?.length) setMessages(restored.messages.map(message => ({
+      role:message.role, content:message.content, agentUsed:message.agent_used || null, streaming:false,
+    })));
+  };
 
   useEffect(() => {
     setMessages(INITIAL_MESSAGES);
@@ -156,7 +170,7 @@ export default function App() {
             setIsInterrupted={chatSetters.interrupted}
           />
         )}
-        {activeTab === "calendar" && <CalendarView />}
+        {activeTab === "calendar" && <CalendarView onRecordsChanged={refreshIntake} />}
         {activeTab === "dashboard" && <Dashboard />}
         {activeTab === "settings" && (
           <Settings session={session} onDeleted={handleAccountDeleted} />

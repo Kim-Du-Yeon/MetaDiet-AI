@@ -10,7 +10,7 @@ function formatLocalDate(date) {
   return `${year}-${month}-${day}`;
 }
 
-export default function CalendarView() {
+export default function CalendarView({onRecordsChanged}) {
   const [selectedDate, setSelectedDate] = useState(formatLocalDate(new Date()));
   const [data, setData] = useState(null);
   const [monthData, setMonthData] = useState(null);
@@ -18,6 +18,8 @@ export default function CalendarView() {
   const [monthLoading, setMonthLoading] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editValue, setEditValue] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [refreshError, setRefreshError] = useState('');
   const selectedMonth = selectedDate.slice(0, 7);
 
   useEffect(() => {
@@ -59,25 +61,34 @@ export default function CalendarView() {
   const selectToday = () => setSelectedDate(formatLocalDate(new Date()));
 
   const handleEditSave = async (meal) => {
+    if (saving) return;
+    setSaving(true); setRefreshError('');
     try {
       await updateMeal(meal.id, parseFloat(editValue));
       setEditingId(null);
-      fetchCalendar(selectedDate);
-      fetchCalendarMonth(selectedMonth);
+      await refreshAfterChange();
     } catch (e) {
       alert("수정 실패");
-    }
+    } finally { setSaving(false); }
+  };
+
+  const refreshAfterChange = async () => {
+    setRefreshError('');
+    await Promise.all([fetchCalendar(selectedDate),fetchCalendarMonth(selectedMonth)]);
+    try { await onRecordsChanged?.(); }
+    catch (error) { setRefreshError(error.message); }
   };
 
   const handleDelete = async (mealId) => {
+    if (saving) return;
     if (!window.confirm("이 기록을 삭제하시겠습니까?")) return;
+    setSaving(true); setRefreshError('');
     try {
       await deleteMeal(mealId);
-      fetchCalendar(selectedDate);
-      fetchCalendarMonth(selectedMonth);
+      await refreshAfterChange();
     } catch (e) {
       alert("삭제 실패");
-    }
+    } finally { setSaving(false); }
   };
 
   const MEAL_LABELS = {
@@ -105,6 +116,7 @@ export default function CalendarView() {
   return (
     <div style={styles.container}>
       <h2 style={styles.title}>📅 식단 캘린더</h2>
+      {refreshError && <div role="alert">{refreshError}<button onClick={refreshAfterChange} disabled={saving}>섭취량 다시 확인</button></div>}
 
       <div style={styles.calendarCard}>
         <div style={styles.calendarHeader}>
@@ -181,6 +193,7 @@ export default function CalendarView() {
                       {editingId === meal.id ? (
                         <div style={styles.editRow}>
                           <input
+                            aria-label="수정할 분량 (g)" min="0.1" max="10000" step="any"
                             type="number"
                             value={editValue}
                             onChange={(e) => setEditValue(e.target.value)}
@@ -189,6 +202,7 @@ export default function CalendarView() {
                           />
                           <span style={styles.editUnit}>g</span>
                           <button
+                            disabled={saving || !Number.isFinite(Number(editValue)) || Number(editValue) <= 0 || Number(editValue) > 10000}
                             onClick={() => handleEditSave(meal)}
                             style={styles.saveBtn}
                           >저장</button>
@@ -205,6 +219,7 @@ export default function CalendarView() {
                     </div>
                     <div style={styles.mealActions}>
                       <button
+                        disabled={saving}
                         onClick={() => {
                           setEditingId(meal.id);
                           setEditValue(meal.quantity_g);
@@ -213,6 +228,7 @@ export default function CalendarView() {
                         title="수정"
                       >✏️</button>
                       <button
+                        disabled={saving}
                         onClick={() => handleDelete(meal.id)}
                         style={styles.deleteBtn}
                         title="삭제"

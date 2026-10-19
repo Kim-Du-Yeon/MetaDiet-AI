@@ -311,20 +311,24 @@ export async function getCaloriesHistory() {
 }
 
 export async function updateMeal(mealId, quantityG) {
-  const res = await fetch(`${BASE_URL}/meal/update`, {
+  const res = notifyAuthExpired(await fetch(`${BASE_URL}/meal/update`, {
     method: "PUT",
     headers: authHeaders({ "Content-Type": "application/json" }),
     body: JSON.stringify({ meal_id: mealId, quantity_g: quantityG }),
-  });
-  return res.json();
+  }));
+  const data = await res.json();
+  if (!res.ok) throw new Error(typeof data.detail === 'string' ? data.detail : '기록 수정에 실패했습니다.');
+  return data;
 }
 
 export async function deleteMeal(mealId) {
-  const res = await fetch(`${BASE_URL}/meal/delete/${mealId}`, {
+  const res = notifyAuthExpired(await fetch(`${BASE_URL}/meal/delete/${mealId}`, {
     method: "DELETE",
     headers: authHeaders(),
-  });
-  return res.json();
+  }));
+  const data = await res.json();
+  if (!res.ok) throw new Error(typeof data.detail === 'string' ? data.detail : '기록 삭제에 실패했습니다.');
+  return data;
 }
 
 export async function resumeChat(userId, threadId, message, onToken, onDone, decision = null, onProgress = null) {

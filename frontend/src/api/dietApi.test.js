@@ -1,5 +1,5 @@
 import { TextDecoder, TextEncoder } from "util";
-import { deleteAccount, getAdminAnalytics, getSessionRestore, recordProductEvent, sendChatMessage, setToken, submitBetaFeedback } from "./dietApi";
+import { deleteAccount, getAdminAnalytics, getSessionRestore, recordProductEvent, sendChatMessage, setToken, submitBetaFeedback, updateMeal, deleteMeal } from "./dietApi";
 
 global.TextDecoder = TextDecoder;
 
@@ -13,6 +13,12 @@ function streamResponse(text) {
 }
 
 afterEach(() => jest.restoreAllMocks());
+
+test('failed meal writes reject instead of triggering success refresh', async()=>{
+  global.fetch=jest.fn().mockResolvedValue({ok:false,status:409,json:async()=>({detail:'기록이 변경됐습니다.'})});
+  await expect(updateMeal('test',20)).rejects.toThrow('기록이 변경됐습니다.');
+  await expect(deleteMeal('test')).rejects.toThrow('기록이 변경됐습니다.');
+});
 
 test("transport failure reconnects once with the same stream run id", async () => {
   const completed = { type: "completed", seq: 100000, run_id: "server-echo" };

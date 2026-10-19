@@ -26,17 +26,8 @@ async def approval_node(state, config=None):
              "meal_delete": "섭취 기록 삭제", "meal_replace": "섭취 기록 수정"}[proposal["kind"]]
     message = f"{label}을 {'확정했습니다' if action == 'confirm' else '취소했습니다'}."
     if proposal['kind'] == 'intake' and action == 'confirm':
-        payload = resolved['payload']
-        meals = payload['meals']
-        types = {'breakfast': '아침', 'lunch': '점심', 'dinner': '저녁', 'snack': '간식'}
-        meal_types = list(dict.fromkeys(types[m['meal_type']] for m in meals if m.get('meal_type') in types))
-        lines = ['섭취 기록을 저장했습니다.', ' · '.join([payload['log_date'], '·'.join(meal_types)]).rstrip(' ·')]
-        items = []
-        for meal in meals:
-            name = ((meal.get('nutrition_metadata') or {}).get('portion') or {}).get('display_name') or meal['food_name']
-            items.append(f"- {name} · {meal['quantity_g']:g}g · {meal['calories']:.0f} kcal")
-        lines.extend(['\n'.join(items), f"합계 {sum(m['calories'] for m in meals):.0f} kcal"])
-        message = '\n\n'.join(lines)
+        from app.db.receipt_status import format_receipt
+        message = format_receipt(resolved)
     if proposal["kind"] == "plan" and action == "confirm":
         message += " 실제 섭취량에는 반영되지 않습니다. 드신 뒤 기록해주세요."
     return {"response": message, "agent_used": "confirm", "pending_proposal": None,

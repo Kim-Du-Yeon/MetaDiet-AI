@@ -1,3 +1,5 @@
+식사 기록 수정·삭제와 화면 일관성: [상단 집계 갱신·대화의 삭제/수정 표시·검증과 한계](docs/food_catalog/intake-sync-20261019/README.md).
+
 # MetaDiet AI
 
 식사 입력 화면 정리: [제품 기능은 확인 카드 안으로·추천은 기록 완료 후·검증과 캡처](docs/food_catalog/contextual-actions-20261019/README.md).

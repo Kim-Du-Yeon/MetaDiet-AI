@@ -743,6 +743,8 @@ async def restore_session(thread_id: str, current_user: str = Depends(get_curren
             messages.append({'role':'user', 'content':str(sv['message'])[:12000]})
         messages.append({'role':'assistant', 'content':str(sv['response'])[:12000],
                          'agent_used':sv.get('agent_used')})
+    from app.db.receipt_status import reconcile_receipts
+    messages = await asyncio.to_thread(reconcile_receipts, sb, current_user, thread_id, messages)
     stats = await _public_stats(current_user)
     active_pending = proposal is not None
     return {
@@ -1520,20 +1522,24 @@ async def setup_user(goal: str, height_cm: float, weight_kg: float, age: int, ge
 
 
 class MealUpdateRequest(BaseModel):
-    meal_id: str; quantity_g: float
+    meal_id: str; quantity_g: float = Field(gt=0, le=10000, allow_inf_nan=False)
 
 
 @app.put("/meal/update")
 async def update_meal(req: MealUpdateRequest, current_user: str = Depends(get_current_user)):
-    from app.agents.diet_logger.node import NUTRITION_LLM_PROMPT, llm
-    import re as _re, json as _json
-    row = sb.table("meal_logs").select("food_name,user_id").eq("id",req.meal_id).execute().data
+    row = sb.table("meal_logs").select("*").eq("id",req.meal_id).execute().data
     if not row: raise HTTPException(404, "기록을 찾을 수 없습니다.")
     if row[0]["user_id"] != current_user:
         raise HTTPException(403, "본인의 기록만 수정할 수 있습니다.")
-    nutr_resp = await llm.ainvoke(NUTRITION_LLM_PROMPT.format_messages(food_name=row[0]["food_name"], quantity_g=req.quantity_g))
-    nutrition = _json.loads(_re.sub(r"```json|```","",nutr_resp.content).strip())
-    sb.table("meal_logs").update({"quantity_g":req.quantity_g,**{k:nutrition[k] for k in ["calories","protein_g","carbs_g","fat_g"]}}).eq("id",req.meal_id).execute()
+    old_quantity = row[0].get('quantity_g')
+    if not old_quantity or old_quantity <= 0:
+        raise HTTPException(409, '기존 분량이 없어 다시 확인해야 합니다.')
+    ratio = req.quantity_g / old_quantity
+    nutrition = {k: round(float(row[0][k]) * ratio, 4)
+                 for k in ('calories','protein_g','carbs_g','fat_g','sodium_mg') if row[0].get(k) is not None}
+    if not all(k in nutrition for k in ('calories','protein_g','carbs_g','fat_g')):
+        raise HTTPException(409, '기존 영양정보가 없어 다시 확인해야 합니다.')
+    sb.table("meal_logs").update({"quantity_g":req.quantity_g, **nutrition}).eq("id",req.meal_id).eq('user_id',current_user).execute()
     return {"success":True,"updated":nutrition}
 
 
