@@ -155,7 +155,7 @@ def parse_simple_meal(message, *, forced_meal_type=None, allow_unknown=False):
         if not matched:
             if not allow_unknown:
                 return None
-            unknown = re.match(r'([가-힣A-Za-z][가-힣A-Za-z ]*?)(?=\s*(?:\d|한|두|반)\s*(?:개|장|공기|g)|,|$|(?:이랑|랑|하고|와|과)\s+|\s+그리고\s+)', text)
+            unknown = re.match(r'([가-힣A-Za-z][가-힣A-Za-z ]*?)(?=\s*(?:\d|한|두|반)\s*(?:개|장|공기|g)|,|$|\s+(?:그리고|랑|하고)\s+)', text)
             if not unknown or len(unknown[1].strip()) > 100:
                 return None
             alias = unknown[1].strip()

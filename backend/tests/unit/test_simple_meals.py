@@ -18,6 +18,15 @@ def test_place_prefix_does_not_discard_unknown_food_or_future_intent():
         i.get('unresolved') for i in parse_simple_meal('한식뷔페에서 미등록음식과 밥 먹었어', allow_unknown=True)['items'])
 
 
+@pytest.mark.parametrize('food', ['약과', '한과', '유과'])
+def test_unknown_food_name_ending_is_not_treated_as_connector(food):
+    parsed = parse_simple_meal(f'한식뷔페에서 밥 {food} 2개 먹었어', allow_unknown=True)
+    assert parsed is not None
+    assert parsed['items'][1]['portion']['display_name'] == food
+    assert parsed['items'][1]['portion']['amount'] == 2
+    assert parsed['items'][1]['unresolved']
+
+
 @pytest.mark.parametrize('message,grams,defaulted', [
     ('김치찌개 간장불고기 밥 한공기 먹었어', [200, 200, 200], [True, True, False]),
     ('김치찌개 간장불고기 200g 먹었어', [200, 200], [True, False]),
