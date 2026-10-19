@@ -9,6 +9,7 @@ import Setup from "./components/Setup";
 import Settings from "./components/Settings";
 import { useConversationThread } from "./lib/useConversationThread";
 import "./App.css";
+import {validIntakeSnapshot} from './lib/intakeSnapshot';
 
 const INITIAL_MESSAGES = [
   {
@@ -26,6 +27,7 @@ export default function App() {
   const [setupDone, setSetupDone] = useState(false);
   const [messages, setMessages] = useState(INITIAL_MESSAGES);
   const refreshSequence = useRef(0);
+  const [intakeBusy,setIntakeBusy] = useState(false);
 
   const [threadId, setThreadId, threadReady] = useConversationThread(session?.user?.id);
   // 직전에 완료된 thread_id 보관 → 타임 트래블에서 이전 세션 조회용
@@ -34,6 +36,8 @@ export default function App() {
   const ownerId = session?.user?.id || null;
   const latestOwner = useRef(ownerId);
   latestOwner.current = ownerId;
+  const latestThread = useRef(threadId);
+  latestThread.current = threadId;
   const chatSetters = useMemo(() => {
     const owned = setter => value => {
       if (latestOwner.current === ownerId) setter(value);
@@ -42,10 +46,10 @@ export default function App() {
       previousThread: owned(setPrevThreadId), interrupted: owned(setIsInterrupted) };
   }, [ownerId]);
 
-  const refreshIntake = async () => {
-    const sequence = ++refreshSequence.current;
-    const restored = await getSessionRestore(threadId);
-    if (latestOwner.current !== ownerId || sequence !== refreshSequence.current) return;
+  const refreshIntake = async (snapshot, ticket) => {
+    const sequence = ticket ?? ++refreshSequence.current;
+    const restored = validIntakeSnapshot(snapshot) ? snapshot : await getSessionRestore(threadId);
+    if (latestOwner.current !== ownerId || latestThread.current !== threadId || sequence !== refreshSequence.current) return;
     if (restored.today_calories === undefined || restored.target_calories === undefined) {
       throw new Error('기록은 변경됐지만 오늘 섭취량을 갱신하지 못했습니다. 다시 확인해주세요.');
     }
@@ -61,6 +65,7 @@ export default function App() {
     setIsInterrupted(false);
     setTodayStats(null);
     setSetupDone(false);
+    setIntakeBusy(false);
   }, [session?.user?.id]);
 
   const handleAccountDeleted = () => {
@@ -131,24 +136,28 @@ export default function App() {
 
       <div className="tab-bar">
         <button
+          disabled={intakeBusy}
           className={activeTab === "chat" ? "tab active" : "tab"}
           onClick={() => setActiveTab("chat")}
         >
           💬 채팅
         </button>
         <button
+          disabled={intakeBusy}
           className={activeTab === "calendar" ? "tab active" : "tab"}
           onClick={() => setActiveTab("calendar")}
         >
           📅 캘린더
         </button>
         <button
+          disabled={intakeBusy}
           className={activeTab === "dashboard" ? "tab active" : "tab"}
           onClick={() => setActiveTab("dashboard")}
         >
           📊 대시보드
         </button>
         <button
+          disabled={intakeBusy}
           className={activeTab === "settings" ? "tab active" : "tab"}
           onClick={() => setActiveTab("settings")}
         >
@@ -170,7 +179,10 @@ export default function App() {
             setIsInterrupted={chatSetters.interrupted}
           />
         )}
-        {activeTab === "calendar" && <CalendarView onRecordsChanged={refreshIntake} />}
+        {activeTab === "calendar" && <CalendarView threadId={threadId}
+          onRecordsChanging={()=>{setIntakeBusy(true); return ++refreshSequence.current;}}
+          onRecordsChangeFinished={()=>{if(latestOwner.current===ownerId) setIntakeBusy(false);}}
+          onRecordsChanged={refreshIntake} />}
         {activeTab === "dashboard" && <Dashboard />}
         {activeTab === "settings" && (
           <Settings session={session} onDeleted={handleAccountDeleted} />

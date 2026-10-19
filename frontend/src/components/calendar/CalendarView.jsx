@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { validIntakeSnapshot } from '../../lib/intakeSnapshot';
 import { getCalendar, getCalendarMonth, updateMeal, deleteMeal } from "../../api/dietApi";
 
 const WEEKDAYS = ["일", "월", "화", "수", "목", "금", "토"];
@@ -10,7 +11,7 @@ function formatLocalDate(date) {
   return `${year}-${month}-${day}`;
 }
 
-export default function CalendarView({onRecordsChanged}) {
+export default function CalendarView({onRecordsChanged,onRecordsChanging,onRecordsChangeFinished,threadId}) {
   const [selectedDate, setSelectedDate] = useState(formatLocalDate(new Date()));
   const [data, setData] = useState(null);
   const [monthData, setMonthData] = useState(null);
@@ -21,6 +22,8 @@ export default function CalendarView({onRecordsChanged}) {
   const [saving, setSaving] = useState(false);
   const [refreshError, setRefreshError] = useState('');
   const selectedMonth = selectedDate.slice(0, 7);
+  const readSequence = useRef(0);
+  const monthSequence = useRef(0);
 
   useEffect(() => {
     fetchCalendar(selectedDate);
@@ -31,10 +34,11 @@ export default function CalendarView({onRecordsChanged}) {
   }, [selectedMonth]);
 
   const fetchCalendar = async (date) => {
+    const sequence = ++readSequence.current;
     setLoading(true);
     try {
       const result = await getCalendar(date);
-      setData(result);
+      if (sequence === readSequence.current) setData(result);
     } catch (e) {
       console.error(e);
     }
@@ -42,10 +46,11 @@ export default function CalendarView({onRecordsChanged}) {
   };
 
   const fetchCalendarMonth = async (yearMonth) => {
+    const sequence = ++monthSequence.current;
     setMonthLoading(true);
     try {
       const result = await getCalendarMonth(yearMonth);
-      setMonthData(result);
+      if (sequence === monthSequence.current) setMonthData(result);
     } catch (e) {
       console.error(e);
     }
@@ -63,32 +68,45 @@ export default function CalendarView({onRecordsChanged}) {
   const handleEditSave = async (meal) => {
     if (saving) return;
     setSaving(true); setRefreshError('');
+    const ticket = onRecordsChanging?.();
     try {
-      await updateMeal(meal.id, parseFloat(editValue));
+      const result = await updateMeal(meal.id, parseFloat(editValue),
+        {selectedDate,threadId,recordVersion:meal.record_version});
       setEditingId(null);
-      await refreshAfterChange();
+      await refreshAfterChange(result.sync,ticket);
     } catch (e) {
-      alert("수정 실패");
-    } finally { setSaving(false); }
+      setRefreshError(e.message || '기록 상태를 다시 확인해주세요.');
+      alert(e.message || "수정 실패");
+    } finally { setSaving(false); onRecordsChangeFinished?.(); }
   };
 
-  const refreshAfterChange = async () => {
+  const refreshAfterChange = async (snapshot, ticket) => {
     setRefreshError('');
+    if (validIntakeSnapshot(snapshot)) {
+      ++readSequence.current; ++monthSequence.current;
+      setData(snapshot.calendar); setMonthData(snapshot.calendar_month);
+      setLoading(false); setMonthLoading(false);
+      try { await onRecordsChanged?.(snapshot,ticket); }
+      catch (error) { setRefreshError(error.message); }
+      return;
+    }
     await Promise.all([fetchCalendar(selectedDate),fetchCalendarMonth(selectedMonth)]);
-    try { await onRecordsChanged?.(); }
+    try { await onRecordsChanged?.(null,ticket); }
     catch (error) { setRefreshError(error.message); }
   };
 
-  const handleDelete = async (mealId) => {
+  const handleDelete = async (meal) => {
     if (saving) return;
     if (!window.confirm("이 기록을 삭제하시겠습니까?")) return;
     setSaving(true); setRefreshError('');
+    const ticket = onRecordsChanging?.();
     try {
-      await deleteMeal(mealId);
-      await refreshAfterChange();
+      const result = await deleteMeal(meal.id,{selectedDate,threadId,recordVersion:meal.record_version});
+      await refreshAfterChange(result.sync,ticket);
     } catch (e) {
-      alert("삭제 실패");
-    } finally { setSaving(false); }
+      setRefreshError(e.message || '기록 상태를 다시 확인해주세요.');
+      alert(e.message || "삭제 실패");
+    } finally { setSaving(false); onRecordsChangeFinished?.(); }
   };
 
   const MEAL_LABELS = {
@@ -116,13 +134,14 @@ export default function CalendarView({onRecordsChanged}) {
   return (
     <div style={styles.container}>
       <h2 style={styles.title}>📅 식단 캘린더</h2>
+      {saving && <p role="status">기록 변경과 섭취량을 확인하고 있어요.</p>}
       {refreshError && <div role="alert">{refreshError}<button onClick={refreshAfterChange} disabled={saving}>섭취량 다시 확인</button></div>}
 
       <div style={styles.calendarCard}>
         <div style={styles.calendarHeader}>
-          <button onClick={() => moveMonth(-1)} style={styles.monthBtn} title="이전 달">‹</button>
+          <button disabled={saving} onClick={() => moveMonth(-1)} style={styles.monthBtn} title="이전 달">‹</button>
           <strong style={styles.monthTitle}>{monthLabel}</strong>
-          <button onClick={() => moveMonth(1)} style={styles.monthBtn} title="다음 달">›</button>
+          <button disabled={saving} onClick={() => moveMonth(1)} style={styles.monthBtn} title="다음 달">›</button>
         </div>
         <div style={styles.legendRow}>
           <span style={styles.legendItem}><span style={{ ...styles.legendDot, backgroundColor: "#ffebee", borderColor: "#ef5350" }} /> 목표 초과</span>
@@ -146,6 +165,7 @@ export default function CalendarView({onRecordsChanged}) {
             return (
               <button
                 key={dateKey}
+                disabled={saving}
                 onClick={() => setSelectedDate(dateKey)}
                 style={{ ...styles.dayBtn, ...statusStyle, ...(isSelected ? styles.selectedDay : {}) }}
                 title={dayInfo ? `${Math.round(dayInfo.calories)} / ${Math.round(monthData?.target_calories || 0)} kcal` : "기록 없음"}
@@ -158,7 +178,7 @@ export default function CalendarView({onRecordsChanged}) {
         </div>
         <div style={styles.calendarFooter}>
           <span style={styles.targetText}>목표 {Math.round(monthData?.target_calories || 0)}kcal</span>
-          <button onClick={selectToday} style={styles.todayBtn}>오늘</button>
+          <button disabled={saving} onClick={selectToday} style={styles.todayBtn}>오늘</button>
         </div>
       </div>
 
@@ -229,7 +249,7 @@ export default function CalendarView({onRecordsChanged}) {
                       >✏️</button>
                       <button
                         disabled={saving}
-                        onClick={() => handleDelete(meal.id)}
+                        onClick={() => handleDelete(meal)}
                         style={styles.deleteBtn}
                         title="삭제"
                       >🗑️</button>

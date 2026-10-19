@@ -1315,7 +1315,8 @@ async def get_calendar_month(year_month: str, current_user: str = Depends(get_cu
 async def get_calendar(target_date: str, current_user: str = Depends(get_current_user)):
     rows  = sb.table("meal_logs").select("*").eq("user_id",current_user).eq("log_date",target_date).execute().data
     total = {k: sum(r.get(k,0) for r in rows) for k in ["calories","protein_g","carbs_g","fat_g"]}
-    return {"date": target_date, "meals": rows, "total": total}
+    from app.db.intake_snapshot import record_version
+    return {"date": target_date, "meals": [{**r,'record_version':record_version(r)} for r in rows], "total": total}
 
 
 @app.post("/feedback", response_model=FeedbackResponse)
@@ -1523,10 +1524,17 @@ async def setup_user(goal: str, height_cm: float, weight_kg: float, age: int, ge
 
 class MealUpdateRequest(BaseModel):
     meal_id: str; quantity_g: float = Field(gt=0, le=10000, allow_inf_nan=False)
+    include_snapshot: bool = False
+    selected_date: date | None = None
+    thread_id: str | None = Field(default=None,min_length=1,max_length=200,pattern=r'^[A-Za-z0-9_-]+$')
+    expected_record_version: str | None = Field(default=None,pattern=r'^[a-f0-9]{64}$')
 
 
 @app.put("/meal/update")
 async def update_meal(req: MealUpdateRequest, current_user: str = Depends(get_current_user)):
+    if req.include_snapshot:
+        return await _mutate_with_snapshot(current_user,req.meal_id,req.quantity_g,
+            selected_date=req.selected_date,thread_id=req.thread_id,expected_record_version=req.expected_record_version)
     row = sb.table("meal_logs").select("*").eq("id",req.meal_id).execute().data
     if not row: raise HTTPException(404, "기록을 찾을 수 없습니다.")
     if row[0]["user_id"] != current_user:
@@ -1544,13 +1552,38 @@ async def update_meal(req: MealUpdateRequest, current_user: str = Depends(get_cu
 
 
 @app.delete("/meal/delete/{meal_id}")
-async def delete_meal(meal_id: str, current_user: str = Depends(get_current_user)):
+async def delete_meal(meal_id: str, current_user: str = Depends(get_current_user),
+                      include_snapshot: bool = False, selected_date: date | None = None,
+                      thread_id: str | None = None, expected_record_version: str | None = None):
+    if include_snapshot:
+        # Reuse the same validation contract for query parameters and JSON writes.
+        try:
+            options = MealUpdateRequest(meal_id=meal_id,quantity_g=1,selected_date=selected_date,
+                                       thread_id=thread_id,expected_record_version=expected_record_version)
+        except ValueError:
+            raise HTTPException(422,'변경 요청 값을 확인해주세요.') from None
+        return await _mutate_with_snapshot(current_user,meal_id,selected_date=options.selected_date,
+            thread_id=options.thread_id,expected_record_version=options.expected_record_version)
     row = sb.table("meal_logs").select("user_id").eq("id",meal_id).execute().data
     if not row: raise HTTPException(404, "기록을 찾을 수 없습니다.")
     if row[0]["user_id"] != current_user:
         raise HTTPException(403, "본인의 기록만 삭제할 수 있습니다.")
     sb.table("meal_logs").delete().eq("id",meal_id).eq("user_id",current_user).execute()
     return {"success":True}
+
+
+async def _mutate_with_snapshot(user_id,meal_id,quantity_g=None,**options):
+    from app.db.intake_snapshot import mutate_meal
+    from psycopg import Error
+    try:
+        UUID(meal_id)
+    except (ValueError,TypeError):
+        raise HTTPException(422,'기록 ID를 확인해주세요.') from None
+    try:
+        return await mutate_meal(user_id,meal_id,quantity_g,**options)
+    except Error as error:
+        logger.warning('meal_snapshot_failed error_type=%s',type(error).__name__)
+        raise HTTPException(503,'기록 변경 결과를 확인하지 못했습니다. 다시 조회해주세요.') from None
 
 
 @app.get("/health")

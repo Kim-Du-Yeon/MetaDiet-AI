@@ -310,19 +310,27 @@ export async function getCaloriesHistory() {
   return res.json();
 }
 
-export async function updateMeal(mealId, quantityG) {
+export async function updateMeal(mealId, quantityG, options = {}) {
   const res = notifyAuthExpired(await fetch(`${BASE_URL}/meal/update`, {
     method: "PUT",
     headers: authHeaders({ "Content-Type": "application/json" }),
-    body: JSON.stringify({ meal_id: mealId, quantity_g: quantityG }),
+    body: JSON.stringify({ meal_id: mealId, quantity_g: quantityG,
+      ...(options.selectedDate ? {include_snapshot:true, selected_date:options.selectedDate,
+        thread_id:options.threadId || null, expected_record_version:options.recordVersion || null} : {}) }),
   }));
   const data = await res.json();
   if (!res.ok) throw new Error(typeof data.detail === 'string' ? data.detail : '기록 수정에 실패했습니다.');
   return data;
 }
 
-export async function deleteMeal(mealId) {
-  const res = notifyAuthExpired(await fetch(`${BASE_URL}/meal/delete/${mealId}`, {
+export async function deleteMeal(mealId, options = {}) {
+  const query = new URLSearchParams();
+  if (options.selectedDate) {
+    query.set('include_snapshot','true'); query.set('selected_date',options.selectedDate);
+    if (options.threadId) query.set('thread_id',options.threadId);
+    if (options.recordVersion) query.set('expected_record_version',options.recordVersion);
+  }
+  const res = notifyAuthExpired(await fetch(`${BASE_URL}/meal/delete/${mealId}${query.size ? '?'+query : ''}`, {
     method: "DELETE",
     headers: authHeaders(),
   }));
