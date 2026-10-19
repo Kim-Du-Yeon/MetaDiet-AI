@@ -162,7 +162,7 @@ class DietTeam:
         policy = state.get("tool_policy")
         self.allowed = set(policy) if policy is not None else None
         message = state.get("message", "")
-        if re.search(r"(?:검색|rag).*(?:하지|말|없이)|(?:no|without)\s+(?:search|rag)", message, re.I):
+        if re.search(r"(?:검색|rag)(?:\s*(?:은|는|을|를))?\s*(?:(?:사용|수행|실행)\s*)?(?:하지|말고|말아|없이|금지)|(?:no|without|do\s+not|don't)\s+(?:search|rag)\b", message, re.I):
             self.allowed = (self.allowed if self.allowed is not None else set(TOOL_NAMES)) - {"search_evidence"}
         if state.get("requested_action") == "record_only":
             self.allowed = (self.allowed if self.allowed is not None else set(TOOL_NAMES)) & {"search_foods", "nutrition_lookup", "propose_meal"}
