@@ -86,6 +86,8 @@ export default function ChatInterface({
       if (!result.cancelled) {
         setApproval({...result, channel:'upload'});
         setPendingState({pending_meals:result.payload.meals, awaiting_confirmation:true, plan_date:result.payload.log_date});
+      } else {
+        setMessages(prev => [...prev, {role:'assistant', content:'기록하지 않고 닫았어요. 다른 식사를 입력할 수 있어요.'}]);
       }
       setFoodSelection(null);
     } catch (error) { setApprovalError(error.message); }

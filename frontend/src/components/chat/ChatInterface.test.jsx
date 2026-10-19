@@ -29,6 +29,19 @@ function Harness() {
       isInterrupted={interrupted} setIsInterrupted={setInterrupted} onStatsUpdate={setStats} /></>;
 }
 
+test('closing an entirely excluded selection removes card without saving and permits another message', async () => {
+  getSessionRestore.mockResolvedValue({messages:[], pending_state:{}, food_selection:{mode:'meal_choices',id:'choice',known_count:0,items:[
+    {index:0,query:'미등록음식',quantity_g:100}]}});
+  resolveMealChoices.mockResolvedValue({cancelled:true});
+  render(<Harness />);
+  fireEvent.click(await screen.findByRole('button',{name:'제외하기'}));
+  fireEvent.click(screen.getByRole('button',{name:'기록 없이 닫기'}));
+  await screen.findByText('기록하지 않고 닫았어요. 다른 식사를 입력할 수 있어요.');
+  expect(screen.queryByRole('region',{name:'음식 기록 선택'})).not.toBeInTheDocument();
+  expect(resolveMealChoices.mock.calls[0][0].cancel).toBe(true);
+  expect(decideProposal).not.toHaveBeenCalled();
+});
+
 test('restoring a session prevents submission before history can replace the active turn', () => {
   getSessionRestore.mockImplementationOnce(() => new Promise(() => {}));
   render(<Harness />);
@@ -52,9 +65,9 @@ test('unknown food can be excluded by buttons with retry instead of typed answer
   render(<Harness />);
   await screen.findByRole('button',{name:'제외하기'});
   fireEvent.click(screen.getByRole('button',{name:'제외하기'}));
-  fireEvent.click(screen.getByRole('button',{name:'선택 적용'}));
+  fireEvent.click(screen.getByRole('button',{name:'남은 음식 확인하기'}));
   await screen.findAllByText('조회 실패');
-  fireEvent.click(screen.getByRole('button',{name:'선택 적용'}));
+  fireEvent.click(screen.getByRole('button',{name:'남은 음식 확인하기'}));
   await screen.findByRole('button',{name:'이대로 기록'});
   expect(resolveMealChoices.mock.calls[0][0].choices).toEqual([{index:1,action:'exclude'}]);
   expect(resolveMealChoices.mock.calls[0][0].request_id).toBe(resolveMealChoices.mock.calls[1][0].request_id);

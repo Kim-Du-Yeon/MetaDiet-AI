@@ -3,6 +3,21 @@ from app.tools.simple_meals import PORTIONS, CATEGORY_DEFAULTS, parse_simple_mea
 from app.tools.food_catalog import FoodCatalog
 
 
+@pytest.mark.parametrize('prefix', ['한식뷔페가서 ', '한식뷔페에 가서 ', '회사 식당에서 ', '식당에서 '])
+def test_place_prefix_preserves_each_food_and_explicit_quantity(prefix):
+    parsed = parse_simple_meal('오늘 점심에 ' + prefix + '제육볶음 150g과 돈까스와 밥 먹었어', allow_unknown=True)
+    assert parsed is not None
+    assert [i['portion']['display_name'] for i in parsed['items']] == ['제육볶음', '돈까스', '밥']
+    assert [i['quantity_g'] for i in parsed['items']] == [150, 200, 200]
+    assert not any(i.get('unresolved') for i in parsed['items'])
+
+
+def test_place_prefix_does_not_discard_unknown_food_or_future_intent():
+    assert parse_simple_meal('한식뷔페에 가서 제육볶음 먹을 예정', allow_unknown=True) is None
+    assert parse_simple_meal('한식뷔페에서 미등록음식과 밥 먹었어', allow_unknown=True) is None or any(
+        i.get('unresolved') for i in parse_simple_meal('한식뷔페에서 미등록음식과 밥 먹었어', allow_unknown=True)['items'])
+
+
 @pytest.mark.parametrize('message,grams,defaulted', [
     ('김치찌개 간장불고기 밥 한공기 먹었어', [200, 200, 200], [True, True, False]),
     ('김치찌개 간장불고기 200g 먹었어', [200, 200], [True, False]),

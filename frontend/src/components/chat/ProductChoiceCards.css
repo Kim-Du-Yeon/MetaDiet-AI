@@ -17,4 +17,5 @@
 .meal-choice-fields input { box-sizing:border-box; width:100%; min-width:0; padding:10px; border:1px solid #b8c8c2; border-radius:8px; }
 .meal-choice-fields p { grid-column:1 / -1; }
 .product-choices button[aria-pressed="true"] { outline:3px solid #1b795b; outline-offset:2px; }
+.product-choices button[aria-pressed="false"] { background:white; color:#197a55; }
 @media (max-width:480px) { .meal-choice-fields { grid-template-columns:1fr; } }

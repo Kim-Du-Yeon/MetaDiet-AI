@@ -54,6 +54,23 @@ async def test_all_excluded_is_cancel_instead_of_empty_record():
         await resolve_meal_choices(parse_simple_meal('돼지바', allow_unknown=True), [{'index':0,'action':'exclude'}], FoodCatalog())
 
 
+async def test_all_excluded_endpoint_closes_without_proposal(monkeypatch):
+    card = choice_card(parse_simple_meal('돼지바', allow_unknown=True), '돼지바')
+    graph, repo = AsyncMock(), AsyncMock()
+    graph.aget_state.return_value = SimpleNamespace(values={'food_selection': card})
+    @asynccontextmanager
+    async def lock(*args):
+        yield
+    monkeypatch.setattr(main, 'get_graph', lambda: graph)
+    monkeypatch.setattr(main, 'ProposalRepository', lambda: repo)
+    monkeypatch.setattr(main, 'conversation_lock', lock)
+    result = await main.resolve_food_choices(main.MealChoicesRequest(thread_id='t', selection_id=card['id'],
+        request_id=uuid4(), choices=[{'index':0, 'action':'exclude'}]), 'owner')
+    assert result == {'cancelled': True}
+    repo.create.assert_not_called()
+    assert graph.aupdate_state.call_args.args[1]['food_selection'] is None
+
+
 async def test_direct_decision_clears_mixed_source_checkpoint(monkeypatch):
     from app.schemas.proposals import ProposalDecision
     graph, repo = AsyncMock(), AsyncMock()

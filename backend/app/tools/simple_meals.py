@@ -129,6 +129,9 @@ def parse_simple_meal(message, *, forced_meal_type=None, allow_unknown=False):
             text = re.sub(r'^' + word + r'(?:에|으로)?\s*', '', text)
             break
     meal_type = forced_meal_type or meal_type
+    # Consume only an explicit leading dining context; never scan past unknown foods.
+    text = re.sub(r'^(?:(?:회사|학교|구내)\s*)?(?:한식\s*뷔페|뷔페|식당|구내식당|급식실|집|편의점)'
+                  r'\s*(?:에\s*가서|가서|에서|서)\s*', '', text)
     text = re.sub(r'\s*(?:먹었어|먹었어요|먹었다|먹음|머겅써|먹엇어|기록해줘|기록해주세요|기록만(?:\s*해줘)?)[.!]?$', '', text)
     text = re.sub(r'(?:을|를|으\s*ㄹ|르)\s*$', '', text).rstrip()
     items = []
@@ -152,7 +155,7 @@ def parse_simple_meal(message, *, forced_meal_type=None, allow_unknown=False):
         if not matched:
             if not allow_unknown:
                 return None
-            unknown = re.match(r'([가-힣A-Za-z][가-힣A-Za-z ]*?)(?=\s*(?:\d|한|두|반)\s*(?:개|장|공기|g)|,|$|\s+(?:그리고|랑|하고)\s+)', text)
+            unknown = re.match(r'([가-힣A-Za-z][가-힣A-Za-z ]*?)(?=\s*(?:\d|한|두|반)\s*(?:개|장|공기|g)|,|$|(?:이랑|랑|하고|와|과)\s+|\s+그리고\s+)', text)
             if not unknown or len(unknown[1].strip()) > 100:
                 return None
             alias = unknown[1].strip()

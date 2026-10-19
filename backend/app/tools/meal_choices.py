@@ -15,7 +15,8 @@ def choice_card(parsed, request):
             items.append({'index': index, 'query': name, 'quantity_g': item['quantity_g'],
                 'generic_available': '아이스크림' in name or '돼지바' in name})
     identity = hashlib.sha256(json.dumps(parsed, sort_keys=True).encode()).hexdigest()
-    return {'mode': 'meal_choices', 'id': identity, 'parsed': parsed, 'request': request, 'items': items}
+    return {'mode': 'meal_choices', 'id': identity, 'parsed': parsed, 'request': request, 'items': items,
+            'known_count': len(parsed['items']) - len(items)}
 
 
 async def resolve_meal_choices(parsed, choices, catalog):

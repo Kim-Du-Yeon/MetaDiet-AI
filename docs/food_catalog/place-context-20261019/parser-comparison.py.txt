@@ -1,0 +1,48 @@
+"""Frozen 100 synthetic grammar cases; no provider or DB calls."""
+import hashlib
+import json
+from pathlib import Path
+import subprocess
+import sys
+
+sys.path.insert(0, str(Path('backend').resolve()))
+from dotenv import load_dotenv
+load_dotenv('backend/.env')
+from app.tools.simple_meals import parse_simple_meal
+
+baseline_commit = '670d57b'
+source = subprocess.check_output(['git', 'show', f'{baseline_commit}:backend/app/tools/simple_meals.py']).decode('utf-8')
+baseline = {'__name__': 'baseline_place_parser'}
+exec(compile(source, '<frozen-baseline>', 'exec'), baseline)
+places = ['한식뷔페가서', '한식뷔페에 가서', '한식 뷔페에서', '회사 식당에서', '학교 식당에서',
+          '식당에서', '구내식당에서', '집에서', '편의점에서', '급식실에서']
+meals = [('제육볶음과 돈까스와 밥', ['제육볶음','돈까스','밥'], [200,200,200]),
+         ('닭가슴살 2개랑 밥 한공기', ['닭가슴살','밥'], [200,200]),
+         ('김치찌개와 간장불고기 150g', ['김치찌개','간장불고기'], [200,150]),
+         ('계란후라이 4개와 밥', ['계란후라이','밥'], [200,200]),
+         ('라이스페이퍼 8장과 제육볶음', ['라이스페이퍼','제육볶음'], [80,200])]
+cases = [dict(message=f'{time}{place} {meal} 먹었어', names=names, grams=grams)
+         for time in ['', '오늘 점심에 '] for place in places for meal,names,grams in meals]
+rows = []
+for condition, parser in [('before', baseline['parse_simple_meal']), ('after', parse_simple_meal)]:
+    for index, case in enumerate(cases):
+        try:
+            result = parser(case['message'], allow_unknown=True)
+            items = (result or {}).get('items', [])
+            passed = ([i['portion']['display_name'] for i in items] == case['names']
+                      and [i['quantity_g'] for i in items] == case['grams']
+                      and not any(i.get('unresolved') for i in items))
+            rows.append(dict(condition=condition,index=index,passed=passed,returned_none=result is None))
+        except Exception as exc:
+            rows.append(dict(condition=condition,index=index,passed=False,error=type(exc).__name__))
+report = dict(scope='synthetic deterministic parser only, not live Agent or user accuracy',
+              baseline_commit=baseline_commit, baseline_sha256=hashlib.sha256(source.encode()).hexdigest(),
+              cases_sha256=hashlib.sha256(json.dumps(cases,ensure_ascii=False,sort_keys=True).encode()).hexdigest(),
+              cases=cases, rows=rows,
+              summary={c:dict(attempts=100, passed=sum(r['passed'] for r in rows if r['condition']==c))
+                       for c in ['before','after']})
+out = Path('docs/food_catalog/place-context-20261019')
+out.mkdir(exist_ok=True, parents=True)
+(out/'parser-comparison.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+print(json.dumps(report['summary']))
+assert report['summary']['after']['passed'] == 100

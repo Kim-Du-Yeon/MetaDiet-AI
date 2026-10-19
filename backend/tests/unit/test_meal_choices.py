@@ -60,6 +60,22 @@ async def test_user_example_does_not_enter_agent_loop_or_save():
     repo.create.assert_not_called()
 
 
+async def test_buffet_context_prepares_three_foods_without_model_or_confirmation():
+    from app.agents.team import DietTeam
+    from unittest.mock import AsyncMock
+    repo = AsyncMock()
+    repo.create.side_effect = lambda owner, thread, payload, key: {'id':'p', 'payload':payload}
+    def forbidden():
+        raise AssertionError('Place context must not require a model')
+    result = await DietTeam({'user_id':'owner', 'message':'한식뷔페가서 제육볶음과 돈까스와 밥 먹었어'},
+        model_factory=forbidden, repository=repo, db=object()).execute()
+    assert result.get('food_selection') is None
+    meals = result['pending_proposal']['payload']['meals']
+    assert [m['quantity_g'] for m in meals] == [200, 200, 200]
+    assert all(m['calories'] > 0 for m in meals)
+    repo.resolve.assert_not_called()
+
+
 async def test_missing_reviewed_food_is_excludable_without_model_loop():
     from app.agents.team import DietTeam
     from unittest.mock import AsyncMock

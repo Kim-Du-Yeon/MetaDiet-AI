@@ -28,9 +28,14 @@ function FoodChoice({ item, choice, onChange, busy }) {
 export default function MealChoiceCards({ selection, busy, error, onResolve, onCancel }) {
   const [choices, setChoices] = useState({});
   const ready = selection.items.every(item => choices[item.index]?.action);
+  const knownCount = selection.known_count ?? selection.parsed?.items?.filter(item => !item.unresolved).length ?? 1;
+  const excludedCount = selection.items.filter(item => choices[item.index]?.action === 'exclude').length;
+  const remainingCount = knownCount + selection.items.length - excludedCount;
+  const closing = ready && remainingCount === 0;
   function submit(event) {
     event.preventDefault();
     if (!ready) return;
+    if (closing) { onCancel(); return; }
     onResolve(selection.items.map(item => {
       const choice = choices[item.index];
       return {index:item.index, action:choice.action, ...(choice.action === 'label' ? {label:{...choice.label,
@@ -38,15 +43,16 @@ export default function MealChoiceCards({ selection, busy, error, onResolve, onC
     }));
   }
   return <section className="product-choices" aria-label="음식 기록 선택">
-    <h3>이 음식만 어떻게 기록할까요?</h3>
-    <p>나머지 음식은 기본 분량으로 계산해요. 아직 저장되지 않았어요.</p>
+    <h3>확인하지 못한 음식이 있어요</h3>
+    <p>{knownCount ? `확인된 음식 ${knownCount}개는 유지돼요. 아래 음식만 입력하거나 제외해주세요.` : '아래 음식을 입력하거나, 기록하지 않고 닫을 수 있어요.'} 아직 저장되지 않았어요.</p>
     <form onSubmit={submit}>
       {selection.items.map(item => <FoodChoice key={item.index} item={item} choice={choices[item.index]} busy={busy}
         onChange={choice => setChoices({...choices, [item.index]:choice})} />)}
       {error && <p role="alert">{error}</p>}
+      {ready && <p role="status">{closing ? '남은 음식이 없어요. 기록 없이 닫습니다.' : `제외 ${excludedCount}개 · 다음 화면에서 남은 음식 ${remainingCount}개를 확인해요. 아직 저장하지 않아요.`}</p>}
       <div className="product-choices__actions">
-        <button disabled={busy || !ready}>선택 적용</button>
-        <button type="button" disabled={busy} onClick={() => onResolve(selection.items.map(item => ({index:item.index,action:'exclude'})))}>미확인 음식 모두 스킵</button>
+        <button disabled={busy || !ready}>{busy ? '처리 중…' : closing ? '기록 없이 닫기' : excludedCount ? '남은 음식 확인하기' : '선택 적용'}</button>
+        <button type="button" disabled={busy} onClick={() => knownCount === 0 ? onCancel() : onResolve(selection.items.map(item => ({index:item.index,action:'exclude'})))}>{knownCount === 0 ? '모두 제외하고 닫기' : '미확인 음식 제외하고 계속'}</button>
         <button type="button" disabled={busy} onClick={onCancel}>전체 취소</button>
       </div>
     </form>

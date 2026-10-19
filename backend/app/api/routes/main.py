@@ -1189,6 +1189,9 @@ async def resolve_food_choices(req: MealChoicesRequest, current_user: str = Depe
         except ProposalConflict as exc:
             raise HTTPException(409, str(exc)) from exc
         except ValueError as exc:
+            if str(exc) == 'all_foods_excluded':
+                await graph.aupdate_state(config, {'food_selection': None}, as_node='save_chat')
+                return {'cancelled': True}
             raise HTTPException(422, '선택 또는 입력값을 확인해주세요. 모두 제외하려면 전체 취소를 눌러주세요.') from exc
         except TimeoutError as exc:
             raise HTTPException(503, '조회가 지연됐습니다. 다시 시도하거나 취소할 수 있어요.') from exc
