@@ -1,18 +1,19 @@
 import { useEffect, useState } from 'react';
 import MealNutritionFacts from './MealNutritionFacts';
 
+const hasCatalogBasis = meal => meal.food_id && meal.source !== 'user_label';
 const mealTypes = { breakfast: '아침', lunch: '점심', dinner: '저녁', snack: '간식' };
 export default function MealProposalEditor({ proposal, busy, onRevise, onChanged, budget }) {
   const payload = proposal.payload;
   const initial = () => ({ log_date: payload.log_date,
     meal_type: new Set(payload.meals.map(meal => meal.meal_type)).size > 1 ? null : payload.meals[0]?.meal_type || 'dinner',
-    items: payload.meals.map(meal => ({ amount: meal.nutrition_metadata?.portion?.amount ?? meal.quantity_g,
-      unit: meal.nutrition_metadata?.portion?.unit ?? 'g' })) });
+    items: payload.meals.map(meal => ({ amount: hasCatalogBasis(meal) ? meal.nutrition_metadata?.portion?.amount ?? meal.quantity_g : meal.quantity_g,
+      unit: hasCatalogBasis(meal) ? meal.nutrition_metadata?.portion?.unit ?? 'g' : 'g' })) });
   const [draft, setDraft] = useState(initial);
   useEffect(() => { setDraft(initial()); onChanged(false); }, [proposal]); // eslint-disable-line react-hooks/exhaustive-deps
   const change = next => { setDraft(next); onChanged(JSON.stringify(next) !== JSON.stringify(initial())); };
   const total = payload.meals.reduce((sum, meal) => sum + meal.calories, 0);
-  const editable = payload.meals.every(meal => meal.food_id && meal.source !== 'user_label');
+  const editable = typeof onRevise === 'function';
   const today = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Asia/Seoul' }).format(new Date());
   const changed = JSON.stringify(draft) !== JSON.stringify(initial());
   const excluded = [...new Set(payload.meals.flatMap(meal => meal.nutrition_metadata?.excluded_foods || []))];
@@ -36,7 +37,7 @@ export default function MealProposalEditor({ proposal, busy, onRevise, onChanged
           disabled={busy || draft.items[index].exclude} value={draft.items[index].amount} onChange={e => change({ ...draft, items: draft.items.map((item, i) => i === index ? { ...item, amount: Number(e.target.value) } : item) })} /></label>
           <label>단위<select aria-label={`${index + 1}번 음식 단위`} disabled={busy || draft.items[index].exclude} value={draft.items[index].unit}
             onChange={e => change({ ...draft, items: draft.items.map((item, i) => i === index ? { ...item, unit: e.target.value } : item) })}>
-            {[...new Set(['g', ...(portion?.unit_grams ? Object.keys(portion.unit_grams) : portion?.default_unit ? [portion.default_unit, '회분', '인분'] : [])])].map(unit => <option key={unit}>{unit}</option>)}</select></label></div></>}
+            {[...new Set(['g', ...(hasCatalogBasis(meal) ? portion?.unit_grams ? Object.keys(portion.unit_grams) : portion?.default_unit ? [portion.default_unit, '회분', '인분'] : [] : [])])].map(unit => <option key={unit}>{unit}</option>)}</select></label></div></>}
         <details><summary>출처·상세 정보</summary>{portion?.basis_note && <p>{portion.basis_note}</p>}<small>{meal.food_name} · {({ csv: '국가표준식품성분표', mfds: '식약처', user_label: '사용자 영양표' })[meal.source] || meal.source}
           {meal.nutrition_metadata?.manufacturer && ` · ${meal.nutrition_metadata.manufacturer}`} · 나트륨 {meal.sodium_mg ?? '미입력'}mg</small></details></div></li>;
     })}</ul>

@@ -35,3 +35,18 @@
 .coaching-review button:disabled { opacity: .5; cursor: default; }
 .coaching-review label { display: grid; gap: 8px; }
 .coaching-review textarea { box-sizing: border-box; width: 100%; min-height: 96px; padding: 12px; border: 1px solid #b4ccc0; border-radius: 10px; font: inherit; }
+
+.answer-basis { margin-top: 16px; padding: 12px; border: 1px solid #dce7e3; border-radius: 12px; overflow-wrap: anywhere; }
+.answer-basis summary { cursor: pointer; color: #17634d; font-weight: 700; }
+.answer-basis table { width: 100%; margin: 12px 0; border-collapse: collapse; font-size: .9rem; }
+.answer-basis th, .answer-basis td { text-align: left; padding: 6px 4px; border-bottom: 1px solid #dce7e3; }
+.answer-basis blockquote { margin: 8px 0; padding-left: 12px; border-left: 3px solid #dce7e3; max-height: 12rem; overflow: auto; }
+
+.answer-basis__actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.answer-basis__actions button { min-height: 44px; border: 1px solid #c5dcd3; border-radius: 999px; padding: 8px 14px; background: #f4f9f7; color: #17634d; font: inherit; font-weight: 600; cursor: pointer; }
+.answer-basis__actions button[aria-expanded="true"] { background: #e3f1eb; border-color: #17634d; }
+.answer-basis__actions button:focus-visible { outline: 3px solid #17634d; outline-offset: 3px; }
+.answer-basis__source { padding: 12px; margin: 8px 0; border: 1px solid #dce7e3; border-radius: 10px; }
+.answer-basis__source strong { display: block; }
+.answer-basis__source a { display: inline-block; min-height: 32px; margin-top: 8px; color: #17634d; }
+.answer-basis__muted { color: #596e66; font-size: .9rem; }

@@ -7,6 +7,7 @@ import MealChoiceCards from './MealChoiceCards';
 import ProcessTrace from "./ProcessTrace";
 import AnswerContent from './AnswerContent';
 import CoachingActions from './CoachingActions';
+import AnswerBasis from './AnswerBasis';
 import CoachingReview from './CoachingReview';
 import { intakeReceipt } from './intakeReceipt';
 import "./ChatInterface.css";
@@ -14,6 +15,8 @@ import "./ChatInterface.css";
 const USER_ID = "17691249-f22f-4447-a6e4-fca7a8e57cc8";
 
 const AGENT_LABELS = {
+  meal: "식단 추천",
+  supervisor: "종합 상담",
   diet_logger: "🍽️ 식단 기록",
   strategy:    "💡 전략 추천",
   goal:        "🎯 목표 검토",
@@ -103,6 +106,7 @@ export default function ChatInterface({
           role: message.role,
           content: message.content,
           agentUsed: message.agent_used || null,
+          answerBasis: message.answer_basis || null,
           streaming: false,
         })));
       }
@@ -156,7 +160,7 @@ export default function ChatInterface({
       const updated = [...prev];
       updated[updated.length - 1] = { ...updated[updated.length - 1],
         ...(typeof meta.answer === 'string' ? { content: meta.answer } : {}),
-        streaming: false, agentUsed: meta.agent_used, progressSteps: progressRef.current };
+        streaming: false, answerBasis: meta.answer_basis || null, agentUsed: meta.agent_used, progressSteps: progressRef.current };
       return updated;
     });
     setPendingState({ pending_meals: meta.pending_meals || null, awaiting_confirmation: meta.awaiting_confirmation || false, plan_date: meta.plan_date || null });
@@ -471,6 +475,7 @@ export default function ChatInterface({
               {msg.role === 'assistant' ? <AnswerContent content={msg.content} streaming={msg.streaming} />
                 : <p style={{ margin: 0, whiteSpace: 'pre-wrap', lineHeight: 1.6 }}>{msg.content}</p>}
               {msg.streaming && msg.content && <span style={styles.cursor}>▊</span>}
+              {msg.role === 'assistant' && !msg.streaming && <AnswerBasis basis={msg.answerBasis} />}
               {msg.agentUsed && !msg.streaming && <p style={styles.agentLabel}>{AGENT_LABELS[msg.agentUsed] || msg.agentUsed}</p>}
             </div>
           </div>

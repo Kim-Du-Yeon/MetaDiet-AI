@@ -46,3 +46,18 @@ test('excluding all foods blocks saving and recalculation; undo restores the pro
   fireEvent.click(screen.getByRole('button',{name:'1번 음식 제외 취소'}));
   expect(screen.getByRole('button',{name:'이대로 기록'})).toBeEnabled();
 });
+
+
+test('mixed label and catalog foods both allow editing and exclusion', () => {
+  const revise = jest.fn();
+  render(<ProposalCard proposal={{kind:'intake',version:1,payload:{log_date:'2026-10-19',meals:[
+    {food_id:'csv:test',food_name:'치킨',meal_type:'lunch',quantity_g:150,calories:300,protein_g:20,carbs_g:10,fat_g:15,source:'csv'},
+    {food_name:'가라아게',meal_type:'lunch',quantity_g:100,calories:200,protein_g:20,carbs_g:5,fat_g:20,source:'user_label'}
+  ]}}} onRevise={revise} onDecision={jest.fn()} />);
+  fireEvent.change(screen.getByLabelText('2번 음식 분량'), {target:{value:'200'}});
+  expect(screen.getByRole('button',{name:'이대로 기록'})).toBeDisabled();
+  fireEvent.click(screen.getByRole('button',{name:'1번 음식 제외하기'}));
+  fireEvent.click(screen.getByRole('button',{name:'수정한 분량 다시 계산'}));
+  expect(revise).toHaveBeenCalledWith({log_date:'2026-10-19',meal_type:'lunch',items:[
+    {amount:150,unit:'g',exclude:true},{amount:200,unit:'g'}]});
+});

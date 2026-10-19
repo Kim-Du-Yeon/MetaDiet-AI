@@ -245,7 +245,7 @@ def _initial_state(req: ChatRequest, user_id: str, run_id: str | None = None, *,
         "requested_action": req.requested_action, "tool_policy": req.tool_policy,
         "pending_proposal": None, "proposal_decision": None, "proposal_result": None,
         "execution_usage": {}, "execution_status": "running", "execution_error": None, "agent_events": [],
-        "food_selection": None, "coaching_review":None,
+        "food_selection": None, "coaching_review":None, "answer_basis":None,
         "user_id": user_id, "message": req.message,
         "intent": "", "response": "", "messages": req.messages[-10:] if req.messages else [],
         "agent_used": "", "today_calories": 0.0, "today_protein": 0.0,
@@ -474,7 +474,7 @@ async def _stream(graph, config: dict, run_id: str, after_seq: int = 0):
             'food_selection': sv.get('food_selection'),
             'intake_confirmed': (sv.get('proposal_result') or {}).get('status') == 'confirmed'
                 and (sv.get('proposal_result') or {}).get('kind') == 'intake',
-            'coaching_review':sv.get('coaching_review'),
+            'coaching_review':sv.get('coaching_review'), 'answer_basis':sv.get('answer_basis'),
             'execution_usage':sv.get('execution_usage'),'awaiting_confirmation':sv.get('awaiting_confirmation',False),
             'stage_timings_ms': timings,
             **(journal.diagnostics if journal else sv.get('response_diagnostics') or {}),
@@ -743,6 +743,8 @@ async def restore_session(thread_id: str, current_user: str = Depends(get_curren
             messages.append({'role':'user', 'content':str(sv['message'])[:12000]})
         messages.append({'role':'assistant', 'content':str(sv['response'])[:12000],
                          'agent_used':sv.get('agent_used')})
+    if sv.get('answer_basis') is not None and messages and messages[-1].get('role') == 'assistant' and messages[-1].get('content') == str(sv.get('response', ''))[:12000]:
+        messages[-1]['answer_basis'] = sv.get('answer_basis')
     from app.db.receipt_status import reconcile_receipts
     messages = await asyncio.to_thread(reconcile_receipts, sb, current_user, thread_id, messages)
     stats = await _public_stats(current_user)
@@ -967,9 +969,20 @@ async def revise_meal(proposal_id: UUID, req: MealRevision, current_user: str = 
                 quote['nutrition_metadata']['replaced_food_name'] = meal['food_name']
                 revised.append(quote)
                 continue
-            if meal['source'] == 'user_label' and edit.unit == 'g' and edit.amount == meal['quantity_g']:
-                revised.append({**meal, 'nutrition_metadata': dict(meal.get('nutrition_metadata') or {}),
-                    'meal_type': req.meal_type or meal['meal_type']})
+            if meal['source'] == 'user_label' or not meal.get('food_id'):
+                # Scale the trusted pending proposal, never client-supplied nutrients.
+                if edit.unit != 'g' or not meal['quantity_g'] > 0:
+                    raise HTTPException(422, '이 음식의 분량은 g 단위로 수정해주세요.')
+                ratio = edit.amount / meal['quantity_g']
+                quote = {**meal, 'quantity_g': edit.amount,
+                    'nutrition_metadata': dict(meal.get('nutrition_metadata') or {}),
+                    'meal_type': req.meal_type or meal['meal_type']}
+                for key in ('calories', 'protein_g', 'carbs_g', 'fat_g', 'sodium_mg'):
+                    if meal.get(key) is not None:
+                        quote[key] = round(meal[key] * ratio, 3)
+                portion.update(amount=edit.amount, unit='g', defaulted=False)
+                quote['nutrition_metadata']['portion'] = portion
+                revised.append(quote)
                 continue
             unit_grams = portion.get('unit_grams') or ({portion['default_unit']: portion['unit_g'],
                 '회분': portion['unit_g'], '인분': portion['unit_g']} if portion.get('unit_g') else {})

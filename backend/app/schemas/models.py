@@ -97,6 +97,7 @@ class AgentState(TypedDict):
     execution_error: Annotated[Optional[str], keep_latest]
     agent_events: Annotated[list, keep_latest]
     food_selection: Annotated[Optional[dict], keep_latest]
+    answer_basis: Annotated[Optional[dict], keep_latest]
     coaching_review: Annotated[Optional[dict], keep_latest]
 
     # ── message에 keep_latest 리듀서 추가 ────────────────────────────

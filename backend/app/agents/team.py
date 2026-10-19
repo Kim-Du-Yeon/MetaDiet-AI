@@ -364,7 +364,8 @@ class DietTeam:
             key = hashlib.sha256(json.dumps(item, sort_keys=True).encode()).hexdigest()[:16]
             self.evidence[key] = item
             found.append({"evidence_id": key, **item})
-        response = {"grounded": True, "evidence": found}
+        response = {"grounded": True, "evidence": found,
+            "citation_instruction": "자료의 주장에 실제로 의존한 문장에만 [근거:evidence_id] 형식으로 인용하세요. 검색만 한 자료는 인용하지 마세요."}
         self.evidence_cache[query] = response
         return response
 
@@ -701,7 +702,10 @@ class DietTeam:
             coaching_review = {'reason':'measurement_history_missing', 'optional_input':'measurements'}
         if proposal and not self.proposal:
             response += "\n\n기존 확인 대기 제안은 유지됩니다. 확정·수정·취소를 선택해주세요."
-        return {"response": response, "coaching_review":coaching_review, "agent_used": agent_name, "pending_proposal": proposal,
+        from app.agents.answer_basis import build_answer_basis
+        response, answer_basis = build_answer_basis(response, profile=self.profile, intake=self.intake,
+            quotes=self.quotes, evidence=self.evidence, search_attempted=self.evidence_search_attempted)
+        return {"answer_basis": answer_basis, "response": response, "coaching_review":coaching_review, "agent_used": agent_name, "pending_proposal": proposal,
             "food_selection": self.food_selection if self.food_selection['items'] and not self.proposal else None,
             "pending_meals": proposal["payload"].get("meals") if proposal else None,
             "plan_date": proposal["payload"].get("log_date") if proposal else None,

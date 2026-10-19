@@ -136,3 +136,32 @@ async def test_excluding_food_recalculates_without_confirmation(monkeypatch, exc
         assert len(result['payload']['meals']) == 1
         assert result['payload']['meals'][0]['nutrition_metadata']['excluded_foods'] == ['밥']
     repo.resolve.assert_not_called()
+
+
+@pytest.mark.parametrize('source', ['user_label', 'llm_estimated'])
+async def test_non_catalog_portion_scales_trusted_pending_values(monkeypatch, source):
+    payload = await calculate_simple_meal(parse_simple_meal('밥'), FoodCatalog())
+    meal = payload['meals'][0]
+    meal.update(food_id=None, source=source)
+    original = meal['calories']
+    identity = uuid4()
+    old = dict(id=str(identity), version=1, kind='intake', status='pending', thread_id='t', payload=payload)
+    repo, graph = AsyncMock(), AsyncMock()
+    repo.get.return_value = old
+    repo.create.side_effect = lambda owner, thread, value, key, **kw: {**old, 'version':2, 'payload':value}
+    graph.aget_state.return_value = SimpleNamespace(values={'pending_proposal':old})
+    @asynccontextmanager
+    async def lock(*args):
+        yield
+    monkeypatch.setattr(main, 'ProposalRepository', lambda:repo)
+    monkeypatch.setattr(main, 'get_graph', lambda:graph)
+    monkeypatch.setattr(main, 'conversation_lock', lock)
+    result = await main.revise_meal(identity, main.MealRevision(version=1,
+        log_date=payload['log_date'], meal_type='lunch',
+        items=[{'amount':meal['quantity_g'] * 2, 'unit':'g'}]), 'owner')
+    updated = result['payload']['meals'][0]
+    assert updated['calories'] == pytest.approx(original * 2)
+    assert updated['source'] == source
+    assert updated['nutrition_metadata']['portion']['defaulted'] is False
+    repo.resolve.assert_not_called()
+    repo.get.assert_awaited_once_with('owner', str(identity))

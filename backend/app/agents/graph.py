@@ -90,7 +90,7 @@ async def load_state_node(state: AgentState) -> dict:
         "days_since_inbody": days_since,
         "validation_attempts": 0, "validation_passed": None,
         "validation_feedback": "", "can_improve": None,
-        "rag_context": "", "rag_grounded": False,
+        "rag_context": "", "rag_grounded": False, "answer_basis": None,
     }
 
 
