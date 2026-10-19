@@ -78,5 +78,43 @@ Pro 평가·평가 비용 완전입니다. 결과를 보고 임계값을 낮추�
 모델·사례·생성/평가 요청과 원본 결과는 바꾸지 않았습니다. 운영 적용 범위는
 기존에 정의한 추출·제한 분류·번역만이며 도구 Agent·Vision·평가 모델·HITL은 유지합니다.
 
+## main 병합과 공개 검증
+
+[PR2](https://github.com/Kim-Du-Yeon/MetaDiet-AI/pull/2)를 main의
+`aea07144a283b0d05cd0102cca1532f3496d20c4`로 병합했습니다. API·웹의 공개 빌드가
+해당 커밋임을 확인했습니다. [공개 health 원본](public-health.json).
+Render 배포 `dep-dbao3s0jgiss739k5n9g`는 Live이며 다음 설정을 저장·재배포했습니다.
+
+```dotenv
+MODEL_ROUTING_ENABLED=true
+PROMPT_RELEASE=v1
+GEMINI_SIMPLE_MODEL=gemini-3.1-flash-lite
+```
+
+![비밀값을 숨긴 상태의 제한 라우팅·v1 설정](render-settings.png)
+
+첫 공개 상담은 실패했습니다. 요청ID·서버로그·LangSmith LLM 추적을 연결하니
+**HTTP402/선불 크레딧 소진**이었습니다. [건강 수치와 키를 제외한 오류 근거](public-smoke-failure.json).
+같은 시점 로컬 키는 세 모델 모두200이었고, 키 원문을 저장·출력하지 않은 비교에서
+Render 저장 키와 로컬 평가 키가 다름을 확인했습니다. 다른 프로젝트라고 단정하지는
+않습니다. 사용자에게 실제 자격 정보 반영을 요청했습니다.
+[Google 공식 선불 잔액/402 설명](https://ai.google.dev/gemini-api/docs/billing#prepay).
+
+사용자가 키를 직접 반영한 뒤 새 배포 `dep-dbaoa6uq1p3s73cf0nv0`의 Live와
+health 200을 확인했습니다. 같은 공식 지침 질문을 실제 로그인 브라우저에서
+재실행하니 근거 전문 Agent 위임·자료 검색·최종 답변까지 성공했습니다.
+요청 ID는 `ed686503-bb3b-4e60-bab4-d6e271d1d594`이며 첫 서버 진행 이벤트는
+813.9ms, 완료는 27,325.1ms였습니다. 이는 **단일 기능 점검**이며 100건 비교나
+운영 평균·p95 개선 근거가 아닙니다. 이 요청에서 402는 재현되지 않았습니다.
+섭취 기록 확정·목표 변경은 하지 않았습니다. 복구 후 별도 장기 관측은 남아 있습니다.
+
+![공개 서비스의 근거 상담 완료 화면](public-model-recovered.png)
+
+독립적으로 일반 음식3개가 기본 분량 카드로 계산되는 흐름과 저장 전 확인을 확인했습니다.
+취소 첫 요청은 브라우저 `Failed to fetch`였으며 최신 제안 재조회 후 재시도로 정상
+취소됐습니다. 이 일시적 연결 오류의 정확한 원인은 확정하지 않았고 코드 문제로
+단정하지 않았습니다. 검증용 섭취는 확정 저장하지 않았습니다. 이 소수 기능 점검은
+조건별100건 성능 비교에 합산하지 않습니다.
+
 공식 근거: [Google 요금](https://ai.google.dev/gemini-api/docs/pricing),
 [LangChain Gemini usage와 structured output](https://docs.langchain.com/oss/python/integrations/chat/google_generative_ai).

@@ -1,0 +1,19 @@
+{
+  "scope": "public_functional_smoke_not_100_case_performance_evidence",
+  "build": "aea07144a283b0d05cd0102cca1532f3496d20c4",
+  "deployment_id": "dep-dbao3s0jgiss739k5n9g",
+  "health": "ok",
+  "request_id": "6ab9fff6-ff10-4d20-bd39-d048dd445117",
+  "llm_trace_id": "01a15205-8ecc-72d3-b9ce-4aa9c1363c7e",
+  "model": "gemini-3.8-flash",
+  "provider_http_status": 402,
+  "provider_reason": "prepayment_credit_depleted",
+  "first_server_progress_ms": 2580.9,
+  "browser_attempt_failed_ms": 6719.8,
+  "source": "correlated_Render_request_logs_and_LangSmith_error_classification",
+  "credentials_or_health_values_recorded": false,
+  "production_key_matches_local_eval_key": false,
+  "comparison_method": "in_memory_equality_only_no_key_or_fingerprint_persisted",
+  "interpretation": "local_Tier1_preflight_and_fixed100_pair_success_do_not_prove_production_credentials_are_funded",
+  "official_reference": "https://ai.google.dev/gemini-api/docs/billing#prepay"
+}
