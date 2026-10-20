@@ -2,7 +2,8 @@
 import re
 
 
-def build_answer_basis(response, *, profile=None, intake=None, quotes=None, evidence=None, search_attempted=False):
+def build_answer_basis(response, *, profile=None, intake=None, quotes=None, evidence=None,
+                       search_attempted=False, search_status=None):
     evidence = evidence or {}
     cited = []
     def citation(match):
@@ -25,7 +26,11 @@ def build_answer_basis(response, *, profile=None, intake=None, quotes=None, evid
         metadata = quote.get('nutrition_metadata') or {}
         calculations.append({'food_name': quote.get('food_name'), 'source': quote.get('source'),
             'basis': (metadata.get('portion') or {}).get('basis_note'), 'food_id': quote.get('food_id')})
-    limitation = ('검색한 자료는 있지만 답변의 명시적 인용을 확인하지 못했어요.'
+    status = ('cited' if documents else 'retrieved_not_cited' if evidence
+              else 'search_unavailable' if search_attempted and search_status == 'search_unavailable'
+              else 'insufficient_evidence' if search_attempted else 'not_searched')
+    limitation = ('검색 도구 오류로 문서 근거를 확인하지 못했어요.' if status == 'search_unavailable' else
+        '검색한 자료는 있지만 답변의 명시적 인용을 확인하지 못했어요.'
         if evidence and not documents else '관련 문서 근거를 확보하지 못했어요.' if search_attempted and not evidence
         else '이번 답변에서는 문서 검색을 수행하지 않았어요.' if not search_attempted else None)
     return response, {'records': {'date': intake.get('date'), 'meals': [
@@ -33,4 +38,5 @@ def build_answer_basis(response, *, profile=None, intake=None, quotes=None, evid
         for m in meals], 'totals': totals} if intake is not None else None,
         'targets': targets if profile is not None else None,
         'calculations': calculations, 'documents': documents, 'limitation': limitation,
+        'search': {'status': status},
         'notice': '답변 작성 당시 조회한 기록이에요. 미기록 식사는 포함되지 않아요.'}

@@ -39,7 +39,19 @@ test('source list is collapsed, numbered, and links to the original safely', () 
 
 test('zero sources explains absence rather than fabricating a citation', () => {
   render(<AnswerBasis basis={{documents:[],limitation:'이번 답변에서는 문서 검색을 수행하지 않았어요.'}} />);
-  fireEvent.click(screen.getByRole('button',{name:'출처 보기 · 0개'}));
   expect(screen.getByText(/이번 답변에서는 문서 검색을 수행하지 않았어요/)).toBeVisible();
+  expect(screen.queryByRole('button',{name:'출처 보기 · 0개'})).not.toBeInTheDocument();
   expect(screen.queryByRole('link')).not.toBeInTheDocument();
+});
+
+test.each([
+  ['not_searched','문서 검색 안 함'],
+  ['insufficient_evidence','관련 근거 미확보'],
+  ['search_unavailable','근거 검색 오류'],
+  ['retrieved_not_cited','검색 완료 · 인용 없음'],
+])('shows %s without opening a panel', (status,label) => {
+  render(<AnswerBasis basis={{documents:[],search:{status},limitation:'상태 상세 안내'}} />);
+  expect(screen.getByText(label)).toBeVisible();
+  expect(screen.getByText('상태 상세 안내')).toBeVisible();
+  expect(screen.queryByRole('button',{name:/출처 보기/})).not.toBeInTheDocument();
 });

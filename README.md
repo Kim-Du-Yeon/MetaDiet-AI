@@ -1,3 +1,5 @@
+자연스러운 근거 요청: [‘영양학적으로·근거해서’ 선행 검색과 검색 상태 구분](docs/food_catalog/natural-evidence-20261020/README.md).
+
 기술 포트폴리오: [Parser·Chunking·Embedding·RAG·Jev·모델 라우팅·멀티 Agent·Kubernetes — 구현 / 비교 실험 / 운영 적용·결과·한계](docs/TECHNOLOGY_PORTFOLIO.md).
 
 선택적 RAG 설계: [단순 추천은 상시 검색을 강제하지 않고, 근거 요청은 검색 가능한 경로로·질문/실행 단계/출처 원본 캡처](docs/food_catalog/selective-rag-20261019/README.md).

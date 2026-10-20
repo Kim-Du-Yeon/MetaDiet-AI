@@ -11,13 +11,22 @@ export default function AnswerBasis({ basis }) {
   const [recordsOpen, setRecordsOpen] = useState(false);
   if (!basis) return null;
   const count = basis.documents?.length || 0;
+  const searchStatus = basis.search?.status;
+  const searchLabel = {
+    not_searched: '문서 검색 안 함',
+    insufficient_evidence: '관련 근거 미확보',
+    search_unavailable: '근거 검색 오류',
+    retrieved_not_cited: '검색 완료 · 인용 없음',
+  }[searchStatus] || '문서 인용 없음';
   return <section className="answer-basis" aria-label="참고한 기록·근거">
     <div className="answer-basis__actions">
-      <button type="button" aria-expanded={sourcesOpen} aria-controls={`${id}-sources`}
+      {count > 0 ? <button type="button" aria-expanded={sourcesOpen} aria-controls={`${id}-sources`}
         onClick={() => setSourcesOpen(!sourcesOpen)}>출처 보기 · {count}개</button>
+        : <span className="answer-basis__status">{searchLabel}</span>}
       <button type="button" aria-expanded={recordsOpen} aria-controls={`${id}-records`}
         onClick={() => setRecordsOpen(!recordsOpen)}>내 기록·계산 근거 보기</button>
     </div>
+    {!count && <p className="answer-basis__muted">{basis.limitation || '이 답변에 연결된 문서 인용은 없어요. 과거 답변은 검색 상태를 확인할 수 없어요.'}</p>}
     <div id={`${id}-records`} hidden={!recordsOpen}>
     <p>{basis.notice}</p>
     <strong>내 기록</strong>
@@ -31,7 +40,7 @@ export default function AnswerBasis({ basis }) {
     {basis.calculations?.length ? <ul>{basis.calculations.map((item,i) => <li key={i}>{item.food_name} · {sourceNames[item.source] || item.source}{item.basis && ` · ${item.basis}`}</li>)}</ul>
       : <p>이번 답변에서 별도 식품 영양 계산은 확인되지 않았어요.</p>}
     </div>
-    <div id={`${id}-sources`} hidden={!sourcesOpen}>
+    {count > 0 && <div id={`${id}-sources`} hidden={!sourcesOpen}>
     <strong>답변에 인용된 출처</strong>
     {basis.documents?.length ? <ol>{basis.documents.map((doc,i) => <li key={i} className="answer-basis__source">
       <strong>[근거 {i + 1}] {doc.source}</strong>
@@ -41,6 +50,6 @@ export default function AnswerBasis({ basis }) {
         : <p className="answer-basis__muted">원문 링크가 제공되지 않은 자료예요.</p>}</li>)}</ol> : <p>답변에 명시적으로 연결된 문서 인용이 없어요.</p>}
     {basis.limitation && <p><strong>한계</strong> · {basis.limitation}</p>}
     <p>문서 인용 표시는 근거 연결을 돕는 정보이며, 답변 전체의 정확성을 보장하지 않아요.</p>
-    </div>
+    </div>}
   </section>;
 }
