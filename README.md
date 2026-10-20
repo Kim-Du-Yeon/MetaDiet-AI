@@ -1,3 +1,5 @@
+기술 포트폴리오: [Parser·Chunking·Embedding·RAG·Jev·모델 라우팅·멀티 Agent·Kubernetes — 구현 / 비교 실험 / 운영 적용·결과·한계](docs/TECHNOLOGY_PORTFOLIO.md).
+
 선택적 RAG 설계: [단순 추천은 상시 검색을 강제하지 않고, 근거 요청은 검색 가능한 경로로·질문/실행 단계/출처 원본 캡처](docs/food_catalog/selective-rag-20261019/README.md).
 
 답변 출처·기록 근거 표시: [공개 배포·저녁 추천 브라우저 검증·검색 정책 오류 수정·캡처](docs/food_catalog/answer-basis-20261019/README.md).
