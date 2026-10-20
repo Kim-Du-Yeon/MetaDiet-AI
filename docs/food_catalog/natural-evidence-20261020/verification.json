@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-20",
+  "scope": "Functional browser verification; not a speed or accuracy benchmark",
+  "before": {
+    "commit": "19bd2597ba741b46302c7d5efdf9b20d78f24c11",
+    "request_id": "306c37d9-2172-4b79-99cd-0e1bd28e91df",
+    "question": "저녁에 치킨 약속이 있는데 점심을 어떻게 먹어야 좋을까? 다이어트를 위해서 어떻게 밥을 먹으면 좋을지 영양성분 지식에 근거해서 알려줘",
+    "observed_progress_count": 8,
+    "search_progress_present": false,
+    "cited_passages": 0,
+    "displayed_limitation": "이번 답변에서는 문서 검색을 수행하지 않았어요.",
+    "screenshot": "before-no-search.jpg"
+  },
+  "deployment": {
+    "commit": "7dfbda0f14e556c7def56a16138597db68d123d5",
+    "api_and_web_match": true
+  },
+  "automated": {
+    "backend_passed": 1475,
+    "backend_existing_skipped": 1,
+    "frontend_passed": 130,
+    "frontend_suites": 35,
+    "production_build": "passed"
+  },
+  "domain_records_written": false,
+  "after": [
+    {
+      "request_id": "83933d14-e632-4198-ae82-e783bb2bcfe4",
+      "question": "저녁에 치킨 약속이 있는데 점심을 어떻게 먹어야 좋을까? 다이어트를 위해서 어떻게 밥을 먹으면 좋을지 영양성분 지식에 근거해서 알려줘",
+      "search_progress_present": true,
+      "cited_passages": 2,
+      "sources": [
+        {
+          "source": "guideline2022_vol8.pdf",
+          "page": "6.0"
+        },
+        {
+          "source": "KDRI_2025_vol3.pdf",
+          "page": "507.0"
+        }
+      ],
+      "screenshot": "after-natural-sources.jpg"
+    },
+    {
+      "request_id": "da8387da-fa62-49d5-a715-ce11de7bc72e",
+      "question": "저녁에 치킨 약속이 있는데 점심은 어떻게 먹으면 좋을까? 영양학적으로 설명해줘. 저장하지 말고 조언만 해줘.",
+      "cited_passages": 1,
+      "sources": [
+        {
+          "source": "WHO_total_fat_2023.pdf",
+          "page": "37.0"
+        }
+      ],
+      "latest_source_restored_after_reload": true
+    },
+    {
+      "request_id": "a36de130-cf15-4eb0-97c3-f8bddd8d9eab",
+      "question": "점심 추천해줘",
+      "displayed_status": "문서 검색 안 함",
+      "cited_passages": 0,
+      "screenshot": "after-not-searched.jpg"
+    },
+    {
+      "request_id": "11c87ea4-e9c8-4758-a1b1-713d588e86fa",
+      "question": "점심을 어떻게 먹을까? 영양학적으로 설명하되 검색하지 말고 일반적인 조언만 해줘.",
+      "displayed_status": "문서 검색 안 함",
+      "cited_passages": 0
+    }
+  ]
+}
