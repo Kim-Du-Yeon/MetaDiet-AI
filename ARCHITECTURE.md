@@ -1,3 +1,7 @@
+## Optional bounded evidence loop (2026-10-20, default OFF)
+
+`DietTeam.search_evidence` can call `app/rag/agentic.py`: retrieve → model sufficiency assessment against the immutable original question → one rewrite/retrieval → final assessment. It stays inside the read-only tool boundary; the parent LangGraph and HITL write path are unchanged. Hard maximum2 retrieval rounds/2 controller calls,6000-character assessed evidence,512 controller output tokens and35-second default local deadline. All nested model calls and extra retrievals reserve the shared request budget. Operational failure suppresses later searches this request. Only precisely assessed excerpts retain source/page metadata for explicit answer citations. Existing similarity gating cannot be bypassed. `AGENTIC_RAG_ENABLED=false` is the rollback/default until the [matched100 comparison and limits](docs/agentic_rag/README.md) justify adoption. The controller has a separate version/hash; existing prompt v1 is unchanged.
+
 # 2026-10-09 upgrade status
 
 ## Prompt releases and isolated Jev experiment (2026-10-19)

@@ -115,6 +115,12 @@ _TOOL_PHASES = {
 
 
 def progress_for_runtime_event(kind: str, **payload: Any) -> dict[str, Any] | None:
+    if kind == 'agentic_rag_stage':
+        labels = {'retrieve': '근거 자료 검색 중', 'evaluate': '검색 근거의 관련성 확인 중',
+                  'rewrite': '검색 질문 개선 중', 'research': '개선한 질문으로 근거 재검색 중'}
+        stage = payload.get('stage')
+        if stage in labels:
+            return {'phase': 'evidence_' + stage, 'label': labels[stage]}
     if kind == 'budget_preparing':
         return {'phase': 'budget_preparation', 'label': '실행 한도와 저장 상태를 확인 중입니다.'}
     if kind == 'model_preparing':

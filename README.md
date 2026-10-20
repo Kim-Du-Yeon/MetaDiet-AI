@@ -1,3 +1,5 @@
+Agentic RAG 후보: [검색 평가·질의 재작성·재검색 구현과 전후100시도씩·미채택 원인](docs/agentic_rag/20261020/README.md). 근거 페이지 적중79→76%, 중앙값11.507→14.370초. Pro 일일250회 제한으로 품질 평가각50/100 완료, 운영 활성화·배포 보류.
+
 자연스러운 근거 요청: [‘영양학적으로·근거해서’ 선행 검색과 검색 상태 구분](docs/food_catalog/natural-evidence-20261020/README.md).
 
 기술 포트폴리오: [Parser·Chunking·Embedding·RAG·Jev·모델 라우팅·멀티 Agent·Kubernetes — 구현 / 비교 실험 / 운영 적용·결과·한계](docs/TECHNOLOGY_PORTFOLIO.md).

@@ -1,3 +1,7 @@
+## Bounded Agentic RAG comparison (2026-10-20)
+
+[Protocol, raw matched attempts, evaluator recovery and deployment gate](docs/agentic_rag/20261020/README.md). This is a read-only RAG-boundary development comparison, not an end-to-end user trial.100 attempts per condition repeat40 source-reviewed development questions; do not claim100 independent questions or reuse the sealed final20 to tune the controller. Failed serving attempts and failed judging remain in denominators. The Pro output-cap recovery regrades both full conditions without regenerating answers and preserves original cost/failures. Embedding SDK missing token metadata is reported as cost incompleteness rather than zero. Activation requires the predeclared quality/latency/cost gate; default is OFF.
+
 # 2026-10-09 upgrade verification
 
 ## Tier1 fixed-v1 matched100 pairs (2026-10-19)

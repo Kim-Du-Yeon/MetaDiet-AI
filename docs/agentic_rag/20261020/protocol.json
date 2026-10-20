@@ -1,0 +1,21 @@
+{
+  "attempts_per_condition": 100,
+  "unique_questions": 40,
+  "sampling": "core40 twice plus first20; development repeated attempts, not held-out",
+  "dataset_sha256": "4ba67cf812497730848fe864580f1a7bf7da191c6a3c71427200eac3535aed9e",
+  "retrieval": "dense, k4, no reranker; matches 512MiB remote fallback",
+  "workers": 3,
+  "pair_order": "alternating",
+  "timeout_seconds": 90,
+  "loop_timeout_seconds": 35,
+  "gate": {
+    "correctness_min": 0.95,
+    "correctness_improvement_min": 0.02,
+    "support_noninferior": true,
+    "failure_noninferior": true,
+    "p50_ratio_max": 1.5,
+    "p95_ratio_max": 1.5,
+    "complete_cost_required": true,
+    "cost_ratio_max": 2
+  }
+}

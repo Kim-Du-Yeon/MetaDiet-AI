@@ -24,6 +24,7 @@ config.py
 import os
 from typing import Literal
 from pydantic_settings import BaseSettings
+from pydantic import Field
 from functools import lru_cache
 
 
@@ -54,6 +55,9 @@ def _default_chunks_path() -> str:
 
 
 class Settings(BaseSettings):
+    agentic_rag_enabled: bool = False
+    agentic_rag_max_rounds: int = Field(default=2, ge=1, le=2)
+    agentic_rag_timeout_seconds: float = Field(default=35, gt=0, le=60)
     food_catalog_enabled: bool = True
     typesafe_api_key: str = ""
     jev_model: str = "jev-1.13.0"

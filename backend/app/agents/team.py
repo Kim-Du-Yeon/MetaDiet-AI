@@ -325,12 +325,26 @@ class DietTeam:
         if self.evidence_search_status == 'search_unavailable':
             return {'grounded':False, 'status':'search_unavailable', 'evidence':[],
                     'instruction':'이번 요청에서는 검색을 다시 시도하지 말고 확인된 기록을 분석하세요.'}
-        # Translation may make a nested LLM call. Count that call conservatively.
-        if re.search(r"[가-힣]", query):
+        from app.core.config import get_settings
+        settings = get_settings()
+        agentic = getattr(settings, 'agentic_rag_enabled', False)
+        # The loop owns all nested translation/controller reservations when enabled.
+        if not agentic and re.search(r"[가-힣]", query):
             await self.budget.reserve("model")
         try:
-            result = await retrieve(query, k=4)
+            if agentic:
+                from app.rag.agentic import bounded_retrieve, Limits
+                from app.agents.execution_stream import emit_runtime_event
+                result = await bounded_retrieve(query, retrieve=retrieve,
+                    reserve=self.budget.reserve, emit=emit_runtime_event,
+                    limits=Limits(settings.agentic_rag_max_rounds, settings.agentic_rag_timeout_seconds))
+                self.events.append({'type': 'agentic_rag_result', **result['agentic']})
+            else:
+                result = await retrieve(query, k=4)
         except Exception as exc:
+            from app.agents.runtime import ExecutionStopped
+            if isinstance(exc, ExecutionStopped):
+                raise
             from app.agents.execution_stream import emit_runtime_event
             self.evidence_search_status = 'search_unavailable'
             known_errors = {
@@ -346,13 +360,16 @@ class DietTeam:
                         'instruction':'검색 도구를 사용할 수 없습니다. 같은 검색을 반복하지 말고 확인된 기록 분석을 제공하고 수치 변경만 보류하세요.'}
             self.evidence_cache[query] = response
             return response
-        self.evidence_search_status = 'grounded' if result.get('grounded') else 'insufficient_evidence'
+        stop = (result.get('agentic') or {}).get('stop_reason')
+        self.evidence_search_status = ('search_unavailable' if stop in
+            {'retrieval_error', 'controller_error', 'timeout'} else
+            'grounded' if result.get('grounded') else 'insufficient_evidence')
         from app.agents.execution_stream import emit_runtime_event
         await emit_runtime_event('evidence_search_result', status=self.evidence_search_status,
                                  document_count=len(result.get('docs') or []),
                                  retrieval_mode=result.get('retrieval_mode', 'unknown'))
         if not result.get("grounded"):
-            response = {"grounded": False, 'status':'insufficient_evidence', "evidence": []}
+            response = {"grounded": False, 'status':self.evidence_search_status, "evidence": []}
             self.evidence_cache[query] = response
             return response
         found = []

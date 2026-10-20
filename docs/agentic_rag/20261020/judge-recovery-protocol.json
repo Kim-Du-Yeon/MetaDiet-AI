@@ -1,0 +1,7 @@
+{
+  "reason": "Some Pro structured grades exhaust 512 total output tokens in reasoning; parsed=None. Original failures remain in attempts.jsonl.",
+  "remedy": "Re-evaluate every baseline and agentic output, including failed serving attempts, with same grade schema/system prompt, Pro model, max_tokens2048 and thinking_level low. New judge file separate; no serving retries or replacement.",
+  "scope": "Judge reliability fix, not selecting/tuning candidate answers",
+  "quality_denominator": 100,
+  "judge_costs": "Report original and recovered separately plus total."
+}

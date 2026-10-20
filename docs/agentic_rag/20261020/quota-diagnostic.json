@@ -1,0 +1,12 @@
+{
+  "provider": "Gemini",
+  "role": "Pro judge",
+  "status": 429,
+  "error_type": "GoogleRateLimitError",
+  "quota_id": "GenerateRequestsPerDayPerProjectPerModel",
+  "quota_value": 250,
+  "daily": true,
+  "minute": false,
+  "credit_exhaustion": false,
+  "action": "Stopped recovery evaluator; serving comparison continues. No model downgrade, quota increase or credential change. Preserve completed grades and failures; resume judging saved answers after quota resets."
+}
