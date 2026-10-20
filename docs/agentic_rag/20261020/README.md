@@ -63,3 +63,5 @@ backend/venv/Scripts/python.exe backend/scripts/eval/analyze_agentic_rag.py docs
 생성 실험 중 별도 리뷰로 발췌 제한·오류 분류·추적 메타데이터를 보강했다. [생성 당시 컨트롤러](controller-experiment-source.py.txt)와 [runner](benchmark-experiment-source.py.txt)를 보존한다. 현재 안전성 수정본의 새100쌍 성능 실험이라고 표기하지 않는다. 비어 있지 않은 후보 context96개의 입력 호환성은 별도 확인했다.
 
 공개 기존 버전 확인: API health 재확인200, API·웹 commit `7dfbda0f14e556c7def56a16138597db68d123d5`. 최초 API health30초 타임아웃은 보존했고 원인은 확정하지 않았다. 후보의 배포/브라우저 검증 결과로 취급하지 않는다. [원본](public-baseline.json).
+
+GitHub 커밋 `1376d0f0` 푸시 후 Render 실제 브라우저 Events에서 **Deploy skipped for commit1376d0f**와 기존 Live `7dfbda0f`를 확인했다. [배포 보류 확인](render-skip-verification.json). 이는 후보 상담 흐름의 브라우저 검증과 구분한다.
