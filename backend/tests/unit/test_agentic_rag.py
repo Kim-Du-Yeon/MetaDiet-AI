@@ -176,7 +176,7 @@ async def test_low_score_research_cannot_replace_initial_grounded_evidence():
 
 def test_controller_preserves_bounded_partial_answers_and_table_constraints():
     from app.rag.agentic import CONTROLLER_PROMPT, PROMPT_VERSION
-    assert PROMPT_VERSION == "agentic-rag-controller-v6"
+    assert PROMPT_VERSION == "agentic-rag-controller-v9"
     assert "primary requested fact" in CONTROLLER_PROMPT
     assert "row" in CONTROLLER_PROMPT and "footnote" in CONTROLLER_PROMPT
     assert "blank" in CONTROLLER_PROMPT
@@ -255,3 +255,18 @@ async def test_truncated_coverage_assessment_is_rejected(monkeypatch):
                     "raw":SimpleNamespace(response_metadata={"finish_reason":"MAX_TOKENS"})}
     monkeypatch.setattr(llm,"get_chat_model",lambda **kwargs:Model())
     with pytest.raises(ValueError):await model_assessment("question",result())
+
+
+@pytest.mark.asyncio
+async def test_retrieval_credit_error_keeps_safe_qa_contract_and_reason(monkeypatch):
+    from app.rag import qa
+    fetch=AsyncMock(side_effect=RuntimeError('402 prepaid depleted private-details'))
+    r=await bounded_retrieve('q',retrieve=fetch,assess=AsyncMock())
+    assert r['max_score']==0
+    assert r['agentic']['provider_failure_reason']=='credits'
+    model=AsyncMock()
+    monkeypatch.setattr(qa._llm,'ainvoke',model)
+    answer=await qa.answer_from_knowledge('q',retrieval_result=r)
+    assert answer['answer']==qa.NO_EVIDENCE
+    model.assert_not_called()
+    assert 'private-details' not in str(r)

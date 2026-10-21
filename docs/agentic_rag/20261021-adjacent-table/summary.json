@@ -1,0 +1,90 @@
+{
+  "baseline": {
+    "attempts": 100,
+    "completed": 53,
+    "failure_rate": 0.47,
+    "operational_failure_rate": 0.52,
+    "judge_failures": 53,
+    "correctness": null,
+    "faithfulness": null,
+    "source_page_support": 0.36,
+    "p50_ms": 4966.331000000537,
+    "p95_ms": 19559.408600000097,
+    "known_model_cost_usd": 0.33491725,
+    "known_embedding_cost_usd": 0.00042140000000000005,
+    "known_serving_cost_usd": 0.33533865,
+    "embedding_cost_upper_proxy_usd": 0.0037966000000000002,
+    "cost_complete": false,
+    "original_judge_known_cost_usd": 0,
+    "recovered_judge_known_cost_usd": 0,
+    "loop_stops": {
+      "sufficient": 47,
+      "round_limit": 1,
+      "controller_error": 5,
+      "not_applicable": 47
+    },
+    "second_rounds": 4,
+    "judge_completed": 0,
+    "judge_states": {
+      "not_attempted_credits": 53,
+      "not_applicable_serving_failed": 47
+    },
+    "correctness_lower_bound": 0.0,
+    "faithfulness_lower_bound": 0.0
+  },
+  "agentic": {
+    "attempts": 100,
+    "completed": 54,
+    "failure_rate": 0.46,
+    "operational_failure_rate": 0.52,
+    "judge_failures": 54,
+    "correctness": null,
+    "faithfulness": null,
+    "source_page_support": 0.38,
+    "p50_ms": 3058.9409999993222,
+    "p95_ms": 19790.69510000045,
+    "known_model_cost_usd": 0.3318416,
+    "known_embedding_cost_usd": 0.00042980000000000004,
+    "known_serving_cost_usd": 0.3322714,
+    "embedding_cost_upper_proxy_usd": 0.0039184,
+    "cost_complete": false,
+    "original_judge_known_cost_usd": 0,
+    "recovered_judge_known_cost_usd": 0,
+    "loop_stops": {
+      "sufficient": 46,
+      "round_limit": 2,
+      "not_applicable": 46,
+      "controller_error": 5,
+      "retrieval_error": 1
+    },
+    "second_rounds": 4,
+    "judge_completed": 0,
+    "judge_states": {
+      "not_attempted_credits": 54,
+      "not_applicable_serving_failed": 46
+    },
+    "correctness_lower_bound": 0.0,
+    "faithfulness_lower_bound": 0.0
+  },
+  "checks": {
+    "judge_complete": false,
+    "quality_minimum": false,
+    "quality_improved": false,
+    "faithfulness_noninferior": false,
+    "support_noninferior": true,
+    "failure_noninferior": true,
+    "operational_failure_noninferior": true,
+    "latency_bounded": true,
+    "cost_complete": false,
+    "cost_bounded": true
+  },
+  "rollout_gate": false,
+  "limitations": [
+    "100 attempts repeat 40 development questions; not 100 independent user outcomes.",
+    "RAG boundary latency excludes auth/DB/queue/browser; not public end-to-end p95.",
+    "No latest-user-record reads: freshness is not applicable to this retrieval-only comparison.",
+    "Pro rubric is an automated judge, not blind human or Ragas validation.",
+    "Missing embedding usage keeps cost incomplete; UTF8 bytes are only a conservative proxy. Complete rows use raw provider promptTokenCount and frozen prices, not an invoice.",
+    "Dense-only recipe matches 512MiB dense fallback, not larger-host hybrid mode."
+  ]
+}

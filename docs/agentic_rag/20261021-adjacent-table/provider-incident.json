@@ -1,0 +1,27 @@
+{
+  "provider_status": 402,
+  "provider_reason": "prepayment_credits_depleted",
+  "provider_message": "Your prepayment credits are depleted.",
+  "billing_documentation": "https://ai.google.dev/gemini-api/docs/billing#prepay",
+  "retry_documentation": "https://ai.google.dev/gemini-api/docs/troubleshooting",
+  "recorded_attempts": 200,
+  "counts": {
+    "baseline": {
+      "completed": 53,
+      "failed": 47
+    },
+    "agentic": {
+      "completed": 54,
+      "failed": 46
+    }
+  },
+  "raw_error_counts": {
+    "{'type': 'ChatGoogleGenerativeAIError', 'reason': 'credits'}": 1,
+    "{'type': 'KeyError', 'reason': 'provider_or_contract'}": 92
+  },
+  "secondary_bug": "bounded retrieval exception before any result omitted max_score; QA then raised KeyError. Reproduced offline.",
+  "attribution_limit": "92 KeyError raw rows did not preserve original provider status; do not retroactively relabel each as proven402. Concurrent sanitized logs show repeated402.",
+  "additional_calls": "Stopped, no final Pro batch submitted. Existing200rows preserved without resampling.",
+  "user_input": "User will notify after top-up or validation-key update.",
+  "rollout_gate": false
+}

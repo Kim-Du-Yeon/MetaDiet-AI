@@ -1,0 +1,488 @@
+{
+  "state": "JOB_STATE_SUCCEEDED",
+  "model": "gemini-3.1-pro-preview",
+  "entries": [
+    {
+      "key": "old|core-dev-001|agentic",
+      "kind": "single",
+      "attempt_id": "core-dev-001",
+      "condition": "agentic",
+      "payload": {
+        "question": "Which named activity levels have separate estimates in the fictional Delta reference?",
+        "gold": "Base Quiet; separate estimates for Swift and Rapid.",
+        "answer": "Delta 기준에서 별도의 추정치가 제시된 활동 그룹은 Swift와 Rapid입니다 [출처: core-scope-development.txt, p.102]. (기본 그룹은 Quiet입니다 [출처: core-scope-development.txt, p.102]).",
+        "context": "[출처: core-scope-development.txt, 페이지: 2]\nThe Delta reference uses a base activity group and presents other activity levels separately.\n\n[출처: core-scope-development.txt, 페이지: 102]\nDelta: the base group is Quiet; the separate estimates are for named groups Swift and Rapid."
+      }
+    },
+    {
+      "key": "old|core-dev-002|baseline",
+      "kind": "single",
+      "attempt_id": "core-dev-002",
+      "condition": "baseline",
+      "payload": {
+        "question": "What quantity and unit does the fictional Echo memo give?",
+        "gold": "16 milligrams per serving.",
+        "answer": "Echo 메모에 제시된 양(quantity)은 16이며, 단위(unit)는 1회 제공량당 밀리그램(milligrams per serving)입니다 [출처: core-scope-development.txt, p.103]. \n\n(페이지 3에는 수치 16만 기재되어 있고 단위는 나와 있지 않습니다 [출처: core-scope-development.txt, p.3].)",
+        "context": "[출처: core-scope-development.txt, 페이지: 3]\nEcho lists a quantity of 16, but this fragment does not show the unit.\n\n[출처: core-scope-development.txt, 페이지: 103]\nEcho memo: the complete quantity is 16 milligrams per serving."
+      }
+    },
+    {
+      "key": "old|core-dev-000|baseline",
+      "kind": "single",
+      "attempt_id": "core-dev-000",
+      "condition": "baseline",
+      "payload": {
+        "question": "What amount and amino-acid balance does the fictional Aria protocol state?",
+        "gold": "430-910 mg per serving with balanced essential amino acids.",
+        "answer": "Aria 프로토콜의 수치 사양에 명시된 양은 1회 제공량당 430-910 mg이며, 모든 필수 아미노산이 균형을 이루어야 합니다 [출처: core-scope-development.txt, p.101]. \n\n한편, 동일 자료의 다른 부분에서는 적절한 양의 아미노산과 균형 잡힌 필수 아미노산이 필요하다고 명시하면서도 구체적인 수치상 양은 제시하지 않았습니다 [출처: core-scope-development.txt, p.1].",
+        "context": "[출처: core-scope-development.txt, 페이지: 1]\nAria requires an adequate amount of amino acids and balanced essential amino acids. No numerical amount is shown here.\n\n[출처: core-scope-development.txt, 페이지: 101]\nAria protocol numerical specification: 430-910 mg per serving, with all essential amino acids in balance."
+      }
+    },
+    {
+      "key": "old|core-dev-002|agentic",
+      "kind": "single",
+      "attempt_id": "core-dev-002",
+      "condition": "agentic",
+      "payload": {
+        "question": "What quantity and unit does the fictional Echo memo give?",
+        "gold": "16 milligrams per serving.",
+        "answer": "가상의 Echo 메모에 제시된 수치는 16이며, 단위는 1회 제공량당 밀리그램(milligrams per serving)입니다 [출처: core-scope-development.txt, p.103].",
+        "context": "[출처: core-scope-development.txt, 페이지: 3]\nEcho lists a quantity of 16, but this fragment does not show the unit.\n\n[출처: core-scope-development.txt, 페이지: 103]\nEcho memo: the complete quantity is 16 milligrams per serving."
+      }
+    },
+    {
+      "key": "old|core-dev-001|baseline",
+      "kind": "single",
+      "attempt_id": "core-dev-001",
+      "condition": "baseline",
+      "payload": {
+        "question": "Which named activity levels have separate estimates in the fictional Delta reference?",
+        "gold": "Base Quiet; separate estimates for Swift and Rapid.",
+        "answer": "Delta 기준에서 별도의 추정치를 가지는 명명된 활동 그룹은 Swift와 Rapid입니다 [출처: core-scope-development.txt, p.102].",
+        "context": "[출처: core-scope-development.txt, 페이지: 2]\nThe Delta reference uses a base activity group and presents other activity levels separately.\n\n[출처: core-scope-development.txt, 페이지: 102]\nDelta: the base group is Quiet; the separate estimates are for named groups Swift and Rapid."
+      }
+    },
+    {
+      "key": "old|core-dev-000|agentic",
+      "kind": "single",
+      "attempt_id": "core-dev-000",
+      "condition": "agentic",
+      "payload": {
+        "question": "What amount and amino-acid balance does the fictional Aria protocol state?",
+        "gold": "430-910 mg per serving with balanced essential amino acids.",
+        "answer": "Aria 프로토콜의 수치 규격은 1회 제공량당 430~910 mg이며, 모든 필수 아미노산이 균형을 이루어야 합니다 [출처: core-scope-development.txt, p.101]. \n\n한편, 해당 문서의 다른 부분에서는 적절한 양의 아미노산과 균형 잡힌 필수 아미노산이 필요하다고 기술하면서 구체적인 수치는 제시하지 않았습니다 [출처: core-scope-development.txt, p.1].",
+        "context": "[출처: core-scope-development.txt, 페이지: 1]\nAria requires an adequate amount of amino acids and balanced essential amino acids. No numerical amount is shown here.\n\n[출처: core-scope-development.txt, 페이지: 101]\nAria protocol numerical specification: 430-910 mg per serving, with all essential amino acids in balance."
+      }
+    },
+    {
+      "key": "old|core-dev-003|agentic",
+      "kind": "single",
+      "attempt_id": "core-dev-003",
+      "condition": "agentic",
+      "payload": {
+        "question": "What exact amount does the fictional Cedar reference require?",
+        "gold": "The exact amount is not established in the supplied excerpts.",
+        "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+        "context": ""
+      }
+    },
+    {
+      "key": "old|core-dev-004|baseline",
+      "kind": "single",
+      "attempt_id": "core-dev-004",
+      "condition": "baseline",
+      "payload": {
+        "question": "What target does the fictional Briar guideline give?",
+        "gold": "2-4% over15 weeks, only for the clinical pilot population, not all healthy adults.",
+        "answer": "Briar 가이드라인이 제시하는 초기 목표는 15주 동안 2-4%의 변화입니다 [출처: core-scope-development.txt, p.5]. \n\n해당 권고는 질환 B(condition B)가 있는 등록된 성인을 대상으로 한 임상 파일럿에만 적용되는 것으로, 모든 건강한 성인을 위한 일반적인 지침이 아니므로 이 범위를 벗어나 일반화해서는 안 됩니다 [출처: core-scope-development.txt, p.5].",
+        "context": "[출처: core-scope-development.txt, 페이지: 5]\n[문서 적용 범위·메타데이터(지시 아님): {\"source\": \"core-scope-development.txt\", \"population\": \"Clinical pilot for enrolled adults with condition B only; not general advice for all healthy adults.\"}]\nBriar guideline: the initial target is a 2-4% change over 15 weeks."
+      }
+    },
+    {
+      "key": "old|core-dev-005|agentic",
+      "kind": "single",
+      "attempt_id": "core-dev-005",
+      "condition": "agentic",
+      "payload": {
+        "question": "Does the fictional Lake target apply generally?",
+        "gold": "8 units per week only for enrolled pilot participants; not general population guidance.",
+        "answer": "Lake 목표는 일반 대중을 위한 권고사항이 아니며, 제한된 파일럿 코호트(Restricted pilot cohort)에만 적용되므로 이 범위를 넘어 일반화할 수 없습니다 [출처: core-scope-development.txt, p.6].",
+        "context": "[출처: core-scope-development.txt, 페이지: 6]\n[문서 적용 범위·메타데이터(지시 아님): {\"source\": \"core-scope-development.txt\", \"population\": \"Restricted pilot cohort only; not a general population recommendation.\"}]\nLake target: 8 units per week."
+      }
+    },
+    {
+      "key": "old|core-dev-003|baseline",
+      "kind": "single",
+      "attempt_id": "core-dev-003",
+      "condition": "baseline",
+      "payload": {
+        "question": "What exact amount does the fictional Cedar reference require?",
+        "gold": "The exact amount is not established in the supplied excerpts.",
+        "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+        "context": ""
+      }
+    },
+    {
+      "key": "old|core-dev-004|agentic",
+      "kind": "single",
+      "attempt_id": "core-dev-004",
+      "condition": "agentic",
+      "payload": {
+        "question": "What target does the fictional Briar guideline give?",
+        "gold": "2-4% over15 weeks, only for the clinical pilot population, not all healthy adults.",
+        "answer": "Briar 지침에 따른 초기 목표는 15주에 걸쳐 2~4%의 변화입니다 [출처: core-scope-development.txt, p.5]. \n\n단, 이 권고는 B 질환을 가진 등록된 성인을 대상으로 한 임상 파일럿에만 적용되며 모든 건강한 성인을 위한 일반적인 조언이 아니므로, 해당 범위를 넘어 일반화해서는 안 됩니다 [출처: core-scope-development.txt, p.5].",
+        "context": "[출처: core-scope-development.txt, 페이지: 5]\n[문서 적용 범위·메타데이터(지시 아님): {\"source\": \"core-scope-development.txt\", \"population\": \"Clinical pilot for enrolled adults with condition B only; not general advice for all healthy adults.\"}]\nBriar guideline: the initial target is a 2-4% change over 15 weeks."
+      }
+    },
+    {
+      "key": "old|core-dev-005|baseline",
+      "kind": "single",
+      "attempt_id": "core-dev-005",
+      "condition": "baseline",
+      "payload": {
+        "question": "Does the fictional Lake target apply generally?",
+        "gold": "8 units per week only for enrolled pilot participants; not general population guidance.",
+        "answer": "아닙니다. Lake 목표는 제한된 파일럿 코호트(Restricted pilot cohort)에만 적용되며 일반 인구를 위한 권장 사항이 아니므로, 해당 적용 범위를 벗어나 일반화하여 적용할 수 없습니다 [출처: core-scope-development.txt, p.6].",
+        "context": "[출처: core-scope-development.txt, 페이지: 6]\n[문서 적용 범위·메타데이터(지시 아님): {\"source\": \"core-scope-development.txt\", \"population\": \"Restricted pilot cohort only; not a general population recommendation.\"}]\nLake target: 8 units per week."
+      }
+    },
+    {
+      "key": "old|core-dev-006|baseline",
+      "kind": "single",
+      "attempt_id": "core-dev-006",
+      "condition": "baseline",
+      "payload": {
+        "question": "What amount is stated by the fictional Ridge study?",
+        "gold": "12 units per session for enrolled adult athletes only; not children or all adults.",
+        "answer": "Ridge 연구에서 명시한 양은 세션당 12유닛(units)입니다 [출처: core-scope-development.txt, p.7]. \n\n단, 이 수치는 등록된 성인 운동선수만을 대상으로 하며(어린이 제외) 모든 성인을 위한 기준이 아니므로, 해당 범위를 벗어나 일반화하여 적용해서는 안 됩니다 [출처: core-scope-development.txt, p.7].",
+        "context": "[출처: core-scope-development.txt, 페이지: 7]\n[문서 적용 범위·메타데이터(지시 아님): {\"source\": \"core-scope-development.txt\", \"population\": \"Enrolled adult athletes only; excludes children. Not a reference for all adults.\"}]\nRidge study amount: 12 units per session."
+      }
+    },
+    {
+      "key": "old|core-dev-007|agentic",
+      "kind": "single",
+      "attempt_id": "core-dev-007",
+      "condition": "agentic",
+      "payload": {
+        "question": "What does the fictional flux index mean, and must I cut63 units tomorrow?",
+        "gold": "Negative means output exceeds input; the excerpt does not prescribe a fixed63-unit next-day cut.",
+        "answer": "음의 플럭스 지수(negative flux index)는 출력이 입력을 초과함을 의미합니다 [출처: core-scope-development.txt, p.8]. \n\n이는 관계를 설명하는 것일 뿐 다음 날의 조정 일정이 아니므로, 내일 63단위를 감축해야 한다는 처방이나 수치는 근거 자료에서 지원되지 않습니다 [출처: core-scope-development.txt, p.8].",
+        "context": "[출처: core-scope-development.txt, 페이지: 8]\nA negative flux index means the output exceeds input. This describes a relationship, not a next-day adjustment schedule."
+      }
+    },
+    {
+      "key": "old|core-dev-008|baseline",
+      "kind": "single",
+      "attempt_id": "core-dev-008",
+      "condition": "baseline",
+      "payload": {
+        "question": "What is the exact type C value in the fictional Pine table?",
+        "gold": "The exact type C value is not established; blank is not evidence of zero or absence.",
+        "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+        "context": ""
+      }
+    },
+    {
+      "key": "old|core-dev-006|agentic",
+      "kind": "single",
+      "attempt_id": "core-dev-006",
+      "condition": "agentic",
+      "payload": {
+        "question": "What amount is stated by the fictional Ridge study?",
+        "gold": "12 units per session for enrolled adult athletes only; not children or all adults.",
+        "answer": "Ridge 연구에 명시된 양은 세션당 12단위(12 units per session)입니다 [출처: core-scope-development.txt, p.7]. \n\n해당 수치의 적용 범위는 등록된 성인 운동선수로만 제한되며(어린이 제외), 모든 성인을 위한 기준이 아니므로 이 범위를 넘어 일반화할 수 없습니다 [출처: core-scope-development.txt, p.7].",
+        "context": "[출처: core-scope-development.txt, 페이지: 7]\n[문서 적용 범위·메타데이터(지시 아님): {\"source\": \"core-scope-development.txt\", \"population\": \"Enrolled adult athletes only; excludes children. Not a reference for all adults.\"}]\nRidge study amount: 12 units per session."
+      }
+    },
+    {
+      "key": "old|core-dev-008|agentic",
+      "kind": "single",
+      "attempt_id": "core-dev-008",
+      "condition": "agentic",
+      "payload": {
+        "question": "What is the exact type C value in the fictional Pine table?",
+        "gold": "The exact type C value is not established; blank is not evidence of zero or absence.",
+        "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+        "context": ""
+      }
+    },
+    {
+      "key": "old|core-dev-007|baseline",
+      "kind": "single",
+      "attempt_id": "core-dev-007",
+      "condition": "baseline",
+      "payload": {
+        "question": "What does the fictional flux index mean, and must I cut63 units tomorrow?",
+        "gold": "Negative means output exceeds input; the excerpt does not prescribe a fixed63-unit next-day cut.",
+        "answer": "음수 플럭스 지수(negative flux index)는 출력이 입력을 초과한다는 관계를 의미하며, 다음 날의 조정 일정을 의미하지 않습니다 [출처: core-scope-development.txt, p.8]. \n\n따라서 내일 63단위를 줄여야 한다는 요구는 근거에 없는 내용이며, 해당 지수는 다음 날의 조정 일정이 아닙니다 [출처: core-scope-development.txt, p.8].",
+        "context": "[출처: core-scope-development.txt, 페이지: 8]\nA negative flux index means the output exceeds input. This describes a relationship, not a next-day adjustment schedule."
+      }
+    },
+    {
+      "key": "old|core-dev-009|agentic",
+      "kind": "single",
+      "attempt_id": "core-dev-009",
+      "condition": "agentic",
+      "payload": {
+        "question": "What nutrition amount does the fictional Birch guide set?",
+        "gold": "No nutrition amount is supported.",
+        "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+        "context": ""
+      }
+    },
+    {
+      "key": "old|core-dev-009|baseline",
+      "kind": "single",
+      "attempt_id": "core-dev-009",
+      "condition": "baseline",
+      "payload": {
+        "question": "What nutrition amount does the fictional Birch guide set?",
+        "gold": "No nutrition amount is supported.",
+        "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+        "context": ""
+      }
+    },
+    {
+      "key": "old|core-dev-011|agentic",
+      "kind": "single",
+      "attempt_id": "core-dev-011",
+      "condition": "agentic",
+      "payload": {
+        "question": "What amount applies to fictional group U?",
+        "gold": "No amount for group U is established; group V cannot be substituted.",
+        "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+        "context": ""
+      }
+    },
+    {
+      "key": "old|core-dev-010|baseline",
+      "kind": "single",
+      "attempt_id": "core-dev-010",
+      "condition": "baseline",
+      "payload": {
+        "question": "What is the fictional Maple reference amount and unit?",
+        "gold": "19 milligrams per day.",
+        "answer": "Maple의 기준 수치는 하루 19 밀리그램(19 milligrams per day)이며, 단위는 1일당 밀리그램(milligrams per day)입니다 [출처: core-scope-development.txt, p.11].",
+        "context": "[출처: core-scope-development.txt, 페이지: 11]\nMaple reference amount: 19 milligrams per day."
+      }
+    },
+    {
+      "key": "old|adj-dev-000|baseline",
+      "kind": "single",
+      "attempt_id": "adj-dev-000",
+      "condition": "baseline",
+      "payload": {
+        "question": "What amount and unit does the fictional Elara protocol require?",
+        "gold": "37-83 micrograms per session; pilot participants only.",
+        "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+        "context": ""
+      }
+    },
+    {
+      "key": "old|core-dev-011|baseline",
+      "kind": "single",
+      "attempt_id": "core-dev-011",
+      "condition": "baseline",
+      "payload": {
+        "question": "What amount applies to fictional group U?",
+        "gold": "No amount for group U is established; group V cannot be substituted.",
+        "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+        "context": ""
+      }
+    },
+    {
+      "key": "old|core-dev-010|agentic",
+      "kind": "single",
+      "attempt_id": "core-dev-010",
+      "condition": "agentic",
+      "payload": {
+        "question": "What is the fictional Maple reference amount and unit?",
+        "gold": "19 milligrams per day.",
+        "answer": "메이플(Maple)의 기준량은 하루 19밀리그램(19 milligrams per day)입니다 [출처: core-scope-development.txt, p.11].",
+        "context": "[출처: core-scope-development.txt, 페이지: 11]\nMaple reference amount: 19 milligrams per day."
+      }
+    },
+    {
+      "key": "old|adj-dev-002|baseline",
+      "kind": "single",
+      "attempt_id": "adj-dev-002",
+      "condition": "baseline",
+      "payload": {
+        "question": "What does the fictional Mira reference specify for marker concentration?",
+        "gold": "61-74 units per litre, experimental group only.",
+        "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+        "context": ""
+      }
+    },
+    {
+      "key": "old|adj-dev-000|agentic",
+      "kind": "single",
+      "attempt_id": "adj-dev-000",
+      "condition": "agentic",
+      "payload": {
+        "question": "What amount and unit does the fictional Elara protocol require?",
+        "gold": "37-83 micrograms per session; pilot participants only.",
+        "answer": "Elara 프로토콜은 파일럿 참가자에 한해 세션당 37~83 마이크로그램(micrograms per session)을 규정하고 있습니다 [출처: adjacent-development.txt, p.1]. \n\n해당 권장량은 파일럿 참가자만을 대상으로 한 제한된 범위이며, 이 범위를 벗어나 일반화해서는 안 됩니다 [출처: adjacent-development.txt, p.1].",
+        "context": "[출처: adjacent-development.txt, 페이지: 1]\nElara protocol introduction. A suitable quantity is needed; the amount continues in the next paragraph.\n\n[출처: adjacent-development.txt, 페이지: 1]\nElara protocol specifies 37-83 micrograms per session for pilot participants only.\n\n[출처: adjacent-development.txt, 페이지: 101]\nElara protocol introduction. A suitable quantity is needed; the amount continues in the next paragraph."
+      }
+    },
+    {
+      "key": "old|adj-dev-001|agentic",
+      "kind": "single",
+      "attempt_id": "adj-dev-001",
+      "condition": "agentic",
+      "payload": {
+        "question": "가상 누리 지침을 모든 사람에게 적용해도 되나요?",
+        "gold": "임상시험 참여자에게만 적용되며 모든 사람에게 일반화할 수 없다.",
+        "answer": "누리 지침은 전체 일반인에게 적용하는 지침이 아니며, 임상시험 참여자에게만 적용되므로 모든 사람에게 일반화하여 적용할 수 없습니다 [출처: adjacent-development.txt, p.2].",
+        "context": "[출처: adjacent-development.txt, 페이지: 2]\n누리 지침의 권장 절차는 다음 문단으로 이어진다.\n\n[출처: adjacent-development.txt, 페이지: 2]\n누리 지침은 임상시험 참여자에게만 적용된다. 전체 일반인에게 적용하는 지침이 아니다."
+      }
+    },
+    {
+      "key": "old|adj-dev-003|agentic",
+      "kind": "single",
+      "attempt_id": "adj-dev-003",
+      "condition": "agentic",
+      "payload": {
+        "question": "가상 시온 기준의 정확한 복용량은 얼마인가?",
+        "gold": "정확한 복용량과 단위는 주어진 자료에서 확인되지 않는다.",
+        "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+        "context": ""
+      }
+    },
+    {
+      "key": "old|adj-dev-001|baseline",
+      "kind": "single",
+      "attempt_id": "adj-dev-001",
+      "condition": "baseline",
+      "payload": {
+        "question": "가상 누리 지침을 모든 사람에게 적용해도 되나요?",
+        "gold": "임상시험 참여자에게만 적용되며 모든 사람에게 일반화할 수 없다.",
+        "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+        "context": ""
+      }
+    },
+    {
+      "key": "old|adj-dev-002|agentic",
+      "kind": "single",
+      "attempt_id": "adj-dev-002",
+      "condition": "agentic",
+      "payload": {
+        "question": "What does the fictional Mira reference specify for marker concentration?",
+        "gold": "61-74 units per litre, experimental group only.",
+        "answer": "Mira 기준에 따르면 마커 농도는 실험군(experimental group)에 한해서만 리터당 61~74단위(units per litre)로 명시되어 있습니다 [출처: adjacent-development.txt, p.3]. \n\n이 기준은 실험군에만 한정된 범위이므로 해당 범위를 벗어나 일반화할 수 없습니다 [출처: adjacent-development.txt, p.3].",
+        "context": "[출처: adjacent-development.txt, 페이지: 3]\nMira reference overview. See the immediately following fragment for the marker specification.\n\n[출처: adjacent-development.txt, 페이지: 3]\nund information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Background information. Mira marker concentration is 61-74 units per litre for the experimental group only."
+      }
+    },
+    {
+      "key": "old|adj-dev-003|baseline",
+      "kind": "single",
+      "attempt_id": "adj-dev-003",
+      "condition": "baseline",
+      "payload": {
+        "question": "가상 시온 기준의 정확한 복용량은 얼마인가?",
+        "gold": "정확한 복용량과 단위는 주어진 자료에서 확인되지 않는다.",
+        "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+        "context": ""
+      }
+    },
+    {
+      "key": "old|adj-dev-004|baseline",
+      "kind": "single",
+      "attempt_id": "adj-dev-004",
+      "condition": "baseline",
+      "payload": {
+        "question": "가상 표에서 항목 가에 제시된 지표 종류는 무엇인가요?",
+        "gold": "항목 가에는 지표 A만 제시되어 있다.",
+        "answer": "항목 가에는 지표 A만 제시되어 있습니다 [출처: adjacent-development.txt, p.5].",
+        "context": "[출처: adjacent-development.txt, 페이지: 5]\n표 8. 항목별 지표 종류\n항목 가: 지표 A만 제시\n항목 나: 지표 B 및 C 제시\n행은 실험군 1과 2이다."
+      }
+    },
+    {
+      "key": "old|adj-dev-006|baseline",
+      "kind": "single",
+      "attempt_id": "adj-dev-006",
+      "condition": "baseline",
+      "payload": {
+        "question": "가상 표의 빈 셀만 보고 항목 가에 지표 B가 적용되지 않는다고 확정해도 되나요?",
+        "gold": "아니다. 주석이 없어 빈 셀만으로 B의 미적용을 확정할 수 없다.",
+        "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+        "context": ""
+      }
+    },
+    {
+      "key": "old|adj-dev-005|agentic",
+      "kind": "single",
+      "attempt_id": "adj-dev-005",
+      "condition": "agentic",
+      "payload": {
+        "question": "이 가상 표에서 항목 가는 B 지표로 제시되나요?",
+        "gold": "아니며 항목 가는 A 지표로 제시된다. B는 항목 나에 속한다. 정책상 미적용까지 단정하지 않는다.",
+        "answer": "항목 가는 지표 A만 제시되며, 지표 B는 항목 나에 제시됩니다 [출처: adjacent-development.txt, p.6]. 따라서 항목 가는 B 지표로 제시되지 않습니다 [출처: adjacent-development.txt, p.6]. 다만 해당 표는 정책상 적용 여부를 정한 표는 아닙니다 [출처: adjacent-development.txt, p.6].",
+        "context": "[출처: adjacent-development.txt, 페이지: 6]\n표 8. 항목별 지표 종류\n항목 가: 지표 A만 제시\n항목 나: 지표 B와 C 제시\n정책상 적용 여부를 정한 표는 아니다."
+      }
+    },
+    {
+      "key": "old|adj-dev-004|agentic",
+      "kind": "single",
+      "attempt_id": "adj-dev-004",
+      "condition": "agentic",
+      "payload": {
+        "question": "가상 표에서 항목 가에 제시된 지표 종류는 무엇인가요?",
+        "gold": "항목 가에는 지표 A만 제시되어 있다.",
+        "answer": "항목 가에 제시된 지표 종류는 지표 A입니다 [출처: adjacent-development.txt, p.5].",
+        "context": "[출처: adjacent-development.txt, 페이지: 5]\n표 8. 항목별 지표 종류\n항목 가: 지표 A만 제시\n항목 나: 지표 B 및 C 제시\n행은 실험군 1과 2이다."
+      }
+    },
+    {
+      "key": "old|adj-dev-006|agentic",
+      "kind": "single",
+      "attempt_id": "adj-dev-006",
+      "condition": "agentic",
+      "payload": {
+        "question": "가상 표의 빈 셀만 보고 항목 가에 지표 B가 적용되지 않는다고 확정해도 되나요?",
+        "gold": "아니다. 주석이 없어 빈 셀만으로 B의 미적용을 확정할 수 없다.",
+        "answer": "빈 셀만 보고 항목 가에 지표 B가 적용되지 않는다고 확정할 수 없습니다. \n\n표 9에서 항목 가의 열은 A와 B이고 행 1의 A 값은 72이며 B 셀은 비어 있으나, 빈 셀의 의미를 설명하는 주석은 제공되지 않았습니다 [출처: adjacent-development.txt, p.7].",
+        "context": "[출처: adjacent-development.txt, 페이지: 7]\n표 9. 항목 가의 열은 A와 B이다. 행 1의 A 값은 72이고 B 셀은 비어 있다. 빈 셀의 의미를 설명하는 주석은 제공되지 않았다."
+      }
+    },
+    {
+      "key": "old|adj-dev-005|baseline",
+      "kind": "single",
+      "attempt_id": "adj-dev-005",
+      "condition": "baseline",
+      "payload": {
+        "question": "이 가상 표에서 항목 가는 B 지표로 제시되나요?",
+        "gold": "아니며 항목 가는 A 지표로 제시된다. B는 항목 나에 속한다. 정책상 미적용까지 단정하지 않는다.",
+        "answer": "아닙니다. 항목 가는 지표 A만 제시됩니다 [출처: adjacent-development.txt, p.6].",
+        "context": "[출처: adjacent-development.txt, 페이지: 6]\n표 8. 항목별 지표 종류\n항목 가: 지표 A만 제시\n항목 나: 지표 B와 C 제시\n정책상 적용 여부를 정한 표는 아니다."
+      }
+    },
+    {
+      "key": "old|adj-dev-007|agentic",
+      "kind": "single",
+      "attempt_id": "adj-dev-007",
+      "condition": "agentic",
+      "payload": {
+        "question": "가상 표에서 항목 다에 제시되는 지표 종류를 알려줘.",
+        "gold": "완전한 머리글에서 항목 다에는 지표 D만 제시된다.",
+        "answer": "표 10에서 항목 다에는 지표 D만 제시됩니다 [출처: adjacent-development.txt, p.108]. 다만, 표 10의 일부 자료에서는 항목별 머리글이 잘려 지표 경계를 알 수 없는 한계가 있습니다 [출처: adjacent-development.txt, p.8].",
+        "context": "[출처: adjacent-development.txt, 페이지: 8]\n표 10의 일부: 항목 다 ... (항목별 머리글이 잘려 지표 경계를 알 수 없음)\n\n[출처: adjacent-development.txt, 페이지: 108]\n表10の完全な日本語版ではなく、韓国語原文: 표 10. 항목별 지표 종류: 항목 다에는 지표 D만 제시된다. 항목 라에는 지표 E와 F가 제시된다."
+      }
+    },
+    {
+      "key": "old|adj-dev-007|baseline",
+      "kind": "single",
+      "attempt_id": "adj-dev-007",
+      "condition": "baseline",
+      "payload": {
+        "question": "가상 표에서 항목 다에 제시되는 지표 종류를 알려줘.",
+        "gold": "완전한 머리글에서 항목 다에는 지표 D만 제시된다.",
+        "answer": "표 10에서 항목 다에는 지표 D만 제시됩니다 [출처: adjacent-development.txt, p.108]. (페이지 8의 표 10 일부에서는 머리글이 잘려 지표 경계를 알 수 없는 것으로 나타납니다 [출처: adjacent-development.txt, p.8].)",
+        "context": "[출처: adjacent-development.txt, 페이지: 8]\n표 10의 일부: 항목 다 ... (항목별 머리글이 잘려 지표 경계를 알 수 없음)\n\n[출처: adjacent-development.txt, 페이지: 108]\n表10の完全な日本語版ではなく、韓国語原文: 표 10. 항목별 지표 종류: 항목 다에는 지표 D만 제시된다. 항목 라에는 지표 E와 F가 제시된다."
+      }
+    }
+  ],
+  "entries_sha256": "024544ffcfb5d3fda0b26d0eaa8ff67273fed65e057dabceae168ef9f46b5206",
+  "name": "batches/f0skw78fhy6mf1o4a6lh5k8dhv7y6lxgq10d"
+}

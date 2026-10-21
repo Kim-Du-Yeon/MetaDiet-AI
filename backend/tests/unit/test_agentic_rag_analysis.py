@@ -120,3 +120,10 @@ def test_operational_timeout_is_counted_even_if_fallback_request_completed():
     assert result['agentic']['operational_failure_rate']==.01
     assert not result['checks']['operational_failure_noninferior']
     assert not result['rollout_gate']
+
+
+def test_neighbor_failure_counts_even_when_original_evidence_answers():
+    r,g=fixture();r[1]['agentic']={'stop_reason':'sufficient','neighbor_status':'unavailable'}
+    result=analyze(r,g)
+    assert result['agentic']['operational_failure_rate']==.01
+    assert not result['rollout_gate']

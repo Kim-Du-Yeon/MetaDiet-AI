@@ -1,0 +1,24 @@
+{
+  "recorded_attempts": 200,
+  "attempts_per_condition": 100,
+  "unique_questions": 40,
+  "attempt_keys_unique": true,
+  "same_frozen_cases": true,
+  "cohort_frozen_sources_match": true,
+  "postfix_current_sources_match_snapshots": true,
+  "development_cases_unchanged_all4runs": true,
+  "backend_full_check": {
+    "command": "backend/venv/Scripts/python.exe -m pytest backend/tests -q --basetemp=tmp/pytest-adjacent-table-release-final",
+    "passed": 1533,
+    "existing_skipped": 1,
+    "warnings": 3,
+    "exit_code": 0,
+    "evidence": "exec session59746 final output"
+  },
+  "quality_gate": false,
+  "final_Pro_batch_submitted": false,
+  "deployment": false,
+  "browser_candidate_validation": false,
+  "no_new_paid_jobs_after_402_detection": true,
+  "legacy_runner_continued_after_first402": true
+}

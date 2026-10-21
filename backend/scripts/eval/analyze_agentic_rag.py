@@ -26,7 +26,7 @@ def analyze(rows,grades):
         good=lambda r,field:serving(r) and judged(r) and judges[(r['attempt_id'],condition)].get(field,False)
         result[condition]={'attempts':n,'completed':sum(serving(r) for r in items),
             'failure_rate':sum(not serving(r) for r in items)/n,
-            'operational_failure_rate':sum(not serving(r) or (r.get('agentic') or {}).get('stop_reason') in {'timeout','controller_error','retrieval_error'} for r in items)/n,
+            'operational_failure_rate':sum(not serving(r) or (r.get('agentic') or {}).get('stop_reason') in {'timeout','controller_error','retrieval_error'} or (r.get('agentic') or {}).get('neighbor_status')=='unavailable' for r in items)/n,
             'judge_failures':sum(serving(r) and not judged(r) for r in items),
             'correctness':sum(good(r,'correct') for r in items)/n,
             'faithfulness':sum(good(r,'faithful') for r in items)/n,

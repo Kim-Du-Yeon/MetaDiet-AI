@@ -16,13 +16,27 @@ class Usage(AsyncCallbackHandler):
         for group in response.generations:
             msg=getattr(group[0],'message',None)
             self.calls.append(getattr(msg,'usage_metadata',None))
+    async def on_llm_error(self,error,**kwargs):
+        row=active.get()
+        if row is not None:
+            row['provider_error']=safe_error(error)
 
 def safe_error(exc):
     text=str(exc)
-    return {'type':type(exc).__name__, 'reason': 'quota' if '429' in text else 'credits' if '402' in text else 'timeout' if isinstance(exc,TimeoutError) else 'provider_or_contract'}
+    return {'type':type(exc).__name__, 'reason': 'quota' if '429' in text else 'credits' if '402' in text else 'auth' if '401' in text or '403' in text else 'timeout' if isinstance(exc,TimeoutError) else 'provider_or_contract',
+            'daily_quota':daily_quota(exc)}
 
 def daily_quota(exc):
-    return '429' in str(exc) and 'PerDay' in str(exc)
+    return '429' in str(exc) and any(value in str(exc).casefold() for value in ('perday','per day','daily'))
+
+
+class ProviderCircuit:
+    def __init__(self):self.reason=None
+    @property
+    def blocked(self):return self.reason is not None
+    def observe(self,error):
+        if error and (error.get('reason') in {'credits','auth'} or error.get('daily_quota')):
+            self.reason=error['reason']
 
 class Grade(BaseModel):
     correct: bool
@@ -34,6 +48,12 @@ def embedding_tokens(payload):
     return value if type(value) is int and value >= 0 else None
 
 active=contextvars.ContextVar('rag_experiment',default=None)
+
+
+def verify_frozen_sources(protocol,paths):
+    for key,path in paths.items():
+        if protocol.get(key) and hashlib.sha256(path.read_bytes()).hexdigest()!=protocol[key]:
+            raise ValueError('Frozen source mismatch: '+key)
 
 async def main(args):
     load_dotenv(ROOT/'backend/.env',override=True)
@@ -47,6 +67,9 @@ async def main(args):
     from google import genai
     directory=Path(args.output)
     protocol=json.loads((directory/'protocol.json').read_text(encoding='utf-8'))
+    neighbor_path=ROOT/'backend/app/rag/neighbors.py'
+    verify_frozen_sources(protocol,{'candidate_source_sha256':ROOT/'backend/app/rag/agentic.py',
+        'neighbor_source_sha256':neighbor_path,'benchmark_source_sha256':Path(__file__)})
     path=directory/'cases.json'
     if hashlib.sha256(path.read_bytes()).hexdigest()!=protocol['dataset_sha256']:
         raise ValueError('Frozen cases changed')
@@ -78,7 +101,10 @@ async def main(args):
     def traced_embed(client,*a,**kw):
         row=active.get()
         if row is not None: row['embedding_input_utf8_bytes']+=len(str(kw.get('contents','')).encode())
-        return embed(client,*a,**kw)
+        try:return embed(client,*a,**kw)
+        except Exception as exc:
+            if row is not None:row['provider_error']=safe_error(exc)
+            raise
     genai.models.Models.embed_content=traced_embed
     # Capture raw provider usage before this SDK version discards usageMetadata.
     from google.genai import _api_client
@@ -94,6 +120,8 @@ async def main(args):
     _api_client.BaseApiClient.request=traced_request
     await asyncio.to_thread(retriever.get_vector_store)
     identity={'dataset_sha256':protocol['dataset_sha256'],'controller_sha256':PROMPT_SHA256,
+              'neighbor_source_sha256':hashlib.sha256(neighbor_path.read_bytes()).hexdigest() if neighbor_path.exists() else None,
+              'chunks_sha256':hashlib.sha256(Path(settings.get_chunks_path()).read_bytes()).hexdigest(),
               'qa_prompt_sha256':hashlib.sha256(str(QA_PROMPT).encode()).hexdigest(),
               'candidate_answer_guidance_sha256':hashlib.sha256(ANSWER_GUIDANCE.encode()).hexdigest(),
               'namespace':settings.pinecone_namespace,'embedding_model':settings.embedding_model,
@@ -108,9 +136,11 @@ async def main(args):
     if output.exists(): raise ValueError('Refuse overwrite existing attempts')
     judge=get_chat_model(role='eval',temperature=0,max_tokens=2048,thinking_level='low')
     judge_disabled=False
+    circuit=ProviderCircuit()
     async def retrieve(q,**kw): return await retriever.retrieve(q,**kw,use_hybrid=False,use_rerank=False)
     async def run(case,condition):
         nonlocal judge_disabled
+        if circuit.blocked:return
         row={'attempt_id':case['attempt_id'],'condition':condition,'status':'failed','model_usage':[],
              'embedding_input_utf8_bytes':0,'embedding_usage':[],'correct':False,'faithful':False,'support':False}
         token=active.set(row); start=time.perf_counter()
@@ -123,6 +153,10 @@ async def main(args):
                 result=(await bounded_retrieve(case['question'],retrieve=retrieve,assess=assess)
                         if condition=='agentic' else await baseline_loop(case['question'],retrieve=retrieve,assess=assess)
                         if baseline_loop else await retrieve(case['question'],k=4))
+                reason=(result.get('agentic') or {}).get('provider_failure_reason')
+                if reason and 'provider_error' not in row:row['provider_error']={'type':'BoundedRetrievalFailure','reason':reason}
+                circuit.observe(row.get('provider_error'))
+                if circuit.blocked:raise RuntimeError('Provider precondition failed')
                 u=Usage()
                 try: answer=await answer_from_knowledge(case['question'],retrieval_result=result,config={'callbacks':[u]})
                 finally: row['model_usage'].extend({'model':settings.gemini_model,'usage':v,'phase':'answer'} for v in u.calls)
@@ -130,13 +164,16 @@ async def main(args):
                            documents=[{'text':d.page_content,'metadata':d.metadata} for d in result.get('context_docs',[])])
                 for acceptable in case['acceptable_evidence']:
                     row['support'] |= any(d['metadata'].get('source_file')==acceptable['source'] and int(d['metadata'].get('pdf_page',d['metadata'].get('page',-1))) in acceptable['pdf_pages'] for d in row['documents'])
-        except Exception as exc: row['error']=safe_error(exc)
+        except Exception as exc:
+            row['error']=row.get('provider_error') or safe_error(exc)
+            if row.get('provider_error'):row['secondary_error_type']=type(exc).__name__
         finally:
             row['ms']=(time.perf_counter()-start)*1000
             active.reset(token)
+        circuit.observe(row.get('provider_error') or row.get('error'))
         costs=[estimate_cost(c['model'],c['usage']) for c in row['model_usage']]
         row['known_model_cost_usd']=sum(c or 0 for c in costs)
-        row['model_cost_complete']=row['status']=='completed' and all(c is not None for c in costs)
+        row['model_cost_complete']=row['status']=='completed' and not row.get('provider_error') and all(c is not None for c in costs)
         # Raw provider usage is billed-token evidence; byte count is only a proxy.
         # Missing raw usage must still fail the complete-cost rollout gate.
         row['embedding_cost_upper_proxy_usd']=row['embedding_input_utf8_bytes']*.2/1e6
@@ -154,6 +191,7 @@ async def main(args):
                 row.update(correct=grade.correct,faithful=grade.faithful,judge_reason=grade.reason,judge_status='completed')
             except Exception as exc:
                 row.update(judge_status='failed',judge_error=safe_error(exc))
+                circuit.observe(row['judge_error'])
                 if daily_quota(exc): judge_disabled=True
             row['judge_usage']=ju.calls
             row['judge_known_cost_usd']=sum(estimate_cost(settings.gemini_eval_model,v) or 0 for v in ju.calls)
@@ -165,9 +203,14 @@ async def main(args):
     async def pair(i,case):
         async with semaphore:
             for condition in (['baseline','agentic'] if i%2==0 else ['agentic','baseline']):
+                if circuit.blocked:return
                 await run(case,condition)
                 await asyncio.sleep(1)
     await asyncio.gather(*(pair(i,c) for i,c in enumerate(cases)))
+    rows=[json.loads(v) for v in output.read_text(encoding='utf-8').splitlines()]
+    (directory/'run-status.json').write_text(json.dumps({'provider_blocked':circuit.blocked,'provider_reason':circuit.reason,
+        'planned_slots':len(cases)*2,'recorded_attempts':len(rows),'unstarted_slots':len(cases)*2-len(rows)},indent=2),encoding='utf-8')
+    if circuit.blocked:raise SystemExit(2)
 
 if __name__=='__main__':
     p=argparse.ArgumentParser(); p.add_argument('--output',required=True); p.add_argument('--baseline-source'); p.add_argument('--defer-judge',action='store_true')
