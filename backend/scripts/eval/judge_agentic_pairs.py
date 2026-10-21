@@ -115,7 +115,10 @@ async def main(directory, grades_name="paired-judges.jsonl", reuse_valid=None):
         await asyncio.sleep(2)
 
 if __name__=='__main__':
+    from eval_budget import add_budget_args, activate_budget
     parser=argparse.ArgumentParser(); parser.add_argument('directory')
     parser.add_argument('--grades-name',default='paired-judges.jsonl'); parser.add_argument('--reuse-valid')
+    add_budget_args(parser)
     args=parser.parse_args()
+    activate_budget(args,'judge')
     asyncio.run(main(args.directory,args.grades_name,args.reuse_valid))

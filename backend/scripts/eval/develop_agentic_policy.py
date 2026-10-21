@@ -7,6 +7,7 @@ async def main(args):
     from dotenv import load_dotenv
     load_dotenv(ROOT/'backend/.env',override=True)
     from app.rag import agentic,qa
+    qa._llm.max_tokens=2048
     from app.core.config import get_settings
     from langchain_core.documents import Document
     directory=Path(args.directory); output=directory/'attempts.jsonl'
@@ -70,7 +71,11 @@ async def main(args):
     await asyncio.gather(*(bounded_case(index,case) for index,case in enumerate(cases)))
 
 if __name__=='__main__':
+    from eval_budget import add_budget_args, activate_budget
     p=argparse.ArgumentParser();p.add_argument('--directory',required=True);p.add_argument('--baseline-source',required=True);p.add_argument('--workers',type=int,choices=(1,2,3),default=1)
-    try:asyncio.run(main(p.parse_args()))
+    add_budget_args(p)
+    args=p.parse_args()
+    activate_budget(args,'development')
+    try:asyncio.run(main(args))
     except Exception as exc:
         print(json.dumps(safe_error(exc)));raise SystemExit(1)

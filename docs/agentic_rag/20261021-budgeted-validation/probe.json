@@ -1,0 +1,28 @@
+{
+  "probes": [
+    {
+      "model": "gemini-3.1-flash-lite",
+      "status": "completed",
+      "response_received": true
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "status": "completed",
+      "response_received": true
+    },
+    {
+      "model": "gemini-3.1-pro-preview",
+      "status": "completed",
+      "response_received": true
+    }
+  ],
+  "budget": {
+    "committed_usd": 0.000949,
+    "stages": {
+      "probe": 0.000949
+    },
+    "total_limit_usd": 5.0,
+    "stopped": false,
+    "stop_reason": null
+  }
+}

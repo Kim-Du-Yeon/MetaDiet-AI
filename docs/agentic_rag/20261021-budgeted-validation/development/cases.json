@@ -1,0 +1,46 @@
+[
+  {
+    "attempt_id": "adj-dev-000",
+    "id": "neighbor-range",
+    "split": "separate-synthetic-development",
+    "question": "What amount and unit does the fictional Elara protocol require?",
+    "context": "Elara protocol introduction. A suitable quantity is needed; the amount continues in the next paragraph.",
+    "gold_answer": "37-83 micrograms per session; pilot participants only.",
+    "expected_sufficient": true,
+    "expected_rounds": 1,
+    "population": "",
+    "source": "adjacent-development.txt",
+    "page": 1,
+    "provenance": "Fictional non-nutrition mechanisms; not frozen40 answers or user data.",
+    "neighbor_context": "Elara protocol specifies 37-83 micrograms per session for pilot participants only."
+  },
+  {
+    "attempt_id": "adj-dev-006",
+    "id": "table-blank",
+    "split": "separate-synthetic-development",
+    "question": "가상 표의 빈 셀만 보고 항목 가에 지표 B가 적용되지 않는다고 확정해도 되나요?",
+    "context": "표 9. 항목 가의 열은 A와 B이다. 행 1의 A 값은 72이고 B 셀은 비어 있다. 빈 셀의 의미를 설명하는 주석은 제공되지 않았다.",
+    "gold_answer": "아니다. 주석이 없어 빈 셀만으로 B의 미적용을 확정할 수 없다.",
+    "expected_sufficient": true,
+    "expected_rounds": 1,
+    "population": "",
+    "source": "adjacent-development.txt",
+    "page": 7,
+    "provenance": "Fictional non-nutrition mechanisms; not frozen40 answers or user data."
+  },
+  {
+    "attempt_id": "adj-dev-007",
+    "id": "table-cut",
+    "split": "separate-synthetic-development",
+    "question": "가상 표에서 항목 다에 제시되는 지표 종류를 알려줘.",
+    "context": "표 10의 일부: 항목 다 ... (항목별 머리글이 잘려 지표 경계를 알 수 없음)",
+    "gold_answer": "완전한 머리글에서 항목 다에는 지표 D만 제시된다.",
+    "expected_sufficient": true,
+    "expected_rounds": 2,
+    "population": "",
+    "source": "adjacent-development.txt",
+    "page": 8,
+    "provenance": "Fictional non-nutrition mechanisms; not frozen40 answers or user data.",
+    "research_context": "表10の完全な日本語版ではなく、韓国語原文: 표 10. 항목별 지표 종류: 항목 다에는 지표 D만 제시된다. 항목 라에는 지표 E와 F가 제시된다."
+  }
+]

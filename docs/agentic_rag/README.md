@@ -59,3 +59,10 @@ The predeclared support-noninferiority gate failed despite the95% correctness th
 The fresh100+100 attempt cohort hit HTTP402 prepayment-credit depletion: request-completed53/54, request-failed47/46, operational failures52/100 each including fallback errors. Final Pro judging was not submitted; correctness/faithfulness and total cost remain unverified. Fast failures invalidate latency-improvement claims. Raw rows and all development failures remain. The baseline is a previous experimental v6 candidate, not deployed production. Keep OFF; no public rollout or candidate browser verification.
 
 Post-cohort v11 error handling fixes missing max_score after retrieval exceptions and preserves sanitized provider causes. Generation/inline-judge credit, auth and daily-quota failures stop queued cases, record unstarted slots separately, and exit2; mocked100-pair integration tests verify at most3 calls after first402. Original v10 frozen sources and later v11 snapshots are separate; v11 has offline regression evidence only. Resume only after funding readiness and a per-experiment cost ceiling: probe failed cases, reuse stored answers for rejudging, and reserve a fresh100-pair run for the prepared final candidate. No claim about account-wide billed spend or production AI availability.
+# 평가 비용 제한
+
+[전체 $5·단계별 예산, 오프라인 기본값과 저장 답변 재사용](BUDGET_POLICY.md).
+해당 평가 CLI의 유료 실행은 기본 차단되며, 새 유료 호출 없이 오프라인에서 검증했다.
+
+후속 실제 실행은 [사용·예약 $0.099494에서 채점 한도로 중단](20261021-budgeted-validation/README.md).
+조건별 7개 응답을 보존했으며 최종 비교 미완료·배포 미적용이다.

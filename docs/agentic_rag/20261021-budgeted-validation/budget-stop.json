@@ -1,0 +1,59 @@
+{
+  "status": "stopped_before_judge_submission",
+  "reason": "native100-pair Batch conservative reservation exceeds judge $1 cap",
+  "judge_reservation_proxy_usd": 2.3025440000000006,
+  "proxy_source": "historical saved100 pairs; includes failed-serving sides; not actual billed cost",
+  "preflight_rejection": "Budget exhausted: judge",
+  "budget": {
+    "committed_usd": 0.099494,
+    "stages": {
+      "comparison": 0.083819,
+      "development": 0.014726,
+      "probe": 0.000949
+    },
+    "total_limit_usd": 5.0,
+    "stopped": true,
+    "stop_reason": "Budget exhausted: judge"
+  },
+  "pending_transport_reservations": {
+    "count": 2,
+    "usd": 0.0191,
+    "policy": "Retained after process termination; never assumed free"
+  },
+  "transport_calls_by_stage": [
+    {
+      "stage": "comparison",
+      "count": 61,
+      "committed_usd": 0.083819
+    },
+    {
+      "stage": "development",
+      "count": 15,
+      "committed_usd": 0.014726
+    },
+    {
+      "stage": "probe",
+      "count": 3,
+      "committed_usd": 0.000949
+    }
+  ],
+  "recorded_attempts": 14,
+  "by_condition": {
+    "baseline": {
+      "recorded": 7,
+      "completed": 7
+    },
+    "agentic": {
+      "recorded": 7,
+      "completed": 7
+    }
+  },
+  "planned_attempts": 200,
+  "unrecorded_slots": 186,
+  "unrecorded_note": "Includes up to three in-flight serving attempts, not claimed never started",
+  "final_quality_evaluated": false,
+  "judge_jobs_submitted": 0,
+  "deployed": false,
+  "generation_process_stopped": true,
+  "prior_development_pro_grades_reused": 40
+}

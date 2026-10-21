@@ -126,8 +126,11 @@ def main(args):
     print(json.dumps({'state':job['state'],'requests':len(entries),'job_record':args.job}))
 
 if __name__=='__main__':
+    from eval_budget import add_budget_args, activate_budget
     p=argparse.ArgumentParser(); p.add_argument('action',choices=['old','pairs','collect']); p.add_argument('--directory'); p.add_argument('--prior',default='judges-20261021.jsonl'); p.add_argument('--job',required=True)
+    add_budget_args(p)
     args=p.parse_args()
+    activate_budget(args,'judge')
     try: main(args)
     except Exception as exc:
         print(json.dumps(safe_error(exc))); raise SystemExit(1)

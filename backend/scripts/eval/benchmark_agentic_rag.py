@@ -63,6 +63,9 @@ async def main(args):
     from app.core.llm import get_chat_model
     from app.rag import retriever
     from app.rag.qa import answer_from_knowledge, QA_PROMPT
+    from app.rag import qa
+    # Evaluation-only output bound; freeze this cap for both conditions.
+    qa._llm.max_tokens=2048
     from app.rag.agentic import bounded_retrieve, model_assessment, PROMPT_SHA256, ANSWER_GUIDANCE
     from google import genai
     directory=Path(args.output)
@@ -88,8 +91,12 @@ async def main(args):
         baseline_assessment=module.model_assessment
     cases=json.loads(path.read_text(encoding='utf-8'))
     if len(cases)<100: raise ValueError('100 attempts required')
+    if getattr(args,'allow_paid',False):
+        from eval_budget import Budget,preflight_batch_judge
+        preflight_batch_judge(Budget(args.budget_ledger),pairs=len(cases),output_cap=2048)
     # Per-request telemetry only; never modifies production clients or env files.
     original_translate=retriever._translate_llm
+    original_translate.max_tokens=256
     class Translation:
         async def ainvoke(self,messages):
             row=active.get(); usage=Usage()
@@ -213,5 +220,9 @@ async def main(args):
     if circuit.blocked:raise SystemExit(2)
 
 if __name__=='__main__':
+    from eval_budget import add_budget_args, activate_budget
     p=argparse.ArgumentParser(); p.add_argument('--output',required=True); p.add_argument('--baseline-source'); p.add_argument('--defer-judge',action='store_true')
-    asyncio.run(main(p.parse_args()))
+    add_budget_args(p)
+    args=p.parse_args()
+    activate_budget(args,'comparison')
+    asyncio.run(main(args))

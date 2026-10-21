@@ -1,0 +1,62 @@
+{
+  "attempts_per_condition": 100,
+  "unique_questions": 40,
+  "sampling": "core40 twice plus first20; development repeated attempts, not held-out",
+  "dataset_sha256": "4ba67cf812497730848fe864580f1a7bf7da191c6a3c71427200eac3535aed9e",
+  "retrieval": "dense, k4, no reranker; matches 512MiB remote fallback",
+  "workers": 3,
+  "pair_order": "alternating",
+  "timeout_seconds": 90,
+  "loop_timeout_seconds": 35,
+  "gate": {
+    "correctness_min": 0.95,
+    "correctness_improvement_min": 0.02,
+    "support_noninferior": true,
+    "failure_noninferior": true,
+    "p50_ratio_max": 1.5,
+    "p95_ratio_max": 1.5,
+    "complete_cost_required": true,
+    "cost_ratio_max": 2,
+    "operational_failure_noninferior": true
+  },
+  "date": "2026-10-21",
+  "baseline": "Frozen controller-v6/recipe core-scope-v7 at ecfe3359",
+  "candidate": "controller-v9/adjacent-table-v11-safe-errors",
+  "judge": "All100 paired outputs native Pro Batch, same rubric2048/low and balanced A/B.",
+  "gate_note": "Retain existing conservative gate; no deployment unless complete quality and cost data pass. Embedding metadata missing remains incomplete.",
+  "baseline_source_sha256": "ec0bc7bda6d85c51e11b8c74f19f59c64570a8b8dce97e96bfca84888de0dc9f",
+  "development_dataset_sha256": "3e215b31503b38c3f91c7afbda56f1443849285b031ac0504b76bf8a7d855f0a",
+  "status": "budgeted_frozen_before_generation",
+  "qa_note": "QA base unchanged. Controller-v9 scope/inference refinements plus candidate table-header guidance; baseline v6 frozen. All identities frozen before main generation.",
+  "embedding_note": "Raw response usageMetadata.promptTokenCount is observed before SDK conversion. Missing means cost incomplete. Same telemetry on both conditions.",
+  "development_runner": "backend/scripts/eval/develop_agentic_policy.py",
+  "development_refinement": "Same20 separate fictional cases across four runs. Initial cache/excerpt fixes, blank-cell inference-limit answerability, and unrequested population scope refined. Preserve all unsuccessful runs; no nutrition gold added.",
+  "candidate_source_sha256": "8197837165c5237c04ebdb81f1c141ced70980efecad04f6d53bec536d148048",
+  "benchmark_source_sha256": "99554c593d1998f0758cc633d476ead6061cf2caaefa9ef6291cbed1adee8e12",
+  "operational_failure_policy": "Same predeclared noninferiority gate; count request/loop failures plus neighbor_status=unavailable, even if original-evidence fallback answers. Frozen before main100-pair generation.",
+  "commands": [
+    "backend/venv/Scripts/python.exe backend/scripts/eval/benchmark_agentic_rag.py --output docs/agentic_rag/20261021-adjacent-table --baseline-source docs/agentic_rag/20261021-adjacent-table/baseline-core-scope-v7.py.txt --defer-judge"
+  ],
+  "neighbor_source_sha256": "4c43b05d50ffbeb977b0f7b43f8eca2d3ee92d72a85d266c28ee2060e6d38e79",
+  "development_runner_sha256": "1a13afd3c397bc958d466effa52b3fa917dc5bc178d0cad45c9e45d78e981012",
+  "neighbor_note": "No remote calls or embeddings. Configured trusted local build only, manifest/embedding validation, exact document sha+source+page+full text anchor match. Next/previous chunk only within one page, at most2 extra candidate excerpts700chars each, same8docs/6000char cap. Corpus initialization serialized.",
+  "analysis_source_sha256": "6a074c0eb4726d69e0bafb94ea99beed7605e85ccd7199a5d49cbccc04cc7c48",
+  "budget": {
+    "total_usd": 5,
+    "stages_usd": {
+      "probe": 0.1,
+      "development": 0.25,
+      "comparison": 3,
+      "judge": 1,
+      "browser": 0.15
+    }
+  },
+  "output_caps": {
+    "answer": 2048,
+    "translation": 256,
+    "controller": 512,
+    "judge": 2048
+  },
+  "reused_development_grades": "20261021-adjacent-table/development-v4:40 existing Pro grades; no regrading",
+  "budget_guard_sha256": "b477c062378c1002b4db1efb0a6dca3b80d0dc923bb26174742235ac83fb9ff8"
+}
