@@ -174,9 +174,9 @@ async def test_low_score_research_cannot_replace_initial_grounded_evidence():
     assert r['grounded'] and [d.page_content for d in r['docs']]==['supported']
 
 
-def test_controller_v2_uses_bounded_partial_answers_and_table_constraints():
+def test_controller_preserves_bounded_partial_answers_and_table_constraints():
     from app.rag.agentic import CONTROLLER_PROMPT, PROMPT_VERSION
-    assert PROMPT_VERSION == "agentic-rag-controller-v2"
+    assert PROMPT_VERSION == "agentic-rag-controller-v3"
     assert "supported part" in CONTROLLER_PROMPT
     assert "row" in CONTROLLER_PROMPT and "footnote" in CONTROLLER_PROMPT
     assert "blank" in CONTROLLER_PROMPT

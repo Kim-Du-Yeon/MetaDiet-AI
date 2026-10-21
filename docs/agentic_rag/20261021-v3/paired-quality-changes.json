@@ -1,0 +1,46 @@
+{
+  "recovered": [
+    {
+      "attempt_id": "ag-024",
+      "group": "negative_balance",
+      "reason": "Model B correctly defines negative energy balance and accurately states that the next-day 200 kcal cut is not specified in the text, matching the gold answer and fully supported by the context."
+    },
+    {
+      "attempt_id": "ag-025",
+      "group": "negative_balance",
+      "reason": "Answer A correctly defines negative energy balance and states that the context does not provide evidence for a fixed 200 kcal deduction the next day, which aligns with the gold answer. It is faithful to the provided context."
+    },
+    {
+      "attempt_id": "ag-064",
+      "group": "negative_balance",
+      "reason": "Correctly defines negative energy balance and accurately states that the 200 kcal cut is not specified in the text, matching the gold answer and supported by the context."
+    },
+    {
+      "attempt_id": "ag-065",
+      "group": "negative_balance",
+      "reason": "Model A correctly defines negative energy balance and accurately notes that the 200 kcal deduction is not specified, aligning with the gold answer. It is faithful to its context."
+    }
+  ],
+  "regressed": [
+    {
+      "attempt_id": "ag-014",
+      "group": "leucine",
+      "reason": "Model B fails to provide the specific leucine amount (700-3000 mg) required by the gold standard, making it incorrect. However, it is faithful to its provided context, which omits the section containing the exact numbers."
+    },
+    {
+      "attempt_id": "ag-033",
+      "group": "activity_reference",
+      "reason": "Model A fails to explicitly state that 'active' and 'very active' are the specific estimates presented separately, which is the core of the gold answer. However, its claims are fully supported by its provided context."
+    },
+    {
+      "attempt_id": "ag-054",
+      "group": "leucine",
+      "reason": "Answer B incorrectly states that the specific amount of leucine is not mentioned in the provided text, missing the 700-3000 mg fact. It is faithful to its context, which was truncated and did not include the specific numbers."
+    },
+    {
+      "attempt_id": "ag-094",
+      "group": "leucine",
+      "reason": "Answer B explicitly states that the specific amount of leucine (e.g., in grams) is not mentioned in the provided text, which is a material omission of the gold fact (700-3000 mg). It is faithful to its context, which did not include the page 1 snippet containing the exact numbers."
+    }
+  ]
+}

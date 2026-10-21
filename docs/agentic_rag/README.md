@@ -37,3 +37,7 @@ Runners refuse to overwrite existing attempts. Copy the frozen cases/protocol in
 ## Evidence retention v2 (2026-10-21)
 
 Qualified initial evidence is retained before deduplicated new evidence, capped at 8 documents / 6000 characters for both assessment and answer. Controller prompt v1 and hard loop limits are unchanged. [Completed quality judging and matched 100-per-condition revalidation](20261021/README.md): no correctness gain; default OFF, no rollout.
+
+## Scoped table-aware policy (2026-10-21, not adopted)
+
+Controller-v3/recipe-v4 clarifies sufficient as a supported scoped response and sends bounded answer guidance only with sufficient evidence. Hard limits and score gate remain. [Separate development and full100-pair comparison](20261021-v3/README.md): correctness89→89%, page support76→80%, p95 21.203→20.300s, model API cost+6.8% with complete raw embedding usage. Quality gate failed; keep OFF. Partial-response gains were offset by missing quantitative facts; do not equate page hits with answer coverage.

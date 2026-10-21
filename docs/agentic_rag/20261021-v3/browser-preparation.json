@@ -1,0 +1,13 @@
+{
+  "status": "runtime_unavailable_during_preparation",
+  "attempts": [
+    "cua.getState",
+    "cua reset and getState",
+    "node_repl runtime initialization"
+  ],
+  "error": "failed to write kernel assets: path not found (os error3)",
+  "candidate_browser_validation_performed": false,
+  "decision": "Do not claim browser verification. Revisit only if rollout gate passes.",
+  "fallback_cli": "Playwright CLI available; no existing browser sessions; no browser opened because quality gate failed",
+  "final_status": "candidate_not_deployed_or_browser_verified_due_to_quality_gate"
+}

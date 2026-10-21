@@ -545,3 +545,7 @@ POST /users/onboarding → explicit EnergyInputs/goal validation → Postgres pr
 ## Agentic RAG evidence retention follow-up (2026-10-21)
 
 [Full protocol, 200 historical grades/statuses and 100-per-condition v1/v2 comparison](docs/agentic_rag/20261021/README.md). Qualified initial evidence survives rewritten retrieval; merged evidence is capped at 8 documents / 6000 characters. Prompt v1 and loop budgets are unchanged. New quality judging uses balanced A/B native Pro Batch for all 100 pairs; historical recovery mixes online and Batch interfaces. Correctness 89% in both new conditions; rollout gate failed, default OFF.
+
+## Table/partial-answer policy revalidation (2026-10-21)
+
+[Separate development12, frozen v2 baseline versus controller-v3/recipe-v4 candidate, 100 fresh attempts per condition and 200 valid Pro Batch grades](docs/agentic_rag/20261021-v3/README.md). Scoped partial answers recover four attempts but four other facts regress; correctness remains89%. Raw embedding usage is now complete in this experiment; overall model API estimate$0.570576→$0.609175 per100, p95 21.203→20.300s. Quality gate failed; defaultOFF, no deployment/browser feature verification. Metadata remains attached to documents and DietTeam tool evidence, but population is not rendered in the QA context header; this boundary evaluation is not identical to full production coaching.

@@ -20,16 +20,16 @@
   },
   "date": "2026-10-21",
   "baseline": "Evidence-preserving v2 frozen at a2ba3ba4",
-  "candidate": "controller-v2/table-constraints-v3; preserve supported core, table context and material constraints",
-  "judge": "All100 paired outputs native Pro Batch, balanced A/B; same rubric2048/low. No online rejudging.",
+  "candidate": "controller-v3/table-constraints-v4; refined only on separate synthetic development12; same scored evidence and call limits",
+  "judge": "All100 paired outputs native Pro Batch, balanced A/B; same rubric2048/low. Online Pro429 recorded, no online grades in final score.",
   "gate_note": "Retain existing conservative gate; no deployment unless complete quality and cost data pass. Embedding metadata missing remains incomplete.",
   "baseline_source_sha256": "5b25bcc48d965a1d02952a7d2db9ac1b71b4109221e276ee7cc2039b368845b4",
   "development_dataset_sha256": "e302c6b4567b1ac2f89107e389fb35c30b382aaf1c995ca3798ddabdecadd1f2",
-  "status": "prepared-before-live-comparison; provider HTTP402, waiting for user credit/key update",
+  "status": "credit restored; minimal serving calls passed; Pro online429, native Batch final judging planned before comparison",
   "qa_note": "Base QA prompt unchanged; candidate receives bounded answer_guidance only from sufficient candidate retrieval. Frozen baseline has no guidance.",
   "embedding_note": "Raw response usageMetadata.promptTokenCount is observed before SDK conversion. Missing means cost incomplete. Same telemetry on both conditions.",
-  "candidate_source_sha256": "bacc4ddde38758c4524a5e18fe87ff23bdc25037cd44bc61319de223754363e4",
-  "benchmark_source_sha256": "af8ea0e371053fabc7c923a685a279debf97882264af4cfa0b5eb83930aa49e5",
+  "candidate_source_sha256": "27b7107ffc10344e4150929f97daf13f4c9db85257774e9d006cf790cf2b6cff",
+  "benchmark_source_sha256": "d29ff61bc683ed28195915d6ff439683f07f9609ac51294a279f434e7c6310f5",
   "development_runner": "backend/scripts/eval/develop_agentic_policy.py",
   "commands": [
     "backend/venv/Scripts/python.exe backend/scripts/eval/develop_agentic_policy.py --directory docs/agentic_rag/20261021-v3/development --baseline-source docs/agentic_rag/20261021-v3/baseline-agentic-v2.py.txt",
@@ -37,5 +37,7 @@
     "backend/venv/Scripts/python.exe backend/scripts/eval/batch_agentic_judges.py pairs --directory docs/agentic_rag/20261021-v3 --job docs/agentic_rag/20261021-v3/batch-pairs-job.json",
     "backend/venv/Scripts/python.exe backend/scripts/eval/batch_agentic_judges.py collect --job docs/agentic_rag/20261021-v3/batch-pairs-job.json",
     "backend/venv/Scripts/python.exe backend/scripts/eval/analyze_agentic_rag.py docs/agentic_rag/20261021-v3 --grades-name batch-pairs-job.grades.jsonl"
-  ]
+  ],
+  "development_refinement": "Initial separate dev: baseline8/12 assessment matches, candidate10/12. Retained raw failures; clarified schema/prompt sufficient as grounded scoped answer, then reran all12 before main comparison. No core40 gold/prompt-specific exceptions.",
+  "execution_result": "200serving and200Pro grades completed; original gate failed quality_minimum andquality_improved; no tuning/resampling after final comparison"
 }

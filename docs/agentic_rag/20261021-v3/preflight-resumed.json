@@ -1,0 +1,31 @@
+[
+  {
+    "role": "embedding",
+    "status": "completed",
+    "dimension": 3072,
+    "provider_input_tokens": [
+      10
+    ]
+  },
+  {
+    "role": "controller",
+    "model": "gemini-3.1-flash-lite",
+    "status": "completed",
+    "nonempty": true
+  },
+  {
+    "role": "answer",
+    "model": "gemini-3.8-flash",
+    "status": "completed",
+    "nonempty": true
+  },
+  {
+    "role": "judge",
+    "model": "gemini-3.1-pro-preview",
+    "purpose": "availability_only_not_remaining_quota",
+    "status": "failed",
+    "type": "ClientError",
+    "reason": "quota",
+    "http_code": 429
+  }
+]

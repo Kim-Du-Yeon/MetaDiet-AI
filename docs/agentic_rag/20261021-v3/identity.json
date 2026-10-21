@@ -1,0 +1,17 @@
+{
+  "dataset_sha256": "4ba67cf812497730848fe864580f1a7bf7da191c6a3c71427200eac3535aed9e",
+  "controller_sha256": "eacc0c4a6c74b2e8adeb929aec2f79355e77926e1b86cabdd7335aad767b456e",
+  "qa_prompt_sha256": "32a2e383230c1131ceffebeb4e1d7c29255ec47f6c9beb863078e27dc64908c6",
+  "candidate_answer_guidance_sha256": "c49f5674b865dadea1b41a1b0960308c6ce1b1c6756a63cd937d00fd4611449c",
+  "namespace": "metadiet-gemini-1157903c493dbb5d759f",
+  "embedding_model": "gemini-embedding-2",
+  "answer_model": "gemini-3.8-flash",
+  "controller_model": "gemini-3.1-flash-lite",
+  "judge_model": "gemini-3.1-pro-preview",
+  "mode": "dense",
+  "workers": 3,
+  "baseline_source_sha256": "5b25bcc48d965a1d02952a7d2db9ac1b71b4109221e276ee7cc2039b368845b4",
+  "candidate_source_sha256": "27b7107ffc10344e4150929f97daf13f4c9db85257774e9d006cf790cf2b6cff",
+  "deferred_judging": true,
+  "baseline_controller_sha256": "9fced838e559a3448a950ff08a9e8edc990870901cd61803d60a8cb82323fa0f"
+}

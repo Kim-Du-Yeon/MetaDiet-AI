@@ -137,8 +137,8 @@ async def main(args):
         costs=[estimate_cost(c['model'],c['usage']) for c in row['model_usage']]
         row['known_model_cost_usd']=sum(c or 0 for c in costs)
         row['model_cost_complete']=row['status']=='completed' and all(c is not None for c in costs)
-        # SDK embedding responses have metadata=None. Byte count is a conservative input proxy,
-        # not billed tokens; expose this missingness and fail the complete-cost rollout gate.
+        # Raw provider usage is billed-token evidence; byte count is only a proxy.
+        # Missing raw usage must still fail the complete-cost rollout gate.
         row['embedding_cost_upper_proxy_usd']=row['embedding_input_utf8_bytes']*.2/1e6
         row['embedding_cost_usd']=sum(v or 0 for v in row['embedding_usage'])*.2/1e6
         row['cost_complete']=row['model_cost_complete'] and bool(row['embedding_usage']) and all(v is not None for v in row['embedding_usage'])

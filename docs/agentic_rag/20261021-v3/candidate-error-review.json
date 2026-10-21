@@ -1,0 +1,101 @@
+[
+  {
+    "id": "ag-014",
+    "group": "leucine",
+    "q": "What leucine amount and amino-acid balance does ISSN mention?",
+    "gold": "ISSN suggests acute protein doses contain 700–3000 mg leucine and a balanced array of essential amino acids.",
+    "answer": "제공된 자료에 언급된 내용은 다음과 같습니다.\n\n* **류신 섭취량(Amount):** 구체적인 수치(g 등)는 제공된 자료에 명시되어 있지 않으며, 격렬한 운동 후 단백질 균형을 양의 상태로 전환하기 위한 \"충분한 양(sufficient amounts)\" 및 고품질 단백질 급원을 통해 매 식사마다 \"적절한 류신 함량(adequate leucine content)\"을 섭취해야 한다고만 제시되어 있습니다 [출처: s12970-017-0177-8.pdf, p.12].\n* **아미노산 및 단백질 균형(Amino-acid/Protein Balance):** \n  * 단백질 섭취가 없을 경우 운동 후 단백질 균형은 부정적(negative)이 되지만, 충분한 양의 류신을 함유한 단백질 또는 필수 아미노산(EAA) 복합체를 섭취하면 단백질 합성을 연장하여 단백질 균형을 순 양성(net positive) 상태로 전환할 수 있습니다 [출처: s12970-017-0177-8.pdf, p.12].\n  * 류신이 독립적으로 단백질 합성을 자극할 수 있으나 류신만 단독으로 섭취해서는 안 되며, 류신 단독 섭취는 완전한 식사(whole meal)에 비해 단백질 합성 지속 시간이 짧으므로 고품질 단백질 식품을 통해 섭취해야 합니다 [출처: s12970-017-0177-8.pdf, p.12].\n  * 또한 필수 아미노산 중 세 가지 분지쇄 아미노산(BCAA인 류신, 이소류신, 발린)은 단백질 대사, 신경 기능, 혈당 및 인슐린 조절에 고유한 역할을 합니다 [출처: s12970-017-0177-8.pdf, p.12].",
+    "reason": "Model B fails to provide the specific leucine amount (700-3000 mg) required by the gold standard, making it incorrect. However, it is faithful to its provided context, which omits the section containing the exact numbers.",
+    "context": "[출처: s12970-017-0177-8.pdf, 페이지: 1]\nR E V I E W Open Access\nInternational Society of Sports Nutrition\nPosition Stand: protein and exercise\nRalf Jäger 1, Chad M. Kerksick 2, Bill I. Campbell 3, Paul J. Cribb 4, Shawn D. Wells 5, Tim M. Skwiat 5, Martin Purpura 1,\nTim N. Ziegenfuss 6, Arny A. Ferrando 7, Shawn M. Arent 8, Abbie E. Smith-Ryan 9, Jeffrey R. Stout 10, Paul J. Arciero 11,\nMichael J. Orm"
+  },
+  {
+    "id": "ag-026",
+    "group": "eer_concept",
+    "q": "Does KDRIs set a tolerable upper intake level for energy?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "reason": "The model abstained from answering the question, which is incorrect since the gold answer provides a specific response. However, the abstention is faithful to the provided context as it does not explicitly state whether a UL is set for energy.",
+    "context": "[출처: KDRI_2025_vol3.pdf, 페이지: 489]\nonly when scientific evidence regarding adverse effects from excessive intake is available; \nh o w e v e r ,  t h e  a b s e n c e  o f  a  U L  d o e s  n o t  i m p l y  t h a t  p o t e n t i a l  a d v erse effects can be entirely \nexcluded. In the 2025 KDRIs, the relationships between nutrients and chronic diseases-such as \nc a r d i o v a s c u l a r  d i s"
+  },
+  {
+    "id": "ag-027",
+    "group": "eer_concept",
+    "q": "KDRIs에서 에너지에 상한섭취량 개념을 적용하는가?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "reason": "The model abstained from answering, but the information can be inferred from the provided table where Energy only has EER and no UL.",
+    "context": "[출처: KDRI_2025_vol1.pdf, 페이지: 342]\n에너지와 다량영양소\n300\n1 General Outline\n1 Directions for the Establishment and Revision of the KDRI\n1-1. Purpose\nThe Korean Dietary Reference Intakes (KDRI) are standards for energy and nutrient \nintakes that are established to help individuals maintain health throughout the life course \nwhile minimizing the risks of both nutrient deficiencies and diet-related chronic d"
+  },
+  {
+    "id": "ag-033",
+    "group": "activity_reference",
+    "q": "KDRIs 에너지 기준의 기본 신체활동 수준과 별도로 제시한 수준은 무엇인가?",
+    "gold": "Low-active was used as the default reference activity level, with active and very-active estimates presented separately.",
+    "answer": "KDRIs 에너지필요추정량 산출 시 기본으로 적용된 신체활동 수준과 별도로 제안/언급된 수준은 다음과 같습니다.\n\n* **기본 신체활동 수준:** \n  * 에너지필요추정량 산출 시 모든 연령대(유아, 아동, 청소년, 성인)에서 **'저활동적(Low active)'** 수준이 기본으로 적용되었습니다 [출처: KDRI_2025_vol1.pdf, p. 59, p. 67, p. 68].\n\n* **별도로 제시가 언급된 수준:** \n  * **청소년:** 신체활동수준이 **'중강도 또는 고강도'**인 경우 별도의 에너지필요추정량이 제안되어야 할 것으로 언급되었습니다 [출처: KDRI_2025_vol1.pdf, p. 67].\n  * **성인:** **'‘저활동적’ 수준보다 높은 신체활동'**을 하는 성인들을 위한 별도의 에너지필요추정량 산출 및 제시가 필요한 것으로 제시되었습니다 [출처: KDRI_2025_vol1.pdf, p. 68].\n  * 산출 공식의 신체활동단계(PA) 체계상으로는 기본인 '저활동적' 외에 **'비활동적'**, **'활동적'**, **'매우활동적'** 단계가 분류표로 함께 제시되어 있습니다 [출처: KDRI_2025_vol1.pdf, p. 59].",
+    "reason": "Model A fails to explicitly state that 'active' and 'very active' are the specific estimates presented separately, which is the core of the gold answer. However, its claims are fully supported by its provided context.",
+    "context": "[출처: KDRI_2025_vol1.pdf, 페이지: 68]\n* 신체활동수준에 따른 신체활동계수 (PA)\n남자 PA =1.0 (비활동적), 1.13 (저활동적), 1.26 (활동적), 1.42 (매우활동적)]\n여자 PA =1.0 (비활동적), 1.16 (저활동적), 1.31 (활동적), 1.56 (매우활동적)]\n(3) 성인기 (19-64세)\n성인 (19세 이상)의 에너지필요추정량은 성장을 위한 에너지 축적량 없이 추정 공식의 산출값, 즉, \n총에너지소비량과 같다. 한국 성인의 신체활동수준은 특수 활동 (운동선수, 고강도의 육체적 노동자)을 \n하는 사람을 제외하고 일반적으로 1.60 미만인 저활동적 상태인 것으로 보고되었다 (표 3). 최근, 김 \n등 [34]은 이중표식수법을 이용하여 한국인 성인의 신체활동수"
+  },
+  {
+    "id": "ag-034",
+    "group": "obesity_initial_goal",
+    "q": "What initial weight-loss goal does the 2022 obesity-treatment guideline state?",
+    "gold": "The 2022 obesity-treatment guideline recommends an initial goal of losing 5–10% of pretreatment weight within six months; it should not be generalized to all healthy adults.",
+    "answer": "대한비만학회 비만 진료지침 2022(8판)에 따르면, 체중 감량의 일차 목표는 치료 전 체중의 5~10%를 6개월 내에 감량하는 것입니다 [출처: guideline2022_vol8.pdf, p.4].",
+    "reason": "The answer correctly states the 5-10% weight loss goal within 6 months, but omits the gold fact that it should not be generalized to all healthy adults.",
+    "context": "[출처: guideline2022_vol8.pdf, 페이지: 4]\n대한비만학회 비만 진료지침 2022 8판 _ 요약본대한비만학회 비만 진료지침 2022 8판 _ 요약본\n76\n2. 비만 치료 전 평가\n지침\n1.\t \t비만\t치료를\t시작하기\t전에\t이차성\t비만의\t원인이\t될\t수\t있는\t유전질환,\t\n내분비질환,\t약제에\t대한\t문진과\t선별\t검사의\t실시를\t고려한다.\t(B,\tClass\tIIa)\n2.\t \t비만은\t고혈압,\t2형당뇨병,\t이상지질혈증,\t통풍,\t관절염,\t심혈관계질환\t및\t암\t\n발생의\t위험을\t높이고\t사망률을\t상승시키므로\t비만환자를\t진료할\t때\t이에\t\n대한\t문진과\t선별\t검사를\t권고한다.\t(A,\tClass\tI)\n3.\t \t치료\t전\t체중의\t5~10%를\t6개월\t내에\t감량하는\t것을\t체중\t감량의\t일차\t\n목표로\t할\t것을\t권고한다.\t(A,\tC"
+  },
+  {
+    "id": "ag-035",
+    "group": "obesity_initial_goal",
+    "q": "2022 비만 치료 지침의 초기 체중 감량 목표는 얼마이며 어떤 치료 맥락인가?",
+    "gold": "The 2022 obesity-treatment guideline recommends an initial goal of losing 5–10% of pretreatment weight within six months; it should not be generalized to all healthy adults.",
+    "answer": "대한비만학회 비만 진료지침 2022(8판)에 제시된 초기 체중 감량 목표와 맥락은 다음과 같습니다.\n\n* **일차 감량 목표(비만 치료 전 평가):** 치료 전 체중의 5~10%를 6개월 내에 감량하는 것을 체중 감량의 일차 목표로 권고합니다 [출처: guideline2022_vol8.pdf, p.4].\n* **중재 강화 기준(행동치료 맥락):** 치료 1개월 이내에 2.5%의 체중 감량에 도달하지 못하는 경우에는 기존의 행동치료를 기반으로 한 생활습관 중재를 강화하는 것을 고려합니다 [출처: guideline2022_vol8.pdf, p.8].",
+    "reason": "The answer provides the initial weight loss goal (5-10% within 6 months) and mentions the behavioral therapy context, but it omits the gold fact that this should not be generalized to all healthy adults.",
+    "context": "[출처: guideline2022_vol8.pdf, 페이지: 8]\n대한비만학회 비만 진료지침 2022 8판 _ 요약본대한비만학회 비만 진료지침 2022 8판 _ 요약본\n1514\n5. 행동치료\n5. 행동치료\n지침\n1.\t \t체중\t감량을\t위해\t행동치료를\t기반으로\t한\t음식\t섭취\t감소,\t활동량\t증가\t등의\t\n포괄적인\t생활습관\t개선을\t권고한다.\t(A,\tClass\tI)\n2.\t \t효과적인\t체중\t감량을\t위해\t훈련된\t치료자가\t대면\t행동치료를\t6개월\t이상\t\n시행하는\t것을\t권고한다.\t(A,\tClass\tI)\n3.\t \t감량된\t체중의\t효과적인\t유지를\t위해\t훈련된\t치료자가\t행동치료를\t1년\t이상\t\n시행하는\t것을\t권고한다.\t(A,\tClass\tI)\n4.\t \t치료\t1개월\t이내에\t2.5%의\t체중\t감량에\t도달하지\t못하는\t경우,\t기존의\t\n행동치료를\t"
+  },
+  {
+    "id": "ag-054",
+    "group": "leucine",
+    "q": "What leucine amount and amino-acid balance does ISSN mention?",
+    "gold": "ISSN suggests acute protein doses contain 700–3000 mg leucine and a balanced array of essential amino acids.",
+    "answer": "제공된 자료에서 언급된 류신(leucine)의 양 및 아미노산 균형에 대한 내용은 다음과 같습니다.\n\n1. **류신의 양 (Leucine amount)**\n* 제공된 자료에는 류신의 구체적인 수치(g 등)는 명시되어 있지 않습니다.\n* 다만, 강도 높은 운동 후 단백질 합성을 연장하고 단백질 균형을 순 양(positive)의 상태로 전환하기 위해 \"충분한 양의 류신(sufficient amounts of leucine / adequate leucine content)\"을 섭취해야 한다고 언급하고 있습니다 [출처: s12970-017-0177-8.pdf, p.12].\n\n2. **아미노산 균형 (Amino-acid balance)**\n* **류신 단독 섭취 지양**: 류신이 독립적으로 단백질 합성을 자극할 수 있지만, 보충 시 류신 단독으로만 섭취해서는 안 됩니다 [출처: s12970-017-0177-8.pdf, p.12]. 동물 모델에서 류신 단독 섭취는 완전한 식사(whole meal)에 비해 단백질 합성 지속 시간이 더 짧았기 때문에, 운동선수는 고품질 단백질 공급원 선택을 통해 매 식사마다 적절한 류신을 섭취하는 데 집중해야 합니다 [출처: s12970-017-0177-8.pdf, p.12].\n* **필수 아미노산(EAA)과의 복합 섭취**: 충분한 양의 류신을 함유한 단백질 또는 필수 아미노산(EAA) 복합체를 섭취할 때 강도 높은 운동 훈련 후 단백질 균형이 순 양의 상태로 전환되는 것으로 나타났습니다 [출처: s12970-017-0177-8.pdf, p.12].\n* **분지사슬 아미노산(BCAA)의 역할**: 필수 아미노산(EAA) 중 3가지 분지사슬 아미노산인 류신, 이소류신, 발린은 단백질 대사, 신경 기능, 혈당 및 인슐린 조절에 고유한 역할을 하며, 경구 섭취 시 혈류에 빠르게 나타나 골격근 단백질 합성(MPS)의 핵심 구성 요소가 됩니다 [출처: s12970-017-0177-8.pdf, p.12].",
+    "reason": "Answer B incorrectly states that the specific amount of leucine is not mentioned in the provided text, missing the 700-3000 mg fact. It is faithful to its context, which was truncated and did not include the specific numbers.",
+    "context": "[출처: s12970-017-0177-8.pdf, 페이지: 1]\nR E V I E W Open Access\nInternational Society of Sports Nutrition\nPosition Stand: protein and exercise\nRalf Jäger 1, Chad M. Kerksick 2, Bill I. Campbell 3, Paul J. Cribb 4, Shawn D. Wells 5, Tim M. Skwiat 5, Martin Purpura 1,\nTim N. Ziegenfuss 6, Arny A. Ferrando 7, Shawn M. Arent 8, Abbie E. Smith-Ryan 9, Jeffrey R. Stout 10, Paul J. Arciero 11,\nMichael J. Orm"
+  },
+  {
+    "id": "ag-066",
+    "group": "eer_concept",
+    "q": "Does KDRIs set a tolerable upper intake level for energy?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "reason": "The model abstained from answering the question, which is considered incorrect. The abstention is faithful to its claim of not finding the answer.",
+    "context": "[출처: KDRI_2025_vol3.pdf, 페이지: 489]\nonly when scientific evidence regarding adverse effects from excessive intake is available; \nh o w e v e r ,  t h e  a b s e n c e  o f  a  U L  d o e s  n o t  i m p l y  t h a t  p o t e n t i a l  a d v erse effects can be entirely \nexcluded. In the 2025 KDRIs, the relationships between nutrients and chronic diseases-such as \nc a r d i o v a s c u l a r  d i s"
+  },
+  {
+    "id": "ag-067",
+    "group": "eer_concept",
+    "q": "KDRIs에서 에너지에 상한섭취량 개념을 적용하는가?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "reason": "The model abstained from answering, but the information can be inferred from the provided table where Energy only has EER and no UL.",
+    "context": "[출처: KDRI_2025_vol1.pdf, 페이지: 342]\n에너지와 다량영양소\n300\n1 General Outline\n1 Directions for the Establishment and Revision of the KDRI\n1-1. Purpose\nThe Korean Dietary Reference Intakes (KDRI) are standards for energy and nutrient \nintakes that are established to help individuals maintain health throughout the life course \nwhile minimizing the risks of both nutrient deficiencies and diet-related chronic d"
+  },
+  {
+    "id": "ag-075",
+    "group": "obesity_initial_goal",
+    "q": "2022 비만 치료 지침의 초기 체중 감량 목표는 얼마이며 어떤 치료 맥락인가?",
+    "gold": "The 2022 obesity-treatment guideline recommends an initial goal of losing 5–10% of pretreatment weight within six months; it should not be generalized to all healthy adults.",
+    "answer": "2022 비만 치료 지침에서 제시하는 체중 감량의 일차(초기) 목표와 치료 맥락은 다음과 같습니다.\n\n* **비만 치료 전 평가 맥락:** 체중 감량의 일차 목표로 **치료 전 체중의 5~10%를 6개월 내에 감량**할 것을 권고합니다(A, Class I) [출처: guideline2022_vol8.pdf, p.4].\n* **행동치료 맥락:** 치료 **1개월 이내에 2.5%의 체중 감량**에 도달하지 못하는 경우, 기존의 행동치료를 기반으로 한 생활습관 중재를 강화하는 것을 고려하도록 제시하고 있습니다(B, Class IIa) [출처: guideline2022_vol8.pdf, p.8].",
+    "reason": "Model A correctly identifies the 5-10% weight loss goal within six months but omits the gold fact that this should not be generalized to all healthy adults.",
+    "context": "[출처: guideline2022_vol8.pdf, 페이지: 4]\n대한비만학회 비만 진료지침 2022 8판 _ 요약본대한비만학회 비만 진료지침 2022 8판 _ 요약본\n76\n2. 비만 치료 전 평가\n지침\n1.\t \t비만\t치료를\t시작하기\t전에\t이차성\t비만의\t원인이\t될\t수\t있는\t유전질환,\t\n내분비질환,\t약제에\t대한\t문진과\t선별\t검사의\t실시를\t고려한다.\t(B,\tClass\tIIa)\n2.\t \t비만은\t고혈압,\t2형당뇨병,\t이상지질혈증,\t통풍,\t관절염,\t심혈관계질환\t및\t암\t\n발생의\t위험을\t높이고\t사망률을\t상승시키므로\t비만환자를\t진료할\t때\t이에\t\n대한\t문진과\t선별\t검사를\t권고한다.\t(A,\tClass\tI)\n3.\t \t치료\t전\t체중의\t5~10%를\t6개월\t내에\t감량하는\t것을\t체중\t감량의\t일차\t\n목표로\t할\t것을\t권고한다.\t(A,\tC"
+  },
+  {
+    "id": "ag-094",
+    "group": "leucine",
+    "q": "What leucine amount and amino-acid balance does ISSN mention?",
+    "gold": "ISSN suggests acute protein doses contain 700–3000 mg leucine and a balanced array of essential amino acids.",
+    "answer": "제공된 자료에서 언급된 류신(leucine)의 양과 아미노산 균형에 대한 내용은 다음과 같습니다.\n\n* **류신 섭취량**: 제공된 본문에는 류신의 구체적인 수치(g 등)는 명시되어 있지 않으며, 격렬한 운동 훈련 후 단백질 균형을 순 양의 상태(net positive state)로 전환하기 위해 \"충분한 양의 류신(sufficient amounts of leucine)\"을 함유한 단백질 또는 필수 아미노산 복합체를 섭취해야 하고, 운동선수는 고품질 단백질 공급원을 선택하여 매 식사마다 \"적절한 류신 함량(adequate leucine content)\"을 섭취하는 데 집중해야 한다고 설명하고 있습니다 [출처: s12970-017-0177-8.pdf, p.12].\n* **아미노산 균형 및 단독 섭취 지양**: 류신이 독립적으로 단백질 합성을 자극하는 것으로 입증되었더라도 류신만을 단독으로 보충해서는 안 됩니다 [출처: s12970-017-0177-8.pdf, p.12]. 동물 모델 연구에 따르면 류신만 섭취한 경우 전체 식사(whole meal)를 섭취했을 때보다 단백질 합성 지속 시간이 더 짧았습니다 [출처: s12970-017-0177-8.pdf, p.12].\n* **필수 아미노산(EAA) 및 BCAA의 역할**: 단백질 균형 조절과 관련하여 3가지 분지쇄 아미노산(BCAA)인 류신, 이소류신, 발린은 단백질 대사, 신경 기능, 혈당 및 인슐린 조절에 있어 필수 아미노산 중 독특한 역할을 합니다 [출처: s12970-017-0177-8.pdf, p.12].",
+    "reason": "Answer B explicitly states that the specific amount of leucine (e.g., in grams) is not mentioned in the provided text, which is a material omission of the gold fact (700-3000 mg). It is faithful to its context, which did not include the page 1 snippet containing the exact numbers.",
+    "context": "[출처: s12970-017-0177-8.pdf, 페이지: 1]\nR E V I E W Open Access\nInternational Society of Sports Nutrition\nPosition Stand: protein and exercise\nRalf Jäger 1, Chad M. Kerksick 2, Bill I. Campbell 3, Paul J. Cribb 4, Shawn D. Wells 5, Tim M. Skwiat 5, Martin Purpura 1,\nTim N. Ziegenfuss 6, Arny A. Ferrando 7, Shawn M. Arent 8, Abbie E. Smith-Ryan 9, Jeffrey R. Stout 10, Paul J. Arciero 11,\nMichael J. Orm"
+  }
+]

@@ -1,0 +1,26 @@
+{
+  "purpose": "functional synthetic development only; not >=100 performance evidence",
+  "initial_assessment_matches": {
+    "baseline": 8,
+    "agentic": 10
+  },
+  "refined_assessment_matches": {
+    "baseline": 8,
+    "agentic": 12
+  },
+  "refined_pro_judging": {
+    "baseline": {
+      "completed": 12,
+      "correct": 8,
+      "faithful": 12,
+      "known_cost_usd": 0.016799
+    },
+    "agentic": {
+      "completed": 12,
+      "correct": 12,
+      "faithful": 12,
+      "known_cost_usd": 0.016933
+    }
+  },
+  "refinement": "Prompt/schema sufficient clarified after separate dev failures; main100 comparisons started only after all12 refinement probes finished. No source-specific examples added to runtime prompt."
+}
