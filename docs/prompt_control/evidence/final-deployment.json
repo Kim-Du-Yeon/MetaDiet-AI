@@ -1,0 +1,56 @@
+{
+  "verified_at": "2026-10-22T01:38:34.6846428+09:00",
+  "api": {
+    "status": "ok",
+    "build": {
+      "commit": "1a4e66f20cf4f8115928d053fa77ec3f10367d6b",
+      "protocol": 2,
+      "delivery": "verified_buffered"
+    }
+  },
+  "frontend": {
+    "commit": "1a4e66f20cf4f8115928d053fa77ec3f10367d6b",
+    "stream_protocol": 2
+  },
+  "admin": {
+    "endpoint": "https://metadiet-api.onrender.com/admin/prompts/refresh",
+    "status": 200,
+    "body": {
+      "prompt_release": "v1",
+      "prompt_bundle_sha256": "a7c1a26538f261cd1c87c47a643f81dcf21058c0307d53b9ac955975a118d283",
+      "prompt_scope": "registered_primary_templates",
+      "prompt_commit_ids": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "prompt_source": "signed",
+      "prompt_hashes": {
+        "legacy.food_extraction": "718176d51a8c2d34ce1c0b32f4afda13b3fa51d033e4ac73b78dab72d3013c4f",
+        "legacy.intent_classification": "771222e7e54f2fe0199072d6995c9beadf386918ed9b95cd51daa431f599ab20",
+        "rag.query_translation": "b34cdcb49ef64b79e264bbf3bf49434809196a3a9e33082ee1ec54ef0f235523",
+        "team.base": "14106af6c42e10fb55d36af2a4df2e40db39279ffe57e80f58c56bdbc78dc961",
+        "team.compact_followup": "4e45616624ede3cf57f17391e19a168a92b0129a23fa2c2cc86e0ca323397fc6",
+        "team.role.evidence": "03fdbef4bef24d58ba55f8308a6436d54422b282694c4df7d86b8c10b2f1ab69",
+        "team.role.goal": "286e4cc89eef0dad270f0dc57c4a55a72361ffb1c313dd0b95003675b0095aff",
+        "team.role.meal": "79ae127184046a6350ebe5fd3a15b3c1e1af91460af5ec6cad4521dc6fcb7e78"
+      },
+      "prompt_release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "last_refresh_error": null,
+      "refresh_interval_seconds": 60,
+      "remote_enabled": true,
+      "channel": "production",
+      "ab_enabled": false,
+      "explicit_cache_enabled": false,
+      "private_cache_enabled": false
+    }
+  },
+  "render_api_deploy": "dep-dbcejqjncjis7386u2v0",
+  "render_web_deploy": "dep-dbcej6pkjs5s73cffh10",
+  "scope": "Final same-code deployment readback; earlier71975d71 browser counseling/RAG/HITL/promotion/rollback evidence retained; no additional model generation or meal writes"
+}
