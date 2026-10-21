@@ -9,6 +9,11 @@ spec=importlib.util.spec_from_file_location("eval_budget",PATH)
 budget=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(budget)
 
+@pytest.fixture(autouse=True)
+def fixed_limits_for_safety_scenarios(monkeypatch):
+    # These arithmetic scenarios use explicit small fixture caps, not campaign defaults.
+    monkeypatch.setattr(budget, 'LIMITS', {'probe':.1,'development':.25,'comparison':3.,'judge':1.,'browser':.15})
+
 def test_stage_total_restart_and_unknown_usage(tmp_path):
     path=tmp_path/"budget.sqlite"
     b=budget.Budget(path)
@@ -148,7 +153,8 @@ def test_batch_judge_feasibility_stops_before_any_generation(tmp_path):
     budget.preflight_batch_judge(b,pairs=100,output_cap=2048)
     assert b.summary()["committed_usd"]==0
     assert not b.summary()["stopped"]
+    b.reserve('judge', budget.LIMITS['judge'] - 1)
     with pytest.raises(budget.BudgetStop,match="Budget exhausted: judge"):
         budget.preflight_batch_judge(b,pairs=100,output_cap=2048,chunk_size=100)
-    assert b.summary()["committed_usd"]==0
+    assert b.summary()["committed_usd"]==budget.LIMITS['judge'] - 1
     assert b.summary()["stopped"]

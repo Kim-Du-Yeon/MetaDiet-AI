@@ -1,0 +1,26 @@
+"""Sequential final100 coordinator; no retries after a failed child process."""
+import json,subprocess,sys,time
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1];PY=str(ROOT/'backend/venv/Scripts/python.exe');D=ROOT/'docs/agentic_rag/20261021-v14-final100'
+def run(args):
+ p=subprocess.run([PY,*args],cwd=ROOT)
+ if p.returncode:
+  (D/'coordinator-stop.json').write_text(json.dumps({'status':'stopped','exit_code':p.returncode,'command':args},indent=2)+'\n',encoding='utf-8')
+  raise SystemExit(p.returncode)
+for start in range(0,100,5):
+ rows=[json.loads(s) for s in (D/'attempts.jsonl').read_text(encoding='utf-8').splitlines()]
+ if any(r['status']!='completed' or r.get('verification_failure') for r in rows):raise SystemExit('Prior serving failure: no new calls')
+ ids={r['attempt_id'] for r in rows if r['condition']=='agentic'}
+ needed={f'ag-{i:03}' for i in range(start,start+5)}
+ if not needed<=ids:
+  if needed&ids:raise SystemExit('Partially entered packet; inspect rather than retry')
+  run(['tmp/v9_v12_generation.py','--output',str(D),'--baseline-source',str(D/'baseline-v9.py.txt'),'--chunk-start',str(start),'--chunk-size','5','--defer-judge','--allow-paid'])
+ job=D/f'packet-{start:04d}.json'
+ if not job.exists():run(['tmp/v14_grade_packet.py','--start',str(start),'--action','submit','--allow-paid'])
+ while json.loads(job.read_text(encoding='utf-8'))['state']!='completed':
+  time.sleep(30)
+  run(['tmp/v14_grade_packet.py','--start',str(start),'--action','collect','--allow-paid'])
+ grades=[json.loads(s) for s in job.with_suffix('.grades.jsonl').read_text(encoding='utf-8').splitlines()]
+ if any(g['condition']=='agentic' and (g['status']!='completed' or not g['correct'] or not g['faithful']) for g in grades):raise SystemExit('Prior bad grade; no new calls')
+ print(json.dumps({'packet_passed':start,'candidate_cases_judged':start+5}),flush=True)
+print('Completed100 generation and paired grades; full protocol gate still requires analysis.',flush=True)

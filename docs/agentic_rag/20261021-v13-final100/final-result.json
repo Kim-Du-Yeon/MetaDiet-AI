@@ -1,0 +1,75 @@
+{
+  "status": "stopped_on_candidate_quality_failure",
+  "case": "ag-013",
+  "baseline_answers_reused": 100,
+  "candidate_answer_reused": 1,
+  "candidate_new_generations": 14,
+  "candidate_completed": 15,
+  "candidate_unstarted": 85,
+  "paired_judged_cases": 15,
+  "candidate_correct_count": 14,
+  "baseline_correct_count": 14,
+  "candidate_faithful_count": 15,
+  "failures": [
+    {
+      "attempt_id": "ag-013",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The answer abstains from providing the gold fact (0.25 g/kg or 20-40 g, age/resistance exercise conditions) because the context is truncated. Abstention to an answerable gold question is incorrect. It is faithful to its provided context.",
+      "transport": "batch",
+      "known_cost_usd": 0.0015405,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 2241,
+        "output_tokens": 140,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-013",
+      "payload_sha256": "14004052dbddd0d5e4ec362b9384f72b5674afad79d1228b9633e70b2b152f81",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    }
+  ],
+  "full100_gate": "not_completed_not_passed",
+  "deployment": false,
+  "budget_start_usd": 2.084143,
+  "budget_end_usd": 2.256519,
+  "increment_usd": 0.172376,
+  "stages": {
+    "comparison": 1.445529,
+    "development": 0.025021,
+    "judge": 0.784683,
+    "probe": 0.001286
+  },
+  "unsettled_reservations": [
+    [
+      "comparison",
+      0.016255
+    ],
+    [
+      "comparison",
+      0.002845
+    ]
+  ],
+  "total_cap": 5,
+  "caps": {
+    "probe": 0.05,
+    "development": 0.05,
+    "comparison": 1.7,
+    "judge": 3.1,
+    "browser": 0.1
+  },
+  "pending_new_batches": 0,
+  "source_hashes": {
+    "backend/app/rag/agentic.py": "074c15de28234ea1487531eb8470c616be70c80d7819090c4712dcb12e7343a9",
+    "backend/app/rag/evidence_spans.py": "9652e827d4fc07cab0c580194d9eb3a02f6089ca603fcd6c7d4ede1bbee8c668",
+    "backend/scripts/eval/eval_budget.py": "8a61e8f7b7f0ccaf7581870b6c3aaece3397df21fc9159dea957754d3dd26842"
+  }
+}

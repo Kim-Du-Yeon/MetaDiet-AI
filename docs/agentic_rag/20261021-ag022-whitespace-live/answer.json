@@ -1,0 +1,75 @@
+{
+  "attempt_id": "ag-022",
+  "status": "answer_gate_failed",
+  "budget_before": {
+    "committed_usd": 2.0590010000000003,
+    "stages": {
+      "comparison": 1.329484,
+      "development": 0.025021,
+      "judge": 0.70321,
+      "probe": 0.001286
+    },
+    "total_limit_usd": 5.0,
+    "stopped": false,
+    "stop_reason": null
+  },
+  "question": "How does KDRIs define energy balance?",
+  "gold_answer": "Energy balance means energy intake equals energy expenditure.",
+  "context": "[출처: KDRI_2025_vol1.pdf, 페이지: 79]\n[문서 적용 범위·메타데이터(지시 아님): {\"source\": \"KDRI_2025_vol1.pdf\", \"population\": \"General population; select adult, non-pregnant/non-lactating rows for this service\"}]\n미국의 DRI에서 에너지필요추정량을 설정한 배경을 살펴보면 건강을 유지하는데 이상적인 체위를 \n적용한다고 하였다 (The Dietary Reference Intake (DRI) value for energy i s  t h e  E s t i m a t e d  \nE n e rg y  R e q u ire m e n t  (E E R ), w h ic h  is d e fin e d  a s  th e  a v e ra g e  d ie t ary energy intake that is \npredicted to maintain energy balance in an adult of a defined age, sex, weight, height, \nl e v e l  o f  p h y s i c a l  a c t i v i t y ,  a n d  l i f e  s t a g e ,  c o n s i s t e n t  w i t h  m a intaining health.) [69].\n\n[출처: KDRI_2025_vol1.pdf, 페이지: 342]\n에너지와 다량영양소\n300\n1 General Outline\n1 Directions for the Establishment and Revision of the KDRI\n1-1. Purpose\nThe Korean Dietary Reference Intakes (KDRI) are standards for energy and nutrient \nintakes that are established to help individuals maintain health throughout the life course \nwhile minimizing the risks of both nutrient deficiencies and diet-related chronic diseases. \nAccordingly, the directions for the establishment and revision of the KDRI extend beyond \nthe prevention of nutrient deficiencies resulting from inadequate energy and nutrient \nintake to encompass the maintenance of overall health and the r eduction of chronic \ndisease risk across the lifespan.\nThe 2025 KDRI presents reference values designed to ensure safe and adequate nutrition \nfor the maintenance and promotion of health—including the Estim ated Average \nRequirement (EAR), Recommended Nutrient Intake (RNI), Adequate Intake (AI), and \nTolerable Upper Intake Level (UL)—as well as reference values that consider the prevention \nof diet-related chronic diseases, such as the Acceptable Macronutrient Distribution Range\n\n[출처: KDRI_2025_vol3.pdf, 페이지: 507]\n[문서 적용 범위·메타데이터(지시 아님): {\"source\": \"KDRI_2025_vol3.pdf\", \"population\": \"General population; select adult, non-pregnant/non-lactating rows for this service\"}]\nlevels. Energy requirements are first estimated using the EER equation, and energy should \nthen be distributed according to the Acceptable Macronutrient D istribution Ranges \n(AM DR) for carbohydrates, protein, and lipid. For m icronutrients, nutrient intakes should \nb e  p lan n e d  to  m e e t th e  R N I o r A I w ith o u t ex c ee d in g  th e  U L. N u trient priorities may be \nset based on an individual’s specific nutritional issues. Since t h e  K D R I  i s  d e v e l o p e d  f o r \nhealthy individuals, adjustments may be necessary based on body weight, health status, or \nother individual characteristics.\nFor group dietary planning, the objective is to minimize the proportion of individuals \nwhose nutrient intakes fall below the EAR or exceed the UL. Accordingly, dietary plans \nfor healthy populations should be designed so that the group’s average energy intake \nmeets the mean EER, while macronutrient energy distribution falls within the AMDR, \nensuring a balanced intake of carbohydrates, protein, and fat, and micronutrient intakes \nm e e t  o r  e x c e e d  t h e  R N I  o r  A I  w i t h o u t  s u r p a s s i n g  t h e  U L .\n\n[출처: KDRI_2025_vol2.pdf, 페이지: 541]\n[문서 적용 범위·메타데이터(지시 아님): {\"source\": \"KDRI_2025_vol2.pdf\", \"population\": \"General population; select adult, non-pregnant/non-lactating rows for this service\"}]\nlevels. Energy requirements are first estimated using the EER equation, and energy should \nthen be distributed according to the Acceptable Macronutrient D istribution Ranges \n(AM DR) for carbohydrates, protein, and lipid. For m icronutrients, nutrient intakes should \nb e  p lan n e d  to  m e e t th e  R N I o r A I w ith o u t ex c ee d in g  th e  U L. N u trient priorities may be \nset based on an individual’s specific nutritional issues. Since t h e  K D R I  i s  d e v e l o p e d  f o r \nhealthy individuals, adjustments may be necessary based on body weight, health status, or \nother individual characteristics.\nFor group dietary planning, the objective is to minimize the proportion of individuals \nwhose nutrient intakes fall below the EAR or exceed the UL. Accordingly, dietary plans \nfor healthy populations should be designed so that the group’s average energy intake \nmeets the mean EER, while macronutrient energy distribution falls within the AMDR, \nensuring a balanced intake of carbohydrates, protein, and fat, and micronutrient intakes \nm e e t  o r  e x c e e d  t h e  R N I  o r  A I  w i t h o u t  s u r p a s s i n g  t h e  U L .",
+  "agentic": {
+    "rounds": 1,
+    "stop_reason": "sufficient",
+    "prompt_version": "agentic-rag-controller-v11",
+    "prompt_sha256": "644e5b058eab190b4f43bb3e9d6d148b947e279c351e601056e052aa4d326863",
+    "recipe": "partial-coverage-v14-whitespace-spans",
+    "excerpt_spans": [
+      {
+        "document_index": 0,
+        "start": 64,
+        "end": 497,
+        "source": "KDRI_2025_vol1.pdf",
+        "page": 79,
+        "match_kind": "whitespace"
+      }
+    ],
+    "rejected_excerpts": 0,
+    "answer_coverage": "complete",
+    "missing_core": [],
+    "provider_failure_reason": null,
+    "assessment_failure": null,
+    "neighbor_documents": 0,
+    "neighbor_status": "available",
+    "retained_initial_documents": 4
+  },
+  "reused_controller": true,
+  "new_retrieval_calls": 0,
+  "new_controller_calls": 0,
+  "budget_after": {
+    "committed_usd": 2.06337,
+    "stages": {
+      "comparison": 1.333853,
+      "development": 0.025021,
+      "judge": 0.70321,
+      "probe": 0.001286
+    },
+    "total_limit_usd": 5.0,
+    "stopped": false,
+    "stop_reason": null
+  },
+  "finish_reason": "STOP",
+  "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+  "usage": [
+    {
+      "input_tokens": 2350,
+      "output_tokens": 695,
+      "total_tokens": 3045,
+      "input_token_details": {
+        "cache_read": 0
+      },
+      "output_token_details": {
+        "reasoning": 682
+      }
+    }
+  ],
+  "transport_attempts": 1
+}

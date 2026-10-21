@@ -1,0 +1,46 @@
+{
+  "status": "single_case_repair_passed",
+  "case": "ag-013",
+  "cached_initial_documents_reused": true,
+  "calls": {
+    "controller": 1,
+    "answer": 1
+  },
+  "embedding_calls": 0,
+  "judge_calls": 1,
+  "judge_transport": "native_batch",
+  "correct": true,
+  "faithful": true,
+  "budget_start_usd": 2.256519,
+  "budget_end_usd": 2.270037,
+  "increment_usd": 0.013518,
+  "stage_usage": {
+    "comparison": 1.453787,
+    "development": 0.025021,
+    "judge": 0.789943,
+    "probe": 0.001286
+  },
+  "total_cap_usd": 5,
+  "stage_caps": {
+    "probe": 0.05,
+    "development": 0.05,
+    "comparison": 1.7,
+    "judge": 3.1,
+    "browser": 0.1
+  },
+  "unsettled_old_reservations": [
+    [
+      "comparison",
+      0.016255
+    ],
+    [
+      "comparison",
+      0.002845
+    ]
+  ],
+  "new_pending_batches": 0,
+  "duplicate_rewrite_fix_live_exercised": false,
+  "duplicate_rewrite_fix_offline_tested": true,
+  "full100_comparison_passed": false,
+  "deployed": false
+}

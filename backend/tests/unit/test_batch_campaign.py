@@ -9,6 +9,13 @@ from eval_budget import Budget,BudgetStop
 import batch_agentic_judges as batches
 import batch_campaign as campaign
 
+@pytest.fixture(autouse=True)
+def fixed_limits_for_split_scenarios(monkeypatch, request):
+ if request.node.name == 'test_limits_unchanged_and_stopped_real_ledger_not_reopened':return
+ import eval_budget
+ # Keep split/denial scenarios independent of the approved campaign allocation.
+ monkeypatch.setattr(eval_budget,'LIMITS',{'probe':.1,'development':.25,'comparison':3.,'judge':1.,'browser':.15})
+
 def entry(i):
  return {"key":f"old|a{i}|baseline","kind":"single","attempt_id":f"a{i}","condition":"baseline",
          "payload":{"question":"q","gold":"g","answer":"saved answer","context":"saved evidence"}}
@@ -233,7 +240,8 @@ def test_corrupt_saved_grade_prevents_advance_and_refund(tmp_path,monkeypatch):
 def test_limits_unchanged_and_stopped_real_ledger_not_reopened():
  import eval_budget
  assert eval_budget.TOTAL==5
- assert eval_budget.LIMITS=={"probe":.1,"development":.25,"comparison":3.,"judge":1.,"browser":.15}
+ assert eval_budget.LIMITS=={"probe":.05,"development":.05,"comparison":2.6,"judge":2.2,"browser":.1}
+ assert sum(eval_budget.LIMITS.values())==pytest.approx(5)
 
 def test_concurrent_identical_settlement_refunds_only_once(tmp_path):
  from concurrent.futures import ThreadPoolExecutor

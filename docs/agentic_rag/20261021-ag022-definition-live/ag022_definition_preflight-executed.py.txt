@@ -1,0 +1,17 @@
+"""Offline read-only preflight; never imports a provider or loads credentials."""
+import ast,json,sqlite3,sys
+from pathlib import Path
+root=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(root/'backend/scripts/eval'))
+from eval_budget import TOTAL,LIMITS
+script=root/'tmp/ag022_definition_live.py'
+ast.parse(script.read_text(encoding='utf-8'))
+db=sqlite3.connect((root/'tmp/eval-budget.sqlite').as_uri()+'?mode=ro',uri=True)
+stages=dict(db.execute('SELECT stage,SUM(amount)/1000000.0 FROM costs GROUP BY stage'))
+stopped=bool(db.execute('SELECT 1 FROM stop LIMIT 1').fetchone());db.close()
+record={'offline_only':True,'paid_calls':0,'existing_committed_usd':round(sum(stages.values()),6),
+    'comparison_remaining_usd':round(LIMITS['comparison']-stages.get('comparison',0),6),
+    'total_cap':TOTAL,'stage_caps':LIMITS,'budget_stopped':stopped,
+    'attempt_already_exists':(root/'docs/agentic_rag/20261021-ag022-definition-live/loop.json').exists(),
+    'planned_scope':'One ag-022 only; cached initial documents, at most 2 Lite controller calls and 1 query embedding; one read-only dense re-search; no answer/judge/user DB writes in this step.'}
+print(json.dumps(record))

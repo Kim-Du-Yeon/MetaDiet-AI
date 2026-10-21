@@ -1,0 +1,1556 @@
+[
+  {
+    "attempt_id": "ag-014",
+    "condition": "baseline",
+    "question": "What leucine amount and amino-acid balance does ISSN mention?",
+    "gold": "ISSN suggests acute protein doses contain 700–3000 mg leucine and a balanced array of essential amino acids.",
+    "answer": "제공된 자료에서 언급된 류신 양 및 아미노산/단백질 균형 관련 내용은 다음과 같습니다:\n\n1. **류신 섭취량**: 구체적인 수치는 제시되지 않았으나, 격렬한 운동 후 식사에 대한 근육 단백질 합성(MPS) 반응을 연장하여 단백질 균형을 양의 상태로 전환하기 위해 \"충분한 양의 류신(sufficient amounts of leucine)\" 및 고품질 단백질 공급원을 통한 매 식사 시 \"적절한 류신 함량(adequate leucine content)\" 섭취에 집중해야 한다고 언급합니다 [출처: s12970-017-0177-8.pdf, p.12].\n2. **아미노산 균형 및 단백질 균형**: \n   - 류신이 독립적으로 단백질 합성을 자극할 수 있지만, 류신 단독으로만 보충해서는 안 되며 동물 모델 연구에서 류신 단독 섭취는 온전한 식사(whole meal)에 비해 단백질 합성 지속 시간이 짧았습니다 [출처: s12970-017-0177-8.pdf, p.12].\n   - 따라서 격렬한 운동 후 단백질 균형을 순 양성(net positive) 상태로 전환하기 위해서는 충분한 양의 류신이 포함된 단백질 또는 필수 아미노산(EAA) 복합체를 섭취해야 합니다 [출처: s12970-017-0177-8.pdf, p.12].\n   - BCAA(류신, 이소류신, 발린)는 단백질 대사, 신경 기능, 혈당 및 인슐린 조절에 역할을 하여 EAA 중 독특한 위치를 차지하며, 경구 섭취 시 혈류에 빠르게 나타나 골격근 단백질 합성의 핵심 구성 요소로 작용합니다 [출처: s12970-017-0177-8.pdf, p.12].",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-014",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Model A fails to provide the specific leucine amount (700-3000 mg) mentioned in the gold answer, stating that specific numbers were not provided. However, it is faithful to its provided context, which omits the section containing the exact dosage.",
+      "transport": "batch",
+      "known_cost_usd": 0.003288,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 4104,
+        "output_tokens": 412,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-014",
+      "payload_sha256": "c94f27a9af542f24e670d5594d7498da2a77536f323f2726fd43abbbca0a9c79",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-018",
+    "condition": "baseline",
+    "question": "How long can the exercise anabolic effect last according to ISSN?",
+    "gold": "ISSN notes exercise anabolic effects last at least 24 hours, likely diminishing over time; optimal protein timing depends on individual tolerance.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-018",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Abstention to an answerable question is incorrect.",
+      "transport": "batch",
+      "known_cost_usd": 0.002722,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 2072,
+        "output_tokens": 562,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-018",
+      "payload_sha256": "bd3ff2f8c6885f56035297996844425496a3d717fa12a1d72cbd167ccdfbe6db",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-022",
+    "condition": "baseline",
+    "question": "How does KDRIs define energy balance?",
+    "gold": "Energy balance means energy intake equals energy expenditure.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-022",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering. While the context mentions 'energy balance', it does not define it as energy intake equaling energy expenditure, making the abstention faithful but incorrect as it does not provide the gold fact.",
+      "transport": "batch",
+      "known_cost_usd": 0.004146,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3534,
+        "output_tokens": 793,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-022",
+      "payload_sha256": "c9dee7dd5727c4ed379c065d1b2c6381b65ee0525dcf3313c03b5b67627c3b9c",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-026",
+    "condition": "baseline",
+    "question": "Does KDRIs set a tolerable upper intake level for energy?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-026",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering, but the gold standard provides a specific answer. Abstention to an answerable gold question is considered incorrect. The abstention is faithful to the provided context, which lacks the specific information.",
+      "transport": "batch",
+      "known_cost_usd": 0.003363,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3852,
+        "output_tokens": 479,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-026",
+      "payload_sha256": "41fb8c2c38ca3263e1ee092c7f607ee6a406bd7b5cedea5ead7efff0a2e4c731",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-025",
+    "condition": "baseline",
+    "question": "음의 에너지 균형은 무엇이며 전날 과식 후 다음 날 200 kcal 차감을 정하는가?",
+    "gold": "Negative energy balance means expenditure exceeds intake and is associated with weight reduction; this does not specify a fixed next-day compensation amount.",
+    "answer": null,
+    "status": "failed",
+    "grade": {
+      "attempt_id": "ag-025",
+      "condition": "baseline",
+      "status": "not_applicable_serving_failed",
+      "correct": false,
+      "faithful": false,
+      "reason": "Answer B failed to serve, providing no answer.",
+      "transport": "batch",
+      "known_cost_usd": 0.0024995,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 4261,
+        "output_tokens": 123,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-025",
+      "payload_sha256": "c123fc7bd6c5102230681e098a77c6602e7802beee5024c3195607821a7be88e",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-027",
+    "condition": "baseline",
+    "question": "KDRIs에서 에너지에 상한섭취량 개념을 적용하는가?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-027",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering, failing to provide the gold fact, making it incorrect. It is faithful as the context lacks the explicit statement needed to answer the question.",
+      "transport": "batch",
+      "known_cost_usd": 0.0043505,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 4195,
+        "output_tokens": 751,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-027",
+      "payload_sha256": "1c7ef25739c38887475faa7f57b74906a6ea051b867bf7438486306d897cfb84",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-034",
+    "condition": "baseline",
+    "question": "What initial weight-loss goal does the 2022 obesity-treatment guideline state?",
+    "gold": "The 2022 obesity-treatment guideline recommends an initial goal of losing 5–10% of pretreatment weight within six months; it should not be generalized to all healthy adults.",
+    "answer": "2022 비만 진료지침에서는 치료 전 체중의 5~10%를 6개월 내에 감량하는 것을 체중 감량의 일차 목표로 권고하고 있습니다 [출처: guideline2022_vol8.pdf, p.4].",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-034",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Answer A states the 5-10% weight loss goal within 6 months but omits the crucial caveat from the gold standard that it should not be generalized to all healthy adults.",
+      "transport": "batch",
+      "known_cost_usd": 0.0054265,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 9995,
+        "output_tokens": 143,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-034",
+      "payload_sha256": "d9aff1b70c61fa4c0b3a67ec421faae39d8a8ee467dbaa23b75e232d4235792e",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-035",
+    "condition": "baseline",
+    "question": "2022 비만 치료 지침의 초기 체중 감량 목표는 얼마이며 어떤 치료 맥락인가?",
+    "gold": "The 2022 obesity-treatment guideline recommends an initial goal of losing 5–10% of pretreatment weight within six months; it should not be generalized to all healthy adults.",
+    "answer": "비만 치료 전 평가 지침에 따른 체중 감량의 일차 목표는 치료 전 체중의 5~10%를 6개월 내에 감량하는 것입니다 [출처: guideline2022_vol8.pdf, p.4].\n\n또한, 행동치료 맥락에서는 치료 1개월 이내에 2.5%의 체중 감량에 도달하지 못하는 경우 기존의 행동치료를 기반으로 한 생활습관 중재를 강화하는 것을 고려하도록 권고하고 있습니다 [출처: guideline2022_vol8.pdf, p.8].",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-035",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Answer B omits the material fact from the gold standard that the guideline should not be generalized to all healthy adults. However, the claims it does make are supported by its context.",
+      "transport": "batch",
+      "known_cost_usd": 0.005962,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 8444,
+        "output_tokens": 580,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-035",
+      "payload_sha256": "8a701403349206ca544e6fed4a0837c803cef6780e34b96a622eaa871567b258",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-054",
+    "condition": "baseline",
+    "question": "What leucine amount and amino-acid balance does ISSN mention?",
+    "gold": "ISSN suggests acute protein doses contain 700–3000 mg leucine and a balanced array of essential amino acids.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-054",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Model A abstains from answering, which is incorrect for an answerable gold question. It is faithful as it does not make any unsupported claims.",
+      "transport": "batch",
+      "known_cost_usd": 0.002165,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3532,
+        "output_tokens": 133,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-054",
+      "payload_sha256": "5af2808e492946b6eacf0ff3541c39da2cbbed822c336a90719d1908fa0ef4a6",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-062",
+    "condition": "baseline",
+    "question": "How does KDRIs define energy balance?",
+    "gold": "Energy balance means energy intake equals energy expenditure.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-062",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering the question, which is incorrect according to the gold standard, but faithful to the provided context as it does not explicitly define energy balance.",
+      "transport": "batch",
+      "known_cost_usd": 0.001645,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 1358,
+        "output_tokens": 322,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-062",
+      "payload_sha256": "10c830af1d70a642968140960ba5b0d1758c0acc7f03eabce058fdf5a3e301d1",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-066",
+    "condition": "baseline",
+    "question": "Does KDRIs set a tolerable upper intake level for energy?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-066",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "A abstains from answering the question, which is incorrect since the gold standard provides an answer. It is faithful to its context as it correctly states the information is not found.",
+      "transport": "batch",
+      "known_cost_usd": 0.002364,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3864,
+        "output_tokens": 144,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-066",
+      "payload_sha256": "81ecff31b6a5b2ab89e3a06ecc676a3b17c5d20edd0f41927adece474aab4b6b",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-067",
+    "condition": "baseline",
+    "question": "KDRIs에서 에너지에 상한섭취량 개념을 적용하는가?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-067",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering the gold question, stating it could not find the evidence in the context, which makes it incorrect but faithful.",
+      "transport": "batch",
+      "known_cost_usd": 0.004304,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 4522,
+        "output_tokens": 681,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-067",
+      "payload_sha256": "5b4d5807fe7af6986cc4c3b0575565bebc379dc87ab40a83a75e090d902a13cc",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-074",
+    "condition": "baseline",
+    "question": "What initial weight-loss goal does the 2022 obesity-treatment guideline state?",
+    "gold": "The 2022 obesity-treatment guideline recommends an initial goal of losing 5–10% of pretreatment weight within six months; it should not be generalized to all healthy adults.",
+    "answer": "2022 비만 진료지침에서는 치료 전 체중의 5~10%를 6개월 내에 감량하는 것을 체중 감량의 일차 목표로 권고하고 있습니다 [출처: guideline2022_vol8.pdf, p.4].",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-074",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Answer A states the 5-10% weight loss goal within 6 months but omits the second part of the gold answer regarding not generalizing it to all healthy adults.",
+      "transport": "batch",
+      "known_cost_usd": 0.0054205,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 9989,
+        "output_tokens": 142,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-074",
+      "payload_sha256": "87a7d4a713afb121f68bde3143641370f1f9fa5f549f1aeecd8d206d2d30ba5c",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-075",
+    "condition": "baseline",
+    "question": "2022 비만 치료 지침의 초기 체중 감량 목표는 얼마이며 어떤 치료 맥락인가?",
+    "gold": "The 2022 obesity-treatment guideline recommends an initial goal of losing 5–10% of pretreatment weight within six months; it should not be generalized to all healthy adults.",
+    "answer": "비만 치료 지침에 제시된 체중 감량 목표와 맥락은 다음과 같습니다.\n\n- **비만 치료 전 평가 맥락:** 체중 감량의 일차 목표로 **치료 전 체중의 5~10%를 6개월 내에 감량**하는 것을 권고합니다 [출처: guideline2022_vol8.pdf, p.4].\n- **행동치료 맥락:** **치료 1개월 이내에 2.5%의 체중 감량**에 도달하지 못하는 경우, 기존의 행동치료를 기반으로 한 생활습관 중재를 강화하는 것을 고려합니다 [출처: guideline2022_vol8.pdf, p.8].",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-075",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Model B identifies the 5-10% weight loss goal but fails to mention the material omission from the gold standard regarding not generalizing the guideline to all healthy adults. It is faithful to its context.",
+      "transport": "batch",
+      "known_cost_usd": 0.0030153000000000003,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 8477,
+        "output_tokens": 460,
+        "input_token_details": {
+          "cache_read": 6508
+        }
+      },
+      "batch_key": "pair|ag-075",
+      "payload_sha256": "1a38e12058bc8b6d206bd2eaa13527a1c087615b718696d94ede6e792e4c4f76",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-094",
+    "condition": "baseline",
+    "question": "What leucine amount and amino-acid balance does ISSN mention?",
+    "gold": "ISSN suggests acute protein doses contain 700–3000 mg leucine and a balanced array of essential amino acids.",
+    "answer": "제공된 자료에 따르면 구체적인 류신의 수치(정량적 양)는 명시되어 있지 않으나, 류신 및 아미노산/단백질 균형과 관련하여 다음과 같이 언급되어 있습니다:\n\n- **류신의 양 및 섭취 방식:** 충분한 양의 류신(sufficient amounts of leucine)을 함유한 단백질 또는 필수 아미노산(EAA) 복합체의 섭취가 권장되며, 운동선수는 고품질 단백질 식품을 선택하여 매 식사마다 적절한 류신 함량(adequate leucine content)을 섭취하는 데 집중해야 합니다 [출처: s12970-017-0177-8.pdf, p.12]. 또한 단독 류신 보충은 전체 식사에 비해 단백질 합성 지속 시간이 짧으므로 류신만을 단독으로 보충해서는 안 됩니다 [출처: s12970-017-0177-8.pdf, p.12].\n- **단백질 및 아미노산 균형:** 단백질 섭취가 없을 때는 단백질 균형이 더 부정적(음의 상태)이 되지만, 강도 높은 운동 후 류신 섭취는 근육 단백질 합성(MPS) 반응을 연장하여 음의 단백질 균형을 순 양의 상태(net positive state)로 전환할 수 있습니다 [출처: s12970-017-0177-8.pdf, p.12]. \n- **관련 아미노산:** 필수 아미노산(EAA) 중 분지쇄 아미노산(BCAA)인 류신, 이소류신, 발린은 단백질 대사 조절, 신경 기능, 혈당 및 인슐린 조절에 관여하는 고유한 역할을 가지며 골격근 단백질 합성의 핵심 요소로 작용합니다 [출처: s12970-017-0177-8.pdf, p.12].",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-094",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Model A fails to provide the specific leucine amount (700-3000 mg), explicitly stating it is not mentioned. However, it is faithful to its provided context, which omits the section containing the exact numbers.",
+      "transport": "batch",
+      "known_cost_usd": 0.00325,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3956,
+        "output_tokens": 424,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-094",
+      "payload_sha256": "885b8fb3c39bab0342adc69d2589fb863a8c0ea7cf4d5fc1e93afe031cb6dcf4",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-022",
+    "condition": "agentic",
+    "question": "How does KDRIs define energy balance?",
+    "gold": "Energy balance means energy intake equals energy expenditure.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-022",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering. The provided context does not contain the definition of energy balance, so the abstention is faithful to the text, but it fails to answer the gold fact.",
+      "transport": "batch",
+      "known_cost_usd": 0.004146,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3534,
+        "output_tokens": 793,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-022",
+      "payload_sha256": "c9dee7dd5727c4ed379c065d1b2c6381b65ee0525dcf3313c03b5b67627c3b9c",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "direct",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 0,
+          "start": 0,
+          "end": 504,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 79,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 1,
+          "start": 0,
+          "end": 1165,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 79,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 3
+    }
+  },
+  {
+    "attempt_id": "ag-026",
+    "condition": "agentic",
+    "question": "Does KDRIs set a tolerable upper intake level for energy?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에는 에너지에 대해 상한섭취량(UL)이 설정되는지 여부가 명시되어 있지 않아 확인이 불가능합니다.\n\n근거를 통해 확인된 관련 내용은 다음과 같습니다:\n- 상한섭취량(UL)은 과잉 섭취로 인한 유해 영향에 관한 과학적 근거가 있는 경우에만 설정됩니다 [출처: KDRI_2025_vol1.pdf, p.347].\n- 에너지 불균형과 관련된 만성질환 위험을 줄이기 위한 지표로는 탄수화물, 지질, 단백질에 대한 에너지적정비율(AMDR)이 설정되어 있습니다 [출처: KDRI_2025_vol1.pdf, p.347].\n\n따라서 에너지 자체의 상한섭취량(UL) 설정 여부는 제공된 자료에서 확인할 수 없습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-026",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering the question directly, which is incorrect when a gold answer exists. However, the response is faithful to its provided context, accurately reflecting the information available within it.",
+      "transport": "batch",
+      "known_cost_usd": 0.003363,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3852,
+        "output_tokens": 479,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-026",
+      "payload_sha256": "41fb8c2c38ca3263e1ee092c7f607ee6a406bd7b5cedea5ead7efff0a2e4c731",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 1,
+          "start": 0,
+          "end": 1175,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 347,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 2,
+          "start": 0,
+          "end": 1175,
+          "source": "KDRI_2025_vol2.pdf",
+          "page": 523,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 3
+    }
+  },
+  {
+    "attempt_id": "ag-027",
+    "condition": "agentic",
+    "question": "KDRIs에서 에너지에 상한섭취량 개념을 적용하는가?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-027",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering, which is considered incorrect as it does not provide the gold fact. However, it is faithful because the provided context does not contain sufficient explicit information to fully answer the question.",
+      "transport": "batch",
+      "known_cost_usd": 0.0043505,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 4195,
+        "output_tokens": 751,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-027",
+      "payload_sha256": "1c7ef25739c38887475faa7f57b74906a6ea051b867bf7438486306d897cfb84",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 1,
+          "start": 0,
+          "end": 1175,
+          "source": "KDRI_2025_vol2.pdf",
+          "page": 523,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 2,
+          "start": 0,
+          "end": 1113,
+          "source": "KDRI_2025_vol2.pdf",
+          "page": 524,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 4
+    }
+  },
+  {
+    "attempt_id": "ag-036",
+    "condition": "agentic",
+    "question": "What secondary causes should be considered before obesity treatment?",
+    "gold": "Before obesity treatment, the guideline advises considering history and screening for secondary causes including genetic disease, endocrine disease and medication.",
+    "answer": "비만 치료를 시작하기 전에 평가 및 고려해야 하는 이차성 비만의 원인은 다음과 같습니다 (권고수준 B, Class IIa) [출처: guideline2022_vol8.pdf, p. 4].\n\n해당 권고는 임상 비만 진료지침(생활습관 근거 중심, 개별 의학적 처방 아님) 대상 기준이므로 이 범위를 넘어 일반화하여 적용해서는 안 됩니다 [출처: guideline2022_vol8.pdf, p. 4].\n\n---\n\n### **이차성 비만의 원인**\n\n1. **유전 및 선천성 장애** [출처: guideline2022_vol8.pdf, p. 4]\n   - **비만 유발 유전자:** *ob*, *db*, *POMC* (Proopiomelanocortin), *MC4R* (Melanocortin 4 receptor) 유전자 등 [출처: guideline2022_vol8.pdf, p. 4]\n   - **선천성 장애:** 프라더-윌리 증후군(Prader-Willi syndrome), 로렌스-문-비들 증후군(Laurence-Moon-Biedl syndrome), 알스트롬 증후군(Alström syndrome), 코헨 증후군(Cohen syndrome), 카펜터 증후군(Carpenter syndrome) [출처: guideline2022_vol8.pdf, p. 4]\n\n2. **약물** [출처: guideline2022_vol8.pdf, p. 4]\n   - **항정신병약물:** Thioridazine, Olanzepine, Clozapine, Quetiapine, Risperidone [출처: guideline2022_vol8.pdf, p. 4]\n   - **삼환계 항우울제(TCAs):** Imipramine, Amitriptyline, Nortriptyline, Doxepin [출처: guideline2022_vol8.pdf, p. 4]\n   - **선택적 세로토닌 재흡수 억제제(SSRIs):** Paroxetine [출처: guideline2022_vol8.pdf, p. 4]\n   - **노르아드레날린 특정 세로토닌 항우울제(NaSSA):** Mirtazapine [출처: guideline2022_vol8.pdf, p. 4]\n   - **기분안정제:** 리튬(lithium) [출처: guideline2022_vol8.pdf",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-036",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": true,
+      "faithful": true,
+      "reason": "Model B correctly identifies the secondary causes to be considered before obesity treatment (genetic, medication, etc.) and is faithful to its provided context, although it cuts off at the end.",
+      "transport": "batch",
+      "known_cost_usd": 0.005187,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 9612,
+        "output_tokens": 127,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-036",
+      "payload_sha256": "a26df496f9d324e74aae3dc193ff4c194ce3c1011b5bd00ad564be0e9093addc",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 0,
+          "start": 0,
+          "end": 1140,
+          "source": "guideline2022_vol8.pdf",
+          "page": 4,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 5,
+          "start": 0,
+          "end": 824,
+          "source": "guideline2022_vol8.pdf",
+          "page": 4,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 4
+    }
+  },
+  {
+    "attempt_id": "ag-038",
+    "condition": "agentic",
+    "question": "Which associated conditions does the guideline recommend screening during obesity care?",
+    "gold": "The guideline recommends history and screening for obesity-associated conditions such as hypertension, type 2 diabetes and dyslipidemia during clinical obesity care.",
+    "answer": "해당 지침은 임상 비만 지침(개별 의학적 처방이 아닌 생활습관 근거 중심)에 적용되며, 이 적용 범위를 벗어나 일반화해서는 안 됩니다 [출처: guideline2022_vol8.pdf, p. 5].\n\n비만 진료 시 지침에서 문진과 선별 검사를 권고하는 비만 동반 질환 및 평가 대상은 다음과 같습니다.\n\n### 1. 선별 검사 및 문진 권고 질환 (A, Class I)\n비만환자를 진료할 때 발생 위험 및 사망률 상승과 관련하여 문진과 선별 검사를 권고하는 주요 동반 질환은 다음과 같습니다 [출처: guideline2022_vol8.pdf, p. 4]:\n* **고혈압** [출처: guideline2022_vol8.pdf, p. 4]\n* **2형당뇨병** [출처: guideline2022_vol8.pdf, p. 4]\n* **이상지질혈증** [출처: guideline2022_vol8.pdf, p. 4]\n* **통풍** [출처: guideline2022_vol8.pdf, p. 4]\n* **관절염** [출처: guideline2022_vol8.pdf, p. 4]\n* **심혈관계질환** [출처: guideline2022_vol8.pdf, p. 4]\n* **암** [출처: guideline2022_vol8.pdf, p. 4]\n\n---\n\n### 2. 비만 동반 질환 평가 목록(계통별)\n비만전단계 또는 비만으로 진단된 경우 평가가 필요한 계통별 동반 질환 목록은 다음과 같습니다 [출처: guideline2022_vol8.pdf, p. 5]:\n* **심뇌혈관계:** 관상동맥질환, 고혈압, 뇌경색(허혈성), 울혈성심부전, 동맥경화증, 폐색전증, 하지정맥류, 정맥혈전색전증 등 [출처: guideline2022_vol8.pdf, p. 5]\n* **내분비계:** 2형당뇨병, 인슐린저항성, 대사증후군, 이상지질혈증, 고요산혈증, 통풍 [출처: guideline2",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-038",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": false,
+      "reason": "Model B's response is cut off at the end, which constitutes a serving failure. Therefore, it is considered incorrect and unfaithful.",
+      "transport": "batch",
+      "known_cost_usd": 0.0070225,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 11351,
+        "output_tokens": 449,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-038",
+      "payload_sha256": "e97899dff7925002085a7ac2a87f5db55b778fec35202517c168181ea713b2ed",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 0,
+          "start": 0,
+          "end": 1182,
+          "source": "guideline2022_vol8.pdf",
+          "page": 5,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 1140,
+          "source": "guideline2022_vol8.pdf",
+          "page": 4,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 4,
+          "start": 0,
+          "end": 799,
+          "source": "guideline2022_vol8.pdf",
+          "page": 5,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 3
+    }
+  },
+  {
+    "attempt_id": "ag-049",
+    "condition": "agentic",
+    "question": "WHO 유리당 5% 미만 권고를 뒷받침하는 근거의 질과 연구 유형은 무엇인가?",
+    "gold": "The recommendation below 5% is based on very low quality evidence from ecological studies of dental caries.",
+    "answer": null,
+    "status": "failed",
+    "grade": {
+      "attempt_id": "ag-049",
+      "condition": "agentic",
+      "status": "not_applicable_serving_failed",
+      "correct": false,
+      "faithful": false,
+      "reason": "Serving failure.",
+      "transport": "batch",
+      "known_cost_usd": 0.0014055,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 1569,
+        "output_tokens": 207,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-049",
+      "payload_sha256": "a8f25756c2cb901a7398eed5cf6ee3a6e6583d81f840650e27a61d83649e6803",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-053",
+    "condition": "agentic",
+    "question": "ISSN의 1회 단백질 섭취 일반 권고와 개인별 적용 조건은 무엇인가?",
+    "gold": "ISSN gives general per-serving guidance of 0.25 g/kg or 20–40 g, while noting age and recent resistance exercise affect optimal intake.",
+    "answer": "제공된 자료에서 확인된 내용과 확인되지 않은 내용은 다음과 같습니다.\n\n### 1. 확인된 일반 권고 및 개인별 적용 조건\n* **섭취 분배 주기:** 단백질 섭취는 이상적으로 하루 동안 매 3~4시간 간격으로 고르게 분배되어야 합니다 [출처: s12970-017-0177-8.pdf, p.1].\n* **타이밍 및 개인별 적용 조건:** 단백질을 섭취하는 최적의 시점은 개인별 내약성(individual tolerance)에 따라 결정될 가능성이 높습니다. 운동 전 또는 운동 후 섭취 모두에서 이점을 얻을 수 있기 때문입니다. 다만 운동의 동화 작용 효과는 최소 24시간 동안 지속되지만 운동 후 시간이 지남에 따라 감소할 가능성이 있습니다 [출처: s12970-017-0177-8.pdf, p.1].\n* **적용 범위:** 해당 권고는 '건강한 운동을 하는 개인(healthy exercising individuals)'을 대상으로 하며, 선수 특정 용량을 모든 사용자에게 일반화해서는 안 됩니다 [출처: s12970-017-0177-8.pdf, p.1].\n\n### 2. 확인 불가 항목\n* **1회 구체적 섭취 수치:** 1회 섭취 시 요구되는 구체적인 단백질 양(수치 및 단위)에 대해서는 제공된 자료에 내용이 없어 확인되지 않았습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-053",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Model A abstains from providing the specific per-serving protein amounts because its context cuts off before the relevant information, making it incorrect against the gold standard but faithful to its provided text.",
+      "transport": "batch",
+      "known_cost_usd": 0.0033545,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3901,
+        "output_tokens": 468,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-053",
+      "payload_sha256": "a807b77998ee1e631cc2a0d16100060a34dc212e1e703b4b481f75e7ff834d39",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": {
+      "rounds": 2,
+      "stop_reason": "round_limit",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 1,
+          "start": 0,
+          "end": 1088,
+          "source": "s12970-017-0177-8.pdf",
+          "page": 1,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 5,
+          "start": 0,
+          "end": 597,
+          "source": "s12970-017-0177-8.pdf",
+          "page": 1,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "partial",
+      "missing_core": [
+        "1회 단백질 섭취량에 대한 구체적인 권고 수치"
+      ],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 3
+    }
+  },
+  {
+    "attempt_id": "ag-062",
+    "condition": "agentic",
+    "question": "How does KDRIs define energy balance?",
+    "gold": "Energy balance means energy intake equals energy expenditure.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-062",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering due to an empty context, which is faithful but incorrect.",
+      "transport": "batch",
+      "known_cost_usd": 0.001645,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 1358,
+        "output_tokens": 322,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-062",
+      "payload_sha256": "10c830af1d70a642968140960ba5b0d1758c0acc7f03eabce058fdf5a3e301d1",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 2,
+      "stop_reason": "round_limit",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "missing",
+      "definition_research_required": true,
+      "excerpt_spans": [],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "none",
+      "missing_core": [
+        "definition of energy balance by KDRIs",
+        "Direct definition of the concept requested in the original question"
+      ],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 0
+    }
+  },
+  {
+    "attempt_id": "ag-063",
+    "condition": "agentic",
+    "question": "KDRIs에서 에너지 평형은 무엇을 뜻하는가?",
+    "gold": "Energy balance means energy intake equals energy expenditure.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-063",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Model A abstained from answering a question that is answerable from the context.",
+      "transport": "batch",
+      "known_cost_usd": 0.002324,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 2650,
+        "output_tokens": 333,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-063",
+      "payload_sha256": "43224330823e9b1609867bf966d9150d4305a085d1b5b00f3ad63429e9321c9c",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": {
+      "rounds": 2,
+      "stop_reason": "round_limit",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "missing",
+      "definition_research_required": true,
+      "excerpt_spans": [],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "none",
+      "missing_core": [
+        "KDRIs에서 정의하는 에너지 평형의 의미",
+        "Direct definition of the concept requested in the original question"
+      ],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 0
+    }
+  },
+  {
+    "attempt_id": "ag-066",
+    "condition": "agentic",
+    "question": "Does KDRIs set a tolerable upper intake level for energy?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서 확인되는 내용과 확인 불가한 내용은 다음과 같습니다.\n\n- **확인된 내용**: 상한섭취량(UL)은 과잉 섭취로 인한 건강상의 유해영향을 예방하기 위해 과잉 섭취의 유해영향에 관한 과학적 근거가 있는 경우에만 설정되는 지표입니다 [출처: KDRI_2025_vol1.pdf, p.347]. 에너지와 관련해서는, 에너지 불균형에 따른 만성질환 위험을 줄이기 위해 탄수화물, 지질, 단백질에 대한 에너지적정비율(AMDR)을 설정한다고 명시되어 있습니다 [출처: KDRI_2025_vol1.pdf, p.347].\n- **확인 불가**: 에너지 자체에 대해 상한섭취량(UL)이 설정되어 있는지 여부는 제공된 자료에 명시되어 있지 않아 확인되지 않습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-066",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "B states that it cannot confirm if a UL is set for energy, which contradicts the gold standard that explicitly says UL concepts are not applied to energy. It is faithful to its context, which does not contain the specific information about energy UL.",
+      "transport": "batch",
+      "known_cost_usd": 0.002364,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3864,
+        "output_tokens": 144,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-066",
+      "payload_sha256": "81ecff31b6a5b2ab89e3a06ecc676a3b17c5d20edd0f41927adece474aab4b6b",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 1,
+          "start": 0,
+          "end": 1175,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 347,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 2,
+          "start": 0,
+          "end": 1175,
+          "source": "KDRI_2025_vol2.pdf",
+          "page": 523,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 3
+    }
+  },
+  {
+    "attempt_id": "ag-067",
+    "condition": "agentic",
+    "question": "KDRIs에서 에너지에 상한섭취량 개념을 적용하는가?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서 확인되는 내용과 확인 불가능한 내용은 다음과 같습니다.\n\n**1. 확인된 내용**\n* **상한섭취량(UL)의 정의 및 적용 조건:** 상한섭취량은 과잉 섭취로 인한 유해한 건강 영향을 예방하기 위해 설정되는 기준이며, 과잉 섭취에 따른 유해 영향에 관한 과학적 근거가 있을 때만 설정됩니다 [출처: KDRI_2025_vol2.pdf, p.523].\n* **에너지 관련 기준 설정:** 에너지 필요량은 개인별 직접 측정의 기술적 한계로 인해 에너지 균형(energy balance)이라는 가정 하에 에너지 소비량을 바탕으로 추정합니다 [출처: KDRI_2025_vol2.pdf, p.524]. 또한 에너지 불균형과 관련된 만성질환 위험을 줄이기 위해 탄수화물, 지질, 단백질에 대해 에너지적정비율(AMDR)을 설정하고 있습니다 [출처: KDRI_2025_vol2.pdf, p.523].\n\n**2. 확인 불가 내용**\n* 에너지에 상한섭취량(UL) 개념을 직접 적용하는지 여부는 관련 설명 문장이 중간에 중단되어 있어(\"Consequently, for energy, the term...\") 제공된 자료만으로는 명확한 적용 여부를 확인할 수 없습니다 [출처: KDRI_2025_vol2.pdf, p.524].",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-067",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering the gold question, stating the context was cut off, which makes it incorrect but faithful to the provided text.",
+      "transport": "batch",
+      "known_cost_usd": 0.004304,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 4522,
+        "output_tokens": 681,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-067",
+      "payload_sha256": "5b4d5807fe7af6986cc4c3b0575565bebc379dc87ab40a83a75e090d902a13cc",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 1,
+          "start": 0,
+          "end": 1175,
+          "source": "KDRI_2025_vol2.pdf",
+          "page": 523,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 2,
+          "start": 0,
+          "end": 1113,
+          "source": "KDRI_2025_vol2.pdf",
+          "page": 524,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 4
+    }
+  },
+  {
+    "attempt_id": "ag-068",
+    "condition": "agentic",
+    "question": "What changed in the 2025 energy reference compared with 2020?",
+    "gold": "The 2025 energy reference uses the same US calculation equations as 2020, but incorporates 2025 Korean reference body measurements.",
+    "answer": "2020년 대비 2025년 에너지필요추정량(EER) 및 관련 기준의 주요 변경 사항과 유지된 사항은 다음과 같습니다.\n\n### 1. 에너지필요추정량(EER) 설정 원칙의 변경 및 유지 사항\n* **산출 공식 유지**: 2020년에 사용하였던 에너지필요추정량 산출 공식을 그대로 적용하였습니다 [출처: KDRI_2025_vol1.pdf, p.64].\n* **변경된 체위 참고치 반영**: 2025년도에 변경된 체위 참고치를 적용하여 에너지필요추정량을 계산하였습니다 [출처: KDRI_2025_vol1.pdf, p.64].\n* **100 kcal 단위 절삭 적용**: 최근 한국인의 비만유병률을 고려하여 산출값을 100 kcal 단위로 절삭하며, 감소분에 대해서도 100 kcal 단위로 절삭하는 원칙을 정하였습니다 [출처: KDRI_2025_vol1.pdf, p.64].\n* **신체활동단계 제시**: 신체활동단계는 '저활동적'을 기본 적용하되, 활동적 및 매우활동적 신체활동수준에 해당하는 에너지필요추정량을 별도의 표로 제시하였습니다 [출처: KDRI_2025_vol1.pdf, p",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-068",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": true,
+      "faithful": true,
+      "reason": "Answer B correctly identifies that the 2025 energy reference uses the same calculation equations as 2020 but incorporates the 2025 changed anthropometric reference values. It is faithful to its context, although the text cuts off at the end.",
+      "transport": "batch",
+      "known_cost_usd": 0.003792,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 6594,
+        "output_tokens": 165,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-068",
+      "payload_sha256": "b13bc72e7ea76690c333749bdc6b13901f744b9f74af8fec05ab0e3dac747b77",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_assessed",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 0,
+          "start": 0,
+          "end": 1197,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 352,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 1199,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 62,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 4,
+          "start": 0,
+          "end": 480,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 64,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 5,
+          "start": 0,
+          "end": 773,
+          "source": "KDRI_2025_vol2.pdf",
+          "page": 528,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 3
+    }
+  },
+  {
+    "attempt_id": "ag-073",
+    "condition": "agentic",
+    "question": "KDRIs 에너지 기준의 기본 신체활동 수준과 별도로 제시한 수준은 무엇인가?",
+    "gold": "Low-active was used as the default reference activity level, with active and very-active estimates presented separately.",
+    "answer": "제공된 자료를 바탕으로 확인된 내용과 확인 불가한 내용은 다음과 같습니다.\n\n* **기본 신체활동 수준**: 에너지필요추정량 산출 시 모든 연령대 및 성인에게 기본으로 적용된 신체활동 수준은 **'저활동적(Low active)'**(신체활동수준 PAL 1.40-1.59)입니다 [출처: KDRI_2025_vol1.pdf, p.59, p.68]. 성인의 경우 신체활동단계별계수(PA)로 남녀 각각 1.11과 1.12가 대입되었습니다 [출처: KDRI_2025_vol1.pdf, p.68].\n* **별도로 제시한 수준 (확인 불가)**: 자료에는 최근 ‘저활동적’ 수준보다 높은 신체활동을 하는 성인들이 증가하는 추세여서 \"이들을 위한 별도의 에너지필요추정량을 산출하여 제시되어야 할 것이다\"라고만 언급되어 있으며, 실제로 별도로 제시된 수준의 명칭이나 구체적인 수치·내용은 제공된 자료에서 확인되지 않습니다 [출처: KDRI_2025_vol1.pdf, p.68].",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-073",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstains from answering the second part of the question (the separately presented levels) due to missing information in its context, which makes it incorrect against the gold standard, though faithful to its provided text.",
+      "transport": "batch",
+      "known_cost_usd": 0.0048875,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 7441,
+        "output_tokens": 389,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-073",
+      "payload_sha256": "faac65418dd63c5b3c8da1318667d2d8b984174ce4ba05ab3e964c473676e44f",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": {
+      "rounds": 2,
+      "stop_reason": "round_limit",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 0,
+          "start": 0,
+          "end": 903,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 68,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "partial",
+      "missing_core": [
+        "KDRIs 에너지 기준에서 기본 신체활동 수준과 별도로 제시한 수준의 명칭 또는 구체적인 내용"
+      ],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 3
+    }
+  },
+  {
+    "attempt_id": "ag-078",
+    "condition": "agentic",
+    "question": "Which associated conditions does the guideline recommend screening during obesity care?",
+    "gold": "The guideline recommends history and screening for obesity-associated conditions such as hypertension, type 2 diabetes and dyslipidemia during clinical obesity care.",
+    "answer": "이 지침은 임상 비만 가이드라인(Clinical obesity guideline; 생활습관 근거 중심, 개별 의학적 처방 아님)의 적용 범위를 가지며, 이를 벗어나 일반화할 수 없습니다 [출처: guideline2022_vol8.pdf, p.5].\n\n제공된 지침에서 비만환자 진료 시 문진 및 선별 검사를 권고하거나 평가하도록 명시한 비만 동반 질환은 다음과 같습니다.\n\n### 1. 문진 및 선별 검사 권고 질환 (A, Class I)\n비만환자를 진료할 때 발생 위험 증가 및 사망률 상승과 관련하여 문진과 선별 검사를 권고하는 질환은 다음과 같습니다 [출처: guideline2022_vol8.pdf, p.4].\n- **고혈압** [출처: guideline2022_vol8.pdf, p.4]\n- **2형당뇨병** [출처: guideline2022_vol8.pdf, p.4]\n- **이상지질혈증** [출처: guideline2022_vol8.pdf, p.4]\n- **통풍** [출처: guideline2022_vol8.pdf, p.4]\n- **관절염** [출처: guideline2022_vol8.pdf, p.4]\n- **심혈관계질환** [출처: guideline2022_vol8.pdf, p.4]\n- **암** [출처: guideline2022_vol8.pdf, p.4]\n\n---\n\n### 2. 계통별 비만 동반 질환 평가 목록 (필요시 정밀검사 등 시행)\n지침의 비만 동",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-078",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": true,
+      "faithful": true,
+      "reason": "Answer B correctly identifies the conditions recommended for screening during obesity care (hypertension, type 2 diabetes, dyslipidemia, gout, arthritis, cardiovascular disease, and cancer) and is fully supported by the provided context, although it cuts off at the end.",
+      "transport": "batch",
+      "known_cost_usd": 0.005787,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 10644,
+        "output_tokens": 155,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-078",
+      "payload_sha256": "ebc087d480c3dc7c8d0b514fb0bd5c171fcece36d6edce998ad581c7df789541",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 0,
+          "start": 0,
+          "end": 1182,
+          "source": "guideline2022_vol8.pdf",
+          "page": 5,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 1140,
+          "source": "guideline2022_vol8.pdf",
+          "page": 4,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 4,
+          "start": 0,
+          "end": 799,
+          "source": "guideline2022_vol8.pdf",
+          "page": 5,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 3
+    }
+  },
+  {
+    "attempt_id": "ag-087",
+    "condition": "agentic",
+    "question": "WHO의 유리당 감소 권고는 아동에게만 적용되는가?",
+    "gold": "WHO strongly recommends reduced free-sugar intake throughout the lifecourse.",
+    "answer": null,
+    "status": "failed",
+    "grade": {
+      "attempt_id": "ag-087",
+      "condition": "agentic",
+      "status": "not_applicable_serving_failed",
+      "correct": false,
+      "faithful": false,
+      "reason": "Serving failed.",
+      "transport": "batch",
+      "known_cost_usd": 0.00138,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 1116,
+        "output_tokens": 274,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-087",
+      "payload_sha256": "46285858401878c7cde175f83ef9187bfcd72ad3433e6128a860a58dc9f0bc6e",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "controller_error",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_assessed",
+      "definition_research_required": false,
+      "excerpt_spans": [],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "none",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 0
+    }
+  },
+  {
+    "attempt_id": "ag-094",
+    "condition": "agentic",
+    "question": "What leucine amount and amino-acid balance does ISSN mention?",
+    "gold": "ISSN suggests acute protein doses contain 700–3000 mg leucine and a balanced array of essential amino acids.",
+    "answer": "**적용 범위 및 주의사항**  \n해당 권장 사항은 건강한 운동을 하는 개인(Healthy exercising individuals)을 대상으로 하며, 운동선수 전용 용량을 모든 사용자에게 일반화해서는 안 됩니다 [출처: s12970-017-0177-8.pdf, p.1].\n\n**ISSN이 제시한 류신 양 및 아미노산 균형**\n\n1. **류신 양**\n   - 1회 급성 단백질 섭취량에는 700~3000 mg의 류신 및/또는 더 높은 상대적 류신 함량이 포함되어야 합니다 [출처: s12970-017-0177-8.pdf, p.1].\n   - 류신 섭취에 따른 단백질 합성 자극은 용량 의존적으로 나타나며, 휴식 시에는 약 2 g에서 정체(plateau)를 보이고, 60분간의 중강도 사이클링을 마친 후 섭취할 경우 최대 3.5 g까지 증가합니다 [출처: s12970-017-0177-8.pdf, p.12].\n\n2. **아미노산 균형**\n   - 단백질 섭취 시 류신뿐만 아니라 균형 잡힌 필수 아미노산(EAAs) 배열이 함께 제공되어야 합니다 [출처: s12970-017-0177-8.pdf, p.1].\n   - 류신이 독립적으로 단백질 합성을 자극하더라도 류신만 단독으로 보충해서는 안 되며, 근육 단",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-094",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": true,
+      "faithful": true,
+      "reason": "Model B correctly identifies the 700-3000 mg leucine amount and the balanced array of essential amino acids, matching the gold answer. It is fully supported by its provided context.",
+      "transport": "batch",
+      "known_cost_usd": 0.00325,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3956,
+        "output_tokens": 424,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-094",
+      "payload_sha256": "885b8fb3c39bab0342adc69d2589fb863a8c0ea7cf4d5fc1e93afe031cb6dcf4",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 1,
+          "start": 0,
+          "end": 1135,
+          "source": "s12970-017-0177-8.pdf",
+          "page": 1,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 2
+    }
+  }
+]

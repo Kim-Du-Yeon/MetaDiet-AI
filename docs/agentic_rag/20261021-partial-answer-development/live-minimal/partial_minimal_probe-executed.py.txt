@@ -1,0 +1,51 @@
+"""One authorized, budget-guarded controller schema probe; no automatic retry."""
+import asyncio, hashlib, json, sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path[:0] = [str(ROOT/'backend'), str(ROOT/'backend/scripts/eval')]
+from dotenv import load_dotenv
+from eval_budget import Budget, BudgetStop, install_transport_guard
+from benchmark_agentic_rag import Usage, safe_error
+
+OUT = ROOT/'docs/agentic_rag/20261021-partial-answer-development/live-minimal'
+OUT.mkdir(exist_ok=True)
+
+async def main():
+    if '--allow-paid' not in sys.argv:
+        raise SystemExit('Explicit authorization required')
+    path = OUT/'schema-probe.json'
+    if path.exists():
+        raise SystemExit('Probe already attempted; no automatic retry')
+    load_dotenv(ROOT/'backend/.env', override=True)
+    from app.rag.agentic import model_assessment, _scoped_context, PROMPT_SHA256, PROMPT_VERSION
+    from app.core.config import get_settings
+    from langchain_core.documents import Document
+    budget = Budget(ROOT/'tmp/eval-budget.sqlite')
+    before = budget.summary()
+    install_transport_guard(budget, 'probe')
+    text = 'Fictional Nera: the new edition changed body measurements; its equation remains unchanged from edition A. Applies only to pilot participants. No dose is supplied.'
+    question = 'What changed and stayed unchanged in Nera, for whom, and what dose is prescribed?'
+    docs = [Document(page_content=text, metadata={'source_file':'fictional-nera.txt','page':1})]
+    context, docs = _scoped_context(docs)
+    result = {'grounded':True,'max_score':.9,'context':context,'docs':docs,'context_docs':docs}
+    record = {'status':'entered','question':question,'context':context,'budget_before':before,
+              'controller_version':PROMPT_VERSION,'controller_sha256':PROMPT_SHA256,
+              'purpose':'synthetic schema functionality only','paid_call_limit':1}
+    path.write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')
+    usage = Usage()
+    try:
+        decision = await model_assessment(question,result,config={'callbacks':[usage]})
+        exact = bool(decision.supported_excerpts) and all(e in text for e in decision.supported_excerpts)
+        passed = bool(decision.missing_core) and not decision.sufficient and exact
+        record.update(status='completed',decision=decision.model_dump(),contract_pass=passed,
+                      valid_verbatim_excerpts=exact)
+    except BudgetStop as exc:
+        record.update(status='budget_stopped',reason=str(exc),contract_pass=False)
+    except Exception as exc:
+        record.update(status='failed',error=safe_error(exc),contract_pass=False)
+    record.update(usage=usage.calls,budget_after=budget.summary())
+    path.write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')
+    print(json.dumps({k:record[k] for k in ('status','contract_pass','budget_after')},ensure_ascii=False))
+
+asyncio.run(main())

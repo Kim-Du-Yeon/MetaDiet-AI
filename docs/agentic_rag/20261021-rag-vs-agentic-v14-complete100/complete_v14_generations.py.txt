@@ -1,0 +1,13 @@
+import json,subprocess
+from pathlib import Path
+R=Path(__file__).resolve().parents[1];P=str(R/'backend/venv/Scripts/python.exe');D=R/'docs/agentic_rag/20261021-rag-vs-agentic-v14-complete100'
+while True:
+ rows=[json.loads(s) for s in (D/'attempts.jsonl').read_text(encoding='utf-8').splitlines()]
+ ids={r['attempt_id'] for r in rows if r['condition']=='agentic'};missing=[i for i in range(100) if f'ag-{i:03}' not in ids]
+ if not missing:break
+ start=missing[0];size=min(5,100-start)
+ result=subprocess.run([P,'tmp/v14_complete_generation.py','--output',str(D),'--chunk-start',str(start),'--chunk-size',str(size),'--defer-judge','--allow-paid'],cwd=R)
+ if result.returncode:
+  (D/'provider-or-accounting-stop.json').write_text(json.dumps({'start':start,'returncode':result.returncode})+'\n');raise SystemExit(result.returncode)
+ print(json.dumps({'recorded_candidate_attempts':start+size,'individual_failures_retained':True}),flush=True)
+print('All100 candidate attempts recorded, including individual failures. Ready for grading.',flush=True)

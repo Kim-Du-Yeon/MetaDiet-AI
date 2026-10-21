@@ -1,0 +1,20 @@
+"""Grade all stored pairs, retaining bad grades; never regenerate answers."""
+import json,subprocess,time
+from pathlib import Path
+R=Path(__file__).resolve().parents[1];P=str(R/'backend/venv/Scripts/python.exe');D=R/'docs/agentic_rag/20261021-rag-vs-agentic-v14-complete100';job=D/'grading.json'
+while True:
+ text=(D/'attempts.jsonl').read_text(encoding='utf-8');lines=text.splitlines() if text.endswith('\n') else text.splitlines()[:-1]
+ rows=[json.loads(s) for s in lines]
+ if len([r for r in rows if r['condition']=='agentic'])==100:break
+ if (D/'provider-or-accounting-stop.json').exists():raise SystemExit('Provider/accounting needs inspection')
+ time.sleep(15)
+def run(args):
+ p=subprocess.run([P,'backend/scripts/eval/batch_agentic_judges.py',*args,'--allow-paid'],cwd=R)
+ if p.returncode:raise SystemExit(p.returncode)
+if not job.exists():run(['pairs','--directory',str(D),'--job',str(job),'--chunk-size','100'])
+while json.loads(job.read_text(encoding='utf-8'))['state']!='completed':
+ time.sleep(30)
+ run(['advance','--job',str(job)])
+ state=json.loads(job.read_text(encoding='utf-8'))['state']
+ if state=='usage_unverified':raise SystemExit('Unverified provider usage, inspect stored result')
+print('All100 paired grades stored; individual wrong answers retained.',flush=True)

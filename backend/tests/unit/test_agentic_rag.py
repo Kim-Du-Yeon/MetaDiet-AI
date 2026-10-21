@@ -145,7 +145,7 @@ async def test_controller_trace_pins_own_prompt_version(monkeypatch):
             assert config['metadata']['agentic_prompt_sha256']==PROMPT_SHA256
             assert config['metadata']['agentic_prompt_version']==PROMPT_VERSION
             assert config['metadata']['request_id']=='synthetic'
-            return {'parsed':Assessment(missing_core=[],sufficient=True),'parsing_error':None}
+            return {'parsed':{'missing_core':[],'sufficient':True,'supported_document_indices':[]},'parsing_error':None}
     monkeypatch.setattr(llm,'get_chat_model',lambda **kwargs:Model())
     assert (await model_assessment('question',result(),config={'metadata':{'request_id':'synthetic'}})).sufficient
 
@@ -176,7 +176,7 @@ async def test_low_score_research_cannot_replace_initial_grounded_evidence():
 
 def test_controller_preserves_bounded_partial_answers_and_table_constraints():
     from app.rag.agentic import CONTROLLER_PROMPT, PROMPT_VERSION
-    assert PROMPT_VERSION == "agentic-rag-controller-v9"
+    assert PROMPT_VERSION == "agentic-rag-controller-v14"
     assert "primary requested fact" in CONTROLLER_PROMPT
     assert "row" in CONTROLLER_PROMPT and "footnote" in CONTROLLER_PROMPT
     assert "blank" in CONTROLLER_PROMPT

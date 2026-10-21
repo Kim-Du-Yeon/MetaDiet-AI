@@ -1,3 +1,15 @@
+**성능 하락 정성 분석:** [회귀10건의4유형·공통 실패 분리·문맥 조립6건 재현·미채택 판단](docs/agentic_rag/20261021-controlled-hybrid-analysis/README.md). 수치3/시간조건3/전체보류2/목록누락2건으로 분류했다. 인접 청크 우선·6,000자 문맥 한도에 의한 핵심 표현 탈락은 오프라인6/6 동일 문맥 재현으로 확인했다. 새 답변 품질 개선을 뜻하지 않으며,신규 유료 호출 없이 면접 설명·개선 검증 기준까지 정리했다.
+
+## 최신: 동일 조건 Hybrid vs Hybrid+Agentic100시도씩 비교
+
+[통제 비교 전체 결과·오류·비용·채택 판단](docs/agentic_rag/20261021-controlled-hybrid-v14/README.md). 같은 최종 프롬프트·Flash 모델·Hybrid 설정·환경에서 새200답변과Pro200판정을 완료했다. 정답89%→80%,이진 근거 충실성100%→99%,중앙값6.435→9.709초,p95 10.663→15.477초,모델+임베딩 추정/100시도$0.293046→$0.399767. Agentic이 기존 오답1건을 회복했지만 정답10건을 놓쳤다. **기존 Hybrid/no-reranker 유지·Agentic 운영 미채택**으로 판단했다. 구현·비교 실험 완료와 운영 적용X를 구분한다.
+
+40질문/20사실그룹 반복 개발셋이며 독립100문항·사용자 성공률이 아니다. 같은 정적 답변 지침을 양쪽에 적용하고 Agentic의 동적 답변 지침은 제거했다. 충실성은 Pro 이진 판정으로 Ragas와 혼용하지 않는다. 모든 보류를 분모에 남겼고,요청 실패·출력 잘림은0건이었다. 아래 과거 dense 비교와 독립20문항 평가 기록은 서로 다른 평가 범위의 보존 자료다.
+
+## Agentic을 기존 RAG 실험 축에 추가: 조건별100시도 완료
+
+[조합별 인덱스·지표 종류·선택 근거](docs/rag_experiments/RAG_RECIPE_DECISIONS.md), [일반 dense RAG85% 대 Agentic88%의 전체 결과와 오류](docs/agentic_rag/20261021-rag-vs-agentic-v14-complete100/README.md). 정상 종료 확인 Agentic 정답84/100, 기존 종료 메타데이터 미수집. 오답/보류/실패 포함100시도씩과Pro200판정을 완료했다. 반복 개발셋·역사적 기준선의 프롬프트/worker 차이를 공개하며, 운영 미채택·기존 Hybrid/no-reranker 유지로 판단했다. 아래 이전 중단 기록 및 독립20문항 Ragas 결과는 평가 범위가 다른 원본으로 유지한다.
+
 ## Bounded Agentic RAG comparison (2026-10-20)
 
 [Protocol, raw matched attempts, evaluator recovery and deployment gate](docs/agentic_rag/20261020/README.md). This is a read-only RAG-boundary development comparison, not an end-to-end user trial.100 attempts per condition repeat40 source-reviewed development questions; do not claim100 independent questions or reuse the sealed final20 to tune the controller. Failed serving attempts and failed judging remain in denominators. The Pro output-cap recovery regrades both full conditions without regenerating answers and preserves original cost/failures. Embedding SDK missing token metadata is reported as cost incompleteness rather than zero. Activation requires the predeclared quality/latency/cost gate; default is OFF.

@@ -1,0 +1,15 @@
+"""Explicit evaluation-only controls; importing never changes budgets or clients."""
+def enable_campaign_budget(allow_paid):
+    if allow_paid is not True:
+        raise ValueError("Explicit --allow-paid required")
+    import eval_budget
+    eval_budget.TOTAL=15.
+    eval_budget.LIMITS={"probe":.05,"development":.05,"comparison":11.,"judge":3.8,"browser":.1}
+
+def alternating_conditions(index):
+    return ("baseline","agentic") if index%2==0 else ("agentic","baseline")
+
+def common_answer_result(result):
+    from app.rag.agentic import ANSWER_GUIDANCE, _scoped_context
+    context, docs=_scoped_context(result.get("context_docs",result.get("docs",[])))
+    return {**result,"context":context,"context_docs":docs,"answer_guidance":ANSWER_GUIDANCE}

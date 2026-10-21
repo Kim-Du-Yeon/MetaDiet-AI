@@ -1,0 +1,89 @@
+{
+  "new_paid_calls": 0,
+  "question": "How does KDRIs define energy balance?",
+  "gold_answer": "Energy balance means energy intake equals energy expenditure.",
+  "acceptable_evidence": [
+    {
+      "source": "KDRI_2025_vol1.pdf",
+      "pdf_pages": [
+        48
+      ],
+      "core_excerpt": "섭취 에너지 = 소비 에너지"
+    }
+  ],
+  "prior_answers": [
+    {
+      "condition": "baseline",
+      "answer": "한국인 영양소 섭취기준(KDRI)에서 에너지 평형은 섭취에너지와 소비에너지가 동일한 상태를 뜻합니다 [출처: KDRI_2025_vol1.pdf, p.44]. 이러한 에너지 균형의 결과는 체지방량에 영향을 미쳐 체중 증가와 감소, 유지 등의 체중 조절과 관련이 있습니다 [출처: KDRI_2025_vol1.pdf, p.44].",
+      "documents": [
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 79,
+          "pdf_page": 79.0
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 342,
+          "pdf_page": 342.0
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 365,
+          "pdf_page": 365.0
+        },
+        {
+          "source": "KDRI_2025_vol2.pdf",
+          "page": 541,
+          "pdf_page": 541.0
+        },
+        {
+          "source": "KDRI_2025_vol2.pdf",
+          "page": 518,
+          "pdf_page": 518.0
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 44,
+          "pdf_page": 44.0
+        }
+      ]
+    },
+    {
+      "condition": "agentic",
+      "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+      "documents": [
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 79,
+          "pdf_page": 79.0
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 342,
+          "pdf_page": 342.0
+        },
+        {
+          "source": "KDRI_2025_vol3.pdf",
+          "page": 507,
+          "pdf_page": 507.0
+        },
+        {
+          "source": "KDRI_2025_vol2.pdf",
+          "page": 541,
+          "pdf_page": 541.0
+        },
+        {
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 79,
+          "pdf_page": 79
+        },
+        {
+          "source": "KDRI_2025_vol2.pdf",
+          "page": 541,
+          "pdf_page": 541
+        }
+      ]
+    }
+  ],
+  "scope_note": "EER definition mentions maintaining energy balance, but that alone does not explicitly define intake equals expenditure."
+}

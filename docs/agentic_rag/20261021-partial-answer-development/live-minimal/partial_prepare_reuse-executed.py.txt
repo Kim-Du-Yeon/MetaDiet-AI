@@ -1,0 +1,27 @@
+import json,sys,hashlib
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+sys.path[:0]=[str(ROOT/'backend'),str(ROOT/'backend/scripts/eval')]
+from judge_agentic_pairs import valid_prior_pairs
+out=ROOT/'docs/agentic_rag/20261021-partial-answer-development/live-minimal'
+p=ROOT/'docs/agentic_rag/20261021-batch-live-validation/matched100'
+cases={c['attempt_id']:c for c in json.loads((p/'cases.json').read_text(encoding='utf-8'))}
+read=lambda name:[json.loads(s) for s in (p/name).read_text(encoding='utf-8').splitlines()]
+attempts=read('attempts.jsonl');prior=read('judges.jsonl')
+valid=valid_prior_pairs(prior,cases,attempts)
+audit={'valid_reused_grades':len(valid),'saved_answer_count':len(attempts),'new_paid_calls':0,
+    'meaning':'Historical grades remain valid for unchanged answers, not v10 quality',
+    'files':{f:hashlib.sha256((p/f).read_bytes()).hexdigest() for f in ['cases.json','attempts.jsonl','judges.jsonl']}}
+(out/'reuse-audit.json').write_text(json.dumps(audit,indent=2),encoding='utf-8')
+report=json.loads((out/'development.json').read_text(encoding='utf-8'))
+batch=out/'batch-grading';batch.mkdir(exist_ok=True)
+new_cases=[];new_attempts=[]
+for index,row in enumerate(report['rows']):
+    case_id=f'minimal-dev-{index:03}'
+    new_cases.append({'attempt_id':case_id,'question':row['question'],'gold_answer':row['gold']})
+    new_attempts.append({'attempt_id':case_id,'condition':'candidate-v10','status':row['status'],
+        'answer':row['answer'],'context':row['context']})
+for name,content in [('cases.json',json.dumps(new_cases,ensure_ascii=False,indent=2)),
+    ('attempts.jsonl',''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in new_attempts)),('prior.jsonl','')]:
+    with (batch/name).open('x',encoding='utf-8') as f:f.write(content)
+print(json.dumps({'validated_saved_grades':len(valid),'new_batch_answers':len(new_attempts)}))

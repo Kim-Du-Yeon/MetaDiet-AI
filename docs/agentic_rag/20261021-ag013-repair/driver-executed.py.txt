@@ -1,0 +1,52 @@
+import asyncio,hashlib,json,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1];sys.path[:0]=[str(ROOT/'backend'),str(ROOT/'backend/scripts/eval')]
+from eval_budget import Budget,BudgetStop,install_transport_guard,LIMITS
+from benchmark_agentic_rag import Usage,safe_error
+async def main():
+ if '--allow-paid' not in sys.argv:raise SystemExit('Paid flag required')
+ out=ROOT/'docs/agentic_rag/20261021-ag013-repair';out.mkdir(exist_ok=True);path=out/'attempt.json'
+ if path.exists():raise SystemExit('No automatic repeat')
+ from dotenv import load_dotenv
+ load_dotenv(ROOT/'backend/.env',override=True)
+ from app.core.config import get_settings
+ s=get_settings();s.model_max_retries=0;s.rag_chunks_path=str((ROOT/'backend'/s.rag_chunks_path).resolve())
+ from app.rag import agentic,qa
+ from app.core.llm import get_chat_model
+ from langchain_core.documents import Document
+ from google.genai._api_client import BaseApiClient
+ old=json.loads((ROOT/'docs/agentic_rag/20261021-v13-final100/ag013-review.json').read_text(encoding='utf-8'))
+ docs=[Document(page_content=d['text'],metadata=d['metadata']) for d in old['attempt']['documents'][:4]]
+ budget=Budget(ROOT/'tmp/eval-budget.sqlite');row={'attempt_id':'ag-013','status':'entered','reused_initial_retrieval':True,'new_embedding_calls':0,'new_judge_calls':0,'budget_before':budget.summary(),'stage_caps':LIMITS,'calls':{},'source_hashes':{name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in ['backend/app/rag/agentic.py','backend/app/rag/neighbors.py']}}
+ def save():row['budget_after']=budget.summary();path.write_text(json.dumps(row,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+ save();install_transport_guard(budget,'comparison')
+ sync,asyn=BaseApiClient.request,BaseApiClient.async_request
+ def check(method,url):
+  if method.lower()=='get':return
+  role='controller' if 'gemini-3.1-flash-lite:generateContent' in url else 'answer' if 'gemini-3.8-flash:generateContent' in url else None
+  if role is None or row['calls'].get(role,0)>=1:raise BudgetStop('Only one controller and one answer allowed for cached repair smoke')
+  row['calls'][role]=row['calls'].get(role,0)+1
+ def request(client,method,url,*a,**kw):check(method,url);return sync(client,method,url,*a,**kw)
+ async def arequest(client,method,url,*a,**kw):check(method,url);return await asyn(client,method,url,*a,**kw)
+ BaseApiClient.request=request;BaseApiClient.async_request=arequest
+ usage=Usage()
+ async def fetch(q,**kw):return {'grounded':True,'max_score':old['attempt'].get('max_score',.9),'docs':docs}
+ async def assess(q,r):return await agentic.model_assessment(q,r,config={'callbacks':[usage]})
+ class Answer:
+  def __init__(self):self.model=get_chat_model(temperature=0,max_tokens=2048)
+  async def ainvoke(self,*a,**kw):
+   response=await self.model.ainvoke(*a,**kw);row['finish_reason']=str(response.response_metadata.get('finish_reason'));return response
+ try:
+  result=await agentic.bounded_retrieve(old['case']['question'],retrieve=fetch,assess=assess,limits=agentic.Limits(max_rounds=1))
+  row.update(agentic=result['agentic'],context=result.get('context'),documents=[{'text':d.page_content,'metadata':d.metadata} for d in result.get('docs',[])])
+  if result['agentic']['answer_coverage']!='complete' or result['agentic']['rejected_excerpts']:raise ValueError('Repair context not sufficient; no answer call')
+  qa._llm=Answer();answer=await qa.answer_from_knowledge(old['case']['question'],retrieval_result=result,config={'callbacks':[usage]})
+  row['answer']=answer['answer']
+  if row['finish_reason']!='STOP' or answer['answer']==qa.NO_EVIDENCE:raise ValueError('Answer gate failed')
+  row['status']='completed'
+ except BudgetStop as exc:row.update(status='budget_stopped',reason=str(exc))
+ except Exception as exc:row.update(status='failed',error=safe_error(exc))
+ finally:
+  row['usage']=usage.calls;save();(out/'driver-executed.py.txt').write_bytes(Path(__file__).read_bytes());print(json.dumps({k:row.get(k) for k in ['status','calls','budget_after','agentic']},ensure_ascii=True))
+ if row['status']!='completed':raise SystemExit(2)
+asyncio.run(main())

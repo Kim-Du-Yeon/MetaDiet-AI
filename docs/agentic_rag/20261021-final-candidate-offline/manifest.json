@@ -1,0 +1,63 @@
+{
+  "candidate_id": "v12-diagnostics-final-offline-20261021",
+  "status": "offline_candidate_not_live_validated",
+  "files": {
+    "backend/app/rag/agentic.py": "e745f9f03ca0e5ee3ee80cdab19d8601dc70e738b5a9f5e2afc6fcec6508c3b2",
+    "backend/app/rag/definition_evidence.py": "88e3f7417bf276de1697c2bd1281964bb047558451c76049a4d08f78ce4b4440",
+    "backend/app/rag/evidence_spans.py": "9652e827d4fc07cab0c580194d9eb3a02f6089ca603fcd6c7d4ede1bbee8c668",
+    "backend/app/rag/assessment_diagnostics.py": "a93604016af9294fec279efb90a19e7f487efd7e9f251f3842ea240b4142dda6",
+    "backend/app/rag/qa.py": "39ff161ea8f4a02dc3018afaf835ff6ed813df10b81fbe29c8675811aaad8c43",
+    "backend/app/rag/neighbors.py": "4c43b05d50ffbeb977b0f7b43f8eca2d3ee92d72a85d266c28ee2060e6d38e79",
+    "backend/scripts/eval/eval_budget.py": "e78e9671b95676b915a00b92827d23c97a92053e7310cc89e56cb86dee01923c",
+    "backend/tests/unit/test_definition_evidence.py": "284d860dc33ade17a57d97ba9d6e5d19a7befec143b997a22549815e83900214",
+    "backend/tests/unit/test_evidence_spans.py": "f7a590d1904ebf04b12f29868d010f5f23496fe52adfa3867e76a14e6c84f985",
+    "backend/tests/unit/test_natural_evidence_request.py": "0e361461d90fa3357db482606f31cf99bc0fe8820e9299a26a8a922034c27d9a",
+    "backend/tests/unit/test_strategy_evidence_gate.py": "8c6218162d955eb4c2431383d252f3c776754297342a1874d0fcd17a6e09aa5a",
+    "backend/tests/unit/test_excerpt_diagnostics.py": "2e3319d19881bd8babf6bd6d37b119d912b75a0ad84ebc9760c838d58068f1f4",
+    "backend/tests/unit/test_agentic_rag.py": "095816263d63d0c4c30839a6b2c8d5756d71bd57ab93b791baa7db9a11e7ee0d",
+    "backend/tests/unit/test_assessment_excerpt_bounds.py": "a6649e7a04517734cdff27a78978289b788778bcc49930e2b4291e15cab4f3fd",
+    "backend/tests/unit/test_assessment_diagnostics.py": "e4096d258d6c3f9467c6ebecaadc1b5a55e9072479dd2cf35eb52f15a2d076f3",
+    "backend/tests/unit/test_agentic_partial_development.py": "e89bc6cf9918f693d44f26fd515397f381b6db2ccffcc8e4829333d650102845",
+    "docs/agentic_rag/20261021-v9-v12-matched100/cases.json": "4ba67cf812497730848fe864580f1a7bf7da191c6a3c71427200eac3535aed9e",
+    "docs/agentic_rag/20261021-v9-v12-matched100/protocol.json": "2355116e42dffe2fe958b9130d7aa69d82d4a2d1ba9e8bc3e33018bdf0f8f36d",
+    "docs/agentic_rag/20261021-v9-v12-matched100/identity.json": "0f54e01298d57161c2b26f82c5f1f7e653d9510ed33a8266a3f55004818186b0",
+    "docs/agentic_rag/20261021-v9-v12-matched100/attempts.jsonl": "ef00d61dbcef9f8a3689c0451af8291b19f4c14af9532b3c487d6485d11597c0",
+    "docs/agentic_rag/20261021-v9-v12-matched100/historical-baseline-judges.jsonl": "e8f3abcc48908399d829346a155e10d10fba3e4ab45f43150f00562d1f271681",
+    "docs/agentic_rag/20261021-v9-v12-matched100/baseline-v9.py.txt": "8197837165c5237c04ebdb81f1c141ced70980efecad04f6d53bec536d148048",
+    "docs/agentic_rag/20261021-v9-v12-matched100/generation-executed.py.txt": "bba11e57f4c8e45f3cf2242f8115905edc402d0159b21a5ad601af1b0fd4dd31",
+    "backend/app/rag/retriever.py": "1e83274dabd772691ccc15143ff65e994248995b5ecc88bfae5e10d92b2be02c",
+    "backend/app/rag/evidence_policy.py": "63f8c970bc9a1d05552983c132f3a6111187af9ea72837f857321b48c9eb6d40",
+    "backend/app/rag/region_guidance.py": "5dd476a870159b18113c6d63c31e2bbf047d7baf4c5e97220289baf8fe7358b4",
+    "backend/app/core/config.py": "a99632b339b05719573c9196d445c98cddd62a8057095857b2b46cba3e9050be",
+    "backend/scripts/eval/judge_agentic_pairs.py": "e3542ff315ea426c81b5e65f6622df8f0110c12828664cb7d76493bd1d98ae6a",
+    "backend/scripts/eval/batch_campaign.py": "69ef88441338759762aead807fa9420ef7032a2f74d34ed59afba96c6bfe8fda"
+  },
+  "budget": {
+    "committed_usd": 2.077268,
+    "stages": {
+      "comparison": 1.341829,
+      "development": 0.025021,
+      "judge": 0.709132,
+      "probe": 0.001286
+    },
+    "total_cap": 5,
+    "stage_caps": {
+      "probe": 0.1,
+      "development": 0.25,
+      "comparison": 3,
+      "judge": 1,
+      "browser": 0.15
+    },
+    "unsettled": [
+      [
+        "comparison",
+        0.016255
+      ],
+      [
+        "comparison",
+        0.002845
+      ]
+    ],
+    "ledger_sha256": "b621f2752778a60a9fb46c97bf2ff8e1c44b58c94da6b9246e45d678052edc70"
+  }
+}

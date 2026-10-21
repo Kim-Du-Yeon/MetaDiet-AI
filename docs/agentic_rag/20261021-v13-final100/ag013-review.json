@@ -1,0 +1,347 @@
+{
+  "case": {
+    "case_group": "protein_serving",
+    "gold_source": "s12970-017-0177-8.pdf",
+    "gold_page": 1,
+    "gold_excerpt": "dependent upon age",
+    "gold_answer": "ISSN gives general per-serving guidance of 0.25 g/kg or 20–40 g, while noting age and recent resistance exercise affect optimal intake.",
+    "document_sha256": "7a97a81db0334c95ddd17a2009200e7f38945988b3e1dd5aa70f73a502fe8140",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "pilot text facts only; no clinical policy approval",
+    "split": "development",
+    "id": "protein_serving-ko",
+    "language": "ko",
+    "question": "ISSN의 1회 단백질 섭취 일반 권고와 개인별 적용 조건은 무엇인가?",
+    "acceptable_evidence": [
+      {
+        "source": "s12970-017-0177-8.pdf",
+        "pdf_pages": [
+          1
+        ],
+        "core_excerpt": "dependent upon age"
+      }
+    ],
+    "adjudication_version": "core40-v2-who-equivalent-pages",
+    "adjudication_notes": "WHO PDF pages 12 and 24 source-text checked; other equivalent pages not yet adjudicated. Prior experimental cases are all development.",
+    "attempt_id": "ag-013",
+    "repeat": 0
+  },
+  "attempt": {
+    "attempt_id": "ag-013",
+    "condition": "agentic",
+    "status": "completed",
+    "model_usage": [
+      {
+        "model": "gemini-3.8-flash",
+        "usage": {
+          "input_tokens": 61,
+          "output_tokens": 252,
+          "total_tokens": 313,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 246
+          }
+        },
+        "phase": "translation"
+      },
+      {
+        "model": "gemini-3.1-flash-lite",
+        "usage": {
+          "input_tokens": 2615,
+          "output_tokens": 94,
+          "total_tokens": 2709,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        },
+        "phase": "controller"
+      },
+      {
+        "model": "gemini-3.8-flash",
+        "usage": {
+          "input_tokens": 2608,
+          "output_tokens": 1657,
+          "total_tokens": 4265,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 1247
+          }
+        },
+        "phase": "answer"
+      }
+    ],
+    "embedding_input_utf8_bytes": 187,
+    "embedding_usage": [
+      13,
+      35
+    ],
+    "correct": false,
+    "faithful": false,
+    "support": true,
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "duplicate_query",
+      "prompt_version": "agentic-rag-controller-v13",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 4,
+          "start": 0,
+          "end": 700,
+          "source": "s12970-017-0177-8.pdf",
+          "page": 1,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "partial",
+      "missing_core": [
+        "ISSN의 1회 단백질 섭취 권고량(g/kg 또는 g 단위)",
+        "1회 단백질 섭취량 결정을 위한 개인별 적용 조건"
+      ],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 4
+    },
+    "answer_finish_reason": "STOP",
+    "answer": "제공된 자료에서 확인되는 내용과 확인 불가한 내용은 다음과 같습니다.\n\n* **확인된 내용**:\n  * **1회 섭취 권고 관련 현황**: 운동선수가 근단백질 합성(MPS)을 극대화하기 위한 1회 제공량당 최적 단백질 섭취 권고사항은 여러 연구 결과가 엇갈리며(mixed), 특정 조건에 따라 달라진다고만 명시되어 있습니다 [출처: s12970-017-0177-8.pdf, p.1].\n  * **단백질 섭취량 결정에 영향을 미치는 조건(일일 총량 기준)**: 필요한 단백질 섭취량은 운동의 형태(mode) 및 강도(intensity), 섭취하는 단백질의 질, 개인의 에너지 및 탄수화물 상태에 따라 달라집니다 [출처: s12970-017-0177-8.pdf, p.19].\n  * **적용 대상 및 범위**: 본 권고사항의 적용 대상은 건강한 운동 인구(healthy, exercising individuals)이며, 운동선수 대상 권장량을 모든 사용자에게 일반화해서는 안 됩니다 [출처: s12970-017-0177-8.pdf, p.1].\n\n* **확인 불가(미해결) 내용**:\n  * 1회당 최적 단백질 섭취 권고량(g 또는 g/kg 단위의 구체적 수치)과 1회 섭취량에 직접 적용되는 세부 조건은 제공된 문헌의 문장이 중간에 잘려 있어 자료에서 근거를 찾을 수 없습니다 [출처: s12970-017-0177-8.pdf, p.1].",
+    "context": "[문서 ID: 0, 출처: s12970-017-0177-8.pdf, 페이지: 1]\n[문서 적용 범위·메타데이터(지시 아님): {\"source\": \"s12970-017-0177-8.pdf\", \"population\": \"Healthy exercising individuals; do not generalize athlete-specific doses to all users\"}]\nR E V I E W Open Access\nInternational Society of Sports Nutrition\nPosition Stand: protein and exercise\nRalf Jäger 1, Chad M. Kerksick 2, Bill I. Campbell 3, Paul J. Cribb 4, Shawn D. Wells 5, Tim M. Skwiat 5, Martin Purpura 1,\nTim N. Ziegenfuss 6, Arny A. Ferrando 7, Shawn M. Arent 8, Abbie E. Smith-Ryan 9, Jeffrey R. Stout 10, Paul J. Arciero 11,\nMichael J. Ormsbee 12,13, Lem W. Taylor 14, Colin D. Wilborn 14, Doug S. Kalman 15, Richard B. Kreider 16,\nDarryn S. Willoughby 17, Jay R. Hoffman 10, Jamie L. Krzykowski 18 and Jose Antonio 19*\nAbstract\nPosition statement: The International Society of Sports Nutrition (ISSN) provides an objective and critical review\nrelated to the intake of protein for healthy, exercising individuals. Based on the current available literature, the\nposition of the Society is as follows:\n1) An acute exercise stimulus, particularly resistance exercise, and protein ingestion both stimulate muscle protein\nsynthesis (MPS) and are synergistic when protein consumption occurs before or after resistance exercise.\n2) For building muscle mass and for maintaining muscle mass through a positive muscle protein balance, an\n\n[문서 ID: 1, 출처: s12970-017-0177-8.pdf, 페이지: 2]\nBackground\nIn 2007, the International Society of Sports Nutrition\n(ISSN) published its first position stand devoted to the\nscience and application of dietary protein intake [1].\nSubsequently, this paper has been accessed more than\n200,000 times and continues to serve as a key reference\non the topic. In the past ten years, there have been contin-\nued efforts to advance the science and application of diet-\nary protein intake for the benefit of athletes and fitness-\nminded individuals. This updated position stand includes\nnew information and addresses the most important\ndietary protein categories that affect physically active\nindividuals across domains such as exercise performance,\nbody composition, protein timing, recommended intakes,\nprotein sources and quality, and the preparation methods\nof various proteins.\nBenefits on exercise performance\nMost of the scientific research investigating the effects\nof protein intake on exercise performance has focused\non supplemental protein intake. From a broad perspec-\ntive, the dependent measures of these studies can be\ncategorized into two domains:\n/C15Endurance exercise performance\n/C15Resistance exercise performance (increases in\n\n[문서 ID: 2, 출처: s12970-017-0177-8.pdf, 페이지: 19]\nKey points\n/C15Multiple review articles indicate that no controlled\nscientific evidence exists indicating that increased\nintakes of protein pose any health risks in healthy,\nexercising individuals.\n/C15Statements by large regulatory bodies have also\nindicated that concerns about one ’s health\nsecondary to ingesting high amounts of protein\nare unfounded.\n/C15A series of controlled investigations spanning up to\none year in duration utilizing protein intakes of up\nto 2.5 –3.3 g/kg/day in healthy resistance-trained\nindividuals consistently indicate that increased\nintakes of protein exert no harmful effect on blood\nlipids or markers of kidney and liver function.\nConclusion\nIn alignment with our previous position stand, it is the\nposition of the International Society of Sports Nutrition\nthat the majority of exercising individuals should\nconsume at minimum approximately 1.4 to 2.0 g of pro-\ntein per kg of bodyweight per day to optimize exercise\ntraining induced adaptations. Importantly, this recom-\nmendation also falls within the Institute of Medicine ’s\nAcceptable Macronutrient Distribution Range (AMDR)\nof 10 –35% protein [224]. The amount is dependent\n\n[문서 ID: 3, 출처: s12970-017-0177-8.pdf, 페이지: 19]\nAcceptable Macronutrient Distribution Range (AMDR)\nof 10 –35% protein [224]. The amount is dependent\nupon the mode and intensity of the exercise, the quality\nof the protein ingested, as well as the energy and carbo-\nhydrate status of the individual. However, it should be\nnoted that there is preliminary evidence that consuming\nmuch higher quantities of protein (> 3 g/kg/d) may con-\nfer a benefit as it relates to body composition. Concerns\nthat protein intake within this range is unhealthy are un-\nfounded in healthy, exercising individuals. An attempt\nshould be made to consume whole foods that contain\nhigh-quality (e.g., complete) sources of protein; however,\nsupplemental protein is a safe and convenient method of\ningesting high-quality dietary protein. The timing of\nprotein intake in the period encompassing the exercise\nsession may offer several benefits including improved re-\ncovery and greater gains in lean body mass. However,\nperhaps the most important issue regarding protein\nintake during the peri-workout period is that it serves as\nan opportunity to eat thus elevating one ’s total daily\nprotein intake. In addition, consuming protein pre-sleep\n\n[문서 ID: 4, 출처: s12970-017-0177-8.pdf, 페이지: 1]\n2) For building muscle mass and for maintaining muscle mass through a positive muscle protein balance, an\noverall daily protein intake in the range of 1.4 –2.0 g protein/kg body weight/day (g/kg/d) is sufficient for\nmost exercising individuals, a value that falls in line within the Acceptable Macronutrient Distribution Range\npublished by the Institute of Medicine for protein.\n3) There is novel evidence that suggests higher protein intakes (>3.0 g/kg/d) may have positive effects on body\ncomposition in resistance-trained individuals (i.e., promote loss of fat mass).\n4) Recommendations regarding the optimal protein intake per serving for athletes to maximize MPS are mixed\nand are dependent upon\n\n[문서 ID: 5, 출처: s12970-017-0177-8.pdf, 페이지: 1]\nthe Creative Commons license, and indicate if changes were made. The Creative Commons Public Domain Dedication waiver\n(http://creativecommons.org/publicdomain/zero/1.0/) applies to ",
+    "documents": [
+      {
+        "text": "R E V I E W Open Access\nInternational Society of Sports Nutrition\nPosition Stand: protein and exercise\nRalf Jäger 1, Chad M. Kerksick 2, Bill I. Campbell 3, Paul J. Cribb 4, Shawn D. Wells 5, Tim M. Skwiat 5, Martin Purpura 1,\nTim N. Ziegenfuss 6, Arny A. Ferrando 7, Shawn M. Arent 8, Abbie E. Smith-Ryan 9, Jeffrey R. Stout 10, Paul J. Arciero 11,\nMichael J. Ormsbee 12,13, Lem W. Taylor 14, Colin D. Wilborn 14, Doug S. Kalman 15, Richard B. Kreider 16,\nDarryn S. Willoughby 17, Jay R. Hoffman 10, Jamie L. Krzykowski 18 and Jose Antonio 19*\nAbstract\nPosition statement: The International Society of Sports Nutrition (ISSN) provides an objective and critical review\nrelated to the intake of protein for healthy, exercising individuals. Based on the current available literature, the\nposition of the Society is as follows:\n1) An acute exercise stimulus, particularly resistance exercise, and protein ingestion both stimulate muscle protein\nsynthesis (MPS) and are synergistic when protein consumption occurs before or after resistance exercise.\n2) For building muscle mass and for maintaining muscle mass through a positive muscle protein balance, an",
+        "metadata": {
+          "author": "Ralf Jäger",
+          "chunking": "recursive",
+          "creationdate": "2017-07-22T02:13:18+08:00",
+          "creator": "Arbortext Advanced Print Publisher 9.1.440/W Unicode",
+          "document_sha256": "7a97a81db0334c95ddd17a2009200e7f38945988b3e1dd5aa70f73a502fe8140",
+          "edition": "2017",
+          "embedding_dimension": 3072.0,
+          "embedding_model": "gemini-embedding-2",
+          "keywords": "",
+          "lang": "en",
+          "moddate": "2017-07-25T15:28:04+02:00",
+          "page": 1,
+          "page_label": "1",
+          "parser": "pypdf",
+          "pdf_page": 1.0,
+          "pdf_page_index": 0.0,
+          "population": "Healthy exercising individuals; do not generalize athlete-specific doses to all users",
+          "producer": "Acrobat Distiller 10.1.5 (Windows); modified using iText® 5.3.5 ©2000-2012 1T3XT BVBA (AGPL-version)",
+          "source": "D:\\AX\\diet_agent\\docs\\nutrition\\s12970-017-0177-8.pdf",
+          "source_file": "s12970-017-0177-8.pdf",
+          "source_url": "https://doi.org/10.1186/s12970-017-0177-8",
+          "subject": "Journal of the International Society of Sports Nutrition, 2017, doi:10.1186/s12970-017-0177-8",
+          "title": "ISSN position stand: protein and exercise",
+          "total_pages": 25.0,
+          "usage_notes": "Existing open-access article; retain attribution and verify article licence"
+        }
+      },
+      {
+        "text": "Background\nIn 2007, the International Society of Sports Nutrition\n(ISSN) published its first position stand devoted to the\nscience and application of dietary protein intake [1].\nSubsequently, this paper has been accessed more than\n200,000 times and continues to serve as a key reference\non the topic. In the past ten years, there have been contin-\nued efforts to advance the science and application of diet-\nary protein intake for the benefit of athletes and fitness-\nminded individuals. This updated position stand includes\nnew information and addresses the most important\ndietary protein categories that affect physically active\nindividuals across domains such as exercise performance,\nbody composition, protein timing, recommended intakes,\nprotein sources and quality, and the preparation methods\nof various proteins.\nBenefits on exercise performance\nMost of the scientific research investigating the effects\nof protein intake on exercise performance has focused\non supplemental protein intake. From a broad perspec-\ntive, the dependent measures of these studies can be\ncategorized into two domains:\n/C15Endurance exercise performance\n/C15Resistance exercise performance (increases in",
+        "metadata": {
+          "author": "Ralf Jäger",
+          "chunking": "recursive",
+          "creationdate": "2017-07-22T02:13:18+08:00",
+          "creator": "Arbortext Advanced Print Publisher 9.1.440/W Unicode",
+          "document_sha256": "7a97a81db0334c95ddd17a2009200e7f38945988b3e1dd5aa70f73a502fe8140",
+          "edition": "2017",
+          "embedding_dimension": 3072.0,
+          "embedding_model": "gemini-embedding-2",
+          "keywords": "",
+          "lang": "en",
+          "moddate": "2017-07-25T15:28:04+02:00",
+          "page": 2,
+          "page_label": "2",
+          "parser": "pypdf",
+          "pdf_page": 2.0,
+          "pdf_page_index": 1.0,
+          "population": "Healthy exercising individuals; do not generalize athlete-specific doses to all users",
+          "producer": "Acrobat Distiller 10.1.5 (Windows); modified using iText® 5.3.5 ©2000-2012 1T3XT BVBA (AGPL-version)",
+          "source": "D:\\AX\\diet_agent\\docs\\nutrition\\s12970-017-0177-8.pdf",
+          "source_file": "s12970-017-0177-8.pdf",
+          "source_url": "https://doi.org/10.1186/s12970-017-0177-8",
+          "subject": "Journal of the International Society of Sports Nutrition, 2017, doi:10.1186/s12970-017-0177-8",
+          "title": "ISSN position stand: protein and exercise",
+          "total_pages": 25.0,
+          "usage_notes": "Existing open-access article; retain attribution and verify article licence"
+        }
+      },
+      {
+        "text": "Key points\n/C15Multiple review articles indicate that no controlled\nscientific evidence exists indicating that increased\nintakes of protein pose any health risks in healthy,\nexercising individuals.\n/C15Statements by large regulatory bodies have also\nindicated that concerns about one ’s health\nsecondary to ingesting high amounts of protein\nare unfounded.\n/C15A series of controlled investigations spanning up to\none year in duration utilizing protein intakes of up\nto 2.5 –3.3 g/kg/day in healthy resistance-trained\nindividuals consistently indicate that increased\nintakes of protein exert no harmful effect on blood\nlipids or markers of kidney and liver function.\nConclusion\nIn alignment with our previous position stand, it is the\nposition of the International Society of Sports Nutrition\nthat the majority of exercising individuals should\nconsume at minimum approximately 1.4 to 2.0 g of pro-\ntein per kg of bodyweight per day to optimize exercise\ntraining induced adaptations. Importantly, this recom-\nmendation also falls within the Institute of Medicine ’s\nAcceptable Macronutrient Distribution Range (AMDR)\nof 10 –35% protein [224]. The amount is dependent",
+        "metadata": {
+          "author": "Ralf Jäger",
+          "chunking": "recursive",
+          "creationdate": "2017-07-22T02:13:18+08:00",
+          "creator": "Arbortext Advanced Print Publisher 9.1.440/W Unicode",
+          "document_sha256": "7a97a81db0334c95ddd17a2009200e7f38945988b3e1dd5aa70f73a502fe8140",
+          "edition": "2017",
+          "embedding_dimension": 3072.0,
+          "embedding_model": "gemini-embedding-2",
+          "keywords": "",
+          "lang": "en",
+          "moddate": "2017-07-25T15:28:04+02:00",
+          "page": 19,
+          "page_label": "19",
+          "parser": "pypdf",
+          "pdf_page": 19.0,
+          "pdf_page_index": 18.0,
+          "population": "Healthy exercising individuals; do not generalize athlete-specific doses to all users",
+          "producer": "Acrobat Distiller 10.1.5 (Windows); modified using iText® 5.3.5 ©2000-2012 1T3XT BVBA (AGPL-version)",
+          "source": "D:\\AX\\diet_agent\\docs\\nutrition\\s12970-017-0177-8.pdf",
+          "source_file": "s12970-017-0177-8.pdf",
+          "source_url": "https://doi.org/10.1186/s12970-017-0177-8",
+          "subject": "Journal of the International Society of Sports Nutrition, 2017, doi:10.1186/s12970-017-0177-8",
+          "title": "ISSN position stand: protein and exercise",
+          "total_pages": 25.0,
+          "usage_notes": "Existing open-access article; retain attribution and verify article licence"
+        }
+      },
+      {
+        "text": "Acceptable Macronutrient Distribution Range (AMDR)\nof 10 –35% protein [224]. The amount is dependent\nupon the mode and intensity of the exercise, the quality\nof the protein ingested, as well as the energy and carbo-\nhydrate status of the individual. However, it should be\nnoted that there is preliminary evidence that consuming\nmuch higher quantities of protein (> 3 g/kg/d) may con-\nfer a benefit as it relates to body composition. Concerns\nthat protein intake within this range is unhealthy are un-\nfounded in healthy, exercising individuals. An attempt\nshould be made to consume whole foods that contain\nhigh-quality (e.g., complete) sources of protein; however,\nsupplemental protein is a safe and convenient method of\ningesting high-quality dietary protein. The timing of\nprotein intake in the period encompassing the exercise\nsession may offer several benefits including improved re-\ncovery and greater gains in lean body mass. However,\nperhaps the most important issue regarding protein\nintake during the peri-workout period is that it serves as\nan opportunity to eat thus elevating one ’s total daily\nprotein intake. In addition, consuming protein pre-sleep",
+        "metadata": {
+          "author": "Ralf Jäger",
+          "chunking": "recursive",
+          "creationdate": "2017-07-22T02:13:18+08:00",
+          "creator": "Arbortext Advanced Print Publisher 9.1.440/W Unicode",
+          "document_sha256": "7a97a81db0334c95ddd17a2009200e7f38945988b3e1dd5aa70f73a502fe8140",
+          "edition": "2017",
+          "embedding_dimension": 3072.0,
+          "embedding_model": "gemini-embedding-2",
+          "keywords": "",
+          "lang": "en",
+          "moddate": "2017-07-25T15:28:04+02:00",
+          "page": 19,
+          "page_label": "19",
+          "parser": "pypdf",
+          "pdf_page": 19.0,
+          "pdf_page_index": 18.0,
+          "population": "Healthy exercising individuals; do not generalize athlete-specific doses to all users",
+          "producer": "Acrobat Distiller 10.1.5 (Windows); modified using iText® 5.3.5 ©2000-2012 1T3XT BVBA (AGPL-version)",
+          "source": "D:\\AX\\diet_agent\\docs\\nutrition\\s12970-017-0177-8.pdf",
+          "source_file": "s12970-017-0177-8.pdf",
+          "source_url": "https://doi.org/10.1186/s12970-017-0177-8",
+          "subject": "Journal of the International Society of Sports Nutrition, 2017, doi:10.1186/s12970-017-0177-8",
+          "title": "ISSN position stand: protein and exercise",
+          "total_pages": 25.0,
+          "usage_notes": "Existing open-access article; retain attribution and verify article licence"
+        }
+      },
+      {
+        "text": "2) For building muscle mass and for maintaining muscle mass through a positive muscle protein balance, an\noverall daily protein intake in the range of 1.4 –2.0 g protein/kg body weight/day (g/kg/d) is sufficient for\nmost exercising individuals, a value that falls in line within the Acceptable Macronutrient Distribution Range\npublished by the Institute of Medicine for protein.\n3) There is novel evidence that suggests higher protein intakes (>3.0 g/kg/d) may have positive effects on body\ncomposition in resistance-trained individuals (i.e., promote loss of fat mass).\n4) Recommendations regarding the optimal protein intake per serving for athletes to maximize MPS are mixed\nand are dependent upon",
+        "metadata": {
+          "producer": "Acrobat Distiller 10.1.5 (Windows); modified using iText® 5.3.5 ©2000-2012 1T3XT BVBA (AGPL-version)",
+          "creator": "Arbortext Advanced Print Publisher 9.1.440/W Unicode",
+          "creationdate": "2017-07-22T02:13:18+08:00",
+          "title": "ISSN position stand: protein and exercise",
+          "keywords": "",
+          "moddate": "2017-07-25T15:28:04+02:00",
+          "subject": "Journal of the International Society of Sports Nutrition, 2017, doi:10.1186/s12970-017-0177-8",
+          "author": "Ralf Jäger",
+          "source": "D:\\AX\\diet_agent\\docs\\nutrition\\s12970-017-0177-8.pdf",
+          "total_pages": 25,
+          "page": 1,
+          "page_label": "1",
+          "pdf_page_index": 0,
+          "pdf_page": 1,
+          "source_url": "https://doi.org/10.1186/s12970-017-0177-8",
+          "edition": "2017",
+          "population": "Healthy exercising individuals; do not generalize athlete-specific doses to all users",
+          "usage_notes": "Existing open-access article; retain attribution and verify article licence",
+          "source_file": "s12970-017-0177-8.pdf",
+          "lang": "en",
+          "document_sha256": "7a97a81db0334c95ddd17a2009200e7f38945988b3e1dd5aa70f73a502fe8140",
+          "parser": "pypdf",
+          "chunking": "recursive",
+          "embedding_model": "gemini-embedding-2",
+          "embedding_dimension": 3072,
+          "text": "2) For building muscle mass and for maintaining muscle mass through a positive muscle protein balance, an\noverall daily protein intake in the range of 1.4 –2.0 g protein/kg body weight/day (g/kg/d) is sufficient for\nmost exercising individuals, a value that falls in line within the Acceptable Macronutrient Distribution Range\npublished by the Institute of Medicine for protein.\n3) There is novel evidence that suggests higher protein intakes (>3.0 g/kg/d) may have positive effects on body\ncomposition in resistance-trained individuals (i.e., promote loss of fat mass).\n4) Recommendations regarding the optimal protein intake per serving for athletes to maximize MPS are mixed\nand are dependent upon age and recent resistance exercise stimuli. General recommendations are 0.25 g of a\nhigh-quality protein per kg of body weight, or an absolute dose of 20 –40 g.\n5) Acute protein doses should strive to contain 700 –3000 mg of leucine and/or a higher relative leucine content,\nin addition to a balanced array of the essential amino acids (EAAs).\n6) These protein doses should ideally be evenly distributed, every 3 –4 h, across the day.",
+          "neighbor_context": true,
+          "neighbor_chunk_index": 3978,
+          "original_chunk_sha256": "f09233ac91efee90e4501f87bfac967519fc73886bb2659b2fa8e564a4e1abf6",
+          "excerpt_start": 0,
+          "excerpt_end": 700
+        }
+      },
+      {
+        "text": "the Creative Commons license, and indicate if changes were made. The Creative Commons Public Domain Dedication waiver\n(http://creativecommons.org/publicdomain/zero/1.0/) applies to ",
+        "metadata": {
+          "producer": "Acrobat Distiller 10.1.5 (Windows); modified using iText® 5.3.5 ©2000-2012 1T3XT BVBA (AGPL-version)",
+          "creator": "Arbortext Advanced Print Publisher 9.1.440/W Unicode",
+          "creationdate": "2017-07-22T02:13:18+08:00",
+          "title": "ISSN position stand: protein and exercise",
+          "keywords": "",
+          "moddate": "2017-07-25T15:28:04+02:00",
+          "subject": "Journal of the International Society of Sports Nutrition, 2017, doi:10.1186/s12970-017-0177-8",
+          "author": "Ralf Jäger",
+          "source": "D:\\AX\\diet_agent\\docs\\nutrition\\s12970-017-0177-8.pdf",
+          "total_pages": 25,
+          "page": 1,
+          "page_label": "1",
+          "pdf_page_index": 0,
+          "pdf_page": 1,
+          "source_url": "https://doi.org/10.1186/s12970-017-0177-8",
+          "edition": "2017",
+          "population": "Healthy exercising individuals; do not generalize athlete-specific doses to all users",
+          "usage_notes": "Existing open-access article; retain attribution and verify article licence",
+          "source_file": "s12970-017-0177-8.pdf",
+          "lang": "en",
+          "document_sha256": "7a97a81db0334c95ddd17a2009200e7f38945988b3e1dd5aa70f73a502fe8140",
+          "parser": "pypdf",
+          "chunking": "recursive",
+          "embedding_model": "gemini-embedding-2",
+          "embedding_dimension": 3072,
+          "text": "the Creative Commons license, and indicate if changes were made. The Creative Commons Public Domain Dedication waiver\n(http://creativecommons.org/publicdomain/zero/1.0/) applies to the data made available in this article, unless otherwise stated.\nJäger et al. Journal of the International Society of Sports Nutrition  (2017) 14:20 \nDOI 10.1186/s12970-017-0177-8",
+          "neighbor_context": true,
+          "neighbor_chunk_index": 3980,
+          "original_chunk_sha256": "faa0d1d1e18107c7ca7b0eafb10e9f4a5265a51eab501a80a1c104d1707d7cd8",
+          "excerpt_start": 0,
+          "excerpt_end": 361
+        }
+      }
+    ],
+    "ms": 21726.218200001313,
+    "known_model_cost_usd": 0.00995525,
+    "model_cost_complete": true,
+    "embedding_cost_upper_proxy_usd": 3.74e-05,
+    "embedding_cost_usd": 9.600000000000001e-06,
+    "cost_complete": true,
+    "judge_status": "not_attempted_deferred"
+  },
+  "grade": {
+    "attempt_id": "ag-013",
+    "condition": "agentic",
+    "status": "completed",
+    "correct": false,
+    "faithful": true,
+    "reason": "The answer abstains from providing the gold fact (0.25 g/kg or 20-40 g, age/resistance exercise conditions) because the context is truncated. Abstention to an answerable gold question is incorrect. It is faithful to its provided context.",
+    "transport": "batch",
+    "known_cost_usd": 0.0015405,
+    "cost_complete": true,
+    "usage": {
+      "input_tokens": 2241,
+      "output_tokens": 140,
+      "input_token_details": {
+        "cache_read": 0
+      }
+    },
+    "batch_key": "pair|ag-013",
+    "payload_sha256": "14004052dbddd0d5e4ec362b9384f72b5674afad79d1228b9633e70b2b152f81",
+    "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+    "judge_model": "gemini-3.1-pro-preview",
+    "judge_tokens": 2048,
+    "judge_thinking": "low",
+    "side": "A"
+  }
+}

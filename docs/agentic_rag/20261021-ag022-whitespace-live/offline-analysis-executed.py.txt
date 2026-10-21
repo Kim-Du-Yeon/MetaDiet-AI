@@ -1,0 +1,17 @@
+"""Read stored reference and prior results only; no model or database access."""
+import json
+from pathlib import Path
+root=Path(__file__).resolve().parents[1]
+source=root/'docs/agentic_rag/20261021-batch-live-validation/matched100'
+out=root/'docs/agentic_rag/20261021-ag022-whitespace-live'
+case=next(c for c in json.loads((source/'cases.json').read_text(encoding='utf-8')) if c['attempt_id']=='ag-022')
+old=[r for r in (json.loads(s) for s in (source/'attempts.jsonl').read_text(encoding='utf-8').splitlines())
+     if r['attempt_id']=='ag-022']
+record={'new_paid_calls':0,'question':case['question'],'gold_answer':case['gold_answer'],
+    'acceptable_evidence':case.get('acceptable_evidence'),
+    'prior_answers':[{'condition':r['condition'],'answer':r.get('answer'),
+        'documents':[{'source':d['metadata'].get('source_file'),'page':d['metadata'].get('page'),
+                      'pdf_page':d['metadata'].get('pdf_page')} for d in r.get('documents',[])]} for r in old],
+    'scope_note':'EER definition mentions maintaining energy balance, but that alone does not explicitly define intake equals expenditure.'}
+(out/'scope-analysis.json').write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')
+print(json.dumps(record,ensure_ascii=False))

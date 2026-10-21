@@ -1,0 +1,55 @@
+{
+  "status": "completed",
+  "question": "What changed and stayed unchanged in Nera, for whom, and what dose is prescribed?",
+  "context": "[출처: fictional-nera.txt, 페이지: 1]\nFictional Nera: the new edition changed body measurements; its equation remains unchanged from edition A. Applies only to pilot participants. No dose is supplied.",
+  "budget_before": {
+    "committed_usd": 2.001159,
+    "stages": {
+      "comparison": 1.326774,
+      "development": 0.014726,
+      "judge": 0.65871,
+      "probe": 0.000949
+    },
+    "total_limit_usd": 5.0,
+    "stopped": false,
+    "stop_reason": null
+  },
+  "controller_version": "agentic-rag-controller-v10",
+  "controller_sha256": "f2ea40250e7e1ae953f3ecbbf37a94ca183cb21df3573c8d9ae432d9c47a5317",
+  "purpose": "synthetic schema functionality only",
+  "paid_call_limit": 1,
+  "decision": {
+    "sufficient": false,
+    "missing_core": [
+      "prescribed dose"
+    ],
+    "rewrite": "What is the prescribed dose for Nera for pilot participants?",
+    "supported_excerpts": [
+      "Fictional Nera: the new edition changed body measurements; its equation remains unchanged from edition A. Applies only to pilot participants. No dose is supplied."
+    ]
+  },
+  "contract_pass": true,
+  "valid_verbatim_excerpts": true,
+  "usage": [
+    {
+      "input_tokens": 781,
+      "output_tokens": 94,
+      "total_tokens": 875,
+      "input_token_details": {
+        "cache_read": 0
+      }
+    }
+  ],
+  "budget_after": {
+    "committed_usd": 2.001496,
+    "stages": {
+      "comparison": 1.326774,
+      "development": 0.014726,
+      "judge": 0.65871,
+      "probe": 0.001286
+    },
+    "total_limit_usd": 5.0,
+    "stopped": false,
+    "stop_reason": null
+  }
+}

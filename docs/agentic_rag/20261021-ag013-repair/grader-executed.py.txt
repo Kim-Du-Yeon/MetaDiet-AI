@@ -1,0 +1,24 @@
+import argparse,json,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1];sys.path[:0]=[str(ROOT/'backend'),str(ROOT/'backend/scripts/eval')]
+from eval_budget import add_budget_args,activate_budget
+p=argparse.ArgumentParser();p.add_argument('--action',choices=['submit','collect'],required=True);add_budget_args(p);a=p.parse_args();b=activate_budget(a,'judge')
+from dotenv import load_dotenv
+load_dotenv(ROOT/'backend/.env',override=True)
+from app.core.config import get_settings
+from batch_agentic_judges import make_requests
+from batch_campaign import advance
+from google import genai
+from google.genai import types
+out=ROOT/'docs/agentic_rag/20261021-ag013-repair';path=out/'grading.json'
+row=json.loads((out/'attempt.json').read_text(encoding='utf-8'));assert row['status']=='completed'
+old=json.loads((ROOT/'docs/agentic_rag/20261021-v13-final100/ag013-review.json').read_text(encoding='utf-8'))
+entries=[{'key':'single|ag-013|v14','kind':'single','attempt_id':'ag-013','condition':'v14-repair',
+ 'payload':{'question':old['case']['question'],'gold':old['case']['gold_answer'],'answer':row['answer'],'context':row['context']}}]
+s=get_settings();client=genai.Client(api_key=s.gemini_api_key,http_options=types.HttpOptions(timeout=60000,retry_options=types.HttpRetryOptions(attempts=1)))
+state=advance(client,path,s.gemini_eval_model,entries,make_requests(entries),b,max_entries=1,submit_next=a.action=='submit')
+print(json.dumps({'state':state,'budget':b.summary()}))
+if state=='completed':
+ grades=[json.loads(v) for v in path.with_suffix('.grades.jsonl').read_text(encoding='utf-8').splitlines()]
+ print(json.dumps({'grades':grades},ensure_ascii=True))
+ if any(g['status']!='completed' or not g['correct'] or not g['faithful'] for g in grades):raise SystemExit(2)

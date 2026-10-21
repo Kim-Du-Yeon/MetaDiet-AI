@@ -1,0 +1,90 @@
+{
+  "attempts_per_condition": 100,
+  "unique_questions": 40,
+  "sampling": "core40 twice plus first20; development repeated attempts, not held-out",
+  "dataset_sha256": "4ba67cf812497730848fe864580f1a7bf7da191c6a3c71427200eac3535aed9e",
+  "retrieval": "dense, k4, no reranker; matches 512MiB remote fallback",
+  "workers": 1,
+  "pair_order": "alternating",
+  "timeout_seconds": 90,
+  "loop_timeout_seconds": 35,
+  "gate": {
+    "correctness_min": 0.95,
+    "correctness_improvement_min": 0.02,
+    "support_noninferior": true,
+    "failure_noninferior": true,
+    "p50_ratio_max": 1.5,
+    "p95_ratio_max": 1.5,
+    "complete_cost_required": true,
+    "cost_ratio_max": 2,
+    "operational_failure_noninferior": true
+  },
+  "date": "2026-10-21",
+  "baseline": "reused controller-v9/adjacent-table-v11-safe-errors",
+  "candidate": "v14-full-neighbor-context-focused-rewrite",
+  "judge": "Same Pro paired rubric; max2048/LOW; sequential native Batch chunks up to10; cumulative judge cap $1",
+  "gate_note": "Retain existing conservative gate; no deployment unless complete quality and cost data pass. Embedding metadata missing remains incomplete.",
+  "baseline_source_sha256": "8197837165c5237c04ebdb81f1c141ced70980efecad04f6d53bec536d148048",
+  "development_dataset_sha256": "3e215b31503b38c3f91c7afbda56f1443849285b031ac0504b76bf8a7d855f0a",
+  "status": "frozen_v14_final100",
+  "qa_note": "QA base unchanged. Controller-v9 scope/inference refinements plus candidate table-header guidance; baseline v6 frozen. All identities frozen before main generation.",
+  "embedding_note": "Raw response usageMetadata.promptTokenCount is observed before SDK conversion. Missing means cost incomplete. Same telemetry on both conditions.",
+  "development_runner": "backend/scripts/eval/develop_agentic_policy.py",
+  "development_refinement": "Same20 separate fictional cases across four runs. Initial cache/excerpt fixes, blank-cell inference-limit answerability, and unrequested population scope refined. Preserve all unsuccessful runs; no nutrition gold added.",
+  "candidate_source_sha256": "d45bf2abeea61e372ef610236afb83bd4661f602d1a527ee2f5f1a02a28ecd11",
+  "benchmark_source_sha256": "bba11e57f4c8e45f3cf2242f8115905edc402d0159b21a5ad601af1b0fd4dd31",
+  "operational_failure_policy": "Same predeclared noninferiority gate; count request/loop failures plus neighbor_status=unavailable, even if original-evidence fallback answers. Frozen before main100-pair generation.",
+  "commands": [],
+  "neighbor_source_sha256": "81db0270e2f2507b4e46b52e306d640c011631f2f3e4438a431fe60a9de92b02",
+  "development_runner_sha256": "1a13afd3c397bc958d466effa52b3fa917dc5bc178d0cad45c9e45d78e981012",
+  "neighbor_note": "No remote calls or embeddings. Configured trusted local build only, manifest/embedding validation, exact document sha+source+page+full text anchor match. Next/previous chunk only within one page, at most2 extra candidate excerpts700chars each, same8docs/6000char cap. Corpus initialization serialized.",
+  "analysis_source_sha256": "6a074c0eb4726d69e0bafb94ea99beed7605e85ccd7199a5d49cbccc04cc7c48",
+  "output_caps": {
+    "answer": 2048,
+    "translation": 256,
+    "controller": 512,
+    "judge": 2048
+  },
+  "budget": {
+    "total": 5,
+    "probe": 0.05,
+    "development": 0.05,
+    "comparison": 2.6,
+    "judge": 2.2,
+    "browser": 0.1
+  },
+  "serving_reuse_note": "Previous14 partial responses were reused for ancillary saved-answer grading, not mixed into this new cohort",
+  "controller_development_frozen": true,
+  "packet_policy": "5 generation attempts then paired batch grading; no further generation until passed",
+  "stopping_policy": "stop on any serving/contract/cost failure or bad candidate grade; no further billable calls after failure",
+  "latency_note": "baseline reused historical3 workers; new sequential1 for strict stop; latency descriptive, not causal speed evidence",
+  "saved_ag022_note": "single smoke results not inserted; generate fresh attempts for all new cohort slots",
+  "frozen_source_hashes": {
+    "backend\\app\\rag\\agentic.py": "d45bf2abeea61e372ef610236afb83bd4661f602d1a527ee2f5f1a02a28ecd11",
+    "backend\\app\\rag\\definition_evidence.py": "88e3f7417bf276de1697c2bd1281964bb047558451c76049a4d08f78ce4b4440",
+    "backend\\app\\rag\\evidence_spans.py": "9652e827d4fc07cab0c580194d9eb3a02f6089ca603fcd6c7d4ede1bbee8c668",
+    "backend\\app\\rag\\assessment_diagnostics.py": "a93604016af9294fec279efb90a19e7f487efd7e9f251f3842ea240b4142dda6",
+    "backend\\app\\rag\\qa.py": "39ff161ea8f4a02dc3018afaf835ff6ed813df10b81fbe29c8675811aaad8c43"
+  },
+  "budget_start": {
+    "committed_usd": 2.270037,
+    "stages": {
+      "comparison": 1.453787,
+      "development": 0.025021,
+      "judge": 0.789943,
+      "probe": 0.001286
+    }
+  },
+  "stage_caps": {
+    "probe": 0.05,
+    "development": 0.05,
+    "comparison": 2.6,
+    "judge": 2.2,
+    "browser": 0.1
+  },
+  "total_cap": 5.0,
+  "rubric_policy": "paired Pro regrades both outputs independently per case, old grades retained as audit; cannot reuse pair grade when new output differs",
+  "answer_finish_reason_capture": "STOP required; no extra provider call",
+  "supersedes_failed_study": false,
+  "reuse_note": "baseline100 answers and historical grades reused; v13 results not promoted; v14 cached ag013 smoke separate from new full-pipeline attempts"
+}

@@ -1,0 +1,85 @@
+"""Frozen pricing estimates and conservative deployment gates; no provider I/O."""
+import math
+import statistics
+
+# USD per million tokens, Standard text rates checked 2026-10-19. Not invoices.
+# 3.8 rates expire 2026-12-31; Pro here only supports <=200k input tokens.
+PRICES = {'gemini-3.8-flash': (.75, 3.75, .075),
+          'gemini-3.1-flash-lite': (.25, 1.50, .025),
+          'gemini-3.1-pro-preview': (2., 12., .20)}
+
+
+def evaluation_key(path):
+    """Explicit local eval credential only; never override deployment/process env."""
+    from dotenv import dotenv_values
+    from pathlib import Path
+    if not Path(path).is_file():
+        raise ValueError('Evaluation env file missing')
+    value = dotenv_values(path).get('GEMINI_API_KEY', '')
+    if not value or not value.strip():
+        raise ValueError('Evaluation Gemini key missing')
+    return value.strip()
+
+
+def estimate_cost(model, usage):
+    if model not in PRICES or not usage or not all(k in usage for k in ('input_tokens', 'output_tokens')):
+        return None
+    incoming, outgoing = usage['input_tokens'], usage['output_tokens']
+    cached = (usage.get('input_token_details') or {}).get('cache_read', 0)
+    if not all(isinstance(v, (float, int)) and math.isfinite(v) and v >= 0
+               for v in (incoming, outgoing, cached)) or cached > incoming:
+        return None
+    if model == 'gemini-3.1-pro-preview' and incoming > 200000:
+        return None
+    i, o, c = PRICES[model]
+    return ((incoming - cached) * i + cached * c + outgoing * o) / 1e6
+
+
+def summarize(rows):
+    n = len(rows)
+    times = sorted(row['ms'] for row in rows)
+    fresh = [r for r in rows if r.get('fresh_applicable', True)]
+    complete_cost = bool(rows) and all(r.get('cost_usd') is not None for r in rows)
+    return {'attempts': n, 'completed': sum(r['status'] == 'completed' for r in rows),
+        'failure_rate': sum(r['status'] != 'completed' for r in rows) / n if n else 1,
+        'quality_rate': sum(bool(r.get('quality')) for r in rows) / n if n else 0,
+        'freshness_attempts': len(fresh), 'freshness_passes': sum(bool(r.get('fresh')) for r in fresh),
+        'p50_ms': statistics.median(times) if times else None,
+        'p95_ms': times[max(0, math.ceil(n * .95) - 1)] if times else None,
+        'cost_complete': complete_cost,
+        'known_cost_usd': sum(r.get('cost_usd') or 0 for r in rows),
+        'mean_cost_usd': sum(r['cost_usd'] for r in rows) / n if complete_cost else None}
+
+
+def deployment_gate(baseline, candidate, *, judge_complete, by_task=None):
+    tasks = {'extraction', 'classification', 'query_translation', 'agent'}
+    per_task_pass = bool(by_task and set(by_task) == tasks and all(
+        group['baseline']['attempts'] >= 25 and
+        group['baseline']['attempts'] == group['routing']['attempts'] and
+        group['routing']['quality_rate'] >= group['baseline']['quality_rate'] and
+        group['routing']['failure_rate'] <= group['baseline']['failure_rate']
+        for group in by_task.values()))
+    return bool(judge_complete and per_task_pass and baseline['attempts'] >= 100 and
+        baseline['attempts'] == candidate['attempts'] and
+        baseline['failure_rate'] <= .02 and candidate['failure_rate'] <= baseline['failure_rate'] and
+        candidate['quality_rate'] >= baseline['quality_rate'] and candidate['quality_rate'] >= .95 and
+        candidate['freshness_attempts'] > 0 and
+        candidate['freshness_passes'] == candidate['freshness_attempts'] and
+        baseline['cost_complete'] and candidate['cost_complete'] and
+        candidate['mean_cost_usd'] <= baseline['mean_cost_usd'] * .9 and
+        candidate['p50_ms'] <= baseline['p50_ms'] * .95 and
+        candidate['p95_ms'] <= baseline['p95_ms'] * 1.05)
+def require_prompt_v1(metadata):
+    """Reject prompt drift before this fixed-v1 comparison sends any model call."""
+    if (metadata.get('prompt_release') != 'v1' or metadata.get('prompt_bundle_sha256') !=
+            '4c40f46e4c2aa01b5ba7c78f456cff11b11907a4730e697288f796694ec7a741'):
+        raise ValueError('This comparison requires the unchanged prompt v1 bundle')
+    return dict(metadata)
+
+
+def summarize_judge_cost(rows):
+    return {mode: {'attempts': len(items),
+                   'known_cost_usd': sum(row.get('cost_usd') or 0 for row in items),
+                   'cost_complete': bool(items) and all(row.get('cost_usd') is not None for row in items)}
+            for mode in ('baseline', 'routing')
+            for items in [[row for row in rows if row['condition'] == mode]]}

@@ -1,0 +1,32 @@
+import argparse,json,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1];sys.path[:0]=[str(ROOT/'backend'),str(ROOT/'backend/scripts/eval')]
+from eval_budget import add_budget_args,activate_budget
+p=argparse.ArgumentParser();p.add_argument('--start',type=int,default=0);p.add_argument('--action',choices=['submit','collect'],required=True);add_budget_args(p);a=p.parse_args()
+b=activate_budget(a,'judge')
+from dotenv import load_dotenv
+load_dotenv(ROOT/'backend/.env',override=True)
+from app.core.config import get_settings
+from google import genai
+from google.genai import types
+from judge_agentic_pairs import paired_payload
+from batch_agentic_judges import make_requests
+from batch_campaign import advance
+settings=get_settings();d=ROOT/'docs/agentic_rag/20261021-v13-final100';path=d/f'packet-{a.start:04d}.json'
+if a.action=='submit':
+    rows=[json.loads(s) for s in (d/'attempts.jsonl').read_text(encoding='utf-8').splitlines()]
+    assert all(r['status']=='completed' and not r.get('verification_failure') for r in rows)
+    cases=json.loads((d/'cases.json').read_text(encoding='utf-8'))[a.start:a.start+5];entries=[]
+    for case in cases:
+        pair=[r for r in rows if r['attempt_id']==case['attempt_id']]
+        payload,mapping=paired_payload(case,pair)
+        entries.append({'key':'pair|'+case['attempt_id'],'kind':'pair','attempt_id':case['attempt_id'],'payload':payload,'mapping':mapping})
+else:entries=json.loads(path.read_text(encoding='utf-8'))['entries']
+client=genai.Client(api_key=settings.gemini_api_key,http_options=types.HttpOptions(timeout=60000,retry_options=types.HttpRetryOptions(attempts=1)))
+state=advance(client,path,settings.gemini_eval_model,entries,make_requests(entries),b,max_entries=5,submit_next=a.action=='submit')
+print(json.dumps({'state':state,'budget':b.summary()}))
+if state=='completed':
+    grades=[json.loads(s) for s in path.with_suffix('.grades.jsonl').read_text(encoding='utf-8').splitlines()]
+    bad=[{'attempt_id':r['attempt_id'],'condition':r['condition'],'status':r['status'],'correct':r.get('correct'),'faithful':r.get('faithful'),'reason':r.get('reason')} for r in grades if r['condition']=='agentic' and (r['status']!='completed' or not r.get('correct') or not r.get('faithful'))]
+    print(json.dumps({'candidate_grade_failures':bad},ensure_ascii=False))
+    if bad:raise SystemExit(2)

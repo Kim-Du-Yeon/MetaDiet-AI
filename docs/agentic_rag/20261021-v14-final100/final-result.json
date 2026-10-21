@@ -1,0 +1,74 @@
+{
+  "status": "stopped_on_serving_refusal",
+  "failed_case": "ag-022",
+  "planned_per_condition": 100,
+  "baseline_reused": 100,
+  "candidate_started": 23,
+  "candidate_nonrefusal": 22,
+  "candidate_refusals": 1,
+  "candidate_unstarted": 77,
+  "paired_judged_cases": 20,
+  "candidate_correct_judged": 20,
+  "candidate_faithful_judged": 20,
+  "baseline_correct_judged": 19,
+  "unjudged_candidate_cases": [
+    "ag-020",
+    "ag-021",
+    "ag-022"
+  ],
+  "ag013_paired_grade": {
+    "attempt_id": "ag-013",
+    "condition": "agentic",
+    "status": "completed",
+    "correct": true,
+    "faithful": true,
+    "reason": "Model A correctly provides the general per-serving guidance (0.25 g/kg or 20-40 g) and the individual conditions (age and recent resistance exercise), matching the gold answer. It is fully supported by the provided context.",
+    "transport": "batch",
+    "known_cost_usd": 0.0022535,
+    "cost_complete": true,
+    "usage": {
+      "input_tokens": 2323,
+      "output_tokens": 364,
+      "input_token_details": {
+        "cache_read": 0
+      }
+    },
+    "batch_key": "pair|ag-013",
+    "payload_sha256": "a9972f8f06f6739662ec24b4827028dcfaa405c46b1c5923cabff5832f4c5a39",
+    "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+    "judge_model": "gemini-3.1-pro-preview",
+    "judge_tokens": 2048,
+    "judge_thinking": "low",
+    "side": "A"
+  },
+  "budget_start": 2.270037,
+  "budget_end": 2.529382,
+  "increment_usd": 0.259345,
+  "stage_usage": {
+    "comparison": 1.608743,
+    "development": 0.025021,
+    "judge": 0.894332,
+    "probe": 0.001286
+  },
+  "caps": {
+    "probe": 0.05,
+    "development": 0.05,
+    "comparison": 2.6,
+    "judge": 2.2,
+    "browser": 0.1
+  },
+  "total_cap": 5,
+  "old_unsettled_reservations": [
+    [
+      "comparison",
+      0.016255
+    ],
+    [
+      "comparison",
+      0.002845
+    ]
+  ],
+  "new_pending_batches": 0,
+  "full_gate_passed": false,
+  "deployed": false
+}

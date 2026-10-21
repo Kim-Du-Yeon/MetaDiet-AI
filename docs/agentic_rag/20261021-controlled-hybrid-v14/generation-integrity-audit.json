@@ -1,0 +1,92 @@
+{
+  "checks": {
+    "candidate_source_sha256": true,
+    "neighbor_source_sha256": true,
+    "benchmark_source_sha256": true,
+    "dataset_sha256": true,
+    "backend/app/rag/qa.py": true,
+    "backend/app/rag/retriever.py": true,
+    "backend/scripts/eval/controlled_hybrid_support.py": true,
+    "unique_slots200": true,
+    "conditions100_each": true,
+    "hybrid_only": true,
+    "all_costs_complete": true,
+    "context_bound": true,
+    "same_answer_model": true
+  },
+  "source_page_hit_note": "strict source/page match, not correctness",
+  "actual_retrieval_config": {
+    "candidate_k": 20,
+    "score_threshold": 0.35,
+    "rerank": false,
+    "embedding_dimension": 3072
+  },
+  "conditions": {
+    "baseline": {
+      "model_call_phases": {
+        "answer": 100,
+        "translation": 50
+      },
+      "guard_no_model": 0
+    },
+    "agentic": {
+      "model_call_phases": {
+        "translation": 56,
+        "controller": 110,
+        "answer": 96
+      },
+      "guard_no_model": 4
+    }
+  },
+  "all_passed": true,
+  "production_source_base_commit": "aa00d1ed79d96826fdeee5b1f6a6d591825648c5",
+  "rates_usd_per_million_tokens": {
+    "gemini-3.8-flash": {
+      "input": 0.75,
+      "output": 3.75,
+      "cached_input": 0.075
+    },
+    "gemini-3.1-flash-lite": {
+      "input": 0.25,
+      "output": 1.5,
+      "cached_input": 0.025
+    },
+    "gemini-3.1-pro-preview": {
+      "input": 2,
+      "output": 12,
+      "batch_discount": 0.5
+    },
+    "gemini-embedding-2": {
+      "input": 0.2
+    }
+  },
+  "validation": {
+    "focused": "30 passed",
+    "backend_full": "1654 passed,1 existing skipped,3 deprecation warnings; exit0",
+    "backend_command": "backend/venv/Scripts/python.exe -m pytest backend/tests -q --basetemp=tmp/controlled-hybrid-escalated-tests -o faulthandler_timeout=60",
+    "frontend": "unchanged; no frontend checks run",
+    "restricted_runner": "Initial restricted runs stalled and were terminated; same tests passed with permitted local process execution. No test removed/disabled.",
+    "cost_followup": "25 passed; workspace basetemp; exit0",
+    "temp_path_fix_official_reference": "https://docs.pytest.org/en/stable/how-to/tmp_path.html#temporary-directory-location-and-retention"
+  },
+  "judge_integrity": {
+    "campaign_state": "completed",
+    "pairs": 100,
+    "grades": 200,
+    "payload_model_rubric_side_verified_by_summary": true,
+    "batches": [
+      {
+        "requests": 73,
+        "state": "JOB_STATE_SUCCEEDED",
+        "budget_settled": true,
+        "token_cost_estimate_usd": 0.475719
+      },
+      {
+        "requests": 27,
+        "state": "JOB_STATE_SUCCEEDED",
+        "budget_settled": true,
+        "token_cost_estimate_usd": 0.174347
+      }
+    ]
+  }
+}

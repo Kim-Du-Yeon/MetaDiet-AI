@@ -1,0 +1,33 @@
+{
+  "source_directory": "docs/agentic_rag/20261021-controlled-hybrid-v14",
+  "source_hashes": {
+    "cases.json": "4ba67cf812497730848fe864580f1a7bf7da191c6a3c71427200eac3535aed9e",
+    "attempts.jsonl": "39f5a84df44eba8cc1b3e488079f863f1f16858a6adc4ba6fb07c9fbb00b608c",
+    "grading.grades.jsonl": "26124a60c888040b56bf4022a20dce9a46748617bd70b866ef6459d787ae09ec",
+    "final-summary.json": "d6bcd6047b6a5b2fab52180fb1279242dbdfaabb8147262bd2f47c30b6920b53"
+  },
+  "analysis_script_sha256": "1816b879952b3016208c322e4629b17c3d680327256b79fac6956cfa0b97289c",
+  "packing_source_sha256": "d45bf2abeea61e372ef610236afb83bd4661f602d1a527ee2f5f1a02a28ecd11",
+  "transitions": {
+    "correct->correct": 79,
+    "correct->incorrect": 10,
+    "incorrect->incorrect": 10,
+    "incorrect->correct": 1
+  },
+  "regression_categories": {
+    "numeric_range_evidence_displaced": 3,
+    "duration_qualifier_evidence_displaced": 3,
+    "definition_gate_full_abstention": 2,
+    "requested_list_missing_in_partial_context": 2
+  },
+  "regression_attempts": 10,
+  "regression_fact_groups": 4,
+  "shared_incorrect_attempts": 10,
+  "shared_incorrect_fact_groups": 4,
+  "recovery_attempts": 1,
+  "packing_replays_exact": 6,
+  "new_provider_calls": 0,
+  "new_answers": 0,
+  "new_judges": 0,
+  "method": "Author-coded qualitative taxonomy and deterministic saved-text packing replay; original scores unchanged, no clinical adjudication or new model-quality experiment."
+}

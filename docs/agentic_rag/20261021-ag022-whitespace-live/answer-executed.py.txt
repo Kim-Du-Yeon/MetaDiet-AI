@@ -1,0 +1,81 @@
+"""One answer generation using the successful stored controller decision."""
+import asyncio,hashlib,json,sys
+from pathlib import Path
+from unittest.mock import AsyncMock
+ROOT=Path(__file__).resolve().parents[1]
+sys.path[:0]=[str(ROOT/'backend'),str(ROOT/'backend/scripts/eval')]
+from dotenv import load_dotenv
+from eval_budget import Budget,BudgetStop,install_transport_guard
+from benchmark_agentic_rag import Usage,safe_error
+OUT=ROOT/'docs/agentic_rag/20261021-ag022-whitespace-live'
+
+async def main():
+    if '--allow-paid' not in sys.argv:raise SystemExit('Explicit authorization required')
+    path=OUT/'answer.json'
+    if path.exists():raise SystemExit('Already attempted; no automatic retry')
+    controller=json.loads((OUT/'single-attempt.json').read_text(encoding='utf-8'))
+    if not controller.get('contract_pass'):raise SystemExit('Controller gate did not pass')
+    load_dotenv(ROOT/'backend/.env',override=True)
+    from app.rag import agentic,qa
+    from app.core.config import get_settings
+    from app.core.llm import get_chat_model
+    from langchain_core.documents import Document
+    from google.genai._api_client import BaseApiClient
+    get_settings().model_max_retries=0
+    budget=Budget(ROOT/'tmp/eval-budget.sqlite')
+    source=ROOT/'docs/agentic_rag/20261021-batch-live-validation/matched100'
+    case=next(c for c in json.loads((source/'cases.json').read_text(encoding='utf-8')) if c['attempt_id']=='ag-022')
+    old=next(r for r in (json.loads(s) for s in (source/'attempts.jsonl').read_text(encoding='utf-8').splitlines())
+        if r['attempt_id']=='ag-022' and r['condition']=='agentic')
+    docs=[Document(page_content=d['text'],metadata=d['metadata']) for d in old['documents']][:4]
+    result=await agentic.bounded_retrieve(case['question'],
+        retrieve=AsyncMock(return_value={'grounded':True,'max_score':0,'docs':docs}),
+        assess=AsyncMock(return_value=agentic.Assessment.model_validate(controller['decision'])),
+        expand=AsyncMock(return_value=[]),limits=agentic.Limits(max_rounds=1))
+    if not result['grounded']:raise SystemExit('Cached evidence gate failed; no answer call')
+    record={'attempt_id':'ag-022','status':'entered','budget_before':budget.summary(),
+        'question':case['question'],'gold_answer':case['gold_answer'],'context':result['context'],
+        'agentic':result['agentic'],'reused_controller':True,'new_retrieval_calls':0,'new_controller_calls':0}
+    def save():
+        record['budget_after']=budget.summary()
+        path.write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')
+    save()
+    class Model:
+        def __init__(self):self.inner=get_chat_model(temperature=0,max_tokens=2048)
+        async def ainvoke(self,*args,**kwargs):
+            response=await self.inner.ainvoke(*args,**kwargs)
+            finish=str((response.response_metadata or {}).get('finish_reason',''))
+            record['finish_reason']=finish if finish in {'STOP','MAX_TOKENS','SAFETY','OTHER'} else 'UNRECOGNIZED'
+            return response
+    qa._llm=Model()
+    install_transport_guard(budget,'comparison')
+    sync,asynchronous=BaseApiClient.request,BaseApiClient.async_request
+    count=0
+    def check(method):
+        nonlocal count
+        if method.lower()!='get':
+            if count>=1:raise BudgetStop('Single answer call limit')
+            count+=1
+    def request(client,method,*args,**kwargs):
+        check(method);return sync(client,method,*args,**kwargs)
+    async def async_request(client,method,*args,**kwargs):
+        check(method);return await asynchronous(client,method,*args,**kwargs)
+    BaseApiClient.request=request;BaseApiClient.async_request=async_request
+    usage=Usage()
+    try:
+        answer=await qa.answer_from_knowledge(case['question'],retrieval_result=result,config={'callbacks':[usage]})
+        passed=answer['answer']!=qa.NO_EVIDENCE and bool(answer['answer'].strip()) and record['finish_reason']=='STOP'
+        record.update(status='answer_pass' if passed else 'answer_gate_failed',answer=answer['answer'])
+        if passed:
+            batch=OUT/'grading';batch.mkdir(exist_ok=True)
+            for name,content in [('cases.json',json.dumps([case],ensure_ascii=False,indent=2)),
+                ('attempts.jsonl',json.dumps({'attempt_id':'ag-022','condition':'v11-whitespace-fixed-context',
+                    'status':'completed','answer':answer['answer'],'context':result['context']},ensure_ascii=False)+'\n'),('prior.jsonl','')]:
+                with (batch/name).open('x',encoding='utf-8') as f:f.write(content)
+    except BudgetStop as exc:record.update(status='budget_stopped',reason=str(exc))
+    except Exception as exc:record.update(status='failed',error=safe_error(exc))
+    finally:
+        record.update(usage=usage.calls,transport_attempts=count);save()
+        print(json.dumps({k:record[k] for k in ('status','transport_attempts','budget_after')}))
+
+asyncio.run(main())
