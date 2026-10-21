@@ -1,0 +1,24 @@
+{
+  "backend": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "1",
+    "tests": "1679",
+    "time": "115.111",
+    "timestamp": "2026-10-21T23:19:08.559046+09:00"
+  },
+  "existing_skips": [
+    {
+      "name": "test_pdfplumber_exports_page_aligned_common_blocks",
+      "reason": "optional isolated ingestion runtime"
+    }
+  ],
+  "frontend": {
+    "suites": 36,
+    "passed": 132,
+    "failed": 0,
+    "build": "Compiled successfully"
+  },
+  "independent_review": "P1 undefined provider key reference fixed; followup reviewer found no remaining important defects; final tests authoritative"
+}

@@ -34,8 +34,8 @@ def provider_factory(monkeypatch):
 async def test_reuse_is_opt_in_and_tool_bindings_are_not_shared(provider_factory):
     created, _ = provider_factory
     a, b = llm.get_chat_model(reuse_provider=True), llm.get_chat_model(reuse_provider=True)
-    assert a.bind_tools(['a'])[0] is b.bind_tools(['b'])[0]
-    assert a.bind_tools(['a'])[1] != b.bind_tools(['b'])[1]
+    assert a.bind_tools(['a']).bound[0] is b.bind_tools(['b']).bound[0]
+    assert a.bind_tools(['a']).bound[1] != b.bind_tools(['b']).bound[1]
     assert len(created) == 1
     llm.get_chat_model().prepare()
     llm.get_chat_model().prepare()

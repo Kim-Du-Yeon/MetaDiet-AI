@@ -83,6 +83,7 @@ class AgentState(TypedDict):
     user_id:   str
     user_goal: str
     thread_id: Annotated[str, keep_latest]
+    prompt_pin: Annotated[Optional[dict], keep_latest]
     run_id: Annotated[str, keep_latest]
     trace_id: Annotated[Optional[str], keep_latest]
     response_build: Annotated[Optional[dict], keep_latest]

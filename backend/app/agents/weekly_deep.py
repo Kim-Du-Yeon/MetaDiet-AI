@@ -58,7 +58,7 @@ class WeeklyDeepTeam(DietTeam):
         self.delegations[role] = 1
         tools = self.analysis_tools() if role == "weekly_analysis" else [
             AgentTool("search_evidence", "공식 문서 근거를 MCP로 검색", Query, self.search_evidence_mcp)]
-        result = await run_agent(model=self.model_factory(), instruction=WEEKLY_INSTRUCTION + f"\n담당: {role}",
+        result = await run_agent(model=self.model_factory(), instruction=self.base_instruction + WEEKLY_INSTRUCTION[len(BASE_INSTRUCTION):] + f"\n담당: {role}",
             request=json.dumps({"task": query, "original_request": self.state["message"]}, ensure_ascii=False),
             tools=tools, allowed_tools=self.allowed, budget=self.budget, config=self.config, agent_name=role)
         self.events.extend({**event, "agent": role} for event in result.events)
@@ -93,7 +93,7 @@ class WeeklyDeepTeam(DietTeam):
         return allowed
 
     async def execute(self):
-        result = await run_agent(model=self.model_factory(), instruction=WEEKLY_INSTRUCTION +
+        result = await run_agent(model=self.model_factory(), instruction=self.base_instruction + WEEKLY_INSTRUCTION[len(BASE_INSTRUCTION):] +
             "\n당신은 Weekly Supervisor입니다. 두 전문 Agent 결과를 종합해 실행 가능한 주간 리포트를 작성하세요.",
             request=json.dumps({"message": self.state["message"]}, ensure_ascii=False),
             tools=self.supervisor_tools(), allowed_tools=self.supervisor_allowed_tools(),

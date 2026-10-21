@@ -22,10 +22,8 @@ import json, re
 
 llm = get_chat_model(temperature=0)
 
-PARSE_PROMPT = ChatPromptTemplate.from_messages([
-    ("system", get_prompt('legacy.food_extraction')),
-    ("human", "{message}")
-])
+from app.core.prompts import RegisteredChatPrompt
+PARSE_PROMPT = RegisteredChatPrompt('legacy.food_extraction', '{message}')
 
 NUTRITION_LLM_PROMPT = ChatPromptTemplate.from_messages([
     ("system", """다음 음식의 영양성분을 JSON으로만 응답하세요.
@@ -215,4 +213,3 @@ async def diet_logger_node(state: AgentState) -> dict:
         "plan_date":             today,
         "rag_grounded":          rag_grounded,
     }
-

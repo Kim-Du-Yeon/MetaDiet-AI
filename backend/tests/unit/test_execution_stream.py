@@ -118,6 +118,10 @@ async def test_running_checkpoint_without_local_journal_resumes_after_pod_change
 
     class FakeGraph:
         inputs = []
+        async def aget_state(self, config):
+            from types import SimpleNamespace
+            from app.core.prompt_release_control import local_snapshot
+            return SimpleNamespace(values={"prompt_pin":local_snapshot().wire})
 
         async def ainvoke(self, graph_input, config=None):
             self.inputs.append(graph_input)
