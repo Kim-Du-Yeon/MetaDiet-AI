@@ -32,6 +32,8 @@ def analyze(rows,grades):
             'source_page_support':sum(serving(r) and r.get('support',False) for r in items)/n,
             'p50_ms':statistics.median(times),'p95_ms':times[math.ceil(.95*n)-1],
             'known_model_cost_usd':sum(r.get('known_model_cost_usd',0) for r in items),
+            'known_embedding_cost_usd':sum(r.get('embedding_cost_usd',0) for r in items),
+            'known_serving_cost_usd':sum(r.get('known_model_cost_usd',0)+r.get('embedding_cost_usd',0) for r in items),
             'embedding_cost_upper_proxy_usd':sum(r.get('embedding_cost_upper_proxy_usd',0) for r in items),
             'cost_complete':all(r.get('cost_complete',False) for r in items),
             'original_judge_known_cost_usd':sum(r.get('judge_known_cost_usd',0) for r in items),
@@ -56,13 +58,13 @@ def analyze(rows,grades):
         'failure_noninferior':c['failure_rate']<=b['failure_rate'],
         'latency_bounded':c['p50_ms']<=b['p50_ms']*1.5 and c['p95_ms']<=b['p95_ms']*1.5,
         'cost_complete':b['cost_complete'] and c['cost_complete'],
-        'cost_bounded':c['known_model_cost_usd']+c['embedding_cost_upper_proxy_usd']<=2*(b['known_model_cost_usd']+b['embedding_cost_upper_proxy_usd'])}
+        'cost_bounded':c['known_serving_cost_usd']+(0 if c['cost_complete'] else c['embedding_cost_upper_proxy_usd'])<=2*(b['known_serving_cost_usd']+(0 if b['cost_complete'] else b['embedding_cost_upper_proxy_usd']))}
     result.update(checks=checks,rollout_gate=all(checks.values()),
         limitations=['100 attempts repeat 40 development questions; not 100 independent user outcomes.',
         'RAG boundary latency excludes auth/DB/queue/browser; not public end-to-end p95.',
         'No latest-user-record reads: freshness is not applicable to this retrieval-only comparison.',
         'Pro rubric is an automated judge, not blind human or Ragas validation.',
-        'Embedding SDK metadata=None; UTF8 bytes are conservative proxy, not billed tokens. Cost is incomplete.',
+        'Missing embedding usage keeps cost incomplete; UTF8 bytes are only a conservative proxy. Complete rows use raw provider promptTokenCount and frozen prices, not an invoice.',
         'Dense-only recipe matches 512MiB dense fallback, not larger-host hybrid mode.'])
     return result
 

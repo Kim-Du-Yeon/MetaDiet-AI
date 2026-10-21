@@ -92,3 +92,23 @@ def test_pair_resume_rejects_changed_judge_configuration():
     attempts=[{'attempt_id':'ag-000','condition':c,'status':'completed','answer':'a','context':'c'} for c in ['baseline','agentic']]
     prior=[{'attempt_id':'ag-000','condition':c,'side':side,'status':'completed','judge_model':'different'} for side,c in [('A','baseline'),('B','agentic')]]
     with pytest.raises(ValueError,match='configuration'): valid_prior_pairs(prior,cases,attempts)
+
+
+def test_embedding_usage_uses_raw_provider_tokens_and_rejects_missing_or_invalid():
+    from benchmark_agentic_rag import embedding_tokens
+    assert embedding_tokens({"usageMetadata":{"promptTokenCount":17}}) == 17
+    assert embedding_tokens({"usageMetadata":{"promptTokenCount":0}}) == 0
+    for payload in [{},{"usageMetadata":{}},{"usageMetadata":{"promptTokenCount":-1}},
+                    {"usageMetadata":{"promptTokenCount":True}},{"usageMetadata":{"promptTokenCount":1.5}}]:
+        assert embedding_tokens(payload) is None
+
+
+def test_complete_embedding_cost_is_added_without_byte_proxy_double_count():
+    r,g=fixture()
+    for row in r:
+        row['embedding_cost_usd']=.002
+        row['embedding_cost_upper_proxy_usd']=9
+    result=analyze(r,g)
+    assert result['agentic']['known_embedding_cost_usd']==pytest.approx(.2)
+    assert result['agentic']['known_serving_cost_usd']==pytest.approx(.3)
+    assert result['checks']['cost_bounded']

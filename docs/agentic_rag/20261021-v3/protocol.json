@@ -1,0 +1,41 @@
+{
+  "attempts_per_condition": 100,
+  "unique_questions": 40,
+  "sampling": "core40 twice plus first20; development repeated attempts, not held-out",
+  "dataset_sha256": "4ba67cf812497730848fe864580f1a7bf7da191c6a3c71427200eac3535aed9e",
+  "retrieval": "dense, k4, no reranker; matches 512MiB remote fallback",
+  "workers": 3,
+  "pair_order": "alternating",
+  "timeout_seconds": 90,
+  "loop_timeout_seconds": 35,
+  "gate": {
+    "correctness_min": 0.95,
+    "correctness_improvement_min": 0.02,
+    "support_noninferior": true,
+    "failure_noninferior": true,
+    "p50_ratio_max": 1.5,
+    "p95_ratio_max": 1.5,
+    "complete_cost_required": true,
+    "cost_ratio_max": 2
+  },
+  "date": "2026-10-21",
+  "baseline": "Evidence-preserving v2 frozen at a2ba3ba4",
+  "candidate": "controller-v2/table-constraints-v3; preserve supported core, table context and material constraints",
+  "judge": "All100 paired outputs native Pro Batch, balanced A/B; same rubric2048/low. No online rejudging.",
+  "gate_note": "Retain existing conservative gate; no deployment unless complete quality and cost data pass. Embedding metadata missing remains incomplete.",
+  "baseline_source_sha256": "5b25bcc48d965a1d02952a7d2db9ac1b71b4109221e276ee7cc2039b368845b4",
+  "development_dataset_sha256": "e302c6b4567b1ac2f89107e389fb35c30b382aaf1c995ca3798ddabdecadd1f2",
+  "status": "prepared-before-live-comparison; provider HTTP402, waiting for user credit/key update",
+  "qa_note": "Base QA prompt unchanged; candidate receives bounded answer_guidance only from sufficient candidate retrieval. Frozen baseline has no guidance.",
+  "embedding_note": "Raw response usageMetadata.promptTokenCount is observed before SDK conversion. Missing means cost incomplete. Same telemetry on both conditions.",
+  "candidate_source_sha256": "bacc4ddde38758c4524a5e18fe87ff23bdc25037cd44bc61319de223754363e4",
+  "benchmark_source_sha256": "af8ea0e371053fabc7c923a685a279debf97882264af4cfa0b5eb83930aa49e5",
+  "development_runner": "backend/scripts/eval/develop_agentic_policy.py",
+  "commands": [
+    "backend/venv/Scripts/python.exe backend/scripts/eval/develop_agentic_policy.py --directory docs/agentic_rag/20261021-v3/development --baseline-source docs/agentic_rag/20261021-v3/baseline-agentic-v2.py.txt",
+    "backend/venv/Scripts/python.exe backend/scripts/eval/benchmark_agentic_rag.py --output docs/agentic_rag/20261021-v3 --baseline-source docs/agentic_rag/20261021-v3/baseline-agentic-v2.py.txt --defer-judge",
+    "backend/venv/Scripts/python.exe backend/scripts/eval/batch_agentic_judges.py pairs --directory docs/agentic_rag/20261021-v3 --job docs/agentic_rag/20261021-v3/batch-pairs-job.json",
+    "backend/venv/Scripts/python.exe backend/scripts/eval/batch_agentic_judges.py collect --job docs/agentic_rag/20261021-v3/batch-pairs-job.json",
+    "backend/venv/Scripts/python.exe backend/scripts/eval/analyze_agentic_rag.py docs/agentic_rag/20261021-v3 --grades-name batch-pairs-job.grades.jsonl"
+  ]
+}

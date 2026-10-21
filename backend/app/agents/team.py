@@ -384,6 +384,8 @@ class DietTeam:
             found.append({"evidence_id": key, **item})
         response = {"grounded": True, "evidence": found,
             "citation_instruction": "자료의 주장에 실제로 의존한 문장에만 [근거:evidence_id] 형식으로 인용하세요. 검색만 한 자료는 인용하지 마세요."}
+        if result.get("answer_guidance"):
+            response["answer_guidance"] = result["answer_guidance"]
         self.evidence_cache[query] = response
         return response
 

@@ -81,11 +81,13 @@ async def test_team_enabled_path_charges_and_preserves_source(monkeypatch):
         captured.update(kwargs)
         await kwargs['reserve']('model')
         return {'grounded': True, 'docs': [Document(page_content='valid', metadata={'source_file':'guide.pdf','page':4})],
+                'answer_guidance':'preserve population and table footnotes',
                 'agentic':{'rounds':1,'stop_reason':'sufficient'}}
     monkeypatch.setattr(agentic, 'bounded_retrieve', loop)
     team=DietTeam({'user_id':'synthetic','message':'nutrition evidence'}, model_factory=lambda:None,
                   db=object(), repository=AsyncMock())
     r=await team.search_evidence(Query(query='nutrition evidence'))
+    assert r['answer_guidance']=='preserve population and table footnotes'
     assert r['evidence'][0]['source']=='guide.pdf'
     assert team.budget.model_calls==1
     assert captured['retrieve'] is retriever.retrieve
@@ -170,3 +172,36 @@ async def test_low_score_research_cannot_replace_initial_grounded_evidence():
     r=await bounded_retrieve('question',retrieve=fetch,
         assess=AsyncMock(side_effect=[Assessment(sufficient=False,rewrite='rewrite'),Assessment(sufficient=True)]))
     assert r['grounded'] and [d.page_content for d in r['docs']]==['supported']
+
+
+def test_controller_v2_uses_bounded_partial_answers_and_table_constraints():
+    from app.rag.agentic import CONTROLLER_PROMPT, PROMPT_VERSION
+    assert PROMPT_VERSION == "agentic-rag-controller-v2"
+    assert "supported part" in CONTROLLER_PROMPT
+    assert "row" in CONTROLLER_PROMPT and "footnote" in CONTROLLER_PROMPT
+    assert "blank" in CONTROLLER_PROMPT
+
+@pytest.mark.asyncio
+async def test_only_assessed_grounded_evidence_gets_answer_guidance():
+    good = await bounded_retrieve("q", retrieve=AsyncMock(return_value=result()),
+        assess=AsyncMock(return_value=Assessment(sufficient=True)))
+    bad = await bounded_retrieve("q", retrieve=AsyncMock(return_value=result(False)),
+        assess=AsyncMock(return_value=Assessment(sufficient=True)))
+    assert "population" in good["answer_guidance"]
+    assert "answer_guidance" not in bad
+
+@pytest.mark.asyncio
+async def test_qa_guidance_is_conditional_and_does_not_override_missing_evidence(monkeypatch):
+    from app.rag import qa
+    from types import SimpleNamespace
+    model = AsyncMock(return_value=SimpleNamespace(content="supported",usage_metadata={}))
+    monkeypatch.setattr(qa._llm,"ainvoke",model)
+    base={"grounded":True,"context":"table data","docs":[],"max_score":.9}
+    await qa.answer_from_knowledge("q",retrieval_result=base)
+    initial=len(model.call_args.args[0])
+    await qa.answer_from_knowledge("q",retrieval_result={**base,"answer_guidance":"preserve population"})
+    assert len(model.call_args.args[0]) == initial + 1
+    assert model.call_args.args[0][-2].content == "preserve population"
+    model.reset_mock()
+    await qa.answer_from_knowledge("q",retrieval_result={**base,"grounded":False,"answer_guidance":"unsafe"})
+    model.assert_not_called()

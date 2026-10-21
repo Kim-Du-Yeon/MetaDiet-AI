@@ -67,10 +67,14 @@ async def answer_from_knowledge(question: str, k: int = 4, user_region: str = "K
         }
 
     region_guidance = get_region_guidance(user_region)
-    resp = await _llm.ainvoke(QA_PROMPT.format_messages(
+    messages = QA_PROMPT.format_messages(
         context=r["context"], question=question, no_evidence=NO_EVIDENCE,
         region_guidance=region_guidance,
-    ), config=config)
+    )
+    if r.get("answer_guidance"):
+        from langchain_core.messages import SystemMessage
+        messages.insert(-1, SystemMessage(content=r["answer_guidance"]))
+    resp = await _llm.ainvoke(messages, config=config)
     answer = resp.content.strip()
 
     sources = [

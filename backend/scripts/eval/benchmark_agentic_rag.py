@@ -29,6 +29,10 @@ class Grade(BaseModel):
     faithful: bool
     reason: str
 
+def embedding_tokens(payload):
+    value=(payload.get('usageMetadata') or {}).get('promptTokenCount')
+    return value if type(value) is int and value >= 0 else None
+
 active=contextvars.ContextVar('rag_experiment',default=None)
 
 async def main(args):
@@ -39,7 +43,7 @@ async def main(args):
     from app.core.llm import get_chat_model
     from app.rag import retriever
     from app.rag.qa import answer_from_knowledge, QA_PROMPT
-    from app.rag.agentic import bounded_retrieve, model_assessment, PROMPT_SHA256
+    from app.rag.agentic import bounded_retrieve, model_assessment, PROMPT_SHA256, ANSWER_GUIDANCE
     from google import genai
     directory=Path(args.output)
     protocol=json.loads((directory/'protocol.json').read_text(encoding='utf-8'))
@@ -47,6 +51,7 @@ async def main(args):
     if hashlib.sha256(path.read_bytes()).hexdigest()!=protocol['dataset_sha256']:
         raise ValueError('Frozen cases changed')
     baseline_loop = None
+    baseline_assessment = model_assessment
     if args.baseline_source:
         source=Path(args.baseline_source)
         if hashlib.sha256(source.read_bytes()).hexdigest()!=protocol.get('baseline_source_sha256'):
@@ -57,6 +62,7 @@ async def main(args):
         sys.modules[loader.name]=module
         loader.exec_module(module)
         baseline_loop=module.bounded_retrieve
+        baseline_assessment=module.model_assessment
     cases=json.loads(path.read_text(encoding='utf-8'))
     if len(cases)<100: raise ValueError('100 attempts required')
     # Per-request telemetry only; never modifies production clients or env files.
@@ -74,15 +80,29 @@ async def main(args):
         if row is not None: row['embedding_input_utf8_bytes']+=len(str(kw.get('contents','')).encode())
         return embed(client,*a,**kw)
     genai.models.Models.embed_content=traced_embed
+    # Capture raw provider usage before this SDK version discards usageMetadata.
+    from google.genai import _api_client
+    request=_api_client.BaseApiClient.request
+    def traced_request(client,http_method,path,request_dict,http_options=None):
+        response=request(client,http_method,path,request_dict,http_options)
+        row=active.get()
+        if row is not None and (':batchEmbedContents' in path or ':embedContent' in path):
+            try: tokens=embedding_tokens(json.loads(response.body))
+            except (ValueError,TypeError): tokens=None
+            row['embedding_usage'].append(tokens)
+        return response
+    _api_client.BaseApiClient.request=traced_request
     await asyncio.to_thread(retriever.get_vector_store)
     identity={'dataset_sha256':protocol['dataset_sha256'],'controller_sha256':PROMPT_SHA256,
               'qa_prompt_sha256':hashlib.sha256(str(QA_PROMPT).encode()).hexdigest(),
+              'candidate_answer_guidance_sha256':hashlib.sha256(ANSWER_GUIDANCE.encode()).hexdigest(),
               'namespace':settings.pinecone_namespace,'embedding_model':settings.embedding_model,
               'answer_model':settings.gemini_model,'controller_model':settings.gemini_simple_model,
               'judge_model':settings.gemini_eval_model,'mode':'dense','workers':3,
               'baseline_source_sha256':protocol.get('baseline_source_sha256'),
               'candidate_source_sha256':hashlib.sha256((ROOT/'backend/app/rag/agentic.py').read_bytes()).hexdigest(),
-              'deferred_judging':args.defer_judge}
+              'deferred_judging':args.defer_judge,
+              'baseline_controller_sha256':getattr(module,'PROMPT_SHA256',None) if baseline_loop else None}
     (directory/'identity.json').write_text(json.dumps(identity,indent=2),encoding='utf-8')
     output=directory/'attempts.jsonl'
     if output.exists(): raise ValueError('Refuse overwrite existing attempts')
@@ -92,13 +112,13 @@ async def main(args):
     async def run(case,condition):
         nonlocal judge_disabled
         row={'attempt_id':case['attempt_id'],'condition':condition,'status':'failed','model_usage':[],
-             'embedding_input_utf8_bytes':0,'correct':False,'faithful':False,'support':False}
+             'embedding_input_utf8_bytes':0,'embedding_usage':[],'correct':False,'faithful':False,'support':False}
         token=active.set(row); start=time.perf_counter()
         try:
             async with asyncio.timeout(90):
                 async def assess(q,result):
                     u=Usage()
-                    try: return await model_assessment(q,result,config={'callbacks':[u]})
+                    try: return await (model_assessment if condition=='agentic' else baseline_assessment)(q,result,config={'callbacks':[u]})
                     finally: row['model_usage'].extend({'model':settings.gemini_simple_model,'usage':v,'phase':'controller'} for v in u.calls)
                 result=(await bounded_retrieve(case['question'],retrieve=retrieve,assess=assess)
                         if condition=='agentic' else await baseline_loop(case['question'],retrieve=retrieve,assess=assess)
@@ -120,7 +140,8 @@ async def main(args):
         # SDK embedding responses have metadata=None. Byte count is a conservative input proxy,
         # not billed tokens; expose this missingness and fail the complete-cost rollout gate.
         row['embedding_cost_upper_proxy_usd']=row['embedding_input_utf8_bytes']*.2/1e6
-        row['cost_complete']=False
+        row['embedding_cost_usd']=sum(v or 0 for v in row['embedding_usage'])*.2/1e6
+        row['cost_complete']=row['model_cost_complete'] and bool(row['embedding_usage']) and all(v is not None for v in row['embedding_usage'])
         if row['status']=='completed' and not judge_disabled and not args.defer_judge:
             ju=Usage()
             try:
