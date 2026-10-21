@@ -1,6 +1,12 @@
 # RAG 조합 실험과 채택 판단
 
-파서·청킹·임베딩·검색·리랭킹 실험에 **Agentic RAG를 추가 제어 방식 후보**로 연결한다. Agentic은 임베딩이나 검색기의 이름이 아니라, 검색 후 충분성 판단→질의 재작성→제한된 재검색을 수행하는 제어 루프다. 따라서 Hybrid와 양자택일 기술로 설명하지 않는다. Hybrid+Agentic 조합도 가능하지만 이번 실제 API 비교의 검색 모드는 dense다.
+파서·청킹·임베딩·검색·리랭킹 실험에 **Agentic RAG를 추가 제어 방식 후보**로 연결한다. Agentic은 임베딩이나 검색기의 이름이 아니라, 검색 후 충분성 판단→질의 재작성→제한된 재검색을 수행하는 제어 루프다. 따라서 Hybrid와 양자택일 기술로 설명하지 않는다. 최신 통제 비교는 양쪽 모두 Hybrid를 강제하며,아래 과거 dense 비교와 구분한다.
+
+## 최신: 동일 조건 Hybrid vs Hybrid+Agentic100시도씩 비교
+
+[통제 비교 전체 결과·오류·비용·채택 판단](../agentic_rag/20261021-controlled-hybrid-v14/README.md). 같은 최종 프롬프트·Flash 모델·Hybrid 설정·환경에서 새200답변과Pro200판정을 완료했다. 정답89%→80%,이진 근거 충실성100%→99%,중앙값6.435→9.709초,p95 10.663→15.477초,모델+임베딩 추정/100시도$0.293046→$0.399767. Agentic이 기존 오답1건을 회복했지만 정답10건을 놓쳤다. **기존 Hybrid/no-reranker 유지·Agentic 운영 미채택**으로 판단했다. 구현·비교 실험 완료와 운영 적용X를 구분한다.
+
+40질문/20사실그룹 반복 개발셋이며 독립100문항·사용자 성공률이 아니다. 같은 정적 답변 지침을 양쪽에 적용하고 Agentic의 동적 답변 지침은 제거했다. 충실성은 Pro 이진 판정으로 Ragas와 혼용하지 않는다. 모든 보류를 분모에 남겼고,요청 실패·출력 잘림은0건이었다. 아래 과거 dense 비교와 독립20문항 평가 기록은 서로 다른 평가 범위의 보존 자료다.
 
 ## 기존 실험 이력
 
@@ -10,7 +16,7 @@
 | 임베딩 차원 | Gemini embedding 768/1536/3072 | [차원 실험](dimension_full_summary_v1.json). 선택 namespace의 3072차원 유지, 다른 벡터 공간과 혼합하지 않음 |
 | 검색 | Dense, BM25, Hybrid | [검색 모드 비교](search_modes_summary_v1.json). 개발40문항의 PyPDF/recursive 페이지 적중은75/27.5/80%, 핵심구절 적중67.5/25/75%. 후보 비교이며 독립 최종 품질 수치 아님 |
 | 리랭킹 | 없음, FlashRank, Jev | [검색·Jev 결과](search_modes_summary_v1.json), [평가 상세](../../EVALUATION.md). Jev는 개발40문항에서800모델 호출, recall 증가의 불확실성과 비용·지연을 고려해 미채택. 기본 no-reranker 유지 |
-| 검색 제어 | 한 번 검색해 답변, Agentic 충분성 평가·재검색 | [100시도씩 완료 결과](../agentic_rag/20261021-rag-vs-agentic-v14-complete100/README.md). Pro 내용 정답85→88%, 정상 종료 확인된 Agentic 정답84%. 운영 미채택·기존 조합 유지 |
+| 검색 제어 | Hybrid 단일 검색, Hybrid+Agentic 평가·재작성·재검색 | [동일 조건100시도씩 통제 비교](../agentic_rag/20261021-controlled-hybrid-v14/README.md). 정답89→80%,충실성100→99%,중앙값6.435→9.709초,생성 추정 비용$0.293046→$0.399767. 기존 Hybrid/no-reranker 유지,Agentic 운영 미채택 |
 
 ### 기존 Ragas 비교: 동일 개발40문항
 
@@ -26,7 +32,7 @@
 
 [독립 최종20문항](RAG_FINAL_EVALUATION_V1.md)의 선택 조합은 PyPDF/recursive + Gemini embedding3072 + Dense/BM25 Hybrid + no-reranker다. source-reviewed 정답19/20, strict source-page Recall@4 17/20, 대체 근거 판정 support19/20, Ragas faithfulness1.00/context recall0.95였다. 저메모리 원격 환경의 dense fallback은 Hybrid 실험과 구분한다.
 
-## 추가 후보: Agentic RAG
+## 과거 dense 비교: Agentic RAG
 
 동일한 반복 개발100사례씩으로 기존 일반 dense RAG와 현재 v14 Agentic dense를 평가한다. 기존 일반 RAG100답변, 현재 후보의 이미 실행한23답변을 재사용하며 개별 보류·실패도 분모에 남긴다. Pro paired judge 정답/충실성, 보류율, 근거 페이지 적중, 재검색 비율, 요청 지연, 모델 사용 비용을 기록한다. **이 평가의 이진 충실성 판정은 Ragas 점수가 아니다.** Agentic의 Ragas 점수를 측정하지 않았다면 비워 두며 기존1.00과 직접 비교하지 않는다.
 

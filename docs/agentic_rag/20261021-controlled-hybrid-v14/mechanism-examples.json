@@ -1,0 +1,76 @@
+[
+  {
+    "case": "ag-014",
+    "observation": "baseline context contains required cue; final Agentic context loses it",
+    "required_cue": "700",
+    "baseline_has_cue": true,
+    "agentic_has_cue": false,
+    "baseline_context_chars": 4998,
+    "agentic_context_chars": 6000,
+    "candidate_stop_reason": "sufficient",
+    "candidate_rounds": 1,
+    "candidate_retained_initial_documents": 2,
+    "interpretation": "neighbor expansion, selection and bounded packing can discard useful initial evidence; component-specific causality not isolated"
+  },
+  {
+    "case": "ag-018",
+    "observation": "baseline context contains required cue; final Agentic context loses it",
+    "required_cue": "at least 24",
+    "baseline_has_cue": true,
+    "agentic_has_cue": false,
+    "baseline_context_chars": 4908,
+    "agentic_context_chars": 6000,
+    "candidate_stop_reason": "sufficient",
+    "candidate_rounds": 1,
+    "candidate_retained_initial_documents": 2,
+    "interpretation": "neighbor expansion, selection and bounded packing can discard useful initial evidence; component-specific causality not isolated"
+  },
+  {
+    "case": "ag-024",
+    "baseline_finish": "STOP",
+    "agentic_finish": "NOT_CALLED_GUARD",
+    "baseline_context_chars": 5272,
+    "agentic_context_chars": 0,
+    "agentic": {
+      "stop_reason": "round_limit",
+      "rounds": 2,
+      "answer_coverage": "none",
+      "missing_core": [
+        "definition of negative energy balance",
+        "specification of a next-day 200 kcal cut",
+        "Direct definition of the concept requested in the original question"
+      ],
+      "retained_initial_documents": 0
+    }
+  },
+  {
+    "case": "ag-032",
+    "baseline_finish": "STOP",
+    "agentic_finish": "STOP",
+    "baseline_context_chars": 4101,
+    "agentic_context_chars": 6000,
+    "agentic": {
+      "stop_reason": "sufficient",
+      "rounds": 1,
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "retained_initial_documents": 3
+    }
+  },
+  {
+    "case": "ag-038",
+    "baseline_finish": "STOP",
+    "agentic_finish": "STOP",
+    "baseline_context_chars": 5580,
+    "agentic_context_chars": 6000,
+    "agentic": {
+      "stop_reason": "round_limit",
+      "rounds": 2,
+      "answer_coverage": "partial",
+      "missing_core": [
+        "specific associated conditions recommended for screening during obesity care"
+      ],
+      "retained_initial_documents": 2
+    }
+  }
+]

@@ -1,3 +1,9 @@
+## 최신: 동일 조건 Hybrid vs Hybrid+Agentic100시도씩 비교
+
+[통제 비교 전체 결과·오류·비용·채택 판단](docs/agentic_rag/20261021-controlled-hybrid-v14/README.md). 같은 최종 프롬프트·Flash 모델·Hybrid 설정·환경에서 새200답변과Pro200판정을 완료했다. 정답89%→80%,이진 근거 충실성100%→99%,중앙값6.435→9.709초,p95 10.663→15.477초,모델+임베딩 추정/100시도$0.293046→$0.399767. Agentic이 기존 오답1건을 회복했지만 정답10건을 놓쳤다. **기존 Hybrid/no-reranker 유지·Agentic 운영 미채택**으로 판단했다. 구현·비교 실험 완료와 운영 적용X를 구분한다.
+
+40질문/20사실그룹 반복 개발셋이며 독립100문항·사용자 성공률이 아니다. 같은 정적 답변 지침을 양쪽에 적용하고 Agentic의 동적 답변 지침은 제거했다. 충실성은 Pro 이진 판정으로 Ragas와 혼용하지 않는다. 모든 보류를 분모에 남겼고,요청 실패·출력 잘림은0건이었다. 아래 과거 dense 비교와 독립20문항 평가 기록은 서로 다른 평가 범위의 보존 자료다.
+
 RAG 조합 실험·채택 판단(최종): [Parser·Chunking·Embedding·검색·Jev·Agentic 비교 인덱스](docs/rag_experiments/RAG_RECIPE_DECISIONS.md). 일반 RAG/Agentic 조건별100시도 완료, Pro 내용 정답85%/88%, 정상 종료 확인 Agentic 정답84%. 일관된 운영 우위가 없어 기존 Hybrid/no-reranker 유지. [전체 결과·오류·한계](docs/agentic_rag/20261021-rag-vs-agentic-v14-complete100/README.md).
 
 Agentic RAG 인접 청크·한국어 표 후속 (2026-10-21): [구현·별도 개발20문항 검증·전후100시도씩 원본과402 중단](docs/agentic_rag/20261021-adjacent-table/README.md). 합성 개발 Pro 정답16/20→20/20, 충실도20/20 유지. 본 비교는 크레딧 소진으로 요청 완료53/54건·최종 평가와 비용 미완료여서 운영 개선을 주장하지 않는다. 기본OFF·미배포. 이후 실패 사례 소규모 확인·저장 답변 재채점·사전 비용 상한을 우선한다.

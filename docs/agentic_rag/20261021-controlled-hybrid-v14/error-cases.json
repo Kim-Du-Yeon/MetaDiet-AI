@@ -1,0 +1,1692 @@
+[
+  {
+    "attempt_id": "ag-014",
+    "condition": "agentic",
+    "question": "What leucine amount and amino-acid balance does ISSN mention?",
+    "gold": "ISSN suggests acute protein doses contain 700–3000 mg leucine and a balanced array of essential amino acids.",
+    "answer": "제공된 자료에서 언급된 류신(leucine)의 양과 아미노산 균형에 대한 내용은 다음과 같습니다 (해당 문서의 적용 대상은 건강한 운동을 하는 개인이며, 운동선수 전용 용량을 모든 사용자에게 일반화해서는 안 됩니다) [출처: s12970-017-0177-8.pdf, p.12]:\n\n**1. 류신(Leucine) 섭취량**\n* **식사당 필요량:** 단백질 번역 기전을 자극하기 위해 식사당 약 1~3g의 류신 섭취가 필요한 것으로 나타납니다 [출처: s12970-017-0177-8.pdf, p.12].\n* **반응 범위:** 휴식 시에는 약 2g에서 정체(plateau)를 보이며, 60분간의 중강도 사이클링 운동을 마친 후 섭취할 경우 최대 3.5g까지 증가합니다 [출처: s12970-017-0177-8.pdf, p.12].\n\n**2. 아미노산 균형(Amino-acid balance)**\n* **필수아미노산(EAA)과의 균형:** 더 많은 양의 류신이 단백질 합성을 독립적으로 자극하는 것으로 나타났으나, 단백질 합성(MPS)을 가장 크게 증가시키는 것은 균형 잡힌 필수아미노산(EAA)의 섭취입니다 [출처: s12970-017-0177-8.pdf, p.12].\n* **류신 단독 섭취의 한계:** 류신만을 단독으로 보충해서는 안 되며, 류신 농도를 높이는 것이 근육 단백질 증가를 자극할 수는 있지만 증가된 근단백질 합성률을 지속하기 위해서는 (유리 아미노산 또는 온전한 단백질 급원 형태의) 모든 필수아미노산의 총 섭취량이 더 높은 것이 가장 적합합니다 [출처: s12970-017-0177-8.pdf, p.12].\n* **BCAA 및 단백질 섭취:** 적절한 양의 류신/BCAA를 함유한 단백질 섭취를 우선시하는 것이 근단백질 합성(MPS) 증가를 가장 잘 촉진하며, 필수아미노산은 6~15g 범위의 용량에서 모두 자극 효과를 나타냅니다 [출처: s12970-017-0177-8.pdf, p.12].",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-014",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Answer B mentions 1-3g (1000-3000 mg) of leucine per meal and balanced EAAs, but misses the specific 700-3000 mg range mentioned in the gold standard (which comes from a different part of the text not fully captured in B's answer, though B's context doesn't have the 700-3000mg quote). Thus, it fails the strict correctness check against the gold fact.",
+      "transport": "batch",
+      "known_cost_usd": 0.0029455,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 4643,
+        "output_tokens": 208,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-014",
+      "payload_sha256": "c80e012ad05ef4248786b4df49b96e8c9efbef9d6b3b6b2538a251d78eba7a8c",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 2,
+          "start": 0,
+          "end": 1119,
+          "source": "s12970-017-0177-8.pdf",
+          "page": 12,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 1150,
+          "source": "s12970-017-0177-8.pdf",
+          "page": 12,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 2
+    }
+  },
+  {
+    "attempt_id": "ag-018",
+    "condition": "agentic",
+    "question": "How long can the exercise anabolic effect last according to ISSN?",
+    "gold": "ISSN notes exercise anabolic effects last at least 24 hours, likely diminishing over time; optimal protein timing depends on individual tolerance.",
+    "answer": "국제스포츠영양학회(ISSN)의 문헌에 따르면 다음과 같습니다:\n\n골격근은 저항 운동을 완료한 후 최대 24시간 동안 단백질 및 아미노산의 효과에 민감해집니다 [출처: s12970-017-0177-8.pdf, p.10]. 또한, 급성 탈진 저항 운동과 유청 단백질 섭취의 결합은 유청 단백질 공급에 대한 근육의 동화 반응성을 최대 24시간까지 증가시킵니다 [출처: s12970-017-0177-8.pdf, p.5]. \n\n(적용 범위: 본 자료의 적용 대상은 건강한 운동 개체(Healthy exercising individuals)이며, 선수에게 국한된 용량을 모든 사용자에게 일반화해서는 안 됩니다 [출처: s12970-017-0177-8.pdf, p.10].)",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-018",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Model B misses the specific gold facts that the effect lasts 'at least 24 hours' and 'diminishes over time', instead only mentioning 'up to 24 hours'. It is faithful to its context.",
+      "transport": "batch",
+      "known_cost_usd": 0.003319,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3686,
+        "output_tokens": 492,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-018",
+      "payload_sha256": "fd99e5d62f5b07295a463c166337b7376499ff4c1f0336cdbe23c6c61ef8d4b9",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 0,
+          "start": 0,
+          "end": 1165,
+          "source": "s12970-017-0177-8.pdf",
+          "page": 10,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 1148,
+          "source": "s12970-017-0177-8.pdf",
+          "page": 5,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 2
+    }
+  },
+  {
+    "attempt_id": "ag-022",
+    "condition": "baseline",
+    "question": "How does KDRIs define energy balance?",
+    "gold": "Energy balance means energy intake equals energy expenditure.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-022",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering the question, failing to provide the gold fact.",
+      "transport": "batch",
+      "known_cost_usd": 0.0036695,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3697,
+        "output_tokens": 607,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-022",
+      "payload_sha256": "00c7f04f1b41ec48b39b661620d7118d733ccd65368a7e841e5aaee7d36e023e",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-022",
+    "condition": "agentic",
+    "question": "How does KDRIs define energy balance?",
+    "gold": "Energy balance means energy intake equals energy expenditure.",
+    "answer": "제공된 자료에서 KDRIs(한국인 영양소 섭취기준) 자체의 '에너지 균형(energy balance)' 정의에 대한 근거는 찾지 못했습니다. \n\n다만, KDRIs 자료에 인용된 미국 DRI의 에너지필요추정량(EER) 설정 배경에 따르면, \"건강을 유지하는 것과 일치하도록 정해진 연령, 성별, 체중, 신장, 신체활동 수준 및 생애주기 단계의 성인에서 에너지 균형(energy balance)을 유지할 것으로 예측되는 평균 식이 에너지 섭취량\"으로 기술되어 있습니다 [출처: KDRI_2025_vol1.pdf, p.79].",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-022",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from providing the gold definition of energy balance, although it faithfully cited related information from the context.",
+      "transport": "batch",
+      "known_cost_usd": 0.0036695,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3697,
+        "output_tokens": 607,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-022",
+      "payload_sha256": "00c7f04f1b41ec48b39b661620d7118d733ccd65368a7e841e5aaee7d36e023e",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "direct",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 0,
+          "start": 0,
+          "end": 504,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 79,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 3
+    }
+  },
+  {
+    "attempt_id": "ag-026",
+    "condition": "baseline",
+    "question": "Does KDRIs set a tolerable upper intake level for energy?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-026",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering a question that has a gold answer, which is considered incorrect. It is faithful as it correctly states the information is missing from its context.",
+      "transport": "batch",
+      "known_cost_usd": 0.0027195,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3183,
+        "output_tokens": 376,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-026",
+      "payload_sha256": "9a5652d4b85a3d431f00f2c6e33e2355e57f71b61fd26931e16f0d2dd5c60053",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-024",
+    "condition": "agentic",
+    "question": "What is negative energy balance, and does it specify a next-day 200 kcal cut?",
+    "gold": "Negative energy balance means expenditure exceeds intake and is associated with weight reduction; this does not specify a fixed next-day compensation amount.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-024",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": false,
+      "reason": "Answer B abstains from answering an answerable question, which is incorrect. It also has an empty context, making it unfaithful.",
+      "transport": "batch",
+      "known_cost_usd": 0.002471,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 2434,
+        "output_tokens": 418,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-024",
+      "payload_sha256": "48ecaec1780fdffcbb1dca116e6400279280b1d2382d7b7374694dcd846d358e",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 2,
+      "stop_reason": "round_limit",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "missing",
+      "definition_research_required": true,
+      "excerpt_spans": [],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "none",
+      "missing_core": [
+        "definition of negative energy balance",
+        "specification of a next-day 200 kcal cut",
+        "Direct definition of the concept requested in the original question"
+      ],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 0
+    }
+  },
+  {
+    "attempt_id": "ag-026",
+    "condition": "agentic",
+    "question": "Does KDRIs set a tolerable upper intake level for energy?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서는 에너지(energy)에 대해 에너지필요추정량(EER: estimated energy requirements) 약어와 에너지 불균형 관련 만성질환 위험 감소를 위한 탄수화물, 지질, 단백질의 에너지적정비율(AMDR: Acceptable Macronutrient Distribution Range) 설정 여부만 언급되어 있을 뿐 [출처: KDRI_2025_vol1.pdf, p.371], [출처: KDRI_2025_vol2.pdf, p.523], 에너지를 대상으로 상한섭취량(UL: Tolerable Upper Intake Level)이 설정되어 있는지 여부는 직접적으로 확인되지 않습니다. \n\n따라서 에너지에 대한 상한섭취량 설정 여부는 제공된 자료에서 근거를 찾지 못하여 확인이 불가합니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-026",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering a question that has a gold answer, which is considered incorrect. It is faithful to its context, accurately summarizing what is and isn't present.",
+      "transport": "batch",
+      "known_cost_usd": 0.0027195,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3183,
+        "output_tokens": 376,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-026",
+      "payload_sha256": "9a5652d4b85a3d431f00f2c6e33e2355e57f71b61fd26931e16f0d2dd5c60053",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 1,
+          "start": 0,
+          "end": 1175,
+          "source": "KDRI_2025_vol2.pdf",
+          "page": 523,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 2,
+          "start": 0,
+          "end": 1175,
+          "source": "KDRI_2025_vol3.pdf",
+          "page": 489,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 165,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 371,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 165,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 371,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 4
+    }
+  },
+  {
+    "attempt_id": "ag-027",
+    "condition": "agentic",
+    "question": "KDRIs에서 에너지에 상한섭취량 개념을 적용하는가?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-027",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering the question, which is incorrect since the gold answer provides a specific fact. However, the abstention is faithful to the provided context, which does not contain the answer.",
+      "transport": "batch",
+      "known_cost_usd": 0.002448,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 4134,
+        "output_tokens": 127,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-027",
+      "payload_sha256": "058de2ce19346b93e8d6c8ffc9d86e5474aef0f16e779d1377ea180d4f8dfdb3",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": {
+      "rounds": 2,
+      "stop_reason": "round_limit",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 1099,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 342,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "partial",
+      "missing_core": [
+        "에너지에 대한 상한섭취량(UL) 설정 여부"
+      ],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 4
+    }
+  },
+  {
+    "attempt_id": "ag-028",
+    "condition": "baseline",
+    "question": "What changed in the 2025 energy reference compared with 2020?",
+    "gold": "The 2025 energy reference uses the same US calculation equations as 2020, but incorporates 2025 Korean reference body measurements.",
+    "answer": "제공된 자료에서 2020년 대비 2025년 기준과 관련하여 확인된 변경 사항은 다음과 같습니다:\n\n1. **성인 체위 기준 분석 자료 기간 변경**:\n   - 2020 KDRI에서는 최근 5개년(2013–2017) 국민건강영양조사(KNHANES) 자료를 활용했으나, 2025 KDRI에서는 동일한 방법론적 틀을 따르되 10개년 자료를 기반으로 분석했습니다 [출처: KDRI_2025_vol1.pdf, p.352].\n   - 코로나19 팬데믹에 따른 특이 체형 변화로 인한 잠재적 편향을 피하기 위해 2020–2022년 자료는 제외하고 2013–2019년 자료만 분석에 사용했습니다 [출처: KDRI_2025_vol1.pdf, p.352].\n   - 그 결과, 성인 중앙값 체질량지수(BMI)는 2020 KDRI와 동일하게 남성 22.6, 여성 21.4로 유지되었습니다 [출처: KDRI_2025_vol1.pdf, p.352].\n\n2. **체위 참고치(신장 및 체중)의 일부 수치 변경**:\n   - 성인 연령층에서 일부 신장 및 체중 참고치에 변화가 있었습니다(영유아 및 소아·청소년 등 18세 이하는 2020년과 2025년의 신장, 체중, BMI 수치 차이가 모두 0.00으로 동일함) [출처: KDRI_2025_vol1.pdf, p.62]:\n     - **남성 19–29세**: 신장 174.6 cm에서 174.8 cm로 0.20 cm 증가, 체중 68.9 kg에서 69.1 kg으로 0.20 kg 증가 [출처: KDRI_2025_vol1.pdf, p.62].\n     - **남성 30–49세**: 신장 173.2 cm에서 173.4 cm로 0.20 cm 증가, 체중 67.8 kg에서 68.0 kg으로 0.20 kg 증가 [출처: KDRI_2025_vol1.pdf, p.62].\n     - **남성 50–64세**: 신장 168.9 cm에서 169.2 cm로 0.30 cm 증가, 체중 64.5 kg에서 64.7 kg으로 0.20 kg 증가 [출처: KDRI_2025_vol1.pdf, p.62].\n     - **남성 65–74세**: 신장 166.2 cm에서 166.5 cm로 0.30 cm 증가, 체중 62.4 kg에서 62.7 kg으로 0.30 kg 증가 [출처: KDRI_2025_vol1.pdf, p.62].\n     - **남성 75세 이상**: 신장 163.1 cm에서 163.5 cm로 0.40 cm 증가, 체중 60.1 kg에서 60.4 kg으로 0.30 kg 증가 [출처: KDRI_2025_vol1.pdf, p.62].\n     - **여성 19–29세**: 신장 161.4 cm에서 161.5 cm로 0.10 cm 증가, 체중은 55.9 kg으로 동일(차이 0.00) [출처: KDRI_2025_vol1.pdf, p.62].\n     - **여성 30–49세**: 신장 159.8 cm에서 160.0 cm로 0.20 cm 증가, 체중 54.7 kg에서 54.8 kg으로 0.10 kg 증가 [출처: KDRI_2025_vol1.pdf, p.62].\n   - (참고: 표 5의 여성 50세 이상 구간은 제공된 자료에서 잘려 있어 확인 불가)\n\n3. **에너지 및 다량영양소 관련 추가 개정 사항**:\n   - 2025년 개정에서 탄수화물과 단백질의 에너지적정비율(AMDR) 하한선이 수정되었습니다(구체적인 변경 수치는 제공된 문단 끝부분이 잘려 있어 확인 불가) [출처: KDRI_2025_vol2.pdf, p.536].\n\n*주의: 구체적인 에너지 필요추정량(EER)의 2020년 대비 변경 수치 등 상기 내용 외의 에너지 기준 세부 사항은 제공된 자료에 포함되어 있지 않아 확인되지 않습니다.*",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-028",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The gold answer states that the 2025 energy reference uses the same US calculation equations as 2020, but incorporates 2025 Korean reference body measurements. Answer A does not mention the US calculation equations, focusing instead on the anthropometric data changes and AMDR changes. It misses the core fact about the calculation equations.",
+      "transport": "batch",
+      "known_cost_usd": 0.0044045,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 7579,
+        "output_tokens": 205,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-028",
+      "payload_sha256": "e571681c61dc3369d8a8bb1db291c02969e927df06a0ae664c8140416310746b",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-027",
+    "condition": "baseline",
+    "question": "KDRIs에서 에너지에 상한섭취량 개념을 적용하는가?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에는 상한섭취량(UL)의 설정 기준(과다 섭취에 따른 유해 영향에 대한 과학적 근거가 있을 때만 설정됨) 및 일부 영양소의 지표 설정 현황(EAR, RNI, UL이 모두 설정되거나 AI, UL, CDRR 등 일부만 제공됨)에 대한 내용만 나와 있으며 [출처: KDRI_2025_vol1.pdf, p.347], 에너지에 상한섭취량 개념을 적용하는지 여부에 대한 구체적인 내용은 나와 있지 않아 확인되지 않습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-027",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering the question, which is incorrect. The abstention and the explanation provided are faithful to the context.",
+      "transport": "batch",
+      "known_cost_usd": 0.002448,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 4134,
+        "output_tokens": 127,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-027",
+      "payload_sha256": "058de2ce19346b93e8d6c8ffc9d86e5474aef0f16e779d1377ea180d4f8dfdb3",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-030",
+    "condition": "baseline",
+    "question": "How were calculated energy reference values rounded in KDRIs 2025?",
+    "gold": "The 2025 reference estimates were truncated in 100 kcal units; this describes the reference-setting procedure rather than authorizing arbitrary individual intake changes.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-030",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering the question, which makes it incorrect according to the gold standard. However, it is faithful because the provided context does not contain the information needed to answer the question.",
+      "transport": "batch",
+      "known_cost_usd": 0.002377,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 1874,
+        "output_tokens": 480,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-030",
+      "payload_sha256": "46c3fe73d06a0634bbc20ac0a99b65f394f69e2c76814d71f465124ad758fb8e",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-028",
+    "condition": "agentic",
+    "question": "What changed in the 2025 energy reference compared with 2020?",
+    "gold": "The 2025 energy reference uses the same US calculation equations as 2020, but incorporates 2025 Korean reference body measurements.",
+    "answer": "2020년 기준과 비교하여 2025년 에너지 및 관련 체위 기준(참고치)에서 확인된 변경 사항은 다음과 같습니다.\n\n1. **성인 체질량지수(BMI) 기준 산출 자료 분석 기간 확대 및 코로나19 기간 제외**\n   - 2020 KDRI에서는 성인 기준 산출을 위해 최근 5개년(2013~2017년) 국민건강영양조사(KNHANES) 자료를 활용했으나, 2025 KDRI에서는 동일한 방법론적 틀을 따르되 10개년 자료를 바탕으로 분석했습니다 [출처: KDRI_2025_vol1.pdf, p.352].\n   - 코로나19 팬데믹과 관련된 비정형적인 체격 변화로 인한 잠재적 편향을 피하기 위해 2020~2022년 자료는 제외하고 2013~2019년 자료만을 분석에 사용했습니다 [출처: KDRI_2025_vol1.pdf, p.352].\n   - 그 결과, 성인 중앙값 BMI 수치 자체는 남성 22.6, 여성 21.4로 2020 KDRI와 동일하게 유지되었습니다 [출처: KDRI_2025_vol1.pdf, p.352].\n\n2. **성인 연령대별 신장 및 체중 참고치 변경**\n   - **남성 성인** [출처: KDRI_2025_vol1.pdf, p.62]:\n     - 19~29세: 신장 174.6 cm → 174.8 cm (+0.20 cm), 체중 68.9 kg → 69.1 kg (+0.20 kg)\n     - 30~49세: 신장 173.2 cm → 173.4 cm (+0.20 cm), 체중 67.8 kg → 68.0 kg (+0.20 kg)\n     - 50~64세: 신장 168.9 cm → 169.2 cm (+0.30 cm), 체중 64.5 kg → 64.7 kg (+0.20 kg)\n   - **여성 성인** [출처: KDRI_2025_vol1.pdf, p.62]:\n     - 19~29세: 신장 161.4 cm → 161.5 cm (+0.10 cm), 체중 55.9 kg 유지 (차이 0.00 kg)\n     - 30~49세: 신장 159.8 cm → 160.0 cm (+0.20 cm), 체중 54.7 kg → 54.8 kg (+0.10 kg)\n     - 50~64세: 신장 156.6 cm → 156.7 cm (+0.10 cm), 체중 52.5 kg 유지 (차이 0.00 kg)\n     - 65~74세: 신장 152.9 cm → 153.0 cm (+0.10 cm), 체중 50.0 kg → 50.1 kg (+0.10 kg)\n     - 75세 이상: 신장 146.7 cm → 146.9 cm (+0.20 cm), 체중 46.1 kg → 46.2 kg (+0.10 kg)\n\n3. **에너지필요추정량(EER) 산출 공식의 타당도 평가**\n   - 2005년부터 사용 중인 DRI 추정식(미국·캐나다인 대상 개발)에 대해 한국인 성인을 대상으로 이중표식수법을 이용한 타당도 평가 연구가 진행되었으며, 측정된 1일 총에너지소비량과 산출된 EER 간에 남녀 모두 유의한 양의 상관관계가 확인되었습니다 [출처: KDRI_2025_vol1.pdf, p.62].\n\n*(참고: 제공된 자료에는 2025년과 2020년 사이의 최종 '에너지필요추정량(EER, kcal/일)' 수치 자체의 직접적인 비교표는 포함되어 있지 않아 구체적인 에너지 수치 변경량은 확인되지 않습니다.)*",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-028",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Answer B mentions the anthropometric data changes and the validation of the DRI equations (developed for US/Canadians), but it does not explicitly state that the 2025 energy reference uses the same US calculation equations as 2020 while incorporating the 2025 Korean reference body measurements, missing the direct comparison requested by the gold answer.",
+      "transport": "batch",
+      "known_cost_usd": 0.0044045,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 7579,
+        "output_tokens": 205,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-028",
+      "payload_sha256": "e571681c61dc3369d8a8bb1db291c02969e927df06a0ae664c8140416310746b",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_assessed",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 1197,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 352,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 5,
+          "start": 0,
+          "end": 759,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 62,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 3
+    }
+  },
+  {
+    "attempt_id": "ag-030",
+    "condition": "agentic",
+    "question": "How were calculated energy reference values rounded in KDRIs 2025?",
+    "gold": "The 2025 reference estimates were truncated in 100 kcal units; this describes the reference-setting procedure rather than authorizing arbitrary individual intake changes.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-030",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering the question, which makes it incorrect. It is faithful because the context is empty, so abstaining is the only faithful response.",
+      "transport": "batch",
+      "known_cost_usd": 0.002377,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 1874,
+        "output_tokens": 480,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-030",
+      "payload_sha256": "46c3fe73d06a0634bbc20ac0a99b65f394f69e2c76814d71f465124ad758fb8e",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 2,
+      "stop_reason": "round_limit",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "none",
+      "missing_core": [
+        "rounding rules for calculated energy reference values in KDRI 2025"
+      ],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 0
+    }
+  },
+  {
+    "attempt_id": "ag-032",
+    "condition": "baseline",
+    "question": "Which activity level was the KDRIs energy reference default?",
+    "gold": "Low-active was used as the default reference activity level, with active and very-active estimates presented separately.",
+    "answer": "한국인 영양소 섭취기준(KDRIs)에서 유아, 아동 및 청소년의 에너지필요추정량 산출 시 기본으로 적용된 신체활동수준은 **'저활동적(저활동적 수준)'**입니다 [출처: KDRI_2025_vol1.pdf, p.67].\n\n- **유아 및 아동(3~11세)**: 유아 및 아동의 에너지필요추정량 산출 시 저활동적 신체활동수준을 기본으로 적용하였습니다 [출처: KDRI_2025_vol1.pdf, p.67].\n- **청소년(12~18세)**: 우리나라 청소년의 대부분은 학습활동 등으로 신체활동량이 부족한 저활동적 수준으로 보고되어, 저활동적 신체활동수준을 적용하여 산출하였습니다 [출처: KDRI_2025_vol1.pdf, p.67].\n\n(참고: 제공된 자료에는 성인 등 전 연령에 걸친 단일한 기본 신체활동수준 규정은 나와 있지 않으며, 유아, 아동, 청소년 대상의 기본 적용 기준만 명시되어 있습니다 [출처: KDRI_2025_vol1.pdf, p.67].)",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-032",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Answer A states 'low active' is the default for infants, children, and adolescents, but explicitly claims the provided material does not state a single default for all ages including adults. The gold answer states 'Low-active was used as the default reference activity level, with active and very-active estimates presented separately.' Answer A misses the general default and the separate presentation of active/very-active estimates.",
+      "transport": "batch",
+      "known_cost_usd": 0.0029155,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 4745,
+        "output_tokens": 181,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-032",
+      "payload_sha256": "f7a94cdc94518724ab2085a5b437178d21cefb4870d317f6980a63faa7b09aae",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-038",
+    "condition": "agentic",
+    "question": "Which associated conditions does the guideline recommend screening during obesity care?",
+    "gold": "The guideline recommends history and screening for obesity-associated conditions such as hypertension, type 2 diabetes and dyslipidemia during clinical obesity care.",
+    "answer": "제공된 비만 진료지침에 따르면, 비만전단계 또는 비만으로 진단된 경우 **비만 동반 질환 및 합병증**에 대한 평가를 시행하도록 권고하고 있습니다 [출처: guideline2022_vol8.pdf, p.5]. \n\n또한 복부비만(허리둘레 기준: 남자 90 cm 이상, 여자 85 cm 이상)이 있는 경우 비만 동반 질환 위험도를 상향하여 관리하도록 명시되어 있습니다 [출처: guideline2022_vol8.pdf, p.5]. \n\n다만, 구체적으로 어떤 세부 동반 질환 및 합병증(특정 질환명)을 선별 검사해야 하는지에 대한 상세 목록은 제공된 자료에 나타나 있지 않아 확인되지 않습니다.\n\n*(적용 범위 참고: 해당 지침은 임상 비만 지침으로 생활습관 근거에 기반하며 개별 의학적 처방이 아니므로, 제시된 범위를 넘어 일반화할 수 없습니다 [출처: guideline2022_vol8.pdf, p.5].)*",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-038",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Model B abstains from listing the specific conditions because its context was truncated. While faithful to its provided text, abstaining from an answerable gold question is considered incorrect.",
+      "transport": "batch",
+      "known_cost_usd": 0.0041455,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 4883,
+        "output_tokens": 568,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-038",
+      "payload_sha256": "2fd8f2f0aa2f566a583c1864865e262c39542d0f14ef03e0d46ffc9ba1ed77c8",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 2,
+      "stop_reason": "round_limit",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 4,
+          "start": 0,
+          "end": 407,
+          "source": "guideline2022_vol8.pdf",
+          "page": 5,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "partial",
+      "missing_core": [
+        "specific associated conditions recommended for screening during obesity care"
+      ],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 2
+    }
+  },
+  {
+    "attempt_id": "ag-054",
+    "condition": "agentic",
+    "question": "What leucine amount and amino-acid balance does ISSN mention?",
+    "gold": "ISSN suggests acute protein doses contain 700–3000 mg leucine and a balanced array of essential amino acids.",
+    "answer": "제공된 자료에서 언급된 류신(leucine) 섭취량과 아미노산 균형에 대한 내용은 다음과 같습니다:\n\n* **적용 대상 및 주의사항**: 해당 자료의 메타데이터에 따르면 이는 건강한 운동 대상자(Healthy exercising individuals)에 적용되는 내용이며, 운동선수 특화 용량을 모든 사용자에게 일반화해서는 안 됩니다 [출처: s12970-017-0177-8.pdf, p.12].\n\n**1. 류신(Leucine) 섭취량**\n* **식사당 필요량**: 단백질 번역 기전(protein translation machinery)을 자극하기 위해 식사당 약 1~3g의 류신 섭취가 필요한 것으로 나타납니다 [출처: s12970-017-0177-8.pdf, p.12].\n* **반응 특성 및 용량**: 근육 단백질 합성(MPS) 반응은 용량 의존적으로 나타날 수 있으며, 휴식 시에는 약 2g에서 정체(plateauing)를 보이고, 60분간의 중강도 사이클링 운동 후 섭취할 경우 최대 3.5g까지 증가합니다 [출처: s12970-017-0177-8.pdf, p.12].\n\n**2. 아미노산 균형(Amino-acid balance)**\n* **필수 아미노산(EAA) 균형**: 더 많은 양의 류신이 단독으로 단백질 합성을 자극할 수 있음이 입증되었으나, 필수 아미노산(EAA)의 균형 잡힌 섭취가 가장 큰 증가를 촉진합니다 [출처: s12970-017-0177-8.pdf, p.12].\n* **단독 섭취의 한계 및 전체 EAA의 역할**: 류신 단독 섭취는 전체 식사에 비해 단백질 합성 지속 시간이 더 짧았으므로 류신 단독으로만 보충해서는 안 됩니다 [출처: s12970-017-0177-8.pdf, p.12]. 저항 운동 후 단백질 합성 지속 시간은 류신 농도(신호)뿐 아니라 전체 단백질 공급원에 존재하는 추가적인 EAA(기질 가용성) 등에 의해 제한되므로, 증가된 MPS 속도를 지속하기 위해서는 유리 아미노산 또는 온전한 단백질 형태의 모든 EAA를 더 높은 총량으로 섭취하는 것이 가장 적합합니다 [출처: s12970-017-0177-8.pdf, p.12].\n* **EAA 용량 범위**: 필수 아미노산(EAA)은 6~15g 범위의 용량에서 모두 MPS를 증가시키는 자극 효과를 나타냅니다 [출처: s12970-017-0177-8.pdf, p.12].",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-054",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Model B fails to mention the specific 700-3000 mg range stated in the gold answer, instead stating 1-3g based on its context. It is faithful to its own context, but incorrect against the gold standard.",
+      "transport": "batch",
+      "known_cost_usd": 0.0041975,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 4705,
+        "output_tokens": 615,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-054",
+      "payload_sha256": "45b80c4370e81c3366c0731ca76b0db8216814e774c26ed546ccaf5fbf0b2705",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 2,
+          "start": 0,
+          "end": 1119,
+          "source": "s12970-017-0177-8.pdf",
+          "page": 12,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 1150,
+          "source": "s12970-017-0177-8.pdf",
+          "page": 12,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 2
+    }
+  },
+  {
+    "attempt_id": "ag-058",
+    "condition": "agentic",
+    "question": "How long can the exercise anabolic effect last according to ISSN?",
+    "gold": "ISSN notes exercise anabolic effects last at least 24 hours, likely diminishing over time; optimal protein timing depends on individual tolerance.",
+    "answer": "국제스포츠영양학회(ISSN)의 입장에 따르면, 저항 운동 완료 후 골격근이 단백질 및 아미노산의 효과에 반응하는 민감성은 최대 24시간 동안 지속될 수 있습니다 [출처: s12970-017-0177-8.pdf, p.10]. \n\n또한 급성의 탈진적 저항 운동과 유청 단백질 공급의 결합이 최대 24시간 동안 유청 단백질 공급에 대한 근육의 동화 반응성을 증가시킨다는 연구 결과가 제시되어 있습니다 [출처: s12970-017-0177-8.pdf, p.5].\n\n(적용 범위: 해당 권고사항 및 자료는 건강한 운동하는 개인(Healthy exercising individuals)을 대상으로 하며, 운동선수 특화 용량을 모든 사용자에게 일반화해서는 안 됩니다 [출처: s12970-017-0177-8.pdf, p.10].)",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-058",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Answer B states the effect lasts 'up to 24 hours', which contradicts the gold standard's 'at least 24 hours, likely diminishing over time'. However, it is faithful to its own provided context.",
+      "transport": "batch",
+      "known_cost_usd": 0.003627,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3684,
+        "output_tokens": 595,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-058",
+      "payload_sha256": "e152d7602e8373d840c76ffb76a911a834fd2b89233826c6ac97a916ce2901fb",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 0,
+          "start": 0,
+          "end": 1165,
+          "source": "s12970-017-0177-8.pdf",
+          "page": 10,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 1148,
+          "source": "s12970-017-0177-8.pdf",
+          "page": 5,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 2
+    }
+  },
+  {
+    "attempt_id": "ag-062",
+    "condition": "baseline",
+    "question": "How does KDRIs define energy balance?",
+    "gold": "Energy balance means energy intake equals energy expenditure.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-062",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering the question, which fails to provide the gold fact. However, the abstention is faithful because the provided context does not contain the definition of energy balance.",
+      "transport": "batch",
+      "known_cost_usd": 0.004111,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3548,
+        "output_tokens": 779,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-062",
+      "payload_sha256": "8c13445cd8e5819e3c64f7602102e829407782e285393d8dc464355443357b70",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-062",
+    "condition": "agentic",
+    "question": "How does KDRIs define energy balance?",
+    "gold": "Energy balance means energy intake equals energy expenditure.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-062",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering the question, which fails to provide the gold fact. However, the abstention is faithful because the provided context does not contain the definition of energy balance.",
+      "transport": "batch",
+      "known_cost_usd": 0.004111,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3548,
+        "output_tokens": 779,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-062",
+      "payload_sha256": "8c13445cd8e5819e3c64f7602102e829407782e285393d8dc464355443357b70",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "direct",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 0,
+          "start": 0,
+          "end": 504,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 79,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 3
+    }
+  },
+  {
+    "attempt_id": "ag-066",
+    "condition": "baseline",
+    "question": "Does KDRIs set a tolerable upper intake level for energy?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-066",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Model A abstains from answering the question, stating that the evidence could not be found in the provided materials. Abstention to an answerable gold question is incorrect. It is faithful to its context as it makes no unsupported claims.",
+      "transport": "batch",
+      "known_cost_usd": 0.002135,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3256,
+        "output_tokens": 169,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-066",
+      "payload_sha256": "c6aac6f0d46d17988dded539912e51b8bbfafb8cc9ccd0c5e5160be7daa7c9d7",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-064",
+    "condition": "agentic",
+    "question": "What is negative energy balance, and does it specify a next-day 200 kcal cut?",
+    "gold": "Negative energy balance means expenditure exceeds intake and is associated with weight reduction; this does not specify a fixed next-day compensation amount.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-064",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Answer B incorrectly abstains from answering a question that has an answer in the gold standard. It is faithful to its empty context.",
+      "transport": "batch",
+      "known_cost_usd": 0.00267,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 2436,
+        "output_tokens": 484,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-064",
+      "payload_sha256": "2102fa5c37277899941d6d868eadece1713d462fc3a991c41633ded1756376e5",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 2,
+      "stop_reason": "round_limit",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "missing",
+      "definition_research_required": true,
+      "excerpt_spans": [],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "none",
+      "missing_core": [
+        "definition of negative energy balance",
+        "specification of a next-day 200 kcal cut",
+        "Direct definition of the concept requested in the original question"
+      ],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 0
+    }
+  },
+  {
+    "attempt_id": "ag-066",
+    "condition": "agentic",
+    "question": "Does KDRIs set a tolerable upper intake level for energy?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서는 에너지(energy)에 대해 상한섭취량(Tolerable Upper Intake Level, UL)이 설정되어 있는지 여부에 대한 구체적인 근거를 찾을 수 없습니다. \n\n다만, 제공된 자료에 따르면 영양소의 과다 섭취로 인한 유해 영향에 관한 과학적 근거가 있을 때만 상한섭취량(UL)이 설정되며, 상한섭취량이 설정되어 있지 않다고 해서 잠재적인 유해 영향을 완전히 배제할 수 있는 것은 아니라고 명시되어 있습니다 [출처: KDRI_2025_vol3.pdf, p.489]. 또한 에너지와 관련해서는 에너지 필요추정량(EER: estimated energy requirements) 약어 표기와 에너지 불균형과 관련된 만성질환 위험을 줄이기 위해 탄수화물, 지질, 단백질에 대한 에너지 적정비율(AMDR)을 설정한다는 내용만 확인됩니다 [출처: KDRI_2025_vol2.pdf, p.523], [출처: KDRI_2025_vol1.pdf, p.371].",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-066",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Model B states that the provided materials do not contain specific evidence on whether a UL is set for energy, which fails to answer the gold fact directly (that UL concepts are not applied to energy). It is faithful to its context, accurately summarizing the available information about ULs, EER, and AMDR.",
+      "transport": "batch",
+      "known_cost_usd": 0.002135,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3256,
+        "output_tokens": 169,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-066",
+      "payload_sha256": "c6aac6f0d46d17988dded539912e51b8bbfafb8cc9ccd0c5e5160be7daa7c9d7",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 1,
+          "start": 0,
+          "end": 1175,
+          "source": "KDRI_2025_vol2.pdf",
+          "page": 523,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 2,
+          "start": 0,
+          "end": 1175,
+          "source": "KDRI_2025_vol3.pdf",
+          "page": 489,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 165,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 371,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 165,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 371,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 4
+    }
+  },
+  {
+    "attempt_id": "ag-067",
+    "condition": "agentic",
+    "question": "KDRIs에서 에너지에 상한섭취량 개념을 적용하는가?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-067",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering the question, which is considered incorrect when a gold answer exists. However, it is faithful because the provided context does not contain the information needed to answer the question.",
+      "transport": "batch",
+      "known_cost_usd": 0.0033565,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 4115,
+        "output_tokens": 433,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-067",
+      "payload_sha256": "31d092b779ccbd94fa4d090790fdfb68ac8678b855716be4a641710516e632c3",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": {
+      "rounds": 2,
+      "stop_reason": "round_limit",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 1099,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 342,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "partial",
+      "missing_core": [
+        "에너지에 대한 상한섭취량(UL) 설정 여부"
+      ],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 4
+    }
+  },
+  {
+    "attempt_id": "ag-068",
+    "condition": "baseline",
+    "question": "What changed in the 2025 energy reference compared with 2020?",
+    "gold": "The 2025 energy reference uses the same US calculation equations as 2020, but incorporates 2025 Korean reference body measurements.",
+    "answer": "제공된 자료에서 2020년과 비교하여 2025년 기준에 나타난 변화는 다음과 같습니다.\n\n1. **성인 체위 기준 분석 데이터 및 산출 방법의 변화**\n   - 2020 KDRI에서는 성인 체위 기준 설정을 위해 국민건강영양조사(KNHANES)의 최근 5개년(2013–2017년) 자료를 활용했으나, 2025 KDRI에서는 10개년 자료를 기반으로 분석했습니다 [출처: KDRI_2025_vol1.pdf, p.352].\n   - 이때 코로나19 팬데믹으로 인한 체격의 비전형적 변화에 따른 잠재적 편향을 피하기 위해 2020–2022년 자료를 제외하고 2013–2019년 데이터만 분석에 사용했습니다 [출처: KDRI_2025_vol1.pdf, p.352].\n   - 그 결과, 건강 체중 개념을 반영한 19~40세 성인의 체질량지수(BMI) 중앙값은 남성 22.6 kg/m², 여성 21.4 kg/m²로 2020 KDRI와 동일하게 유지되었습니다 [출처: KDRI_2025_vol1.pdf, p.352].\n\n2. **연령별 체위 참고치(신장·체중)의 변화**\n   - 영유아, 소아·청소년(0개월~18세)의 신장, 체중, BMI 참고치는 2020년과 2025년 사이에 차이가 없습니다(차이 0.00) [출처: KDRI_2025_vol1.pdf, p.62].\n   - 성인 및 노인 연령대에서는 신장과 체중에 일부 변화가 있었습니다 [출처: KDRI_2025_vol1.pdf, p.62]:\n     - **남성 19–29세:** 신장 174.6 cm → 174.8 cm (+0.20 cm), 체중 68.9 kg → 69.1 kg (+0.20 kg)\n     - **남성 30–49세:** 신장 173.2 cm → 173.4 cm (+0.20 cm), 체중 67.8 kg → 68.0 kg (+0.20 kg)\n     - **남성 50–64세:** 신장 168.9 cm → 169.2 cm (+0.30 cm), 체중 64.5 kg → 64.7 kg (+0.20 kg)\n     - **남성 65–74세:** 신장 166.2 cm → 166.5 cm (+0.30 cm), 체중 62.4 kg → 62.7 kg (+0.30 kg)\n     - **남성 75세 이상:** 신장 163.1 cm → 163.5 cm (+0.40 cm), 체중 60.1 kg → 60.4 kg (+0.30 kg)\n     - **여성 19–29세:** 신장 161.4 cm → 161.5 cm (+0.10 cm), 체중은 55.9 kg으로 동일 (0.00 kg)\n     - **여성 30–49세:** 신장 159.8 cm → 160.0 cm (+0.20 cm), 체중 54.7 kg → 54.8 kg (+0.10 kg)\n     *(단, 성인의 기준 BMI는 남성 22.6 kg/m², 여성 21.4 kg/m²로 모두 변화 없음)* [출처: KDRI_2025_vol1.pdf, p.62]\n\n*(참고: 제공된 근거 자료에는 에너지 필요추정량(EER)의 구체적인 수치 변화나 기타 에너지 세부 기준의 변경 사항은 수록되어 있지 않아 확인되지 않습니다.)*",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-068",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model fails to mention that the 2025 energy reference uses the same US calculation equations as 2020, which is a material omission of the gold answer.",
+      "transport": "batch",
+      "known_cost_usd": 0.006404,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 7456,
+        "output_tokens": 892,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-068",
+      "payload_sha256": "6b7fc69deed86036bc9f594d7c8f2204947d4aa33dd9c4cb8b1ee85c2d9f613b",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-067",
+    "condition": "baseline",
+    "question": "KDRIs에서 에너지에 상한섭취량 개념을 적용하는가?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "answer": "제공된 자료에서는 건강 유지 및 증진을 위해 상한섭취량(UL) 등의 기준값이 제시되고, 과다 섭취로 인한 유해 영향에 대한 과학적 근거가 있을 때만 UL을 설정한다고 명시되어 있으나 [출처: KDRI_2025_vol1.pdf, p.342, p.347], '에너지' 항목에 상한섭취량 개념을 적용하는지에 대해서는 직접적인 언급이 없어 확인되지 않습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-067",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering the question, which is considered incorrect when a gold answer exists. However, it is faithful because the provided context does not contain the information needed to answer the question.",
+      "transport": "batch",
+      "known_cost_usd": 0.0033565,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 4115,
+        "output_tokens": 433,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-067",
+      "payload_sha256": "31d092b779ccbd94fa4d090790fdfb68ac8678b855716be4a641710516e632c3",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-070",
+    "condition": "baseline",
+    "question": "How were calculated energy reference values rounded in KDRIs 2025?",
+    "gold": "The 2025 reference estimates were truncated in 100 kcal units; this describes the reference-setting procedure rather than authorizing arbitrary individual intake changes.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-070",
+      "condition": "baseline",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering, which is incorrect for an answerable gold question. However, since it did not make any claims, it is technically faithful to the context.",
+      "transport": "batch",
+      "known_cost_usd": 0.00133,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 1874,
+        "output_tokens": 131,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-070",
+      "payload_sha256": "46c3fe73d06a0634bbc20ac0a99b65f394f69e2c76814d71f465124ad758fb8e",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "A"
+    },
+    "agentic": null
+  },
+  {
+    "attempt_id": "ag-068",
+    "condition": "agentic",
+    "question": "What changed in the 2025 energy reference compared with 2020?",
+    "gold": "The 2025 energy reference uses the same US calculation equations as 2020, but incorporates 2025 Korean reference body measurements.",
+    "answer": "2020년 기준과 비교하여 2025년 에너지 및 관련 체위 참고치에서 확인되는 주요 변경 사항은 다음과 같습니다.\n\n1. **성인 체질량지수(BMI) 분석 자료 기간 변경 및 중앙값 유지**\n   - 2020 KDRI에서는 최근 5년간(2013~2017년)의 국민건강영양조사(KNHANES) 자료를 사용했으나, 2025 KDRI에서는 동일한 방법론적 틀을 따르되 10년간의 수집 자료를 기반으로 분석했습니다 [출처: KDRI_2025_vol1.pdf, p.352].\n   - 코로나19 팬데믹과 관련된 체형의 비전형적인 변화로 인한 잠재적 왜곡을 방지하기 위해 2020~2022년 자료를 제외하고 2013~2019년 자료만 분석했습니다 [출처: KDRI_2025_vol1.pdf, p.352].\n   - 그 결과, 성인 중앙값 BMI는 남성 22.6, 여성 21.4로 2020 KDRI와 동일하게 유지되었으며, 이 수치가 성인 체위 기준을 도출하는 데 사용되었습니다 [출처: KDRI_2025_vol1.pdf, p.352].\n\n2. **성인 연령대별 체위 참고치(신장·체중)의 미세 조정**\n   - **남성**:\n     - 19~29세: 신장 174.6 cm → 174.8 cm (+0.20 cm), 체중 68.9 kg → 69.1 kg (+0.20 kg) [출처: KDRI_2025_vol1.pdf, p.62].\n     - 30~49세: 신장 173.2 cm → 173.4 cm (+0.20 cm), 체중 67.8 kg → 68.0 kg (+0.20 kg) [출처: KDRI_2025_vol1.pdf, p.62].\n     - 50~64세: 신장 168.9 cm → 169.2 cm (+0.30 cm), 체중 64.5 kg → 64.7 kg (+0.20 kg) [출처: KDRI_2025_vol1.pdf, p.62].\n     - (※ 0~18세 남성의 신장 및 체중 참고치와 체질량지수는 변화 없이 동일함) [출처: KDRI_2025_vol1.pdf, p.62].\n   - **여성**:\n     - 19~29세: 신장 161.4 cm → 161.5 cm (+0.10 cm), 체중 55.9 kg (변화 없음) [출처: KDRI_2025_vol1.pdf, p.62].\n     - 30~49세: 신장 159.8 cm → 160.0 cm (+0.20 cm), 체중 54.7 kg → 54.8 kg (+0.10 kg) [출처: KDRI_2025_vol1.pdf, p.62].\n     - 50~64세: 신장 156.6 cm → 156.7 cm (+0.10 cm), 체중 52.5 kg (변화 없음) [출처: KDRI_2025_vol1.pdf, p.62].\n     - 65~74세: 신장 152.9 cm → 153.0 cm (+0.10 cm), 체중 50.0 kg → 50.1 kg (+0.10 kg) [출처: KDRI_2025_vol1.pdf, p.62].\n     - 75세 이상: 신장 146.7 cm → 146.9 cm (+0.20 cm), 체중 46.1 kg → 46.2 kg (+0.10 kg) [출처: KDRI_2025_vol1.pdf, p.62].\n     - (※ 성인 여성 체질량지수는 21.4로 모든 성인 연령대에서 차이 없음) [출처: KDRI_2025_vol1.pdf, p.62].\n\n*(참고: 제공된 근거에서는 에너지필요추정량(EER)의 구체적인 산출 수치나 공식 자체의 변경 여부에 대한 내용은 포함되어 있지 않아 확인되지 않습니다.)*",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-068",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model fails to mention that the 2025 energy reference uses the same US calculation equations as 2020, missing a key part of the gold answer.",
+      "transport": "batch",
+      "known_cost_usd": 0.006404,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 7456,
+        "output_tokens": 892,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-068",
+      "payload_sha256": "6b7fc69deed86036bc9f594d7c8f2204947d4aa33dd9c4cb8b1ee85c2d9f613b",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_assessed",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 1197,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 352,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 5,
+          "start": 0,
+          "end": 759,
+          "source": "KDRI_2025_vol1.pdf",
+          "page": 62,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 3
+    }
+  },
+  {
+    "attempt_id": "ag-070",
+    "condition": "agentic",
+    "question": "How were calculated energy reference values rounded in KDRIs 2025?",
+    "gold": "The 2025 reference estimates were truncated in 100 kcal units; this describes the reference-setting procedure rather than authorizing arbitrary individual intake changes.",
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-070",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "The model abstained from answering, which is incorrect for an answerable gold question. However, since it did not make any claims, it is technically faithful to the context.",
+      "transport": "batch",
+      "known_cost_usd": 0.00133,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 1874,
+        "output_tokens": 131,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-070",
+      "payload_sha256": "46c3fe73d06a0634bbc20ac0a99b65f394f69e2c76814d71f465124ad758fb8e",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 2,
+      "stop_reason": "round_limit",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "none",
+      "missing_core": [
+        "rounding rules for calculated energy reference values in KDRI 2025"
+      ],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 0
+    }
+  },
+  {
+    "attempt_id": "ag-078",
+    "condition": "agentic",
+    "question": "Which associated conditions does the guideline recommend screening during obesity care?",
+    "gold": "The guideline recommends history and screening for obesity-associated conditions such as hypertension, type 2 diabetes and dyslipidemia during clinical obesity care.",
+    "answer": "제공된 비만 진료지침에 따르면, 비만전단계 또는 비만으로 진단된 경우 다음과 같이 평가하도록 권고하고 있습니다:\n\n- 비만전단계 또는 비만으로 진단된 경우 '비만 동반 질환 및 합병증'에 대한 평가를 시행하도록 권고합니다 [출처: guideline2022_vol8.pdf, p.5].\n- 복부비만(남자 90 cm 이상, 여자 85 cm 이상)이 있는 경우 비만 동반 질환 위험도를 상향하여 관리하도록 명시되어 있습니다 [출처: guideline2022_vol8.pdf, p.5].\n\n다만, 구체적으로 어떤 동반 질환(특정 질환명 목록)을 선별·평가해야 하는지에 대한 상세 항목은 제공된 자료에 명시되어 있지 않아 확인되지 않습니다. \n\n*(본 지침은 임상 비만 가이드라인에 근거한 내용으로, 개인에 대한 의학적 처방이 아닌 생활습관 근거에 해당하며 해당 적용 범위를 넘어 일반화할 수 없습니다 [출처: guideline2022_vol8.pdf, p.5].)*",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-078",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Answer B states that the specific conditions to be screened are not provided in the context, which is true for its truncated context, but it fails to answer the gold question.",
+      "transport": "batch",
+      "known_cost_usd": 0.002848,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 4922,
+        "output_tokens": 129,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-078",
+      "payload_sha256": "dfecd7035ebb746630e9f7132d1c8944a193066a3403a771c7c9450f642d9731",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 2,
+      "stop_reason": "round_limit",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 4,
+          "start": 0,
+          "end": 407,
+          "source": "guideline2022_vol8.pdf",
+          "page": 5,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "partial",
+      "missing_core": [
+        "specific associated conditions recommended for screening during obesity care"
+      ],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 2
+    }
+  },
+  {
+    "attempt_id": "ag-094",
+    "condition": "agentic",
+    "question": "What leucine amount and amino-acid balance does ISSN mention?",
+    "gold": "ISSN suggests acute protein doses contain 700–3000 mg leucine and a balanced array of essential amino acids.",
+    "answer": "제공된 자료에서 언급된 류신(leucine)의 양과 아미노산 균형에 대한 내용은 다음과 같습니다:\n\n* **적용 대상 범위**: 이 자료는 건강한 운동 인구(Healthy exercising individuals)를 대상으로 하며, 운동선수에게 특화된 용량을 모든 사용자에게 일반화해서는 안 됩니다 [출처: s12970-017-0177-8.pdf, p.12].\n\n**1. 류신의 양 (Leucine Amount)**\n* **단백질 번역 기전 자극**: 단백질 번역 기전을 자극하기 위해 식사당 약 1~3g의 류신 섭취가 필요한 것으로 나타납니다 [출처: s12970-017-0177-8.pdf, p.12].\n* **반응 특성 및 용량 의존성**: 류신에 의한 단백질 합성 반응은 용량 의존적 방식으로 나타날 수 있으며, 휴식 시에는 약 2g에서 정체(plateau)를 보이고, 60분간의 중강도 사이클링 운동을 마친 후 섭취할 때는 최대 3.5g까지 증가합니다 [출처: s12970-017-0177-8.pdf, p.12].\n\n**2. 아미노산 균형 (Amino-Acid Balance)**\n* **류신 단독 섭취 지양**: 류신이 독립적으로 단백질 합성을 자극하는 것으로 입증되었으나, 류신만을 단독으로 보충해서는 안 됩니다 [출처: s12970-017-0177-8.pdf, p.12]. \n* **필수 아미노산(EAA)의 균형 잡힌 섭취**: 더 많은 양의 류신이 단백질 합성 증가를 독립적으로 자극할 수 있지만, 필수 아미노산(EAA)의 균형 잡힌 섭취가 가장 큰 증가를 촉진합니다 [출처: s12970-017-0177-8.pdf, p.12].\n* **단백질 합성 지속성**: 저항 운동 후 단백질 합성의 지속 시간은 신호(류신 농도), ATP 상태, 기질의 가용성(전체 단백질 공급원에 존재하는 추가적인 EAA)에 의해 제한되는 것으로 보입니다. 따라서 류신 농도를 높이는 것이 근육 단백질 증가를 자극할 수 있으나, 증가된 근단백질 합성(MPS) 비율을 유지하는 데는 전체 EAA의 더 높은 총 투여량(유리 아미노산 형태 또는 완전 단백질 형태)이 가장 적합합니다 [출처: s12970-017-0177-8.pdf, p.12].\n* **EAA 용량 범위**: EAA는 6~15g 범위의 용량에서 모두 자극 효과를 나타내며 근단백질 합성을 증가시키는 데 고유한 역할을 합니다 [출처: s12970-017-0177-8.pdf, p.12].",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-094",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Model B fails to mention the specific 700-3000 mg range for leucine stated in the gold answer (instead mentioning 1-3g based on its context). However, it is faithful to its provided text.",
+      "transport": "batch",
+      "known_cost_usd": 0.004117,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 4700,
+        "output_tokens": 589,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-094",
+      "payload_sha256": "f0172aa5117456ef66247b5014b2f93d85ba659fbe7226f5f3337d3a99cbffcf",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 2,
+          "start": 0,
+          "end": 1119,
+          "source": "s12970-017-0177-8.pdf",
+          "page": 12,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 1150,
+          "source": "s12970-017-0177-8.pdf",
+          "page": 12,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 2
+    }
+  },
+  {
+    "attempt_id": "ag-098",
+    "condition": "agentic",
+    "question": "How long can the exercise anabolic effect last according to ISSN?",
+    "gold": "ISSN notes exercise anabolic effects last at least 24 hours, likely diminishing over time; optimal protein timing depends on individual tolerance.",
+    "answer": "국제스포츠영양학회(ISSN)에 따르면, 저항 운동을 마친 후 골격근이 단백질 및 아미노산의 효과에 민감해지는 상태(아나볼릭 반응성)는 최대 24시간 동안 지속될 수 있습니다 [출처: s12970-017-0177-8.pdf, p.5, p.10].\n\n(참고: 본 자료의 적용 대상은 건강한 운동 인구(Healthy exercising individuals)에 해당합니다) [출처: s12970-017-0177-8.pdf, p.1, p.10].",
+    "status": "completed",
+    "grade": {
+      "attempt_id": "ag-098",
+      "condition": "agentic",
+      "status": "completed",
+      "correct": false,
+      "faithful": true,
+      "reason": "Model B misses the specific gold facts that the effect lasts 'at least 24 hours' (it says 'up to 24 hours') and diminishes over time, as well as the point about optimal protein timing. It is faithful to its context.",
+      "transport": "batch",
+      "known_cost_usd": 0.0032005,
+      "cost_complete": true,
+      "usage": {
+        "input_tokens": 3623,
+        "output_tokens": 463,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_key": "pair|ag-098",
+      "payload_sha256": "6ad18e2493fd4ae614f02577ac8fff5ee0dd218c8b74b13300b18e4ddcb09475",
+      "rubric_sha256": "3160073d12406b960351cda7f5b1e501da77f41ecdd502f83208172bc1da7d65",
+      "judge_model": "gemini-3.1-pro-preview",
+      "judge_tokens": 2048,
+      "judge_thinking": "low",
+      "side": "B"
+    },
+    "agentic": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v14",
+      "prompt_sha256": "715a108da87d26ecc38b86ecaa1a6f4825329b95165cb603c38f5b072133f0ba",
+      "recipe": "partial-coverage-v15-definition-gate",
+      "definition_support": "not_requested",
+      "definition_research_required": false,
+      "excerpt_spans": [
+        {
+          "document_index": 0,
+          "start": 0,
+          "end": 1165,
+          "source": "s12970-017-0177-8.pdf",
+          "page": 10,
+          "match_kind": "exact"
+        },
+        {
+          "document_index": 3,
+          "start": 0,
+          "end": 1148,
+          "source": "s12970-017-0177-8.pdf",
+          "page": 5,
+          "match_kind": "exact"
+        }
+      ],
+      "rejected_excerpts": 0,
+      "excerpt_failures": [],
+      "answer_coverage": "complete",
+      "missing_core": [],
+      "provider_failure_reason": null,
+      "assessment_failure": null,
+      "neighbor_documents": 2,
+      "neighbor_status": "available",
+      "retained_initial_documents": 2
+    }
+  }
+]

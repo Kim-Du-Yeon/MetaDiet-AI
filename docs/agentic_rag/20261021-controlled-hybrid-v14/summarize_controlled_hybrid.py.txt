@@ -1,0 +1,90 @@
+"""Summarize completed paired100; no provider I/O or answer rewriting."""
+import json,math,sqlite3,statistics,hashlib,sys,argparse,random
+from pathlib import Path
+R=Path(__file__).resolve().parents[3]
+p=argparse.ArgumentParser();p.add_argument('--directory',required=True);args=p.parse_args();D=Path(args.directory)
+protocol=json.loads((D/'protocol.json').read_text(encoding='utf-8'))
+rows=[json.loads(s) for s in (D/'attempts.jsonl').read_text(encoding='utf-8').splitlines()]
+grades=[json.loads(s) for s in (D/'grading.grades.jsonl').read_text(encoding='utf-8').splitlines()]
+assert len(rows)==len(grades)==200
+from judge_agentic_pairs import paired_payload, payload_hash, SYSTEM
+case_map={c['attempt_id']:c for c in json.loads((D/'cases.json').read_text(encoding='utf-8'))}
+grouped={}
+for row in rows:grouped.setdefault(row['attempt_id'],[]).append(row)
+assert len({(g['attempt_id'],g['condition']) for g in grades})==200
+for grade in grades:
+ payload,mapping=paired_payload(case_map[grade['attempt_id']],grouped[grade['attempt_id']])
+ assert grade['payload_sha256']==payload_hash(payload)
+ assert grade['rubric_sha256']==hashlib.sha256(SYSTEM.encode()).hexdigest()
+ assert grade['judge_model']=='gemini-3.1-pro-preview' and grade['judge_tokens']==2048 and grade['judge_thinking']=='low'
+ assert mapping[grade['side']]==grade['condition']
+assert all(set(r.get('retrieval_modes',[]))=={'hybrid'} for r in rows if r['status']=='completed')
+assert len({(r['attempt_id'],r['condition']) for r in rows})==200
+case_by={c['attempt_id']:c for c in json.loads((D/'cases.json').read_text(encoding='utf-8'))}
+by_grade={(g['attempt_id'],g['condition']):g for g in grades}
+metrics={};NO='제공된 자료에서 근거를 찾지 못했습니다.'
+for condition in ['baseline','agentic']:
+ group=[r for r in rows if r['condition']==condition];assert len(group)==100
+ judged=[by_grade[(r['attempt_id'],condition)] for r in group]
+ correct=sum(g['status']=='completed' and bool(g['correct']) for g in judged)
+ faithful=sum(g['status']=='completed' and bool(g['faithful']) for g in judged)
+ latency=sorted(r['ms']/1000 for r in group)
+ costs=sum(r.get('known_model_cost_usd',0) for r in group)
+ metrics[condition]={'attempts':100,'correct':correct,'accuracy':correct/100,'faithful':faithful,'faithfulness_binary_rate':faithful/100,
+ 'valid_judges':sum(g['status']=='completed' for g in judged),'judge_failures':sum(g['status'] not in ['completed','not_applicable_serving_failed'] for g in judged),
+ 'provider_failed_attempts':sum(r['status']!='completed' for r in group),'finish_reason_observed_attempts':sum(bool(r.get('answer_finish_reason')) for r in group),'correct_and_normal_stop':sum(g['status']=='completed' and g['correct'] and r.get('answer_finish_reason')=='STOP' for r,g in zip(group,judged)) if any(r.get('answer_finish_reason') for r in group) else None,'truncated_answers':sum(r.get('answer_finish_reason')=='MAX_TOKENS' for r in group),'exact_refusals':sum(r.get('answer','').strip()==NO for r in group),
+ 'source_page_hits':sum(bool(r.get('support')) for r in group),'max_seconds':max(latency),'p50_seconds':statistics.median(latency),'p95_seconds_nearest_rank':latency[math.ceil(.95*len(latency))-1],
+ 'known_generation_model_cost_usd':costs,'model_cost_complete_attempts':sum(bool(r.get('model_cost_complete')) for r in group),
+ 'raw_embedding_cost_complete_attempts':sum(bool(r.get('embedding_usage')) and all(v is not None for v in r['embedding_usage']) for r in group),
+ 'known_embedding_cost_usd':sum(r.get('embedding_cost_usd',0) for r in group),'embedding_byte_proxy_usd_not_actual':sum(r.get('embedding_cost_upper_proxy_usd',0) for r in group),
+ 'two_round_attempts':sum((r.get('agentic') or {}).get('rounds',0)>1 for r in group),
+ 'error_case_ids':[r['attempt_id'] for r,g in zip(group,judged) if not(g['status']=='completed' and g['correct'])]}
+ for lang in ['en','ko']:
+  sub=[r for r in group if case_by[r['attempt_id']]['language'].lower()==lang]
+  metrics[condition][lang]={'n':len(sub),'correct':sum(by_grade[(r['attempt_id'],condition)]['status']=='completed' and by_grade[(r['attempt_id'],condition)]['correct'] for r in sub)}
+c=sqlite3.connect('file:'+str(R/'tmp/eval-budget.sqlite').replace('\\','/')+'?mode=ro',uri=True)
+stages=dict(c.execute('SELECT stage,SUM(amount)/1000000.0 FROM costs GROUP BY stage'));total=c.execute('SELECT SUM(amount)/1000000.0 FROM costs').fetchone()[0];unsettled=list(c.execute('SELECT stage,amount/1000000.0 FROM costs WHERE settled=0'));c.close()
+summary={'status':'completed100_per_condition','metrics':metrics,'quality_difference_percentage_points':100*(metrics['agentic']['accuracy']-metrics['baseline']['accuracy']),
+ 'unique_questions':40,'unique_fact_groups':len({c['case_group'] for c in case_by.values()}),'repeated_attempts_per_condition':100,'scope':'controlled strict Hybrid versus Hybrid+v14 loop; identical final QA/model/config/context formatter/workers/environment; fresh200 attempts',
+ 'causal_agentic_ablation':True,'ragas_rescored':False,'budget_end_usd':total,'budget_start_usd':protocol['budget_start']['committed_usd'],'increment_usd':round(total-protocol['budget_start']['committed_usd'],6),'stage_usage':stages,'old_unsettled_reservations':unsettled,
+ 'deployment_decision':'Review measured tradeoffs; production default unchanged during read-only experiment.'}
+for condition in ['baseline','agentic']:
+ group=[r for r in rows if r['condition']==condition]
+ metrics[condition]['retrieval_modes']=sorted({m for r in group for m in r.get('retrieval_modes',[])})
+ metrics[condition]['total_known_generation_cost_usd']=metrics[condition]['known_generation_model_cost_usd']+metrics[condition]['known_embedding_cost_usd']
+ metrics[condition]['complete_cost_attempts']=sum(bool(r.get('cost_complete')) for r in group)
+ metrics[condition]['provider_or_loop_errors']=sum(bool(r.get('provider_error')) or (r.get('agentic') or {}).get('stop_reason') in {'timeout','retrieval_error','controller_error','excerpt_mismatch'} or bool((r.get('agentic') or {}).get('assessment_failure')) for r in group)
+ metrics[condition]['neighbor_unavailable_attempts']=sum((r.get('agentic') or {}).get('neighbor_status')=='unavailable' for r in group)
+ metrics[condition]['model_call_count']=len([v for r in group for v in r.get('model_usage',[])])
+ metrics[condition]['embedding_request_count']=sum(len(r.get('embedding_usage',[])) for r in group)
+ metrics[condition]['finish_reason_counts']={f:sum(r.get('answer_finish_reason')==f for r in group) for f in sorted({str(r.get('answer_finish_reason')) for r in group})}
+# Cluster bootstrap over20 fact groups: repeats/languages are not independent100 samples.
+groups={}
+for key,case in case_by.items():
+ b=by_grade[(key,'baseline')];a=by_grade[(key,'agentic')]
+ delta=int(a['status']=='completed' and a['correct'])-int(b['status']=='completed' and b['correct'])
+ groups.setdefault(str(case['case_group']),[]).append(delta)
+values=list(groups.values());rng=random.Random(20261021);boot=[]
+for _ in range(10000):
+ sampled=[rng.choice(values) for _ in values]
+ boot.append(100*sum(sum(x) for x in sampled)/sum(len(x) for x in sampled))
+boot.sort();summary['exploratory_fact_cluster_bootstrap_95pp']=[boot[249],boot[9749]]
+paired={}
+for key in case_by:
+ b=by_grade[(key,'baseline')];a=by_grade[(key,'agentic')]
+ label=('correct' if b['status']=='completed' and b['correct'] else 'incorrect')+'->'+('correct' if a['status']=='completed' and a['correct'] else 'incorrect')
+ paired[label]=paired.get(label,0)+1
+summary['paired_correctness']=paired
+summary['new_judge_cost_usd']=sum(g.get('known_cost_usd',0) for g in grades)
+summary['new_token_cost_estimate_usd']=sum(m['total_known_generation_cost_usd'] for m in metrics.values())+summary['new_judge_cost_usd']
+summary['cost_accounting_note']='Token estimate uses cache discounts and native Batch rates. Persistent budget charges cached input at full rate and rounds each call upward to microdollars; ledger delta is conservative, not invoice spending. Old unknown reservations retained.'
+summary['deployment_decision']='Keep existing Hybrid/no-reranker; do not enable Agentic. Correctness89 versus80, faithfulness100 versus99, higher latency and token cost; exploratory repeated development cohort, not universal inferiority.'
+summary['summary_analysis_source_sha256']=hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
+(D/'final-summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+errors=[]
+for r in rows:
+ g=by_grade[(r['attempt_id'],r['condition'])]
+ if g['status']!='completed' or not g['correct'] or not g['faithful'] or r.get('verification_failure') or r.get('answer_finish_reason') not in {'STOP','NOT_CALLED_GUARD'}:
+  errors.append({'attempt_id':r['attempt_id'],'condition':r['condition'],'question':case_by[r['attempt_id']]['question'],'gold':case_by[r['attempt_id']]['gold_answer'],'answer':r.get('answer'),'status':r['status'],'grade':g,'agentic':r.get('agentic')})
+(D/'error-cases.json').write_text(json.dumps(errors,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+print(json.dumps(summary,ensure_ascii=True))

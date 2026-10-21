@@ -1,0 +1,170 @@
+{
+  "status": "completed100_per_condition",
+  "metrics": {
+    "baseline": {
+      "attempts": 100,
+      "correct": 89,
+      "accuracy": 0.89,
+      "faithful": 100,
+      "faithfulness_binary_rate": 1.0,
+      "valid_judges": 100,
+      "judge_failures": 0,
+      "provider_failed_attempts": 0,
+      "finish_reason_observed_attempts": 100,
+      "correct_and_normal_stop": 89,
+      "truncated_answers": 0,
+      "exact_refusals": 6,
+      "source_page_hits": 78,
+      "max_seconds": 12.058088900004805,
+      "p50_seconds": 6.435185750000528,
+      "p95_seconds_nearest_rank": 10.662940100002743,
+      "known_generation_model_cost_usd": 0.2922632,
+      "model_cost_complete_attempts": 100,
+      "raw_embedding_cost_complete_attempts": 100,
+      "known_embedding_cost_usd": 0.0007830000000000001,
+      "embedding_byte_proxy_usd_not_actual": 0.003278,
+      "two_round_attempts": 0,
+      "error_case_ids": [
+        "ag-022",
+        "ag-026",
+        "ag-028",
+        "ag-027",
+        "ag-030",
+        "ag-032",
+        "ag-062",
+        "ag-066",
+        "ag-068",
+        "ag-067",
+        "ag-070"
+      ],
+      "en": {
+        "n": 50,
+        "correct": 41
+      },
+      "ko": {
+        "n": 50,
+        "correct": 48
+      },
+      "retrieval_modes": [
+        "hybrid"
+      ],
+      "total_known_generation_cost_usd": 0.2930462,
+      "complete_cost_attempts": 100,
+      "provider_or_loop_errors": 0,
+      "neighbor_unavailable_attempts": 0,
+      "model_call_count": 150,
+      "embedding_request_count": 150,
+      "finish_reason_counts": {
+        "STOP": 100
+      }
+    },
+    "agentic": {
+      "attempts": 100,
+      "correct": 80,
+      "accuracy": 0.8,
+      "faithful": 99,
+      "faithfulness_binary_rate": 0.99,
+      "valid_judges": 100,
+      "judge_failures": 0,
+      "provider_failed_attempts": 0,
+      "finish_reason_observed_attempts": 100,
+      "correct_and_normal_stop": 80,
+      "truncated_answers": 0,
+      "exact_refusals": 7,
+      "source_page_hits": 73,
+      "max_seconds": 22.31343349999952,
+      "p50_seconds": 9.708533749999333,
+      "p95_seconds_nearest_rank": 15.477404800003569,
+      "known_generation_model_cost_usd": 0.3988504,
+      "model_cost_complete_attempts": 100,
+      "raw_embedding_cost_complete_attempts": 100,
+      "known_embedding_cost_usd": 0.0009166,
+      "embedding_byte_proxy_usd_not_actual": 0.0038072,
+      "two_round_attempts": 10,
+      "error_case_ids": [
+        "ag-014",
+        "ag-018",
+        "ag-022",
+        "ag-024",
+        "ag-026",
+        "ag-027",
+        "ag-028",
+        "ag-030",
+        "ag-038",
+        "ag-054",
+        "ag-058",
+        "ag-062",
+        "ag-064",
+        "ag-066",
+        "ag-067",
+        "ag-068",
+        "ag-070",
+        "ag-078",
+        "ag-094",
+        "ag-098"
+      ],
+      "en": {
+        "n": 50,
+        "correct": 32
+      },
+      "ko": {
+        "n": 50,
+        "correct": 48
+      },
+      "retrieval_modes": [
+        "hybrid"
+      ],
+      "total_known_generation_cost_usd": 0.399767,
+      "complete_cost_attempts": 100,
+      "provider_or_loop_errors": 0,
+      "neighbor_unavailable_attempts": 0,
+      "model_call_count": 262,
+      "embedding_request_count": 166,
+      "finish_reason_counts": {
+        "NOT_CALLED_GUARD": 4,
+        "STOP": 96
+      }
+    }
+  },
+  "quality_difference_percentage_points": -8.999999999999996,
+  "unique_questions": 40,
+  "unique_fact_groups": 20,
+  "repeated_attempts_per_condition": 100,
+  "scope": "controlled strict Hybrid versus Hybrid+v14 loop; identical final QA/model/config/context formatter/workers/environment; fresh200 attempts",
+  "causal_agentic_ablation": true,
+  "ragas_rescored": false,
+  "budget_end_usd": 5.139139,
+  "budget_start_usd": 3.7811999999999997,
+  "increment_usd": 1.357939,
+  "stage_usage": {
+    "comparison": 2.926568,
+    "development": 0.025021,
+    "judge": 2.186264,
+    "probe": 0.001286
+  },
+  "old_unsettled_reservations": [
+    [
+      "comparison",
+      0.016255
+    ],
+    [
+      "comparison",
+      0.002845
+    ]
+  ],
+  "deployment_decision": "Keep existing Hybrid/no-reranker; do not enable Agentic. Correctness89 versus80, faithfulness100 versus99, higher latency and token cost; exploratory repeated development cohort, not universal inferiority.",
+  "exploratory_fact_cluster_bootstrap_95pp": [
+    -19.0,
+    0.0
+  ],
+  "paired_correctness": {
+    "correct->correct": 79,
+    "correct->incorrect": 10,
+    "incorrect->incorrect": 10,
+    "incorrect->correct": 1
+  },
+  "new_judge_cost_usd": 0.650066,
+  "new_token_cost_estimate_usd": 1.3428792,
+  "cost_accounting_note": "Token estimate uses cache discounts and native Batch rates. Persistent budget charges cached input at full rate and rounds each call upward to microdollars; ledger delta is conservative, not invoice spending. Old unknown reservations retained.",
+  "summary_analysis_source_sha256": "28ce012c9c9c3a4fbe73421f9afebec73b717fefda51557bb85aa967adbfe318"
+}

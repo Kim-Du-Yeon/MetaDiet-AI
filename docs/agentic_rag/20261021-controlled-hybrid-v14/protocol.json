@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-21",
+  "attempts_per_condition": 100,
+  "unique_questions": 40,
+  "fact_groups": 20,
+  "sampling": "same frozen development40 repeated; 50 EN +50 KO; not independent held-out100",
+  "dataset_sha256": "4ba67cf812497730848fe864580f1a7bf7da191c6a3c71427200eac3535aed9e",
+  "candidate_source_sha256": "d45bf2abeea61e372ef610236afb83bd4661f602d1a527ee2f5f1a02a28ecd11",
+  "neighbor_source_sha256": "81db0270e2f2507b4e46b52e306d640c011631f2f3e4438a431fe60a9de92b02",
+  "benchmark_source_sha256": "ade1648289852555d0d6f69f41b94a3104e9a0367d51548b950c24e25f18ac4a",
+  "retrieval": "strict Hybrid dense+Kiwi BM25+RRF, k4/candidate20, no reranker; fallback forbidden",
+  "workers": 3,
+  "pair_order": "50 AB,50 BA; pairs share semaphore3",
+  "timeout_seconds": 90,
+  "loop_timeout_seconds": 35,
+  "loop_max_rounds": 2,
+  "answer_model": "gemini-3.8-flash",
+  "answer_temperature": 0,
+  "answer_thinking_level": "low",
+  "output_caps": {
+    "answer": 4096,
+    "translation": 256,
+    "controller": 512,
+    "judge": 2048
+  },
+  "answer_prompt": "same QA_PROMPT plus same static ANSWER_GUIDANCE; dynamic candidate coverage instructions removed for causal control",
+  "context": "same _scoped_context rendering,8doc/6000char cap; selected evidence differs by retrieval algorithm",
+  "judge": "blind paired Pro, LOW, native Batch, boolean correctness and faithfulness (not Ragas)",
+  "stopping_policy": "retain individual failures/refusals/truncations; complete100 each. Fatal credentials/accounting failure requires inspection",
+  "adoption_policy": "consider semantic and STOP-delivery correctness, faithfulness, source hit, errors, latency, cost; no 100% accuracy requirement; no production toggle without positive evidence",
+  "budget_start": {
+    "committed_usd": 3.7811999999999997,
+    "stages": {
+      "comparison": 2.218695,
+      "development": 0.025021,
+      "judge": 1.536198,
+      "probe": 0.001286
+    },
+    "total_limit_usd": 5.0,
+    "stopped": false,
+    "stop_reason": null
+  },
+  "budget_profile": {
+    "total": 15,
+    "comparison": 11,
+    "judge": 3.8,
+    "probe": 0.05,
+    "development": 0.05,
+    "browser": 0.1
+  },
+  "budget_note": "user revoked prior $5 early-stop restriction; existing cumulative ledger preserved; expanded safety cap only explicit paid evaluation process",
+  "python": "3.12.10",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "packages": {
+    "langchain-google-genai": "4.4.0",
+    "google-genai": "2.29.0",
+    "langchain-community": "0.4.2",
+    "kiwipiepy": "0.23.2",
+    "pinecone": "7.3.0"
+  },
+  "frozen_source_hashes": {
+    "backend/app/rag/qa.py": "39ff161ea8f4a02dc3018afaf835ff6ed813df10b81fbe29c8675811aaad8c43",
+    "backend/app/rag/retriever.py": "1e83274dabd772691ccc15143ff65e994248995b5ecc88bfae5e10d92b2be02c",
+    "backend/scripts/eval/controlled_hybrid_support.py": "a7219502a100e8823c8413f16a7496f432608eaa3e28190b9acd71824967855a"
+  }
+}

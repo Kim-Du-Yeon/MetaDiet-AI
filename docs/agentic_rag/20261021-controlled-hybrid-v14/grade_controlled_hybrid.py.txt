@@ -1,0 +1,25 @@
+"""Submit/collect frozen paired grades with explicit evaluation campaign budget."""
+import argparse
+from pathlib import Path
+from controlled_hybrid_support import enable_campaign_budget
+from eval_budget import add_budget_args, activate_budget
+from batch_agentic_judges import main
+
+def cli():
+    parser=argparse.ArgumentParser()
+    parser.add_argument("action",choices=["pairs","collect","advance"])
+    parser.add_argument("--directory")
+    parser.add_argument("--prior",default="unused.jsonl")
+    parser.add_argument("--job",required=True)
+    parser.add_argument("--chunk-size",type=int,choices=range(1,101),default=100)
+    add_budget_args(parser)
+    args=parser.parse_args()
+    enable_campaign_budget(args.allow_paid)
+    args.budget=activate_budget(args,"judge")
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).resolve().parents[3]/"backend/.env",override=True)
+    from app.core.config import get_settings
+    get_settings().gemini_eval_model="gemini-3.1-pro-preview"
+    main(args)
+
+if __name__=="__main__":cli()
