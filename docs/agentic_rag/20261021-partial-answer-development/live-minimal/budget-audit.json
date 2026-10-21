@@ -1,0 +1,34 @@
+{
+  "budget": {
+    "committed_usd": 2.0569640000000002,
+    "stages": {
+      "comparison": 1.327447,
+      "development": 0.025021,
+      "judge": 0.70321,
+      "probe": 0.001286
+    },
+    "total_limit_usd": 5.0,
+    "stopped": false,
+    "stop_reason": null
+  },
+  "stage_caps": {
+    "probe": 0.1,
+    "development": 0.25,
+    "comparison": 3.0,
+    "judge": 1.0,
+    "browser": 0.15
+  },
+  "unknown_active_reservations": [
+    {
+      "stage": "comparison",
+      "reserved_usd": 0.016255,
+      "settled": false
+    },
+    {
+      "stage": "comparison",
+      "reserved_usd": 0.002845,
+      "settled": false
+    }
+  ],
+  "note": "Committed includes conservative unknown failed-call holds and pending Batch reservations, not an invoice."
+}

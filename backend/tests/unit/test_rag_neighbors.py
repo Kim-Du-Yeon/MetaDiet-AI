@@ -16,7 +16,7 @@ def test_neighbors_follow_exact_anchor_and_preserve_scope_and_offsets():
     assert len(found)==1 and '42 units' in found[0].page_content
     start,end=found[0].metadata['excerpt_start'],found[0].metadata['excerpt_end']
     assert found[0].page_content==neighbor.page_content[start:end]
-    assert len(found[0].page_content)<=700
+    assert len(found[0].page_content)<=1200
     assert found[0].metadata['document_sha256']=='build-document'
     assert not index.expand([doc('not indexed')], 'metric Z')
 

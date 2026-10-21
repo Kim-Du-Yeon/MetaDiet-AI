@@ -1,0 +1,127 @@
+{
+  "status": "completed100_per_condition",
+  "metrics": {
+    "baseline": {
+      "attempts": 100,
+      "correct": 85,
+      "accuracy": 0.85,
+      "faithful": 99,
+      "faithfulness_binary_rate": 0.99,
+      "valid_judges": 99,
+      "judge_failures": 0,
+      "provider_failed_attempts": 1,
+      "finish_reason_observed_attempts": 0,
+      "correct_and_normal_stop": null,
+      "truncated_answers": 0,
+      "exact_refusals": 8,
+      "source_page_hits": 79,
+      "max_seconds": 36.30210339999758,
+      "p50_seconds": 11.50686780000251,
+      "p95_seconds_nearest_rank": 18.98703819999355,
+      "known_generation_model_cost_usd": 0.53012025,
+      "model_cost_complete_attempts": 99,
+      "raw_embedding_cost_complete_attempts": 0,
+      "known_embedding_cost_usd": 0,
+      "embedding_byte_proxy_usd_not_actual": 0.0032412,
+      "two_round_attempts": 0,
+      "error_case_ids": [
+        "ag-014",
+        "ag-018",
+        "ag-022",
+        "ag-026",
+        "ag-025",
+        "ag-027",
+        "ag-034",
+        "ag-035",
+        "ag-054",
+        "ag-062",
+        "ag-066",
+        "ag-067",
+        "ag-074",
+        "ag-075",
+        "ag-094"
+      ],
+      "en": {
+        "n": 50,
+        "correct": 40
+      },
+      "ko": {
+        "n": 50,
+        "correct": 45
+      }
+    },
+    "agentic": {
+      "attempts": 100,
+      "correct": 88,
+      "accuracy": 0.88,
+      "faithful": 97,
+      "faithfulness_binary_rate": 0.97,
+      "valid_judges": 98,
+      "judge_failures": 0,
+      "provider_failed_attempts": 2,
+      "finish_reason_observed_attempts": 96,
+      "correct_and_normal_stop": 84,
+      "truncated_answers": 5,
+      "exact_refusals": 4,
+      "source_page_hits": 78,
+      "max_seconds": 391.46318460000475,
+      "p50_seconds": 15.469379350000963,
+      "p95_seconds_nearest_rank": 25.736817200006044,
+      "known_generation_model_cost_usd": 0.756793325,
+      "model_cost_complete_attempts": 98,
+      "raw_embedding_cost_complete_attempts": 100,
+      "known_embedding_cost_usd": 0.0008008000000000001,
+      "embedding_byte_proxy_usd_not_actual": 0.0032930000000000004,
+      "two_round_attempts": 8,
+      "error_case_ids": [
+        "ag-022",
+        "ag-026",
+        "ag-027",
+        "ag-038",
+        "ag-049",
+        "ag-053",
+        "ag-062",
+        "ag-063",
+        "ag-066",
+        "ag-067",
+        "ag-073",
+        "ag-087"
+      ],
+      "en": {
+        "n": 50,
+        "correct": 45
+      },
+      "ko": {
+        "n": 50,
+        "correct": 43
+      }
+    }
+  },
+  "quality_difference_percentage_points": 3.0000000000000027,
+  "unique_questions": 40,
+  "unique_fact_groups": 20,
+  "repeated_attempts_per_condition": 100,
+  "scope": "historical ordinary dense RAG vs current v14 Agentic dense; same cases/models/corpus but changed QA prompt and workers",
+  "causal_agentic_ablation": false,
+  "ragas_rescored": false,
+  "budget_end_usd": 3.7812,
+  "budget_start_usd": 2.529382,
+  "increment_usd": 1.251818,
+  "stage_usage": {
+    "comparison": 2.218695,
+    "development": 0.025021,
+    "judge": 1.536198,
+    "probe": 0.001286
+  },
+  "old_unsettled_reservations": [
+    [
+      "comparison",
+      0.016255
+    ],
+    [
+      "comparison",
+      0.002845
+    ]
+  ],
+  "deployment_decision": "Keep selected single-pass Hybrid/no-reranker with low-memory dense fallback; Agentic remains experimental until controlled comparison against current selected recipe."
+}

@@ -1,0 +1,92 @@
+"""Single ag-022: cached first context, at most one real dense re-search."""
+import asyncio,hashlib,json,logging,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+sys.path[:0]=[str(ROOT/'backend'),str(ROOT/'backend/scripts/eval')]
+from dotenv import load_dotenv
+from eval_budget import Budget,BudgetStop,install_transport_guard,LIMITS
+from benchmark_agentic_rag import Usage,safe_error
+OUT=ROOT/'docs/agentic_rag/20261021-ag022-definition-live'
+
+async def main():
+    if '--allow-paid' not in sys.argv:raise SystemExit('Explicit authorization required')
+    OUT.mkdir(exist_ok=True);path=OUT/'loop.json'
+    if path.exists():raise SystemExit('Already attempted; no automatic retry')
+    load_dotenv(ROOT/'backend/.env',override=True)
+    from app.rag import agentic,retriever
+    from app.core.config import get_settings
+    from langchain_core.documents import Document
+    from google.genai._api_client import BaseApiClient
+    settings=get_settings();settings.model_max_retries=0;settings.model_timeout_seconds=15
+    settings.rag_chunks_path=str((ROOT/'backend'/settings.rag_chunks_path).resolve())
+    budget=Budget(ROOT/'tmp/eval-budget.sqlite')
+    source=ROOT/'docs/agentic_rag/20261021-batch-live-validation/matched100'
+    case=next(c for c in json.loads((source/'cases.json').read_text(encoding='utf-8')) if c['attempt_id']=='ag-022')
+    old=next(r for r in (json.loads(s) for s in (source/'attempts.jsonl').read_text(encoding='utf-8').splitlines())
+        if r['attempt_id']=='ag-022' and r['condition']=='agentic')
+    docs=[Document(page_content=d['text'],metadata=d['metadata']) for d in old['documents']][:4]
+    record={'status':'entered','attempt_id':'ag-022','question':case['question'],
+        'budget_before':budget.summary(),'stage_caps':LIMITS,'maximum_controller_calls':2,
+        'maximum_embedding_calls':1,'new_answer_calls':0,'new_judge_calls':0,
+        'controller_version':agentic.PROMPT_VERSION,'controller_sha256':agentic.PROMPT_SHA256,
+        'retrieval_mode':'dense / no reranker, matches prior remote fallback',
+        'initial_context_reused':True,'queries':[],'decisions':[],'diagnostics':[],
+        'events':[],'transport_counts':{'controller':0,'embedding':0},'real_retrieval_calls':0}
+    with budget.connect() as db:before_rows=list(db.execute('SELECT id,stage,amount,settled FROM costs ORDER BY id'))
+    def save():
+        record['budget_after']=budget.summary()
+        with budget.connect() as db:now={r[0]:list(r) for r in db.execute('SELECT id,stage,amount,settled FROM costs')}
+        record['old_cost_rows_unchanged']=all(now.get(r[0])==list(r) for r in before_rows)
+        record['new_cost_rows']=[v for key,v in now.items() if key not in {r[0] for r in before_rows}]
+        path.write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')
+    save()
+    class Capture(logging.Handler):
+        def emit(self,event):
+            if hasattr(event,'assessment_diagnostic'):record['diagnostics'].append(event.assessment_diagnostic)
+    logger=logging.getLogger('app.rag.assessment_diagnostics');logger.setLevel(logging.INFO);logger.addHandler(Capture())
+    install_transport_guard(budget,'comparison')
+    sync,asynchronous=BaseApiClient.request,BaseApiClient.async_request
+    def check(method,path):
+        if method.lower()=='get':return
+        if ':embedContent' in path or ':batchEmbedContents' in path:kind,maximum='embedding',1
+        elif ':generateContent' in path and 'gemini-3.1-flash-lite' in path:kind,maximum='controller',2
+        else:raise BudgetStop('Unplanned endpoint in single-case verification')
+        if record['transport_counts'][kind]>=maximum:raise BudgetStop('Single-case call limit: '+kind)
+        record['transport_counts'][kind]+=1
+    def request(client,method,path,*args,**kwargs):
+        check(method,path);return sync(client,method,path,*args,**kwargs)
+    async def async_request(client,method,path,*args,**kwargs):
+        check(method,path);return await asynchronous(client,method,path,*args,**kwargs)
+    BaseApiClient.request=request;BaseApiClient.async_request=async_request
+    usage=Usage()
+    async def fetch(query,**kwargs):
+        record['queries'].append(query);save()
+        if len(record['queries'])==1:return {'grounded':True,'max_score':0,'docs':docs}
+        if record['real_retrieval_calls']>=1:raise BudgetStop('Only one real re-search allowed')
+        record['real_retrieval_calls']+=1
+        result=await retriever.retrieve(query,k=4,use_hybrid=False,use_rerank=False)
+        record['research_result']={'grounded':result['grounded'],'max_score':result['max_score'],
+            'documents':[{'text':d.page_content,'metadata':d.metadata} for d in result['docs']]}
+        save();return result
+    async def assess(question,result):
+        decision=await agentic.model_assessment(question,result,config={'callbacks':[usage]})
+        record['decisions'].append(decision.model_dump());save();return decision
+    async def expand(*args):return []
+    async def emit(event,**data):record['events'].append({'event':event,**data})
+    try:
+        result=await agentic.bounded_retrieve(case['question'],retrieve=fetch,assess=assess,expand=expand,emit=emit)
+        record['agentic']=result['agentic']
+        record['final_result']={'grounded':result['grounded'],'max_score':result.get('max_score',0),
+            'context':result.get('context',''),'answer_guidance':result.get('answer_guidance',''),
+            'documents':[{'text':d.page_content,'metadata':d.metadata} for d in result.get('docs',[])]}
+        passed=bool(result['grounded'] and result['agentic']['definition_research_required'] and
+            result['agentic']['definition_support']=='direct' and record['real_retrieval_calls']==1 and
+            len(record['decisions'])==2 and result['agentic']['excerpt_spans'])
+        record['status']='research_gate_pass' if passed else 'research_gate_failed'
+    except BudgetStop as exc:record.update(status='budget_stopped',reason=str(exc))
+    except Exception as exc:record.update(status='failed',error=safe_error(exc))
+    finally:
+        record['usage']=usage.calls;save()
+        print(json.dumps({k:record[k] for k in ('status','transport_counts','real_retrieval_calls','budget_after')}),flush=True)
+
+asyncio.run(main())

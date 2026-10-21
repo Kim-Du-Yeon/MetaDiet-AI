@@ -1,0 +1,43 @@
+{
+  "status": "blocked_at_full_campaign_budget_preflight",
+  "new_paid_calls": 0,
+  "attempts_per_condition": 100,
+  "baseline_answers_reusable": 100,
+  "historical_baseline_grades_reusable_as_audit": 100,
+  "old_candidate_answers_reusable_as_v14": 0,
+  "v14_single_repair_role": "cached-initial-context smoke only; retain separately, not a full-pipeline comparison attempt",
+  "budget_committed_usd": 2.270037,
+  "total_limit_usd": 5,
+  "stage_caps": {
+    "probe": 0.05,
+    "development": 0.05,
+    "comparison": 1.7,
+    "judge": 3.1,
+    "browser": 0.1
+  },
+  "stage_usage": {
+    "comparison": 1.453787,
+    "development": 0.025021,
+    "judge": 0.789943,
+    "probe": 0.001286
+  },
+  "comparison_remaining_usd": 0.246213,
+  "answer_model": "gemini-3.8-flash",
+  "frozen_answer_output_cap": 2048,
+  "frozen_output_price_per_million": 3.75,
+  "planned_answer_output_envelope_usd": 0.768,
+  "shortfall_vs_output_envelope_usd": 0.521787,
+  "actual_cost_forecast": false,
+  "input_controller_translation_embedding_costs_included": false,
+  "stopping_reason": "Cannot provision frozen 100-answer output envelope inside unchanged comparison cap; do not spend on partial rerun",
+  "ledger_sha_before": "8f72a85235b4db8f485a15c6e9f2936114831d7b97eddcd672e52da3c3579266",
+  "ledger_sha_after": "8f72a85235b4db8f485a15c6e9f2936114831d7b97eddcd672e52da3c3579266",
+  "candidate_sources": {
+    "backend/app/rag/agentic.py": "d45bf2abeea61e372ef610236afb83bd4661f602d1a527ee2f5f1a02a28ecd11",
+    "backend/app/rag/neighbors.py": "81db0270e2f2507b4e46b52e306d640c011631f2f3e4438a431fe60a9de92b02",
+    "backend/app/rag/qa.py": "39ff161ea8f4a02dc3018afaf835ff6ed813df10b81fbe29c8675811aaad8c43",
+    "backend/scripts/eval/eval_budget.py": "8a61e8f7b7f0ccaf7581870b6c3aaece3397df21fc9159dea957754d3dd26842"
+  },
+  "deployment": false,
+  "pending_new_batches": 0
+}

@@ -1,0 +1,30 @@
+"""Offline reuse/budget audit; no provider client and no ledger writes."""
+import hashlib,json,sqlite3,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+sys.path[:0]=[str(ROOT/'backend'),str(ROOT/'backend/scripts/eval')]
+from judge_agentic_pairs import valid_prior_pairs
+from eval_budget import TOTAL,LIMITS
+OUT=ROOT/'docs/agentic_rag/20261021-ag022-definition-live'
+source=ROOT/'docs/agentic_rag/20261021-batch-live-validation/matched100'
+cases={c['attempt_id']:c for c in json.loads((source/'cases.json').read_text(encoding='utf-8'))}
+read=lambda name:[json.loads(s) for s in (source/name).read_text(encoding='utf-8').splitlines()]
+attempts=read('attempts.jsonl');grades=read('judges.jsonl')
+valid=valid_prior_pairs(grades,cases,attempts)
+db=sqlite3.connect((ROOT/'tmp/eval-budget.sqlite').as_uri()+'?mode=ro',uri=True)
+stages=dict(db.execute('SELECT stage,SUM(amount)/1000000.0 FROM costs GROUP BY stage'))
+stopped=bool(db.execute('SELECT 1 FROM stop LIMIT 1').fetchone())
+unknown=[{'stage':s,'reserved_usd':v/1e6} for s,v in db.execute('SELECT stage,amount FROM costs WHERE settled=0')];db.close()
+loop=json.loads((OUT/'loop.json').read_text(encoding='utf-8'))
+record={'valid_reused_grades':len(valid),'historical_answer_count':len(attempts),'ungraded_historical_answers':len(attempts)-len(valid),
+    'old_outputs_regenerated':0,'old_grade_calls':0,'new_version_claim':'Historical grades are not v12 performance evidence.',
+    'budget':{'committed_usd':round(sum(stages.values()),6),'stages':stages,'total_cap':TOTAL,'stage_caps':LIMITS,'stopped':stopped},
+    'increment_committed_usd':round(sum(stages.values())-loop['budget_before']['committed_usd'],6),
+    'unknown_reservations':unknown,'old_cost_rows_unchanged_at_loop_end':loop['old_cost_rows_unchanged'],
+    'historical_files':{name:hashlib.sha256((source/name).read_bytes()).hexdigest() for name in ['cases.json','attempts.jsonl','judges.jsonl']}}
+campaign=OUT/'grading/campaign.json'
+if campaign.exists():
+    state=json.loads(campaign.read_text(encoding='utf-8'))
+    record['batch_campaign_status']=state.get('status',state.get('state'))
+(OUT/'final-audit.json').write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')
+print(json.dumps(record,ensure_ascii=False))

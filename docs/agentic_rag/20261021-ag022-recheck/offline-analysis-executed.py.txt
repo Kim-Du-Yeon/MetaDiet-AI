@@ -1,0 +1,23 @@
+"""Offline only: compare the single saved model excerpt to saved document bodies."""
+import difflib,json,re,unicodedata
+from pathlib import Path
+root=Path(__file__).resolve().parents[1]
+out=root/'docs/agentic_rag/20261021-ag022-recheck'
+result=json.loads((out/'single-attempt.json').read_text(encoding='utf-8'))
+source=root/'docs/agentic_rag/20261021-batch-live-validation/matched100/attempts.jsonl'
+row=next(r for r in (json.loads(s) for s in source.read_text(encoding='utf-8').splitlines())
+         if r['attempt_id']=='ag-022' and r['condition']=='agentic')
+bodies=[d['text'] for d in row['documents']][:4]
+compact=lambda s:re.sub(r'\s+','',s)
+normalized=lambda s:compact(unicodedata.normalize('NFKC',s))
+checks=[]
+for excerpt in result['decision']['supported_excerpts']:
+    longest=max(difflib.SequenceMatcher(None,excerpt,body,autojunk=False).find_longest_match().size
+                for body in bodies)
+    checks.append({'excerpt_characters':len(excerpt),'exact_body_match':any(excerpt in b for b in bodies),
+        'whitespace_insensitive_match':any(compact(excerpt) in compact(b) for b in bodies),
+        'nfkc_whitespace_insensitive_match':any(normalized(excerpt) in normalized(b) for b in bodies),
+        'longest_exact_contiguous_match_characters':longest})
+record={'paid_calls':0,'checks':checks,'note':'Similarity is diagnostic only; it does not verify or promote evidence.'}
+(out/'quote-analysis.json').write_text(json.dumps(record,indent=2),encoding='utf-8')
+print(json.dumps(record))

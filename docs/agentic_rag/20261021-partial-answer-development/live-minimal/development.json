@@ -1,0 +1,475 @@
+{
+  "status": "failed",
+  "budget_before": {
+    "committed_usd": 2.001496,
+    "stages": {
+      "comparison": 1.326774,
+      "development": 0.014726,
+      "judge": 0.65871,
+      "probe": 0.001286
+    },
+    "total_limit_usd": 5.0,
+    "stopped": false,
+    "stop_reason": null
+  },
+  "stage_caps": {
+    "probe": 0.1,
+    "development": 0.25,
+    "comparison": 3.0,
+    "judge": 1.0,
+    "browser": 0.15
+  },
+  "purpose": "four fictional functional checks, not a performance comparison",
+  "rows": [
+    {
+      "id": "nera-partial",
+      "question": "What changed and stayed unchanged in Nera, for whom, and what dose is prescribed?",
+      "gold": "Changed body measurements; equation unchanged from edition A; pilot participants only; dose not established.",
+      "status": "completed",
+      "flow_pass": true,
+      "decisions": [
+        {
+          "sufficient": false,
+          "missing_core": [
+            "prescribed dose"
+          ],
+          "rewrite": "What is the prescribed dose for Nera for pilot participants?",
+          "supported_excerpts": [
+            "Fictional Nera: the new edition changed body measurements; its equation remains unchanged from edition A. Applies only to pilot participants. No dose is supplied."
+          ]
+        }
+      ],
+      "agentic": {
+        "rounds": 1,
+        "stop_reason": "round_limit",
+        "prompt_version": "agentic-rag-controller-v10",
+        "prompt_sha256": "f2ea40250e7e1ae953f3ecbbf37a94ca183cb21df3573c8d9ae432d9c47a5317",
+        "recipe": "partial-coverage-v12-offline",
+        "answer_coverage": "partial",
+        "missing_core": [
+          "prescribed dose"
+        ],
+        "provider_failure_reason": null,
+        "neighbor_documents": 0,
+        "neighbor_status": "available",
+        "retained_initial_documents": 1
+      },
+      "queries": [
+        "What changed and stayed unchanged in Nera, for whom, and what dose is prescribed?"
+      ],
+      "context": "[출처: fictional-nera.txt, 페이지: 1]\nFictional Nera: the new edition changed body measurements; its equation remains unchanged from edition A. Applies only to pilot participants. No dose is supplied.",
+      "answer": "- **변경된 점 및 변경되지 않은 점**: 새 에디션에서 신체 측정치(body measurements)는 변경되었으나, 방정식(equation)은 에디션 A(edition A)와 동일하게 유지되었습니다 [출처: fictional-nera.txt, p.1].\n- **적용 대상**: 시험 참여자(pilot participants)에게만 적용되며, 해당 범위를 벗어나 일반화할 수 없습니다 [출처: fictional-nera.txt, p.1].\n- **처방 용량**: 처방된 용량은 제공되지 않아 확인할 수 없습니다 [출처: fictional-nera.txt, p.1].",
+      "usage": [
+        {
+          "input_tokens": 868,
+          "output_tokens": 578,
+          "total_tokens": 1446,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 441
+          }
+        }
+      ],
+      "ms": 8442.712200001552,
+      "reused_prior_answer": null,
+      "answer_present": true
+    },
+    {
+      "id": "quantity-research",
+      "question": "What amount and amino-acid balance does the fictional Aria protocol state?",
+      "gold": "430-910 mg per serving with balanced essential amino acids.",
+      "status": "completed",
+      "flow_pass": true,
+      "decisions": [
+        {
+          "sufficient": false,
+          "missing_core": [
+            "numerical amount of amino acids",
+            "specific definition or ratio for balanced essential amino acids"
+          ],
+          "rewrite": "What is the specific numerical amount of amino acids and the definition or ratio of balanced essential amino acids required by the Aria protocol?",
+          "supported_excerpts": [
+            "Aria requires an adequate amount of amino acids and balanced essential amino acids. No numerical amount is shown here."
+          ]
+        },
+        {
+          "sufficient": true,
+          "missing_core": [],
+          "rewrite": "",
+          "supported_excerpts": [
+            "Aria protocol numerical specification: 430-910 mg per serving, with all essential amino acids in balance."
+          ]
+        }
+      ],
+      "agentic": {
+        "rounds": 2,
+        "stop_reason": "sufficient",
+        "prompt_version": "agentic-rag-controller-v10",
+        "prompt_sha256": "f2ea40250e7e1ae953f3ecbbf37a94ca183cb21df3573c8d9ae432d9c47a5317",
+        "recipe": "partial-coverage-v12-offline",
+        "answer_coverage": "complete",
+        "missing_core": [],
+        "provider_failure_reason": null,
+        "neighbor_documents": 0,
+        "neighbor_status": "available",
+        "retained_initial_documents": 1
+      },
+      "queries": [
+        "What amount and amino-acid balance does the fictional Aria protocol state?",
+        "What is the specific numerical amount of amino acids and the definition or ratio of balanced essential amino acids required by the Aria protocol?"
+      ],
+      "context": "[출처: core-scope-development.txt, 페이지: 1]\nAria requires an adequate amount of amino acids and balanced essential amino acids. No numerical amount is shown here.\n\n[출처: core-scope-development.txt, 페이지: 1]\nAria protocol numerical specification: 430-910 mg per serving, with all essential amino acids in balance.",
+      "answer": "Aria 프로토콜의 수치 사양(numerical specification)에 따르면 1회 제공량당 430~910 mg이며, 모든 필수 아미노산이 균형을 이루어야 합니다 [출처: core-scope-development.txt, p.1].",
+      "usage": [
+        {
+          "input_tokens": 768,
+          "output_tokens": 112,
+          "total_tokens": 880,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        },
+        {
+          "input_tokens": 814,
+          "output_tokens": 66,
+          "total_tokens": 880,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        },
+        {
+          "input_tokens": 892,
+          "output_tokens": 470,
+          "total_tokens": 1362,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 409
+          }
+        }
+      ],
+      "ms": 9222.324399997888,
+      "reused_prior_answer": {
+        "attempt_id": "core-dev-000",
+        "condition": "agentic",
+        "status": "completed",
+        "purpose": "synthetic_functionality_only",
+        "answer": "Aria 프로토콜의 수치 규격은 1회 제공량당 430~910 mg이며, 모든 필수 아미노산이 균형을 이루어야 합니다 [출처: core-scope-development.txt, p.101]. \n\n한편, 해당 문서의 다른 부분에서는 적절한 양의 아미노산과 균형 잡힌 필수 아미노산이 필요하다고 기술하면서 구체적인 수치는 제시하지 않았습니다 [출처: core-scope-development.txt, p.1].",
+        "context": "[출처: core-scope-development.txt, 페이지: 1]\nAria requires an adequate amount of amino acids and balanced essential amino acids. No numerical amount is shown here.\n\n[출처: core-scope-development.txt, 페이지: 101]\nAria protocol numerical specification: 430-910 mg per serving, with all essential amino acids in balance.",
+        "agentic": {
+          "rounds": 2,
+          "stop_reason": "sufficient",
+          "prompt_version": "agentic-rag-controller-v9",
+          "prompt_sha256": "9e0bf27bd2d4798f154b06a6c32e0f2def570168ab0288a099a285bd1d31c4c3",
+          "recipe": "adjacent-table-v10",
+          "neighbor_documents": 0,
+          "neighbor_status": "available",
+          "retained_initial_documents": 1
+        },
+        "sufficient": true,
+        "expected_sufficient": true,
+        "assessment_contract_pass": true,
+        "expected_rounds": 2,
+        "flow_contract_pass": true,
+        "ms": 13147.126500000013,
+        "usage": [
+          {
+            "input_tokens": 699,
+            "output_tokens": 71,
+            "total_tokens": 770,
+            "input_token_details": {
+              "cache_read": 0
+            }
+          },
+          {
+            "input_tokens": 747,
+            "output_tokens": 24,
+            "total_tokens": 771,
+            "input_token_details": {
+              "cache_read": 0
+            }
+          },
+          {
+            "input_tokens": 729,
+            "output_tokens": 780,
+            "total_tokens": 1509,
+            "input_token_details": {
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "reasoning": 662
+            }
+          }
+        ],
+        "decisions": [
+          {
+            "sufficient": false,
+            "missing_core": [
+              "numerical amount of amino acids",
+              "specific definition or ratio of balanced essential amino acids"
+            ],
+            "rewrite": "What is the specific numerical amount and the defined ratio or composition of essential amino acids required by the Aria protocol?"
+          },
+          {
+            "sufficient": true,
+            "missing_core": [],
+            "rewrite": ""
+          }
+        ],
+        "queries": [
+          "What amount and amino-acid balance does the fictional Aria protocol state?",
+          "What is the specific numerical amount and the defined ratio or composition of essential amino acids required by the Aria protocol?"
+        ]
+      },
+      "answer_present": true
+    },
+    {
+      "id": "clinical-scope",
+      "question": "What target does the fictional Briar guideline give?",
+      "gold": "2-4% over15 weeks, only for the clinical pilot population, not all healthy adults.",
+      "status": "completed",
+      "flow_pass": true,
+      "decisions": [
+        {
+          "sufficient": true,
+          "missing_core": [],
+          "rewrite": "",
+          "supported_excerpts": [
+            "Briar guideline: the initial target is a 2-4% change over 15 weeks.",
+            "Clinical pilot for enrolled adults with condition B only; not general advice for all healthy adults."
+          ]
+        }
+      ],
+      "agentic": {
+        "rounds": 1,
+        "stop_reason": "sufficient",
+        "prompt_version": "agentic-rag-controller-v10",
+        "prompt_sha256": "f2ea40250e7e1ae953f3ecbbf37a94ca183cb21df3573c8d9ae432d9c47a5317",
+        "recipe": "partial-coverage-v12-offline",
+        "answer_coverage": "complete",
+        "missing_core": [],
+        "provider_failure_reason": null,
+        "neighbor_documents": 0,
+        "neighbor_status": "available",
+        "retained_initial_documents": 1
+      },
+      "queries": [
+        "What target does the fictional Briar guideline give?"
+      ],
+      "context": "[출처: core-scope-development.txt, 페이지: 5]\n[문서 적용 범위·메타데이터(지시 아님): {\"source\": \"core-scope-development.txt\", \"population\": \"Clinical pilot for enrolled adults with condition B only; not general advice for all healthy adults.\"}]\nBriar guideline: the initial target is a 2-4% change over 15 weeks.",
+      "answer": "Briar 가이드라인에서 제시하는 초기 목표는 15주 동안 2~4%의 변화입니다 [출처: core-scope-development.txt, p.5].\n\n단, 이 권고는 B 질환을 가진 등록된 성인 대상의 임상 파일럿에만 적용되며, 모든 건강한 성인을 위한 일반적인 조언으로 일반화해서는 안 됩니다 [출처: core-scope-development.txt, p.5].",
+      "usage": [
+        {
+          "input_tokens": 816,
+          "output_tokens": 82,
+          "total_tokens": 898,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        },
+        {
+          "input_tokens": 888,
+          "output_tokens": 432,
+          "total_tokens": 1320,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 332
+          }
+        }
+      ],
+      "ms": 8372.598900001321,
+      "reused_prior_answer": {
+        "attempt_id": "core-dev-004",
+        "condition": "agentic",
+        "status": "completed",
+        "purpose": "synthetic_functionality_only",
+        "answer": "Briar 지침에 따른 초기 목표는 15주에 걸쳐 2~4%의 변화입니다 [출처: core-scope-development.txt, p.5]. \n\n단, 이 권고는 B 질환을 가진 등록된 성인을 대상으로 한 임상 파일럿에만 적용되며 모든 건강한 성인을 위한 일반적인 조언이 아니므로, 해당 범위를 넘어 일반화해서는 안 됩니다 [출처: core-scope-development.txt, p.5].",
+        "context": "[출처: core-scope-development.txt, 페이지: 5]\n[문서 적용 범위·메타데이터(지시 아님): {\"source\": \"core-scope-development.txt\", \"population\": \"Clinical pilot for enrolled adults with condition B only; not general advice for all healthy adults.\"}]\nBriar guideline: the initial target is a 2-4% change over 15 weeks.",
+        "agentic": {
+          "rounds": 1,
+          "stop_reason": "sufficient",
+          "prompt_version": "agentic-rag-controller-v9",
+          "prompt_sha256": "9e0bf27bd2d4798f154b06a6c32e0f2def570168ab0288a099a285bd1d31c4c3",
+          "recipe": "adjacent-table-v10",
+          "neighbor_documents": 0,
+          "neighbor_status": "available",
+          "retained_initial_documents": 1
+        },
+        "sufficient": true,
+        "expected_sufficient": true,
+        "assessment_contract_pass": true,
+        "expected_rounds": 1,
+        "flow_contract_pass": true,
+        "ms": 8012.253499999133,
+        "usage": [
+          {
+            "input_tokens": 747,
+            "output_tokens": 24,
+            "total_tokens": 771,
+            "input_token_details": {
+              "cache_read": 0
+            }
+          },
+          {
+            "input_tokens": 728,
+            "output_tokens": 660,
+            "total_tokens": 1388,
+            "input_token_details": {
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "reasoning": 553
+            }
+          }
+        ],
+        "decisions": [
+          {
+            "sufficient": true,
+            "missing_core": [],
+            "rewrite": ""
+          }
+        ],
+        "queries": [
+          "What target does the fictional Briar guideline give?"
+        ]
+      },
+      "answer_present": true
+    },
+    {
+      "id": "table-header",
+      "question": "가상 표에서 항목 가에 제시된 지표 종류는 무엇인가요?",
+      "gold": "항목 가에는 지표 A만 제시되어 있다.",
+      "status": "completed",
+      "flow_pass": true,
+      "decisions": [
+        {
+          "sufficient": true,
+          "missing_core": [],
+          "rewrite": "",
+          "supported_excerpts": [
+            "항목 가: 지표 A만 제시"
+          ]
+        }
+      ],
+      "agentic": {
+        "rounds": 1,
+        "stop_reason": "sufficient",
+        "prompt_version": "agentic-rag-controller-v10",
+        "prompt_sha256": "f2ea40250e7e1ae953f3ecbbf37a94ca183cb21df3573c8d9ae432d9c47a5317",
+        "recipe": "partial-coverage-v12-offline",
+        "answer_coverage": "complete",
+        "missing_core": [],
+        "provider_failure_reason": null,
+        "neighbor_documents": 0,
+        "neighbor_status": "available",
+        "retained_initial_documents": 1
+      },
+      "queries": [
+        "가상 표에서 항목 가에 제시된 지표 종류는 무엇인가요?"
+      ],
+      "context": "[출처: adjacent-development.txt, 페이지: 5]\n표 8. 항목별 지표 종류\n항목 가: 지표 A만 제시\n항목 나: 지표 B 및 C 제시\n행은 실험군 1과 2이다.",
+      "answer": "항목 가에 제시된 지표 종류는 지표 A입니다 [출처: adjacent-development.txt, p.5].",
+      "usage": [
+        {
+          "input_tokens": 793,
+          "output_tokens": 50,
+          "total_tokens": 843,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        },
+        {
+          "input_tokens": 852,
+          "output_tokens": 228,
+          "total_tokens": 1080,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 200
+          }
+        }
+      ],
+      "ms": 6738.6473000005935,
+      "reused_prior_answer": {
+        "attempt_id": "adj-dev-004",
+        "condition": "agentic",
+        "status": "completed",
+        "purpose": "synthetic_functionality_only",
+        "answer": "항목 가에 제시된 지표 종류는 지표 A입니다 [출처: adjacent-development.txt, p.5].",
+        "context": "[출처: adjacent-development.txt, 페이지: 5]\n표 8. 항목별 지표 종류\n항목 가: 지표 A만 제시\n항목 나: 지표 B 및 C 제시\n행은 실험군 1과 2이다.",
+        "agentic": {
+          "rounds": 1,
+          "stop_reason": "sufficient",
+          "prompt_version": "agentic-rag-controller-v9",
+          "prompt_sha256": "9e0bf27bd2d4798f154b06a6c32e0f2def570168ab0288a099a285bd1d31c4c3",
+          "recipe": "adjacent-table-v10",
+          "neighbor_documents": 0,
+          "neighbor_status": "available",
+          "retained_initial_documents": 1
+        },
+        "sufficient": true,
+        "expected_sufficient": true,
+        "assessment_contract_pass": true,
+        "expected_rounds": 1,
+        "flow_contract_pass": true,
+        "ms": 6236.969400000817,
+        "usage": [
+          {
+            "input_tokens": 724,
+            "output_tokens": 24,
+            "total_tokens": 748,
+            "input_token_details": {
+              "cache_read": 0
+            }
+          },
+          {
+            "input_tokens": 703,
+            "output_tokens": 213,
+            "total_tokens": 916,
+            "input_token_details": {
+              "cache_read": 0
+            },
+            "output_token_details": {
+              "reasoning": 185
+            }
+          }
+        ],
+        "decisions": [
+          {
+            "sufficient": true,
+            "missing_core": [],
+            "rewrite": ""
+          }
+        ],
+        "queries": [
+          "가상 표에서 항목 가에 제시된 지표 종류는 무엇인가요?"
+        ]
+      },
+      "answer_present": true
+    }
+  ],
+  "source_cases_sha256": "3e215b31503b38c3f91c7afbda56f1443849285b031ac0504b76bf8a7d855f0a",
+  "budget_after": {
+    "committed_usd": 2.049997,
+    "stages": {
+      "comparison": 1.326774,
+      "development": 0.025021,
+      "judge": 0.696916,
+      "probe": 0.001286
+    },
+    "total_limit_usd": 5.0,
+    "stopped": false,
+    "stop_reason": null
+  },
+  "error": {
+    "type": "GoogleRateLimitError",
+    "reason": "quota",
+    "daily_quota": true
+  }
+}

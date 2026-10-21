@@ -1,3 +1,5 @@
+RAG 조합 실험·채택 판단(최종): [Parser·Chunking·Embedding·검색·Jev·Agentic 비교 인덱스](docs/rag_experiments/RAG_RECIPE_DECISIONS.md). 일반 RAG/Agentic 조건별100시도 완료, Pro 내용 정답85%/88%, 정상 종료 확인 Agentic 정답84%. 일관된 운영 우위가 없어 기존 Hybrid/no-reranker 유지. [전체 결과·오류·한계](docs/agentic_rag/20261021-rag-vs-agentic-v14-complete100/README.md).
+
 Agentic RAG 인접 청크·한국어 표 후속 (2026-10-21): [구현·별도 개발20문항 검증·전후100시도씩 원본과402 중단](docs/agentic_rag/20261021-adjacent-table/README.md). 합성 개발 Pro 정답16/20→20/20, 충실도20/20 유지. 본 비교는 크레딧 소진으로 요청 완료53/54건·최종 평가와 비용 미완료여서 운영 개선을 주장하지 않는다. 기본OFF·미배포. 이후 실패 사례 소규모 확인·저장 답변 재채점·사전 비용 상한을 우선한다.
 
 Agentic RAG 핵심 수치·적용 범위 재검증 (2026-10-21): [별도 개발12개·새 전후100시도씩·Pro200평가와 남은 검색 한계](docs/agentic_rag/20261021-core-scope/README.md). 정답률89→95%, 충실도100→100%, p95 17.029→21.410초, 모델+임베딩 API 추정/100시도$0.597061→$0.688828. 적용 범위 누락4건 회복, 다만 근거 페이지80→76%로 사전 게이트 미통과. 기본OFF·공개 배포 보류.

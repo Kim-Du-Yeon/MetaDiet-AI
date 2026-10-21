@@ -1,0 +1,92 @@
+{
+  "attempt_id": "ag-022",
+  "status": "controller_pass",
+  "budget_before": {
+    "committed_usd": 2.058319,
+    "stages": {
+      "comparison": 1.328802,
+      "development": 0.025021,
+      "judge": 0.70321,
+      "probe": 0.001286
+    },
+    "total_limit_usd": 5.0,
+    "stopped": false,
+    "stop_reason": null
+  },
+  "stage_caps": {
+    "probe": 0.1,
+    "development": 0.25,
+    "comparison": 3.0,
+    "judge": 1.0,
+    "browser": 0.15
+  },
+  "maximum_paid_calls": 1,
+  "retrieval_calls": 0,
+  "answer_calls": 0,
+  "judge_calls": 0,
+  "stored_context_sha256": "c40cd5de0b30e6b475f2f3ea466267614297e18dda6379e142cb1d8d92a71239",
+  "assessed_context_sha256": "f9f21f9e3ccdb79977bcda7dc2b01c7c7193d2e923ccaec59eb4e0bff7c3fb45",
+  "controller_sha256": "644e5b058eab190b4f43bb3e9d6d148b947e279c351e601056e052aa4d326863",
+  "diagnostics": [
+    {
+      "prompt_version": "agentic-rag-controller-v11",
+      "prompt_sha256": "644e5b058eab190b4f43bb3e9d6d148b947e279c351e601056e052aa4d326863",
+      "context_chars": 4538,
+      "output_token_limit": 512,
+      "finish_reason": "STOP",
+      "usage_status": "complete",
+      "usage": {
+        "input_tokens": 2107,
+        "output_tokens": 103,
+        "total_tokens": 2210,
+        "reasoning_tokens": null
+      },
+      "parsing_error_present": false,
+      "parsing_error_type": null,
+      "parsed_present": true,
+      "failure_reason": null
+    }
+  ],
+  "validation_issues": [],
+  "budget_after": {
+    "committed_usd": 2.0590010000000003,
+    "stages": {
+      "comparison": 1.329484,
+      "development": 0.025021,
+      "judge": 0.70321,
+      "probe": 0.001286
+    },
+    "total_limit_usd": 5.0,
+    "stopped": false,
+    "stop_reason": null
+  },
+  "old_cost_rows_unchanged": true,
+  "new_cost_rows": [
+    [
+      "2f6e2d3fa04d40dbab32173f6aa6744b",
+      "comparison",
+      682,
+      1
+    ]
+  ],
+  "contract_pass": true,
+  "decision": {
+    "sufficient": true,
+    "missing_core": [],
+    "rewrite": "",
+    "supported_excerpts": [
+      "The Dietary Reference Intake (DRI) value for energy is the Estimated Energy Requirement (EER), which is defined as the average dietary energy intake that is predicted to maintain energy balance in an adult of a defined age, sex, weight, height, level of physical activity, and life stage, consistent with maintaining health."
+    ]
+  },
+  "usage": [
+    {
+      "input_tokens": 2107,
+      "output_tokens": 103,
+      "total_tokens": 2210,
+      "input_token_details": {
+        "cache_read": 0
+      }
+    }
+  ],
+  "transport_attempts": 1
+}

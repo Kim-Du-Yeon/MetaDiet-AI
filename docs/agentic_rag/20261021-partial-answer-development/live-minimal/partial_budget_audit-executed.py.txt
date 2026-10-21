@@ -1,0 +1,15 @@
+import json,sys,sqlite3
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT/'backend/scripts/eval'))
+from eval_budget import Budget,LIMITS
+out=ROOT/'docs/agentic_rag/20261021-partial-answer-development/live-minimal'
+b=Budget(ROOT/'tmp/eval-budget.sqlite')
+with b.connect() as db:
+    unknown=[{'stage':s,'reserved_usd':v/1e6,'settled':bool(done)}
+             for s,v,done in db.execute('SELECT stage,amount,settled FROM costs WHERE settled=0')]
+    held=sum(v[0] for v in db.execute('SELECT amount FROM costs WHERE settled=1'))/1e6
+record={'budget':b.summary(),'stage_caps':LIMITS,'unknown_active_reservations':unknown,
+    'note':'Committed includes conservative unknown failed-call holds and pending Batch reservations, not an invoice.'}
+(out/'budget-audit.json').write_text(json.dumps(record,indent=2),encoding='utf-8')
+print(json.dumps(record))

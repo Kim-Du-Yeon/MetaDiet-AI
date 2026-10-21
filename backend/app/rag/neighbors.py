@@ -62,9 +62,12 @@ class NeighborIndex:
         for index,(score,doc) in sorted(candidates.items(),key=lambda item:(-item[1][0],item[0]))[:limit]:
             text=doc.page_content
             hits=[text.casefold().find(term) for term in terms if term in text.casefold()]
-            starts={max(0,min(hit-180,len(text)-700)) for hit in hits} or {0}
-            start=min(starts,key=lambda offset:(-sum(term in text[offset:offset+700].casefold() for term in terms),offset))
-            end=min(len(text),start+700)
+            # Keep a normal ingestion chunk intact, including trailing qualifiers.
+            # Oversized legacy chunks still get a bounded contiguous window.
+            window = 1200
+            starts={max(0,min(hit-180,len(text)-window)) for hit in hits} or {0}
+            start=min(starts,key=lambda offset:(-sum(term in text[offset:offset+window].casefold() for term in terms),offset))
+            end=min(len(text),start+window)
             # Exact contiguous excerpt; never invent a table cell or rewrite text.
             out.append(Document(page_content=text[start:end],metadata={**doc.metadata,
                 'neighbor_context':True,'neighbor_chunk_index':index,

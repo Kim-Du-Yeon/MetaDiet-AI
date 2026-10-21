@@ -1,0 +1,32 @@
+{
+  "status": "stopped_on_first_candidate_failure",
+  "baseline_reused": 100,
+  "candidate_started": 1,
+  "candidate_failed": 1,
+  "candidate_unstarted": 99,
+  "new_judge_calls": 0,
+  "failure": "excerpt_mismatch",
+  "rejected_excerpts": 3,
+  "rollout_gate": false,
+  "previous_committed_usd": 2.076424,
+  "committed_usd": 2.077268,
+  "increment_usd": 0.000844,
+  "stages": {
+    "comparison": 1.341829,
+    "development": 0.025021,
+    "judge": 0.709132,
+    "probe": 0.001286
+  },
+  "stage_caps": {
+    "probe": 0.1,
+    "development": 0.25,
+    "comparison": 3,
+    "judge": 1,
+    "browser": 0.15
+  },
+  "total_cap_usd": 5,
+  "unsettled_reservations_usd": [
+    0.016255,
+    0.002845
+  ]
+}

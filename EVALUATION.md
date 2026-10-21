@@ -1,3 +1,7 @@
+## Agentic을 기존 RAG 실험 축에 추가: 조건별100시도 완료
+
+[조합별 인덱스·지표 종류·선택 근거](docs/rag_experiments/RAG_RECIPE_DECISIONS.md), [일반 dense RAG85% 대 Agentic88%의 전체 결과와 오류](docs/agentic_rag/20261021-rag-vs-agentic-v14-complete100/README.md). 정상 종료 확인 Agentic 정답84/100, 기존 종료 메타데이터 미수집. 오답/보류/실패 포함100시도씩과Pro200판정을 완료했다. 반복 개발셋·역사적 기준선의 프롬프트/worker 차이를 공개하며, 운영 미채택·기존 Hybrid/no-reranker 유지로 판단했다. 아래 이전 중단 기록 및 독립20문항 Ragas 결과는 평가 범위가 다른 원본으로 유지한다.
+
 ## Bounded Agentic RAG comparison (2026-10-20)
 
 [Protocol, raw matched attempts, evaluator recovery and deployment gate](docs/agentic_rag/20261020/README.md). This is a read-only RAG-boundary development comparison, not an end-to-end user trial.100 attempts per condition repeat40 source-reviewed development questions; do not claim100 independent questions or reuse the sealed final20 to tune the controller. Failed serving attempts and failed judging remain in denominators. The Pro output-cap recovery regrades both full conditions without regenerating answers and preserves original cost/failures. Embedding SDK missing token metadata is reported as cost incompleteness rather than zero. Activation requires the predeclared quality/latency/cost gate; default is OFF.

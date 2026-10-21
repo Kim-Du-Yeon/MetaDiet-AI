@@ -1,0 +1,70 @@
+"""Generate one answer from the stored successful definition re-search result."""
+import asyncio,json,sys
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+sys.path[:0]=[str(ROOT/'backend'),str(ROOT/'backend/scripts/eval')]
+from dotenv import load_dotenv
+from eval_budget import Budget,BudgetStop,install_transport_guard
+from benchmark_agentic_rag import Usage,safe_error
+OUT=ROOT/'docs/agentic_rag/20261021-ag022-definition-live'
+
+async def main():
+    if '--allow-paid' not in sys.argv:raise SystemExit('Explicit authorization required')
+    path=OUT/'answer.json'
+    if path.exists():raise SystemExit('Answer already attempted; no repeat')
+    loop=json.loads((OUT/'loop.json').read_text(encoding='utf-8'))
+    if loop['status']!='research_gate_pass':raise SystemExit('Research did not pass')
+    load_dotenv(ROOT/'backend/.env',override=True)
+    from app.rag import qa
+    from app.core.llm import get_chat_model
+    from app.core.config import get_settings
+    from langchain_core.documents import Document
+    from google.genai._api_client import BaseApiClient
+    get_settings().model_max_retries=0
+    budget=Budget(ROOT/'tmp/eval-budget.sqlite')
+    case=next(c for c in json.loads((ROOT/'docs/agentic_rag/20261021-batch-live-validation/matched100/cases.json').read_text(encoding='utf-8')) if c['attempt_id']=='ag-022')
+    stored=loop['final_result'];docs=[Document(page_content=d['text'],metadata=d['metadata']) for d in stored['documents']]
+    result={**stored,'docs':docs,'context_docs':docs}
+    row={'attempt_id':'ag-022','status':'entered','question':case['question'],'gold_answer':case['gold_answer'],
+        'context':result['context'],'budget_before':budget.summary(),'reused_research_result':True,
+        'new_retrieval_calls':0,'new_controller_calls':0}
+    def save():
+        row['budget_after']=budget.summary();path.write_text(json.dumps(row,ensure_ascii=False,indent=2),encoding='utf-8')
+    save()
+    class Model:
+        def __init__(self):self.inner=get_chat_model(temperature=0,max_tokens=2048)
+        async def ainvoke(self,*a,**kw):
+            response=await self.inner.ainvoke(*a,**kw)
+            finish=str((response.response_metadata or {}).get('finish_reason',''))
+            row['finish_reason']=finish if finish in {'STOP','MAX_TOKENS','SAFETY','OTHER'} else 'UNRECOGNIZED'
+            return response
+    qa._llm=Model()
+    install_transport_guard(budget,'comparison')
+    sync,asynchronous=BaseApiClient.request,BaseApiClient.async_request
+    count=0
+    def check(method):
+        nonlocal count
+        if method.lower()!='get':
+            if count>=1:raise BudgetStop('One answer call only')
+            count+=1
+    def request(client,method,*a,**kw):check(method);return sync(client,method,*a,**kw)
+    async def async_request(client,method,*a,**kw):check(method);return await asynchronous(client,method,*a,**kw)
+    BaseApiClient.request=request;BaseApiClient.async_request=async_request
+    usage=Usage()
+    try:
+        answer=await qa.answer_from_knowledge(case['question'],retrieval_result=result,config={'callbacks':[usage]})
+        passed=bool(answer['answer'].strip()) and answer['answer']!=qa.NO_EVIDENCE and row['finish_reason']=='STOP'
+        row.update(status='answer_gate_pass' if passed else 'answer_gate_failed',answer=answer['answer'])
+        if passed:
+            batch=OUT/'grading';batch.mkdir(exist_ok=True)
+            for name,content in [('cases.json',json.dumps([case],ensure_ascii=False,indent=2)),
+                ('attempts.jsonl',json.dumps({'attempt_id':'ag-022','condition':'v12-definition-research',
+                    'status':'completed','answer':answer['answer'],'context':result['context']},ensure_ascii=False)+'\n'),('prior.jsonl','')]:
+                with (batch/name).open('x',encoding='utf-8') as f:f.write(content)
+    except BudgetStop as exc:row.update(status='budget_stopped',reason=str(exc))
+    except Exception as exc:row.update(status='failed',error=safe_error(exc))
+    finally:
+        row.update(usage=usage.calls,transport_attempts=count);save()
+        print(json.dumps({k:row[k] for k in ('status','transport_attempts','budget_after')}),flush=True)
+
+asyncio.run(main())

@@ -12,7 +12,7 @@ import contextvars
 from contextlib import contextmanager
 from pathlib import Path
 
-LIMITS = {"probe": .10, "development": .25, "comparison": 3., "judge": 1., "browser": .15}
+LIMITS = {"probe": .05, "development": .05, "comparison": 2.6, "judge": 2.2, "browser": .10}
 TOTAL = 5.
 BATCH_RESERVATION = contextvars.ContextVar("prepaid_eval_batch", default=None)
 PRICES = {"gemini-3.8-flash": (.75, 3.75),

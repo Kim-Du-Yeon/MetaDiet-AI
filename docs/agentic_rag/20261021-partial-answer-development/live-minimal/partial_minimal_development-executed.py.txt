@@ -1,0 +1,117 @@
+"""Bounded live functional checks, reusing frozen fictional cases and prior grades."""
+import asyncio, json, sys, time, hashlib
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+sys.path[:0]=[str(ROOT/'backend'),str(ROOT/'backend/scripts/eval')]
+from dotenv import load_dotenv
+from eval_budget import Budget, BudgetStop, install_transport_guard, LIMITS
+from benchmark_agentic_rag import Usage, Grade, safe_error
+from pydantic import BaseModel, Field
+
+OUT=ROOT/'docs/agentic_rag/20261021-partial-answer-development/live-minimal'
+
+class CheckedGrade(BaseModel):
+    case_id: str
+    correct: bool
+    faithful: bool
+    reason: str
+
+class Grades(BaseModel):
+    grades: list[CheckedGrade] = Field(min_length=4,max_length=4)
+
+async def main():
+    if '--allow-paid' not in sys.argv: raise SystemExit('Explicit authorization required')
+    path=OUT/'development.json'
+    if path.exists(): raise SystemExit('Already attempted; inspect saved output before retry')
+    load_dotenv(ROOT/'backend/.env',override=True)
+    from app.rag import agentic,qa
+    from app.core.config import get_settings
+    from app.core.llm import get_chat_model
+    from langchain_core.documents import Document
+    from google.genai._api_client import BaseApiClient
+    settings=get_settings();settings.model_max_retries=0
+    qa._llm.max_tokens=2048
+    budget=Budget(ROOT/'tmp/eval-budget.sqlite')
+    original={key:getattr(BaseApiClient,key) for key in ('request','async_request','request_streamed','async_request_streamed')}
+    def stage(name):
+        for key,value in original.items():setattr(BaseApiClient,key,value)
+        install_transport_guard(budget,name)
+    probe=json.loads((OUT/'schema-probe.json').read_text(encoding='utf-8'))
+    if not probe.get('contract_pass'):raise SystemExit('Schema probe failed')
+    prior=ROOT/'docs/agentic_rag/20261021-adjacent-table/development-v4'
+    all_cases=json.loads((prior/'cases.json').read_text(encoding='utf-8'))
+    selected=[c for c in all_cases if c['id'] in {'quantity-research','clinical-scope','table-header'}]
+    cached=[json.loads(line) for line in (prior/'attempts.jsonl').read_text(encoding='utf-8').splitlines()]
+    selected.insert(0,{'id':'nera-partial','question':probe['question'],'context':probe['context'].split('\n',1)[1],
+        'source':'fictional-nera.txt','page':1,'gold_answer':'Changed body measurements; equation unchanged from edition A; pilot participants only; dose not established.',
+        'expected_sufficient':True,'expected_rounds':1})
+    report={'status':'entered','budget_before':budget.summary(),'stage_caps':LIMITS,
+            'purpose':'four fictional functional checks, not a performance comparison','rows':[],
+            'source_cases_sha256':hashlib.sha256((prior/'cases.json').read_bytes()).hexdigest()}
+    def save():
+        report['budget_after']=budget.summary()
+        path.write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+    save()
+    try:
+        budget.reserve('development',.10,check_only=True)
+        budget.reserve('judge',.08,check_only=True)
+        stage('development')
+        for case in selected:
+            usage=Usage();queries=[];decisions=[]
+            row={'id':case['id'],'question':case['question'],'gold':case['gold_answer'],'status':'entered'}
+            async def fetch(query,**kwargs):
+                queries.append(query)
+                text=case.get('research_context',case['context']) if len(queries)>1 else case['context']
+                doc=Document(page_content=text,metadata={'source_file':case['source'],'page':case['page'],
+                    **({'population':case['population']} if case.get('population') else {})})
+                return {'grounded':True,'max_score':.9,'docs':[doc]}
+            async def assess(question,value):
+                if case['id']=='nera-partial':
+                    decision=agentic.Assessment.model_validate(probe['decision'])
+                else:
+                    decision=await agentic.model_assessment(question,value,config={'callbacks':[usage]})
+                decisions.append(decision.model_dump());return decision
+            async def expand(*args):return []
+            start=time.perf_counter()
+            result=await agentic.bounded_retrieve(case['question'],retrieve=fetch,assess=assess,expand=expand,
+                limits=agentic.Limits(max_rounds=1 if case['id']=='nera-partial' else 2))
+            flow=result['grounded']==case['expected_sufficient'] and result['agentic']['rounds']==case['expected_rounds']
+            if case['id']=='nera-partial':flow=flow and result['agentic']['answer_coverage']=='partial'
+            row.update(flow_pass=flow,decisions=decisions,agentic=result['agentic'],queries=queries,
+                       context=result.get('context',''))
+            if not flow:
+                row.update(status='flow_failed',usage=usage.calls);report['rows'].append(row)
+                report['status']='development_gate_failed';save();return
+            answer=await qa.answer_from_knowledge(case['question'],retrieval_result=result,config={'callbacks':[usage]})
+            previous=next((r for r in cached if r['attempt_id']==case.get('attempt_id') and r['condition']=='agentic'),None)
+            row.update(status='completed',answer=answer['answer'],usage=usage.calls,ms=(time.perf_counter()-start)*1000,
+                       reused_prior_answer=previous,answer_present=answer['answer']!=qa.NO_EVIDENCE)
+            report['rows'].append(row);save()
+            print(json.dumps({'id':case['id'],'flow_pass':flow,'answer_present':row['answer_present']}),flush=True)
+            if not row['answer_present']:
+                report['status']='answer_gate_failed';save();return
+        stage('judge')
+        model=get_chat_model(role='eval',temperature=0,max_tokens=2048,thinking_level='low')
+        usage=Usage()
+        payload=[{key:row[key] for key in ('id','question','gold','answer','context')} for row in report['rows']]
+        from rejudge_agentic_rag import SYSTEM
+        raw=await model.with_structured_output(Grades,include_raw=True).ainvoke([
+            ('system',SYSTEM+' Return one grade per supplied id as case_id, no missing or duplicate IDs. Partial answers are correct only when every supported gold fact and explicit unresolved limitation are included.'),
+            ('human',json.dumps(payload,ensure_ascii=False))],config={'callbacks':[usage]})
+        finish=str((raw['raw'].response_metadata or {}).get('finish_reason',''))
+        if raw.get('parsing_error') or raw.get('parsed') is None or 'MAX_TOKENS' in finish.upper():
+            raise ValueError('Invalid or truncated development judge')
+        grades=raw['parsed'].model_dump()['grades']
+        if len({g['case_id'] for g in grades})!=4 or {g['case_id'] for g in grades}!={c['id'] for c in selected}:
+            raise ValueError('Judge key mismatch')
+        report.update(grades=grades,judge_usage=usage.calls,judge_finish_reason=finish,
+            status='functional_pass' if all(g['correct'] and g['faithful'] for g in grades) else 'quality_gate_failed')
+    except BudgetStop as exc:
+        report.update(status='budget_stopped',reason=str(exc))
+    except Exception as exc:
+        report.update(status='failed',error=safe_error(exc))
+    finally:
+        save()
+        print(json.dumps({'status':report['status'],'budget_after':report['budget_after']},ensure_ascii=False),flush=True)
+
+asyncio.run(main())

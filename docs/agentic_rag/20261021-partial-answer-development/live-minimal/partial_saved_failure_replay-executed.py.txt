@@ -1,0 +1,72 @@
+"""Small fixed-evidence replay of stored failures, not a new retrieval benchmark."""
+import asyncio,json,sys,time,hashlib
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+sys.path[:0]=[str(ROOT/'backend'),str(ROOT/'backend/scripts/eval')]
+from dotenv import load_dotenv
+from eval_budget import Budget,BudgetStop,install_transport_guard
+from benchmark_agentic_rag import Usage,safe_error
+OUT=ROOT/'docs/agentic_rag/20261021-partial-answer-development/live-minimal'
+
+async def main():
+    if '--allow-paid' not in sys.argv:raise SystemExit('Explicit authorization required')
+    path=OUT/'failure-replay.json'
+    if path.exists():raise SystemExit('Refuse repeated generation')
+    development_grades=[json.loads(s) for s in (OUT/'batch-grading/campaign.grades.jsonl').read_text(encoding='utf-8').splitlines()]
+    if len(development_grades)!=4 or not all(r['status']=='completed' and r['correct'] and r['faithful'] for r in development_grades):
+        raise SystemExit('Development quality gate not passed')
+    load_dotenv(ROOT/'backend/.env',override=True)
+    from app.rag import agentic,qa
+    from app.core.config import get_settings
+    from langchain_core.documents import Document
+    get_settings().model_max_retries=0;qa._llm.max_tokens=2048
+    budget=Budget(ROOT/'tmp/eval-budget.sqlite')
+    source=ROOT/'docs/agentic_rag/20261021-batch-live-validation/matched100'
+    cases={r['attempt_id']:r for r in json.loads((source/'cases.json').read_text(encoding='utf-8'))}
+    attempts=[json.loads(s) for s in (source/'attempts.jsonl').read_text(encoding='utf-8').splitlines()]
+    old={r['attempt_id']:r for r in attempts if r['condition']=='agentic'}
+    record={'status':'entered','scope':'fixed stored candidate evidence; no new retrieval, no speed claim',
+        'budget_before':budget.summary(),'rows':[]}
+    def save():
+        record['budget_after']=budget.summary()
+        path.write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')
+    save()
+    try:
+        budget.reserve('comparison',.12,check_only=True)
+        budget.reserve('judge',.10,check_only=True)
+        install_transport_guard(budget,'comparison')
+        for key in ['ag-022','ag-029','ag-059','ag-036']:
+            previous=old[key];case=cases[key];u=Usage();start=time.perf_counter()
+            documents=[Document(page_content=d['text'],metadata=d['metadata']) for d in previous['documents']]
+            if not previous.get('context') or not documents:raise ValueError('Missing stored context')
+            async def fetch(q,**kwargs):
+                return {'grounded':True,'max_score':0,'docs':documents,'context':previous['context']}
+            decisions=[]
+            async def assess(q,result):
+                d=await agentic.model_assessment(q,result,config={'callbacks':[u]})
+                decisions.append(d.model_dump());return d
+            async def expand(*args):return []
+            result=await agentic.bounded_retrieve(case['question'],retrieve=fetch,assess=assess,
+                expand=expand,limits=agentic.Limits(max_rounds=1))
+            if result['agentic']['stop_reason'] in {'controller_error','retrieval_error','timeout'}:
+                raise ValueError('Replay controller failed')
+            answer=await qa.answer_from_knowledge(case['question'],retrieval_result=result,config={'callbacks':[u]})
+            row={'attempt_id':key,'question':case['question'],'gold_answer':case['gold_answer'],
+                'status':'completed','condition':'v10-fixed-evidence','answer':answer['answer'],
+                'context':answer['context'],'decisions':decisions,'agentic':result['agentic'],
+                'usage':u.calls,'ms':(time.perf_counter()-start)*1000,'previous_answer':previous['answer'],
+                'previous_context_sha256':hashlib.sha256(previous['context'].encode()).hexdigest()}
+            record['rows'].append(row);save()
+            print(json.dumps({'attempt_id':key,'answer_coverage':result['agentic']['answer_coverage']}),flush=True)
+        record['status']='ready_for_batch_grading'
+        batch=OUT/'failure-grading';batch.mkdir(exist_ok=True)
+        (batch/'cases.json').write_text(json.dumps([{'attempt_id':r['attempt_id'],'question':r['question'],
+            'gold_answer':r['gold_answer']} for r in record['rows']],ensure_ascii=False,indent=2),encoding='utf-8')
+        (batch/'attempts.jsonl').write_text(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in record['rows']),encoding='utf-8')
+        (batch/'prior.jsonl').write_text('',encoding='utf-8')
+    except BudgetStop as exc:record.update(status='budget_stopped',reason=str(exc))
+    except Exception as exc:record.update(status='failed',error=safe_error(exc))
+    finally:
+        save();print(json.dumps({'status':record['status'],'budget_after':record['budget_after']}),flush=True)
+
+asyncio.run(main())

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "energy_balance-en",
+    "case_group": "energy_balance",
+    "question": "How does KDRIs define energy balance?",
+    "language": "en",
+    "gold_source": "KDRI_2025_vol1.pdf",
+    "gold_page": 48,
+    "gold_excerpt": "섭취 에너지 = 소비 에너지",
+    "gold_answer": "Energy balance means energy intake equals energy expenditure.",
+    "document_sha256": "31c99fbf3a0253f55a5b9f53964ea9a1db8a108077650d119b4841a9b11f9cad",
+    "review_status": "reviewed",
+    "reviewer": "Codex source-text review",
+    "review_scope": "document-fact evaluation; clinical policy not approved",
+    "split": "development",
+    "acceptable_evidence": [
+      {
+        "source": "KDRI_2025_vol1.pdf",
+        "pdf_pages": [
+          48
+        ],
+        "core_excerpt": "섭취 에너지 = 소비 에너지"
+      }
+    ],
+    "adjudication_version": "core40-v2-who-equivalent-pages",
+    "adjudication_notes": "WHO PDF pages 12 and 24 source-text checked; other equivalent pages not yet adjudicated. Prior experimental cases are all development.",
+    "attempt_id": "ag-022",
+    "repeat": 0
+  }
+]
