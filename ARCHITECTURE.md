@@ -541,3 +541,7 @@ POST /users/onboarding → explicit EnergyInputs/goal validation → Postgres pr
 모든 이벤트에는 클라이언트가 생성한 `stream_run_id`와 단조 증가 `seq`가 붙는다. 프론트는 `completed` 전에 연결이 끊기면 같은 실행 ID와 마지막 순번으로 한 번 재접속하고 이미 받은 이벤트를 제거한다. 같은 `run_id`의 완료 체크포인트가 있으면 그래프나 저장을 다시 실행하지 않고 남은 답변만 재생한다. 실행 도중 연결이 사라져도 그래프 작업은 끝까지 유지하며 기존 대화 advisory lock, 제안 idempotency key, HITL이 중복 저장을 차단한다.
 
 진행 이벤트 journal은 각 API Pod의 메모리에만 존재한다. 재연결이 다른 Pod로 전달되어 journal이 없고 체크포인트의 `execution_status`가 `running`이면, 해당 Pod가 같은 `run_id`와 LangGraph `thread_id`로 `graph.ainvoke(None, config)`를 호출해 `AsyncPostgresSaver`의 마지막 durable checkpoint부터 실행을 이어간다. 완료 상태라면 그래프를 다시 실행하지 않고 저장된 최종 상태만 반환한다. 실제 kind 시험에서는 첫 진행 이벤트 뒤 담당 Pod를 강제 삭제한 다음 다른 Pod로 재접속해 완료 이벤트와 pending proposal 1건을 복구했고, 중복 확정 후에도 식사 row는 1건만 저장됐다.
+
+## Agentic RAG evidence retention follow-up (2026-10-21)
+
+[Full protocol, 200 historical grades/statuses and 100-per-condition v1/v2 comparison](docs/agentic_rag/20261021/README.md). Qualified initial evidence survives rewritten retrieval; merged evidence is capped at 8 documents / 6000 characters. Prompt v1 and loop budgets are unchanged. New quality judging uses balanced A/B native Pro Batch for all 100 pairs; historical recovery mixes online and Batch interfaces. Correctness 89% in both new conditions; rollout gate failed, default OFF.

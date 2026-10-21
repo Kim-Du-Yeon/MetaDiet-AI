@@ -52,6 +52,8 @@ async def bounded_retrieve(question, *, retrieve, assess=model_assessment,
     result = {}
     reason = "round_limit"
     phase = "retrieve"
+    retained = []
+    initial_keys = set()
     async def charge(kind):
         if reserve is not None:
             await reserve(kind)
@@ -70,12 +72,25 @@ async def bounded_retrieve(question, *, retrieve, assess=model_assessment,
                 await event("retrieve" if not index else "research")
                 phase = "retrieve"
                 result = await retrieve(current, k=4)
+                # Preserve prior score-qualified evidence; never promote rejected documents.
+                from app.rag.retriever import _doc_key, _format_context
+                if result.get("grounded"):
+                    keys = {_doc_key(doc) for doc in retained}
+                    for doc in result.get("context_docs", result.get("docs", []))[:4]:
+                        key = _doc_key(doc)
+                        if key not in keys and len(retained) < 8:
+                            retained.append(doc)
+                            keys.add(key)
+                    if not index:
+                        initial_keys = {_doc_key(doc) for doc in retained}
+                if retained:
+                    result = {**result, "grounded": True, "docs": retained, "context_docs": retained}
                 # Expose exactly the excerpts assessed by the controller.
                 from app.rag.retriever import _format_context
                 from langchain_core.documents import Document
                 documents = []
                 remaining = 6000
-                for doc in result.get("context_docs", result.get("docs", []))[:4]:
+                for doc in result.get("context_docs", result.get("docs", []))[:8]:
                     source = doc.metadata.get("source_file", doc.metadata.get("source", "Unknown"))
                     header = f"[출처: {source}, 페이지: {doc.metadata.get('page', 'N/A')}]\n"
                     available = remaining - len(header) - (2 if documents else 0)
@@ -85,7 +100,7 @@ async def bounded_retrieve(question, *, retrieve, assess=model_assessment,
                     documents.append(Document(page_content=excerpt, metadata=dict(doc.metadata)))
                     remaining -= len(header) + len(excerpt) + (2 if len(documents)>1 else 0)
                 if documents:
-                    context, documents = _format_context(documents, 4, 6000)
+                    context, documents = _format_context(documents, 8, 6000)
                     result = {**result, "context": context, "docs": documents, "context_docs": documents}
                 await charge("model")
                 phase = "controller"
@@ -116,4 +131,6 @@ async def bounded_retrieve(question, *, retrieve, assess=model_assessment,
     if reason != "sufficient":
         result = {**result, "grounded": False, "context": "", "context_docs": [], "docs": []}
     return {**result, "agentic": {"rounds": rounds, "stop_reason": reason,
-                                 "prompt_version": PROMPT_VERSION, "prompt_sha256": PROMPT_SHA256}}
+                                 "prompt_version": PROMPT_VERSION, "prompt_sha256": PROMPT_SHA256,
+                                 "recipe": "preserve-initial-v2",
+                                 "retained_initial_documents": sum(_doc_key(d) in initial_keys for d in result.get("docs", [])) if initial_keys else 0}}

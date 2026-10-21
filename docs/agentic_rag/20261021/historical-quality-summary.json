@@ -1,0 +1,79 @@
+{
+  "baseline": {
+    "attempts": 100,
+    "completed": 99,
+    "failure_rate": 0.01,
+    "judge_failures": 0,
+    "correctness": 0.87,
+    "faithfulness": 0.99,
+    "source_page_support": 0.79,
+    "p50_ms": 11506.86780000251,
+    "p95_ms": 18987.03819999355,
+    "known_model_cost_usd": 0.53012025,
+    "embedding_cost_upper_proxy_usd": 0.0032412,
+    "cost_complete": false,
+    "original_judge_known_cost_usd": 0.679814,
+    "recovered_judge_known_cost_usd": 0.578932,
+    "loop_stops": {
+      "not_applicable": 100
+    },
+    "second_rounds": 0,
+    "judge_completed": 99,
+    "judge_states": {
+      "completed": 99,
+      "not_applicable_serving_failed": 1
+    },
+    "correctness_lower_bound": 0.87,
+    "faithfulness_lower_bound": 0.99
+  },
+  "agentic": {
+    "attempts": 100,
+    "completed": 100,
+    "failure_rate": 0.0,
+    "judge_failures": 0,
+    "correctness": 0.91,
+    "faithfulness": 1.0,
+    "source_page_support": 0.76,
+    "p50_ms": 14370.075899998483,
+    "p95_ms": 22402.407100002165,
+    "known_model_cost_usd": 0.5719995,
+    "embedding_cost_upper_proxy_usd": 0.0038222000000000004,
+    "cost_complete": false,
+    "original_judge_known_cost_usd": 0.649814,
+    "recovered_judge_known_cost_usd": 0.579219,
+    "loop_stops": {
+      "sufficient": 96,
+      "round_limit": 4
+    },
+    "second_rounds": 14,
+    "judge_completed": 100,
+    "judge_states": {
+      "completed": 100
+    },
+    "correctness_lower_bound": 0.91,
+    "faithfulness_lower_bound": 1.0
+  },
+  "checks": {
+    "judge_complete": true,
+    "quality_minimum": false,
+    "quality_improved": true,
+    "faithfulness_noninferior": true,
+    "support_noninferior": false,
+    "failure_noninferior": true,
+    "latency_bounded": true,
+    "cost_complete": false,
+    "cost_bounded": true
+  },
+  "rollout_gate": false,
+  "limitations": [
+    "100 attempts repeat 40 development questions; not 100 independent user outcomes.",
+    "RAG boundary latency excludes auth/DB/queue/browser; not public end-to-end p95.",
+    "No latest-user-record reads: freshness is not applicable to this retrieval-only comparison.",
+    "Pro rubric is an automated judge, not blind human or Ragas validation.",
+    "Embedding SDK metadata=None; UTF8 bytes are conservative proxy, not billed tokens. Cost is incomplete.",
+    "Dense-only recipe matches 512MiB dense fallback, not larger-host hybrid mode."
+  ],
+  "method": "104 valid online Pro grades +95 native Pro Batch grades, identical named rubric/model/2048-low but structured interface differs. Original serving failure1 remains incorrect; not a new serving experiment.",
+  "current_run_online_known_cost_usd": 0.03004,
+  "current_run_batch_known_cost_usd": 0.370697
+}

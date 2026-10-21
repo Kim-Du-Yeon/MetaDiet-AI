@@ -33,3 +33,7 @@ backend/venv/Scripts/python.exe backend/scripts/eval/analyze_agentic_rag.py docs
 ```
 
 Runners refuse to overwrite existing attempts. Copy the frozen cases/protocol into a new result directory for a new experiment. Existing failure rows must remain in reports. Recovered judging never regenerates serving answers; original judge failures/cost remain separate.
+
+## Evidence retention v2 (2026-10-21)
+
+Qualified initial evidence is retained before deduplicated new evidence, capped at 8 documents / 6000 characters for both assessment and answer. Controller prompt v1 and hard loop limits are unchanged. [Completed quality judging and matched 100-per-condition revalidation](20261021/README.md): no correctness gain; default OFF, no rollout.

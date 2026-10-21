@@ -65,3 +65,7 @@ backend/venv/Scripts/python.exe backend/scripts/eval/analyze_agentic_rag.py docs
 공개 기존 버전 확인: API health 재확인200, API·웹 commit `7dfbda0f14e556c7def56a16138597db68d123d5`. 최초 API health30초 타임아웃은 보존했고 원인은 확정하지 않았다. 후보의 배포/브라우저 검증 결과로 취급하지 않는다. [원본](public-baseline.json).
 
 GitHub 커밋 `1376d0f0` 푸시 후 Render 실제 브라우저 Events에서 **Deploy skipped for commit1376d0f**와 기존 Live `7dfbda0f`를 확인했다. [배포 보류 확인](render-skip-verification.json). 이는 후보 상담 흐름의 브라우저 검증과 구분한다.
+
+## 2026-10-21 follow-up
+
+[Historical judging completed and evidence preservation retested](../20261021/README.md). The original 200 attempts now have 199 valid grades and one original serving failure. Correctness: baseline 87%, Agentic v1 91%. This preserves the report above as its earlier incomplete state; no rollout was approved.

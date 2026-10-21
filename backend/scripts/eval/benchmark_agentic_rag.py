@@ -1,6 +1,6 @@
 """Matched read-only live RAG boundary experiment; never touches user records."""
 from __future__ import annotations
-import argparse, asyncio, contextvars, hashlib, json, math, statistics, sys, time
+import argparse, asyncio, contextvars, hashlib, importlib.machinery, importlib.util, json, math, statistics, sys, time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[3]
 sys.path.insert(0,str(ROOT/'backend'))
@@ -46,6 +46,17 @@ async def main(args):
     path=directory/'cases.json'
     if hashlib.sha256(path.read_bytes()).hexdigest()!=protocol['dataset_sha256']:
         raise ValueError('Frozen cases changed')
+    baseline_loop = None
+    if args.baseline_source:
+        source=Path(args.baseline_source)
+        if hashlib.sha256(source.read_bytes()).hexdigest()!=protocol.get('baseline_source_sha256'):
+            raise ValueError('Baseline source hash mismatch')
+        loader=importlib.machinery.SourceFileLoader('frozen_agentic_baseline',str(source))
+        spec=importlib.util.spec_from_loader(loader.name,loader)
+        module=importlib.util.module_from_spec(spec)
+        sys.modules[loader.name]=module
+        loader.exec_module(module)
+        baseline_loop=module.bounded_retrieve
     cases=json.loads(path.read_text(encoding='utf-8'))
     if len(cases)<100: raise ValueError('100 attempts required')
     # Per-request telemetry only; never modifies production clients or env files.
@@ -68,7 +79,10 @@ async def main(args):
               'qa_prompt_sha256':hashlib.sha256(str(QA_PROMPT).encode()).hexdigest(),
               'namespace':settings.pinecone_namespace,'embedding_model':settings.embedding_model,
               'answer_model':settings.gemini_model,'controller_model':settings.gemini_simple_model,
-              'judge_model':settings.gemini_eval_model,'mode':'dense','workers':3}
+              'judge_model':settings.gemini_eval_model,'mode':'dense','workers':3,
+              'baseline_source_sha256':protocol.get('baseline_source_sha256'),
+              'candidate_source_sha256':hashlib.sha256((ROOT/'backend/app/rag/agentic.py').read_bytes()).hexdigest(),
+              'deferred_judging':args.defer_judge}
     (directory/'identity.json').write_text(json.dumps(identity,indent=2),encoding='utf-8')
     output=directory/'attempts.jsonl'
     if output.exists(): raise ValueError('Refuse overwrite existing attempts')
@@ -87,7 +101,8 @@ async def main(args):
                     try: return await model_assessment(q,result,config={'callbacks':[u]})
                     finally: row['model_usage'].extend({'model':settings.gemini_simple_model,'usage':v,'phase':'controller'} for v in u.calls)
                 result=(await bounded_retrieve(case['question'],retrieve=retrieve,assess=assess)
-                        if condition=='agentic' else await retrieve(case['question'],k=4))
+                        if condition=='agentic' else await baseline_loop(case['question'],retrieve=retrieve,assess=assess)
+                        if baseline_loop else await retrieve(case['question'],k=4))
                 u=Usage()
                 try: answer=await answer_from_knowledge(case['question'],retrieval_result=result,config={'callbacks':[u]})
                 finally: row['model_usage'].extend({'model':settings.gemini_model,'usage':v,'phase':'answer'} for v in u.calls)
@@ -106,7 +121,7 @@ async def main(args):
         # not billed tokens; expose this missingness and fail the complete-cost rollout gate.
         row['embedding_cost_upper_proxy_usd']=row['embedding_input_utf8_bytes']*.2/1e6
         row['cost_complete']=False
-        if row['status']=='completed' and not judge_disabled:
+        if row['status']=='completed' and not judge_disabled and not args.defer_judge:
             ju=Usage()
             try:
                 graded=await judge.with_structured_output(Grade,include_raw=True).ainvoke([
@@ -122,7 +137,7 @@ async def main(args):
             row['judge_usage']=ju.calls
             row['judge_known_cost_usd']=sum(estimate_cost(settings.gemini_eval_model,v) or 0 for v in ju.calls)
         if row['status']=='completed' and 'judge_status' not in row:
-            row['judge_status']='not_attempted_quota'
+            row['judge_status']='not_attempted_deferred' if args.defer_judge else 'not_attempted_quota'
         with output.open('a',encoding='utf-8') as f: f.write(json.dumps(row,ensure_ascii=False)+'\n')
         print(json.dumps({k:row.get(k) for k in ['attempt_id','condition','status','ms','correct','support'] }),flush=True)
     semaphore=asyncio.Semaphore(3)
@@ -134,5 +149,5 @@ async def main(args):
     await asyncio.gather(*(pair(i,c) for i,c in enumerate(cases)))
 
 if __name__=='__main__':
-    p=argparse.ArgumentParser(); p.add_argument('--output',required=True)
+    p=argparse.ArgumentParser(); p.add_argument('--output',required=True); p.add_argument('--baseline-source'); p.add_argument('--defer-judge',action='store_true')
     asyncio.run(main(p.parse_args()))

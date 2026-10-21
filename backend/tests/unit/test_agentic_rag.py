@@ -146,3 +146,27 @@ async def test_controller_trace_pins_own_prompt_version(monkeypatch):
             return {'parsed':Assessment(sufficient=True),'parsing_error':None}
     monkeypatch.setattr(llm,'get_chat_model',lambda **kwargs:Model())
     assert (await model_assessment('question',result(),config={'metadata':{'request_id':'synthetic'}})).sufficient
+
+@pytest.mark.asyncio
+async def test_research_preserves_initial_grounded_documents_and_adds_new_evidence():
+    from langchain_core.documents import Document
+    original=[Document(page_content=f'original-{i}',metadata={'source_file':'original.pdf','page':i}) for i in range(4)]
+    fresh=[Document(page_content=f'new-{i}',metadata={'source_file':'new.pdf','page':i}) for i in range(4)]
+    fetch=AsyncMock(side_effect=[{**result(),'docs':original,'context_docs':original},
+                               {**result(),'docs':fresh,'context_docs':fresh}])
+    assess=AsyncMock(side_effect=[Assessment(sufficient=False,rewrite='rewrite'),Assessment(sufficient=True)])
+    r=await bounded_retrieve('question',retrieve=fetch,assess=assess)
+    assert [d.page_content for d in r['docs']][:4]==[d.page_content for d in original]
+    assert any(d.page_content=='new-0' for d in r['docs'])
+    assert len(r['context'])<=6000
+    assert r['agentic']['retained_initial_documents']==4
+
+@pytest.mark.asyncio
+async def test_low_score_research_cannot_replace_initial_grounded_evidence():
+    from langchain_core.documents import Document
+    initial=Document(page_content='supported',metadata={'source_file':'good.pdf','page':1})
+    unsafe=Document(page_content='low score',metadata={'source_file':'bad.pdf','page':1})
+    fetch=AsyncMock(side_effect=[{**result(),'docs':[initial]}, {**result(False),'docs':[unsafe]}])
+    r=await bounded_retrieve('question',retrieve=fetch,
+        assess=AsyncMock(side_effect=[Assessment(sufficient=False,rewrite='rewrite'),Assessment(sufficient=True)]))
+    assert r['grounded'] and [d.page_content for d in r['docs']]==['supported']

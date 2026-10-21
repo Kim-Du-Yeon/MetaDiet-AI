@@ -1,0 +1,76 @@
+{
+  "baseline": {
+    "attempts": 100,
+    "completed": 100,
+    "failure_rate": 0.0,
+    "judge_failures": 0,
+    "correctness": 0.89,
+    "faithfulness": 1.0,
+    "source_page_support": 0.74,
+    "p50_ms": 14738.923999999997,
+    "p95_ms": 22982.718299999986,
+    "known_model_cost_usd": 0.557182,
+    "embedding_cost_upper_proxy_usd": 0.0037388,
+    "cost_complete": false,
+    "original_judge_known_cost_usd": 0,
+    "recovered_judge_known_cost_usd": 0.2737835,
+    "loop_stops": {
+      "sufficient": 95,
+      "round_limit": 5
+    },
+    "second_rounds": 13,
+    "judge_completed": 100,
+    "judge_states": {
+      "completed": 100
+    },
+    "correctness_lower_bound": 0.89,
+    "faithfulness_lower_bound": 1.0
+  },
+  "agentic": {
+    "attempts": 100,
+    "completed": 100,
+    "failure_rate": 0.0,
+    "judge_failures": 0,
+    "correctness": 0.89,
+    "faithfulness": 1.0,
+    "source_page_support": 0.75,
+    "p50_ms": 14126.00950000001,
+    "p95_ms": 21720.062099999952,
+    "known_model_cost_usd": 0.54784695,
+    "embedding_cost_upper_proxy_usd": 0.0036782000000000004,
+    "cost_complete": false,
+    "original_judge_known_cost_usd": 0,
+    "recovered_judge_known_cost_usd": 0.2737835,
+    "loop_stops": {
+      "sufficient": 96,
+      "round_limit": 4
+    },
+    "second_rounds": 12,
+    "judge_completed": 100,
+    "judge_states": {
+      "completed": 100
+    },
+    "correctness_lower_bound": 0.89,
+    "faithfulness_lower_bound": 1.0
+  },
+  "checks": {
+    "judge_complete": true,
+    "quality_minimum": false,
+    "quality_improved": false,
+    "faithfulness_noninferior": true,
+    "support_noninferior": true,
+    "failure_noninferior": true,
+    "latency_bounded": true,
+    "cost_complete": false,
+    "cost_bounded": true
+  },
+  "rollout_gate": false,
+  "limitations": [
+    "100 attempts repeat 40 development questions; not 100 independent user outcomes.",
+    "RAG boundary latency excludes auth/DB/queue/browser; not public end-to-end p95.",
+    "No latest-user-record reads: freshness is not applicable to this retrieval-only comparison.",
+    "Pro rubric is an automated judge, not blind human or Ragas validation.",
+    "Embedding SDK metadata=None; UTF8 bytes are conservative proxy, not billed tokens. Cost is incomplete.",
+    "Dense-only recipe matches 512MiB dense fallback, not larger-host hybrid mode."
+  ]
+}
