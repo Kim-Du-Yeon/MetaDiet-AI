@@ -36,6 +36,8 @@ def analyze(report,judges):
     return {'judge_usage_complete':bool(judge_usage_complete),'judge_estimate_usd':sum(v or 0 for v in judge_costs),'summary':summary,'candidate_passed':bool(passed),'selection':'v2' if passed else 'v1','denominator':'100 frozen synthetic attempts per condition; incomplete and failures count against success; repeated question templates are not independent actual-user outcomes','judge_cost_note':'Pro evaluator consumption reported separately; generation cost is token estimate, not invoice'}
 
 if __name__=='__main__':
-    folder=ROOT/'docs/prompt_control/comparison';report=json.loads((folder/'paired.json').read_text(encoding='utf-8'));judges=json.loads((folder/'judges.json').read_text(encoding='utf-8'))
+    import argparse
+    parser=argparse.ArgumentParser();parser.add_argument('--folder');args=parser.parse_args()
+    folder=Path(args.folder) if args.folder else ROOT/'docs/prompt_control/comparison';report=json.loads((folder/'paired.json').read_text(encoding='utf-8'));judges=json.loads((folder/'judges.json').read_text(encoding='utf-8'))
     result=analyze(report,judges);result['source_hashes']={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in [folder/'paired.json',folder/'judges.json',folder/'frozen.json']}
     (folder/'summary.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf-8');print(json.dumps(result,ensure_ascii=False))

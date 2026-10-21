@@ -1,3 +1,7 @@
+## General immutable candidate approval (2026-10-22)
+
+[Generic release workflow](docs/prompt_control/release_workflow/README.md) separates immutable selection, evidence verification, signing and environment promotion. Saved results are reused only for identical8commit/text/contracts. New evidence binds prompt/model/cohort and exact graded answers; only the exact hashed historical run may omit pre-binding metadata. The current code-reviewed quality adapter covers compact followup; other semantic routes fail closed. No model calls or new performance comparison were needed for this workflow validation; earlier metrics remain historical.
+
 **성능 하락 정성 분석:** [회귀10건의4유형·공통 실패 분리·문맥 조립6건 재현·미채택 판단](docs/agentic_rag/20261021-controlled-hybrid-analysis/README.md). 수치3/시간조건3/전체보류2/목록누락2건으로 분류했다. 인접 청크 우선·6,000자 문맥 한도에 의한 핵심 표현 탈락은 오프라인6/6 동일 문맥 재현으로 확인했다. 새 답변 품질 개선을 뜻하지 않으며,신규 유료 호출 없이 면접 설명·개선 검증 기준까지 정리했다.
 
 ## 최신: 동일 조건 Hybrid vs Hybrid+Agentic100시도씩 비교

@@ -1,0 +1,32 @@
+{
+  "backend": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "1",
+    "tests": "1706",
+    "time": "115.250",
+    "timestamp": "2026-10-22T07:36:17.343453+09:00"
+  },
+  "passed": 1705,
+  "existing_optional_skip": 1,
+  "frontend": {
+    "suites": 36,
+    "passed": 132,
+    "build": "Compiled successfully",
+    "typecheck": "No standalone TypeScript script; CRA build/lint used"
+  },
+  "frontend_windows_note": "CRA generated mixed-separator testMatch found0. Full default-style test glob and node_modules literal ignore supplied on CLI; all36suites/132tests ran; no tests removed/skipped. See https://jestjs.io/docs/configuration#testmatch-arraystring",
+  "workflow_unit_tests": 16,
+  "model_generation_calls": 0,
+  "model_judge_calls": 0,
+  "ledger_committed_usd_before_and_after": 8.324354,
+  "negative_actual_cli": {
+    "candidate": "unapproved-translation",
+    "expected_exit": 1,
+    "reason": "Evaluation coverage missing for changed route",
+    "receipt_created": false,
+    "published": false
+  },
+  "review": "Important judge binding gap fixed; focused followup found no remaining important issues; full tests authoritative"
+}

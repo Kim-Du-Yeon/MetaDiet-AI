@@ -19,14 +19,20 @@ class Pair(BaseModel):
     a:Grade
     b:Grade
 
-async def main():
-    folder=ROOT/'docs/prompt_control/comparison'
+async def main(folder=None):
+    folder=Path(folder) if folder else ROOT/'docs/prompt_control/comparison'
     protocol=json.loads((ROOT/'docs/prompt_control/budget-protocol.json').read_text())
     eval_budget.TOTAL=protocol['total_limit_usd'];eval_budget.LIMITS=protocol['stage_caps']
     budget=eval_budget.Budget(protocol['ledger']);eval_budget.install_transport_guard(budget,'judge')
     cases=json.loads((folder/'frozen.json').read_text(encoding='utf-8'))
+    from app.core.prompt_release_control import digest
+    generation=json.loads((folder/'paired.json').read_text(encoding='utf-8'))
+    binding=digest({k:generation[k] for k in ['cases_sha256','prompt_snapshots','model','conditions']})
     output=folder/'judges.json';rubric_hash=hashlib.sha256(RUBRIC.encode()).hexdigest()
     report=json.loads(output.read_text(encoding='utf-8')) if output.exists() else {'rubric':RUBRIC,'rubric_sha256':rubric_hash,'model':'gemini-3.1-pro-preview','rows':[]}
+    if generation.get('experiment_id'):
+        if output.exists() and report.get('generation_binding')!=binding:raise ValueError('Judge results belong to another generation snapshot')
+        report['generation_binding']=binding
     if report['rubric_sha256']!=rubric_hash:raise ValueError('Frozen judge rubric changed')
     done={r['case_id'] for r in report['rows']}
     while len(done)<100:
@@ -43,10 +49,11 @@ async def main():
             if any(answers[label]['status']!='completed' for label in labels):row['error']={'reason':'generation_failed'}
             else:
                 payload={'question':case['question'],'current_calories':case['calories'],'current_calorie_target':case['target'],'a':answers[labels[0]]['answer'],'b':answers[labels[1]]['answer']}
+                row['answer_binding']=digest(payload)
                 try:
                     model=get_chat_model(role='eval',temperature=0,max_tokens=2048,thinking_level='low')
                     result=await asyncio.wait_for(model.with_structured_output(Pair).ainvoke([
-                        {'role':'system','content':RUBRIC},{'role':'user','content':json.dumps(payload,ensure_ascii=False)}],config={'callbacks':[usage],'metadata':{'prompt_experiment_id':'prompt-control-20261021','evaluation':'synthetic_coaching_blinded_pair','case_id':key,'rubric_sha256':rubric_hash}}),90)
+                        {'role':'system','content':RUBRIC},{'role':'user','content':json.dumps(payload,ensure_ascii=False)}],config={'callbacks':[usage],'metadata':{'prompt_experiment_id':generation.get('experiment_id','prompt-control-20261021'),'evaluation':'synthetic_coaching_blinded_pair','case_id':key,'rubric_sha256':rubric_hash}}),90)
                     row.update(status='completed',grades=result.model_dump())
                 except Exception as exc:row['error']=safe_error(exc)
             row.update(usage=usage.calls,ms=(time.perf_counter()-started)*1000)
@@ -57,5 +64,6 @@ async def main():
 if __name__=='__main__':
     import argparse
     parser=argparse.ArgumentParser();parser.add_argument('--allow-paid',action='store_true')
-    if not parser.parse_args().allow_paid:parser.error('Offline default: pass --allow-paid only with authorization')
-    asyncio.run(main())
+    parser.add_argument('--folder');args=parser.parse_args()
+    if not args.allow_paid:parser.error('Offline default: pass --allow-paid only with authorization')
+    asyncio.run(main(args.folder))
