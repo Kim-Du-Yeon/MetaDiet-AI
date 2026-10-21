@@ -69,3 +69,7 @@ Post-cohort v11 error handling fixes missing max_score after retrieval exception
 
 [분할 Batch와 실제 사용량 정산 구현·오프라인 확인](BATCH_SPLIT_SETTLEMENT.md).
 최종 관련 테스트 91개 통과. 전체/단계별 예산 및 기존 중단 장부는 유지하며 새 유료 호출은 없다.
+
+[후속 실제 분할·정산과100건씩 비교 결과](20261021-batch-live-validation/README.md):
+누적 사용·예약 $2.001159, Pro $0.658710로 한도 내 완료. 분할 정산은 실제 성공했으나
+정답률85%→83%로 품질 기준 미달, 배포 보류. 이후 추가 유료 재실험은 하지 않았다.

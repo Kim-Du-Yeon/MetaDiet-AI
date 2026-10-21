@@ -1,0 +1,43 @@
+{
+  "amendment_before_submission_of_packets_2_onward": true,
+  "reason": "Reduce sequential provider wait/submit overhead; use adaptive affordable chunks without changing any per-case payload, rubric, model or output cap; no quality-based selection",
+  "prior_plan_retained": "incremental-judge-plan.json",
+  "completed_or_submitted_packets_preserved": [
+    0,
+    1
+  ],
+  "groups": [
+    {
+      "start": 0,
+      "end": 10,
+      "packet": 0,
+      "max_entries": 10
+    },
+    {
+      "start": 10,
+      "end": 20,
+      "packet": 1,
+      "max_entries": 10
+    },
+    {
+      "start": 20,
+      "end": 50,
+      "packet": 2,
+      "max_entries": 30
+    },
+    {
+      "start": 50,
+      "end": 80,
+      "packet": 3,
+      "max_entries": 30
+    },
+    {
+      "start": 80,
+      "end": 100,
+      "packet": 4,
+      "max_entries": 30
+    }
+  ],
+  "max_outstanding_jobs": 1,
+  "all_caps_unchanged": true
+}

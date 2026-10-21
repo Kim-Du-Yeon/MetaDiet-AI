@@ -1,0 +1,43 @@
+{
+  "budget": {
+    "committed_usd": 2.001159,
+    "stages": {
+      "comparison": 1.326774,
+      "development": 0.014726,
+      "judge": 0.65871,
+      "probe": 0.000949
+    },
+    "total_limit_usd": 5.0,
+    "stopped": false,
+    "stop_reason": null
+  },
+  "stage_caps": {
+    "probe": 0.1,
+    "development": 0.25,
+    "comparison": 3,
+    "judge": 1,
+    "browser": 0.15
+  },
+  "native_batch_jobs": 10,
+  "native_batch_requests": 114,
+  "all_jobs_settled": true,
+  "settled_job_tickets": 10,
+  "peak_judge_committed_plus_reservation_usd": 0.99783,
+  "reconstructed_judge_committed_usd": 0.65871,
+  "old79_cost_rows_unchanged": true,
+  "retained_unknown_reservations": {
+    "count": 2,
+    "usd": 0.0191,
+    "same_old_reservations": true
+  },
+  "budget_cap_hit": false,
+  "new_browser_calls": 0,
+  "deployed": false,
+  "rollout_gate": false,
+  "judge_quality_source": "Pro frozen rubric; no Ragas/human final review",
+  "saved_answer_grades": 14,
+  "fresh_serving_attempts": 200,
+  "fresh_grade_rows": 200,
+  "further_paid_calls_after_quality_failure": 0,
+  "read_only_corpus_and_no_user_database_writes": true
+}

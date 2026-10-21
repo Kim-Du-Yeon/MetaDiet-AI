@@ -1,0 +1,44 @@
+import sys,json
+from pathlib import Path
+root=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(root/"backend"));sys.path.insert(0,str(root/"backend/scripts/eval"))
+from dotenv import load_dotenv
+load_dotenv(root/"backend/.env",override=True)
+from eval_budget import Budget,install_transport_guard
+from batch_campaign import advance
+from batch_agentic_judges import read_rows,make_requests
+from judge_agentic_pairs import paired_payload
+from app.core.config import get_settings
+from google import genai
+from google.genai import types
+out=root/"docs/agentic_rag/20261021-batch-live-validation"
+saved=json.loads((out/"saved-campaign.json").read_text(encoding="utf-8"))
+if saved["state"]!="completed":raise SystemExit("Saved-answer Batch must finish first")
+budget=Budget(root/"tmp/eval-budget.sqlite")
+if budget.summary()["stopped"]:raise SystemExit("Budget stopped; no further calls")
+install_transport_guard(budget,"judge")
+settings=get_settings()
+cases=json.loads((out/"matched100/cases.json").read_text(encoding="utf-8"))
+rows=read_rows(out/"matched100/attempts.jsonl")
+groups={}
+for row in rows:groups.setdefault(row["attempt_id"],[]).append(row)
+client=genai.Client(api_key=settings.gemini_api_key,http_options=types.HttpOptions(timeout=60000,retry_options=types.HttpRetryOptions(attempts=1)))
+plan=json.loads((out/"incremental-judge-plan-v2.json").read_text(encoding="utf-8"))
+for group in plan["groups"]:
+ index=group["start"];packet=cases[index:group["end"]];directory=out/"matched100/judge-packets"
+ directory.mkdir(exist_ok=True)
+ path=directory/f"packet-{group['packet']:02d}.json"
+ if path.exists() and json.loads(path.read_text(encoding="utf-8"))["state"]=="completed":continue
+ if not all(len(groups.get(case["attempt_id"],[]))==2 for case in packet):
+  print(json.dumps({"waiting_for_complete_pair_group":group["packet"],"recorded_attempts":len(rows)}));break
+ entries=[]
+ for case in packet:
+  payload,mapping=paired_payload(case,groups[case["attempt_id"]])
+  entries.append({"key":"pair|"+case["attempt_id"],"kind":"pair","attempt_id":case["attempt_id"],"payload":payload,"mapping":mapping})
+ state=advance(client,path,settings.gemini_eval_model,entries,make_requests(entries),budget,max_entries=group["max_entries"])
+ print(json.dumps({"packet":group["packet"],"state":state,"budget":budget.summary()}),flush=True)
+ # A completed packet may advance to the next frozen packet; at most one new job.
+ if state=="completed":continue
+ break
+else:print(json.dumps({"all_packets_completed":True,"budget":budget.summary()}))
+client.close()
