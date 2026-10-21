@@ -55,3 +55,35 @@ async def test_invalid_reference_falls_back_once_but_timeout_does_not_duplicate(
     async def timeout(*args,**kwargs):calls.append(kwargs);raise TimeoutError()
     with pytest.raises(TimeoutError):await invoke_cached(pool,timeout,'m','r','prefix',[],eligible=True)
     assert len(calls)==3
+
+@pytest.mark.asyncio
+async def test_expired_provider_reference_is_successful_cleanup_not_retry_queue():
+    class Missing(Exception):code=404
+    async def create(*args):return 'cachedContents/gone'
+    async def delete(name):raise Missing()
+    pool=CachePool(create,delete,secret=b'x'*32)
+    await pool._delete('cachedContents/gone')
+    assert not pool.deletion_queue
+
+@pytest.mark.asyncio
+async def test_hundred_synthetic_mutations_keep_dynamic_inputs_and_isolation():
+    from app.core.gemini_cache import invoke_cached
+    created=[];observed=[]
+    async def create(model,text,ttl):
+        created.append(text);return 'cachedContents/'+str(len(created))
+    async def delete(name):pass
+    async def invoke(messages,**kwargs):
+        observed.append((messages,kwargs));return messages[-1]['content']
+    pool=CachePool(create,delete,secret=b'x'*32)
+    for number in range(100):
+        owner='synthetic-'+str(number%2)
+        revision=number//2
+        current='current:'+str(number)+':operation:'+['save','edit','delete','goal','new_day'][number%5]
+        scope=CacheScope(owner,'thread',revision)
+        result=await invoke_cached(pool,invoke,'m','r','static role only',[{'role':'user','content':current}],eligible=True,scope=scope)
+        assert result==current
+        assert pool.key('m','r','static role only',scope)!=pool.key('m','r','static role only',CacheScope('other','thread',revision))
+        await pool.invalidate(owner)
+    assert len(observed)==100 and len(created)==100
+    assert set(created)=={'static role only'}
+    await pool.close()

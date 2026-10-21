@@ -1,0 +1,79 @@
+{
+  "scope": "synthetic public RAG generation boundary, frozen retrieval, not actual users/full Agent service latency",
+  "judge_api_timeout_attempts_retained": 1,
+  "conditions": {
+    "ordinary": {
+      "attempts": 100,
+      "completed": 100,
+      "failures": 0,
+      "graded": 100,
+      "correct": 87,
+      "faithful": 100,
+      "mean_ms_all_attempts": 3913.615113000269,
+      "p95_ms_all_attempts": 7165.271999998367,
+      "ttft_p95_ms_observed_only": 3697.62179999816,
+      "ttft_observations": 100,
+      "cached_input_tokens": 4060,
+      "cache_hit_attempts": 2,
+      "known_model_estimate_usd": 0.22711875,
+      "unknown_cost_attempts": 0,
+      "creation_and_full_ttl_upper_usd": 0,
+      "stages": {
+        "ordinary": {
+          "attempts": 100,
+          "completed": 100,
+          "p95_ms_all_attempts": 7165.271999998367
+        }
+      },
+      "known_total_upper_estimate_usd": 0.22711875
+    },
+    "explicit": {
+      "attempts": 100,
+      "completed": 98,
+      "failures": 2,
+      "graded": 98,
+      "correct": 86,
+      "faithful": 98,
+      "mean_ms_all_attempts": 21903.421041000474,
+      "p95_ms_all_attempts": 10757.630799998879,
+      "ttft_p95_ms_observed_only": 7370.745200001693,
+      "ttft_observations": 98,
+      "cached_input_tokens": 190045,
+      "cache_hit_attempts": 98,
+      "known_model_estimate_usd": 0.099488625,
+      "unknown_cost_attempts": 2,
+      "creation_and_full_ttl_upper_usd": 0.06703041666666666,
+      "stages": {
+        "first": {
+          "attempts": 42,
+          "completed": 40,
+          "p95_ms_all_attempts": 12082.543600001372
+        },
+        "reuse": {
+          "attempts": 58,
+          "completed": 58,
+          "p95_ms_all_attempts": 8093.664600004558
+        }
+      },
+      "known_total_upper_estimate_usd": 0.16651904166666665
+    }
+  },
+  "gates": {
+    "correct_noninferiority_2pp": true,
+    "faithfulness_noninferiority_2pp": true,
+    "failure_noninferiority": false,
+    "p95_within_1_1": false,
+    "complete_usage": false,
+    "all_pairs_judged": true,
+    "saving_at_least_10percent": true
+  },
+  "cache_adoption": false,
+  "judge_estimate_usd": 0.771668,
+  "denominator_note": "100 each; failed/truncated/ungraded are zero quality; TTFT descriptive observed subset only; costs estimates not invoice; unknown costs retain budget reservation",
+  "offline_freshness_isolation": "100 synthetic invocations of cache library; not production mutation hooks",
+  "private_cache": "OFF; unique prefixes fail economics; no paired private-cache generation experiment",
+  "source_sha256": {
+    "paired.json": "d955fe55e283420620f58888ed8c77fe4dcd671f2627767e8df7524d15af2814",
+    "judges.json": "3ff301e669d32c6d25594edb9ba32275c80cb0af45b1654a31f594e3c4d556a9"
+  }
+}

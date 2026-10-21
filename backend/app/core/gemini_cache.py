@@ -29,7 +29,9 @@ class CachePool:
         return hashlib.sha256(json.dumps(identity).encode()).hexdigest()
     async def _delete(self,name):
         try:await asyncio.wait_for(self.delete(name),5)
-        except Exception:self.deletion_queue.add(name)
+        except Exception as exc:
+            if getattr(exc,"code",getattr(exc,"status_code",None))==404:self.deletion_queue.discard(name)
+            else:self.deletion_queue.add(name)
         else:self.deletion_queue.discard(name)
     async def cleanup(self):
         for key,entry in list(self.entries.items()):

@@ -20,13 +20,13 @@ def plain_template(manifest):
     if kind=="PromptTemplate" and kwargs.get("template_format","f-string")=="f-string" and isinstance(kwargs.get("template"),str):return kwargs["template"]
     raise ValueError("Remote runnable/model/schema is forbidden")
 
-def make_client():
+def make_client(*,timeout_ms=2000):
     from langsmith import Client
     from urllib3.util.retry import Retry
     from app.core.config import get_settings
     s=get_settings()
     if not s.langsmith_api_key:raise ValueError("LangSmith key not configured")
-    return Client(api_url=s.langsmith_endpoint,api_key=s.langsmith_api_key,timeout_ms=2000,
+    return Client(api_url=s.langsmith_endpoint,api_key=s.langsmith_api_key,timeout_ms=timeout_ms,
                   retry_config=Retry(total=0),auto_batch_tracing=False,hide_inputs=True,hide_outputs=True,
                   disable_prompt_cache=True)
 
