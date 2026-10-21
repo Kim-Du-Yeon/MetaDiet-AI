@@ -20,9 +20,14 @@ async def main(args):
         for condition in (['baseline','agentic'] if index%2==0 else ['agentic','baseline']):
             row={'attempt_id':case['attempt_id'],'condition':condition,'status':'failed','purpose':'synthetic_functionality_only'}
             model=old if condition=='baseline' else agentic
-            usage=Usage(); decisions=[]; start=time.perf_counter()
+            usage=Usage(); decisions=[]; queries=[]; start=time.perf_counter()
             async def retrieve(q,**kw):
-                return {'grounded':True,'max_score':.9,'docs':[Document(page_content=case['context'],metadata={'source_file':case['source'],'page':case['page']})]}
+                queries.append(q)
+                research=len(queries)>1
+                content=case.get('research_context',case['context']) if research else case['context']
+                metadata={'source_file':case['source'],'page':case['page']+(100 if research else 0)}
+                if case.get('population'):metadata['population']=case['population']
+                return {'grounded':True,'max_score':.9,'docs':[Document(page_content=content,metadata=metadata)]}
             async def assess(q,result):
                 decision=await model.model_assessment(q,result,config={'callbacks':[usage]})
                 decisions.append(decision.model_dump())
@@ -32,10 +37,12 @@ async def main(args):
                 answer=await qa.answer_from_knowledge(case['question'],retrieval_result=result,config={'callbacks':[usage]})
                 row.update(status='completed',answer=answer['answer'],context=answer['context'],agentic=result['agentic'],
                            sufficient=result['grounded'],expected_sufficient=case['expected_sufficient'],
-                           assessment_contract_pass=result['grounded']==case['expected_sufficient'])
+                           assessment_contract_pass=result['grounded']==case['expected_sufficient'],
+                           expected_rounds=case.get("expected_rounds"),
+                           flow_contract_pass=result["grounded"]==case["expected_sufficient"] and (case.get("expected_rounds") is None or result["agentic"]["rounds"]==case["expected_rounds"]))
             except Exception as exc:
                 row['error']=safe_error(exc)
-            row.update(ms=(time.perf_counter()-start)*1000,usage=usage.calls,decisions=decisions)
+            row.update(ms=(time.perf_counter()-start)*1000,usage=usage.calls,decisions=decisions,queries=queries)
             with output.open('a',encoding='utf-8') as f:f.write(json.dumps(row,ensure_ascii=False)+'\n')
             print(json.dumps({k:row.get(k) for k in ('attempt_id','condition','status','assessment_contract_pass','error')}),flush=True)
             if row.get('error',{}).get('reason') in {'credits','quota'}:

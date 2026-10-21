@@ -112,3 +112,11 @@ def test_complete_embedding_cost_is_added_without_byte_proxy_double_count():
     assert result['agentic']['known_embedding_cost_usd']==pytest.approx(.2)
     assert result['agentic']['known_serving_cost_usd']==pytest.approx(.3)
     assert result['checks']['cost_bounded']
+
+
+def test_operational_timeout_is_counted_even_if_fallback_request_completed():
+    r,g=fixture();r[1]['agentic']={'stop_reason':'timeout'}
+    result=analyze(r,g)
+    assert result['agentic']['operational_failure_rate']==.01
+    assert not result['checks']['operational_failure_noninferior']
+    assert not result['rollout_gate']

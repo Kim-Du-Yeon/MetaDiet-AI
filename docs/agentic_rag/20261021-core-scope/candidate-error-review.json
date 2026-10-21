@@ -1,0 +1,162 @@
+[
+  {
+    "id": "ag-009",
+    "group": "evidence5",
+    "question": "WHO 유리당 5% 미만 권고를 뒷받침하는 근거의 질과 연구 유형은 무엇인가?",
+    "gold": "The recommendation below 5% is based on very low quality evidence from ecological studies of dental caries.",
+    "support_before": false,
+    "support_after": true,
+    "correct_before": true,
+    "correct_after": true,
+    "loop": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v6",
+      "prompt_sha256": "67d1ee2f62b4d1f5392dc5e0070884431ad2540bdf3f56b09026fedc5a0cabab",
+      "recipe": "core-scope-v7",
+      "retained_initial_documents": 4
+    },
+    "answer": "WHO의 유리당 섭취량을 총 에너지 섭취량의 5% 미만으로 제한하는 권고를 뒷받침하는 근거의 질과 연구 유형은 다음과 같습니다.\n\n* **근거의 질:** 매우 낮음(very low quality) [출처: WHO_sugars_2015.pdf, p. 12], [출처: WHO_sugars_2015.pdf, p. 34]\n* **연구 유형:** 생태학적 연구(ecological studies, 3건) [출처: WHO_sugars_2015.pdf, p. 12], [출처: WHO_sugars_2015.pdf, p. 34] (국가 인구 집단 연구 [출처: WHO_sugars_2015.pdf, p. 11])",
+    "reason": "Answer A correctly identifies the quality of evidence as 'very low' and the study type as 'ecological studies' (or national population studies), which matches the gold answer. It is faithful to its provided context."
+  },
+  {
+    "id": "ag-014",
+    "group": "leucine",
+    "question": "What leucine amount and amino-acid balance does ISSN mention?",
+    "gold": "ISSN suggests acute protein doses contain 700–3000 mg leucine and a balanced array of essential amino acids.",
+    "support_before": true,
+    "support_after": false,
+    "correct_before": false,
+    "correct_after": false,
+    "loop": {
+      "rounds": 2,
+      "stop_reason": "round_limit",
+      "prompt_version": "agentic-rag-controller-v6",
+      "prompt_sha256": "67d1ee2f62b4d1f5392dc5e0070884431ad2540bdf3f56b09026fedc5a0cabab",
+      "recipe": "core-scope-v7",
+      "retained_initial_documents": 0
+    },
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "reason": "Model B abstains from answering, which is incorrect according to the instructions. It is faithful because its context is empty."
+  },
+  {
+    "id": "ag-027",
+    "group": "eer_concept",
+    "question": "KDRIs에서 에너지에 상한섭취량 개념을 적용하는가?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "support_before": false,
+    "support_after": false,
+    "correct_before": false,
+    "correct_after": false,
+    "loop": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v6",
+      "prompt_sha256": "67d1ee2f62b4d1f5392dc5e0070884431ad2540bdf3f56b09026fedc5a0cabab",
+      "recipe": "core-scope-v7",
+      "retained_initial_documents": 4
+    },
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "reason": "The model abstained from answering, which is incorrect because the context contains a table showing Energy has only EER and no UL (Tolerable Upper Intake Level) values, but the model failed to deduce this. However, the abstention is faithful to its claim of not finding the evidence."
+  },
+  {
+    "id": "ag-054",
+    "group": "leucine",
+    "question": "What leucine amount and amino-acid balance does ISSN mention?",
+    "gold": "ISSN suggests acute protein doses contain 700–3000 mg leucine and a balanced array of essential amino acids.",
+    "support_before": true,
+    "support_after": false,
+    "correct_before": false,
+    "correct_after": false,
+    "loop": {
+      "rounds": 2,
+      "stop_reason": "round_limit",
+      "prompt_version": "agentic-rag-controller-v6",
+      "prompt_sha256": "67d1ee2f62b4d1f5392dc5e0070884431ad2540bdf3f56b09026fedc5a0cabab",
+      "recipe": "core-scope-v7",
+      "retained_initial_documents": 0
+    },
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "reason": "The model abstained from answering, which is incorrect according to the gold standard, but faithful to its empty context."
+  },
+  {
+    "id": "ag-063",
+    "group": "energy_balance",
+    "question": "KDRIs에서 에너지 평형은 무엇을 뜻하는가?",
+    "gold": "Energy balance means energy intake equals energy expenditure.",
+    "support_before": true,
+    "support_after": false,
+    "correct_before": true,
+    "correct_after": true,
+    "loop": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v6",
+      "prompt_sha256": "67d1ee2f62b4d1f5392dc5e0070884431ad2540bdf3f56b09026fedc5a0cabab",
+      "recipe": "core-scope-v7",
+      "retained_initial_documents": 4
+    },
+    "answer": "에너지 평형은 섭취에너지와 소비에너지가 동일한 상태를 뜻합니다 [출처: KDRI_2025_vol1.pdf, p.44].",
+    "reason": "The answer correctly defines energy balance as energy intake equaling energy expenditure, which matches the gold answer and is supported by the provided context."
+  },
+  {
+    "id": "ag-067",
+    "group": "eer_concept",
+    "question": "KDRIs에서 에너지에 상한섭취량 개념을 적용하는가?",
+    "gold": "Energy is expressed as estimated energy requirement; recommended nutrient intake and tolerable upper intake level concepts are not applied to energy.",
+    "support_before": false,
+    "support_after": false,
+    "correct_before": false,
+    "correct_after": false,
+    "loop": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v6",
+      "prompt_sha256": "67d1ee2f62b4d1f5392dc5e0070884431ad2540bdf3f56b09026fedc5a0cabab",
+      "recipe": "core-scope-v7",
+      "retained_initial_documents": 4
+    },
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "reason": "The model abstained from answering, stating it could not find the basis in the provided materials. However, the context contains a table showing 'Energy (kcal/d)' with only 'EER' listed, and no 'UL' (Tolerable Upper Intake Level) values for energy, which implies the concept is not applied. Abstention to an answerable question is incorrect."
+  },
+  {
+    "id": "ag-089",
+    "group": "evidence5",
+    "question": "WHO 유리당 5% 미만 권고를 뒷받침하는 근거의 질과 연구 유형은 무엇인가?",
+    "gold": "The recommendation below 5% is based on very low quality evidence from ecological studies of dental caries.",
+    "support_before": true,
+    "support_after": false,
+    "correct_before": true,
+    "correct_after": true,
+    "loop": {
+      "rounds": 1,
+      "stop_reason": "sufficient",
+      "prompt_version": "agentic-rag-controller-v6",
+      "prompt_sha256": "67d1ee2f62b4d1f5392dc5e0070884431ad2540bdf3f56b09026fedc5a0cabab",
+      "recipe": "core-scope-v7",
+      "retained_initial_documents": 4
+    },
+    "answer": "WHO의 유리당 섭취량을 총에너지 섭취량의 5% 미만으로 제한하는 것에 대한 근거의 질은 '매우 낮음(Very low)'입니다 [출처: WHO_sugars_2015.pdf, p.34] [출처: WHO_sugars_2015.pdf, p.45]. \n\n이를 뒷받침하는 연구 유형은 3편의 '생태학적 연구(Ecological studies)'입니다 [출처: WHO_sugars_2015.pdf, p.34].",
+    "reason": "Model A correctly identifies the evidence quality as 'very low' and the study type as 'ecological studies', matching the gold answer. It is fully supported by its provided context."
+  },
+  {
+    "id": "ag-094",
+    "group": "leucine",
+    "question": "What leucine amount and amino-acid balance does ISSN mention?",
+    "gold": "ISSN suggests acute protein doses contain 700–3000 mg leucine and a balanced array of essential amino acids.",
+    "support_before": true,
+    "support_after": false,
+    "correct_before": false,
+    "correct_after": false,
+    "loop": {
+      "rounds": 2,
+      "stop_reason": "round_limit",
+      "prompt_version": "agentic-rag-controller-v6",
+      "prompt_sha256": "67d1ee2f62b4d1f5392dc5e0070884431ad2540bdf3f56b09026fedc5a0cabab",
+      "recipe": "core-scope-v7",
+      "retained_initial_documents": 0
+    },
+    "answer": "제공된 자료에서 근거를 찾지 못했습니다.",
+    "reason": "Model B abstains from answering, which is incorrect according to the gold standard, but it is faithful to its empty context."
+  }
+]

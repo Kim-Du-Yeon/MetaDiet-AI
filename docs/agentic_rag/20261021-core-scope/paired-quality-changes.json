@@ -1,0 +1,137 @@
+{
+  "recovered": [
+    {
+      "attempt_id": "ag-026",
+      "group": "eer_concept",
+      "reason": "The model correctly answers the question by stating that a UL is not set for energy and that an EER is used instead, which is fully supported by the provided context (Table 4)."
+    },
+    {
+      "attempt_id": "ag-034",
+      "group": "obesity_initial_goal",
+      "reason": "Model B correctly includes both the 5-10% weight loss goal within six months and the caveat about not generalizing the guideline, and is fully supported by its context."
+    },
+    {
+      "attempt_id": "ag-035",
+      "group": "obesity_initial_goal",
+      "reason": "Model A correctly states the 5-10% weight loss goal within 6 months and includes the context that it should not be generalized, matching the gold answer. All claims are supported by its provided context."
+    },
+    {
+      "attempt_id": "ag-066",
+      "group": "eer_concept",
+      "reason": "The model correctly answers that a tolerable upper intake level (UL) is not set for energy, accurately citing the provided table in its context."
+    },
+    {
+      "attempt_id": "ag-074",
+      "group": "obesity_initial_goal",
+      "reason": "Answer B correctly includes both the 5-10% weight loss goal within six months and the caveat about not generalizing it, and is fully supported by its provided context."
+    },
+    {
+      "attempt_id": "ag-075",
+      "group": "obesity_initial_goal",
+      "reason": "Answer A correctly identifies the 5-10% weight loss goal within 6 months and includes the crucial context that it is a clinical guideline not to be generalized, matching the gold standard. It is fully supported by its provided context."
+    }
+  ],
+  "regressed": [],
+  "groups": {
+    "sugar10": {
+      "attempts": 6,
+      "baseline_correct": 6,
+      "candidate_correct": 6
+    },
+    "sugar5": {
+      "attempts": 6,
+      "baseline_correct": 6,
+      "candidate_correct": 6
+    },
+    "juice": {
+      "attempts": 6,
+      "baseline_correct": 6,
+      "candidate_correct": 6
+    },
+    "lifecourse": {
+      "attempts": 6,
+      "baseline_correct": 6,
+      "candidate_correct": 6
+    },
+    "evidence5": {
+      "attempts": 6,
+      "baseline_correct": 6,
+      "candidate_correct": 6
+    },
+    "protein_daily": {
+      "attempts": 6,
+      "baseline_correct": 6,
+      "candidate_correct": 6
+    },
+    "protein_serving": {
+      "attempts": 6,
+      "baseline_correct": 6,
+      "candidate_correct": 6
+    },
+    "leucine": {
+      "attempts": 6,
+      "baseline_correct": 3,
+      "candidate_correct": 3
+    },
+    "spacing": {
+      "attempts": 6,
+      "baseline_correct": 6,
+      "candidate_correct": 6
+    },
+    "exercise_window": {
+      "attempts": 6,
+      "baseline_correct": 6,
+      "candidate_correct": 6
+    },
+    "tee_components": {
+      "attempts": 4,
+      "baseline_correct": 4,
+      "candidate_correct": 4
+    },
+    "energy_balance": {
+      "attempts": 4,
+      "baseline_correct": 4,
+      "candidate_correct": 4
+    },
+    "negative_balance": {
+      "attempts": 4,
+      "baseline_correct": 4,
+      "candidate_correct": 4
+    },
+    "eer_concept": {
+      "attempts": 4,
+      "baseline_correct": 0,
+      "candidate_correct": 2
+    },
+    "eer_edition": {
+      "attempts": 4,
+      "baseline_correct": 4,
+      "candidate_correct": 4
+    },
+    "eer_rounding": {
+      "attempts": 4,
+      "baseline_correct": 4,
+      "candidate_correct": 4
+    },
+    "activity_reference": {
+      "attempts": 4,
+      "baseline_correct": 4,
+      "candidate_correct": 4
+    },
+    "obesity_initial_goal": {
+      "attempts": 4,
+      "baseline_correct": 0,
+      "candidate_correct": 4
+    },
+    "secondary_obesity": {
+      "attempts": 4,
+      "baseline_correct": 4,
+      "candidate_correct": 4
+    },
+    "comorbidity_screen": {
+      "attempts": 4,
+      "baseline_correct": 4,
+      "candidate_correct": 4
+    }
+  }
+}

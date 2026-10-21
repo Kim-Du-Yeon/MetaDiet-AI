@@ -26,6 +26,7 @@ def analyze(rows,grades):
         good=lambda r,field:serving(r) and judged(r) and judges[(r['attempt_id'],condition)].get(field,False)
         result[condition]={'attempts':n,'completed':sum(serving(r) for r in items),
             'failure_rate':sum(not serving(r) for r in items)/n,
+            'operational_failure_rate':sum(not serving(r) or (r.get('agentic') or {}).get('stop_reason') in {'timeout','controller_error','retrieval_error'} for r in items)/n,
             'judge_failures':sum(serving(r) and not judged(r) for r in items),
             'correctness':sum(good(r,'correct') for r in items)/n,
             'faithfulness':sum(good(r,'faithful') for r in items)/n,
@@ -56,6 +57,7 @@ def analyze(rows,grades):
         'faithfulness_noninferior':complete_quality and c['faithfulness']>=b['faithfulness'],
         'support_noninferior':c['source_page_support']>=b['source_page_support'],
         'failure_noninferior':c['failure_rate']<=b['failure_rate'],
+        'operational_failure_noninferior':c['operational_failure_rate']<=b['operational_failure_rate'],
         'latency_bounded':c['p50_ms']<=b['p50_ms']*1.5 and c['p95_ms']<=b['p95_ms']*1.5,
         'cost_complete':b['cost_complete'] and c['cost_complete'],
         'cost_bounded':c['known_serving_cost_usd']+(0 if c['cost_complete'] else c['embedding_cost_upper_proxy_usd'])<=2*(b['known_serving_cost_usd']+(0 if b['cost_complete'] else b['embedding_cost_upper_proxy_usd']))}

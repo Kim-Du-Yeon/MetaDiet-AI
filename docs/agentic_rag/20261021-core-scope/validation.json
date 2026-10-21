@@ -1,0 +1,34 @@
+{
+  "attempts": 200,
+  "grades": 200,
+  "attempts_per_condition": 100,
+  "unique_questions": 40,
+  "keys_unique_and_matched": true,
+  "candidate_AB_balanced": true,
+  "same_cases_as_previous_study": true,
+  "candidate_source_matches_frozen": true,
+  "baseline_source_matches_frozen": true,
+  "benchmark_source_matches_protocol": true,
+  "corrected_dev_v2_v3_identical": true,
+  "quality_gate": {
+    "judge_complete": true,
+    "quality_minimum": true,
+    "quality_improved": true,
+    "faithfulness_noninferior": true,
+    "support_noninferior": false,
+    "failure_noninferior": true,
+    "operational_failure_noninferior": true,
+    "latency_bounded": true,
+    "cost_complete": true,
+    "cost_bounded": true
+  },
+  "rollout_gate": false,
+  "backend_tests": {
+    "passed": 1518,
+    "existing_skipped": 1,
+    "warnings": 3,
+    "exit_code": 0
+  },
+  "judge_cost_usd": 0.589137,
+  "cost_scope": "Serving model+embedding estimates use provider token usage and frozen rates; Pro Batch evaluation separate. Excludes Pinecone/hosting/tax/invoice reconciliation."
+}

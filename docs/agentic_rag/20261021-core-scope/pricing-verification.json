@@ -1,0 +1,21 @@
+{
+  "checked_service_date": "2026-10-21",
+  "source": "https://ai.google.dev/gemini-api/docs/pricing",
+  "rates_unchanged_from_frozen_support_table": true,
+  "usd_per_million_tokens": {
+    "gemini-3.8-flash": {
+      "input": 0.75,
+      "output_including_thinking": 3.75,
+      "cache_read": 0.075
+    },
+    "gemini-3.1-flash-lite": {
+      "input": 0.25,
+      "output_including_thinking": 1.5,
+      "cache_read": 0.025
+    },
+    "gemini-embedding-2": {
+      "text_input": 0.2
+    }
+  },
+  "interpretation": "Provider token usage times frozen standard rates; not tax-inclusive billing invoice. Pro final judging uses native Batch50% standard, separately reported."
+}

@@ -1,0 +1,43 @@
+{
+  "attempts_per_condition": 100,
+  "unique_questions": 40,
+  "sampling": "core40 twice plus first20; development repeated attempts, not held-out",
+  "dataset_sha256": "4ba67cf812497730848fe864580f1a7bf7da191c6a3c71427200eac3535aed9e",
+  "retrieval": "dense, k4, no reranker; matches 512MiB remote fallback",
+  "workers": 3,
+  "pair_order": "alternating",
+  "timeout_seconds": 90,
+  "loop_timeout_seconds": 35,
+  "gate": {
+    "correctness_min": 0.95,
+    "correctness_improvement_min": 0.02,
+    "support_noninferior": true,
+    "failure_noninferior": true,
+    "p50_ratio_max": 1.5,
+    "p95_ratio_max": 1.5,
+    "complete_cost_required": true,
+    "cost_ratio_max": 2,
+    "operational_failure_noninferior": true
+  },
+  "date": "2026-10-21",
+  "baseline": "Frozen controller-v3/recipe-v4 at16363a06",
+  "candidate": "controller-v6/recipe core-scope-v7, required missing_core guard + bounded scoped metadata context",
+  "judge": "All100 paired outputs native Pro Batch, same rubric2048/low and balanced A/B.",
+  "gate_note": "Retain existing conservative gate; no deployment unless complete quality and cost data pass. Embedding metadata missing remains incomplete.",
+  "baseline_source_sha256": "27b7107ffc10344e4150929f97daf13f4c9db85257774e9d006cf790cf2b6cff",
+  "development_dataset_sha256": "4bd448288fa9046d262ae9426ac509152e6ab88c8b96f3f8e3e8aaf225b6f1e8",
+  "status": "development_before_new_matched100",
+  "qa_note": "Base QA prompt unchanged. Candidate bounded context now includes applicability metadata, same6000char cap. Baseline formatter/assessor frozen.",
+  "embedding_note": "Raw response usageMetadata.promptTokenCount is observed before SDK conversion. Missing means cost incomplete. Same telemetry on both conditions.",
+  "development_runner": "backend/scripts/eval/develop_agentic_policy.py",
+  "development_refinement": "Original and v2 runs retained. Reference-name/spacing fixture corrections preserve questions/gold. Generic non-nutrition logic examples refined only on separate dev before main comparison. Final dev-v3 uses unchanged corrected12.",
+  "candidate_source_sha256": "8ab589bff8bd17a37c281f823f79f856c7393f2c2624927fe055c928785fac67",
+  "benchmark_source_sha256": "d29ff61bc683ed28195915d6ff439683f07f9609ac51294a279f434e7c6310f5",
+  "operational_failure_policy": "Requests and loop timeout/controller_error/retrieval_error retained in denominator; additionally require operational_failure_noninferior before rollout. Frozen before new main comparison.",
+  "commands": [
+    "backend/venv/Scripts/python.exe backend/scripts/eval/benchmark_agentic_rag.py --output docs/agentic_rag/20261021-core-scope --baseline-source docs/agentic_rag/20261021-core-scope/baseline-agentic-v4.py.txt --defer-judge",
+    "backend/venv/Scripts/python.exe backend/scripts/eval/batch_agentic_judges.py pairs --directory docs/agentic_rag/20261021-core-scope --job docs/agentic_rag/20261021-core-scope/batch-pairs-job.json",
+    "backend/venv/Scripts/python.exe backend/scripts/eval/batch_agentic_judges.py collect --job docs/agentic_rag/20261021-core-scope/batch-pairs-job.json",
+    "backend/venv/Scripts/python.exe backend/scripts/eval/analyze_agentic_rag.py docs/agentic_rag/20261021-core-scope --grades-name batch-pairs-job.grades.jsonl"
+  ]
+}
