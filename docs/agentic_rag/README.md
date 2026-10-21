@@ -66,3 +66,6 @@ Post-cohort v11 error handling fixes missing max_score after retrieval exception
 
 후속 실제 실행은 [사용·예약 $0.099494에서 채점 한도로 중단](20261021-budgeted-validation/README.md).
 조건별 7개 응답을 보존했으며 최종 비교 미완료·배포 미적용이다.
+
+[분할 Batch와 실제 사용량 정산 구현·오프라인 확인](BATCH_SPLIT_SETTLEMENT.md).
+최종 관련 테스트 91개 통과. 전체/단계별 예산 및 기존 중단 장부는 유지하며 새 유료 호출은 없다.

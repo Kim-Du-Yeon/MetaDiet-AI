@@ -8,11 +8,13 @@ import math
 import re
 import sqlite3
 import uuid
+import contextvars
 from contextlib import contextmanager
 from pathlib import Path
 
 LIMITS = {"probe": .10, "development": .25, "comparison": 3., "judge": 1., "browser": .15}
 TOTAL = 5.
+BATCH_RESERVATION = contextvars.ContextVar("prepaid_eval_batch", default=None)
 PRICES = {"gemini-3.8-flash": (.75, 3.75),
           "gemini-3.1-flash-lite": (.25, 1.5),
           "gemini-3.1-pro-preview": (2., 12.), "gemini-embedding-2": (.2, 0.)}
@@ -35,6 +37,7 @@ class Budget:
         with self.connect() as db:
             db.execute("CREATE TABLE IF NOT EXISTS costs (id TEXT PRIMARY KEY, stage TEXT NOT NULL, amount INTEGER NOT NULL, settled INTEGER NOT NULL DEFAULT 0)")
             db.execute("CREATE TABLE IF NOT EXISTS stop (reason TEXT NOT NULL)")
+            db.execute("CREATE TABLE IF NOT EXISTS batch_jobs (ticket TEXT PRIMARY KEY, name TEXT UNIQUE NOT NULL, usage_hash TEXT)")
 
     @contextmanager
     def connect(self):
@@ -86,6 +89,51 @@ class Budget:
             stopped = db.execute("SELECT reason FROM stop LIMIT 1").fetchone()
         return {"committed_usd": sum(stages.values()), "stages": stages, "total_limit_usd": TOTAL,
                 "stopped": bool(stopped), "stop_reason": stopped[0] if stopped else None}
+
+    def available(self, stage):
+        """Read-only planning; the actual reservation still checks atomically."""
+        if stage not in LIMITS:
+            raise BudgetStop("Unknown budget stage")
+        snapshot = self.summary()
+        if snapshot["stopped"]:
+            raise BudgetStop("Campaign stopped")
+        return max(0, min(TOTAL-snapshot["committed_usd"], LIMITS[stage]-snapshot["stages"].get(stage, 0)))
+
+    def bind_batch(self, ticket, name):
+        if not isinstance(name, str) or not name:
+            raise BudgetStop("Missing provider batch identity")
+        with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            cost = db.execute("SELECT stage,settled FROM costs WHERE id=?", (ticket,)).fetchone()
+            old = db.execute("SELECT name FROM batch_jobs WHERE ticket=?", (ticket,)).fetchone()
+            if not cost or cost[0] != "judge" or (cost[1] and not old) or (old and old[0] != name):
+                raise BudgetStop("Batch reservation identity mismatch")
+            if not old:
+                db.execute("INSERT INTO batch_jobs(ticket,name) VALUES(?,?)", (ticket, name))
+
+    def settle_batch(self, ticket, name, actual, usage_hash):
+        """Idempotent actual-usage settlement, including after process restart."""
+        if actual is None:
+            return False  # Never release unknown charges; allow later verified collection.
+        amount = micros(actual)
+        with self.connect() as db:
+            db.execute("BEGIN IMMEDIATE")
+            row = db.execute("SELECT c.amount,c.settled,b.name,b.usage_hash FROM costs c JOIN batch_jobs b ON c.id=b.ticket WHERE c.id=?", (ticket,)).fetchone()
+            if row is None or row[2] != name:
+                raise BudgetStop("Batch reservation identity mismatch")
+            if row[1]:
+                if row[0] != amount or row[3] != usage_hash:
+                    db.execute("INSERT INTO stop(reason) VALUES('Conflicting batch settlement')")
+                    db.commit()
+                    raise BudgetStop("Conflicting batch settlement")
+                return True
+            db.execute("UPDATE costs SET amount=?,settled=1 WHERE id=?", (amount, ticket))
+            db.execute("UPDATE batch_jobs SET usage_hash=? WHERE ticket=?", (usage_hash, ticket))
+            if amount > row[0]:
+                db.execute("INSERT INTO stop(reason) VALUES('Provider usage exceeded reservation')")
+                db.commit()
+                raise BudgetStop("Provider usage exceeded reservation; stop")
+        return True
 
 
 def request_bound(path, body):
@@ -165,16 +213,23 @@ def install_transport_guard(budget, stage, client_class=None):
     def reserve(method, path, body):
         if method.lower() == "get":
             return None  # Job status/collection; no model generation.
-        return budget.reserve(stage, request_bound(path, body))
+        bound = request_bound(path, body)
+        prepaid = BATCH_RESERVATION.get() if path.endswith(":batchGenerateContent") else None
+        if prepaid is not None:
+            if prepaid["ledger"] != budget.path or stage != "judge" or prepaid["used"] or micros(bound) > prepaid["micros"]:
+                raise BudgetStop("Prepaid batch request mismatch or duplicate transport")
+            prepaid["used"] = True
+            return prepaid["ticket"]
+        return budget.reserve(stage, bound)
 
     def guarded(client, method, path, request_dict, http_options=None):
         ticket = reserve(method, path, request_dict)
         try:
             response = original(client, method, path, request_dict, single_attempt(http_options))
         except BaseException:
-            if ticket: budget.settle(ticket, None)
+            if ticket and not path.endswith(":batchGenerateContent"): budget.settle(ticket, None)
             raise
-        if ticket: budget.settle(ticket, response_cost(path, response))
+        if ticket and not path.endswith(":batchGenerateContent"): budget.settle(ticket, response_cost(path, response))
         return response
 
     async def guarded_async(client, method, path, request_dict, http_options=None):
@@ -182,9 +237,9 @@ def install_transport_guard(budget, stage, client_class=None):
         try:
             response = await original_async(client, method, path, request_dict, single_attempt(http_options))
         except BaseException:
-            if ticket: budget.settle(ticket, None)
+            if ticket and not path.endswith(":batchGenerateContent"): budget.settle(ticket, None)
             raise
-        if ticket: budget.settle(ticket, response_cost(path, response))
+        if ticket and not path.endswith(":batchGenerateContent"): budget.settle(ticket, response_cost(path, response))
         return response
 
     client_class.request = guarded
@@ -201,15 +256,15 @@ def add_budget_args(parser):
     parser.add_argument("--budget-ledger", default=str(Path(__file__).resolve().parents[3]/"tmp/eval-budget.sqlite"))
 
 
-def preflight_batch_judge(budget, *, pairs, output_cap=2048):
+def preflight_batch_judge(budget, *, pairs, output_cap=2048, chunk_size=10):
     """Reject impossible final-judge plans before spending on new answers.
 
     This is the output-only reservation floor, not an actual charge or complete
     input estimate. Passing still requires full-payload reservation at submit.
     """
-    if type(pairs) is not int or pairs <= 0 or type(output_cap) is not int or output_cap <= 0:
+    if type(pairs) is not int or pairs <= 0 or type(output_cap) is not int or output_cap <= 0 or type(chunk_size) is not int or chunk_size <= 0:
         raise BudgetStop("Invalid judge plan")
-    minimum = pairs * output_cap * PRICES["gemini-3.1-pro-preview"][1] * .5 / 1e6
+    minimum = min(pairs, chunk_size) * output_cap * PRICES["gemini-3.1-pro-preview"][1] * .5 / 1e6
     budget.reserve("judge", minimum, check_only=True)
 
 

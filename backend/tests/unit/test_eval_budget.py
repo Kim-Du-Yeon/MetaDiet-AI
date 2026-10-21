@@ -145,7 +145,10 @@ def test_structured_output_function_schema_has_only_token_cost():
 
 def test_batch_judge_feasibility_stops_before_any_generation(tmp_path):
     b=budget.Budget(tmp_path/"preflight.sqlite")
+    budget.preflight_batch_judge(b,pairs=100,output_cap=2048)
+    assert b.summary()["committed_usd"]==0
+    assert not b.summary()["stopped"]
     with pytest.raises(budget.BudgetStop,match="Budget exhausted: judge"):
-        budget.preflight_batch_judge(b,pairs=100,output_cap=2048)
+        budget.preflight_batch_judge(b,pairs=100,output_cap=2048,chunk_size=100)
     assert b.summary()["committed_usd"]==0
     assert b.summary()["stopped"]
