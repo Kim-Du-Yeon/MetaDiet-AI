@@ -1,0 +1,90 @@
+"""Offline qualitative audit of frozen paired results. No provider or DB calls."""
+from __future__ import annotations
+import argparse
+from collections import Counter
+import hashlib
+import json
+from pathlib import Path
+import sys
+
+ROOT=Path(__file__).resolve().parents[3]
+sys.path.insert(0,str(ROOT/"backend"))
+from langchain_core.documents import Document
+from app.rag.agentic import _scoped_context
+
+def sha(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+def read_rows(path):
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines()]
+
+def snippet(text,cue,radius=180):
+    index=text.find(cue)
+    return text[max(0,index-radius):index+len(cue)+radius] if index>=0 else None
+
+def analyze(source,output):
+    protocol=json.loads((source/"protocol.json").read_text(encoding="utf-8"))
+    assert sha(ROOT/"backend/app/rag/agentic.py")==protocol["candidate_source_sha256"],"Packing source changed since experiment"
+    cases={c["attempt_id"]:c for c in json.loads((source/"cases.json").read_text(encoding="utf-8"))}
+    rows=read_rows(source/"attempts.jsonl");grades=read_rows(source/"grading.grades.jsonl")
+    assert len(cases)==100 and len(rows)==len(grades)==200
+    by={(r["attempt_id"],r["condition"]):r for r in rows}
+    judged={(g["attempt_id"],g["condition"]):g for g in grades}
+    assert len(by)==len(judged)==200
+    assert all(g["status"]=="completed" for g in grades)
+    taxonomy={"leucine":"numeric_range_evidence_displaced",
+              "exercise_window":"duration_qualifier_evidence_displaced",
+              "negative_balance":"definition_gate_full_abstention",
+              "comorbidity_screen":"requested_list_missing_in_partial_context"}
+    selected=[];transitions=Counter();regression_groups=Counter();replay=[]
+    for key,case in cases.items():
+        b=by[(key,"baseline")];a=by[(key,"agentic")]
+        bg=judged[(key,"baseline")];ag=judged[(key,"agentic")]
+        transition=("correct" if bg["correct"] else "incorrect")+"->"+("correct" if ag["correct"] else "incorrect")
+        transitions[transition]+=1
+        if transition=="correct->correct":continue
+        kind=(taxonomy.get(case["case_group"],"unclassified_regression") if transition=="correct->incorrect" else "shared_retrieval_coverage" if transition=="incorrect->incorrect" else "recovered_applicability")
+        if transition=="correct->incorrect":regression_groups[kind]+=1
+        item={"attempt_id":key,"fact_group":case["case_group"],"question":case["question"],
+              "gold":case["gold_answer"],"transition":transition,"analysis_category":kind,
+              "baseline":{"answer":b["answer"],"context_chars":len(b["context"]),"grade":bg},
+              "agentic":{"answer":a["answer"],"context_chars":len(a["context"]),"finish_reason":a["answer_finish_reason"],"grade":ag,"controller":a.get("agentic")}}
+        if case["case_group"]=="comorbidity_screen":
+            item["required_list_markers"]={cue:{"baseline":cue in b["context"],"agentic":cue in a["context"]} for cue in ["고혈압","2형당뇨병","이상지질혈증"]}
+        selected.append(item)
+        if transition!="correct->incorrect" or case["case_group"] not in {"leucine","exercise_window"}:continue
+        cue="700" if case["case_group"]=="leucine" else "at least 24"
+        primary=[Document(page_content=d["text"],metadata=d["metadata"]) for d in b["documents"]]
+        neighbors=[Document(page_content=d["text"],metadata=d["metadata"]) for d in a["documents"] if d["metadata"].get("neighbor_context")]
+        current,_=_scoped_context(primary+neighbors)
+        # Preserve evidence text and scope data; removing this internal flag only
+        # changes the existing packer's ordering, not source facts or the cap.
+        original_first,_=_scoped_context([Document(page_content=d.page_content,metadata={**d.metadata,"neighbor_context":False}) for d in primary+neighbors])
+        record={"attempt_id":key,"cue":cue,"baseline_context_chars":len(b["context"]),
+            "observed_agentic_context_chars":len(a["context"]),"neighbor_count":len(neighbors),
+            "current_packing_matches_observed_context_exactly":current==a["context"],
+            "baseline_has_cue":cue in b["context"],"current_packing_has_cue":cue in current,
+            "primary_first_packing_has_cue":cue in original_first,
+            "baseline_excerpt":snippet(b["context"],cue),"primary_first_excerpt":snippet(original_first,cue),
+            "interpretation_limit":"Text packing only; baseline saved hits proxy initial candidate hits. Exact final-context reconstruction observed, but intermediate candidate retrieval/controller decisions were not saved. No new answer or judge run; restored cue is not verified accuracy improvement."}
+        assert record["current_packing_matches_observed_context_exactly"]
+        assert record["baseline_has_cue"] and not record["current_packing_has_cue"] and record["primary_first_packing_has_cue"]
+        replay.append(record)
+    assert transitions=={"correct->correct":79,"correct->incorrect":10,"incorrect->incorrect":10,"incorrect->correct":1}
+    assert sorted(regression_groups.values())==[2,2,3,3] and len(replay)==6
+    output.mkdir(parents=True,exist_ok=True)
+    dump=lambda name,value:(output/name).write_text(json.dumps(value,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    summary={"source_directory":source.relative_to(ROOT).as_posix(),"source_hashes":{n:sha(source/n) for n in ["cases.json","attempts.jsonl","grading.grades.jsonl","final-summary.json"]},
+        "analysis_script_sha256":sha(Path(__file__)),"packing_source_sha256":sha(ROOT/"backend/app/rag/agentic.py"),"transitions":dict(transitions),
+        "regression_categories":dict(regression_groups),"regression_attempts":10,"regression_fact_groups":4,
+        "shared_incorrect_attempts":10,"shared_incorrect_fact_groups":len({c["fact_group"] for c in selected if c["transition"]=="incorrect->incorrect"}),
+        "recovery_attempts":1,"packing_replays_exact":len(replay),
+        "new_provider_calls":0,"new_answers":0,"new_judges":0,
+        "method":"Author-coded qualitative taxonomy and deterministic saved-text packing replay; original scores unchanged, no clinical adjudication or new model-quality experiment."}
+    dump("case-analysis.json",selected);dump("packing-replay.json",replay);dump("analysis-audit.json",summary)
+    print(json.dumps(summary,ensure_ascii=True))
+
+if __name__=="__main__":
+    parser=argparse.ArgumentParser()
+    parser.add_argument("--source",type=Path,required=True);parser.add_argument("--output",type=Path,required=True)
+    args=parser.parse_args();analyze(args.source.resolve(),args.output.resolve())
