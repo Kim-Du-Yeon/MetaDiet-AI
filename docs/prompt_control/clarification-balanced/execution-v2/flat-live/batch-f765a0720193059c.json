@@ -1,0 +1,65 @@
+{
+  "state": "JOB_STATE_SUCCEEDED",
+  "model": "gemini-3.1-pro-preview",
+  "entries": [
+    {
+      "key": "cb2-eval-known_choices-06",
+      "case_id": "cb2-eval-known_choices-06",
+      "mapping": {
+        "a": "v1",
+        "b": "v2"
+      },
+      "answer_binding": "eda3210376ae59cd93e38b1616402f0999d2269a6519d54eb5f7d80c1601341c",
+      "format_contract": "clarification-grade-flat-v1",
+      "system_instruction_sha256": "b207334a1e36ba6749a9f456a435eb255f30e009cd29602f67220401c1cd4c3e",
+      "request_sha256": "26aaaf5856963fedcff69a539f588ba9577f8d80fd39a329528f2423fb6db08e"
+    },
+    {
+      "key": "cb2-eval-known_label-08",
+      "case_id": "cb2-eval-known_label-08",
+      "mapping": {
+        "a": "v1",
+        "b": "v2"
+      },
+      "answer_binding": "3627fb132026ed65c23d95a13a4f10f65096e3f715217d8a432273a2b2110bf6",
+      "format_contract": "clarification-grade-flat-v1",
+      "system_instruction_sha256": "b207334a1e36ba6749a9f456a435eb255f30e009cd29602f67220401c1cd4c3e",
+      "request_sha256": "aced8f25ade21db7a9e84c537205fc1f4c1e5702dac244ef99e22034e6c4a738"
+    },
+    {
+      "key": "cb2-eval-known_intake-05",
+      "case_id": "cb2-eval-known_intake-05",
+      "mapping": {
+        "a": "v2",
+        "b": "v1"
+      },
+      "answer_binding": "4bbe63ea5e64f196b736ae63caf6a33ad93207ea32823dfdc0578a6c6175eba9",
+      "format_contract": "clarification-grade-flat-v1",
+      "system_instruction_sha256": "b207334a1e36ba6749a9f456a435eb255f30e009cd29602f67220401c1cd4c3e",
+      "request_sha256": "3ce06629d45f0c13d7b3183de4572efb44f43cfb3d8f2a4574f960d6bc428c80"
+    },
+    {
+      "key": "cb2-eval-known_intake-06",
+      "case_id": "cb2-eval-known_intake-06",
+      "mapping": {
+        "a": "v1",
+        "b": "v2"
+      },
+      "answer_binding": "5aaf3cda10973cc3bb5cbdf33c9b5bcd3dca99994f1dc4d4dd1857fe377c60c3",
+      "format_contract": "clarification-grade-flat-v1",
+      "system_instruction_sha256": "b207334a1e36ba6749a9f456a435eb255f30e009cd29602f67220401c1cd4c3e",
+      "request_sha256": "a1056c297a8c6abf54e1eede64f890c14f907fa83a5689a4f2739a1406dab6f0"
+    }
+  ],
+  "entries_sha256": "5e6acde55be95d30c31215a8990c64447a8802fafbedd5a0e7cf5b95ccd00293",
+  "budget": {
+    "ledger": "D:\\AX\\diet_agent\\tmp\\eval-budget.sqlite",
+    "ticket": "2bae9e04ca78409c9da40db275c79cb6",
+    "reserved_usd": 0.078116
+  },
+  "name": "batches/sg7bzyacgp8suu7qre3dghk4caz1al6xvx9r",
+  "collected": true,
+  "parser_version": 5,
+  "actual_batch_cost_usd": 0.014648999999999999,
+  "usage_hash": "59beb6e8da5c39d1ef91e7bab1d2e56860c6d6ea67ef03a54d49047df4263b7d"
+}

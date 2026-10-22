@@ -1,0 +1,53 @@
+{
+  "state": "JOB_STATE_SUCCEEDED",
+  "model": "gemini-3.1-pro-preview",
+  "entries": [
+    {
+      "key": "cb2-eval-known_intake-11",
+      "case_id": "cb2-eval-known_intake-11",
+      "mapping": {
+        "a": "v2",
+        "b": "v1"
+      },
+      "answer_binding": "b10a00c5b969d4d9c51531020291140e8d5e20a595b325b27b6860f60202f68a",
+      "format_contract": "clarification-grade-flat-v1",
+      "system_instruction_sha256": "b207334a1e36ba6749a9f456a435eb255f30e009cd29602f67220401c1cd4c3e",
+      "request_sha256": "1db73d91e310392a15593ce469c5fad9a61e65d03723fd187607307629c104eb"
+    },
+    {
+      "key": "cb2-eval-missing_choices-02",
+      "case_id": "cb2-eval-missing_choices-02",
+      "mapping": {
+        "a": "v1",
+        "b": "v2"
+      },
+      "answer_binding": "da44e6720d5101cbbdc423cdc42e2e3b5a7f24685107c83fb0d0b917729b5acb",
+      "format_contract": "clarification-grade-flat-v1",
+      "system_instruction_sha256": "b207334a1e36ba6749a9f456a435eb255f30e009cd29602f67220401c1cd4c3e",
+      "request_sha256": "ad799e7773c88e8c9d74720b7b466fa5beff6d366f759aead9c8c6ec3bd36d9c"
+    },
+    {
+      "key": "cb2-eval-missing_choices-03",
+      "case_id": "cb2-eval-missing_choices-03",
+      "mapping": {
+        "a": "v2",
+        "b": "v1"
+      },
+      "answer_binding": "a9ba072a0bf45851e012d42b7edef8135b1544f03afa6858358262c6044e9dcf",
+      "format_contract": "clarification-grade-flat-v1",
+      "system_instruction_sha256": "b207334a1e36ba6749a9f456a435eb255f30e009cd29602f67220401c1cd4c3e",
+      "request_sha256": "1fc73594a7a07952bb3ca482abe4e6ff379714fcde2bf9c17be0b7a52a585b76"
+    }
+  ],
+  "entries_sha256": "8082e6ee97b9fee30f4f03f52c03d4c91869cbd176dd71c5f62317e9389173f1",
+  "budget": {
+    "ledger": "D:\\AX\\diet_agent\\tmp\\eval-budget.sqlite",
+    "ticket": "69e1966bdb3e490baf25823991108e1f",
+    "reserved_usd": 0.05871
+  },
+  "name": "batches/ik6vq8buay7rxgzqvl4g7xdm4ddtz91q1x4r",
+  "collected": true,
+  "parser_version": 5,
+  "actual_batch_cost_usd": 0.012058000000000001,
+  "usage_hash": "df08d4efa8fc3c97646dfcae8d71bfaf507de536f0829390eb32a3ed9cd159d4"
+}

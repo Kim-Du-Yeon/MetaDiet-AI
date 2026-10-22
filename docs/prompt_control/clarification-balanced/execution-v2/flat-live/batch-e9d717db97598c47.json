@@ -1,0 +1,41 @@
+{
+  "state": "JOB_STATE_SUCCEEDED",
+  "model": "gemini-3.1-pro-preview",
+  "entries": [
+    {
+      "key": "cb2-eval-missing_choices-10",
+      "case_id": "cb2-eval-missing_choices-10",
+      "mapping": {
+        "a": "v1",
+        "b": "v2"
+      },
+      "answer_binding": "813e674198154ccaa87631952c64fd964ec0960ab903323fe37ba15cc7aaef17",
+      "format_contract": "clarification-grade-flat-v1",
+      "system_instruction_sha256": "b207334a1e36ba6749a9f456a435eb255f30e009cd29602f67220401c1cd4c3e",
+      "request_sha256": "cf22b4d20622e1583d3a9193641772c809b6a53e9e193daebcc06ce1c273f190"
+    },
+    {
+      "key": "cb2-eval-missing_label-04",
+      "case_id": "cb2-eval-missing_label-04",
+      "mapping": {
+        "a": "v1",
+        "b": "v2"
+      },
+      "answer_binding": "0f0ecd0ac7bb412f9c2954e4feebfd762ac01c693e40cde46a3316d3fa682cf2",
+      "format_contract": "clarification-grade-flat-v1",
+      "system_instruction_sha256": "b207334a1e36ba6749a9f456a435eb255f30e009cd29602f67220401c1cd4c3e",
+      "request_sha256": "0af9acc2230871e2deea3dbb5219f567565dea08e95f6a12ed7b3ef3e83584d4"
+    }
+  ],
+  "entries_sha256": "5847481b1f5b3f1eaa062bd5fbf2fba95232a7bb2acbdd286ffe4f5e5f1d78b6",
+  "budget": {
+    "ledger": "D:\\AX\\diet_agent\\tmp\\eval-budget.sqlite",
+    "ticket": "b32ae9902a154d1d8a8d8869ee4764da",
+    "reserved_usd": 0.038997
+  },
+  "name": "batches/7w6kx10blvyjjdcpsem534mvlka64ckb907o",
+  "collected": true,
+  "parser_version": 5,
+  "actual_batch_cost_usd": 0.007747,
+  "usage_hash": "b42758a45d423ade8b3f65faa288f17f5c9a47b61f7906902ed26e71313553ba"
+}

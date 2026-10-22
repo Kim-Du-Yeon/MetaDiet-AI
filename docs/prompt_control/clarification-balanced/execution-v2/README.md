@@ -1,3 +1,5 @@
+최신완결결과: [100쌍채점완료·후보미채택·출력계약31/31정상](COMPLETE100.md). 아래는해당실행시점의원본기록이다.
+
 # 후속 질문 의미 평가 실행·승인 v2
 
 2026-10-22. 기존 LangSmith 비공개 프롬프트와 signed v1은 유지한다. 후보는 `../../followup-question-candidate/candidate.json`의 불변 8개 커밋이며, 변경 범위는 `team.compact_followup` 하나다.
