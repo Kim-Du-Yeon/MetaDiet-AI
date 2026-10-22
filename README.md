@@ -1,3 +1,5 @@
+추가 질문 평가셋: [바로 답변50·필수 질문50·개발20·저장 사례10·Pro RPD 차단과 재개 조건](docs/prompt_control/clarification-balanced/README.md).
+
 후속 상담 새 후보 비교: [기존 v1 재사용·추가 질문 감소 가설·Pro429 중단·미승격 이유](docs/prompt_control/followup-question-candidate/README.md).
 
 새 후보 승인 절차: [커밋 선택 → 기존 평가 재사용/새 비교 → 검증 receipt → 서명 → 수동 승격](docs/prompt_control/release_workflow/README.md). 미검증 후보는 운영에 적용되지 않습니다.
