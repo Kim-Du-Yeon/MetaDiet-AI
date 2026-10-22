@@ -72,4 +72,4 @@ python backend/scripts/approve_prompt_release.py publish --candidate tmp/candida
 
 검증 종료 후 Staging도 v1로 복구했다(Production 변경 없음). [실제 브라우저 승격·복구 상태](langsmith-ui.json).
 
-재개 후 API health와 웹 build-info에서 배포 코드 af3cbf83를 확인했고 관련 테스트 27개가 통과했다. 중단 중 기존 브라우저가 닫혀 마지막 인증 관리자 화면 검증은 재로그인 대기 상태다. 이전 실제 LangSmith 승격·복구 검증과 구분한다. [재개 검증 상태](resume-verification.json).
+재개 후 API health와 웹 build-info에서 배포 코드 af3cbf83를 확인했고 관련 테스트 27개가 통과했다. 재로그인 후 공개 관리자 화면에서 강제 갱신 완료와 signed v1, 실제 커밋 8개, 실제 사용자 A/B 중지를 확인했다. 미승인 번역 초안이 아닌 기존 승인 번역 커밋 9078da11이 유지됐다. 이전 실제 LangSmith 승격·복구 검증과 구분한다. [재개 검증 상태](resume-verification.json).

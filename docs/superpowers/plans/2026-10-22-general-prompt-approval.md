@@ -7,7 +7,7 @@ Design: extend the existing CLI, not the serving graph. Candidate JSON carries t
 - [x] Add failing offline tests for arbitrary release names, immutable selection, evidence reuse/mismatch/tampering, incomplete/duplicate rows and failed candidates.
 - [x] Implement pure candidate/evidence/receipt checks and CLI prepare/evaluate/publish; parameterize existing comparison generation/judging for new folders/candidates without overwriting old results.
 - [x] Reuse saved v1 evidence; reject the existing unapproved translation draft without publishing it. No paid generation needed for workflow validation.
-- [ ] Run regression/frontend checks, independent review, publish no-op approved-v1 bundle, deploy code, verify public browser signed-v1 and unapproved isolation.
-- [ ] Update operation cookbook/README/portfolio, preserve raw evidence, commit/push and PR.
+- [x] Run regression/frontend checks, independent review, publish no-op approved-v1 bundle, deploy code, verify public browser signed-v1 and unapproved isolation.
+- [x] Update operation cookbook/README/portfolio, preserve raw evidence, commit/push and PR.
 
-Resume: code af3cbf83 deployed; API/web build verified,27 targeted tests passed. Final authenticated browser refresh remains pending login. No new model calls.
+Resume: code af3cbf83 deployed; API/web build verified,27 targeted tests passed. Final authenticated administrator refresh passed: signed v1, all8 immutable commits and live A/B disabled. No new model calls.
