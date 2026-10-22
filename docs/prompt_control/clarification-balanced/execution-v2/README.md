@@ -75,3 +75,6 @@ Pro 최소 확인은 성공했지만 채점5번째 요청에서 `GoogleRateLimit
 원본: [생성](run-final/paired.json), [채점](run-final/judges.json), [요약·해시](run-final/summary.json), [상태·비용](run-final/status.json), [중단](run-final/stop.json).
 
 후속 채점 재개: [RPD 확정 진단·Batch 재개·예산·실행 상태](RESUME.md). 기존 run-final은 최초 중단 시점 원본으로 보존하며 이후 결과는 resume-batch에 별도 보관한다.
+
+
+2026-10-22 후속 결과: [추가$0.25 상한 내45쌍 재평가·최종69/100 유효·31형식 실패·후보 미채택](RETRY_025.md). 위 본문은 이전 시점의 원본 결과로 보존한다.

@@ -22,9 +22,25 @@ MODEL='gemini-3.1-pro-preview'
 
 def parse_grade(text):
     value=json.loads(text)
+    # A singleton wrapper has no ordering decision; only fully named fields below qualify.
+    if isinstance(value,list) and len(value)==1 and isinstance(value[0],dict):value=value[0]
+    if isinstance(value,list):
+        metrics=[k for k in Grade.model_fields if k!='reason']
+        if len(value)!=len(metrics) or any(not isinstance(r,dict) or set(r)!={'metric','a','b','reason'} or type(r['metric']) is not str or type(r['reason']) is not str or any(type(r[side]) is not bool for side in ['a','b']) for r in value):raise ValueError('Incomplete or unlabelled metric array')
+        by_metric={r['metric']:r for r in value}
+        if set(by_metric)!=set(metrics):raise ValueError('Missing, duplicate or unknown metric')
+        shared_reasons='\n'.join(k+': '+by_metric[k]['reason'] for k in metrics)
+        return Pair.model_validate({side:{**{k:by_metric[k][side] for k in metrics},'reason':shared_reasons} for side in ['a','b']})
     if isinstance(value,dict) and set(value)=={'a','b'}:return Pair.model_validate(value)
     fields=set(Grade.model_fields)
-    expected={'a','b'}|{side+'_'+key for side in ['a','b'] for key in fields}
+    bare={side+'_'+key for side in ['a','b'] for key in fields}
+    suffix={'a','b'}|{key+'_'+side for side in ['a','b'] for key in fields}
+    if isinstance(value,dict) and set(value)==bare:
+        return Pair.model_validate({side:{key:value[side+'_'+key] for key in fields} for side in ['a','b']})
+    if isinstance(value,dict) and set(value)==suffix:
+        if any(value[side] is not None and type(value[side]) is not bool for side in ['a','b']):raise ValueError('Unrecognized root summary flag')
+        return Pair.model_validate({side:{key:value[key+'_'+side] for key in fields} for side in ['a','b']})
+    expected={'a','b'}|bare
     shared={'a','b','reason'}|{side+'_'+key for side in ['a','b'] for key in fields-{'reason'}}
     if isinstance(value,dict) and set(value)==shared:
         # The original shared rationale stays verbatim; no score is derived from it.
@@ -67,7 +83,7 @@ def collect(client,folder,budget):
     folder=Path(folder);validate_resume(folder);jp=folder/'judges.json';j=json.loads(jp.read_text(encoding='utf-8'))
     for path in sorted(folder.glob('batch-*.json')):
         saved=json.loads(path.read_text(encoding='utf-8'))
-        if saved.get('collected') and saved.get('parser_version')==3:continue
+        if saved.get('collected') and saved.get('parser_version')==5:continue
         if not saved.get('name'):raise ValueError('Uncertain batch submission; no duplicate allowed')
         if saved['budget']['ledger']!=budget.path:raise ValueError('Batch ledger changed')
         job=client.batches.get(name=saved['name']);saved['state']=job.state.value;save_json(path,saved)
@@ -104,7 +120,7 @@ def collect(client,folder,budget):
                 history=folder/'parse-history.json';records=json.loads(history.read_text(encoding='utf-8')) if history.exists() else [];records.append({'prior':prior,'replacement_sha256':digest(row),'reason':'Strict lossless JSON shape normalization; no new model call'});save_json(history,records)
             existing[row['case_id']]=row
         j['rows']=list(existing.values());save_json(jp,j)
-        saved.update(collected=True,parser_version=3,actual_batch_cost_usd=actual,usage_hash=digest(usages));save_json(path,saved)
+        saved.update(collected=True,parser_version=5,actual_batch_cost_usd=actual,usage_hash=digest(usages));save_json(path,saved)
     save_json(folder/'budget-after.json',budget.summary());summarize_folder(folder)
 
 def main(args):

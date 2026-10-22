@@ -1,0 +1,14 @@
+{
+  "model": "gemini-3.1-pro-preview",
+  "same_rubric": true,
+  "same_saved_answers": true,
+  "new_generation_calls": 0,
+  "smoke_reparse": "Second response has6 explicitly named metrics; map names/boolean values only, shared per-metric reasons retained; unnamed/duplicate/missing metrics/null/strings rejected",
+  "initial_smoke_check": "initial-smoke-check.json",
+  "verified_smoke_check": "smoke-check.json",
+  "model_calls_for_smoke": 2,
+  "new_model_calls_for_reparse": 0,
+  "parser_module_sha256": "71c9cfa73fc27b01b5183849fbd1b8470500747afe24fc20aa0af0e5e3996b02",
+  "incremental_hard_cap_usd": 0.25,
+  "policy": "Only submit a new disjoint key set after existing batch collected and settled; never retry already submitted keys."
+}

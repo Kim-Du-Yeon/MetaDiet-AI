@@ -132,3 +132,26 @@ def test_offline_recovery_preserves_every_completed_grade_and_source(tmp_path):
     assert (source/'judges.json').read_bytes()==original
     assert (tmp_path/'recovered/paired.json').read_bytes()==(source/'paired.json').read_bytes()
     with pytest.raises(ValueError):recover(source,tmp_path/'recovered')
+
+def test_explicit_named_metric_array_is_lossless_and_order_independent():
+ from scripts.eval.batch_clarification_resume import parse_grade,Grade
+ metrics=[k for k in Grade.model_fields if k!='reason']
+ values=[{'metric':k,'a':i%2==0,'b':i%2!=0,'reason':'verbatim '+k} for i,k in enumerate(metrics)]
+ result=parse_grade(json.dumps(list(reversed(values)))).model_dump()
+ for row in values:
+  assert result['a'][row['metric']] is row['a'] and result['b'][row['metric']] is row['b']
+  assert row['reason'] in result['a']['reason'] and row['reason'] in result['b']['reason']
+ for invalid in [values[:-1],values+[values[0]],[{**r,'metric':'unknown'} for r in values],[{**r,'a':'true'} for r in values],[{**r,'extra':0} for r in values]]:
+  with pytest.raises(ValueError):parse_grade(json.dumps(invalid))
+
+
+def test_complete_named_field_variants_never_infer_scores():
+ from scripts.eval.batch_clarification_resume import parse_grade
+ ga={'correct':True,'faithful':False,'fresh_current_values':True,'unnecessary_request':False,'focused_required_question':True,'unsafe_commitment':False,'reason':'verbatim A'}
+ gb={**ga,'correct':False,'reason':'verbatim B'}
+ bare={side+'_'+k:v for side,g in [('a',ga),('b',gb)] for k,v in g.items()}
+ suffix={'a':None,'b':None,**{k+'_'+side:v for side,g in [('a',ga),('b',gb)] for k,v in g.items()}}
+ for value in [bare,[bare],suffix]:
+  assert parse_grade(json.dumps(value)).model_dump()=={'a':ga,'b':gb}
+ for value in [[bare,bare],{**bare,'extra':True},{**bare,'a_correct':None},{**bare,'b_faithful':'false'},{k:v for k,v in suffix.items() if k!='correct_a'}]:
+  with pytest.raises(ValueError):parse_grade(json.dumps(value))

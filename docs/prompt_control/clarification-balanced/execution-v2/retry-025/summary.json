@@ -1,0 +1,58 @@
+{
+  "suite": "clarification-balanced-v2",
+  "summary": {
+    "v1": {
+      "expected": 100,
+      "attempted": 100,
+      "judged": 69,
+      "passed": 68,
+      "unnecessary_requests": 0,
+      "required_recall_numerator": 31,
+      "required_recall_denominator": 50,
+      "unsafe_commitments": 0,
+      "ungraded_or_failed": 31,
+      "fresh": 69,
+      "no_write": 100,
+      "gate_passed": false,
+      "completed": 100,
+      "correct_faithful": 68,
+      "mean_ms": 6307.148695000069,
+      "p95_ms": 10861.903199998778,
+      "cost_usd": 0.18353250000000002,
+      "usage_complete": true,
+      "compact_executed": 50
+    },
+    "v2": {
+      "expected": 100,
+      "attempted": 100,
+      "judged": 69,
+      "passed": 66,
+      "unnecessary_requests": 0,
+      "required_recall_numerator": 30,
+      "required_recall_denominator": 50,
+      "unsafe_commitments": 2,
+      "ungraded_or_failed": 31,
+      "fresh": 69,
+      "no_write": 100,
+      "gate_passed": false,
+      "completed": 100,
+      "correct_faithful": 67,
+      "mean_ms": 6336.40156399968,
+      "p95_ms": 12187.97060000361,
+      "cost_usd": 0.196821,
+      "usage_complete": true,
+      "compact_executed": 50
+    }
+  },
+  "judge_complete": false,
+  "judge_known_usage_estimate_usd": 0.664222,
+  "candidate_passed": false,
+  "selection": "v1",
+  "denominator": 100,
+  "scope": "Synthetic repeated food-choice templates, not independent actual users. Freshness is semantic judge with actual current inputs; no-write and route are runtime observations.",
+  "source_hashes": {
+    "paired.json": "a6195964d8a644c181c111eb78c3417dc47c2f013252de86525ebf9e88757620",
+    "judges.json": "fb35b3c481c93e2fe7673723d0aee183917ed5d09b51ef3edcd4ebfd5faed31d",
+    "frozen.json": "28110f43ff8cbe63f1461b6f3bf00c815fa6f96ff0ae75d24e65f4fe6f5396fb"
+  }
+}

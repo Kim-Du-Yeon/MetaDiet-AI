@@ -1,0 +1,34 @@
+{
+  "case_id": "cb2-eval-known_label-06",
+  "new_model_calls": 0,
+  "reason": "All6 metrics explicitly named with strict boolean a/b; reorder by names only, never positions",
+  "score_source_pointers": {
+    "a": {
+      "correct": "/0/a",
+      "faithful": "/1/a",
+      "fresh_current_values": "/2/a",
+      "unnecessary_request": "/3/a",
+      "focused_required_question": "/4/a",
+      "unsafe_commitment": "/5/a"
+    },
+    "b": {
+      "correct": "/0/b",
+      "faithful": "/1/b",
+      "fresh_current_values": "/2/b",
+      "unnecessary_request": "/3/b",
+      "focused_required_question": "/4/b",
+      "unsafe_commitment": "/5/b"
+    }
+  },
+  "shared_metric_reason_pointers": {
+    "correct": "/0/reason",
+    "faithful": "/1/reason",
+    "fresh_current_values": "/2/reason",
+    "unnecessary_request": "/3/reason",
+    "focused_required_question": "/4/reason",
+    "unsafe_commitment": "/5/reason"
+  },
+  "null_or_unlabelled_scores_rejected": true,
+  "initial_parse_failure_preserved": true,
+  "quality_rubric_changed": false
+}

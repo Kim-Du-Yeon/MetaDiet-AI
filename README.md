@@ -1,3 +1,5 @@
+최신 후속 질문 후보 평가: [추가 $0.141522로45쌍 재평가·69/100 유효·31 형식 실패·기존 v1 유지](docs/prompt_control/clarification-balanced/execution-v2/RETRY_025.md).
+
 추가 질문 평가셋: [바로 답변50·필수 질문50·개발20·저장 사례10·Pro RPD 차단과 재개 조건](docs/prompt_control/clarification-balanced/README.md).
 
 후속 상담 새 후보 비교: [기존 v1 재사용·추가 질문 감소 가설·Pro429 중단·미승격 이유](docs/prompt_control/followup-question-candidate/README.md).
