@@ -258,3 +258,5 @@ Ragas는 의존성 충돌을 피하기 위해 별도 평가 환경을 사용합�
 후속 질문 의미 평가의 실제 실행·승인 연결: [실행 조건·사전 게이트·예산·원본 결과](docs/prompt_control/clarification-balanced/execution-v2/README.md).
 
 [Pro RPD 진단 및 저장 답변의 Batch 채점 재개](docs/prompt_control/clarification-balanced/execution-v2/RESUME.md).
+
+[후속 채점 오프라인 복구와 남은45쌍 비용 제안](docs/prompt_control/clarification-balanced/execution-v2/OFFLINE_RECOVERY.md).

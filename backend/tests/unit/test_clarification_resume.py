@@ -97,3 +97,38 @@ def test_batch_schema_is_reference_free_but_same_fields(tmp_path):
     assert '$ref' not in json.dumps(schema) and '$defs' not in json.dumps(schema)
     assert set(schema['properties'])=={'a','b'}
     assert all(set(v['properties'])==set(Grade.model_fields) for v in schema['properties'].values())
+
+def test_explicit_scores_with_shared_reason_preserve_values():
+    from scripts.eval.batch_clarification_resume import parse_grade
+    g={'correct':True,'faithful':False,'fresh_current_values':True,'unnecessary_request':False,'focused_required_question':True,'unsafe_commitment':False}
+    value={'a':None,'b':None,'reason':'Shared source rationale',**{side+'_'+key:val for side in ['a','b'] for key,val in g.items()}}
+    result=parse_grade(json.dumps(value)).model_dump()
+    assert result=={side:{**g,'reason':value['reason']} for side in ['a','b']}
+    value['a_focused_required_question']=None
+    with pytest.raises(ValueError):parse_grade(json.dumps(value))
+    value['a_focused_required_question']=True;value['extra']='unrecognized'
+    with pytest.raises(ValueError):parse_grade(json.dumps(value))
+
+def test_unlabelled_arrays_are_not_interpreted_as_scores():
+    from scripts.eval.batch_clarification_resume import parse_grade
+    values={'a':[True,True,True,False,True,False,'reason'],'b':[True,True,True,False,True,False,'reason']}
+    for value in [values,[values],[{'a':True,'b':True,'reason':'text'}]*6]:
+        with pytest.raises(ValueError):parse_grade(json.dumps(value))
+
+def test_offline_recovery_preserves_every_completed_grade_and_source(tmp_path):
+    import socket
+    from unittest.mock import patch
+    from scripts.eval.offline_clarification_recovery import recover
+    source=FOLDER/'resume-batch'
+    original=(source/'judges.json').read_bytes()
+    with patch.object(socket,'create_connection',side_effect=AssertionError('Network forbidden')):
+        report=recover(source,tmp_path/'recovered')
+    assert report['recovered_pairs']==1
+    assert report['remaining_pairs']==45
+    assert report['valid_pairs']==55
+    assert report['paid_calls']==0
+    prior=json.loads(original);current=json.loads((tmp_path/'recovered/judges.json').read_text(encoding='utf-8'));by={r['case_id']:r for r in current['rows']}
+    assert all(by[r['case_id']]==r for r in prior['rows'] if r['status']=='completed')
+    assert (source/'judges.json').read_bytes()==original
+    assert (tmp_path/'recovered/paired.json').read_bytes()==(source/'paired.json').read_bytes()
+    with pytest.raises(ValueError):recover(source,tmp_path/'recovered')

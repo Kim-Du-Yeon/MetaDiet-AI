@@ -71,3 +71,5 @@ collect는 기존 job을 조회하고 알려진 usage만 정산한다. submit은
 검증은 unit1552 passed, security/RAG/integration196 passed·기존 optional1 skipped다. 새 테스트 삭제/skip 없음. 원본 바이트 해시·블라인드 binding·누락/추가 필드·엄격한 타입·역순 Batch key·중복 정산·회계 불명확 영속 중지를 검증했다. 독립 검토의 지적을 수정했고 최종 중요 지적은 없었다.
 
 원본: [최종 상태/비용](resume-batch/status.json), [채점/usage](resume-batch/judges.json), [100분모 요약](resume-batch/summary.json), [형식 실패 목록](resume-batch/judging-failures.json), [파싱 실패 보존](resume-batch/parse-history.json), [원문](resume-batch/raw-grades/). 다음 개선은 별도 개발셋에서 평가자 출력 안정성을 검증하는 것이며, 이번 결과를 임의로 보정하거나 유료 재시도를 자동 반복하지 않는다.
+
+46쌍의 후속 오프라인 분석에서는 점수 추측 없이1쌍만 추가 복구해 유효55/100이 됐다. 기존 결과는 덮어쓰지 않았다. [복구·45쌍 보류 사유·유료 호출 전 비용 제안](OFFLINE_RECOVERY.md).

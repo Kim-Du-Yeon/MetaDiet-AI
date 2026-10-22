@@ -25,6 +25,11 @@ def parse_grade(text):
     if isinstance(value,dict) and set(value)=={'a','b'}:return Pair.model_validate(value)
     fields=set(Grade.model_fields)
     expected={'a','b'}|{side+'_'+key for side in ['a','b'] for key in fields}
+    shared={'a','b','reason'}|{side+'_'+key for side in ['a','b'] for key in fields-{'reason'}}
+    if isinstance(value,dict) and set(value)==shared:
+        # The original shared rationale stays verbatim; no score is derived from it.
+        if any(value[side] is not None and type(value[side]) is not bool for side in ['a','b']):raise ValueError('Unrecognized root summary flag')
+        return Pair.model_validate({side:{**{key:value[side+'_'+key] for key in fields-{'reason'}},'reason':value['reason']} for side in ['a','b']})
     if not isinstance(value,dict) or set(value)!=expected or any(value[side] is not None and type(value[side]) is not bool for side in ['a','b']):raise ValueError('Unrecognized batch grade shape')
     # Root a/b are redundant provider summary flags, never used as metric grades.
     # Only complete, strictly typed per-field grades are mapped; no values inferred.

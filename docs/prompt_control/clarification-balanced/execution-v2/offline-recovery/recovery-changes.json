@@ -1,0 +1,33 @@
+[
+  {
+    "case_id": "cb2-eval-missing_referent-03",
+    "original_row": {
+      "key": "cb2-eval-missing_referent-03",
+      "case_id": "cb2-eval-missing_referent-03",
+      "mapping": {
+        "a": "v2",
+        "b": "v1"
+      },
+      "answer_binding": "5fa1ff338bb75ca7bd0958e089ce220f006107b7eeabb8c672eafa1bf78d0f57",
+      "status": "failed",
+      "usage": [
+        {
+          "input_tokens": 618,
+          "output_tokens": 447,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "transport": "batch",
+      "batch_cost_usd": 0.0033,
+      "error": {
+        "type": "ValueError",
+        "reason": "batch_parse_or_response_error"
+      },
+      "raw_sha256": "c5452b844b783871bddb23374b9582f6a4ac84251b1f764d582571a378429356"
+    },
+    "replacement_sha256": "9a79adcbb111394ae0fde36bd374e9d6252b0232ac8df0d9e5d4eabd328a6325",
+    "raw_source": "docs/prompt_control/clarification-balanced/execution-v2/resume-batch/raw-grades/cb2-eval-missing_referent-03.json"
+  }
+]
