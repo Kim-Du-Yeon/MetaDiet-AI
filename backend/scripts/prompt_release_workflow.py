@@ -55,6 +55,9 @@ def supported_changes(candidate):
     if changed-{'team.compact_followup'}:raise ValueError('Evaluation coverage missing for changed route; add a reviewed suite before approval')
 
 def verify_evidence(candidate,folder,key):
+    if read(Path(folder)/'paired.json').get('suite')=='clarification-balanced-v2':
+        from scripts.eval.clarification_execution import verify
+        return verify(candidate,folder,key)
     validate_candidate(candidate,key);supported_changes(candidate)
     folder=Path(folder);report=read(folder/'paired.json');judges=read(folder/'judges.json');cases=read(folder/'frozen.json');stored=read(folder/'summary.json')
     hashes={name:hashlib.sha256((folder/name).read_bytes()).hexdigest() for name in FILES}

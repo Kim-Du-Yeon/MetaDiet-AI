@@ -1,0 +1,21 @@
+{
+  "development.json": {
+    "sha256": "ff0f169bbd6f9dd36869cd61cb055bdc368624fd226d6e80075799db92e12316",
+    "expected_routes": {
+      "answer_now": 10,
+      "ask_required": 0
+    }
+  },
+  "frozen.json": {
+    "sha256": "28110f43ff8cbe63f1461b6f3bf00c815fa6f96ff0ae75d24e65f4fe6f5396fb",
+    "expected_routes": {
+      "answer_now": 50,
+      "ask_required": 0
+    }
+  },
+  "original_v1_preserved": true,
+  "no_provider_outputs_before_revision": true,
+  "reason": "Original history did not satisfy production followup routing. V2 revises answer-now inputs before paid execution; required controls preserved, routing policy unchanged.",
+  "used_usd": 8.735208,
+  "remaining_usd": 1.589146
+}

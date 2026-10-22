@@ -73,3 +73,7 @@ python backend/scripts/approve_prompt_release.py publish --candidate tmp/candida
 검증 종료 후 Staging도 v1로 복구했다(Production 변경 없음). [실제 브라우저 승격·복구 상태](langsmith-ui.json).
 
 재개 후 API health와 웹 build-info에서 배포 코드 af3cbf83를 확인했고 관련 테스트 27개가 통과했다. 재로그인 후 공개 관리자 화면에서 강제 갱신 완료와 signed v1, 실제 커밋 8개, 실제 사용자 A/B 중지를 확인했다. 미승인 번역 초안이 아닌 기존 승인 번역 커밋 9078da11이 유지됐다. 이전 실제 LangSmith 승격·복구 검증과 구분한다. [재개 검증 상태](resume-verification.json).
+
+## 의미 기반 추가 질문 평가 어댑터
+
+후속 상담의 과잉 질문·필수 질문 대조군을 지원하는 `clarification-balanced-v2` 어댑터를 추가했다. [실행 조건·기준·예산·미완료 결과](../clarification-balanced/execution-v2/README.md)를 참조한다. 각100건 생성은 완료했으나 Pro 채점 한도로 품질은 미완료이고 실제 evaluate도 거부했다. 기존 어댑터의 승인 기준을 완화하지 않는다.
