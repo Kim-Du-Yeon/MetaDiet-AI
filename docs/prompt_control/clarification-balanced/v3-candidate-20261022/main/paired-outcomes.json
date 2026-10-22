@@ -1,0 +1,3902 @@
+[
+  {
+    "case_id": "cb2-eval-generic_menu-02",
+    "family": "followup_ordinary_choice",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question with helpful advice for eating at a Korean buffet without making unsafe commitments or unnecessary requests."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question with helpful advice for eating at a Korean buffet without making unsafe commitments or unnecessary requests."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question with helpful advice for eating at a Korean buffet without making unsafe commitments or unnecessary requests."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-generic_menu-03",
+    "family": "followup_ordinary_choice",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer correctly addresses the question, uses the provided target calories, and gives appropriate general advice without unnecessary requests."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer correctly addresses the question and provides helpful general advice without making unsafe commitments or unnecessary requests."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer correctly addresses the question and provides helpful general advice without making unsafe commitments or unnecessary requests."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-generic_menu-04",
+    "family": "followup_ordinary_choice",
+    "expected": "answer_now",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question, uses the provided context accurately, and does not make any unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question without making any unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question without making any unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-generic_menu-05",
+    "family": "followup_ordinary_choice",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question, uses the provided context accurately, and provides helpful dietary advice without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question, uses the provided context accurately, and provides helpful dietary advice without making unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question, uses the provided context accurately, and provides helpful dietary advice without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-generic_menu-06",
+    "family": "followup_ordinary_choice",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question about eating a salad, providing helpful nutritional advice without making unsafe commitments or unnecessary requests."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question, providing good advice on adding protein and carbs to a salad without any unnecessary requests."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly and safely addresses the user's question, offering sound nutritional guidance without asking for unnecessary information."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-generic_menu-07",
+    "family": "followup_ordinary_choice",
+    "expected": "answer_now",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question with appropriate general guidance for eating at a Korean buffet."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question with appropriate general guidance."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question with appropriate general guidance."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-generic_menu-08",
+    "family": "followup_ordinary_choice",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question using the current context without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question using the current context without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-generic_menu-09",
+    "family": "followup_ordinary_choice",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "Answers the question directly and accurately uses the current context."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "Answers the question directly with helpful suggestions."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "Answers the question directly with appropriate portion and cooking suggestions."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-generic_menu-10",
+    "family": "followup_ordinary_choice",
+    "expected": "answer_now",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-generic_menu-11",
+    "family": "followup_ordinary_choice",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question about eating salad, providing helpful advice on adding protein and managing dressing without making unsafe commitments or unnecessary requests."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly confirms that salad is a good choice and provides sound nutritional advice on adding protein and complex carbs, without any unnecessary requests."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer directly answers the question and gives appropriate advice on balancing the salad with protein and carbs, avoiding any unsafe commitments or unnecessary questions."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-unlogged_meal-02",
+    "family": "followup_unlogged_context",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "Answers the question directly and provides helpful general advice for eating at a Korean buffet without making unsafe commitments or unnecessary requests."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "Answers the question directly and provides helpful general advice for eating at a Korean buffet without making unsafe commitments or unnecessary requests."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "Answers the question directly and provides helpful general advice for eating at a Korean buffet without making unsafe commitments or unnecessary requests."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-unlogged_meal-03",
+    "family": "followup_unlogged_context",
+    "expected": "answer_now",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The response correctly answers the question, uses the provided context accurately, and provides helpful guidance without making unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The response correctly answers the question, uses the provided context accurately, and provides helpful guidance without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The response correctly answers the question, uses the provided context accurately, and provides helpful guidance without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-unlogged_meal-04",
+    "family": "followup_unlogged_context",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer directly addresses the question, provides helpful general advice, and does not make any unsafe commitments or unnecessary requests."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer directly addresses the question, provides helpful general advice, and does not make any unsafe commitments or unnecessary requests."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer directly addresses the question, provides helpful general advice, and does not make any unsafe commitments or unnecessary requests."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-unlogged_meal-05",
+    "family": "followup_unlogged_context",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-unlogged_meal-06",
+    "family": "followup_unlogged_context",
+    "expected": "answer_now",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question about eating a salad, providing helpful nutritional advice without making unsafe commitments or unnecessary requests."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question, providing good advice on adding protein and carbs to the salad without any unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly and safely answers the question, offering sound dietary advice without asking for unnecessary information or making unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-unlogged_meal-07",
+    "family": "followup_unlogged_context",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-unlogged_meal-08",
+    "family": "followup_unlogged_context",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer A correctly answers the question with appropriate general advice without making unsafe commitments or unnecessary requests."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer B correctly answers the question, accurately uses the current context values, and provides helpful advice."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer C correctly answers the question with appropriate general advice without making unsafe commitments or unnecessary requests."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-unlogged_meal-09",
+    "family": "followup_unlogged_context",
+    "expected": "answer_now",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-unlogged_meal-10",
+    "family": "followup_unlogged_context",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question using the provided context without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question using the provided context without making unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question using the provided context without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-unlogged_meal-11",
+    "family": "followup_unlogged_context",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer A correctly answers the question without making unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer B correctly answers the question, uses the provided context accurately, and makes no unnecessary requests."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer C correctly answers the question, uses the provided context accurately, and makes no unnecessary requests."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_choices-02",
+    "family": "followup_optional_preference",
+    "expected": "answer_now",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question with appropriate general advice without making unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question with appropriate general advice without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question with appropriate general advice without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_choices-03",
+    "family": "followup_optional_preference",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer a correctly answers the question with general advice and no unnecessary requests."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer b correctly answers the question with general advice and no unnecessary requests."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer c correctly answers the question, uses the provided context values accurately, and makes no unnecessary requests."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_choices-04",
+    "family": "followup_optional_preference",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer directly addresses the user's question about eating rice and eggs, providing helpful suggestions without asking unnecessary questions or making unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly evaluates the food combination and provides good dietary advice without any unnecessary requests or unsafe claims."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer confirms the user's choice and gives appropriate portion and cooking advice without requiring further information or making unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_choices-05",
+    "family": "followup_optional_preference",
+    "expected": "answer_now",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer a correctly addresses the question, uses the provided context accurately, and does not make unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer b correctly addresses the question, uses the provided context accurately, and does not make unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer c correctly addresses the question, uses the provided context accurately, and does not make unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_choices-06",
+    "family": "followup_optional_preference",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question about eating a salad, provides helpful guidance without inventing facts, and does not ask unnecessary questions."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question, provides helpful guidance without inventing facts, and does not ask unnecessary questions."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question, provides helpful guidance without inventing facts, and does not ask unnecessary questions."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_choices-07",
+    "family": "followup_optional_preference",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_choices-08",
+    "family": "followup_optional_preference",
+    "expected": "answer_now",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question, uses the current context (calorie room), and makes no unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_choices-09",
+    "family": "followup_optional_preference",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_choices-10",
+    "family": "followup_optional_preference",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question, uses the current context values accurately, and makes no unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_choices-11",
+    "family": "followup_optional_preference",
+    "expected": "answer_now",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question, uses the provided context accurately, and does not make unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_label-02",
+    "family": "followup_stale_history",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question with helpful advice for eating at a Korean buffet, without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question with helpful advice for eating at a Korean buffet, without making unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question with helpful advice for eating at a Korean buffet, without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_label-03",
+    "family": "followup_stale_history",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question using the fresh current values (2017 target, 679 intake) without making unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question using the fresh current values without making unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question using the fresh current values without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_label-04",
+    "family": "followup_stale_history",
+    "expected": "answer_now",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer correctly addresses the question using the fresh current values without making unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer correctly addresses the question using the fresh current values without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer correctly addresses the question without making unnecessary requests or unsafe commitments, and does not use stale history."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_label-05",
+    "family": "followup_stale_history",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer a correctly addresses the question, uses the fresh current values, and provides helpful advice without unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer b correctly addresses the question and provides helpful advice without relying on stale history or making unnecessary requests."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer c correctly addresses the question, uses the fresh current values, and provides helpful advice without unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_label-06",
+    "family": "followup_stale_history",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question about eating salad, provides helpful nutritional advice without inventing facts, and does not ask unnecessary questions or use stale context."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly confirms that salad is a good choice, provides sound dietary advice, and avoids using stale history or making unnecessary requests."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly answers the question, accurately uses the fresh current values (706kcal intake, 2038kcal target) instead of the stale history, and provides helpful advice without unnecessary requests."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_label-07",
+    "family": "followup_stale_history",
+    "expected": "answer_now",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question without using stale history or making unnecessary requests."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer provides helpful guidance for eating at a Korean buffet without relying on stale data or asking unnecessary questions."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly uses the fresh current values (715kcal intake, 2045kcal target) and provides appropriate advice without unnecessary requests."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_label-08",
+    "family": "followup_stale_history",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer correctly addresses the question using the fresh current values without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer correctly addresses the question using the fresh current values without making unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer correctly addresses the question using the fresh current values and fixture truth without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_label-09",
+    "family": "followup_stale_history",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question, provides helpful suggestions, and avoids unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question, uses the fresh current values from the verified context, and avoids unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_label-10",
+    "family": "followup_stale_history",
+    "expected": "answer_now",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question using the fresh context values (2066 target, 742 intake) without making unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question using the fresh context values without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question using the fresh context values without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_label-11",
+    "family": "followup_stale_history",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "Answer A correctly answers the question without using stale history or making unnecessary requests."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "Answer B correctly answers the question and uses the fresh current values for calories and target."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "Answer C correctly answers the question without using stale history or making unnecessary requests."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_intake-02",
+    "family": "followup_updated_goal",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question with appropriate general advice without making unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question with appropriate general advice without making unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question with appropriate general advice without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_intake-03",
+    "family": "followup_updated_goal",
+    "expected": "answer_now",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question using the current context without making unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question using the current context without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question using the current context without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_intake-04",
+    "family": "followup_updated_goal",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer directly addresses the user's question about eating rice and eggs, providing helpful suggestions without making unsafe commitments or asking unnecessary questions."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly and safely addresses the user's question, offering good dietary advice without unnecessary requests."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer provides a direct and helpful response to the user's question, suggesting healthy cooking methods and additions without any unsafe commitments or unnecessary questions."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_intake-05",
+    "family": "followup_updated_goal",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "Answer A correctly addresses the question, uses the provided context accurately, and does not make unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "Answer B correctly addresses the question, provides helpful suggestions without inventing facts, and does not make unnecessary requests."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "Answer C correctly addresses the question, provides appropriate dietary advice based on the context, and does not make unnecessary requests."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_intake-06",
+    "family": "followup_updated_goal",
+    "expected": "answer_now",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question about eating a salad, provides helpful general advice without making unsafe commitments or unnecessary requests."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question, provides helpful general advice without making unsafe commitments or unnecessary requests."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question, provides helpful general advice without making unsafe commitments or unnecessary requests."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_intake-07",
+    "family": "followup_updated_goal",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question about eating at a Korean buffet, providing helpful guidance without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question, providing practical advice for a Korean buffet without unnecessary requests."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question and provides good advice for eating at a Korean buffet without asking unnecessary questions."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_intake-08",
+    "family": "followup_updated_goal",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer A correctly answers the question using the provided context and fixture truth without making unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer B correctly answers the question using the provided context without making unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer C correctly answers the question using the provided context without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_intake-09",
+    "family": "followup_updated_goal",
+    "expected": "answer_now",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question and provides helpful portion suggestions without unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question and provides helpful portion suggestions without unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_intake-10",
+    "family": "followup_updated_goal",
+    "expected": "answer_now",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question using the current context without making unnecessary requests or unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question using the current context without making unnecessary requests or unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the question using the current context without making unnecessary requests or unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-known_intake-11",
+    "family": "followup_updated_goal",
+    "expected": "answer_now",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly addresses the user's question about eating a salad, provides helpful nutritional advice without inventing facts, and does not ask unnecessary questions."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly and safely addresses the user's question, providing good advice on balancing the salad without any unnecessary requests or unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer is correct, faithful, and provides helpful guidance on how to make the salad a balanced meal without asking unnecessary questions or making unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_choices-02",
+    "family": "missing_choices",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer A correctly identifies that the options are missing and asks for them without making unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer B correctly asks for the missing options while providing safe, general guidance based on the current calorie status."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer C correctly asks for the missing options and accurately references the current calorie status."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_choices-03",
+    "family": "missing_choices",
+    "expected": "ask_required",
+    "passes": {
+      "v1": false,
+      "v2": false,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": false,
+        "faithful": false,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": true,
+        "reason": "Answer A invents two new options instead of asking for the missing required options."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": true,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer B correctly asks for the missing options, but also includes an unnecessary request for food preferences."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer C correctly and concisely asks for the missing options without inventing facts or making unnecessary requests."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_choices-04",
+    "family": "missing_choices",
+    "expected": "ask_required",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing comparison options without inventing them."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing comparison options."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing comparison options."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_choices-05",
+    "family": "missing_choices",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": false
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly identifies that the options are missing and asks the user to provide them."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing options and accurately references current intake values."
+      },
+      "v2": {
+        "correct": false,
+        "faithful": false,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": true,
+        "reason": "Invents two new options instead of asking the user for the missing choices they wanted to compare."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_choices-06",
+    "family": "missing_choices",
+    "expected": "ask_required",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing comparison options without inventing them."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing comparison options and provides safe general guidance."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing comparison options."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_choices-07",
+    "family": "missing_choices",
+    "expected": "ask_required",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies that the choices are missing and asks the user to provide them."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the missing choices without making unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the missing choices to provide a recommendation."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_choices-08",
+    "family": "missing_choices",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The assistant correctly identifies that the two options are missing and asks the user to provide them."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The assistant correctly asks for the missing options and accurately references the remaining calories."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The assistant asks for the missing options while providing generic alternative recommendations, which is allowed."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_choices-09",
+    "family": "missing_choices",
+    "expected": "ask_required",
+    "passes": {
+      "v1": true,
+      "v2": false,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly identifies that the options are missing and asks the user to provide them, while accurately referencing current calorie values."
+      },
+      "v2": {
+        "correct": false,
+        "faithful": false,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": true,
+        "reason": "Fails to ask for the missing options and instead invents two new menus to choose from, which is an unsafe commitment and unfaithful to the prompt."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly identifies the missing options and asks the user to provide them without inventing facts."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_choices-10",
+    "family": "missing_choices",
+    "expected": "ask_required",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer A correctly identifies that the options are missing and asks the user to provide them or a direction, without making unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer B correctly asks for the missing options to make a comparison."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer C correctly asks for the missing options and uses the current context values accurately."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_choices-11",
+    "family": "missing_choices",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies that the options are missing and asks the user to provide them."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the missing options and accurately references the current calorie values."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the missing options without making unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_label-02",
+    "family": "missing_label",
+    "expected": "ask_required",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required product name or nutrition label without making unsafe commitments or unnecessary requests."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required product name or nutrition label without making unsafe commitments or unnecessary requests."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required product name or nutrition label without making unsafe commitments or unnecessary requests."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_label-03",
+    "family": "missing_label",
+    "expected": "ask_required",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies the missing product name or nutrition label and asks for it without inventing facts."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the required product name or nutrition label to provide the exact protein content."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the required product name or nutrition label without making unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_label-04",
+    "family": "missing_label",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required product name or nutrition label without inventing facts."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required product name or nutrition label without inventing facts."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required product name or nutrition label without inventing facts."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_label-05",
+    "family": "missing_label",
+    "expected": "ask_required",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required product name or nutrition label without making unsafe commitments or unnecessary requests."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required product name or nutrition label without making unsafe commitments or unnecessary requests."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required product name or nutrition label without making unsafe commitments or unnecessary requests."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_label-06",
+    "family": "missing_label",
+    "expected": "ask_required",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly identifies that the product name or nutrition label is missing and asks for it without inventing facts."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required product name or nutrition label to provide the exact protein content."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the missing product name or nutrition label without making unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_label-07",
+    "family": "missing_label",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required product name or nutrition label without inventing facts."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required product name or nutrition label without inventing facts."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required product name or nutrition label without inventing facts."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_label-08",
+    "family": "missing_label",
+    "expected": "ask_required",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies the missing product name or nutrition label and asks for it without making unsafe commitments or estimates."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the required product name or nutrition label to provide an exact value, avoiding estimates."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly requests the missing product name or nutrition label to provide the exact protein content."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_label-09",
+    "family": "missing_label",
+    "expected": "ask_required",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required product name or nutrition label without inventing facts."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required product name or nutrition label without inventing facts."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required product name or nutrition label without inventing facts."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_label-10",
+    "family": "missing_label",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the required product name or nutrition label without inventing facts."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the required product name or nutrition label without inventing facts."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the required product name or nutrition label without inventing facts."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_label-11",
+    "family": "missing_label",
+    "expected": "ask_required",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies the missing required fields (product name or nutrition label) and asks for them without inventing facts or making unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies the missing required fields (product name or nutrition label) and asks for them without inventing facts or making unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies the missing required fields (product name or nutrition label) and asks for them without inventing facts or making unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_portion-02",
+    "family": "missing_portion",
+    "expected": "ask_required",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required consumed amount without making unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required consumed amount and specific ingredients to calculate exact calories."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required consumed amount and components."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_portion-03",
+    "family": "missing_portion",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the missing consumed amount and meal components to calculate the exact calories as requested."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the missing consumed amount and meal components to calculate the exact calories as requested."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the missing consumed amount and meal components to calculate the exact calories as requested."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_portion-04",
+    "family": "missing_portion",
+    "expected": "ask_required",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": false
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer correctly asks for the required consumed amount without making unsafe commitments or unnecessary requests."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer correctly asks for the required consumed amount."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": true,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer asks for the required consumed amount but also makes unnecessary requests for detailed cooking methods and sauce types."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_portion-05",
+    "family": "missing_portion",
+    "expected": "ask_required",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the missing portion size as requested, without making unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the missing portion size and relevant details for exact calculation."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the missing portion size and ingredients to calculate exact calories."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_portion-06",
+    "family": "missing_portion",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required consumed amount to calculate the exact calories, as requested."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required consumed amount to calculate the exact calories, as requested."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required consumed amount to calculate the exact calories, as requested."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_portion-07",
+    "family": "missing_portion",
+    "expected": "ask_required",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required consumed amount without making unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required consumed amount without making unsafe commitments."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required consumed amount and ingredients to calculate exact calories."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_portion-08",
+    "family": "missing_portion",
+    "expected": "ask_required",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required consumed amount without making unsafe commitments or using default estimates."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required consumed amount and details to calculate the exact calories."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly identifies that it cannot calculate the calories without the amount and asks for it."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_portion-09",
+    "family": "missing_portion",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required consumed amount without using default estimates."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required consumed amount without using default estimates."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required consumed amount without using default estimates."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_portion-10",
+    "family": "missing_portion",
+    "expected": "ask_required",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": false
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer 'a' correctly asks for the required consumed amount without making any unsafe commitments or unnecessary requests."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer 'b' correctly asks for the required consumed amount without making any unsafe commitments or unnecessary requests."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": true,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer 'c' asks for the required consumed amount but also unnecessarily asks for detailed cooking methods and ingredients."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_portion-11",
+    "family": "missing_portion",
+    "expected": "ask_required",
+    "passes": {
+      "v2": true,
+      "v3": false,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required consumed amount without making unsafe commitments or unnecessary requests."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": true,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model asks for the required consumed amount but also unnecessarily asks for detailed cooking information like the amount of oil used."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The model correctly asks for the required consumed amount without making unsafe commitments or unnecessary requests."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_recipe-02",
+    "family": "missing_recipe",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required ingredients and amounts to calculate the exact fat content."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required ingredients and amounts to calculate the exact fat content."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required ingredients and amounts to calculate the exact fat content."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_recipe-03",
+    "family": "missing_recipe",
+    "expected": "ask_required",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer a correctly asks for the missing recipe ingredients and amounts without making unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer b correctly asks for the missing recipe ingredients and amounts and provides the requested meal choice advice."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer c correctly asks for the missing recipe ingredients and amounts without making unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_recipe-04",
+    "family": "missing_recipe",
+    "expected": "ask_required",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the missing ingredients and oil amounts as required, without making unsafe commitments or inventing facts."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the missing ingredients and oil amounts as required, without making unsafe commitments or inventing facts."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the missing ingredients and oil amounts as required, without making unsafe commitments or inventing facts."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_recipe-05",
+    "family": "missing_recipe",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required ingredients and amounts without making unsafe commitments or using representative values."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required ingredients and amounts without making unsafe commitments or using representative values."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required ingredients and amounts without making unsafe commitments or using representative values."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_recipe-06",
+    "family": "missing_recipe",
+    "expected": "ask_required",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required ingredients and amounts without inventing facts."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required ingredients and amounts without inventing facts."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required ingredients and amounts without inventing facts."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_recipe-07",
+    "family": "missing_recipe",
+    "expected": "ask_required",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing ingredients and amounts to calculate the exact total fat."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing ingredients and amounts to calculate the exact total fat."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing ingredients and amounts to calculate the exact total fat."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_recipe-08",
+    "family": "missing_recipe",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required ingredients and amounts without inventing facts."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required ingredients and amounts."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required ingredients and amounts."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_recipe-09",
+    "family": "missing_recipe",
+    "expected": "ask_required",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing ingredients and amounts without inventing facts."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing ingredients and amounts without inventing facts."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing ingredients and amounts without inventing facts."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_recipe-10",
+    "family": "missing_recipe",
+    "expected": "ask_required",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required ingredients and amounts without inventing facts."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required ingredients and amounts without inventing facts."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the required ingredients and amounts without inventing facts."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_recipe-11",
+    "family": "missing_recipe",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer A correctly asks for the required ingredients and oil amounts without making unsafe commitments."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer B correctly asks for the required ingredients and oil amounts without making unsafe commitments."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer C correctly asks for the required ingredients and oil amounts without making unsafe commitments."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_referent-02",
+    "family": "missing_referent",
+    "expected": "ask_required",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly identifies the missing referent and asks for the food name to make the comparison."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly identifies the missing referent and asks for the food name."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly identifies the missing referent and asks for the food name."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_referent-03",
+    "family": "missing_referent",
+    "expected": "ask_required",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies the missing referent and asks for the food name."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies the missing referent and asks for the food name."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies the missing referent and asks for the food name."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_referent-04",
+    "family": "missing_referent",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing referenced food."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing referenced food and provides general information."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing referenced food."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_referent-05",
+    "family": "missing_referent",
+    "expected": "ask_required",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies the missing referent and asks for the food name."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the missing food name to make the comparison."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly asks for the missing food name."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_referent-06",
+    "family": "missing_referent",
+    "expected": "ask_required",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing referenced food."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing referenced food."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing referenced food."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_referent-07",
+    "family": "missing_referent",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing referenced food."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing referenced food and provides general context."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing referenced food."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_referent-08",
+    "family": "missing_referent",
+    "expected": "ask_required",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies the missing referent and asks the user for the name of the food to compare."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies the missing referent and asks the user for the name of the food to compare."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies the missing referent and asks the user for the name of the food to compare."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_referent-09",
+    "family": "missing_referent",
+    "expected": "ask_required",
+    "passes": {
+      "v2": true,
+      "v3": true,
+      "v1": true
+    },
+    "grades": {
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies the missing referent and asks for the name of the food to compare."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies the missing referent and asks for the name of the food to compare."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "The answer correctly identifies the missing referent and asks for the name of the food to compare."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_referent-10",
+    "family": "missing_referent",
+    "expected": "ask_required",
+    "passes": {
+      "v3": true,
+      "v1": true,
+      "v2": true
+    },
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing referenced food."
+      },
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing referenced food."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing referenced food."
+      }
+    }
+  },
+  {
+    "case_id": "cb2-eval-missing_referent-11",
+    "family": "missing_referent",
+    "expected": "ask_required",
+    "passes": {
+      "v1": true,
+      "v2": true,
+      "v3": true
+    },
+    "grades": {
+      "v1": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing referenced food."
+      },
+      "v2": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing referenced food while providing general information about vegetable fried rice."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Correctly asks for the missing referenced food."
+      }
+    }
+  }
+]

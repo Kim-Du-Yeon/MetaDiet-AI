@@ -1,0 +1,39 @@
+{
+  "state": "JOB_STATE_SUCCEEDED",
+  "model": "gemini-3.1-pro-preview",
+  "entries": [
+    {
+      "key": "cb2-eval-generic_menu-02",
+      "case_id": "cb2-eval-generic_menu-02",
+      "mapping": {
+        "a": "v1",
+        "b": "v2",
+        "c": "v3"
+      },
+      "answer_binding": "1a9417e0902bfcf711d87acfc77555286b33cf8095bbc47e1c263b8616e1434c",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3
+    },
+    {
+      "key": "cb2-eval-generic_menu-03",
+      "case_id": "cb2-eval-generic_menu-03",
+      "mapping": {
+        "a": "v2",
+        "b": "v3",
+        "c": "v1"
+      },
+      "answer_binding": "824bdec8ccba19e4f427ece526fdfebb399006ebedfd7885ec8cc44c50128b93",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3
+    }
+  ],
+  "entries_sha256": "090d0fa083387e94e6725e62c41ece1565f4cf648dee8a950ba045527dd35aed",
+  "budget": {
+    "ledger": "D:\\AX\\diet_agent\\tmp\\eval-budget.sqlite",
+    "ticket": "fbca304e3a434608a466dc0f037a124f",
+    "reserved_usd": 0.043066
+  },
+  "name": "batches/t6y3e9f25j2ejyfsirwi4znqjzt5ig3vjaq8",
+  "collected": true,
+  "actual_batch_cost_usd": 0.009766
+}

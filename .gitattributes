@@ -5,3 +5,7 @@ docs/food_catalog/COMMON_FOODS_100.json text eol=lf
 backend/scripts/eval/clarification_flat_retry.py -text whitespace=cr-at-eol
 backend/scripts/eval/complete_clarification_flat.py -text whitespace=cr-at-eol
 backend/scripts/eval/clarification_grade_contract.py -text whitespace=cr-at-eol
+
+# Preserve raw v3 evaluation evidence hashes across checkout conversion.
+docs/prompt_control/clarification-balanced/v3-candidate-20261022/**/*.json -text whitespace=cr-at-eol
+docs/prompt_control/clarification-balanced/v3-candidate-20261022/*.json -text whitespace=cr-at-eol

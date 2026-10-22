@@ -1,0 +1,68 @@
+{
+  "code_sha256": "9e2fada1f2bf8e53389a449d3b92898df0ca8628fcfb901b226a832a0fec3387",
+  "source_hashes": {
+    "paired.json": "a6195964d8a644c181c111eb78c3417dc47c2f013252de86525ebf9e88757620",
+    "judges.json": "fe5d0ddcc50b2d919096c1a7591d8b026d5e20201776330d158f540386e7d7ce",
+    "frozen.json": "28110f43ff8cbe63f1461b6f3bf00c815fa6f96ff0ae75d24e65f4fe6f5396fb"
+  },
+  "candidate_sha256": "0c5fe15d26462d92edb0b4497674af4971c5e484711d0ef597b5fb916b8bc650",
+  "development_sha256": "4d517498559128532c1ba50c8b87e8479ce3184812b25bb6498a2af73d79db36",
+  "frozen_sha256": "080792490ac0db9f5608da7c8239f06cda10aa553e071a9bdb249d90503389a4",
+  "old_100_exposed": true,
+  "evaluation_scope": "diagnostic same100 re-evaluation, not independent holdout or actual users",
+  "reused_generation_rows": 200,
+  "new_candidate_generation_rows": 100,
+  "new_development_generation_rows": 48,
+  "main_judge_cases": 100,
+  "development_judge_cases": 24,
+  "main_labels": [
+    "v1",
+    "v2",
+    "v3"
+  ],
+  "dev_labels": [
+    "v2",
+    "v3"
+  ],
+  "expected_cost_usd": [
+    1,
+    2
+  ],
+  "user_incremental_budget_waiver_retained": true,
+  "model": "gemini-3.8-flash",
+  "conditions": {
+    "runtime": "actual_DietTeam_no_forced_routing",
+    "fixture_date": "2026-10-22",
+    "model": "gemini-3.8-flash",
+    "temperature": 0,
+    "thinking": "low",
+    "output_cap": 1024,
+    "model_call_cap": 3,
+    "tool_call_cap": 8,
+    "timeout_seconds": 65,
+    "concurrency": 1,
+    "order": "AB/BA",
+    "retrieval": "off",
+    "allowed_domain_tools": [
+      "read_profile",
+      "read_intake"
+    ],
+    "first_direct": "off",
+    "compact": true,
+    "brief": false,
+    "delivery": "invoke",
+    "model_routing": false,
+    "followup_tools": false,
+    "packages": {
+      "google-genai": "2.29.0",
+      "langchain-google-genai": "4.4.0",
+      "langgraph": "1.2.2",
+      "langsmith": "0.8.6"
+    }
+  },
+  "judge": "gemini-3.1-pro-preview",
+  "judge_rubric_sha256": "e5b8472aa290f6ff0eb8a141eebc27d5001ee33fa3136eda336be2a91ee82f60",
+  "primary_gate": "v3 joint>=98, behavior>=98 and >=v1, required>=49 and >=v1, unsafe0, fresh/no-write100, generationfail0, target and all unnecessary<=v1, p95/cost<=v1*1.25; at least2 behavior recoveries over old-v2 under SAME new judge",
+  "production_adoption": "not authorized by this exposed-set diagnostic; requires fresh holdout and approval adapter coverage for2 changed prompts",
+  "prompt_commit_provenance": "v3 commit fields are local content identities, not LangSmith remote commit IDs; unapproved evaluation-only snapshot"
+}

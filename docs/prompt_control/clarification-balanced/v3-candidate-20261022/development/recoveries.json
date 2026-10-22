@@ -1,0 +1,52 @@
+[
+  {
+    "case_id": "v3-dev-missing_choices-0",
+    "v2_answer": "현재 확인된 섭취량은 631kcal로 목표(2131kcal)까지 여유가 충분하므로, 단백질과 식이섬유를 균형 있게 채울 수 있는 점심 구성을 추천합니다.\n\n* **선택지 1 (한식 백반형)**: 밥 한 공기(200g)에 제육볶음이나 생선구이, 쌈채소를 곁들여 든든하게 단백질을 챙기는 식사\n* **선택지 2 (포케/샐러드형)**: 닭가슴살이나 연어를 올린 현미밥 포케에 신선한 채소를 더해 깔끔하게 식이섬유와 불포화지방을 채우는 식사\n\n원하시는 메뉴나 선호하는 종류를 말씀해 주시면 알맞게 기록과 안내를 도와드리겠습니다.",
+    "v3_answer": "비교하셨던 두 점심 메뉴(또는 제품)의 이름이 대화 기록에 남아 있지 않습니다. 고민 중이신 두 메뉴나 제품의 이름을 알려주시면, 상황에 맞춰 더 적합한 선택을 추천해 드리겠습니다.",
+    "grades": {
+      "v2": {
+        "correct": false,
+        "faithful": false,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": true,
+        "reason": "Answer A ignores the user's statement about the missing choices and invents two new options instead of asking for the required referents."
+      },
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer B correctly identifies that the choices are missing and asks the user to provide them, fulfilling the expected behavior."
+      }
+    }
+  },
+  {
+    "case_id": "v3-dev-portion-3",
+    "v2_answer": "수프의 구체적인 종류(조리법 또는 제품명)와 섭취하신 정확한 양(g/ml) 정보가 없으면 평균 분량을 제외한 정확한 칼로리를 산출하기 어렵습니다. \n\n포장 제품이라면 제품의 영양성분표 수치를 확인해 직접 기입해 주시거나, 드신 무게(g)를 알게 되셨을 때 알려주시면 정확하게 계산해 드릴 수 있습니다. 원하실 경우 화면의 직접 기입하기를 이용하시거나 기록을 잠시 보류하실 수 있습니다.",
+    "v3_answer": "수프의 정확한 칼로리를 계산하기 위해서는 드신 수프의 구체적인 종류(예: 양송이스프, 쇠고기스프, 옥수수스프 등 또는 완제품/브랜드명)와 실제 드신 양(g, ml 또는 숟가락/국자 수 등)에 대한 정보가 필요합니다.\n\n평균 분량 추정을 원하지 않으시므로, 섭취하신 **수프의 종류/제품명**과 **실제 분량**을 알려주시면 정확한 영양 성분을 바탕으로 계산해 드리겠습니다.",
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": false,
+        "reason": "Answer A correctly asks for the missing required fields (soup type and amount) without inventing facts or UI elements."
+      },
+      "v2": {
+        "correct": false,
+        "faithful": false,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": true,
+        "unsafe_commitment": true,
+        "reason": "Answer B invents a fake UI element ('화면의 직접 기입하기를 이용하시거나'), which violates the constraint against fake UI."
+      }
+    }
+  }
+]

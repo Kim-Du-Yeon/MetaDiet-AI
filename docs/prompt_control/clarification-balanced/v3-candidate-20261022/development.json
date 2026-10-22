@@ -1,0 +1,718 @@
+[
+  {
+    "id": "v3-dev-ordinary-0",
+    "split": "development",
+    "family": "ordinary",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 631,
+      "target": 2131,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "그러면 편의점에서 샌드위치 먹어도 될까?",
+    "rationale": "Answer using current verified truth without optional closing questions; no invented UI, facts or forced recording.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-ordinary-1",
+    "split": "development",
+    "family": "ordinary",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 668,
+      "target": 2174,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "그러면 닭가슴살 먹어도 괜찮나요?",
+    "rationale": "Answer using current verified truth without optional closing questions; no invented UI, facts or forced recording.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-ordinary-2",
+    "split": "development",
+    "family": "ordinary",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 705,
+      "target": 2217,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "그러면 밥이랑 계란 먹어도 괜찮을까?",
+    "rationale": "Answer using current verified truth without optional closing questions; no invented UI, facts or forced recording.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-ordinary-3",
+    "split": "development",
+    "family": "ordinary",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 742,
+      "target": 2260,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "그러면 샐러드 먹어도 돼?",
+    "rationale": "Answer using current verified truth without optional closing questions; no invented UI, facts or forced recording.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-scope-0",
+    "split": "development",
+    "family": "scope",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 631,
+      "target": 2131,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "아침에 샌드위치 먹어도 괜찮나요?",
+    "rationale": "Answer using current verified truth without optional closing questions; no invented UI, facts or forced recording.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-scope-1",
+    "split": "development",
+    "family": "scope",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 668,
+      "target": 2174,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "점심에 샐러드 먹어도 될까?",
+    "rationale": "Answer using current verified truth without optional closing questions; no invented UI, facts or forced recording.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-scope-2",
+    "split": "development",
+    "family": "scope",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 705,
+      "target": 2217,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "그러면 일반식 먹어도 돼?",
+    "rationale": "Answer using current verified truth without optional closing questions; no invented UI, facts or forced recording.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-scope-3",
+    "split": "development",
+    "family": "scope",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 742,
+      "target": 2260,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "그러면 계란 먹어도 괜찮나요?",
+    "rationale": "Answer using current verified truth without optional closing questions; no invented UI, facts or forced recording.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-known_choices-0",
+    "split": "development",
+    "family": "known_choices",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 631,
+      "target": 2131,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "두 메뉴는 두부샐러드와 볶음우동이야. 오늘 상황에 하나만 골라줘.",
+    "rationale": "Answer using current verified truth without optional closing questions; no invented UI, facts or forced recording.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-known_choices-1",
+    "split": "development",
+    "family": "known_choices",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 668,
+      "target": 2174,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "삶은 감자와 닭가슴살 샌드위치 중 하나만 추천해줘. 두 선택지는 이 둘이야.",
+    "rationale": "Answer using current verified truth without optional closing questions; no invented UI, facts or forced recording.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-known_choices-2",
+    "split": "development",
+    "family": "known_choices",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 705,
+      "target": 2217,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "아까 말한 두 메뉴는 생선백반과 크림파스타야. 둘 중 골라줘.",
+    "rationale": "Answer using current verified truth without optional closing questions; no invented UI, facts or forced recording.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-known_choices-3",
+    "split": "development",
+    "family": "known_choices",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 742,
+      "target": 2260,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "고를 후보는 렌틸콩 샐러드와 튀김정식이야. 하나를 고르면 돼.",
+    "rationale": "Answer using current verified truth without optional closing questions; no invented UI, facts or forced recording.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-missing_choices-0",
+    "split": "development",
+    "family": "missing_choices",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 631,
+      "target": 2131,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "choices": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "question": "앞에서 비교한 두 점심 중 하나를 결정해줘. 이름은 대화에서 빠져 있어.",
+    "rationale": "Missing explicit required referent/measurement must be requested; no substitute options, fake UI or invented numbers.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-missing_choices-1",
+    "split": "development",
+    "family": "missing_choices",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 668,
+      "target": 2174,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "choices": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "question": "전에 고른 두 저녁 메뉴 중 택일해줘. 지금은 그 목록이 없어.",
+    "rationale": "Missing explicit required referent/measurement must be requested; no substitute options, fake UI or invented numbers.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-missing_choices-2",
+    "split": "development",
+    "family": "missing_choices",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 705,
+      "target": 2217,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "choices": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "question": "아까의 A안 B안 중 뭐가 나을까? 두 메뉴 이름은 아직 여기 없어.",
+    "rationale": "Missing explicit required referent/measurement must be requested; no substitute options, fake UI or invented numbers.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-missing_choices-3",
+    "split": "development",
+    "family": "missing_choices",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 742,
+      "target": 2260,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "choices": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "question": "내가 비교하던 두 샐러드 중 골라줘. 제품 이름은 현재 제공하지 않았어.",
+    "rationale": "Missing explicit required referent/measurement must be requested; no substitute options, fake UI or invented numbers.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-portion-0",
+    "split": "development",
+    "family": "portion",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 631,
+      "target": 2131,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "consumed_g": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_g"
+    ],
+    "question": "내가 먹은 볶음우동 실제 열량을 정확히 계산해줘. 분량은 말하지 않았고 기본 1인분 추정은 싫어.",
+    "rationale": "Missing explicit required referent/measurement must be requested; no substitute options, fake UI or invented numbers.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-portion-1",
+    "split": "development",
+    "family": "portion",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 668,
+      "target": 2174,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "consumed_g": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_g"
+    ],
+    "question": "먹은 두부덮밥 칼로리를 정확히 구해줘. 섭취량이 아직 없으니 표준량으로 대신하지 마.",
+    "rationale": "Missing explicit required referent/measurement must be requested; no substitute options, fake UI or invented numbers.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-portion-2",
+    "split": "development",
+    "family": "portion",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 705,
+      "target": 2217,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "consumed_g": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_g"
+    ],
+    "question": "김밥을 실제 먹은 만큼 계산해줘. 몇 줄인지는 안 말했고 한 줄로 간주하면 안 돼.",
+    "rationale": "Missing explicit required referent/measurement must be requested; no substitute options, fake UI or invented numbers.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-portion-3",
+    "split": "development",
+    "family": "portion",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 742,
+      "target": 2260,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "consumed_g": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_g"
+    ],
+    "question": "오늘 먹은 수프의 정확한 칼로리가 필요해. 그릇 크기와 양은 아직 없고 평균량은 쓰지 마.",
+    "rationale": "Missing explicit required referent/measurement must be requested; no substitute options, fake UI or invented numbers.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-product-0",
+    "split": "development",
+    "family": "product",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 631,
+      "target": 2131,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "product_name": null,
+      "nutrition_label": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "product_name",
+      "nutrition_label"
+    ],
+    "question": "내가 먹은 브랜드 단백질 음료의 정확한 당류를 알려줘. 제품명과 영양표는 아직 없어.",
+    "rationale": "Missing explicit required referent/measurement must be requested; no substitute options, fake UI or invented numbers.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-product-1",
+    "split": "development",
+    "family": "product",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 668,
+      "target": 2174,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "product_name": null,
+      "nutrition_label": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "product_name",
+      "nutrition_label"
+    ],
+    "question": "그 냉동 간편식의 실제 단백질을 계산해줘. 어떤 제품인지는 아직 안 말했어.",
+    "rationale": "Missing explicit required referent/measurement must be requested; no substitute options, fake UI or invented numbers.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-product-2",
+    "split": "development",
+    "family": "product",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 705,
+      "target": 2217,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "product_name": null,
+      "nutrition_label": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "product_name",
+      "nutrition_label"
+    ],
+    "question": "그 포장 시리얼의 정확한 칼로리를 원해. 제품명과 표는 지금 안 줬어.",
+    "rationale": "Missing explicit required referent/measurement must be requested; no substitute options, fake UI or invented numbers.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v3-dev-product-3",
+    "split": "development",
+    "family": "product",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 742,
+      "target": 2260,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "product_name": null,
+      "nutrition_label": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_regression_family_development_case_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "product_name",
+      "nutrition_label"
+    ],
+    "question": "내가 고른 에너지바의 정확한 지방을 알려줘. 어떤 바인지 아직 제공하지 않았어.",
+    "rationale": "Missing explicit required referent/measurement must be requested; no substitute options, fake UI or invented numbers.",
+    "source_case_id": "dev-generic_menu-00"
+  }
+]

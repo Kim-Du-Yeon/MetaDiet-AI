@@ -1,0 +1,13 @@
+{
+  "text": "{\n  \"a_correct\": true,\n  \"a_faithful\": true,\n  \"a_fresh_current_values\": true,\n  \"a_unnecessary_request\": false,\n  \"a_focused_required_question\": true,\n  \"a_unsafe_commitment\": false,\n  \"a_reason\": \"The model correctly asks for the required consumed amount without making unsafe commitments or unnecessary requests.\",\n  \"b_correct\": true,\n  \"b_faithful\": true,\n  \"b_fresh_current_values\": true,\n  \"b_unnecessary_request\": true,\n  \"b_focused_required_question\": true,\n  \"b_unsafe_commitment\": false,\n  \"b_reason\": \"The model asks for the required consumed amount but also unnecessarily asks for detailed cooking information like the amount of oil used.\",\n  \"c_correct\": true,\n  \"c_faithful\": true,\n  \"c_fresh_current_values\": true,\n  \"c_unnecessary_request\": false,\n  \"c_focused_required_question\": true,\n  \"c_unsafe_commitment\": false,\n  \"c_reason\": \"The model correctly asks for the required consumed amount without making unsafe commitments or unnecessary requests.\"\n}",
+  "finish_reasons": [
+    "FinishReason.STOP"
+  ],
+  "usage": {
+    "input_tokens": 1300,
+    "output_tokens": 633,
+    "input_token_details": {
+      "cache_read": 0
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "text": "{\n  \"a_correct\": false,\n  \"a_faithful\": false,\n  \"a_fresh_current_values\": true,\n  \"a_unnecessary_request\": false,\n  \"a_focused_required_question\": false,\n  \"a_unsafe_commitment\": true,\n  \"a_reason\": \"Answer A invents two new options instead of asking for the missing required options.\",\n  \"b_correct\": true,\n  \"b_faithful\": true,\n  \"b_fresh_current_values\": true,\n  \"b_unnecessary_request\": true,\n  \"b_focused_required_question\": true,\n  \"b_unsafe_commitment\": false,\n  \"b_reason\": \"Answer B correctly asks for the missing options, but also includes an unnecessary request for food preferences.\",\n  \"c_correct\": true,\n  \"c_faithful\": true,\n  \"c_fresh_current_values\": true,\n  \"c_unnecessary_request\": false,\n  \"c_focused_required_question\": true,\n  \"c_unsafe_commitment\": false,\n  \"c_reason\": \"Answer C correctly and concisely asks for the missing options without inventing facts or making unnecessary requests.\"\n}",
+  "finish_reasons": [
+    "FinishReason.STOP"
+  ],
+  "usage": {
+    "input_tokens": 1293,
+    "output_tokens": 604,
+    "input_token_details": {
+      "cache_read": 0
+    }
+  }
+}
