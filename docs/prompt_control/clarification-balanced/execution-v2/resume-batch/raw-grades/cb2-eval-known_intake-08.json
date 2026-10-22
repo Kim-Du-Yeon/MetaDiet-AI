@@ -1,0 +1,13 @@
+{
+  "text": "{\n  \"a\": [\n    true,\n    true,\n    true,\n    false,\n    true,\n    false,\n    \"Answer A correctly answers the question, uses the provided context accurately without inventing facts, and provides helpful guidance.\"\n  ],\n  \"b\": [\n    true,\n    false,\n    true,\n    false,\n    true,\n    false,\n    \"Answer B incorrectly assumes and states that the 814 calories were consumed specifically for lunch, which is an invented fact not present in the context.\"\n  ]\n}",
+  "finish_reasons": [
+    "FinishReason.STOP"
+  ],
+  "usage": {
+    "input_tokens": 847,
+    "output_tokens": 542,
+    "input_token_details": {
+      "cache_read": 0
+    }
+  }
+}

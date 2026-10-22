@@ -1,0 +1,14 @@
+{
+  "transport": "native Gemini Batch generateContent",
+  "model": "gemini-3.1-pro-preview",
+  "generation_changed": false,
+  "judge_prompt_schema_settings": "Same RUBRIC, case payload, AB/BA mapping, temperature0,thinkinglow,max_output_tokens2048,json_schema; asynchronous transport differs from first4 synchronous grades",
+  "chunk_size": 8,
+  "reason": "Confirmed RPD exhaustion; Batch has independent quotas and discounted rates",
+  "actual_cost": "Batch usage at50% standard rates except cached input; synchronous/standard equivalent summary remains separately labelled",
+  "source_code_sha256": "44a969ce64cab3a8f8524b50f54e438eaced025c52ab8df446d05060dd8fbc6a",
+  "no_new_subscription": true,
+  "live_ab": false,
+  "schema_encoding_revision": "Last24 requests use reference-free inline a/b Grade schema, semantically identical contract; prior72 use $defs/$ref.",
+  "parser": "Strict nested or exact named-flat grades only; arrays without field names rejected. Root summary flags ignored; all named grade fields required with strict types."
+}

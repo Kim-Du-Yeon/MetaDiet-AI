@@ -73,3 +73,5 @@ Pro 최소 확인은 성공했지만 채점5번째 요청에서 `GoogleRateLimit
 오프라인 검증: unit1541 passed; security/RAG/integration196 passed·기존 optional1 skipped. 새 skip/삭제 없음. 최종20개 실행 계약 테스트 및 기존25개 계약 테스트 통과. 프론트/운영 동작 변경이 없어 프론트 빌드·공개 배포는 수행하지 않았다. 독립 코드 검토에서 추가 중요 결함 없음.
 
 원본: [생성](run-final/paired.json), [채점](run-final/judges.json), [요약·해시](run-final/summary.json), [상태·비용](run-final/status.json), [중단](run-final/stop.json).
+
+후속 채점 재개: [RPD 확정 진단·Batch 재개·예산·실행 상태](RESUME.md). 기존 run-final은 최초 중단 시점 원본으로 보존하며 이후 결과는 resume-batch에 별도 보관한다.

@@ -256,3 +256,5 @@ Ragas는 의존성 충돌을 피하기 위해 별도 평가 환경을 사용합�
 독립 무료 Render 검증 완료: [2시간·720건 조회, 실제 DB 재시작, 동시 수정 100라운드, 직접 백업 복구와 Supabase 차이](docs/admin-feedback/RENDER_RECOVERY_VALIDATION.md). 전체 조회 720/720, 중앙값 530.63ms·p95 753.94ms. 복원 후 데이터/제약/인덱스/RLS hash 일치·조회 100/100. 합성 인증과 관리자 API 범위이며 운영 Supabase 전체 복구 결과는 아닙니다. 검증 웹·DB는 정지했습니다.
 
 후속 질문 의미 평가의 실제 실행·승인 연결: [실행 조건·사전 게이트·예산·원본 결과](docs/prompt_control/clarification-balanced/execution-v2/README.md).
+
+[Pro RPD 진단 및 저장 답변의 Batch 채점 재개](docs/prompt_control/clarification-balanced/execution-v2/RESUME.md).

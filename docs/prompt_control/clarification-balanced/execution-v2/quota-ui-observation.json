@@ -1,0 +1,19 @@
+{
+  "source": "AI Studio visible Rate Limit table",
+  "date": "2026-10-22",
+  "project_label": "Gemini API",
+  "tier": "Tier1",
+  "window": "last1day maxima; up to15min reporting delay",
+  "pro": {
+    "RPM": "13/25",
+    "TPM": "26.21K/2M",
+    "RPD": "246/250"
+  },
+  "previous28day_maxima": {
+    "RPM": "22/25",
+    "TPM": "61.64K/2M",
+    "RPD": "247/250"
+  },
+  "conclusion": "RPD is nearly exhausted; not enough for96 synchronous pairs before reset. Historic exception omitted metric so UI alone is not exact historic-error proof.",
+  "credentials_or_project_id_stored": false
+}
