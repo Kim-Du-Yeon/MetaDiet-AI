@@ -55,6 +55,10 @@ def supported_changes(candidate):
     if changed-{'team.compact_followup'}:raise ValueError('Evaluation coverage missing for changed route; add a reviewed suite before approval')
 
 def verify_evidence(candidate,folder,key):
+    marker=Path(folder)/'protocol.json'
+    if marker.exists() and read(marker).get('suite')=='clarification-two-template-holdout-v1':
+        from scripts.eval.clarification_holdout import verify
+        return verify(candidate,folder,key)
     if read(Path(folder)/'paired.json').get('suite')=='clarification-balanced-v2':
         from scripts.eval.clarification_execution import verify
         return verify(candidate,folder,key)

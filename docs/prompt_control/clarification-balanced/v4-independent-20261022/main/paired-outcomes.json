@@ -1,0 +1,3817 @@
+{
+  "comparison": {
+    "recovered": [
+      "h5-portion-01",
+      "h5-label-02",
+      "h5-stale-01",
+      "h5-stale-02",
+      "h5-stale-04",
+      "h5-stale-05",
+      "h5-stale-06",
+      "h5-stale-08"
+    ],
+    "regressed": []
+  },
+  "rows": [
+    {
+      "case_id": "h5-portion-00",
+      "family": "portion",
+      "question": "콩나물국밥 먹은 열량을 성분표 기준으로 환산하려고요. 몇 g 먹었는지는 아직 안 적었고 평균 1인분을 대신 넣지는 말아주세요. 무엇이 더 필요한가요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly asks for the missing consumed amount as requested, without inventing facts or making unsafe commitments."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the missing consumed amount as requested, without inventing facts or making unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "콩나물국밥의 평균 1인분 분량으로 임의 대체하지 않고 정확한 영양 성분을 계산하려면, 실제로 섭취하신 **총 섭취량(g)** 또는 섭취하신 **그릇의 분량(예: 몇 그릇, 밥 포함 여부 및 분량 등)** 정보가 필요합니다. \n\n섭취하신 양(g 수 또는 분량)을 알려주시면 표준 식품성분표 기준으로 열량을 계산해 확인 카드로 제안해 드리겠습니다. 기록을 원치 않으시면 입력을 건너뛰시거나 취소하셔도 괜찮습니다.",
+        "v4": "표준 성분표 기준으로 환산하기 위해 실제로 드신 분량(g, 대접/그릇 기준, 또는 1그릇 중 드신 비율)만 알려주시면 됩니다. \n\n알려주신 분량을 바탕으로 표준 성분표 대표값을 적용해 계산해 드릴게요. (실제 조리법이나 식당에 따라 오차가 있을 수 있습니다.)"
+      }
+    },
+    {
+      "case_id": "h5-portion-01",
+      "family": "portion",
+      "question": "메밀국수 먹은 열량을 성분표 기준으로 환산하려고요. 몇 g 먹었는지는 아직 안 적었고 평균 1인분을 대신 넣지는 말아주세요. 무엇이 더 필요한가요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly asks for the missing consumed amount without making unsafe commitments or asking for unnecessary details."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the missing consumed amount but also asks for optional details like broth, sauce, and toppings, which constitutes an unnecessary request."
+        }
+      },
+      "passed": {
+        "v1": false,
+        "v4": true
+      },
+      "answers": {
+        "v1": "평균 1인분 분량으로 대체하지 않고 성분표 기준으로 정확히 환산하려면 **실제 섭취하신 메밀국수의 중량(g)** 또는 **삶기 전/후 기준의 구체적인 양(예: 건면 중량, 조리 후 면 중량)**이 필요합니다. \n\n또한 육수나 양념장, 고명을 함께 드셨다면 해당 구성 요소의 포함 여부와 대략적인 양을 알려주시면 더욱 정확하게 계산해 드릴 수 있습니다. 편하신 시점에 중량을 확인해 알려주시면 바로 반영해 계산을 도와드리겠습니다.",
+        "v4": "표준 성분표를 기준으로 환산하려면 실제로 드신 **분량(g 단위 또는 몇 그릇/먹은 비율)**이 필요합니다. \n\n드신 양을 알려주시면 해당 기준에 맞춰 열량을 환산해 드리겠습니다. (표준 성분표 대표값을 바탕으로 계산되므로 실제 조리 방식이나 제품에 따라 차이가 있을 수 있습니다.)"
+      }
+    },
+    {
+      "case_id": "h5-portion-02",
+      "family": "portion",
+      "question": "참치비빔밥 먹은 열량을 성분표 기준으로 환산하려고요. 몇 g 먹었는지는 아직 안 적었고 평균 1인분을 대신 넣지는 말아주세요. 무엇이 더 필요한가요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the missing consumed amount as requested, without inventing facts or using average serving sizes."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the missing consumed amount as requested, without inventing facts or using average serving sizes."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "참치비빔밥의 평균 1인분 기본값을 대신 적용하지 않고 정확하게 성분표 기준으로 환산하려면, 실제로 드신 **총 섭취량(g)** 또는 대략적인 **분량 정보**(예: 밥 공기 수, 캔 참치 크기나 개수 등)가 필요합니다. \n\n섭취하신 무게(g)나 분량을 알려주시면 표준 성분표 기준으로 열량과 영양성분을 정확히 계산해 드리겠습니다.",
+        "v4": "표준 성분표 기준으로 환산하기 위해 실제로 드신 분량(g 또는 밥공기 기준/드신 비율 등)만 알려주시면 됩니다. \n\n알려주신 분량을 바탕으로 표준 성분표 대표값에 맞춰 열량을 환산해 드릴게요."
+      }
+    },
+    {
+      "case_id": "h5-portion-03",
+      "family": "portion",
+      "question": "새우죽 먹은 열량을 성분표 기준으로 환산하려고요. 몇 g 먹었는지는 아직 안 적었고 평균 1인분을 대신 넣지는 말아주세요. 무엇이 더 필요한가요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies the missing required field (consumed amount) and asks for it without inventing facts or making unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the consumed amount as requested, respects the constraint not to use an average serving, and does not invent facts."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "새우죽의 열량을 성분표 기준으로 정확히 환산하려면 **실제 섭취하신 양(g 단위 또는 대략적인 그릇/용기 기준 분량)**이 필요합니다. \n\n요청하신 대로 평균 1인분(대략 1그릇 분량)으로 임의 대체하지 않기 위해 현재 상태에서는 계산을 보류합니다. 섭취하신 무게(g)나 제품 포장지에 표기된 총 내용량을 확인해 알려주시면 바로 성분표 기준으로 열량을 계산해 제안 카드로 안내해 드리겠습니다.",
+        "v4": "표준 성분표 기준으로 환산하기 위해 **실제 섭취하신 분량(g, 그릇 수, 또는 드신 비율 등)**만 알려주시면 됩니다. \n\n알려주신 분량을 바탕으로 표준 성분표 값을 적용해 열량과 영양성분을 계산해 드릴게요."
+      }
+    },
+    {
+      "case_id": "h5-portion-04",
+      "family": "portion",
+      "question": "감자수프 먹은 열량을 성분표 기준으로 환산하려고요. 몇 g 먹었는지는 아직 안 적었고 평균 1인분을 대신 넣지는 말아주세요. 무엇이 더 필요한가요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies that the consumed amount (weight or volume) is needed to calculate the calories, respecting the user's constraint not to use an average serving size."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the consumed amount (g, bowls, etc.) to perform the calculation, adhering to the user's instructions."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "평균 1인분을 대신 적용하지 않고 정확한 열량을 환산하려면 **실제 드신 감자수프의 무게(g)** 또는 **용량(ml)** 정보가 필요합니다. \n\n시판 완제품(가공식품)이라면 **제품명/브랜드**나 포장지에 적힌 총 내용량을 알려주셔도 환산이 가능합니다. 준비되시면 드신 양을 알려주세요!",
+        "v4": "표준 성분표 기준으로 환산하기 위해 **실제 드신 감자수프의 분량(g, 그릇 수 또는 드신 비율 등)**만 알려주시면 됩니다. \n\n알려주신 분량을 바탕으로 표준 성분표 수치에 맞춰 열량과 영양성분을 계산해 드릴게요. (표준 데이터 기준 환산이므로 실제 조리법이나 제품에 따라 오차가 있을 수 있습니다.)"
+      }
+    },
+    {
+      "case_id": "h5-portion-05",
+      "family": "portion",
+      "question": "잡곡김밥 먹은 열량을 성분표 기준으로 환산하려고요. 몇 g 먹었는지는 아직 안 적었고 평균 1인분을 대신 넣지는 말아주세요. 무엇이 더 필요한가요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing consumed amount as requested, without inventing portions."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing consumed amount as requested, without inventing portions."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "잡곡김밥의 열량을 성분표 기준으로 정확히 환산하려면 **실제 드신 분량(g 또는 줄/조각 수)** 정보가 필요합니다. \n\n평균 1인분 분량을 임의로 적용하지 않으려면 총 중량(g)이나 섭취하신 양을 알려주시면, 검증된 표준 성분표 기준으로 계산하여 확인하실 수 있도록 안내해 드리겠습니다. (포장 제품인 경우 제품명이나 영양성분표의 기준 중량을 참고해 입력해 주셔도 좋습니다.)",
+        "v4": "표준 성분표 기준으로 열량을 환산하려면 **실제로 드신 분량(g, 줄 수, 또는 드신 비율)**만 알려주시면 됩니다. \n\n드신 양을 알려주시면 표준 성분표 대표값을 기준으로 계산해 드릴게요. (실제 조리법이나 재료에 따라 일부 차이가 있을 수 있습니다.)"
+      }
+    },
+    {
+      "case_id": "h5-portion-06",
+      "family": "portion",
+      "question": "버섯리소토 먹은 열량을 성분표 기준으로 환산하려고요. 몇 g 먹었는지는 아직 안 적었고 평균 1인분을 대신 넣지는 말아주세요. 무엇이 더 필요한가요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly asks for the required consumed amount without inventing facts or using an average serving size."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the required consumed amount without inventing facts or using an average serving size."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "평균 1인분 대신 실제 섭취량을 기준으로 정확히 계산하기 위해서는 **실제 드신 버섯리소토의 섭취량(g 또는 덜어 드신 분량)** 정보가 필요합니다. \n\n대략적인 그릇 단위(예: 밥공기 기준 몇 공기 분량 등)나 저울로 측정한 무게(g)를 알려주시면 검증된 표준 식품성분표 기준으로 영양 성분을 계산해 확인 카드로 제안해 드리겠습니다.",
+        "v4": "버섯리소토의 표준 성분표 기준 환산을 위해 **실제 드신 분량(g, 덜어 드신 그릇 수 또는 드신 비율 등)**만 알려주시면 됩니다. \n\n알려주신 분량을 바탕으로 표준 영양성분표 대표값을 적용해 계산해 드릴게요. (표준 기준 환산값이므로 실제 조리법이나 재료 비율에 따라 약간의 차이가 있을 수 있습니다.)"
+      }
+    },
+    {
+      "case_id": "h5-portion-07",
+      "family": "portion",
+      "question": "토마토파스타 먹은 열량을 성분표 기준으로 환산하려고요. 몇 g 먹었는지는 아직 안 적었고 평균 1인분을 대신 넣지는 말아주세요. 무엇이 더 필요한가요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies and asks for the missing consumed amount without inventing facts or making unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the consumed amount and provides helpful ways for the user to estimate or provide it, without making unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "토마토파스타의 영양 성분을 식품성분표 기준으로 정확히 환산하려면 **실제 섭취하신 총 중량(g)** 또는 **주요 재료(파스타면, 토마토소스 등)의 양**이 필요합니다. \n\n식품성분표는 일반적으로 100g 단위를 기준으로 영양가가 등록되어 있으므로, 드신 양(g)이나 포장 제품의 표기 용량을 알려주시면 그에 맞춰 열량과 탄·단·지 성분을 계산해 드릴 수 있습니다. \n\n정확한 무게를 재기 어려우신 경우에는 시판 소스 제품명이나 삶기 전/후 파스타면의 양(또는 대략적인 그릇 기준 분량)을 알려주셔도 환산에 도움이 됩니다. 편하신 정보를 말씀해 주세요!",
+        "v4": "성분표 기준 환산을 위해 실제로 드신 분량(g 또는 섭취 비율)만 알려주시면 됩니다. \n\n알려주신 양에 맞춰 표준 성분표 대표값을 기준으로 계산해 드릴게요. (실제 조리 방식이나 소스 제품에 따라 일부 차이가 날 수 있습니다.)"
+      }
+    },
+    {
+      "case_id": "h5-portion-08",
+      "family": "portion",
+      "question": "연어덮밥 먹은 열량을 성분표 기준으로 환산하려고요. 몇 g 먹었는지는 아직 안 적었고 평균 1인분을 대신 넣지는 말아주세요. 무엇이 더 필요한가요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly asks for the required consumed amount without inventing facts or using an average serving size."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the required consumed amount without inventing facts or using an average serving size."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "평균 1인분 대체를 적용하지 않고 성분표 기준으로 정확히 환산하려면 **실제 드신 연어덮밥의 총 중량(g)** 또는 **밥과 연어의 각각의 중량(g)**이 필요합니다. \n\n식당이나 조리 방식에 따라 밥의 양, 얹어진 연어의 양 및 소스 비중이 크게 달라지므로, 대략적인 양이라도 그램(g) 단위로 알려주시면 그에 맞춰 정확한 열량과 영양성분을 계산해 드릴 수 있습니다. 추가 입력은 선택 사항이며, 준비되셨을 때 편하게 알려주세요.",
+        "v4": "표준 성분표 기준으로 환산하기 위해 실제로 드신 분량(g, 그릇/공기 수, 또는 1인분 중 드신 비율)만 알려주시면 됩니다. \n\n실제 드신 양을 알려주시면 표준 데이터 기준으로 계산해 드릴게요. (표준 성분표 기반 환산이므로 실제 식당이나 조리법에 따라 세부 열량은 차이가 있을 수 있습니다.)"
+      }
+    },
+    {
+      "case_id": "h5-portion-09",
+      "family": "portion",
+      "question": "잔치국수 먹은 열량을 성분표 기준으로 환산하려고요. 몇 g 먹었는지는 아직 안 적었고 평균 1인분을 대신 넣지는 말아주세요. 무엇이 더 필요한가요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing consumed amount as requested, without inventing facts or making unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing consumed amount as requested, without inventing facts or making unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "잔치국수의 정확한 영양성분 및 열량 환산을 위해서는 **섭취하신 분량(g 또는 면·국물 등의 대략적인 양)**이 필요합니다.\n\n임의의 1인분 기본값을 적용하지 않도록 요청하셨으므로, 드신 분량을 알려주시면 표준 식품성분표 기준으로 영양가를 계산해 안내해 드리겠습니다.",
+        "v4": "표준 성분표 기준으로 환산하기 위해 실제로 드신 분량(g 또는 그릇 기준, 예: 1그릇·반 그릇 등 먹은 비율)만 알려주시면 됩니다. \n\n알려주신 양에 맞춰 표준 영양성분을 기준으로 계산해 드릴게요. (실제 조리법이나 고명·육수 종류에 따라 약간의 차이는 발생할 수 있습니다.)"
+      }
+    },
+    {
+      "case_id": "h5-recipe-00",
+      "family": "recipe",
+      "question": "직접 만든 렌틸콩스튜 115g을 먹었어요. 평균 성분표 말고 내 조리법대로 계산할래요. 들어간 재료와 각각의 양, 기름·양념, 완성 총량은 아직 안 알려드렸어요. 어떤 정보를 드려야 하나요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response A correctly identifies and asks for the missing required fields (ingredients, oil/seasoning, total yield) without inventing facts or making unsafe commitments."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response B correctly identifies and asks for the missing required fields (ingredients, oil/seasoning, total yield) without inventing facts or making unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "직접 만드신 렌틸콩스튜의 영양을 레시피 기준으로 정확히 계산하기 위해 아래 정보를 알려주시면 됩니다.\n\n1. **사용된 모든 식재료와 중량**: 렌틸콩(건조 중량 또는 삶은 중량 표기), 채소, 고기 등 들어간 재료별 대략적인 양(g 또는 개수/부피)\n2. **조리에 사용된 기름 및 소스류**: 볶을 때 쓴 오일의 종류와 양(예: 올리브유 1큰술), 토마토소스나 육수 등의 종류와 양\n3. **완성된 전체 요리의 총량**: 조리가 끝난 후 만들어진 스튜의 총 무게(g) 또는 총 분량(예: 총 4인분 중 115g 섭취 등)\n\n총량을 모르는 경우 재료들의 합산 무게를 기준으로 계산할 수 있으니 편하신 대로 남겨주시면 계산을 도와드리겠습니다.",
+        "v4": "직접 만드신 조리법대로 정밀하게 계산하기 위해 다음 정보를 알려주시면 됩니다. (먹은 양 115g은 확인되었습니다.)\n\n1. **사용한 식재료별 종류와 양** (예: 렌틸콩, 양파, 당근, 토마토 등의 무게 또는 분량)\n2. **조리에 사용한 기름 및 양념류의 종류와 양** (예: 올리브유, 버터, 소금, 치킨스톡 등)\n3. **조리 후 완성된 스튜의 총 무게(g)** (완성 총량 대비 드신 115g의 비율을 계산하기 위해 필요합니다)\n\n해당 내용을 편하신 대로 알려주시면 정확한 영양 성분을 계산해 드릴게요!"
+      }
+    },
+    {
+      "case_id": "h5-recipe-01",
+      "family": "recipe",
+      "question": "직접 만든 해물찜 128g을 먹었어요. 평균 성분표 말고 내 조리법대로 계산할래요. 들어간 재료와 각각의 양, 기름·양념, 완성 총량은 아직 안 알려드렸어요. 어떤 정보를 드려야 하나요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response A correctly asks for the required fields (ingredients, seasoning/oil, and total cooked yield) without inventing any facts or making unnecessary requests."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response B correctly asks for the required fields (ingredients, seasoning/oil, and total cooked yield) without inventing any facts or making unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "직접 만드신 해물찜을 조리법대로 정확히 계산하려면 다음 세 가지 정보가 필요합니다.\n\n1. **주재료 및 부재료의 종류와 중량(g)** (예: 오징어, 새우, 콩나물 등 조리 전 원재료 무게)\n2. **사용한 양념과 유지류의 종류 및 분량** (예: 고춧가루, 간장, 설탕, 식용유, 참기름 등 큰술 또는 g 단위)\n3. **조리 후 완성된 전체 요리의 총 중량(g)**\n\n위 정보를 알려주시면 전체 영양 성분을 계산한 뒤, 실제 드신 128g에 맞춰 비율대로 영양 수치를 산출해 드릴게요.",
+        "v4": "정확한 계산을 위해 다음 정보를 알려주시면 됩니다. 이미 알려주신 섭취량(128g) 외에 아래 내용이 필요합니다.\n\n1. **사용한 재료와 각각의 양(g 또는 개수)**: 해물 종류(오징어, 새우, 콩나물 등)와 부재료의 무게\n2. **사용한 양념 및 기름의 양**: 고춧가루, 간장, 설탕, 참기름, 전분물 등의 구체적인 양(g 또는 큰술/작은술)\n3. **완성된 요리의 전체 총량(g)**: 조리 후 만들어진 해물찜 전체의 무게\n\n전체 분량 대비 드신 128g의 비율을 계산하여 영양 성분을 정확히 산출해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-recipe-02",
+      "family": "recipe",
+      "question": "직접 만든 닭감자조림 141g을 먹었어요. 평균 성분표 말고 내 조리법대로 계산할래요. 들어간 재료와 각각의 양, 기름·양념, 완성 총량은 아직 안 알려드렸어요. 어떤 정보를 드려야 하나요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response A correctly identifies and asks for the missing required fields (ingredients, seasoning/oil, and total cooked yield) without making unsafe commitments or unnecessary requests."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response B correctly identifies and asks for the missing required fields (ingredients, seasoning/oil, and total cooked yield) without making unsafe commitments or unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "직접 만드신 닭감자조림의 맞춤 영양 성분을 정확히 계산하기 위해 아래 3가지 정보를 알려주시면 됩니다.\n\n1. **주재료 및 부재료의 종류와 중량**: 닭고기 부위(닭가슴살, 닭다리살 등 및 껍질 유무)와 감자, 양파 등 채소의 조리 전 무게\n2. **양념 및 유지류 분량**: 간장, 설탕, 올리고당, 식용유, 참기름 등의 종류와 사용량(g 또는 숟가락 단위)\n3. **조리 후 완성된 전체 요리의 총 무게(g)**: 전체 완성량 중 드신 141g의 비율을 계산하는 데 필요합니다.\n\n해당 내용을 편하게 남겨주시면 비율에 맞춰 영양 성분을 산출해 드릴게요!",
+        "v4": "직접 만드신 레시피대로 정확히 계산하기 위해 다음 정보를 알려주시면 됩니다.\n\n1. **들어간 재료와 중량**: 닭고기(부위 포함), 감자, 채소 등 각 식재료의 양(g)\n2. **사용한 양념과 기름**: 식용유, 간장, 설탕, 올리고당 등의 종류와 분량(g 또는 숟가락 단위)\n3. **완성된 총량**: 조리 후 전체 요리의 총 무게(g) (또는 전체 중 드신 비율)\n\n이미 섭취하신 양(141g)은 확인되었으므로, 위 내용을 알려주시면 전체 영양을 계산한 뒤 드신 비율에 맞추어 계산해 드릴게요."
+      }
+    },
+    {
+      "case_id": "h5-recipe-03",
+      "family": "recipe",
+      "question": "직접 만든 두부강정 154g을 먹었어요. 평균 성분표 말고 내 조리법대로 계산할래요. 들어간 재료와 각각의 양, 기름·양념, 완성 총량은 아직 안 알려드렸어요. 어떤 정보를 드려야 하나요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response A correctly asks for the required fields (ingredients, oil/seasoning, and total cooked yield) without making unnecessary requests or unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response B correctly asks for the required fields (ingredients, oil, seasoning, and total cooked yield) without making unnecessary requests or unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "직접 만드신 두부강정의 영양 성분을 레시피 기준으로 계산하려면 다음 정보를 알려주시면 됩니다.\n\n1. **주재료 및 부재료의 중량**: 사용하신 두부(부침용/찌개용 등), 전분가루나 튀김가루, 견과류 등의 양(g)\n2. **조리용 기름**: 부치거나 튀길 때 사용한 기름(식용유 등)의 종류와 대략적인 사용량(큰술 또는 g)\n3. **양념장 재료와 분량**: 고추장, 케첩, 올리고당/물엿/설탕, 간장, 다진 마늘 등 들어간 양념의 종류와 양\n4. **완성된 요리의 전체 무게**: 조리 후 완성된 두부강정의 총 중량(g)\n\n완성 총량을 알면 드신 154g에 해당하는 비율을 정확히 계산해 영양 정보를 산출해 드릴 수 있습니다. 편하신 대로 재료 정보를 남겨주시면 계산을 도와드리겠습니다.",
+        "v4": "직접 만드신 조리법 기준으로 정확히 계산하기 위해 다음 정보를 알려주시면 됩니다. 이미 알려주신 섭취량(154g) 외에 필요한 정보는 아래와 같습니다.\n\n1. **사용한 주재료 및 부재료의 종류와 중량(g)** (예: 두부, 전분가루, 견과류 등)\n2. **조리에 사용한 기름과 양념의 종류 및 양** (예: 식용유 2큰술, 고추장/올리고당/케첩 등 양념 재료의 용량 또는 g)\n3. **조리 후 완성된 두부강정의 전체 무게(g)**\n\n완성된 전체 무게와 들어간 재료의 총 영양성분을 바탕으로, 실제로 드신 154g에 해당하는 영양 성분을 계산해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-recipe-04",
+      "family": "recipe",
+      "question": "직접 만든 가지그라탱 167g을 먹었어요. 평균 성분표 말고 내 조리법대로 계산할래요. 들어간 재료와 각각의 양, 기름·양념, 완성 총량은 아직 안 알려드렸어요. 어떤 정보를 드려야 하나요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response A correctly asks for the required fields (ingredients, oil/seasoning, total yield) without making unsafe commitments or unnecessary requests."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response B correctly asks for the required fields (ingredients, oil/seasoning, total yield) without making unsafe commitments or unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "직접 만드신 조리법대로 정확히 계산하기 위해 다음 정보를 알려주시면 됩니다.\n\n1. **사용된 모든 재료와 중량**: 가지, 치즈, 토마토소스, 고기 등 들어간 식재료의 무게(g 단위)\n2. **조리용 기름 및 양념**: 볶거나 두를 때 사용한 식용유·버터의 양(g 또는 큰술), 소금·설탕 등 양념류\n3. **조리 후 완성된 총 중량**: 조리가 끝난 전체 요리의 무게(g)\n\n완성된 전체 양 대비 실제로 드신 167g의 비율을 적용해 영양 성분을 계산해 드리겠습니다. 편하신 대로 재료 목록을 남겨주세요.",
+        "v4": "직접 만드신 조리법에 맞춰 정밀하게 계산하기 위해 아래 정보들을 알려주시면 됩니다. (먹은 양 167g은 이미 확인되었습니다.)\n\n1. **들어간 각 재료와 양**: 가지, 치즈, 토마토소스/고기 등 주재료의 종류와 중량(g 또는 개수)\n2. **사용한 기름 및 양념**: 조리 시 두른 식용유/올리브유, 버터, 소금, 양념류의 종류와 양(스푼 또는 g)\n3. **완성된 요리의 총 중량**: 조리가 끝난 전체 그라탱의 무게(g)\n\n완성 총량을 알려주시면 전체 재료의 영양 성분 중 드신 167g 비율만큼 정확히 계산해 드릴 수 있습니다. 편하신 대로 재료 목록을 알려주세요!"
+      }
+    },
+    {
+      "case_id": "h5-recipe-05",
+      "family": "recipe",
+      "question": "직접 만든 볶음쌀국수 180g을 먹었어요. 평균 성분표 말고 내 조리법대로 계산할래요. 들어간 재료와 각각의 양, 기름·양념, 완성 총량은 아직 안 알려드렸어요. 어떤 정보를 드려야 하나요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the required fields (ingredients, oil/seasoning, total yield) without inventing facts or making unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the required fields (ingredients, oil/seasoning, total yield) without inventing facts or making unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "직접 만드신 조리법에 맞춰 정확하게 계산하려면 다음 정보를 알려주시면 됩니다.\n\n1. **사용된 주요 식재료와 양**: 쌀국수 면(건면 또는 불린 면 상태 명시), 고기·해물류, 채소류(숙주, 양파 등), 달걀 등의 중량(g)\n2. **조리에 사용된 기름과 양념**: 식용유, 굴소스, 피시소스, 설탕, 팟타이 소스 등의 분량(밥숟가락 기준 또는 g/ml)\n3. **완성된 요리의 전체 무게**: 조리가 끝난 후 나온 총 완성량(g)\n\n완성 총량 대비 드신 180g의 비율을 계산하여 섭취하신 영양 성분을 정확하게 산출해 드릴게요. 편하신 단위로 알려주시면 됩니다.",
+        "v4": "정확한 레시피 기반 계산을 위해 다음 정보를 알려주시면 됩니다. (이미 알려주신 섭취량 180g은 확인되었습니다.)\n\n1. **사용하신 재료와 각각의 양**: 면(건면/불린 면 구분), 고기·해물, 채소 등의 양(g 또는 대략적인 분량)\n2. **사용한 기름과 양념의 종류 및 양**: 식용유, 소스(굴소스, 피시소스, 간장 등), 설탕 등의 양(숟가락 또는 g)\n3. **완성된 전체 요리의 총 무게(g)** 또는 **전체 만든 양 중 드신 비율**(예: 만든 양의 절반, 전부 등)\n\n해당 내용을 남겨주시면 재료별 영양성분을 합산하여 계산해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-recipe-06",
+      "family": "recipe",
+      "question": "직접 만든 콩비지전 193g을 먹었어요. 평균 성분표 말고 내 조리법대로 계산할래요. 들어간 재료와 각각의 양, 기름·양념, 완성 총량은 아직 안 알려드렸어요. 어떤 정보를 드려야 하나요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response A correctly identifies and asks for the missing required fields (ingredients, oil/seasoning, total yield) without making unsafe commitments or unnecessary requests."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response B correctly identifies and asks for the missing required fields (ingredients, oil/seasoning, total yield) without making unsafe commitments or unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "직접 만드신 콩비지전(섭취량 193g)의 영양 성분을 조리법에 맞게 정확히 계산하기 위해 아래 정보를 알려주시면 됩니다.\n\n1. **사용된 식재료와 중량**: 콩비지, 부침가루·밀가루, 돼지고기, 김치, 계란, 채소(파, 양파 등) 등 반죽에 들어간 각 재료의 g 수\n2. **조리용 기름 및 양념**: 부칠 때 사용한 식용유의 양(큰술 또는 g), 소금·간장 등 간을 맞춘 양념의 양\n3. **조리 후 완성된 전의 총 무게(g)**: 전체 완성량 대비 드신 193g의 비율을 계산하기 위해 완성된 총량이 필요합니다. (만약 완성 총량을 재지 않으셨다면 만든 총 장수와 드신 장수를 알려주셔도 됩니다.)\n\n위 내용을 편하신 대로 남겨주시면 비율에 맞춰 영양 정보를 계산해 기록 제안을 도와드리겠습니다.",
+        "v4": "직접 만드신 조리법에 맞춰 정밀하게 계산하기 위해 아래 정보를 알려주시면 됩니다. (이미 섭취량 193g은 확인되었습니다.)\n\n1. **들어간 재료 종류와 각각의 양(g 또는 계량 단위)** (예: 콩비지, 돼지고기, 김치, 부침가루 등)\n2. **조리에 사용한 기름과 양념의 양** (예: 식용유 숟가락 수, 소금/간장 등)\n3. **전체 완성된 총량(g)** 또는 **전체 분량 대비 드신 비율**(예: 총 몇 장 중 몇 장 또는 몇 분의 몇)\n\n위 내용을 남겨주시면 재료별 영양을 합산해 실제로 드신 193g에 맞게 정확히 계산해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-recipe-07",
+      "family": "recipe",
+      "question": "직접 만든 고등어조림 206g을 먹었어요. 평균 성분표 말고 내 조리법대로 계산할래요. 들어간 재료와 각각의 양, 기름·양념, 완성 총량은 아직 안 알려드렸어요. 어떤 정보를 드려야 하나요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly asks for the required fields (ingredients, seasoning/oil, and total cooked yield) without making unsafe commitments or unnecessary requests."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the required fields (ingredients, seasoning/oil, and total cooked yield) without making unsafe commitments or unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "직접 만드신 고등어조림의 영양 성분을 레시피 기준으로 정확히 계산하려면 다음 정보를 알려주시면 됩니다.\n\n1. **주재료 및 부재료의 중량**: 고등어(생물/자반 여부), 무, 양파, 대파 등의 조리 전 중량(g)\n2. **양념 및 유지류**: 간장, 고춧가루, 설탕/물엿, 다진 마늘, 식용유나 참기름 등의 사용량(밥숟가락, g, 또는 mL)\n3. **완성된 요리의 총량**: 조리가 끝난 후 냄비 전체의 고등어조림 총 중량(g)\n\n완성 총량 대비 드신 양(206g)의 비율을 반영해 섭취하신 칼로리와 영양 성분을 정확하게 계산해 드릴게요. 준비되실 때 편하게 남겨주세요!",
+        "v4": "개별 레시피 기준으로 계산하기 위해 아래 정보를 알려주시면 됩니다.\n\n1. **들어간 모든 식재료와 양**: 고등어(생물/자반 여부), 무, 양파 등 주재료의 중량(g)\n2. **양념 및 조미료/기름의 양**: 간장, 고춧가루, 설탕/물엿, 기름 등의 용량(큰술, 작은술 또는 g)\n3. **완성된 전체 조림의 총 중량(g)** (먹은 양 206g이 전체 중 어느 정도 비율인지 파악하기 위함)\n\n남겨주신 섭취량(206g) 외에 위 세 가지 정보를 알려주시면 사용하신 레시피에 맞춰 영양 성분을 계산해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-recipe-08",
+      "family": "recipe",
+      "question": "직접 만든 토마토달걀볶음 219g을 먹었어요. 평균 성분표 말고 내 조리법대로 계산할래요. 들어간 재료와 각각의 양, 기름·양념, 완성 총량은 아직 안 알려드렸어요. 어떤 정보를 드려야 하나요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies and asks for the missing required fields (ingredients, oil/seasoning, total yield) without making unsafe commitments or unnecessary requests."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly identifies and asks for the missing required fields (ingredients, oil/seasoning, total yield) without making unsafe commitments or unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "직접 만드신 조리법대로 정확히 영양 성분을 계산하기 위해 다음 정보를 알려주시면 됩니다.\n\n1. **주재료와 사용량**: 달걀(개수 또는 g), 토마토(개수 또는 g) 등 들어간 주재료의 분량\n2. **조리용 기름 및 양념류**: 조리 시 두른 식용유·버터의 양(스푼 또는 g), 소금·설탕·굴소스·간장 등 사용한 양념의 양\n3. **조리 전후 총량**: 완성된 전체 요리의 총 무게(g)\n\n완성된 전체 요리의 총 무게와 각 재료의 분량을 알려주시면, 이번에 드신 219g에 맞춰 정확한 영양 성분을 계산해 드리겠습니다. 편하신 대로 재료 정보를 남겨주세요!",
+        "v4": "직접 만드신 조리법대로 정밀하게 계산하기 위해 다음 정보를 알려주시면 됩니다. 이미 알려주신 섭취량(219g)은 반영해 계산해 드릴게요.\n\n1. **사용한 주재료와 각각의 양** (예: 달걀 개수 또는 g, 토마토 g)\n2. **사용한 기름 및 양념의 종류와 양** (예: 식용유 1큰술, 굴소스 1작은술, 설탕 등)\n3. **요리 완성 후의 총 무게** (또는 전체 양 중 드신 비율)\n\n위 내용을 남겨주시면 재료별 영양성분을 바탕으로 드신 분량의 영양을 계산해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-recipe-09",
+      "family": "recipe",
+      "question": "직접 만든 채소카레 232g을 먹었어요. 평균 성분표 말고 내 조리법대로 계산할래요. 들어간 재료와 각각의 양, 기름·양념, 완성 총량은 아직 안 알려드렸어요. 어떤 정보를 드려야 하나요?",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response A correctly identifies and asks for the missing required fields (ingredients, oil/seasoning, total yield) without making unsafe commitments or unnecessary requests."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response B correctly identifies and asks for the missing required fields (ingredients, oil/seasoning, total yield) without making unsafe commitments or unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "직접 만드신 채소카레의 정확한 영양 성분을 계산하기 위해 다음 정보를 알려주시면 됩니다.\n\n1. **사용된 식재료와 각 중량(g)**: 감자, 양파, 당근 등 들어간 채소와 카레 가루(또는 고형 카레)의 양\n2. **조리용 유지류 및 추가 양념**: 볶을 때 사용한 식용유·버터 등의 종류와 양(스푼 또는 g)\n3. **완성된 카레의 전체 무게(g)**: 조리가 끝난 후 냄비에 담긴 총 완성량 (또는 전체를 몇 인분으로 나누었는지)\n\n완성 총량과 들어간 전체 재료를 바탕으로 1g당 영양 성분을 산출한 뒤, 이번에 드신 232g에 맞춰 정확히 계산해 드릴 수 있습니다. 편하신 대로 재료 정보를 남겨주시면 계산을 도와드리겠습니다.",
+        "v4": "직접 만드신 채소카레의 정확한 영양 계산을 위해 아래 정보를 알려주세요. 이미 말씀해 주신 섭취량(232g) 외에 다음 내용이 필요합니다.\n\n1. **들어간 재료와 각각의 중량/양** (예: 감자, 양파, 당근 등 채소의 g 수)\n2. **사용한 카레 루/분말 및 조리유·양념의 종류와 양** (예: 고형 카레 2조각, 식용유 1큰술 등)\n3. **조리 후 완성된 카레의 총량(g)** (전체 양 중 드신 232g의 비율을 계산하기 위해 필요합니다)\n\n위 정보를 편하신 대로 남겨주시면 레시피 기준으로 계산해 드릴게요."
+      }
+    },
+    {
+      "case_id": "h5-known_reference-00",
+      "family": "known_reference",
+      "question": "포장 식품 영양표에 100g당 135kcal라고 적혀 있고 115g 먹었어요. 곁들인 것은 없어요. 열량만 계산해 주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly calculates the calories based on the provided information without any unnecessary requests or unsafe commitments."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly calculates the calories based on the provided information without any unnecessary requests or unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "포장 식품 100g당 135kcal 기준, 115g 섭취 시 열량은 **약 155kcal**(정확히는 155.25kcal)입니다.",
+        "v4": "포장 식품 영양표 기준(100g당 135kcal)으로 115g을 섭취하셨을 때의 열량은 **약 155.25kcal**(약 155kcal)입니다."
+      }
+    },
+    {
+      "case_id": "h5-known_reference-01",
+      "family": "known_reference",
+      "question": "포장 식품 영양표에 100g당 144kcal라고 적혀 있고 128g 먹었어요. 곁들인 것은 없어요. 열량만 계산해 주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Correctly calculates the calories based on the provided reference without unnecessary requests."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Correctly calculates the calories and shows the formula, without unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "섭취하신 128g에 대한 열량은 약 **184.3kcal**(반올림 시 약 184kcal)입니다. \n\n(계산식: 144kcal × 1.28 = 184.32kcal)",
+        "v4": "100g당 144kcal 기준으로 128g 섭취하셨을 때의 열량은 **약 184.3kcal**(반올림 시 약 184kcal)입니다."
+      }
+    },
+    {
+      "case_id": "h5-known_reference-02",
+      "family": "known_reference",
+      "question": "포장 식품 영양표에 100g당 153kcal라고 적혀 있고 141g 먹었어요. 곁들인 것은 없어요. 열량만 계산해 주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly calculates the calories based on the provided reference without any unnecessary requests or unsafe commitments."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly calculates the calories based on the provided reference without any unnecessary requests or unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "섭취하신 식품 141g의 열량은 약 **215.7kcal**(반올림 시 216kcal)입니다.\n\n* 계산식: 153kcal × (141g / 100g) = 215.73kcal",
+        "v4": "포장 식품 영양표(100g당 153kcal)를 기준으로 141g을 섭취하셨을 때의 열량은 약 **216kcal**(정확히는 215.73kcal)입니다."
+      }
+    },
+    {
+      "case_id": "h5-known_reference-03",
+      "family": "known_reference",
+      "question": "포장 식품 영양표에 100g당 162kcal라고 적혀 있고 154g 먹었어요. 곁들인 것은 없어요. 열량만 계산해 주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly calculates the calories based on the provided numbers without asking unnecessary questions or inventing facts."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly calculates the calories based on the provided numbers without asking unnecessary questions or inventing facts."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "해당 식품 154g 섭취 시 총 열량은 약 **249.5kcal**(반올림 시 약 **250kcal**)입니다. \n\n(계산식: 1.62kcal × 154g = 249.48kcal)",
+        "v4": "섭취하신 154g에 대한 열량은 약 **249.5kcal**(반올림 시 약 250kcal)입니다.\n\n(계산: 162kcal ÷ 100g × 154g = 249.48kcal)"
+      }
+    },
+    {
+      "case_id": "h5-known_reference-04",
+      "family": "known_reference",
+      "question": "포장 식품 영양표에 100g당 171kcal라고 적혀 있고 167g 먹었어요. 곁들인 것은 없어요. 열량만 계산해 주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly calculates the calories based on the provided numbers without asking unnecessary questions or inventing facts."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly calculates the calories based on the provided numbers without asking unnecessary questions or inventing facts."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "섭취하신 식품 167g의 열량은 **약 285.6kcal**(반올림 시 약 286kcal)입니다.\n\n* 계산식: $171\\text{ kcal} \\times \\frac{167\\text{ g}}{100\\text{ g}} = 285.57\\text{ kcal}$",
+        "v4": "제공해주신 영양표 기준(100g당 171kcal)으로 167g을 섭취하셨을 때의 열량은 약 **286kcal**(285.57kcal)입니다."
+      }
+    },
+    {
+      "case_id": "h5-known_reference-05",
+      "family": "known_reference",
+      "question": "포장 식품 영양표에 100g당 180kcal라고 적혀 있고 180g 먹었어요. 곁들인 것은 없어요. 열량만 계산해 주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly calculates the calories based on the provided reference without any unnecessary requests."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly calculates the calories based on the provided reference without any unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "100g당 180kcal 기준 180g을 섭취하셨으므로 총 열량은 **324kcal**입니다.",
+        "v4": "제공해주신 영양성분표(100g당 180kcal)를 기준으로 180g을 섭취하셨을 때의 총 열량은 **324kcal**입니다."
+      }
+    },
+    {
+      "case_id": "h5-known_reference-06",
+      "family": "known_reference",
+      "question": "포장 식품 영양표에 100g당 189kcal라고 적혀 있고 193g 먹었어요. 곁들인 것은 없어요. 열량만 계산해 주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly calculates the calories based on the provided information without asking unnecessary questions or making unsafe commitments."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly calculates the calories based on the provided information without asking unnecessary questions or making unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "섭취하신 193g의 열량은 약 **365kcal**(정확히는 364.77kcal)입니다.",
+        "v4": "제공해 주신 영양성분표(100g당 189kcal)를 기준으로 193g을 섭취하셨을 때의 열량은 약 **365kcal**(정확히는 364.77kcal)입니다."
+      }
+    },
+    {
+      "case_id": "h5-known_reference-07",
+      "family": "known_reference",
+      "question": "포장 식품 영양표에 100g당 198kcal라고 적혀 있고 206g 먹었어요. 곁들인 것은 없어요. 열량만 계산해 주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly calculates the calories based on the provided information without any unnecessary requests or unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly calculates the calories based on the provided information without any unnecessary requests or unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "섭취하신 제품의 열량은 100g당 198kcal 기준으로 206g을 계산했을 때 약 **408kcal**(정확히는 407.88kcal)입니다.",
+        "v4": "제공해주신 영양성분표(100g당 198kcal)를 기준으로 206g을 섭취하셨을 때의 열량은 **약 408kcal**(407.88kcal)입니다."
+      }
+    },
+    {
+      "case_id": "h5-known_reference-08",
+      "family": "known_reference",
+      "question": "포장 식품 영양표에 100g당 207kcal라고 적혀 있고 219g 먹었어요. 곁들인 것은 없어요. 열량만 계산해 주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer correctly calculates the calories based on the provided numbers without any unnecessary requests or invented facts."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer correctly calculates the calories based on the provided numbers without any unnecessary requests or invented facts."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "섭취하신 포장 식품(100g당 207kcal) 219g의 총 열량은 약 **453.3kcal**(반올림 시 약 453kcal)입니다. \n\n(계산식: 207kcal × 2.19 = 453.33kcal)",
+        "v4": "제공해주신 영양성분표(100g당 207kcal)를 기준으로 219g을 섭취하셨을 때의 열량은 약 **453.33kcal**(반올림 시 약 453kcal)입니다."
+      }
+    },
+    {
+      "case_id": "h5-known_reference-09",
+      "family": "known_reference",
+      "question": "포장 식품 영양표에 100g당 216kcal라고 적혀 있고 232g 먹었어요. 곁들인 것은 없어요. 열량만 계산해 주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer a correctly calculates the calories based on the provided numbers without any unnecessary requests or invented facts."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer b correctly calculates the calories and shows the math, without any unnecessary requests or invented facts."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "섭취하신 식품 232g의 총열량은 약 **501.1kcal**(반올림 시 501kcal)입니다.\n\n* 계산 방식: 216kcal × (232g / 100g) = 501.12kcal",
+        "v4": "제공해주신 영양표(100g당 216kcal)를 기준으로 232g을 섭취하셨을 때의 열량은 약 **501.1kcal**(반올림 시 501kcal)입니다."
+      }
+    },
+    {
+      "case_id": "h5-label-00",
+      "family": "label",
+      "question": "마트에서 산 간식 번호 21의 실제 당류를 알고 싶어요. 115g 먹었지만 이름과 영양표는 아직 없어요. 임의 제품으로 대신하지 말고 확인해줘요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies the missing information and provides options to proceed without inventing data."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the required product name or nutrition label to calculate the sugar content for the specified portion."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "요청하신 간식은 제품명과 영양성분표 정보가 확인되지 않아 실제 당류를 정확히 조회할 수 없습니다. \n\n임의의 유사 제품으로 대체하여 계산하지 않으므로, 아래 방법 중 편하신 방식을 선택해 진행해 주세요.\n\n* **직접 기입하기**: 포장지의 영양성분표를 확인하여 당류를 직접 입력\n* **제외하기**: 해당 간식 기록을 제외하고 나머지 식단 관리 진행\n* **취소하기**: 이번 입력을 취소하고 나중에 다시 확인",
+        "v4": "정확한 당류를 계산하기 위해서는 해당 간식의 **정확한 제품명(브랜드 및 제품 풀네임)**이나 **제품 포장지의 영양성분표(100g당 또는 1회 제공량당 당류 함량)** 정보가 필요합니다. \n\n제품명 또는 영양표에 표기된 당류 수치를 알려주시면 115g 섭취량에 맞춰 정확히 계산해 드릴게요."
+      }
+    },
+    {
+      "case_id": "h5-label-01",
+      "family": "label",
+      "question": "마트에서 산 간식 번호 22의 실제 당류를 알고 싶어요. 128g 먹었지만 이름과 영양표는 아직 없어요. 임의 제품으로 대신하지 말고 확인해줘요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly asks for the missing product name or nutrition label without inventing facts."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the missing product name or nutrition label without inventing facts."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "문의하신 간식은 구체적인 제품명과 영양성분표 정보가 없어 임의의 다른 제품으로 대체하거나 정확한 당류 수치를 조회하기 어렵습니다.\n\n포장지의 영양성분표에 표기된 당류(g)를 직접 기입하시거나, 기록에서 제외 또는 취소하는 방법 중 편하신 방식을 선택해 진행하실 수 있습니다. 제품명이나 영양성분을 확인하신 후 알려주시면 정확하게 기록을 도와드리겠습니다.",
+        "v4": "정확한 당류 계산을 위해서는 해당 간식의 정확한 제품명 또는 포장지의 영양성분표(100g당 또는 총 내용량당 당류 함량) 정보가 필요합니다. \n\n임의의 유사 제품으로 대체하지 않으므로, 확인되시는 대로 제품명이나 영양정보를 알려주시면 섭취하신 128g에 맞춰 계산해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-label-02",
+      "family": "label",
+      "question": "마트에서 산 간식 번호 23의 실제 당류를 알고 싶어요. 141g 먹었지만 이름과 영양표는 아직 없어요. 임의 제품으로 대신하지 말고 확인해줘요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": false,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": true,
+          "reason": "Answer A correctly asks for the missing product information but invents a UI feature (screen cards for manual entry or cancellation), which is an unsafe commitment and unfaithful to the provided context."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the required product identity or nutrition label to calculate the sugar content for the specified 141g, without inventing facts or making unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": false,
+        "v4": true
+      },
+      "answers": {
+        "v1": "제품명과 영양성분표 정보가 확인되지 않은 가공식품은 임의의 다른 제품 영양성분으로 대체하여 조회하거나 계산할 수 없습니다.\n\n해당 간식의 정확한 당류를 확인하기 위해서는 제품 포장지의 제품명이나 영양성분표 확인이 필요합니다.\n\n제품 정보를 확인하신 후 직접 영양정보를 기입하시거나, 기록에서 제외 또는 취소 중 원하시는 방식을 화면 카드를 통해 선택해 주세요.",
+        "v4": "정확한 당류를 확인하려면 해당 제품의 정확한 제품명(브랜드 및 상품명)이나 제품 포장 뒷면의 영양성분표(100g당 또는 1회 제공량당 당류 함량) 정보가 필요합니다. \n\n제품명이나 영양표에 적힌 수치를 알려주시면 141g 기준의 실제 당류를 계산해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-label-03",
+      "family": "label",
+      "question": "마트에서 산 간식 번호 24의 실제 당류를 알고 싶어요. 154g 먹었지만 이름과 영양표는 아직 없어요. 임의 제품으로 대신하지 말고 확인해줘요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies the missing product identity/label and asks for it without inventing facts."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the missing product identity/label and respects the user's constraint not to substitute."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "요청하신 간식의 정확한 제품명과 영양성분 정보가 없어 임의의 다른 제품으로 영양 수치를 조회하거나 계산할 수 없습니다. \n\n포장지의 제품명이나 영양성분표를 확인하신 후 알려주시면 정확한 당류를 확인해 드릴 수 있습니다. 확인이 어려우신 경우 직접 기입하기, 이번 기록에서 제외하기, 또는 기록 취소를 선택하실 수 있습니다.",
+        "v4": "해당 간식의 정확한 당류를 계산하려면 제품을 식별할 수 있는 정보가 필요합니다. \n\n임의의 유사 제품으로 대체하지 않기 위해, 포장지에 적힌 **정확한 제품명(제조사 및 상품명)** 또는 **영양성분표(100g당 또는 총 내용량당 당류 함량)**를 알려주시면 154g 섭취량에 맞춰 정확히 계산해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-label-04",
+      "family": "label",
+      "question": "마트에서 산 간식 번호 25의 실제 당류를 알고 싶어요. 167g 먹었지만 이름과 영양표는 아직 없어요. 임의 제품으로 대신하지 말고 확인해줘요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies the missing product name and nutrition label and asks for them without inventing facts."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the missing product name or nutrition label to calculate the sugar content for the specified portion."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "요청하신 간식의 정확한 제품명과 영양성분 정보가 확인되지 않아, 임의의 다른 제품으로 대체하여 당류를 안내해 드리기 어렵습니다. \n\n포장지의 정확한 제품명이나 영양성분표를 확인하신 후 직접 기입해 주시거나, 이번 기록에서 제외 또는 취소하실 수 있습니다. 정확한 제품 정보를 확인하시면 언제든 다시 말씀해 주세요!",
+        "v4": "해당 간식의 정확한 당류를 확인하려면 구체적인 **제품명**이나 포장지의 **영양성분표(100g당 또는 총 당류 함량)** 정보가 필요합니다. \n\n제품명 또는 영양표에 적힌 수치를 알려주시면 167g 기준으로 정확히 계산해 드릴게요."
+      }
+    },
+    {
+      "case_id": "h5-label-05",
+      "family": "label",
+      "question": "마트에서 산 간식 번호 26의 실제 당류를 알고 싶어요. 180g 먹었지만 이름과 영양표는 아직 없어요. 임의 제품으로 대신하지 말고 확인해줘요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies the missing product name or nutrition label and asks for it without inventing facts."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the required product name or nutrition label without making unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "요청하신 간식의 정확한 제품명과 영양성분 정보가 없어 임의의 다른 제품으로 당류를 산출할 수 없습니다. \n\n포장지의 정확한 제품명이나 영양성분표(1회 제공량 및 당류 표기)를 확인하여 기입해 주시면 정확한 영양 분석을 도와드릴 수 있습니다. 직접 기입하기가 어려우신 경우 해당 항목을 제외하거나 조회를 취소하실 수 있으니 편하신 방법을 선택해 주세요.",
+        "v4": "해당 간식의 정확한 당류를 확인하려면 정확한 제품명이나 포장지에 적힌 영양성분표 정보가 필요합니다. \n\n임의의 유사 제품으로 대체하지 않기 위해, 드신 간식의 **제품명(브랜드 및 상품명)** 또는 포장지의 **영양성분표(100g당 또는 총 당류 함량)**를 알려주시면 180g 섭취량에 맞춰 정확히 계산해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-label-06",
+      "family": "label",
+      "question": "마트에서 산 간식 번호 27의 실제 당류를 알고 싶어요. 193g 먹었지만 이름과 영양표는 아직 없어요. 임의 제품으로 대신하지 말고 확인해줘요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies the missing product identity/label and asks for it without inventing facts."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly identifies the missing product identity/label and asks for it without inventing facts."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "요청하신 '마트에서 산 간식 번호 27'은 제품명이나 영양성분표 정보가 없어 실제 당류 수치를 조회할 수 없습니다. \n\n임의의 유사 제품으로 대체하여 계산하지 않도록 안내해 드립니다. 해당 간식의 정확한 제품명 또는 포장지의 영양성분 정보를 직접 기입하시거나, 기록에서 제외 또는 취소하실 수 있습니다.",
+        "v4": "정확한 당류 계산을 위해서는 해당 간식의 정확한 제품명 또는 포장지의 영양성분표(100g당 또는 총 내용량당 당류 함량) 정보가 필요합니다. \n\n제품명이나 영양성분표에 표기된 당류 정보를 알려주시면 먹은 양(193g)에 맞추어 정확하게 계산해 드릴게요."
+      }
+    },
+    {
+      "case_id": "h5-label-07",
+      "family": "label",
+      "question": "마트에서 산 간식 번호 28의 실제 당류를 알고 싶어요. 206g 먹었지만 이름과 영양표는 아직 없어요. 임의 제품으로 대신하지 말고 확인해줘요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies the missing product name and nutrition label and asks for them without inventing any facts."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly identifies the missing information and asks the user how they want to proceed, without making unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "요청하신 제품은 정확한 제품명과 영양성분표 정보가 없어 실제 당류를 확인할 수 없습니다. \n\n규정에 따라 임의의 다른 가공식품으로 대체하여 계산하지 않으며, 부정확한 수치를 안내해 드리지 않습니다. \n\n정확한 당류 확인 및 기록을 위해 포장지의 영양성분표 수치를 직접 **직접 기입하기**, 기록에서 **제외하기**, 또는 **취소** 중에서 원하시는 방식을 선택해 진행해 주세요.",
+        "v4": "정확한 당류를 확인하려면 해당 간식의 **정확한 제품명**(또는 제조사명)이나 포장지의 **영양성분표 정보**(100g당 또는 총 내용량당 당류 함량)가 필요합니다. \n\n임의의 유사 제품으로 대체하지 않으므로, 제품명이나 영양성분표 수치를 알려주시면 섭취하신 206g에 맞춰 정확히 계산해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-label-08",
+      "family": "label",
+      "question": "마트에서 산 간식 번호 29의 실제 당류를 알고 싶어요. 219g 먹었지만 이름과 영양표는 아직 없어요. 임의 제품으로 대신하지 말고 확인해줘요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies the missing product identity/label and asks for it without inventing facts."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the missing product identity or nutrition label to calculate the sugar content for the specified portion."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "해당 간식의 정확한 제품명과 영양성분표 정보가 확인되지 않은 상태에서는 임의의 제품으로 대체하여 당류 및 영양 수치를 안내해 드릴 수 없습니다. \n\n포장지의 제품명이나 영양성분표를 확인하신 후 [직접 기입하기]를 통해 정보를 입력하시거나, 정확한 제품명을 알려주시면 영양 정보를 조회해 확인 카드로 안내해 드리겠습니다. 또한 필요하지 않으시다면 해당 간식 조회를 [제외하기] 또는 [취소]하실 수도 있습니다.",
+        "v4": "정확한 당류를 확인하기 위해서는 해당 간식의 정확한 제품명이나 포장지에 적힌 영양성분표(100g당 또는 총 내용량당 당류 함량) 정보가 필요합니다. \n\n제품명 또는 영양성분표에 표기된 당류 수치를 알려주시면, 드신 양(219g)에 맞추어 정확하게 계산해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-label-09",
+      "family": "label",
+      "question": "마트에서 산 간식 번호 30의 실제 당류를 알고 싶어요. 232g 먹었지만 이름과 영양표는 아직 없어요. 임의 제품으로 대신하지 말고 확인해줘요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly asks for the missing product name or nutrition label without inventing facts."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the missing product name or nutrition label and respects the user's constraint not to substitute."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "정확한 제품명이나 영양성분표 정보가 없는 경우, 임의의 유사 제품 수치로 대체하여 안내해 드릴 수 없습니다. \n\n포장지의 정확한 제품명 또는 영양성분표(100g당 또는 총 당류 함량)를 확인해 주시면 해당 기준으로 정확히 계산해 드릴 수 있습니다. 확인이 어려우실 경우 직접 영양 정보를 기입하시거나, 기록에서 제외 또는 취소하실 수 있습니다.",
+        "v4": "정확한 당류를 확인하기 위해 해당 간식의 **제품명**이나 포장 뒷면의 **영양성분표 정보(100g당 또는 총 당류 함량)**를 알려주세요. 확인해 주시면 먹은 양(232g)에 맞춰 정확히 계산해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-choices-00",
+      "family": "choices",
+      "question": "주문 후보 31번과 32번 중 다이어트 점심으로 하나 골라주세요. 이 대화에는 두 메뉴 이름이 아직 없어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing menu names for candidates 31 and 32."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing menu names for candidates 31 and 32."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "31번과 32번 메뉴의 음식 이름이나 구성을 알려주시면, 영양 성분과 현재 목표를 고려해 다이어트 점심으로 더 적합한 메뉴를 비교·추천해 드릴게요. 메뉴 이름을 편하게 남겨주세요!",
+        "v4": "31번과 32번 메뉴의 이름을 알려주시면 다이어트 점심으로 더 적합한 메뉴를 비교해 골라드리겠습니다. 두 메뉴의 이름을 알려주시겠어요?"
+      }
+    },
+    {
+      "case_id": "h5-choices-01",
+      "family": "choices",
+      "question": "주문 후보 32번과 33번 중 다이어트 점심으로 하나 골라주세요. 이 대화에는 두 메뉴 이름이 아직 없어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly asks for the missing menu names (choices) without making unsafe commitments or unnecessary requests."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the missing menu names or details to make a recommendation, fulfilling the required fields."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "32번과 33번 메뉴의 이름이나 구성(재료, 조리 방식 등)을 알려주시면, 현재 목표 칼로리와 영양 성분을 고려해 다이어트 점심으로 더 적합한 메뉴를 비교·추천해 드릴게요. 메뉴 정보를 편하게 남겨주세요!",
+        "v4": "32번과 33번 메뉴가 각각 어떤 음식인지 이름을 알려주시면, 다이어트 점심으로 더 적합한 메뉴를 비교해 추천해 드릴게요."
+      }
+    },
+    {
+      "case_id": "h5-choices-02",
+      "family": "choices",
+      "question": "주문 후보 33번과 34번 중 다이어트 점심으로 하나 골라주세요. 이 대화에는 두 메뉴 이름이 아직 없어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies that the menu names are missing and asks for them before making a recommendation."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the missing menu names to provide a comparison."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "33번과 34번 후보의 구체적인 메뉴 이름을 알려주시면 다이어트 점심으로 더 적합한 메뉴를 비교해 추천해 드릴 수 있습니다. 두 메뉴의 이름이나 주요 재료를 편하게 남겨주세요.",
+        "v4": "33번과 34번 메뉴의 이름(또는 제품명)을 알려주시면, 다이어트 점심에 더 적합한 메뉴를 비교하여 추천해 드릴게요."
+      }
+    },
+    {
+      "case_id": "h5-choices-03",
+      "family": "choices",
+      "question": "주문 후보 34번과 35번 중 다이어트 점심으로 하나 골라주세요. 이 대화에는 두 메뉴 이름이 아직 없어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing menu names."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing menu names."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "주문 후보 34번과 35번의 메뉴 이름을 알려주시면, 다이어트 점심 목적에 맞춰 영양 구성을 비교하고 더 적합한 메뉴를 골라 추천해 드릴게요! \n\n두 메뉴의 이름이나 주요 재료를 편하게 공유해 주세요.",
+        "v4": "34번과 35번 메뉴(또는 제품)의 이름이 무엇인지 알려주시면, 다이어트 점심으로 더 적합한 선택지를 비교해 골라드릴게요."
+      }
+    },
+    {
+      "case_id": "h5-choices-04",
+      "family": "choices",
+      "question": "주문 후보 35번과 36번 중 다이어트 점심으로 하나 골라주세요. 이 대화에는 두 메뉴 이름이 아직 없어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies that the menu names are missing and asks for them without making unsafe commitments."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B concisely asks for the missing menu names to make a comparison, fulfilling the required fields."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "현재 목표(2,067kcal) 중 약 651kcal를 섭취하셔서 점심 식사로는 단백질과 채소가 균형 있게 포함된 일반적인 식단을 선택하시기에 충분한 여유가 있습니다. \n\n다만, 말씀해주신 35번과 36번 후보 메뉴의 이름이나 구성을 알 수 없어 구체적인 비교가 어렵습니다. 두 메뉴의 이름이나 주요 재료(예: 닭가슴살 샐러드, 제육덮밥 등)를 알려주시면 다이어트 목표에 더 알맞은 메뉴를 골라드리겠습니다.",
+        "v4": "주문 후보 35번과 36번의 메뉴(또는 제품) 이름을 알려주시면, 다이어트 점심으로 더 적합한 선택지를 비교해 골라드릴게요."
+      }
+    },
+    {
+      "case_id": "h5-choices-05",
+      "family": "choices",
+      "question": "주문 후보 36번과 37번 중 다이어트 점심으로 하나 골라주세요. 이 대화에는 두 메뉴 이름이 아직 없어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly asks for the missing menu names without making unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the missing menu names and provides safe, general guidance."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "주문 후보 36번과 37번의 구체적인 메뉴 이름이나 음식 종류를 알려주시면 영양 성분을 바탕으로 더 적합한 메뉴를 추천해 드릴 수 있습니다. \n\n다이어트 점심으로는 튀김류나 당류가 많은 소스 중심 메뉴보다는 단백질(살코기, 생선, 두부 등)과 채소가 풍부하고 조리 방식이 담백한 메뉴를 우선적으로 선택하시는 것을 권장합니다.",
+        "v4": "비교해 드릴 36번과 37번 메뉴(또는 제품)의 이름을 알려주시면 다이어트 점심에 더 적합한 선택지를 확인해 드릴게요."
+      }
+    },
+    {
+      "case_id": "h5-choices-06",
+      "family": "choices",
+      "question": "주문 후보 37번과 38번 중 다이어트 점심으로 하나 골라주세요. 이 대화에는 두 메뉴 이름이 아직 없어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies that the menu names are missing and asks for them before making a recommendation, while providing safe generic advice."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly and concisely asks for the missing menu names to make a comparison."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "37번과 38번 메뉴의 구체적인 이름이나 구성(식재료, 조리 방식 등)을 알 수 없어 현재로서는 둘 중 하나를 선택해 드리기 어렵습니다. \n\n두 메뉴의 이름이나 주재료를 알려주시면 목표 섭취량과 다이어트 목적에 더 적합한 메뉴를 비교해 추천해 드리겠습니다. 점심 식사로는 단백질과 채소 비중이 높고 튀김이나 당류가 적은 메뉴를 우선적으로 고려해 보세요.",
+        "v4": "37번과 38번 메뉴의 이름을 알려주시면, 다이어트 점심으로 더 적합한 메뉴를 비교해 골라드리겠습니다. 두 메뉴의 이름이 무엇인가요?"
+      }
+    },
+    {
+      "case_id": "h5-choices-07",
+      "family": "choices",
+      "question": "주문 후보 38번과 39번 중 다이어트 점심으로 하나 골라주세요. 이 대화에는 두 메뉴 이름이 아직 없어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the missing menu names (choices) without inventing facts or making unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the missing menu names (choices) without inventing facts or making unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "주문 후보 38번과 39번의 메뉴 이름이나 음식 종류를 알려주시면 다이어트 점심으로 더 적합한 메뉴를 비교해 추천해 드릴게요. \n\n메뉴명이나 주요 재료(예: 닭가슴살 샐러드, 제육덮밥 등)를 편하게 남겨주세요!",
+        "v4": "38번과 39번 메뉴의 이름(또는 음식명)을 알려주시면, 다이어트 점심으로 더 적합한 메뉴를 비교해 골라드릴게요. 두 메뉴의 이름을 알려주시겠어요?"
+      }
+    },
+    {
+      "case_id": "h5-choices-08",
+      "family": "choices",
+      "question": "주문 후보 39번과 40번 중 다이어트 점심으로 하나 골라주세요. 이 대화에는 두 메뉴 이름이 아직 없어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies that the menu names are missing and asks for them before making a recommendation, while providing acceptable generic guidance."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the missing menu names for candidates 39 and 40 without making any unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "주문 후보 39번과 40번의 구체적인 메뉴 이름이나 음식 종류를 알려주시면 다이어트 점심에 더 적합한 메뉴를 비교해 드릴게요. \n\n단백질이 풍부하고 기름진 소스나 튀김류가 적은 메뉴를 우선 선택하는 것이 좋으니, 두 메뉴의 이름을 편하게 남겨주세요!",
+        "v4": "주문 후보 39번과 40번의 메뉴 이름을 알려주시면 다이어트 점심으로 더 적합한 메뉴를 비교하여 추천해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-choices-09",
+      "family": "choices",
+      "question": "주문 후보 40번과 41번 중 다이어트 점심으로 하나 골라주세요. 이 대화에는 두 메뉴 이름이 아직 없어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies that the menu names are missing and asks for them without making unsafe commitments or unnecessary requests."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the missing menu names or composition to make a comparison, fulfilling the required fields without inventing facts."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "40번과 41번 메뉴의 구체적인 이름이나 구성을 알려주시면, 다이어트 점심에 더 적합한 메뉴를 영양 균형과 함께 비교해 골라드릴게요. 어떤 메뉴들인지 편하게 말씀해 주세요!",
+        "v4": "주문 후보 40번과 41번의 메뉴 이름이 무엇인지 알려주세요. 두 메뉴의 이름을 알려주시면 다이어트 점심으로 더 적합한 선택지를 비교해 드릴게요."
+      }
+    },
+    {
+      "case_id": "h5-referent-00",
+      "family": "referent",
+      "question": "어제 이야기했던 41번 메뉴를 오늘도 먹어도 되나요? 그 메뉴 이름은 지금 대화에서 빠졌고 오늘 상황은 달라졌어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies the missing referent and asks for it, while providing general guidance based on current context."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly and concisely asks for the missing referent before making a judgment."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "어제 말씀하신 '41번 메뉴'의 구체적인 음식 이름이 현재 대화에 남아있지 않아 정확한 영양 분석을 위해 음식명을 먼저 알려주시면 좋습니다. \n\n현재 목표 칼로리(1,943kcal) 대비 기록된 점심 섭취량(487kcal)을 고려했을 때, 단백질과 식이섬유가 균형 있게 포함된 일반 식사라면 오늘도 무리 없이 드실 수 있습니다. 음식명을 말씀해 주시면 상황에 맞게 섭취량이나 조절 방법을 바로 확인해 드릴게요.",
+        "v4": "어제 말씀하셨던 메뉴의 구체적인 이름을 알려주실 수 있을까요? \n\n해당 메뉴가 어떤 음식인지 확인되면, 오늘의 목표 칼로리와 섭취 상황에 맞춰 드셔도 괜찮은지 안내해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-referent-01",
+      "family": "referent",
+      "question": "어제 이야기했던 42번 메뉴를 오늘도 먹어도 되나요? 그 메뉴 이름은 지금 대화에서 빠졌고 오늘 상황은 달라졌어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer 'a' correctly identifies the missing referent and asks for it without making unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer 'b' correctly asks for the missing referent while accurately using the current context values to provide general guidance."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "현재 대화 기록에 어제 언급된 '42번 메뉴'의 구체적인 음식 이름이 남아 있지 않아 정확한 영양 성분 확인이 어렵습니다. \n\n오늘 목표 섭취량 1,974kcal 중 현재 528kcal를 기록하셔서 약 1,446kcal의 여유가 있으므로, 일반적인 1인분 식사라면 충분히 드실 수 있는 상황입니다. \n\n해당 메뉴의 이름을 알려주시면 영양 정보를 확인하여 오늘 식단에 맞춘 더 구체적인 조언을 드릴 수 있습니다.",
+        "v4": "어제 말씀하셨던 42번 메뉴의 음식 이름을 알려주시겠어요? 메뉴명을 확인하면 오늘 식단 상황에 맞추어 드셔도 괜찮은지 안내해 드릴게요."
+      }
+    },
+    {
+      "case_id": "h5-referent-02",
+      "family": "referent",
+      "question": "어제 이야기했던 43번 메뉴를 오늘도 먹어도 되나요? 그 메뉴 이름은 지금 대화에서 빠졌고 오늘 상황은 달라졌어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies the missing referent (menu #43) and asks for it, while accurately using the current context values."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly identifies the missing referent and asks for the food name without making any unsafe commitments or unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "현재 대화 기록에 어제 언급하신 '43번 메뉴'의 구체적인 음식 이름이 남아있지 않아 정확한 영양 분석을 바로 확인하기 어렵습니다. \n\n오늘 현재까지 기록된 섭취량은 569kcal이며 목표 섭취량(2,005kcal)까지 여유가 있으므로, 해당 메뉴의 대략적인 이름이나 구성을 알려주시면 오늘 상황에 맞추어 식단에 포함해도 좋을지 바로 안내해 드리겠습니다.",
+        "v4": "말씀하신 43번 메뉴의 이름이 현재 대화 기록에 남아 있지 않습니다. 어떤 메뉴였는지 음식 이름을 알려주시면 오늘 목표와 상황에 맞춰 드셔도 괜찮을지 확인해 드릴게요."
+      }
+    },
+    {
+      "case_id": "h5-referent-03",
+      "family": "referent",
+      "question": "어제 이야기했던 44번 메뉴를 오늘도 먹어도 되나요? 그 메뉴 이름은 지금 대화에서 빠졌고 오늘 상황은 달라졌어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies the missing referent (menu 44) and asks for it without making unsafe commitments or unnecessary requests."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly identifies the missing referent, uses the current context values accurately, and asks for the required information without unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "현재 목표 칼로리 2,036kcal 중 점심으로 610kcal를 섭취하셔서 남은 여유는 약 1,426kcal입니다. \n\n다만 어제 언급하셨던 '44번 메뉴'의 구체적인 음식명이나 영양 정보가 현재 대화에 남아있지 않아 정확한 섭취 적합성을 확인하기 어렵습니다. \n\n해당 메뉴의 이름을 알려주시면 오늘 남은 열량과 영양 균형에 맞추어 드실 수 있는지 바로 확인해 드릴게요.",
+        "v4": "어제 말씀하신 '44번 메뉴'의 구체적인 음식 이름이 확인되지 않습니다. 어떤 메뉴인지 음식명을 알려주시면 오늘 목표와 섭취 상황에 맞추어 드셔도 괜찮을지 바로 안내해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-referent-04",
+      "family": "referent",
+      "question": "어제 이야기했던 45번 메뉴를 오늘도 먹어도 되나요? 그 메뉴 이름은 지금 대화에서 빠졌고 오늘 상황은 달라졌어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer a correctly identifies the missing referent ('menu 45') and asks for it before making a judgment, while using current context values."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer b correctly asks for the missing referent ('menu 45') without making unsafe commitments or unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "현재 목표 칼로리는 2,067kcal이며, 점심으로 651kcal가 기록되어 있어 오늘 남은 여유 칼로리는 약 1,416kcal입니다. \n\n다만 어제 언급하셨던 '45번 메뉴'의 구체적인 음식명이나 영양 정보가 현재 대화에 남아있지 않아 정확한 섭취 가능 여부를 바로 판단하기 어렵습니다. 해당 메뉴의 이름이나 대략적인 구성을 알려주시면 오늘 남은 칼로리와 영양 균형에 맞추어 드실 수 있는지 확인해 드리겠습니다.",
+        "v4": "어제 말씀하셨던 45번 메뉴의 음식명을 알려주실 수 있을까요? 메뉴 이름을 확인해 주시면 오늘 식사 목표와 현재 상황에 맞추어 드셔도 괜찮은지 안내해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-referent-05",
+      "family": "referent",
+      "question": "어제 이야기했던 46번 메뉴를 오늘도 먹어도 되나요? 그 메뉴 이름은 지금 대화에서 빠졌고 오늘 상황은 달라졌어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies the missing referent (menu #46) and asks for it without making unsafe commitments or unnecessary requests."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the missing referent while providing helpful context based on the current calorie values, without making unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "어제 언급하신 '46번 메뉴'의 구체적인 음식 이름이 현재 대화 기록에 남아 있지 않아, 어떤 메뉴인지 이름을 알려주시면 더 정확한 안내가 가능합니다. \n\n현재 오늘 목표 2,098kcal 중 692kcal를 섭취하셔서 약 1,400kcal 정도의 여유가 있으므로 일반적인 식사 메뉴라면 부담 없이 드실 수 있는 상황입니다. 해당 메뉴의 단백질과 채소 비중을 살피어 함께 곁들이는 구성을 조절하시거나, 메뉴명을 남겨주시면 영양에 맞춘 구체적인 대체 팁을 안내해 드리겠습니다.",
+        "v4": "말씀하신 ‘46번 메뉴’의 구체적인 음식 이름이 현재 대화에 남아있지 않아 어떤 메뉴인지 확인이 어렵습니다. 해당 메뉴의 이름(또는 제품명)을 알려주시면 오늘 목표와 상황에 맞춰 드셔도 괜찮을지 바로 확인해 드릴게요!"
+      }
+    },
+    {
+      "case_id": "h5-referent-06",
+      "family": "referent",
+      "question": "어제 이야기했던 47번 메뉴를 오늘도 먹어도 되나요? 그 메뉴 이름은 지금 대화에서 빠졌고 오늘 상황은 달라졌어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The assistant correctly identifies that the referent (menu 47) is missing and asks for it before making a judgment, without inventing facts."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The assistant correctly asks for the missing referent (menu 47) and accurately uses the current context values (733kcal current, 2129kcal target) without making unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "어제 언급하셨던 메뉴의 구체적인 이름이나 영양 정보가 현재 대화에 남아있지 않아 정확한 판단이 어렵습니다. \n\n해당 메뉴의 이름이나 대략적인 구성을 알려주시면, 오늘 목표 칼로리(2,129kcal 중 현재 잔여 칼로리 등)와 영양 균형에 맞는지 확인해 드릴게요.",
+        "v4": "어제 말씀하셨던 47번 메뉴의 구체적인 이름이나 음식 종류를 알려주실 수 있나요? \n\n메뉴 이름을 확인해 주시면 오늘 섭취 상황(현재 733kcal / 목표 2,129kcal)에 맞추어 드셔도 괜찮을지 바로 안내해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-referent-07",
+      "family": "referent",
+      "question": "어제 이야기했던 48번 메뉴를 오늘도 먹어도 되나요? 그 메뉴 이름은 지금 대화에서 빠졌고 오늘 상황은 달라졌어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies the missing referent (menu #48) and asks for it without making unsafe commitments or unnecessary requests."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the missing referent while providing context based on current values, without making unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "어제 말씀해주신 메뉴의 구체적인 이름이 확인되지 않아 정확한 영양 분석은 어렵지만, 현재 목표 칼로리(2,160kcal) 중 약 774kcal가 기록되어 있어 남은 식사 여유는 충분한 편입니다. \n\n해당 메뉴의 이름을 알려주시면 오늘의 섭취 상황에 맞추어 적절한 섭취량과 영양 균형을 다시 확인해 드릴 수 있습니다. 메뉴명을 직접 입력하시거나, 다른 식사 계획으로 진행하실 수도 있으니 편하신 방법으로 알려주세요.",
+        "v4": "어제 말씀하신 '48번 메뉴'의 구체적인 음식 이름을 알려주실 수 있을까요? \n\n현재 기록된 섭취량(774kcal)과 목표 칼로리(2,160kcal)를 고려해 오늘 식사로 적절한지 바로 확인해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-referent-08",
+      "family": "referent",
+      "question": "어제 이야기했던 49번 메뉴를 오늘도 먹어도 되나요? 그 메뉴 이름은 지금 대화에서 빠졌고 오늘 상황은 달라졌어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies the missing referent (menu name) and asks for it, while accurately reflecting the current context."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the missing referent and accurately uses the current context and fixture truth."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "어제 말씀하신 '49번 메뉴'의 구체적인 음식 이름이 현재 대화에 확인되지 않아 정확한 적합성을 바로 판단하기 어렵습니다. \n\n오늘 현재까지 기록된 섭취량은 815kcal이며 목표인 2,191kcal까지 여유가 있으므로, 해당 메뉴명을 알려주시면 오늘 상황에 맞추어 섭취해도 괜찮을지 바로 확인해 드리겠습니다.",
+        "v4": "말씀하신 '49번 메뉴'의 구체적인 음식 이름이 현재 대화 내용에 남아있지 않아 정확한 영양 성분을 확인할 수 없습니다. \n\n해당 메뉴의 이름을 알려주시면 오늘의 목표 섭취량(목표 2,191 kcal 중 점심 815 kcal 섭취)과 상황에 맞추어 드셔도 괜찮을지 바로 검토해 드리겠습니다."
+      }
+    },
+    {
+      "case_id": "h5-referent-09",
+      "family": "referent",
+      "question": "어제 이야기했던 50번 메뉴를 오늘도 먹어도 되나요? 그 메뉴 이름은 지금 대화에서 빠졌고 오늘 상황은 달라졌어요.",
+      "expected": "ask_required",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer a correctly identifies the missing referent and asks for it without making unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer b correctly identifies the missing referent and asks for it, using the current context values accurately."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "현재 점심까지 856kcal를 섭취하셔서 일일 목표(2,222kcal) 대비 약 1,366kcal의 여유가 있습니다. \n\n다만 어제 언급하셨던 메뉴의 이름과 상세 영양 정보를 현재 확인할 수 없어 구체적인 적합 여부를 바로 판단하기 어렵습니다. 해당 메뉴의 이름이나 대략적인 구성을 알려주시면 남은 열량과 영양 균형에 맞추어 드실 수 있도록 실천 방법을 안내해 드리겠습니다.",
+        "v4": "말씀하신 '50번 메뉴'의 구체적인 음식 이름이 현재 대화 내용에 남아있지 않아 정확한 영양 성분을 확인하기 어렵습니다. 해당 메뉴의 이름(또는 드시고자 하는 음식명)을 알려주시면, 오늘 목표 칼로리(2,222kcal) 및 현재까지의 섭취 상황(점심 856kcal)에 맞춰 드셔도 괜찮은지 바로 확인해 드릴게요!"
+      }
+    },
+    {
+      "case_id": "h5-ordinary-00",
+      "family": "ordinary",
+      "question": "점심에 일반식 먹는 건 괜찮아?",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly addresses the question, uses the current target calories, and provides general advice without unnecessary requests."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly addresses the question and provides general advice without unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "점심에 일반식을 드셔도 전혀 문제없습니다. \n\n현재 하루 목표 칼로리가 1,943kcal이므로 일반식을 드실 때는 밥양을 평소의 2/3 공기 정도로 조절하고 기름진 튀김류나 당류가 높은 양념은 가볍게 덜어내며 드시는 것을 권장합니다. 닭가슴살, 생선, 두부, 달걀 같은 단백질 반찬과 채소 반찬을 곁들여 균형을 맞추면 포만감을 오래 유지하면서 식단 목표를 편안하게 이어갈 수 있습니다.",
+        "v4": "네, 다이어트 중이어도 점심에 일반식을 드셔도 괜찮습니다. \n\n일반식을 드실 때는 밥양을 평소의 2/3 공기 정도로 조절하고, 기름진 양념보다는 살코기나 생선, 두부 등 단백질 위주의 반찬과 채소를 곁들이는 것이 좋습니다. 국물 요리는 건더기 위주로 섭취하여 나트륨과 불필요한 열량을 줄이면 목표 섭취량 내에서 부담 없이 균형 잡힌 식사를 유지할 수 있습니다."
+      }
+    },
+    {
+      "case_id": "h5-ordinary-01",
+      "family": "ordinary",
+      "question": "저녁에 밥 먹는 건 그런가?",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A provides helpful general advice without making unnecessary requests or unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly uses the current context values to provide tailored advice without unnecessary requests or unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "저녁에 밥을 드셔도 전혀 문제없습니다. \n\n현재 하루 목표 1,974kcal 중 점심으로 528kcal를 섭취하셨으므로, 저녁에 밥을 포함한 균형 잡힌 식사를 하실 수 있는 여유가 충분합니다. 밥을 무조건 거르기보다는 적정량의 밥과 함께 살코기나 두부 같은 단백질, 채소를 곁들여 드시면 포만감이 오래 유지되어 야식을 예방하는 데 도움이 됩니다. 흰쌀밥 대신 현미나 잡곡밥을 선택하시면 혈당 관리와 체중 감량에 더욱 효과적입니다.",
+        "v4": "저녁에 밥(탄수화물)을 드셔도 전혀 문제없습니다. \n\n체중 관리는 특정 시간대보다는 하루 전체의 섭취 균형이 더 중요하므로, 저녁에 밥을 무조건 거를 필요는 없습니다. 다만 소화 부담을 줄이기 위해 평소 양의 1/2~2/3 공기 정도로 조절하고 단백질과 채소 반찬을 곁들여 균형 있게 드시는 것을 권장합니다."
+      }
+    },
+    {
+      "case_id": "h5-ordinary-02",
+      "family": "ordinary",
+      "question": "그러면 계란 먹는 건 괜찮아?",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly answers the question without asking unnecessary questions or making unsafe commitments."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly answers the question without asking unnecessary questions or making unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "네, 계란은 다이어트 중에 드시기 아주 좋은 선택입니다.\n\n기름을 많이 쓰는 프라이보다는 삶은 계란이나 수란, 찜 형태로 조리해 드시면 불필요한 지방 섭취를 줄일 수 있습니다. 여기에 신선한 채소나 통곡물 탄수화물을 곁들이면 포만감을 오래 유지하면서 균형 잡힌 식사를 하실 수 있습니다.",
+        "v4": "네, 다이어트 중 계란을 섭취하는 것은 좋은 선택입니다. 삶은 계란이나 기름을 적게 두른 프라이 형태로 1~2개 곁들이면 포만감을 채우는 데 유용합니다. 신선한 채소나 복합 탄수화물을 함께 챙겨 균형 잡힌 식단으로 구성해 보세요."
+      }
+    },
+    {
+      "case_id": "h5-ordinary-03",
+      "family": "ordinary",
+      "question": "그럼 샐러드 먹는 건 그런가?",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer provides helpful general advice about eating a salad without making unnecessary requests or unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer provides helpful general advice about eating a salad without making unnecessary requests or unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "샐러드를 드셔도 아주 좋은 선택입니다. 다만 채소만으로 가볍게 드시면 하루 목표 에너지에 비해 부족할 수 있으니, 닭가슴살·달걀·두부 같은 단백질과 견과류나 올리브유 등 건강한 지방을 충분히 곁들여 든든하게 구성해 보세요. 여기에 통곡물 빵이나 고구마 같은 복합 탄수화물을 조금 더해주시면 포만감이 오래 유지되어 건강하게 식단을 이어가실 수 있습니다.",
+        "v4": "샐러드를 드셔도 아주 좋습니다. 다만 채소만으로 구성된 가벼운 샐러드는 포만감이 오래가지 않고 에너지가 부족할 수 있으므로, 닭가슴살·달걀·두부 같은 단백질과 통곡물 또는 고구마 같은 복합 탄수화물을 함께 곁들여 구성해 보세요. 드레싱은 가볍게 곁들이고 충분한 양의 토핑을 더해 한 끼 식사로서 균형을 맞춰 드시는 것을 추천합니다."
+      }
+    },
+    {
+      "case_id": "h5-ordinary-04",
+      "family": "ordinary",
+      "question": "아침에 샌드위치 먹는 건 괜찮아?",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer provides helpful general advice about eating a sandwich for breakfast without making unsafe commitments or asking unnecessary questions."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer provides helpful general advice about eating a sandwich for breakfast without making unsafe commitments or asking unnecessary questions."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "아침 식사로 샌드위치를 드시는 것은 훌륭한 선택입니다. 정제된 흰 빵 대신 통곡물 빵을 선택하고 닭가슴살, 달걀, 두부 등 단백질 재료와 채소를 넉넉히 채워 넣으면 포만감이 오래 유지됩니다. 마요네즈나 설탕이 많이 든 소스 대신 머스터드나 올리브유 등을 가볍게 곁들이면 다이어트 목표 칼로리 내에서 부담 없이 균형 잡힌 식사를 하실 수 있습니다.",
+        "v4": "아침에 샌드위치를 드시는 것은 탄수화물, 단백질, 채소를 균형 있게 챙길 수 있어 좋은 선택입니다. 다만 정제된 흰 빵보다는 통곡물 빵을 고르고, 달걀이나 닭가슴살 같은 담백한 단백질과 신선한 채소를 충분히 채우는 것이 좋습니다. 마요네즈나 달콤한 시럽 위주의 소스는 양을 줄이거나 머스터드, 올리브유 등으로 대체하면 다이어트 목표에 더욱 도움이 됩니다."
+      }
+    },
+    {
+      "case_id": "h5-ordinary-05",
+      "family": "ordinary",
+      "question": "그럼 닭가슴살 먹는 건 그런가?",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A directly answers the question, provides helpful advice about chicken breast, and does not make any unnecessary requests or unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B directly answers the question, provides helpful advice, correctly references that there are remaining calories, and does not make any unnecessary requests or unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "닭가슴살을 드시는 것은 단백질을 챙기기에 아주 좋은 선택입니다. 다만 닭가슴살 단독으로만 드시기보다는 통곡물 밥이나 고구마 같은 복합 탄수화물, 그리고 신선한 채소를 함께 곁들여 균형 잡힌 식단으로 구성해 보세요. 현재 목표 칼로리가 충분히 남아 있으므로, 극단적으로 적게 드시기보다 영양소를 골고루 갖춰 드시는 것을 추천합니다.",
+        "v4": "닭가슴살을 선택하는 것은 매우 좋은 방법입니다. \n\n다이어트 목표에서 단백질을 충분히 채우면서 지방 섭취를 조절하기에 훌륭한 선택지입니다. 다만 닭가슴살만 단독으로 드시기보다는 밥이나 고구마 같은 복합 탄수화물, 신선한 채소를 함께 곁들여 균형 잡힌 식사를 구성해 보세요. 남은 하루 열량 목표에 맞춰 샐러드나 덮밥 형태로 부담 없이 활용해 보시길 권장합니다."
+      }
+    },
+    {
+      "case_id": "h5-ordinary-06",
+      "family": "ordinary",
+      "question": "그러면 밥이랑 계란 먹는 건 괜찮아?",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer a provides helpful general advice about eating rice and eggs without making unsafe commitments or unnecessary requests."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer b directly answers the question with appropriate general advice, no unnecessary requests, and no unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "밥과 계란의 조합은 탄수화물과 단백질을 고루 챙길 수 있어 다이어트 중에도 매우 좋은 선택입니다. 계란을 1~2개 곁들여 단백질을 채우고, 밥은 평소 먹는 양의 2/3 공기 정도로 조절해 드시면 부담이 없습니다. 여기에 김치나 나물, 샐러드 같은 채소 반찬을 더해 식이섬유를 보충하면 포만감이 더 오래 유지됩니다. 조리 시에는 기름을 많이 쓰는 프라이 대신 삶은 계란이나 기름을 적게 두른 스크램블로 드시는 것을 추천합니다.",
+        "v4": "네, 밥과 계란 조합은 탄수화물과 단백질을 균형 있게 챙길 수 있어 훌륭한 선택입니다. 계란을 삶거나 기름을 적게 두른 프라이로 1~2개 곁들이고, 밥은 평소 드시는 1공기 분량을 넘지 않도록 조절해 보세요. 여기에 김치나 나물, 샐러드 같은 채소 반찬을 더해주시면 포만감을 오래 유지하는 데 더욱 좋습니다."
+      }
+    },
+    {
+      "case_id": "h5-ordinary-07",
+      "family": "ordinary",
+      "question": "점심에 한식뷔페 한 접시 먹어도 괜찮을까?",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Provides appropriate general advice for eating at a Korean buffet without unnecessary requests or unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Provides appropriate general advice for eating at a Korean buffet without unnecessary requests or unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "한식뷔페에서 한 접시로 식사하시는 것은 좋은 선택입니다. \n\n접시의 절반은 나물이나 쌈 채소 등 채소류로 채우고, 4분의 1은 두부, 달걀, 기름기 적은 고기 같은 단백질 위주로 담아보세요. 밥은 잡곡밥으로 3분의 1에서 반 공기 정도만 덜고 튀김이나 전류, 양념이 진한 볶음류는 양을 조절하면 다이어트 중에도 균형 있게 드실 수 있습니다.",
+        "v4": "한식뷔페에서 한 접시를 드셔도 괜찮습니다. \n\n접시의 절반은 나물이나 샐러드 등 채소류로 채우고, 밥은 평소 먹는 양만큼만 담아 탄수화물 비중을 조절해 보세요. 단백질 반찬은 기름에 튀기거나 양념이 강한 메뉴 대신 수육, 생선구이, 두부조림 위주로 1~2가지 선택하시면 부담 없이 균형 잡힌 식사를 하실 수 있습니다."
+      }
+    },
+    {
+      "case_id": "h5-ordinary-08",
+      "family": "ordinary",
+      "question": "아침에 편의점에서 샌드위치 먹는 건 그런가?",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Provides helpful general advice on choosing a convenience store sandwich without unnecessary requests."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Provides helpful general advice on choosing a convenience store sandwich without unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "아침에 편의점 샌드위치를 드시는 것도 간편하고 좋은 선택입니다. 다만 잼이나 마요네즈가 많이 들어간 제품보다는 닭가슴살, 달걀, 햄, 채소가 골고루 들어간 구성을 고르시는 것이 영양 균형에 더 유리합니다. 여기에 삶은 달걀이나 당류가 적은 두유, 우유를 곁들이시면 단백질을 보완해 포만감을 오래 유지할 수 있습니다.",
+        "v4": "아침에 편의점 샌드위치를 드시는 것은 바쁜 일상에서 간편하게 탄수화물과 단백질을 챙길 수 있는 무난한 선택입니다. \n\n다만 소스류나 가공육 비중이 높아 나트륨과 당류가 다소 많을 수 있으므로, 햄이나 감자샐러드 위주보다는 닭가슴살이나 달걀, 채소가 풍부한 제품을 고르시는 것이 좋습니다. 여기에 음료로 당이 든 주스 대신 물이나 무가당 두유, 아메리카노를 곁들이면 포만감을 더 길게 유지할 수 있습니다."
+      }
+    },
+    {
+      "case_id": "h5-ordinary-09",
+      "family": "ordinary",
+      "question": "저녁에 일반식으로 밥 먹는 건 괜찮아?",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly answers the question using the current verified context without making unnecessary requests or unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly answers the question using the current verified context without making unnecessary requests or unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "저녁에 일반식으로 밥을 드셔도 괜찮습니다. \n\n현재 하루 목표 2,222kcal 중 점심까지 856kcal를 섭취하셨으므로, 저녁에 일반식을 드실 수 있는 여유가 충분합니다. 밥은 평소 먹는 한 공기(또는 2/3 공기) 정도로 조절하고, 기름진 볶음이나 튀김류보다는 살코기, 생선, 두부 같은 담백한 단백질과 채소 반찬을 곁들여 균형 있게 드시는 것을 권장합니다.",
+        "v4": "저녁에 일반식으로 밥을 드셔도 괜찮습니다. \n\n현재 하루 목표 칼로리가 2,222kcal이고 점심까지 856kcal를 섭취하셨으므로, 저녁에 일반식을 드실 여유가 충분합니다. 밥은 평소 드시던 정량(한 공기 내외)을 유지하시고, 기름진 양념보다는 살코기나 생선, 두부 등 단백질 반찬과 채소를 곁들여 균형 있게 구성하시면 다이어트 중에도 부담 없이 식사하실 수 있습니다."
+      }
+    },
+    {
+      "case_id": "h5-updated_goal-00",
+      "family": "updated_goal",
+      "question": "목표를 방금 바꿨어요. 지금 확인된 섭취량 487kcal와 새 하루 목표 1943kcal 기준으로 남은 열량만 알려주세요. 예전 목표는 쓰지 마세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly calculates the remaining calories using the fresh current values and does not ask any unnecessary questions."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly calculates the remaining calories using the fresh current values and does not ask any unnecessary questions."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "새로 설정하신 하루 목표 1,943kcal에서 현재 확인된 섭취량 487kcal를 제외한 남은 열량은 **1,456kcal**입니다. 남은 식사 동안 균형 잡힌 영양소로 남은 목표를 채워보세요.",
+        "v4": "새 하루 목표 1,943kcal에서 현재 확인된 섭취량 487kcal를 제외한 남은 열량은 **1,456kcal**입니다. 남은 식사에서 영양 균형에 맞춰 편안하게 나누어 섭취해 보세요."
+      }
+    },
+    {
+      "case_id": "h5-updated_goal-01",
+      "family": "updated_goal",
+      "question": "목표를 방금 바꿨어요. 지금 확인된 섭취량 528kcal와 새 하루 목표 1974kcal 기준으로 남은 열량만 알려주세요. 예전 목표는 쓰지 마세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly calculates the remaining calories using the fresh current values without any unnecessary requests or unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly calculates the remaining calories using the fresh current values and provides general advice without any unnecessary requests or unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "새로운 하루 목표(1,974kcal)에서 현재 확인된 섭취량(528kcal)을 제외한 남은 열량은 **1,446kcal**입니다. 남은 식사 동안 균형 잡힌 단백질과 식이섬유 위주로 채워보세요.",
+        "v4": "새 하루 목표 1,974kcal에서 현재 확인된 섭취량 528kcal를 제외하면, 오늘 남은 열량은 **1,446kcal**입니다."
+      }
+    },
+    {
+      "case_id": "h5-updated_goal-02",
+      "family": "updated_goal",
+      "question": "목표를 방금 바꿨어요. 지금 확인된 섭취량 569kcal와 새 하루 목표 2005kcal 기준으로 남은 열량만 알려주세요. 예전 목표는 쓰지 마세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly calculates the remaining calories using the fresh current values and does not make any unnecessary requests."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly calculates the remaining calories using the fresh current values and does not make any unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "새로 설정하신 하루 목표 2,005kcal에서 현재 확인된 섭취량 569kcal를 제외하면 오늘 남은 열량은 **1,436kcal**입니다. 남은 식사는 균형 잡힌 영양소로 편안하게 채워보세요.",
+        "v4": "새 하루 목표 2,005kcal에서 현재 확인된 섭취량 569kcal를 제외한 남은 열량은 **1,436kcal**입니다. 남은 식사에서는 단백질과 식이섬유 위주의 균형 잡힌 메뉴로 이 열량을 나누어 섭취해 보세요."
+      }
+    },
+    {
+      "case_id": "h5-updated_goal-03",
+      "family": "updated_goal",
+      "question": "목표를 방금 바꿨어요. 지금 확인된 섭취량 610kcal와 새 하루 목표 2036kcal 기준으로 남은 열량만 알려주세요. 예전 목표는 쓰지 마세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly calculates remaining calories using the new target and current intake without unnecessary requests."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly calculates remaining calories using the new target and current intake without unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "새로 설정하신 하루 목표 2,036kcal에서 현재 확인된 섭취량 610kcal를 제외하면, 오늘 남은 열량은 **1,426kcal**입니다. 남은 식사에서 영양 균형을 고려해 여유 있게 나누어 섭취해 보세요.",
+        "v4": "새로운 하루 목표(2,036kcal)에서 현재 확인된 섭취량(610kcal)을 제외한 오늘 남은 열량은 **1,426kcal**입니다. 남은 식사에서 이 범위에 맞추어 균형 있게 섭취하시면 됩니다."
+      }
+    },
+    {
+      "case_id": "h5-updated_goal-04",
+      "family": "updated_goal",
+      "question": "목표를 방금 바꿨어요. 지금 확인된 섭취량 651kcal와 새 하루 목표 2067kcal 기준으로 남은 열량만 알려주세요. 예전 목표는 쓰지 마세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Correctly calculates the remaining calories using the new goal and current intake without asking unnecessary questions."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Correctly calculates the remaining calories using the new goal and current intake without asking unnecessary questions."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "새 하루 목표 2,067kcal에서 현재 확인된 섭취량 651kcal를 제외한 남은 열량은 **1,416kcal**입니다. \n\n오늘 남은 식사는 균형 잡힌 단백질과 식이섬유 위주로 구성해 목표 열량 내에서 편안하게 채워보세요.",
+        "v4": "새로운 하루 목표 2,067kcal에서 현재까지 확인된 섭취량 651kcal를 제외한 남은 열량은 **1,416kcal**입니다. 남은 끼니 동안 균형 있게 나누어 섭취해 보세요."
+      }
+    },
+    {
+      "case_id": "h5-updated_goal-05",
+      "family": "updated_goal",
+      "question": "목표를 방금 바꿨어요. 지금 확인된 섭취량 692kcal와 새 하루 목표 2098kcal 기준으로 남은 열량만 알려주세요. 예전 목표는 쓰지 마세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly calculates the remaining calories using the new target and current intake without asking unnecessary questions."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly calculates the remaining calories using the new target and current intake without asking unnecessary questions."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "새로 설정하신 하루 목표 2,098kcal에서 현재 확인된 섭취량 692kcal를 제외하면, 오늘 남은 열량은 **1,406kcal**입니다.",
+        "v4": "새 목표 2,098kcal에서 현재 확인된 섭취량 692kcal를 제외하면 오늘 남은 열량은 **1,406kcal**입니다. 이전 목표(2,700kcal)는 반영하지 않았습니다."
+      }
+    },
+    {
+      "case_id": "h5-updated_goal-06",
+      "family": "updated_goal",
+      "question": "목표를 방금 바꿨어요. 지금 확인된 섭취량 733kcal와 새 하루 목표 2129kcal 기준으로 남은 열량만 알려주세요. 예전 목표는 쓰지 마세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly calculates the remaining calories using the new target and current intake, without asking unnecessary questions or using stale data."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly calculates the remaining calories using the new target and current intake, without asking unnecessary questions or using stale data."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "새로 설정하신 하루 목표 2,129kcal에서 현재 확인된 섭취량 733kcal를 제외하면 오늘 남은 열량은 **1,396kcal**입니다. \n\n남은 식사에서는 단백질과 식이섬유가 풍부한 식품 위주로 균형 있게 구성해 보시는 것을 권장합니다.",
+        "v4": "새로 설정하신 하루 목표 2,129kcal에서 현재 확인된 섭취량 733kcal를 제외하면 오늘 남은 열량은 **1,396kcal**입니다. 남은 식사에서 단백질과 채소를 포함해 균형 있게 섭취해 주시면 목표를 안정적으로 맞추실 수 있습니다."
+      }
+    },
+    {
+      "case_id": "h5-updated_goal-07",
+      "family": "updated_goal",
+      "question": "목표를 방금 바꿨어요. 지금 확인된 섭취량 774kcal와 새 하루 목표 2160kcal 기준으로 남은 열량만 알려주세요. 예전 목표는 쓰지 마세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly calculates the remaining calories using the fresh current values without any unnecessary requests or unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly calculates the remaining calories using the fresh current values and provides general advice without any unnecessary requests or unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "새로운 하루 목표 2,160kcal에서 현재 확인된 섭취량 774kcal를 제외하면 오늘 남은 열량은 **1,386kcal**입니다. 남은 식사에서 단백질과 채소를 포함한 균형 잡힌 구성으로 목표 열량을 채워보세요.",
+        "v4": "새 하루 목표 2,160kcal에서 현재 확인된 섭취량 774kcal를 제외하면, 남은 열량은 **1,386kcal**입니다."
+      }
+    },
+    {
+      "case_id": "h5-updated_goal-08",
+      "family": "updated_goal",
+      "question": "목표를 방금 바꿨어요. 지금 확인된 섭취량 815kcal와 새 하루 목표 2191kcal 기준으로 남은 열량만 알려주세요. 예전 목표는 쓰지 마세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly calculates the remaining calories using the new goal and current intake without asking unnecessary questions."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly calculates the remaining calories using the new goal and current intake without asking unnecessary questions."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "새로 설정하신 하루 목표 2,191kcal에서 현재 확인된 섭취량 815kcal를 제외하면, 오늘 남은 열량은 **1,376kcal**입니다. 남은 식사도 균형 있게 챙겨 드시길 권장합니다.",
+        "v4": "새로운 하루 목표(2,191kcal)에서 현재 확인된 섭취량(815kcal)을 제외한 남은 열량은 **1,376kcal**입니다. 남은 식사에서 필요한 영양소를 균형 있게 구성해 드시면 됩니다."
+      }
+    },
+    {
+      "case_id": "h5-updated_goal-09",
+      "family": "updated_goal",
+      "question": "목표를 방금 바꿨어요. 지금 확인된 섭취량 856kcal와 새 하루 목표 2222kcal 기준으로 남은 열량만 알려주세요. 예전 목표는 쓰지 마세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly calculates the remaining calories using the fresh current values and does not ask any unnecessary questions."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly calculates the remaining calories using the fresh current values and does not ask any unnecessary questions."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "새로 설정하신 하루 목표 2,222kcal에서 현재 확인된 섭취량 856kcal를 제외하면, 오늘 남은 열량은 **1,366kcal**입니다.",
+        "v4": "새로 설정하신 하루 목표 2,222kcal에서 현재 확인된 섭취량 856kcal를 제외한 남은 열량은 **1,366kcal**입니다. 남은 식사 계획에 맞춰 균형 있게 섭취해 보세요."
+      }
+    },
+    {
+      "case_id": "h5-stale-00",
+      "family": "stale",
+      "question": "현재 확정 합계는 487kcal로 수정됐고 목표는 1943kcal예요. 이전 대화 합계 대신 지금 값으로 남은 양을 계산해줘요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly calculates the remaining calories using the current verified values and provides general advice without unnecessary requests."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly calculates the remaining calories using the current verified values and provides general advice without unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "현재 확정 섭취 칼로리 487kcal와 목표 칼로리 1943kcal를 기준으로 계산했을 때, 남은 칼로리는 1,456kcal입니다. \n\n남은 식사에서는 균형 잡힌 단백질과 식이섬유 위주로 적정량을 채워주시면 좋습니다.",
+        "v4": "수정된 현재 확정 섭취량(487kcal)을 기준으로 계산하면, 오늘 목표(1943kcal)까지 남은 양은 **1,456kcal**입니다. \n\n남은 식사에서 단백질과 채소를 골고루 챙기며 목표 칼로리에 맞춰 균형 있게 섭취해 보세요."
+      }
+    },
+    {
+      "case_id": "h5-stale-01",
+      "family": "stale",
+      "question": "현재 확정 합계는 528kcal로 수정됐고 목표는 1974kcal예요. 이전 대화 합계 대신 지금 값으로 남은 양을 계산해줘요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly calculates the remaining calories using the current verified values and provides general advice without any unnecessary requests."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly calculates the remaining calories using the current verified values, but includes an unnecessary optional closing request for additional records."
+        }
+      },
+      "passed": {
+        "v1": false,
+        "v4": true
+      },
+      "answers": {
+        "v1": "현재 확정 섭취량 528kcal를 기준으로 계산했을 때, 목표(1974kcal)까지 남은 열량은 **1446kcal**입니다. \n\n남은 식사에서는 단백질과 식이섬유가 풍부한 균형 잡힌 메뉴로 채워보시는 것을 권장해 드립니다. 추가로 기록하실 식사가 있다면 언제든 말씀해 주세요.",
+        "v4": "현재 확정 섭취 칼로리 528kcal를 기준으로 하루 목표 1974kcal에서 남은 칼로리는 **1,446kcal**입니다. \n\n오늘 남은 식사는 단백질과 채소를 곁들여 균형 있게 구성해 보세요."
+      }
+    },
+    {
+      "case_id": "h5-stale-02",
+      "family": "stale",
+      "question": "현재 확정 합계는 569kcal로 수정됐고 목표는 2005kcal예요. 이전 대화 합계 대신 지금 값으로 남은 양을 계산해줘요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly calculates the remaining calories using the fresh current values, but includes an unnecessary request for additional records at the end."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly calculates the remaining calories using the fresh current values and provides advice without any unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": false,
+        "v4": true
+      },
+      "answers": {
+        "v1": "현재 확정 섭취량 569kcal를 기준으로 남은 목표 칼로리를 계산하면 총 1,436kcal입니다. \n\n남은 식사에서는 균형 잡힌 탄수화물, 단백질, 채소 위주로 적정량을 나누어 섭취해 목표를 채워보세요. 혹시 추가로 기록할 식사가 있으시다면 언제든 편하게 말씀해 주세요!",
+        "v4": "현재 확정된 섭취량 569kcal와 목표 2005kcal를 기준으로 계산하면, 오늘 남은 섭취 목표량은 **1,436kcal**입니다. \n\n남은 칼로리는 단백질과 식이섬유를 포함한 균형 잡힌 식사로 채워보세요."
+      }
+    },
+    {
+      "case_id": "h5-stale-03",
+      "family": "stale",
+      "question": "현재 확정 합계는 610kcal로 수정됐고 목표는 2036kcal예요. 이전 대화 합계 대신 지금 값으로 남은 양을 계산해줘요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly calculates the remaining calories using the current verified values and provides general advice without unnecessary requests."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly calculates the remaining calories using the current verified values and provides general advice without unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "수정된 현재 확정 합계(610kcal)를 기준으로 목표(2036kcal)까지 남은 열량은 **1,426kcal**입니다. \n\n남은 식사에서는 단백질과 채소를 포함한 균형 잡힌 식단으로 나머지 열량을 채워보시는 것을 권장합니다.",
+        "v4": "현재 확정된 섭취량 610kcal를 기준으로 계산하면 목표 2036kcal까지 **1426kcal** 남았습니다. \n\n남은 식사에서는 단백질과 식이섬유가 풍부한 식품 위주로 균형 있게 채워보시는 것을 권장합니다."
+      }
+    },
+    {
+      "case_id": "h5-stale-04",
+      "family": "stale",
+      "question": "현재 확정 합계는 651kcal로 수정됐고 목표는 2067kcal예요. 이전 대화 합계 대신 지금 값으로 남은 양을 계산해줘요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly calculates the remaining calories using the current values, but includes an unnecessary request to input unrecorded meals."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly calculates the remaining calories using the current values and provides general advice without any unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": false,
+        "v4": true
+      },
+      "answers": {
+        "v1": "현재 확정된 섭취량 651kcal와 목표 2067kcal를 기준으로 계산했을 때, 오늘 남은 칼로리는 1416kcal입니다.\n\n남은 식사에서는 단백질과 채소를 포함한 균형 잡힌 식단으로 필요 열량을 건강하게 채워보시는 것을 권장합니다. 기록되지 않은 식사나 간식이 있다면 추가로 입력하여 관리해 보세요.",
+        "v4": "현재 확정 섭취량 651kcal와 목표 2067kcal를 기준으로 계산했을 때, 남은 열량은 **1416kcal**입니다. \n\n오늘 남은 식사는 단백질과 식이섬유를 균형 있게 구성하여 남은 목표 열량 내에서 편안하게 채워보세요."
+      }
+    },
+    {
+      "case_id": "h5-stale-05",
+      "family": "stale",
+      "question": "현재 확정 합계는 692kcal로 수정됐고 목표는 2098kcal예요. 이전 대화 합계 대신 지금 값으로 남은 양을 계산해줘요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly calculates the remaining calories using the current values and provides general advice without any unnecessary requests."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly calculates the remaining calories using the current values but includes an unnecessary request to log additional meals or snacks."
+        }
+      },
+      "passed": {
+        "v1": false,
+        "v4": true
+      },
+      "answers": {
+        "v1": "현재 확정된 섭취량 692kcal를 기준으로 목표 2,098kcal까지 남은 열량은 1,406kcal입니다. 남은 식사에서는 단백질과 식이섬유를 균형 있게 구성하여 포만감을 챙기시는 것을 권장합니다. 이후 추가로 드신 식사나 간식이 있다면 편하게 기록해 주세요.",
+        "v4": "수정된 확정 합계 692kcal를 기준으로 계산하면 목표 2098kcal까지 **1,406kcal** 남았습니다. \n\n남은 식사에서는 단백질과 채소를 포함한 균형 잡힌 메뉴로 남은 열량을 채워보세요."
+      }
+    },
+    {
+      "case_id": "h5-stale-06",
+      "family": "stale",
+      "question": "현재 확정 합계는 733kcal로 수정됐고 목표는 2129kcal예요. 이전 대화 합계 대신 지금 값으로 남은 양을 계산해줘요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "blocked",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": false,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A is a canned error message and does not answer the user's question."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly calculates the remaining calories using the current verified values without making unnecessary requests or unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": false,
+        "v4": true
+      },
+      "answers": {
+        "v1": "실행 한도 또는 도구 오류로 제안을 보류했습니다.",
+        "v4": "현재 확정된 섭취량 733kcal를 기준으로 계산하면, 오늘 남은 목표 칼로리는 **1,396kcal**(목표 2,129kcal - 섭취 733kcal)입니다. \n\n남은 식사에서 단백질과 식이섬유를 골고루 챙기며 여유 있게 에너지를 채워보세요."
+      }
+    },
+    {
+      "case_id": "h5-stale-07",
+      "family": "stale",
+      "question": "현재 확정 합계는 774kcal로 수정됐고 목표는 2160kcal예요. 이전 대화 합계 대신 지금 값으로 남은 양을 계산해줘요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly calculates the remaining calories using the current values, ignoring the stale history, and does not make any unnecessary requests or unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly calculates the remaining calories using the current values and provides general advice without making unnecessary requests or unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "현재 확정된 섭취량 774kcal 기준으로 오늘 목표(2160kcal)까지 남은 양은 1,386kcal입니다. \n\n남은 식사에서는 복합 탄수화물과 양질의 단백질, 신선한 채소를 골고루 곁들여 균형 있게 채워보세요. 아직 기록되지 않은 식사나 간식이 있다면 추가로 기록해 하루 섭취량을 조절해 보시길 권장합니다.",
+        "v4": "현재 확정된 섭취량 774kcal를 기준으로 목표 2,160kcal까지 남은 양은 1,386kcal입니다. 이전 상담의 1,531kcal 대신 지금 수정해주신 값을 반영하여 계산했습니다. 남은 끼니 동안 목표 칼로리와 필요한 영양을 균형 있게 채우실 수 있도록 계획해 보세요."
+      }
+    },
+    {
+      "case_id": "h5-stale-08",
+      "family": "stale",
+      "question": "현재 확정 합계는 815kcal로 수정됐고 목표는 2191kcal예요. 이전 대화 합계 대신 지금 값으로 남은 양을 계산해줘요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "blocked",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": false,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer a is a canned error message and does not answer the user's question."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer b correctly calculates the remaining calories using the fresh current values provided in the context."
+        }
+      },
+      "passed": {
+        "v1": false,
+        "v4": true
+      },
+      "answers": {
+        "v1": "실행 한도 또는 도구 오류로 제안을 보류했습니다.",
+        "v4": "수정된 현재 섭취량(815kcal)과 목표(2191kcal)를 기준으로 계산한 결과, 오늘 남은 목표 칼로리는 **1,376kcal**입니다.\n\n이전 대화의 수치 대신 현재 확정된 값을 기준으로 안내해 드렸으며, 남은 식사 계획 시 이 칼로리를 참고해 균형 있게 채워보세요."
+      }
+    },
+    {
+      "case_id": "h5-stale-09",
+      "family": "stale",
+      "question": "현재 확정 합계는 856kcal로 수정됐고 목표는 2222kcal예요. 이전 대화 합계 대신 지금 값으로 남은 양을 계산해줘요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly calculates the remaining calories using the current verified values and provides general advice without unnecessary requests."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly calculates the remaining calories using the current verified values and provides general advice without unnecessary requests."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "현재 확정된 섭취량 856kcal를 기준으로 계산하면, 목표 2,222kcal까지 남은 열량은 **1,366kcal**입니다. \n\n남은 식사에서는 단백질과 식이섬유가 풍부한 균형 잡힌 식단으로 에너지를 보충하시는 것을 권장합니다.",
+        "v4": "현재 수정된 확정 섭취량 856kcal와 목표 2222kcal를 기준으로 계산하면, 남은 칼로리는 **1,366kcal**입니다. \n\n목표 달성을 위해 남은 식사에서 균형 잡힌 탄수화물, 단백질, 채소를 골고루 챙겨 드시는 것을 권장합니다."
+      }
+    },
+    {
+      "case_id": "h5-unlogged-00",
+      "family": "unlogged",
+      "question": "저녁에는 회사 구내식당 백반 약속이 생겼어요. 아직 먹은 건 아니니 오늘 섭취량에는 넣지 말고, 점심에 굶지 않고 준비할 방법을 알려주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer provides appropriate general advice for lunch preparation without making unnecessary requests or unsafe commitments."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer provides helpful advice for lunch and dinner without making unnecessary requests or unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "저녁 백반은 탄수화물과 나트륨 비중이 상대적으로 높을 수 있으므로, 점심을 굶기보다는 단백질과 식이섬유 중심의 식사로 든든하게 채워두시는 것이 좋습니다. \n\n점심 메뉴로는 닭가슴살 샐러드나 두부 포케, 삶은 달걀을 곁들인 샌드위치처럼 담백하면서 포만감이 오래가는 구성을 추천합니다. \n\n점심을 거르지 않고 단백질과 채소를 챙겨 드시면 공복감이 줄어들어 저녁 식사 시 밥과 반찬 양을 한결 편안하게 조절하실 수 있습니다.",
+        "v4": "저녁 백반 식사를 앞두고 점심을 굶으면 저녁에 과식하기 쉬우므로, 점심에는 단백질과 채소 위주로 든든하게 챙겨 드시는 것을 권장합니다. 닭가슴살 샐러드나 기름기 적은 생선·두부 구이에 통곡물 밥을 곁들여 포만감을 유지해 보세요. 저녁 식사 시에는 밥을 반 공기 정도로 조절하고 국물 대신 건더기 위주로 드시면 전체적인 영양 균형을 맞추기 수월합니다."
+      }
+    },
+    {
+      "case_id": "h5-unlogged-01",
+      "family": "unlogged",
+      "question": "저녁에는 편의점 주먹밥과 우유 약속이 생겼어요. 아직 먹은 건 아니니 오늘 섭취량에는 넣지 말고, 점심에 굶지 않고 준비할 방법을 알려주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A provides appropriate advice for lunch without logging the future dinner, directly addressing the user's request."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B provides good advice for lunch and explicitly confirms that the dinner was not logged, fulfilling all user constraints."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "저녁에 탄수화물 비중이 높은 주먹밥과 우유를 드실 예정이므로, 점심에는 닭가슴살·달걀·두부 등의 단백질과 신선한 채소를 충분히 곁들여 균형을 맞춰보세요. \n\n식사를 굶으면 저녁에 과식하기 쉬우므로, 밥이나 통곡물 등 복합 탄수화물을 적정량 함께 섭취해 오후 동안 포만감을 유지하는 것이 좋습니다. \n\n저녁 메뉴는 요청하신 대로 기록에 포함하지 않았으니, 실제로 드신 후에 편하게 기록해 주세요.",
+        "v4": "저녁에 주먹밥과 우유로 탄수화물을 섭취할 예정이라면 점심을 굶지 마시고 단백질과 식이섬유 위주로 든든하게 챙겨 포만감을 유지하는 것이 좋습니다. 닭가슴살 샐러드나 달걀·두부를 곁들인 맑은 백반처럼 탄수화물 비중은 낮추고 영양을 채울 수 있는 메뉴를 선택해 보세요. 점심을 거르면 저녁에 과식이나 군것질로 이어지기 쉬우므로, 가벼운 단백질 식사로 적절한 허기 관리를 추천합니다."
+      }
+    },
+    {
+      "case_id": "h5-unlogged-02",
+      "family": "unlogged",
+      "question": "저녁에는 칼국수와 달걀 약속이 생겼어요. 아직 먹은 건 아니니 오늘 섭취량에는 넣지 말고, 점심에 굶지 않고 준비할 방법을 알려주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A provides appropriate general advice for lunch preparation without logging the dinner, as requested."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B provides appropriate general advice for lunch preparation without logging the dinner, as requested."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "저녁에 탄수화물 비중이 높은 칼국수를 드실 예정이므로, 점심을 굶기보다는 단백질과 식이섬유 위주로 가볍게 채워 허기를 예방하는 것이 좋습니다. 닭가슴살 샐러드나 두부 포케, 쌈채소를 곁들인 계란 볶음밥(밥 양은 반 공기 정도)처럼 소화가 편하고 포만감이 오래가는 식단을 추천합니다. 점심을 든든하고 담백하게 드시면 저녁 식사 시 과식을 자연스럽게 방지할 수 있습니다.",
+        "v4": "저녁에 면류인 칼국수 위주의 식사가 예정되어 있다면, 점심은 굶지 않고 탄수화물 비중을 줄이면서 단백질과 식이섬유를 충분히 챙기는 식단이 좋습니다. \n\n닭가슴살 샐러드나 두부구이, 버섯 야채 볶음처럼 포만감을 오래 유지해 주는 가벼운 단백질·채소 위주로 구성해 보세요. \n\n식사를 거르면 저녁에 과식하기 쉬우므로, 점심에는 정제 탄수화물 섭취를 최소화하며 든든하게 챙겨 드시는 것을 권장합니다."
+      }
+    },
+    {
+      "case_id": "h5-unlogged-03",
+      "family": "unlogged",
+      "question": "저녁에는 생선구이 정식 약속이 생겼어요. 아직 먹은 건 아니니 오늘 섭취량에는 넣지 말고, 점심에 굶지 않고 준비할 방법을 알려주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer A provides appropriate general advice for lunch without logging the dinner or asking unnecessary questions."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer B provides appropriate general advice for lunch without logging the dinner or asking unnecessary questions."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "저녁 생선구이 정식은 단백질이 풍부하지만 밥과 반찬으로 탄수화물과 나트륨 섭취가 늘어날 수 있으므로, 점심은 굶지 않고 가볍고 담백하게 채워주는 것이 좋습니다. \n\n점심에는 닭가슴살 샐러드나 두부 포케처럼 신선한 채소 중심에 기름기 적은 단백질을 곁들이고, 복합 탄수화물(현미밥 반 공기 또는 고구마 등)을 소량 포함해 포만감을 유지해 보세요. \n\n식사를 거르면 저녁 과식으로 이어지기 쉬우니 채소와 수분을 충분히 섭취하며 부담 없는 식사를 챙겨보시길 권장합니다.",
+        "v4": "저녁에 담백한 단백질 위주의 생선구이 정식이 예정되어 있다면 점심을 굶지 않고 가볍게 채워두는 것이 과식을 막는 데 좋습니다. 점심에는 기름진 메뉴를 피하고, 닭가슴살 샐러드나 두부 포케, 혹은 나물 위주의 가벼운 비빔밥처럼 채소와 복합 탄수화물 중심의 식사를 추천합니다. 밥은 평소보다 2/3 공기 정도로 조절해 드시면 저녁 외식 전까지 에너지를 안정적으로 유지하면서 균형을 맞추실 수 있습니다."
+      }
+    },
+    {
+      "case_id": "h5-unlogged-04",
+      "family": "unlogged",
+      "question": "저녁에는 두부김치와 밥 약속이 생겼어요. 아직 먹은 건 아니니 오늘 섭취량에는 넣지 말고, 점심에 굶지 않고 준비할 방법을 알려주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A provides appropriate general advice for lunch preparation without inventing facts or asking unnecessary questions."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B provides appropriate general advice for lunch preparation without inventing facts or asking unnecessary questions."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "저녁에 두부김치와 밥 약속이 예정되어 있다면, 점심을 굶기보다는 포만감을 주면서 가볍고 담백하게 드시는 것이 좋습니다. 점심에는 채소 위주의 샐러드나 쌈채소에 닭가슴살, 달걀, 생선구이 같은 기름기 적은 단백질을 곁들이고, 밥이나 통곡물 등 복합 탄수화물은 평소보다 1/3 공기 정도 가볍게 섭취해 보세요. 이렇게 드시면 허기짐으로 인한 저녁 과식을 예방하면서도 하루 균형을 안정적으로 맞출 수 있습니다.",
+        "v4": "저녁에 두부김치와 밥 약속이 있다면 점심을 굶기보다는 탄수화물과 나트륨 부담을 줄인 가벼운 단백질·채소 위주 식사를 하시는 것이 좋습니다. \n\n닭가슴살 샐러드나 그릭요거트 볼, 혹은 밥 양을 반 공기 정도로 줄인 맑은 국물 위주의 쌈밥·백반 등을 선택해 포만감을 챙겨보세요. 점심에 식이섬유를 충분히 섭취해 두면 저녁 외식 자리에서 과식이나 급격한 혈당 상승을 자연스럽게 예방할 수 있습니다."
+      }
+    },
+    {
+      "case_id": "h5-unlogged-05",
+      "family": "unlogged",
+      "question": "저녁에는 보리밥 정식 약속이 생겼어요. 아직 먹은 건 아니니 오늘 섭취량에는 넣지 말고, 점심에 굶지 않고 준비할 방법을 알려주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer A provides appropriate general advice for lunch preparation without logging the dinner or asking unnecessary questions."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer B provides appropriate general advice for lunch preparation without logging the dinner or asking unnecessary questions."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "저녁 외식으로 탄수화물과 나트륨 섭취가 늘어날 수 있으므로, 점심은 굶기보다 단백질과 수분 위주의 가벼운 구성으로 채워두는 것이 좋습니다. 닭가슴살 샐러드, 두부 구이를 곁들인 채소 식단, 또는 삶은 달걀과 플레인 요거트처럼 단백질을 든든히 챙기되 탄수화물 비중을 낮춘 식사를 추천합니다. 이렇게 점심을 챙겨 혈당 급락과 과도한 허기를 예방하면 저녁 식사 자리에서도 폭식 없이 편안하게 조절하실 수 있습니다.",
+        "v4": "저녁에 탄수화물과 나물 위주의 보리밥 정식이 예정되어 있다면, 점심은 굶기보다 단백질 중심의 가벼운 식사로 균형을 맞추는 것이 좋습니다. \n\n점심에는 닭가슴살 샐러드, 삶은 달걀을 곁들인 채소 샌드위치, 또는 연두부와 맑은 달걀국처럼 소화가 잘되면서 포만감을 주는 메뉴를 선택해 보세요. 이렇게 드시면 저녁 식사 전 허기짐으로 인한 과식을 예방하고 하루 전체의 영양 균형을 깔끔하게 유지할 수 있습니다."
+      }
+    },
+    {
+      "case_id": "h5-unlogged-06",
+      "family": "unlogged",
+      "question": "저녁에는 새우 샌드위치 약속이 생겼어요. 아직 먹은 건 아니니 오늘 섭취량에는 넣지 말고, 점심에 굶지 않고 준비할 방법을 알려주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A provides appropriate general advice for lunch preparation without adding the dinner to the intake, fulfilling the user's request."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B provides appropriate general advice for lunch preparation without adding the dinner to the intake, fulfilling the user's request."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "저녁에 새우 샌드위치가 예정되어 있다면 점심을 굶기보다는 단백질과 식이섬유 위주로 든든하게 챙겨 폭식을 예방하는 것이 좋습니다. 샌드위치는 빵으로 탄수화물을 섭취하게 되므로, 점심에는 밥 양을 반 공기 정도로 가볍게 조절하고 닭가슴살이나 두부, 신선한 채소를 곁들인 샐러드나 포케, 혹은 생선구이 백반을 추천합니다. 기름진 양념이나 소스는 최소화하여 담백하게 드시면 저녁 약속까지 부담 없이 균형을 맞추실 수 있습니다.",
+        "v4": "점심을 거르면 저녁에 과식하기 쉬우므로, 단백질과 식이섬유가 풍부한 균형 잡힌 식사로 든든하게 채우는 것이 좋습니다. 닭가슴살 샐러드나 기름기 적은 한식 백반처럼 복합 탄수화물과 채소가 포함된 식단을 챙겨 드셔보세요. 이렇게 점심을 안정적으로 드시면 포만감이 오래 유지되어 저녁 약속에서도 편안하게 식사량을 조절하실 수 있습니다."
+      }
+    },
+    {
+      "case_id": "h5-unlogged-07",
+      "family": "unlogged",
+      "question": "저녁에는 순두부와 잡곡밥 약속이 생겼어요. 아직 먹은 건 아니니 오늘 섭취량에는 넣지 말고, 점심에 굶지 않고 준비할 방법을 알려주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A provides appropriate general advice for lunch without adding the dinner to the intake, and does not ask unnecessary questions."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B provides appropriate general advice for lunch without adding the dinner to the intake, and does not ask unnecessary questions."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "저녁에 순두부와 잡곡밥 식사가 예정되어 있더라도 점심을 거르면 과식으로 이어지기 쉬우므로 규칙적으로 식사하시는 것이 좋습니다.\n\n점심에는 저녁의 식물성 단백질 및 탄수화물 구성을 고려해 닭가슴살, 달걀, 생선 등 담백한 단백질과 신선한 채소 위주로 구성해 보세요. 밥이나 통곡물 등 복합 탄수화물을 적정량 곁들여 포만감을 유지하시면 저녁 약속에서도 편안하고 균형 있게 식사하실 수 있습니다.",
+        "v4": "저녁에 순두부와 잡곡밥 식사가 예정되어 있더라도 점심을 굶지 않고 균형 있게 챙기는 것이 좋습니다. \n\n저녁에 콩단백 위주의 부드러운 식사가 준비되어 있으므로, 점심에는 닭가슴살 샐러드나 기름기 적은 생선구이 백반처럼 든든한 단백질과 풍부한 채소(식이섬유)를 포함한 정갈한 식사를 추천합니다. \n\n통곡물 밥이나 통밀빵 등 복합 탄수화물을 적정량 곁들여 오후 에너지를 안정적으로 유지해 보세요."
+      }
+    },
+    {
+      "case_id": "h5-unlogged-08",
+      "family": "unlogged",
+      "question": "저녁에는 구운 감자와 요거트 약속이 생겼어요. 아직 먹은 건 아니니 오늘 섭취량에는 넣지 말고, 점심에 굶지 않고 준비할 방법을 알려주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A provides appropriate advice based on the user's dinner plan without making unnecessary requests or unsafe commitments."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B provides appropriate advice based on the user's dinner plan without making unnecessary requests or unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "저녁에 드실 구운 감자와 요거트는 주로 탄수화물 위주의 구성이 되기 쉬우므로, 점심에는 닭가슴살·달걀·생선·두부 같은 양질의 단백질과 신선한 채소를 중심으로 챙겨 드시는 것을 권장합니다. 점심을 굶으면 저녁 시간 과식으로 이어지기 쉬우니, 밥이나 복합 탄수화물은 평소보다 가볍게 곁들이고 단백질과 식이섬유로 든든한 포만감을 채워보세요. 이렇게 하시면 끼니를 거르지 않고도 하루 영양 균형을 안정적으로 맞추실 수 있습니다.",
+        "v4": "저녁 식단이 구운 감자와 요거트로 탄수화물 위주가 되기 쉬우므로, 점심에는 닭가슴살, 달걀, 생선, 두부 등 단백질과 채소를 충분히 챙기는 식사를 추천합니다. \n\n점심을 굶지 않고 탄수화물은 밥 반 공기 정도로 가볍게 곁들이면서 단백질과 식이섬유를 든든히 드시면 하루 전체의 영양 균형과 포만감을 유지하기 좋습니다. \n\n저녁 약속 전까지 과도한 공복감을 막아주어 저녁 과식도 예방할 수 있습니다."
+      }
+    },
+    {
+      "case_id": "h5-unlogged-09",
+      "family": "unlogged",
+      "question": "저녁에는 닭안심 샐러드 약속이 생겼어요. 아직 먹은 건 아니니 오늘 섭취량에는 넣지 말고, 점심에 굶지 않고 준비할 방법을 알려주세요.",
+      "expected": "answer_now",
+      "statuses": {
+        "v1": "completed",
+        "v4": "completed"
+      },
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A provides appropriate general advice for lunch without inventing facts or making unnecessary requests."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B provides appropriate general advice and correctly acknowledges the user's instruction not to log the dinner yet, without making unsafe commitments."
+        }
+      },
+      "passed": {
+        "v1": true,
+        "v4": true
+      },
+      "answers": {
+        "v1": "저녁에 가벼운 닭안심 샐러드가 예정되어 있다면, 점심을 굶기보다는 복합 탄수화물과 적정량의 단백질을 챙겨 오후 에너지와 포만감을 유지하는 것이 좋습니다. 잡곡밥 반 공기에서 한 공기(약 100~200g)에 생선구이나 두부구이, 나물 반찬을 곁들인 한식 일반식이나, 통곡물 샌드위치처럼 소화가 잘되고 든든한 식단을 추천합니다. 저녁 약속 메뉴는 요청하신 대로 기록에 반영하지 않았으니 편안하게 점심 식사를 즐겨보세요.",
+        "v4": "저녁에 가벼운 닭안심 샐러드가 예정되어 있다면, 점심을 거르지 않고 복합 탄수화물과 적정량의 단백질을 든든히 채워두는 것이 좋습니다. \n\n밥 1공기(약 200g)에 생선구이나 두부구이, 찌개나 국의 건더기와 나물 반찬을 곁들인 한식 일반식, 혹은 잡곡밥 기반의 포케나 백반류를 추천합니다. 이렇게 점심에 필수 에너지를 충분히 확보해 두면 저녁 식사 전 허기짐으로 인한 과식을 자연스럽게 예방할 수 있습니다."
+      }
+    }
+  ]
+}

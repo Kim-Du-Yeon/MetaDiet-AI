@@ -1,3 +1,7 @@
+## Two-template prospective holdout approval (2026-10-22)
+
+The fixed v4 `team.base` + `team.compact_followup` combination now has a separately reviewed approval adapter. It pins immutable8commits, prospective synthetic100pairs, actual two-template execution, raw semantic grades/normal finishes/usage, and delegated evaluator source hashes. Other route changes still fail closed. The frozen gate is not relaxed after baseline blocked attempts, so this candidate is not signed or promoted. [Protocol, result and limits](docs/prompt_control/clarification-balanced/v4-independent-20261022/RESULTS.md).
+
 ## General immutable candidate approval (2026-10-22)
 
 [Generic release workflow](docs/prompt_control/release_workflow/README.md) separates immutable selection, evidence verification, signing and environment promotion. Saved results are reused only for identical8commit/text/contracts. New evidence binds prompt/model/cohort and exact graded answers; only the exact hashed historical run may omit pre-binding metadata. The current code-reviewed quality adapter covers compact followup; other semantic routes fail closed. No model calls or new performance comparison were needed for this workflow validation; earlier metrics remain historical.

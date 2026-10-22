@@ -77,3 +77,16 @@ python backend/scripts/approve_prompt_release.py publish --candidate tmp/candida
 ## 의미 기반 추가 질문 평가 어댑터
 
 후속 상담의 과잉 질문·필수 질문 대조군을 지원하는 `clarification-balanced-v2` 어댑터를 추가했다. [실행 조건·기준·예산·미완료 결과](../clarification-balanced/execution-v2/README.md)를 참조한다. 각100건 생성은 완료했으나 Pro 채점 한도로 품질은 미완료이고 실제 evaluate도 거부했다. 기존 어댑터의 승인 기준을 완화하지 않는다.
+
+## 두 프롬프트 조합의 신규 holdout 승인 어댑터 (2026-10-22)
+
+[신규100쌍·사전 기준·원본·미승격 판단](../clarification-balanced/v4-independent-20261022/RESULTS.md)을 추가했다. `team.base`와 `team.compact_followup`을 함께 변경한 동결v4 조합만 별도 suite로 검증한다. 다른 의미 변경의 범위 제한과 기존 compact 어댑터의 기준은 유지한다. 원격의 실제 두 커밋을 선택하고 나머지6개를 승인 기준선에서 상속한다.
+
+```powershell
+python backend/scripts/approve_prompt_release.py prepare --base docs/prompt_control/clarification-balanced/v4-independent-20261022/baseline-production.json --name clarification-v4-20261022 --select "team.base=7cb880e71a3599c8fd681ad341070d745c1343483b0168404dbcf6505fed2de0" --select "team.compact_followup=36d05c3aec0e17aaf53b4534960eb9893ee4f2b74c6452550618db369c90a403" --output tmp/new-two-prompt-candidate.json
+python backend/scripts/approve_prompt_release.py evaluate --candidate docs/prompt_control/clarification-balanced/v4-independent-20261022/candidate.json --results docs/prompt_control/clarification-balanced/v4-independent-20261022 --output tmp/new-two-prompt-receipt.json
+```
+
+첫 명령은 실제 불변 커밋 선택 예시이며 기존 후보를 덮어쓰지 않는다. 두 번째는 저장된 평가와 정확히 일치하는 후보를 사용한다. **이번 실제 평가의 기준선 blocked2건 때문에 승인은 거부되며 receipt가 생성되지 않는 것이 정상이다.** 실패 후 publish로 넘어가거나 개별 프롬프트를 Production으로 지정해 우회하지 않는다. 합성 단위 fixture로는 승인·receipt 재검증 성공과6종 변조 거부를 검사했다. 실제 후보의 서명·Staging·운영 적용은 완료한 것으로 표현하지 않는다.
+
+새 어댑터는 Pro 원문·종료 사유·행별 usage·실제 시스템 프롬프트 적용·답변 binding을 검사하고, 동결한 실행기/파서/루브릭 helper 해시까지 고정한다. summary의 선택 결과만 보고 승인하지 않는다. 생성 후 승인 검증만 강화한 원본 보존 전환은 해당 실험의 proof 파일에서 확인할 수 있다.

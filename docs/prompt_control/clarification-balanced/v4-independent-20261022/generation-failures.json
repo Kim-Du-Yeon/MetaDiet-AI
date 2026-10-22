@@ -1,0 +1,74 @@
+[
+  {
+    "case_id": "h5-stale-06",
+    "baseline_status": "blocked",
+    "baseline_calls": 3,
+    "baseline_answer": "실행 한도 또는 도구 오류로 제안을 보류했습니다.",
+    "invocations": [
+      {
+        "invocation": 1,
+        "tool_requests": [],
+        "tool_response_names": []
+      },
+      {
+        "invocation": 2,
+        "tool_requests": [],
+        "tool_response_names": []
+      },
+      {
+        "invocation": 3,
+        "tool_requests": [
+          {
+            "name": "read_intake",
+            "args": {}
+          }
+        ],
+        "tool_response_names": [
+          "call_524372"
+        ]
+      }
+    ],
+    "v4_status": "completed",
+    "v4_calls": 1,
+    "v4_answer": "현재 확정된 섭취량 733kcal를 기준으로 계산하면, 오늘 남은 목표 칼로리는 **1,396kcal**(목표 2,129kcal - 섭취 733kcal)입니다. \n\n남은 식사에서 단백질과 식이섬유를 골고루 챙기며 여유 있게 에너지를 채워보세요.",
+    "no_replacement_calls": true,
+    "cause_confidence": "Observed blocked after3model calls at configured cap; exact AgentResult.reason/final model output was not captured, so final stop cause is not proven",
+    "no_rerun_or_replacement": true
+  },
+  {
+    "case_id": "h5-stale-08",
+    "baseline_status": "blocked",
+    "baseline_calls": 3,
+    "baseline_answer": "실행 한도 또는 도구 오류로 제안을 보류했습니다.",
+    "invocations": [
+      {
+        "invocation": 1,
+        "tool_requests": [],
+        "tool_response_names": []
+      },
+      {
+        "invocation": 2,
+        "tool_requests": [],
+        "tool_response_names": []
+      },
+      {
+        "invocation": 3,
+        "tool_requests": [
+          {
+            "name": "read_intake",
+            "args": {}
+          }
+        ],
+        "tool_response_names": [
+          "call_513216"
+        ]
+      }
+    ],
+    "v4_status": "completed",
+    "v4_calls": 1,
+    "v4_answer": "수정된 현재 섭취량(815kcal)과 목표(2191kcal)를 기준으로 계산한 결과, 오늘 남은 목표 칼로리는 **1,376kcal**입니다.\n\n이전 대화의 수치 대신 현재 확정된 값을 기준으로 안내해 드렸으며, 남은 식사 계획 시 이 칼로리를 참고해 균형 있게 채워보세요.",
+    "no_replacement_calls": true,
+    "cause_confidence": "Observed blocked after3model calls at configured cap; exact AgentResult.reason/final model output was not captured, so final stop cause is not proven",
+    "no_rerun_or_replacement": true
+  }
+]

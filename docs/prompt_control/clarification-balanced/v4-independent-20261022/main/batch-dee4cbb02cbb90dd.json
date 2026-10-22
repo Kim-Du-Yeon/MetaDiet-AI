@@ -1,0 +1,37 @@
+{
+  "state": "JOB_STATE_SUCCEEDED",
+  "model": "gemini-3.1-pro-preview",
+  "entries": [
+    {
+      "key": "h5-portion-00",
+      "case_id": "h5-portion-00",
+      "mapping": {
+        "a": "v1",
+        "b": "v4"
+      },
+      "answer_binding": "8f9ef5ce25b36f7d032db5dfffc10bcb162e703a9521aa72599698a5df9f2e28",
+      "system_sha256": "0d6aecca37109a2d33d86d00589f2ddb6bd00621391aaa23262b88db48f1b0d5",
+      "n_conditions": 2
+    },
+    {
+      "key": "h5-portion-01",
+      "case_id": "h5-portion-01",
+      "mapping": {
+        "a": "v4",
+        "b": "v1"
+      },
+      "answer_binding": "a86c00201ae05fa69e1c032f6fb2f1fb69d8962e53bc04cfc0f09de614f0b277",
+      "system_sha256": "0d6aecca37109a2d33d86d00589f2ddb6bd00621391aaa23262b88db48f1b0d5",
+      "n_conditions": 2
+    }
+  ],
+  "entries_sha256": "6a473a67867860c7762b978a1ff3867984b478d4e8b09fa87853fb6da08d3fb9",
+  "budget": {
+    "ledger": "D:\\AX\\diet_agent\\tmp\\eval-budget.sqlite",
+    "ticket": "e1ce0d408b834028a104f345cfced80c",
+    "reserved_usd": 0.041509000000000004
+  },
+  "name": "batches/ocl4qwi9bgisi28klj7fu30afifyrcuj44lt",
+  "collected": true,
+  "actual_batch_cost_usd": 0.007334
+}
