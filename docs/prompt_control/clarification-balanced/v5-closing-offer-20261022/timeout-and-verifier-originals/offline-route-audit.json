@@ -1,0 +1,1626 @@
+{
+  "passed": true,
+  "code_sha256": {
+    "backend/scripts/eval/clarification_v5.py": "7408a5eb3fd4a057991cef9dbf89f36e2506692886a935bb791169ad848667be",
+    "backend/scripts/eval/run_clarification_v5.py": "fa3ff24b833f8121c555469da09b0a0a9bc357b9a5d29ea3ac390ca36f4f6008",
+    "backend/scripts/eval/approve_clarification_v5.py": "581b5a24e1a4956da523557340b95c0e2bd65d6147c749bc2a29d5ff96845146",
+    "backend/scripts/prompt_release_workflow.py": "48b16215d9b0b995ae485a68d5872bc9d3cb5bfab3e10a950d49799b45e08bd6",
+    "backend/scripts/eval/clarification_holdout.py": "3ea0d8fc22b9a8204316193dd0b66b01d3fca7048d99ff3ab7b216200b231b3c",
+    "backend/scripts/eval/run_clarification_holdout.py": "230a25ad783acc2cebc9f2a98a82da2eb385a08b48cc0cdb1dd8ac8fdd1d7ee0",
+    "backend/scripts/eval/run_clarification_v3.py": "f05c26914ee1457218463155ebe1f3a782a0d480270b819d31db680b9660c6ed",
+    "backend/scripts/eval/run_clarification_v4.py": "f0722a290fb54bd4e4d5d0052427141a10d3fc524f80a5ad460f251e9019c163",
+    "backend/scripts/eval/clarification_v3.py": "9e2fada1f2bf8e53389a449d3b92898df0ca8628fcfb901b226a832a0fec3387",
+    "backend/scripts/eval/clarification_v4.py": "b7cde3cc71fdb58f3a9098f41c413eba89a85aa39e3a9c3a884a0d652e45300e",
+    "backend/scripts/eval/clarification_execution.py": "789147fb998dc16cc53b5baa01be9078038e57665306e1722e4f3cfab2bc56e6",
+    "backend/scripts/eval/run_clarification_comparison.py": "2e906a155e8d92b3fd434e1bad9f4609d24c66d4e56f37defa07de6af1984f4e",
+    "backend/scripts/eval/clarification_cases.py": "ac5b476b85ba7afed873e8fbe3929a40c7c3122de4cd8d99461a0ea30184599d",
+    "backend/scripts/eval/batch_agentic_judges.py": "6874b030ad8b6f18a05a6fc24582b3c150326ba529942800d801213a172e25e8",
+    "backend/scripts/eval/batch_clarification_resume.py": "671f5042d1d0483e475e5ecdc842d0368448d45270a217396a41d5ee7ec39723",
+    "backend/scripts/eval/eval_budget.py": "a5c9d4d52e4fd48d8f5242d0a329307d2ce82e12311598db1d4918913a9039d7",
+    "backend/scripts/eval/model_routing_support.py": "1e93ec3893b0786ebb1d79e1df437f0ea67e5885288b8d2c6ac99f085c973c83",
+    "backend/scripts/eval/cache_artifacts.py": "0d893343a2ac9f1152237f7a8809e153a215da076fc1ec2cbe2ac6eaf8bb6305"
+  },
+  "rows": [
+    {
+      "case_id": "v5-stale-00",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-00",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-01",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-01",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-02",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-02",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-03",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-03",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-04",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-04",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-05",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-05",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-06",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-06",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-07",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-07",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-08",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-08",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-09",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-stale-09",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-00",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-00",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-01",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-01",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-02",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-02",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-03",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-03",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-04",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-04",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-05",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-05",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-06",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-06",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-07",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-07",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-08",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-08",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-09",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-choices-09",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-00",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-00",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-01",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-01",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-02",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-02",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-03",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-03",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-04",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-04",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-05",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-05",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-06",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-06",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-07",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-07",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-08",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-08",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-09",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-known_reference-09",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-00",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-00",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-01",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-01",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-02",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-02",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-03",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-03",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-04",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-04",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-05",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-05",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-06",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-06",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-07",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-07",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-08",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-08",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-09",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-label-09",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-ordinary-00",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-00",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-01",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-01",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-02",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-02",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-03",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-03",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-04",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-04",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-05",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-05",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-06",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-06",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-07",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-07",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-08",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-08",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-09",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-ordinary-09",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "followup_direct",
+      "compact_used": true
+    },
+    {
+      "case_id": "v5-portion-00",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-00",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-01",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-01",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-02",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-02",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-03",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-03",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-04",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-04",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-05",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-05",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-06",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-06",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-07",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-07",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-08",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-08",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-09",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-portion-09",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-00",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-00",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-01",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-01",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-02",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-02",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-03",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-03",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-04",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-04",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-05",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-05",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-06",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-06",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-07",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-07",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-08",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-08",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-09",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-recipe-09",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-00",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-00",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-01",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-01",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-02",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-02",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-03",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-03",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-04",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-04",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-05",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-05",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-06",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-06",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-07",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-07",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-08",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-08",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-09",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-referent-09",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-00",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-00",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-01",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-01",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-02",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-02",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-03",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-03",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-04",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-04",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-05",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-05",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-06",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-06",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-07",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-07",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-08",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-08",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-09",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-unlogged-09",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-00",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-00",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-01",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-01",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-02",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-02",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-03",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-03",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-04",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-04",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-05",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-05",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-06",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-06",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-07",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-07",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-08",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-08",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-09",
+      "condition": "v4",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    },
+    {
+      "case_id": "v5-updated_goal-09",
+      "condition": "v5",
+      "status": "completed",
+      "no_write": true,
+      "route": "supervisor",
+      "compact_used": false
+    }
+  ],
+  "scope": "fake model contract only, not quality or paid answers"
+}

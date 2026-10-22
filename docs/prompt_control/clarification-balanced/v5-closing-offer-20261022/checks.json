@@ -1,0 +1,42 @@
+{
+  "checks": [
+    {
+      "command": [
+        "-m",
+        "pytest",
+        "backend/tests",
+        "-q",
+        "--basetemp=D:/AX/diet_agent/tmp/v5-recorded-full",
+        "--junitxml=tmp/v5-recorded-full.xml"
+      ],
+      "exit_code": 0,
+      "tests": 1839,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "seconds": 165.994,
+      "local_junit_sha256": "2a6fbc3b9d06283775a5c65fa54beb52a2954b38d95a30ac4174472c30744b4b"
+    },
+    {
+      "command": [
+        "-m",
+        "pytest",
+        "backend/tests/unit/test_clarification_v5.py",
+        "-q",
+        "--basetemp=D:/AX/diet_agent/tmp/v5-recorded-focused",
+        "--junitxml=tmp/v5-recorded-focused.xml"
+      ],
+      "exit_code": 0,
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.353,
+      "local_junit_sha256": "e9d8df386df574c9dc057278a16a142bb5ca9804291455328fc172fa7854022d"
+    }
+  ],
+  "existing_skip_not_newly_skipped": 1,
+  "frontend": "No frontend code or serving code edited; no new frontend build claim.",
+  "backend_lint_type_commands": "No separate configured backend lint/type script found.",
+  "offline_route_audit": "200 fake model route runs; functional evidence only."
+}

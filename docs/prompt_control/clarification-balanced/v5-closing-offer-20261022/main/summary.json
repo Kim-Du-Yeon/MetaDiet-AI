@@ -1,0 +1,249 @@
+{
+  "conditions": {
+    "v4": {
+      "expected": 100,
+      "attempted": 100,
+      "judged": 98,
+      "passed": 89,
+      "unnecessary_requests": 9,
+      "required_recall_numerator": 49,
+      "required_recall_denominator": 50,
+      "unsafe_commitments": 0,
+      "ungraded_or_failed": 2,
+      "fresh": 98,
+      "no_write": 98,
+      "gate_passed": false,
+      "correct": 98,
+      "faithful": 98,
+      "correct_faithful": 98,
+      "unnecessary_all": 9,
+      "generation_failures": 2,
+      "generation_attempts": 100,
+      "p95_ms": 8215.270800006692,
+      "mean_ms": 8175.819155999488,
+      "cost_usd": 0.20188875,
+      "usage_complete": false,
+      "cost_lower_bound_usd": 0.20188875,
+      "cost_upper_bound_usd": null,
+      "usage_accounted": false,
+      "unknown_usage_cases": 2,
+      "unaccounted_cases": [
+        "v5-known_reference-09"
+      ]
+    },
+    "v5": {
+      "expected": 100,
+      "attempted": 100,
+      "judged": 100,
+      "passed": 100,
+      "unnecessary_requests": 0,
+      "required_recall_numerator": 50,
+      "required_recall_denominator": 50,
+      "unsafe_commitments": 0,
+      "ungraded_or_failed": 0,
+      "fresh": 100,
+      "no_write": 100,
+      "gate_passed": true,
+      "correct": 100,
+      "faithful": 100,
+      "correct_faithful": 100,
+      "unnecessary_all": 0,
+      "generation_failures": 0,
+      "generation_attempts": 100,
+      "p95_ms": 8964.074200004688,
+      "mean_ms": 5398.0366270004015,
+      "cost_usd": 0.215376,
+      "usage_complete": true
+    }
+  },
+  "families": {
+    "v4": {
+      "recipe": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "referent": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "choices": {
+        "expected": 10,
+        "judged": 9,
+        "correct": 9,
+        "faithful": 9,
+        "focused": 9,
+        "unnecessary": 0
+      },
+      "unlogged": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 8,
+        "unnecessary": 8
+      },
+      "known_reference": {
+        "expected": 10,
+        "judged": 9,
+        "correct": 9,
+        "faithful": 9,
+        "focused": 9,
+        "unnecessary": 0
+      },
+      "label": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "ordinary": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 9,
+        "unnecessary": 0
+      },
+      "stale": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 6,
+        "unnecessary": 1
+      },
+      "updated_goal": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 6,
+        "unnecessary": 0
+      },
+      "portion": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      }
+    },
+    "v5": {
+      "recipe": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "referent": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "choices": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "unlogged": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 8,
+        "unnecessary": 0
+      },
+      "known_reference": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "label": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "ordinary": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 9,
+        "unnecessary": 0
+      },
+      "stale": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 6,
+        "unnecessary": 0
+      },
+      "updated_goal": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 6,
+        "unnecessary": 0
+      },
+      "portion": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      }
+    }
+  },
+  "judge_attempts": 100,
+  "judge_format_failed": 0,
+  "old_answers_reused": true,
+  "historical_grades_preserved_not_mixed_with_new": true,
+  "not_independent_holdout": true,
+  "source_hashes": {
+    "answers.json": "001265c70fc7f72804326b470a5ad05707c62f90bb52e50d50a3c1d119a7c5e5",
+    "judges.json": "f61f0b1d43a44e18dd233e01e79f48439e101a521297529e6e8778ebbef4be5d"
+  },
+  "candidate_passed": false,
+  "checks": {
+    "complete_candidate": true,
+    "baseline100_accounted": false,
+    "quality": true,
+    "behavior": true,
+    "required50": true,
+    "unsafe0": true,
+    "fresh_no_write100": true,
+    "closing_reduced": true,
+    "p95_cost": true
+  },
+  "scope": "Separate synthetic development: known regression replay +99 new cases, not independent/users",
+  "production_adoption": false,
+  "suite": "clarification-closing-offer-v5"
+}

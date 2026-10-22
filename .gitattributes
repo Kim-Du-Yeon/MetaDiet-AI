@@ -27,3 +27,8 @@ docs/prompt_control/clarification-balanced/v4-approval-policy-v2-20261022/*.json
 # The prior immutable Markdown evidence was created with CRLF; reproduce those exact bytes on every OS.
 docs/prompt_control/clarification-balanced/v4-independent-20261022/README.md text eol=crlf
 docs/prompt_control/clarification-balanced/v4-independent-20261022/RESULTS.md text eol=crlf
+
+# Preserve v5 frozen evidence and archived evaluator source bytes.
+docs/prompt_control/clarification-balanced/v5-closing-offer-20261022/**/*.json -text whitespace=cr-at-eol
+docs/prompt_control/clarification-balanced/v5-closing-offer-20261022/*.json -text whitespace=cr-at-eol
+docs/prompt_control/clarification-balanced/v5-closing-offer-20261022/**/*.py -text whitespace=cr-at-eol

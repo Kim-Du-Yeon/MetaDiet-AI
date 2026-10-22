@@ -1,0 +1,19 @@
+{
+  "cases": {
+    "v5-choices-04": {
+      "input_key": "6ff98701e16e222fa35e6c88cd4bab824c3d6ffccae15d43269b04665d90b7fd",
+      "tickets": {
+        "34117ee9db1e40118cf9c6f0d68f01ce": {
+          "stage": "comparison",
+          "micros": 10872,
+          "settled": 1
+        }
+      },
+      "billing": "unknown; Budget.settle(None) marks retained reservation settled=1, not actual provider usage. No fake0 tokens.",
+      "trace_id": "01a16280-962d-7110-a849-5a2863be870d"
+    }
+  },
+  "max_baseline_cases": 2,
+  "candidate_unknown_usage_allowed": false,
+  "exclusive_sequential_ledger_binding": "29 new tickets,28 returned usages in generation order; failure final ticket. All earlier ledger rows preserved."
+}

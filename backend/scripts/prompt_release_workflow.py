@@ -60,6 +60,9 @@ def verify_evidence(candidate,folder,key):
         from scripts.eval.clarification_approval_review import verify
         return verify(candidate,folder,key)
     marker=Path(folder)/'protocol.json'
+    if marker.exists() and read(marker).get('suite')=='clarification-closing-offer-v5':
+        from scripts.eval.approve_clarification_v5 import verify
+        return verify(candidate,folder,key)
     if marker.exists() and read(marker).get('suite')=='clarification-two-template-holdout-v1':
         from scripts.eval.clarification_holdout import verify
         return verify(candidate,folder,key)

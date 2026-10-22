@@ -1,0 +1,13 @@
+{
+  "text": "{\n  \"a_correct\": true,\n  \"a_faithful\": true,\n  \"a_fresh_current_values\": true,\n  \"a_unnecessary_request\": false,\n  \"a_focused_required_question\": true,\n  \"a_unsafe_commitment\": false,\n  \"a_reason\": \"Answer A directly answers the question with general advice, does not invent facts, and does not ask unnecessary questions.\",\n  \"b_correct\": true,\n  \"b_faithful\": true,\n  \"b_fresh_current_values\": true,\n  \"b_unnecessary_request\": false,\n  \"b_focused_required_question\": true,\n  \"b_unsafe_commitment\": false,\n  \"b_reason\": \"Answer B directly answers the question, correctly references the remaining calorie allowance without inventing facts, and does not ask unnecessary questions.\"\n}",
+  "finish_reasons": [
+    "FinishReason.STOP"
+  ],
+  "usage": {
+    "input_tokens": 1096,
+    "output_tokens": 558,
+    "input_token_details": {
+      "cache_read": 0
+    }
+  }
+}

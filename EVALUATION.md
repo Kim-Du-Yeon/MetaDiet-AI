@@ -1,3 +1,7 @@
+## v5 종료 규칙 별도 개발 비교 (2026-10-22)
+
+[실패 포함 각100시도·Pro100쌍·불필요 요청9→0·필수 질문50/50·실제LangSmith199root·회계 미확정으로 운영미승격](docs/prompt_control/clarification-balanced/v5-closing-offer-20261022/RESULTS.md). 합성 개발셋이며 독립/실사용자/Ragas 평가와 구분한다.
+
 ## 최신: 기준선 실패 분리 후 v4 운영 적용 (2026-10-22)
 
 [정책 개정·원문 보존·실제 Staging/운영·브라우저·비용](docs/prompt_control/clarification-balanced/v4-approval-policy-v2-20261022/RESULTS.md). 기존100쌍/이전 미통과 기록을 보존하고 후보 자체의 안전·품질 기준을 분리했다. **결과를 본 뒤의 명시적 정책 개정**이며 새 사전등록 검증으로 표현하지 않는다. 기존200답변/Pro100쌍 재사용, 추가Flash8회/Pro0회로 약$0.022 추정. 서명릴리스8f4014f9를 실제Staging→Production 승격하고 공개2요청의 실제사용커밋을 확인했다. 전체pytest1825통과/기존skip1. Staging1건의 선택적 마무리 제안 재발은 한계로 보존하며 실제 사용자A/B는 계속 비활성이다.

@@ -1,0 +1,2872 @@
+[
+  {
+    "id": "v5-stale-00",
+    "split": "development",
+    "family": "stale",
+    "question": "현재 확정 합계는 733kcal로 수정됐고 목표는 2129kcal예요. 이전 대화 합계 대신 지금 값으로 남은 양을 계산해줘요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 733,
+      "target": 2129,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "지난 상담 때는 1498kcal 먹었다고 했어요."
+      },
+      {
+        "role": "assistant",
+        "content": "이전 상담 수치를 확인했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Known optional-offer regression replay; saved baseline reused by exact request identity"
+  },
+  {
+    "id": "v5-stale-01",
+    "split": "development",
+    "family": "stale",
+    "question": "합계가 정정되어 현재 확정 섭취는 572kcal, 기준 목표는 2100kcal입니다. 옛 대화 수치는 제외하고 현재 남은 열량을 계산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 572,
+      "target": 2100,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "지난 상담 때는 1333kcal 먹었다고 했어요."
+      },
+      {
+        "role": "assistant",
+        "content": "이전 상담 수치를 확인했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-stale-02",
+    "split": "development",
+    "family": "stale",
+    "question": "합계가 정정되어 현재 확정 섭취는 615kcal, 기준 목표는 2129kcal입니다. 옛 대화 수치는 제외하고 현재 남은 열량을 계산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 615,
+      "target": 2129,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "지난 상담 때는 1366kcal 먹었다고 했어요."
+      },
+      {
+        "role": "assistant",
+        "content": "이전 상담 수치를 확인했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-stale-03",
+    "split": "development",
+    "family": "stale",
+    "question": "합계가 정정되어 현재 확정 섭취는 658kcal, 기준 목표는 2158kcal입니다. 옛 대화 수치는 제외하고 현재 남은 열량을 계산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 658,
+      "target": 2158,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "지난 상담 때는 1399kcal 먹었다고 했어요."
+      },
+      {
+        "role": "assistant",
+        "content": "이전 상담 수치를 확인했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-stale-04",
+    "split": "development",
+    "family": "stale",
+    "question": "합계가 정정되어 현재 확정 섭취는 701kcal, 기준 목표는 2187kcal입니다. 옛 대화 수치는 제외하고 현재 남은 열량을 계산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 701,
+      "target": 2187,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "지난 상담 때는 1432kcal 먹었다고 했어요."
+      },
+      {
+        "role": "assistant",
+        "content": "이전 상담 수치를 확인했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-stale-05",
+    "split": "development",
+    "family": "stale",
+    "question": "합계가 정정되어 현재 확정 섭취는 744kcal, 기준 목표는 2216kcal입니다. 옛 대화 수치는 제외하고 현재 남은 열량을 계산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 744,
+      "target": 2216,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "지난 상담 때는 1465kcal 먹었다고 했어요."
+      },
+      {
+        "role": "assistant",
+        "content": "이전 상담 수치를 확인했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-stale-06",
+    "split": "development",
+    "family": "stale",
+    "question": "합계가 정정되어 현재 확정 섭취는 787kcal, 기준 목표는 2245kcal입니다. 옛 대화 수치는 제외하고 현재 남은 열량을 계산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 787,
+      "target": 2245,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "지난 상담 때는 1498kcal 먹었다고 했어요."
+      },
+      {
+        "role": "assistant",
+        "content": "이전 상담 수치를 확인했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-stale-07",
+    "split": "development",
+    "family": "stale",
+    "question": "합계가 정정되어 현재 확정 섭취는 830kcal, 기준 목표는 2274kcal입니다. 옛 대화 수치는 제외하고 현재 남은 열량을 계산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 830,
+      "target": 2274,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "지난 상담 때는 1531kcal 먹었다고 했어요."
+      },
+      {
+        "role": "assistant",
+        "content": "이전 상담 수치를 확인했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-stale-08",
+    "split": "development",
+    "family": "stale",
+    "question": "합계가 정정되어 현재 확정 섭취는 873kcal, 기준 목표는 2303kcal입니다. 옛 대화 수치는 제외하고 현재 남은 열량을 계산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 873,
+      "target": 2303,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "지난 상담 때는 1564kcal 먹었다고 했어요."
+      },
+      {
+        "role": "assistant",
+        "content": "이전 상담 수치를 확인했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-stale-09",
+    "split": "development",
+    "family": "stale",
+    "question": "합계가 정정되어 현재 확정 섭취는 916kcal, 기준 목표는 2332kcal입니다. 옛 대화 수치는 제외하고 현재 남은 열량을 계산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 916,
+      "target": 2332,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "지난 상담 때는 1597kcal 먹었다고 했어요."
+      },
+      {
+        "role": "assistant",
+        "content": "이전 상담 수치를 확인했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-choices-00",
+    "split": "development",
+    "family": "choices",
+    "question": "후보 메뉴 61와 62 중 하나만 골라주세요. 두 이름은 현재 대화에 빠져 있어요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 529,
+      "target": 2071,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-choices-01",
+    "split": "development",
+    "family": "choices",
+    "question": "후보 메뉴 62와 63 중 하나만 골라주세요. 두 이름은 현재 대화에 빠져 있어요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 572,
+      "target": 2100,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-choices-02",
+    "split": "development",
+    "family": "choices",
+    "question": "후보 메뉴 63와 64 중 하나만 골라주세요. 두 이름은 현재 대화에 빠져 있어요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 615,
+      "target": 2129,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-choices-03",
+    "split": "development",
+    "family": "choices",
+    "question": "후보 메뉴 64와 65 중 하나만 골라주세요. 두 이름은 현재 대화에 빠져 있어요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 658,
+      "target": 2158,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-choices-04",
+    "split": "development",
+    "family": "choices",
+    "question": "후보 메뉴 65와 66 중 하나만 골라주세요. 두 이름은 현재 대화에 빠져 있어요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 701,
+      "target": 2187,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-choices-05",
+    "split": "development",
+    "family": "choices",
+    "question": "후보 메뉴 66와 67 중 하나만 골라주세요. 두 이름은 현재 대화에 빠져 있어요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 744,
+      "target": 2216,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-choices-06",
+    "split": "development",
+    "family": "choices",
+    "question": "후보 메뉴 67와 68 중 하나만 골라주세요. 두 이름은 현재 대화에 빠져 있어요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 787,
+      "target": 2245,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-choices-07",
+    "split": "development",
+    "family": "choices",
+    "question": "후보 메뉴 68와 69 중 하나만 골라주세요. 두 이름은 현재 대화에 빠져 있어요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 830,
+      "target": 2274,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-choices-08",
+    "split": "development",
+    "family": "choices",
+    "question": "후보 메뉴 69와 70 중 하나만 골라주세요. 두 이름은 현재 대화에 빠져 있어요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 873,
+      "target": 2303,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-choices-09",
+    "split": "development",
+    "family": "choices",
+    "question": "후보 메뉴 70와 71 중 하나만 골라주세요. 두 이름은 현재 대화에 빠져 있어요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 916,
+      "target": 2332,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-known_reference-00",
+    "split": "development",
+    "family": "known_reference",
+    "question": "제공된 영양표는100g당 143kcal이고 양은117g이에요. 표 기준으로 열량만 환산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 529,
+      "target": 2071,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": {
+        "per_100g_kcal": 143,
+        "consumed_g": 117
+      }
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-known_reference-01",
+    "split": "development",
+    "family": "known_reference",
+    "question": "제공된 영양표는100g당 150kcal이고 양은128g이에요. 표 기준으로 열량만 환산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 572,
+      "target": 2100,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": {
+        "per_100g_kcal": 150,
+        "consumed_g": 128
+      }
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-known_reference-02",
+    "split": "development",
+    "family": "known_reference",
+    "question": "제공된 영양표는100g당 157kcal이고 양은139g이에요. 표 기준으로 열량만 환산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 615,
+      "target": 2129,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": {
+        "per_100g_kcal": 157,
+        "consumed_g": 139
+      }
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-known_reference-03",
+    "split": "development",
+    "family": "known_reference",
+    "question": "제공된 영양표는100g당 164kcal이고 양은150g이에요. 표 기준으로 열량만 환산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 658,
+      "target": 2158,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": {
+        "per_100g_kcal": 164,
+        "consumed_g": 150
+      }
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-known_reference-04",
+    "split": "development",
+    "family": "known_reference",
+    "question": "제공된 영양표는100g당 171kcal이고 양은161g이에요. 표 기준으로 열량만 환산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 701,
+      "target": 2187,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": {
+        "per_100g_kcal": 171,
+        "consumed_g": 161
+      }
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-known_reference-05",
+    "split": "development",
+    "family": "known_reference",
+    "question": "제공된 영양표는100g당 178kcal이고 양은172g이에요. 표 기준으로 열량만 환산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 744,
+      "target": 2216,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": {
+        "per_100g_kcal": 178,
+        "consumed_g": 172
+      }
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-known_reference-06",
+    "split": "development",
+    "family": "known_reference",
+    "question": "제공된 영양표는100g당 185kcal이고 양은183g이에요. 표 기준으로 열량만 환산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 787,
+      "target": 2245,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": {
+        "per_100g_kcal": 185,
+        "consumed_g": 183
+      }
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-known_reference-07",
+    "split": "development",
+    "family": "known_reference",
+    "question": "제공된 영양표는100g당 192kcal이고 양은194g이에요. 표 기준으로 열량만 환산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 830,
+      "target": 2274,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": {
+        "per_100g_kcal": 192,
+        "consumed_g": 194
+      }
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-known_reference-08",
+    "split": "development",
+    "family": "known_reference",
+    "question": "제공된 영양표는100g당 199kcal이고 양은205g이에요. 표 기준으로 열량만 환산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 873,
+      "target": 2303,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": {
+        "per_100g_kcal": 199,
+        "consumed_g": 205
+      }
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-known_reference-09",
+    "split": "development",
+    "family": "known_reference",
+    "question": "제공된 영양표는100g당 206kcal이고 양은216g이에요. 표 기준으로 열량만 환산해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 916,
+      "target": 2332,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": {
+        "per_100g_kcal": 206,
+        "consumed_g": 216
+      }
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-label-00",
+    "split": "development",
+    "family": "label",
+    "question": "포장 간식 51번의 정확한 당류를 확인하려고요. 제품명과 영양표는 아직 없으니 다른 제품을 가정하지 말고 필요한 정보를 확인해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 529,
+      "target": 2071,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "product_identity_or_label"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-label-01",
+    "split": "development",
+    "family": "label",
+    "question": "포장 간식 52번의 정확한 당류를 확인하려고요. 제품명과 영양표는 아직 없으니 다른 제품을 가정하지 말고 필요한 정보를 확인해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 572,
+      "target": 2100,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "product_identity_or_label"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-label-02",
+    "split": "development",
+    "family": "label",
+    "question": "포장 간식 53번의 정확한 당류를 확인하려고요. 제품명과 영양표는 아직 없으니 다른 제품을 가정하지 말고 필요한 정보를 확인해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 615,
+      "target": 2129,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "product_identity_or_label"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-label-03",
+    "split": "development",
+    "family": "label",
+    "question": "포장 간식 54번의 정확한 당류를 확인하려고요. 제품명과 영양표는 아직 없으니 다른 제품을 가정하지 말고 필요한 정보를 확인해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 658,
+      "target": 2158,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "product_identity_or_label"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-label-04",
+    "split": "development",
+    "family": "label",
+    "question": "포장 간식 55번의 정확한 당류를 확인하려고요. 제품명과 영양표는 아직 없으니 다른 제품을 가정하지 말고 필요한 정보를 확인해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 701,
+      "target": 2187,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "product_identity_or_label"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-label-05",
+    "split": "development",
+    "family": "label",
+    "question": "포장 간식 56번의 정확한 당류를 확인하려고요. 제품명과 영양표는 아직 없으니 다른 제품을 가정하지 말고 필요한 정보를 확인해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 744,
+      "target": 2216,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "product_identity_or_label"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-label-06",
+    "split": "development",
+    "family": "label",
+    "question": "포장 간식 57번의 정확한 당류를 확인하려고요. 제품명과 영양표는 아직 없으니 다른 제품을 가정하지 말고 필요한 정보를 확인해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 787,
+      "target": 2245,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "product_identity_or_label"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-label-07",
+    "split": "development",
+    "family": "label",
+    "question": "포장 간식 58번의 정확한 당류를 확인하려고요. 제품명과 영양표는 아직 없으니 다른 제품을 가정하지 말고 필요한 정보를 확인해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 830,
+      "target": 2274,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "product_identity_or_label"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-label-08",
+    "split": "development",
+    "family": "label",
+    "question": "포장 간식 59번의 정확한 당류를 확인하려고요. 제품명과 영양표는 아직 없으니 다른 제품을 가정하지 말고 필요한 정보를 확인해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 873,
+      "target": 2303,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "product_identity_or_label"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-label-09",
+    "split": "development",
+    "family": "label",
+    "question": "포장 간식 60번의 정확한 당류를 확인하려고요. 제품명과 영양표는 아직 없으니 다른 제품을 가정하지 말고 필요한 정보를 확인해주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 916,
+      "target": 2332,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "product_identity_or_label"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-ordinary-00",
+    "split": "development",
+    "family": "ordinary",
+    "question": "그럼 일반식 먹어도 괜찮나요?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 529,
+      "target": 2071,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-ordinary-01",
+    "split": "development",
+    "family": "ordinary",
+    "question": "그러면 샌드위치 먹어도 돼?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 572,
+      "target": 2100,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-ordinary-02",
+    "split": "development",
+    "family": "ordinary",
+    "question": "점심에 계란 먹는 건 괜찮아?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 615,
+      "target": 2129,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-ordinary-03",
+    "split": "development",
+    "family": "ordinary",
+    "question": "그럼 닭가슴살 먹어도 될까?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 658,
+      "target": 2158,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-ordinary-04",
+    "split": "development",
+    "family": "ordinary",
+    "question": "아침에 밥 먹어도 괜찮나요?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 701,
+      "target": 2187,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-ordinary-05",
+    "split": "development",
+    "family": "ordinary",
+    "question": "그러면 샐러드 먹어도 괜찮을까?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 744,
+      "target": 2216,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-ordinary-06",
+    "split": "development",
+    "family": "ordinary",
+    "question": "저녁에 일반식 먹어도 돼?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 787,
+      "target": 2245,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-ordinary-07",
+    "split": "development",
+    "family": "ordinary",
+    "question": "그럼 밥이랑 계란 먹어도 될까?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 830,
+      "target": 2274,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-ordinary-08",
+    "split": "development",
+    "family": "ordinary",
+    "question": "점심에 한식뷔페 한 접시 먹어도 괜찮나요?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 873,
+      "target": 2303,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-ordinary-09",
+    "split": "development",
+    "family": "ordinary",
+    "question": "아침에 샌드위치 먹어도 될까?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 916,
+      "target": 2332,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-portion-00",
+    "split": "development",
+    "family": "portion",
+    "question": "표준 성분표로 음식 1번의 열량을 환산하려는데 실제 먹은 양만 아직 없어요. 기본 분량 추정은 원치 않습니다. 무엇을 확인해야 하나요?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 529,
+      "target": 2071,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": "표준 성분표 대표값 사용 동의; 섭취량 미제공"
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-portion-01",
+    "split": "development",
+    "family": "portion",
+    "question": "표준 성분표로 음식 2번의 열량을 환산하려는데 실제 먹은 양만 아직 없어요. 기본 분량 추정은 원치 않습니다. 무엇을 확인해야 하나요?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 572,
+      "target": 2100,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": "표준 성분표 대표값 사용 동의; 섭취량 미제공"
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-portion-02",
+    "split": "development",
+    "family": "portion",
+    "question": "표준 성분표로 음식 3번의 열량을 환산하려는데 실제 먹은 양만 아직 없어요. 기본 분량 추정은 원치 않습니다. 무엇을 확인해야 하나요?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 615,
+      "target": 2129,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": "표준 성분표 대표값 사용 동의; 섭취량 미제공"
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-portion-03",
+    "split": "development",
+    "family": "portion",
+    "question": "표준 성분표로 음식 4번의 열량을 환산하려는데 실제 먹은 양만 아직 없어요. 기본 분량 추정은 원치 않습니다. 무엇을 확인해야 하나요?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 658,
+      "target": 2158,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": "표준 성분표 대표값 사용 동의; 섭취량 미제공"
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-portion-04",
+    "split": "development",
+    "family": "portion",
+    "question": "표준 성분표로 음식 5번의 열량을 환산하려는데 실제 먹은 양만 아직 없어요. 기본 분량 추정은 원치 않습니다. 무엇을 확인해야 하나요?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 701,
+      "target": 2187,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": "표준 성분표 대표값 사용 동의; 섭취량 미제공"
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-portion-05",
+    "split": "development",
+    "family": "portion",
+    "question": "표준 성분표로 음식 6번의 열량을 환산하려는데 실제 먹은 양만 아직 없어요. 기본 분량 추정은 원치 않습니다. 무엇을 확인해야 하나요?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 744,
+      "target": 2216,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": "표준 성분표 대표값 사용 동의; 섭취량 미제공"
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-portion-06",
+    "split": "development",
+    "family": "portion",
+    "question": "표준 성분표로 음식 7번의 열량을 환산하려는데 실제 먹은 양만 아직 없어요. 기본 분량 추정은 원치 않습니다. 무엇을 확인해야 하나요?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 787,
+      "target": 2245,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": "표준 성분표 대표값 사용 동의; 섭취량 미제공"
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-portion-07",
+    "split": "development",
+    "family": "portion",
+    "question": "표준 성분표로 음식 8번의 열량을 환산하려는데 실제 먹은 양만 아직 없어요. 기본 분량 추정은 원치 않습니다. 무엇을 확인해야 하나요?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 830,
+      "target": 2274,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": "표준 성분표 대표값 사용 동의; 섭취량 미제공"
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-portion-08",
+    "split": "development",
+    "family": "portion",
+    "question": "표준 성분표로 음식 9번의 열량을 환산하려는데 실제 먹은 양만 아직 없어요. 기본 분량 추정은 원치 않습니다. 무엇을 확인해야 하나요?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 873,
+      "target": 2303,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": "표준 성분표 대표값 사용 동의; 섭취량 미제공"
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-portion-09",
+    "split": "development",
+    "family": "portion",
+    "question": "표준 성분표로 음식 10번의 열량을 환산하려는데 실제 먹은 양만 아직 없어요. 기본 분량 추정은 원치 않습니다. 무엇을 확인해야 하나요?",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 916,
+      "target": 2332,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "nutrition_reference": "표준 성분표 대표값 사용 동의; 섭취량 미제공"
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-recipe-00",
+    "split": "development",
+    "family": "recipe",
+    "question": "직접 만든 채소콩조림 125g의 레시피별 열량을 계산하고 싶어요. 대표 성분표 대신 내 재료별 양, 기름과 양념, 완성 총량을 반영할 건데 이 값들은 아직 안 드렸어요. 필요한 것을 물어봐주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 529,
+      "target": 2071,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "ingredient_amounts",
+      "oil_seasoning",
+      "cooked_yield"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-recipe-01",
+    "split": "development",
+    "family": "recipe",
+    "question": "직접 만든 채소콩조림 137g의 레시피별 열량을 계산하고 싶어요. 대표 성분표 대신 내 재료별 양, 기름과 양념, 완성 총량을 반영할 건데 이 값들은 아직 안 드렸어요. 필요한 것을 물어봐주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 572,
+      "target": 2100,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "ingredient_amounts",
+      "oil_seasoning",
+      "cooked_yield"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-recipe-02",
+    "split": "development",
+    "family": "recipe",
+    "question": "직접 만든 채소콩조림 149g의 레시피별 열량을 계산하고 싶어요. 대표 성분표 대신 내 재료별 양, 기름과 양념, 완성 총량을 반영할 건데 이 값들은 아직 안 드렸어요. 필요한 것을 물어봐주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 615,
+      "target": 2129,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "ingredient_amounts",
+      "oil_seasoning",
+      "cooked_yield"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-recipe-03",
+    "split": "development",
+    "family": "recipe",
+    "question": "직접 만든 채소콩조림 161g의 레시피별 열량을 계산하고 싶어요. 대표 성분표 대신 내 재료별 양, 기름과 양념, 완성 총량을 반영할 건데 이 값들은 아직 안 드렸어요. 필요한 것을 물어봐주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 658,
+      "target": 2158,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "ingredient_amounts",
+      "oil_seasoning",
+      "cooked_yield"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-recipe-04",
+    "split": "development",
+    "family": "recipe",
+    "question": "직접 만든 채소콩조림 173g의 레시피별 열량을 계산하고 싶어요. 대표 성분표 대신 내 재료별 양, 기름과 양념, 완성 총량을 반영할 건데 이 값들은 아직 안 드렸어요. 필요한 것을 물어봐주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 701,
+      "target": 2187,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "ingredient_amounts",
+      "oil_seasoning",
+      "cooked_yield"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-recipe-05",
+    "split": "development",
+    "family": "recipe",
+    "question": "직접 만든 채소콩조림 185g의 레시피별 열량을 계산하고 싶어요. 대표 성분표 대신 내 재료별 양, 기름과 양념, 완성 총량을 반영할 건데 이 값들은 아직 안 드렸어요. 필요한 것을 물어봐주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 744,
+      "target": 2216,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "ingredient_amounts",
+      "oil_seasoning",
+      "cooked_yield"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-recipe-06",
+    "split": "development",
+    "family": "recipe",
+    "question": "직접 만든 채소콩조림 197g의 레시피별 열량을 계산하고 싶어요. 대표 성분표 대신 내 재료별 양, 기름과 양념, 완성 총량을 반영할 건데 이 값들은 아직 안 드렸어요. 필요한 것을 물어봐주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 787,
+      "target": 2245,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "ingredient_amounts",
+      "oil_seasoning",
+      "cooked_yield"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-recipe-07",
+    "split": "development",
+    "family": "recipe",
+    "question": "직접 만든 채소콩조림 209g의 레시피별 열량을 계산하고 싶어요. 대표 성분표 대신 내 재료별 양, 기름과 양념, 완성 총량을 반영할 건데 이 값들은 아직 안 드렸어요. 필요한 것을 물어봐주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 830,
+      "target": 2274,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "ingredient_amounts",
+      "oil_seasoning",
+      "cooked_yield"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-recipe-08",
+    "split": "development",
+    "family": "recipe",
+    "question": "직접 만든 채소콩조림 221g의 레시피별 열량을 계산하고 싶어요. 대표 성분표 대신 내 재료별 양, 기름과 양념, 완성 총량을 반영할 건데 이 값들은 아직 안 드렸어요. 필요한 것을 물어봐주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 873,
+      "target": 2303,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "ingredient_amounts",
+      "oil_seasoning",
+      "cooked_yield"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-recipe-09",
+    "split": "development",
+    "family": "recipe",
+    "question": "직접 만든 채소콩조림 233g의 레시피별 열량을 계산하고 싶어요. 대표 성분표 대신 내 재료별 양, 기름과 양념, 완성 총량을 반영할 건데 이 값들은 아직 안 드렸어요. 필요한 것을 물어봐주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 916,
+      "target": 2332,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "ingredient_amounts",
+      "oil_seasoning",
+      "cooked_yield"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-referent-00",
+    "split": "development",
+    "family": "referent",
+    "question": "제가 말한 71번 음식을 점심에 먹어도 괜찮나요? 음식 이름과 설명은 이 대화에 없습니다.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 529,
+      "target": 2071,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "referent"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-referent-01",
+    "split": "development",
+    "family": "referent",
+    "question": "제가 말한 72번 음식을 점심에 먹어도 괜찮나요? 음식 이름과 설명은 이 대화에 없습니다.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 572,
+      "target": 2100,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "referent"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-referent-02",
+    "split": "development",
+    "family": "referent",
+    "question": "제가 말한 73번 음식을 점심에 먹어도 괜찮나요? 음식 이름과 설명은 이 대화에 없습니다.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 615,
+      "target": 2129,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "referent"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-referent-03",
+    "split": "development",
+    "family": "referent",
+    "question": "제가 말한 74번 음식을 점심에 먹어도 괜찮나요? 음식 이름과 설명은 이 대화에 없습니다.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 658,
+      "target": 2158,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "referent"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-referent-04",
+    "split": "development",
+    "family": "referent",
+    "question": "제가 말한 75번 음식을 점심에 먹어도 괜찮나요? 음식 이름과 설명은 이 대화에 없습니다.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 701,
+      "target": 2187,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "referent"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-referent-05",
+    "split": "development",
+    "family": "referent",
+    "question": "제가 말한 76번 음식을 점심에 먹어도 괜찮나요? 음식 이름과 설명은 이 대화에 없습니다.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 744,
+      "target": 2216,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "referent"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-referent-06",
+    "split": "development",
+    "family": "referent",
+    "question": "제가 말한 77번 음식을 점심에 먹어도 괜찮나요? 음식 이름과 설명은 이 대화에 없습니다.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 787,
+      "target": 2245,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "referent"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-referent-07",
+    "split": "development",
+    "family": "referent",
+    "question": "제가 말한 78번 음식을 점심에 먹어도 괜찮나요? 음식 이름과 설명은 이 대화에 없습니다.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 830,
+      "target": 2274,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "referent"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-referent-08",
+    "split": "development",
+    "family": "referent",
+    "question": "제가 말한 79번 음식을 점심에 먹어도 괜찮나요? 음식 이름과 설명은 이 대화에 없습니다.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 873,
+      "target": 2303,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "referent"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-referent-09",
+    "split": "development",
+    "family": "referent",
+    "question": "제가 말한 80번 음식을 점심에 먹어도 괜찮나요? 음식 이름과 설명은 이 대화에 없습니다.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 916,
+      "target": 2332,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "ask_required",
+    "required_fields": [
+      "referent"
+    ],
+    "rationale": "Ask only essential absent fields; never invent an unseen product, recipe, referent or portion. Standard scaling needs consumed amount only; explicit individual recipe needs its missing inputs.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-unlogged-00",
+    "split": "development",
+    "family": "unlogged",
+    "question": "오늘 저녁은 모임 1에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 529,
+      "target": 2071,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-unlogged-01",
+    "split": "development",
+    "family": "unlogged",
+    "question": "오늘 저녁은 모임 2에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 572,
+      "target": 2100,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-unlogged-02",
+    "split": "development",
+    "family": "unlogged",
+    "question": "오늘 저녁은 모임 3에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 615,
+      "target": 2129,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-unlogged-03",
+    "split": "development",
+    "family": "unlogged",
+    "question": "오늘 저녁은 모임 4에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 658,
+      "target": 2158,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-unlogged-04",
+    "split": "development",
+    "family": "unlogged",
+    "question": "오늘 저녁은 모임 5에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 701,
+      "target": 2187,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-unlogged-05",
+    "split": "development",
+    "family": "unlogged",
+    "question": "오늘 저녁은 모임 6에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 744,
+      "target": 2216,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-unlogged-06",
+    "split": "development",
+    "family": "unlogged",
+    "question": "오늘 저녁은 모임 7에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 787,
+      "target": 2245,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-unlogged-07",
+    "split": "development",
+    "family": "unlogged",
+    "question": "오늘 저녁은 모임 8에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 830,
+      "target": 2274,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-unlogged-08",
+    "split": "development",
+    "family": "unlogged",
+    "question": "오늘 저녁은 모임 9에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 873,
+      "target": 2303,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-unlogged-09",
+    "split": "development",
+    "family": "unlogged",
+    "question": "오늘 저녁은 모임 10에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 916,
+      "target": 2332,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천 부탁해요."
+      },
+      {
+        "role": "assistant",
+        "content": "현재 목표를 참고해 일반적인 식사 선택을 도와드릴게요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-updated_goal-00",
+    "split": "development",
+    "family": "updated_goal",
+    "question": "새로 저장한 목표 2071kcal와 현재 합계 529kcal로 오늘 남은 열량을 구해주세요. 이전 목표는 유효하지 않아요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 529,
+      "target": 2071,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "이전 목표는 하루 2600kcal였어요."
+      },
+      {
+        "role": "assistant",
+        "content": "그때 목표를 참고했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-updated_goal-01",
+    "split": "development",
+    "family": "updated_goal",
+    "question": "새로 저장한 목표 2100kcal와 현재 합계 572kcal로 오늘 남은 열량을 구해주세요. 이전 목표는 유효하지 않아요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 572,
+      "target": 2100,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "이전 목표는 하루 2620kcal였어요."
+      },
+      {
+        "role": "assistant",
+        "content": "그때 목표를 참고했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-updated_goal-02",
+    "split": "development",
+    "family": "updated_goal",
+    "question": "새로 저장한 목표 2129kcal와 현재 합계 615kcal로 오늘 남은 열량을 구해주세요. 이전 목표는 유효하지 않아요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 615,
+      "target": 2129,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "이전 목표는 하루 2640kcal였어요."
+      },
+      {
+        "role": "assistant",
+        "content": "그때 목표를 참고했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-updated_goal-03",
+    "split": "development",
+    "family": "updated_goal",
+    "question": "새로 저장한 목표 2158kcal와 현재 합계 658kcal로 오늘 남은 열량을 구해주세요. 이전 목표는 유효하지 않아요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 658,
+      "target": 2158,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "이전 목표는 하루 2660kcal였어요."
+      },
+      {
+        "role": "assistant",
+        "content": "그때 목표를 참고했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-updated_goal-04",
+    "split": "development",
+    "family": "updated_goal",
+    "question": "새로 저장한 목표 2187kcal와 현재 합계 701kcal로 오늘 남은 열량을 구해주세요. 이전 목표는 유효하지 않아요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 701,
+      "target": 2187,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "이전 목표는 하루 2680kcal였어요."
+      },
+      {
+        "role": "assistant",
+        "content": "그때 목표를 참고했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-updated_goal-05",
+    "split": "development",
+    "family": "updated_goal",
+    "question": "새로 저장한 목표 2216kcal와 현재 합계 744kcal로 오늘 남은 열량을 구해주세요. 이전 목표는 유효하지 않아요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 744,
+      "target": 2216,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "이전 목표는 하루 2700kcal였어요."
+      },
+      {
+        "role": "assistant",
+        "content": "그때 목표를 참고했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-updated_goal-06",
+    "split": "development",
+    "family": "updated_goal",
+    "question": "새로 저장한 목표 2245kcal와 현재 합계 787kcal로 오늘 남은 열량을 구해주세요. 이전 목표는 유효하지 않아요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 787,
+      "target": 2245,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "이전 목표는 하루 2720kcal였어요."
+      },
+      {
+        "role": "assistant",
+        "content": "그때 목표를 참고했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-updated_goal-07",
+    "split": "development",
+    "family": "updated_goal",
+    "question": "새로 저장한 목표 2274kcal와 현재 합계 830kcal로 오늘 남은 열량을 구해주세요. 이전 목표는 유효하지 않아요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 830,
+      "target": 2274,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "이전 목표는 하루 2740kcal였어요."
+      },
+      {
+        "role": "assistant",
+        "content": "그때 목표를 참고했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-updated_goal-08",
+    "split": "development",
+    "family": "updated_goal",
+    "question": "새로 저장한 목표 2303kcal와 현재 합계 873kcal로 오늘 남은 열량을 구해주세요. 이전 목표는 유효하지 않아요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 873,
+      "target": 2303,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "이전 목표는 하루 2760kcal였어요."
+      },
+      {
+        "role": "assistant",
+        "content": "그때 목표를 참고했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  },
+  {
+    "id": "v5-updated_goal-09",
+    "split": "development",
+    "family": "updated_goal",
+    "question": "새로 저장한 목표 2332kcal와 현재 합계 916kcal로 오늘 남은 열량을 구해주세요. 이전 목표는 유효하지 않아요.",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 916,
+      "target": 2332,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "이전 목표는 하루 2780kcal였어요."
+      },
+      {
+        "role": "assistant",
+        "content": "그때 목표를 참고했어요."
+      }
+    ],
+    "expected": "answer_now",
+    "required_fields": [],
+    "rationale": "All facts needed for general advice or arithmetic are present. Answer directly using current verified values; no optional closing request or invented record.",
+    "provenance": "Separate synthetic development, one known regression replay +99 new question strings; not independent holdout"
+  }
+]
