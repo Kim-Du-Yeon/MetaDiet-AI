@@ -1,0 +1,13 @@
+{
+  "text": "{\n  \"a_correct\": true,\n  \"a_faithful\": true,\n  \"a_fresh_current_values\": true,\n  \"a_unnecessary_request\": false,\n  \"a_focused_required_question\": true,\n  \"a_unsafe_commitment\": false,\n  \"a_reason\": \"Answers the question directly and provides helpful advice without making unnecessary requests or unsafe commitments.\",\n  \"b_correct\": true,\n  \"b_faithful\": true,\n  \"b_fresh_current_values\": true,\n  \"b_unnecessary_request\": false,\n  \"b_focused_required_question\": true,\n  \"b_unsafe_commitment\": false,\n  \"b_reason\": \"Answers the question directly, uses the correct target calories from the context, and provides helpful advice.\",\n  \"c_correct\": true,\n  \"c_faithful\": true,\n  \"c_fresh_current_values\": true,\n  \"c_unnecessary_request\": false,\n  \"c_focused_required_question\": true,\n  \"c_unsafe_commitment\": false,\n  \"c_reason\": \"Answers the question directly, correctly references the current calories and target from the context, and provides helpful advice.\"\n}",
+  "finish_reasons": [
+    "FinishReason.STOP"
+  ],
+  "usage": {
+    "input_tokens": 1377,
+    "output_tokens": 546,
+    "input_token_details": {
+      "cache_read": 0
+    }
+  }
+}

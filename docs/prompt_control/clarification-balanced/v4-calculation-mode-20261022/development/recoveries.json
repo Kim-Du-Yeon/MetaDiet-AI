@@ -1,0 +1,27 @@
+[
+  {
+    "case_id": "v4-dev-known_reference-4",
+    "v3": "제공해주신 기준(100g당 200kcal)에 따라 계산하면, 닭고기카레 190g의 섭취 열량은 **380kcal**입니다.\n\n현재까지 확인된 오늘 섭취 열량은 771kcal이며, 이 식사를 추가로 기록할지 확인해 주시면 기록 진행을 도와드리겠습니다.",
+    "v4": "제공해주신 기준(100g당 200kcal)으로 190g을 계산하면 총 **380kcal**입니다.",
+    "grades": {
+      "v3": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": true,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "Answer A correctly calculates the calories based on the provided reference and mentions current values accurately, but includes an unnecessary request to confirm recording."
+      },
+      "v4": {
+        "correct": true,
+        "faithful": true,
+        "fresh_current_values": true,
+        "unnecessary_request": false,
+        "focused_required_question": false,
+        "unsafe_commitment": false,
+        "reason": "Answer B correctly calculates the calories based on the provided reference without any unnecessary requests or invented facts."
+      }
+    }
+  }
+]

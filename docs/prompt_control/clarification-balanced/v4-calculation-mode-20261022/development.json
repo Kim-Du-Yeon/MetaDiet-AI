@@ -1,0 +1,809 @@
+[
+  {
+    "id": "v4-dev-reference_portion-0",
+    "split": "development",
+    "family": "reference_portion",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 647,
+      "target": 2177,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "food_reference": {
+        "food": "오므라이스",
+        "calories_per_100g": 180
+      },
+      "consumed_amount": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "question": "오므라이스의 실제 먹은 만큼 칼로리를 정확히 환산해줘. 먹은 양은 아직 안 줬고 기본 한 그릇으로 잡지 마. 제공한 표준 성분표 수치를 기준으로 해줘.",
+    "rationale": "Standard-reference scaling: only consumed amount is missing. Ask only amount; do not request recipe/oil/sauce details or claim absolute actual-recipe precision.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-recipe_exact-0",
+    "split": "development",
+    "family": "recipe_exact",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 647,
+      "target": 2177,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "consumed_amount": 160,
+      "ingredient_amounts": null,
+      "cooking_oil": null,
+      "cooked_total_g": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "ingredient_amounts",
+      "cooking_oil",
+      "cooked_total_g"
+    ],
+    "question": "직접 만든 오므라이스을 160g 먹었어. 표준값 말고 내가 쓴 재료와 기름까지 반영한 레시피별 열량이 필요해. 재료별 양·기름·완성 총량은 아직 안 알려줬어.",
+    "rationale": "Explicit individual recipe exact calculation: consumed grams already given, ingredients/oil/cooked yield absent. Ask missing recipe fields; do not ask consumed grams again, use standard reference, invent quantities, or compute definitive calories.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-known_reference-0",
+    "split": "development",
+    "family": "known_reference",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 647,
+      "target": 2177,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "food_reference": {
+        "food": "오므라이스",
+        "calories_per_100g": 200
+      },
+      "consumed_amount": 150
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "오므라이스은 내가 준 표에서 100g당 200kcal이고 150g 먹었어. 이 표 기준으로 계산해줘. 레시피 분석은 필요 없어.",
+    "rationale": "Both reference and consumed amount provided. Calculate 300kcal directly, clearly as reference scaling; no extra quantity, recipe, product or preference questions.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-required_controls-0",
+    "split": "development",
+    "family": "required_controls",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 647,
+      "target": 2177,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "question": "전에 비교하던 두 오므라이스 메뉴 중 골라줘. 두 이름은 여기 없어.",
+    "rationale": "Ask the identified missing choices or exact product label; do not invent substitutes or values, ask generic preferences, or invent UI buttons.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-reference_portion-1",
+    "split": "development",
+    "family": "reference_portion",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 678,
+      "target": 2218,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "food_reference": {
+        "food": "소고기덮밥",
+        "calories_per_100g": 190
+      },
+      "consumed_amount": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "question": "소고기덮밥의 실제 먹은 만큼 칼로리를 정확히 환산해줘. 먹은 양은 아직 안 줬고 기본 한 그릇으로 잡지 마. 제공한 표준 성분표 수치를 기준으로 해줘.",
+    "rationale": "Standard-reference scaling: only consumed amount is missing. Ask only amount; do not request recipe/oil/sauce details or claim absolute actual-recipe precision.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-recipe_exact-1",
+    "split": "development",
+    "family": "recipe_exact",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 678,
+      "target": 2218,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "consumed_amount": 180,
+      "ingredient_amounts": null,
+      "cooking_oil": null,
+      "cooked_total_g": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "ingredient_amounts",
+      "cooking_oil",
+      "cooked_total_g"
+    ],
+    "question": "직접 만든 소고기덮밥을 180g 먹었어. 표준값 말고 내가 쓴 재료와 기름까지 반영한 레시피별 열량이 필요해. 재료별 양·기름·완성 총량은 아직 안 알려줬어.",
+    "rationale": "Explicit individual recipe exact calculation: consumed grams already given, ingredients/oil/cooked yield absent. Ask missing recipe fields; do not ask consumed grams again, use standard reference, invent quantities, or compute definitive calories.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-known_reference-1",
+    "split": "development",
+    "family": "known_reference",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 678,
+      "target": 2218,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "food_reference": {
+        "food": "소고기덮밥",
+        "calories_per_100g": 200
+      },
+      "consumed_amount": 160
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "소고기덮밥은 내가 준 표에서 100g당 200kcal이고 160g 먹었어. 이 표 기준으로 계산해줘. 레시피 분석은 필요 없어.",
+    "rationale": "Both reference and consumed amount provided. Calculate 320kcal directly, clearly as reference scaling; no extra quantity, recipe, product or preference questions.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-required_controls-1",
+    "split": "development",
+    "family": "required_controls",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 678,
+      "target": 2218,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "question": "전에 비교하던 두 소고기덮밥 메뉴 중 골라줘. 두 이름은 여기 없어.",
+    "rationale": "Ask the identified missing choices or exact product label; do not invent substitutes or values, ask generic preferences, or invent UI buttons.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-reference_portion-2",
+    "split": "development",
+    "family": "reference_portion",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 709,
+      "target": 2259,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "food_reference": {
+        "food": "참치주먹밥",
+        "calories_per_100g": 200
+      },
+      "consumed_amount": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "question": "참치주먹밥의 실제 먹은 만큼 칼로리를 정확히 환산해줘. 먹은 양은 아직 안 줬고 기본 한 그릇으로 잡지 마. 제공한 표준 성분표 수치를 기준으로 해줘.",
+    "rationale": "Standard-reference scaling: only consumed amount is missing. Ask only amount; do not request recipe/oil/sauce details or claim absolute actual-recipe precision.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-recipe_exact-2",
+    "split": "development",
+    "family": "recipe_exact",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 709,
+      "target": 2259,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "consumed_amount": 200,
+      "ingredient_amounts": null,
+      "cooking_oil": null,
+      "cooked_total_g": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "ingredient_amounts",
+      "cooking_oil",
+      "cooked_total_g"
+    ],
+    "question": "직접 만든 참치주먹밥을 200g 먹었어. 표준값 말고 내가 쓴 재료와 기름까지 반영한 레시피별 열량이 필요해. 재료별 양·기름·완성 총량은 아직 안 알려줬어.",
+    "rationale": "Explicit individual recipe exact calculation: consumed grams already given, ingredients/oil/cooked yield absent. Ask missing recipe fields; do not ask consumed grams again, use standard reference, invent quantities, or compute definitive calories.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-known_reference-2",
+    "split": "development",
+    "family": "known_reference",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 709,
+      "target": 2259,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "food_reference": {
+        "food": "참치주먹밥",
+        "calories_per_100g": 200
+      },
+      "consumed_amount": 170
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "참치주먹밥은 내가 준 표에서 100g당 200kcal이고 170g 먹었어. 이 표 기준으로 계산해줘. 레시피 분석은 필요 없어.",
+    "rationale": "Both reference and consumed amount provided. Calculate 340kcal directly, clearly as reference scaling; no extra quantity, recipe, product or preference questions.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-required_controls-2",
+    "split": "development",
+    "family": "required_controls",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 709,
+      "target": 2259,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "choices"
+    ],
+    "question": "전에 비교하던 두 참치주먹밥 메뉴 중 골라줘. 두 이름은 여기 없어.",
+    "rationale": "Ask the identified missing choices or exact product label; do not invent substitutes or values, ask generic preferences, or invent UI buttons.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-reference_portion-3",
+    "split": "development",
+    "family": "reference_portion",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 740,
+      "target": 2300,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "food_reference": {
+        "food": "새우볶음밥",
+        "calories_per_100g": 210
+      },
+      "consumed_amount": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "question": "새우볶음밥의 실제 먹은 만큼 칼로리를 정확히 환산해줘. 먹은 양은 아직 안 줬고 기본 한 그릇으로 잡지 마. 제공한 표준 성분표 수치를 기준으로 해줘.",
+    "rationale": "Standard-reference scaling: only consumed amount is missing. Ask only amount; do not request recipe/oil/sauce details or claim absolute actual-recipe precision.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-recipe_exact-3",
+    "split": "development",
+    "family": "recipe_exact",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 740,
+      "target": 2300,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "consumed_amount": 220,
+      "ingredient_amounts": null,
+      "cooking_oil": null,
+      "cooked_total_g": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "ingredient_amounts",
+      "cooking_oil",
+      "cooked_total_g"
+    ],
+    "question": "직접 만든 새우볶음밥을 220g 먹었어. 표준값 말고 내가 쓴 재료와 기름까지 반영한 레시피별 열량이 필요해. 재료별 양·기름·완성 총량은 아직 안 알려줬어.",
+    "rationale": "Explicit individual recipe exact calculation: consumed grams already given, ingredients/oil/cooked yield absent. Ask missing recipe fields; do not ask consumed grams again, use standard reference, invent quantities, or compute definitive calories.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-known_reference-3",
+    "split": "development",
+    "family": "known_reference",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 740,
+      "target": 2300,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "food_reference": {
+        "food": "새우볶음밥",
+        "calories_per_100g": 200
+      },
+      "consumed_amount": 180
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "새우볶음밥은 내가 준 표에서 100g당 200kcal이고 180g 먹었어. 이 표 기준으로 계산해줘. 레시피 분석은 필요 없어.",
+    "rationale": "Both reference and consumed amount provided. Calculate 360kcal directly, clearly as reference scaling; no extra quantity, recipe, product or preference questions.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-required_controls-3",
+    "split": "development",
+    "family": "required_controls",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 740,
+      "target": 2300,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "product_name",
+      "nutrition_label"
+    ],
+    "question": "그 브랜드 새우볶음밥 제품의 정확한 당류를 알려줘. 제품명과 라벨은 아직 안 줬어.",
+    "rationale": "Ask the identified missing choices or exact product label; do not invent substitutes or values, ask generic preferences, or invent UI buttons.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-reference_portion-4",
+    "split": "development",
+    "family": "reference_portion",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 771,
+      "target": 2341,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "food_reference": {
+        "food": "닭고기카레",
+        "calories_per_100g": 220
+      },
+      "consumed_amount": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "question": "닭고기카레의 실제 먹은 만큼 칼로리를 정확히 환산해줘. 먹은 양은 아직 안 줬고 기본 한 그릇으로 잡지 마. 제공한 표준 성분표 수치를 기준으로 해줘.",
+    "rationale": "Standard-reference scaling: only consumed amount is missing. Ask only amount; do not request recipe/oil/sauce details or claim absolute actual-recipe precision.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-recipe_exact-4",
+    "split": "development",
+    "family": "recipe_exact",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 771,
+      "target": 2341,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "consumed_amount": 240,
+      "ingredient_amounts": null,
+      "cooking_oil": null,
+      "cooked_total_g": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "ingredient_amounts",
+      "cooking_oil",
+      "cooked_total_g"
+    ],
+    "question": "직접 만든 닭고기카레을 240g 먹었어. 표준값 말고 내가 쓴 재료와 기름까지 반영한 레시피별 열량이 필요해. 재료별 양·기름·완성 총량은 아직 안 알려줬어.",
+    "rationale": "Explicit individual recipe exact calculation: consumed grams already given, ingredients/oil/cooked yield absent. Ask missing recipe fields; do not ask consumed grams again, use standard reference, invent quantities, or compute definitive calories.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-known_reference-4",
+    "split": "development",
+    "family": "known_reference",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 771,
+      "target": 2341,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "food_reference": {
+        "food": "닭고기카레",
+        "calories_per_100g": 200
+      },
+      "consumed_amount": 190
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "닭고기카레은 내가 준 표에서 100g당 200kcal이고 190g 먹었어. 이 표 기준으로 계산해줘. 레시피 분석은 필요 없어.",
+    "rationale": "Both reference and consumed amount provided. Calculate 380kcal directly, clearly as reference scaling; no extra quantity, recipe, product or preference questions.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-required_controls-4",
+    "split": "development",
+    "family": "required_controls",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 771,
+      "target": 2341,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "product_name",
+      "nutrition_label"
+    ],
+    "question": "그 브랜드 닭고기카레 제품의 정확한 당류를 알려줘. 제품명과 라벨은 아직 안 줬어.",
+    "rationale": "Ask the identified missing choices or exact product label; do not invent substitutes or values, ask generic preferences, or invent UI buttons.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-reference_portion-5",
+    "split": "development",
+    "family": "reference_portion",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 802,
+      "target": 2382,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "food_reference": {
+        "food": "감자수프",
+        "calories_per_100g": 230
+      },
+      "consumed_amount": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "question": "감자수프의 실제 먹은 만큼 칼로리를 정확히 환산해줘. 먹은 양은 아직 안 줬고 기본 한 그릇으로 잡지 마. 제공한 표준 성분표 수치를 기준으로 해줘.",
+    "rationale": "Standard-reference scaling: only consumed amount is missing. Ask only amount; do not request recipe/oil/sauce details or claim absolute actual-recipe precision.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-recipe_exact-5",
+    "split": "development",
+    "family": "recipe_exact",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 802,
+      "target": 2382,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "consumed_amount": 260,
+      "ingredient_amounts": null,
+      "cooking_oil": null,
+      "cooked_total_g": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "ingredient_amounts",
+      "cooking_oil",
+      "cooked_total_g"
+    ],
+    "question": "직접 만든 감자수프을 260g 먹었어. 표준값 말고 내가 쓴 재료와 기름까지 반영한 레시피별 열량이 필요해. 재료별 양·기름·완성 총량은 아직 안 알려줬어.",
+    "rationale": "Explicit individual recipe exact calculation: consumed grams already given, ingredients/oil/cooked yield absent. Ask missing recipe fields; do not ask consumed grams again, use standard reference, invent quantities, or compute definitive calories.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-known_reference-5",
+    "split": "development",
+    "family": "known_reference",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 802,
+      "target": 2382,
+      "record_completeness": "unknown",
+      "pending_proposal": false,
+      "food_reference": {
+        "food": "감자수프",
+        "calories_per_100g": 200
+      },
+      "consumed_amount": 200
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "감자수프은 내가 준 표에서 100g당 200kcal이고 200g 먹었어. 이 표 기준으로 계산해줘. 레시피 분석은 필요 없어.",
+    "rationale": "Both reference and consumed amount provided. Calculate 400kcal directly, clearly as reference scaling; no extra quantity, recipe, product or preference questions.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "v4-dev-required_controls-5",
+    "split": "development",
+    "family": "required_controls",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 802,
+      "target": 2382,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "new_calculation_mode_development_not_frozen100_copy",
+    "expected": "ask_required",
+    "required_fields": [
+      "product_name",
+      "nutrition_label"
+    ],
+    "question": "그 브랜드 감자수프 제품의 정확한 당류를 알려줘. 제품명과 라벨은 아직 안 줬어.",
+    "rationale": "Ask the identified missing choices or exact product label; do not invent substitutes or values, ask generic preferences, or invent UI buttons.",
+    "source_case_id": "dev-generic_menu-00"
+  }
+]

@@ -1,0 +1,337 @@
+{
+  "conditions": {
+    "v1": {
+      "expected": 100,
+      "attempted": 100,
+      "judged": 100,
+      "passed": 98,
+      "unnecessary_requests": 0,
+      "required_recall_numerator": 49,
+      "required_recall_denominator": 50,
+      "unsafe_commitments": 2,
+      "ungraded_or_failed": 0,
+      "fresh": 100,
+      "no_write": 100,
+      "gate_passed": false,
+      "correct": 99,
+      "faithful": 98,
+      "correct_faithful": 98,
+      "unnecessary_all": 0,
+      "generation_failures": 0,
+      "generation_attempts": 100,
+      "p95_ms": 10861.903199998778,
+      "mean_ms": 6307.148695000069,
+      "cost_usd": 0.18353250000000002,
+      "usage_complete": true
+    },
+    "v3": {
+      "expected": 100,
+      "attempted": 100,
+      "judged": 100,
+      "passed": 97,
+      "unnecessary_requests": 0,
+      "required_recall_numerator": 50,
+      "required_recall_denominator": 50,
+      "unsafe_commitments": 0,
+      "ungraded_or_failed": 0,
+      "fresh": 100,
+      "no_write": 100,
+      "gate_passed": false,
+      "correct": 100,
+      "faithful": 100,
+      "correct_faithful": 100,
+      "unnecessary_all": 3,
+      "generation_failures": 0,
+      "generation_attempts": 100,
+      "p95_ms": 7163.782100004028,
+      "mean_ms": 5196.230229000939,
+      "cost_usd": 0.1526475,
+      "usage_complete": true
+    },
+    "v4": {
+      "expected": 100,
+      "attempted": 100,
+      "judged": 100,
+      "passed": 100,
+      "unnecessary_requests": 0,
+      "required_recall_numerator": 50,
+      "required_recall_denominator": 50,
+      "unsafe_commitments": 0,
+      "ungraded_or_failed": 0,
+      "fresh": 100,
+      "no_write": 100,
+      "gate_passed": true,
+      "correct": 100,
+      "faithful": 100,
+      "correct_faithful": 100,
+      "unnecessary_all": 0,
+      "generation_failures": 0,
+      "generation_attempts": 100,
+      "p95_ms": 6283.426199996029,
+      "mean_ms": 4698.077086999983,
+      "cost_usd": 0.167553,
+      "usage_complete": true
+    }
+  },
+  "families": {
+    "v1": {
+      "followup_updated_goal": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 7,
+        "unnecessary": 0
+      },
+      "missing_label": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "missing_recipe": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 9,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "followup_stale_history": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "followup_ordinary_choice": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 9,
+        "unnecessary": 0
+      },
+      "missing_choices": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 9,
+        "faithful": 9,
+        "focused": 9,
+        "unnecessary": 0
+      },
+      "followup_unlogged_context": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 7,
+        "unnecessary": 0
+      },
+      "followup_optional_preference": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 9,
+        "unnecessary": 0
+      },
+      "missing_referent": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "missing_portion": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      }
+    },
+    "v3": {
+      "followup_updated_goal": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 7,
+        "unnecessary": 0
+      },
+      "missing_label": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "missing_recipe": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "followup_stale_history": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "followup_ordinary_choice": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 9,
+        "unnecessary": 0
+      },
+      "missing_choices": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "followup_unlogged_context": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 7,
+        "unnecessary": 0
+      },
+      "followup_optional_preference": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 9,
+        "unnecessary": 0
+      },
+      "missing_referent": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "missing_portion": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 3
+      }
+    },
+    "v4": {
+      "followup_updated_goal": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 7,
+        "unnecessary": 0
+      },
+      "missing_label": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "missing_recipe": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "followup_stale_history": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "followup_ordinary_choice": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 9,
+        "unnecessary": 0
+      },
+      "missing_choices": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "followup_unlogged_context": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 7,
+        "unnecessary": 0
+      },
+      "followup_optional_preference": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 9,
+        "unnecessary": 0
+      },
+      "missing_referent": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      },
+      "missing_portion": {
+        "expected": 10,
+        "judged": 10,
+        "correct": 10,
+        "faithful": 10,
+        "focused": 10,
+        "unnecessary": 0
+      }
+    }
+  },
+  "evaluation_preferred": "v4",
+  "new_protocol_passed": true,
+  "production_adoption": false,
+  "reason": "Exposed diagnostic; no automatic production signing or promotion",
+  "judge_attempts": 100,
+  "judge_format_failed": 0,
+  "old_answers_reused": true,
+  "historical_grades_preserved_not_mixed_with_new": true,
+  "not_independent_holdout": true,
+  "source_hashes": {
+    "answers.json": "9e0789033e9737a2eac0bf2e1d3d4736c40205b305d7b58b04d87230f10303ed",
+    "judges.json": "fa5697d95c119180c1ba2d40ce8d26aaf93efd6af825470b24531f4818370c41"
+  }
+}

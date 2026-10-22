@@ -1,3 +1,7 @@
+## 분량·레시피 질문 구분 비교 (2026-10-22)
+
+별도 개발24건 후 동일100건에서 v4는 정답·충실성100/100 유지, 불필요 질문3→0, 필수 질문50/50을 확인했다. 평가 후보로 채택했고 운영 승격은 수행하지 않았다. [실험 결과·사례·비용·한계](docs/prompt_control/clarification-balanced/v4-calculation-mode-20261022/RESULTS.md)
+
 후속 상담 v3 회귀 개선·비교 완료: [별도 개발24쌍·동일100건·정답99/98/100·행동99/97/97·v1 유지·추가 약$0.81](docs/prompt_control/clarification-balanced/v3-candidate-20261022/RESULTS.md). 평가 문맥 누락과 모델 오류를 구분하고 기존200답변을 재사용했습니다.
 
 후속 질문 프롬프트 비교 완료: [v1/v2 각100건·Pro100쌍 완료·정답98%/96%·충실성100%/96%·후보미채택 및 원문/비용](docs/prompt_control/clarification-balanced/execution-v2/COMPLETE100.md).
