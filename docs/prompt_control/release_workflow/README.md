@@ -70,4 +70,6 @@ python backend/scripts/approve_prompt_release.py publish --candidate tmp/candida
 
 실제 화면에서 `f9bfaf10…`의 `workflow-reuse-v1`을 Staging으로 지정하고 원격 전체8개 커밋·서명을 검증했다. Production은 `45f094b2…`의v1로 유지했다. [실제 Staging/Production readback](staging-readback.json). 별도 Staging 웹 서버를 띄운 검증으로 표현하지 않는다. [검사·비용·실제 미승인 차단 요약](checks.json).
 
-검증 종료 후 Staging도v1로 복구했다(Production 변경 없음). [실제 브라우저 승격·복구 상태](langsmith-ui.json)。
+검증 종료 후 Staging도 v1로 복구했다(Production 변경 없음). [실제 브라우저 승격·복구 상태](langsmith-ui.json).
+
+재개 후 API health와 웹 build-info에서 배포 코드 af3cbf83를 확인했고 관련 테스트 27개가 통과했다. 중단 중 기존 브라우저가 닫혀 마지막 인증 관리자 화면 검증은 재로그인 대기 상태다. 이전 실제 LangSmith 승격·복구 검증과 구분한다. [재개 검증 상태](resume-verification.json).
