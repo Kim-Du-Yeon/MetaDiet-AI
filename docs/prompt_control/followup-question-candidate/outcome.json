@@ -1,0 +1,37 @@
+{
+  "candidate_commit": "df479a3024dc49d83a407675bc7944b7877b8a13f9bc93a827ecfe07a1b80da2",
+  "historical_baseline_reused": 100,
+  "new_candidate_generation": 100,
+  "paired_judge_completed": 39,
+  "paired_judge_failed": 2,
+  "paired_judge_unattempted": 59,
+  "quality_pass_among_completed_pairs": {
+    "v1": 39,
+    "v2": 39
+  },
+  "question_marker_case_ids": {
+    "v1": [],
+    "v2": []
+  },
+  "marker_note": "Screen only, not validated semantic accuracy; baseline floor0. No essential-clarification cases in this cohort.",
+  "ledger_before_usd": 8.324354,
+  "ledger_after_usd": 8.729022,
+  "increment_conservative_commitment_usd": 0.404668,
+  "increment_token_usage_estimate_usd": 0.335445,
+  "cost_note": "Conservative ledger retains unknown429 reservations; usage sum is not invoice. Baseline costs are historical, not incurred again.",
+  "question_improvement_demonstrated": false,
+  "approved": false,
+  "signed": false,
+  "staging_promoted": false,
+  "production_promoted": false,
+  "production": "signed v1, followup child4018a356; browser verified",
+  "raw_metadata_note": "Initial reuse adapter kept original v1 rows but attached signed baseline manifest, so full manifest digest differs despite identical eight prompt identities. Raw artifacts retained unchanged and not eligible for release receipt. Adapter fixed/tested to preserve original snapshot. No model regeneration or grade rebinding performed.",
+  "checks": {
+    "full_backend_passed": 1708,
+    "preexisting_optional_skip": 1,
+    "after_fix_targeted_passed": 19
+  },
+  "next_unattempted_case": "pc-041",
+  "blocked": "Pro429 scope unknown; no more paid calls after one bounded resume also failed; quality not complete",
+  "approval_check": "evaluate rejected Per-attempt prompt identity mismatch; no receipt created"
+}

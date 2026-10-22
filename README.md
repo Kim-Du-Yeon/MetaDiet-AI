@@ -1,3 +1,5 @@
+후속 상담 새 후보 비교: [기존 v1 재사용·추가 질문 감소 가설·Pro429 중단·미승격 이유](docs/prompt_control/followup-question-candidate/README.md).
+
 새 후보 승인 절차: [커밋 선택 → 기존 평가 재사용/새 비교 → 검증 receipt → 서명 → 수동 승격](docs/prompt_control/release_workflow/README.md). 미검증 후보는 운영에 적용되지 않습니다.
 
 최신 프롬프트 운영 제어: [LangSmith 비공개8개·원자적 서명 릴리스·HITL 고정·v1/v2각100건·캐시100쌍 비교·실제 승격/롤백·채택 판단](docs/prompt_control/README.md). 실제 사용자A/B와 명시적 캐시는OFF이며, 구현/비교/운영 검증 상태를 구분합니다.

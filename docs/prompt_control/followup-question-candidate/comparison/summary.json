@@ -1,0 +1,47 @@
+{
+  "judge_usage_complete": false,
+  "judge_estimate_usd": 0.198056,
+  "summary": {
+    "v1": {
+      "attempts": 100,
+      "expected": 100,
+      "completed": 100,
+      "quality_percent": 39,
+      "unsupported_sufficiency": 0,
+      "fresh_percent": 100,
+      "no_write_percent": 100,
+      "mean_ms": 4792.412879000185,
+      "p95_ms": 6262.124799999583,
+      "failure_percent": 0,
+      "generation_estimate_usd": 0.1236975,
+      "usage_complete": true,
+      "judge_complete": false,
+      "implicit_cache_read_tokens": 0
+    },
+    "v2": {
+      "attempts": 100,
+      "expected": 100,
+      "completed": 100,
+      "quality_percent": 39,
+      "unsupported_sufficiency": 0,
+      "fresh_percent": 100,
+      "no_write_percent": 100,
+      "mean_ms": 5011.398480999342,
+      "p95_ms": 6904.388700000709,
+      "failure_percent": 0,
+      "generation_estimate_usd": 0.13738875,
+      "usage_complete": true,
+      "judge_complete": false,
+      "implicit_cache_read_tokens": 0
+    }
+  },
+  "candidate_passed": false,
+  "selection": "v1",
+  "denominator": "100 frozen synthetic attempts per condition; incomplete and failures count against success; repeated question templates are not independent actual-user outcomes",
+  "judge_cost_note": "Pro evaluator consumption reported separately; generation cost is token estimate, not invoice",
+  "source_hashes": {
+    "paired.json": "63af0d4169f7a36c6ff2fb387edeea020ca67aefbc2196db611e23f4afaf0a28",
+    "judges.json": "a355380911e648eb3b39b44eef2ba3cb21d6ed711105bd695ada21657e383c0a",
+    "frozen.json": "f1785b53de4513e868a91faaa62260fd340bbd2349b5544f8f908282a6aadb86"
+  }
+}
