@@ -1,0 +1,328 @@
+{
+  "scope": "Isolated synthetic read-only actual DietTeam using real LangSmith staging channel; not a separate hosted staging web server or100-case performance comparison",
+  "release": "clarification-v4-20261022",
+  "release_commit": "8f4014f9b18d5c4cf993d9bb6219a8d5bc2cf03d7d4316272010957bc9a173c8",
+  "rows": [
+    {
+      "case_id": "h5-portion-00",
+      "family": "portion",
+      "question": "콩나물국밥 먹은 열량을 성분표 기준으로 환산하려고요. 몇 g 먹었는지는 아직 안 적었고 평균 1인분을 대신 넣지는 말아주세요. 무엇이 더 필요한가요?",
+      "status": "completed",
+      "answer": "표준 성분표 기준으로 환산하기 위해 실제로 드신 분량(g, 그릇 수 또는 드신 비율)만 알려주시면 됩니다. \n\n알려주신 분량을 바탕으로 표준 성분표 대표값을 적용해 열량을 계산해 드릴게요.",
+      "model": "gemini-3.8-flash",
+      "input_key": "c9b9e718267b9b2ea11a3e2cb154e24c20ad138758a958f5d23d97b79f876112",
+      "prompt_metadata": {
+        "prompt_release": "clarification-v4-20261022",
+        "prompt_bundle_sha256": "38d430ce82357d967fd9d798c8c61982a6178b19ab9ece1baa63f2bbd3754891",
+        "prompt_scope": "registered_primary_templates",
+        "prompt_commit_ids": {
+          "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+          "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+          "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+          "team.base": "7cb880e71a3599c8fd681ad341070d745c1343483b0168404dbcf6505fed2de0",
+          "team.compact_followup": "36d05c3aec0e17aaf53b4534960eb9893ee4f2b74c6452550618db369c90a403",
+          "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+          "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+          "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+        },
+        "prompt_source": "signed",
+        "prompt_hashes": {
+          "legacy.food_extraction": "718176d51a8c2d34ce1c0b32f4afda13b3fa51d033e4ac73b78dab72d3013c4f",
+          "legacy.intent_classification": "771222e7e54f2fe0199072d6995c9beadf386918ed9b95cd51daa431f599ab20",
+          "rag.query_translation": "b34cdcb49ef64b79e264bbf3bf49434809196a3a9e33082ee1ec54ef0f235523",
+          "team.base": "a82230f087a020fb27fd2e4e37e5c9bf68a2b92123e68643c6425e7355dee905",
+          "team.compact_followup": "c4db100713a6129377d5861990ccca8699c7a92befb27228b4c7a5e930f1fe3a",
+          "team.role.evidence": "03fdbef4bef24d58ba55f8308a6436d54422b282694c4df7d86b8c10b2f1ab69",
+          "team.role.goal": "286e4cc89eef0dad270f0dc57c4a55a72361ffb1c313dd0b95003675b0095aff",
+          "team.role.meal": "79ae127184046a6350ebe5fd3a15b3c1e1af91460af5ec6cad4521dc6fcb7e78"
+        },
+        "prompt_release_commit": "8f4014f9b18d5c4cf993d9bb6219a8d5bc2cf03d7d4316272010957bc9a173c8"
+      },
+      "no_write": true,
+      "compact_used": false,
+      "route": "supervisor",
+      "model_calls": 1,
+      "ms": 5056.784300002619,
+      "usage": [
+        {
+          "input_tokens": 1629,
+          "output_tokens": 57,
+          "total_tokens": 1686,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.0014355
+    },
+    {
+      "case_id": "h5-recipe-00",
+      "family": "recipe",
+      "question": "직접 만든 렌틸콩스튜 115g을 먹었어요. 평균 성분표 말고 내 조리법대로 계산할래요. 들어간 재료와 각각의 양, 기름·양념, 완성 총량은 아직 안 알려드렸어요. 어떤 정보를 드려야 하나요?",
+      "status": "completed",
+      "answer": "직접 만드신 레시피대로 정확히 계산하기 위해 다음 세 가지 정보를 알려주시면 됩니다.\n\n1. **사용하신 재료와 각각의 양(g 또는 개수)** (예: 렌틸콩, 양파, 당근, 토마토 등)\n2. **사용한 식용유(기름)와 양념·소스의 종류 및 양**\n3. **조리 후 완성된 스튜의 전체 무게(g)**\n\n완성된 총량 대비 드신 양(115g)의 비율을 바탕으로 영양 성분을 정확히 계산해 드릴게요.",
+      "model": "gemini-3.8-flash",
+      "input_key": "3493ec1e9d97623bc1eb64c6a47216ce378a335104a012886fd46052d2e557dc",
+      "prompt_metadata": {
+        "prompt_release": "clarification-v4-20261022",
+        "prompt_bundle_sha256": "38d430ce82357d967fd9d798c8c61982a6178b19ab9ece1baa63f2bbd3754891",
+        "prompt_scope": "registered_primary_templates",
+        "prompt_commit_ids": {
+          "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+          "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+          "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+          "team.base": "7cb880e71a3599c8fd681ad341070d745c1343483b0168404dbcf6505fed2de0",
+          "team.compact_followup": "36d05c3aec0e17aaf53b4534960eb9893ee4f2b74c6452550618db369c90a403",
+          "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+          "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+          "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+        },
+        "prompt_source": "signed",
+        "prompt_hashes": {
+          "legacy.food_extraction": "718176d51a8c2d34ce1c0b32f4afda13b3fa51d033e4ac73b78dab72d3013c4f",
+          "legacy.intent_classification": "771222e7e54f2fe0199072d6995c9beadf386918ed9b95cd51daa431f599ab20",
+          "rag.query_translation": "b34cdcb49ef64b79e264bbf3bf49434809196a3a9e33082ee1ec54ef0f235523",
+          "team.base": "a82230f087a020fb27fd2e4e37e5c9bf68a2b92123e68643c6425e7355dee905",
+          "team.compact_followup": "c4db100713a6129377d5861990ccca8699c7a92befb27228b4c7a5e930f1fe3a",
+          "team.role.evidence": "03fdbef4bef24d58ba55f8308a6436d54422b282694c4df7d86b8c10b2f1ab69",
+          "team.role.goal": "286e4cc89eef0dad270f0dc57c4a55a72361ffb1c313dd0b95003675b0095aff",
+          "team.role.meal": "79ae127184046a6350ebe5fd3a15b3c1e1af91460af5ec6cad4521dc6fcb7e78"
+        },
+        "prompt_release_commit": "8f4014f9b18d5c4cf993d9bb6219a8d5bc2cf03d7d4316272010957bc9a173c8"
+      },
+      "no_write": true,
+      "compact_used": false,
+      "route": "supervisor",
+      "model_calls": 1,
+      "ms": 5813.95720000728,
+      "usage": [
+        {
+          "input_tokens": 1619,
+          "output_tokens": 408,
+          "total_tokens": 2027,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 276
+          }
+        }
+      ],
+      "cost_usd": 0.00274425
+    },
+    {
+      "case_id": "h5-known_reference-00",
+      "family": "known_reference",
+      "question": "포장 식품 영양표에 100g당 135kcal라고 적혀 있고 115g 먹었어요. 곁들인 것은 없어요. 열량만 계산해 주세요.",
+      "status": "completed",
+      "answer": "제공해주신 포장 식품 영양표(100g당 135kcal)를 기준으로 115g을 섭취하셨을 때의 열량은 약 **155.25kcal**(약 155kcal)입니다.",
+      "model": "gemini-3.8-flash",
+      "input_key": "dcb768b4cb73037e3229ae2584f3b337468be24e2b8e3170364130ea6ff1e421",
+      "prompt_metadata": {
+        "prompt_release": "clarification-v4-20261022",
+        "prompt_bundle_sha256": "38d430ce82357d967fd9d798c8c61982a6178b19ab9ece1baa63f2bbd3754891",
+        "prompt_scope": "registered_primary_templates",
+        "prompt_commit_ids": {
+          "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+          "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+          "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+          "team.base": "7cb880e71a3599c8fd681ad341070d745c1343483b0168404dbcf6505fed2de0",
+          "team.compact_followup": "36d05c3aec0e17aaf53b4534960eb9893ee4f2b74c6452550618db369c90a403",
+          "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+          "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+          "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+        },
+        "prompt_source": "signed",
+        "prompt_hashes": {
+          "legacy.food_extraction": "718176d51a8c2d34ce1c0b32f4afda13b3fa51d033e4ac73b78dab72d3013c4f",
+          "legacy.intent_classification": "771222e7e54f2fe0199072d6995c9beadf386918ed9b95cd51daa431f599ab20",
+          "rag.query_translation": "b34cdcb49ef64b79e264bbf3bf49434809196a3a9e33082ee1ec54ef0f235523",
+          "team.base": "a82230f087a020fb27fd2e4e37e5c9bf68a2b92123e68643c6425e7355dee905",
+          "team.compact_followup": "c4db100713a6129377d5861990ccca8699c7a92befb27228b4c7a5e930f1fe3a",
+          "team.role.evidence": "03fdbef4bef24d58ba55f8308a6436d54422b282694c4df7d86b8c10b2f1ab69",
+          "team.role.goal": "286e4cc89eef0dad270f0dc57c4a55a72361ffb1c313dd0b95003675b0095aff",
+          "team.role.meal": "79ae127184046a6350ebe5fd3a15b3c1e1af91460af5ec6cad4521dc6fcb7e78"
+        },
+        "prompt_release_commit": "8f4014f9b18d5c4cf993d9bb6219a8d5bc2cf03d7d4316272010957bc9a173c8"
+      },
+      "no_write": true,
+      "compact_used": false,
+      "route": "supervisor",
+      "model_calls": 1,
+      "ms": 4403.851299997768,
+      "usage": [
+        {
+          "input_tokens": 1632,
+          "output_tokens": 277,
+          "total_tokens": 1909,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 217
+          }
+        }
+      ],
+      "cost_usd": 0.00226275
+    },
+    {
+      "case_id": "h5-ordinary-00",
+      "family": "ordinary",
+      "question": "점심에 일반식 먹는 건 괜찮아?",
+      "status": "completed",
+      "answer": "다이어트 중에도 점심에 일반식을 드시는 것은 충분히 가능하며 권장할 만한 방법입니다. 극단적인 식단 제한보다는 일반식에서 밥의 양을 1/2~2/3 공기로 조절하고, 기름진 튀김류나 국물 대신 살코기·두부·생선 등 단백질 반찬과 채소 위주로 구성해 보세요. 현재 목표 열량에 맞춰 하루 전체 섭취량을 조절한다면 일반식을 섭취해도 체중 감량을 안정적으로 이어갈 수 있습니다.",
+      "model": "gemini-3.8-flash",
+      "input_key": "21f91f27382355752fe523a4989d5c10ff55aa62236d0e9c5736921e7f30e3e6",
+      "prompt_metadata": {
+        "prompt_release": "clarification-v4-20261022",
+        "prompt_bundle_sha256": "38d430ce82357d967fd9d798c8c61982a6178b19ab9ece1baa63f2bbd3754891",
+        "prompt_scope": "registered_primary_templates",
+        "prompt_commit_ids": {
+          "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+          "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+          "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+          "team.base": "7cb880e71a3599c8fd681ad341070d745c1343483b0168404dbcf6505fed2de0",
+          "team.compact_followup": "36d05c3aec0e17aaf53b4534960eb9893ee4f2b74c6452550618db369c90a403",
+          "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+          "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+          "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+        },
+        "prompt_source": "signed",
+        "prompt_hashes": {
+          "legacy.food_extraction": "718176d51a8c2d34ce1c0b32f4afda13b3fa51d033e4ac73b78dab72d3013c4f",
+          "legacy.intent_classification": "771222e7e54f2fe0199072d6995c9beadf386918ed9b95cd51daa431f599ab20",
+          "rag.query_translation": "b34cdcb49ef64b79e264bbf3bf49434809196a3a9e33082ee1ec54ef0f235523",
+          "team.base": "a82230f087a020fb27fd2e4e37e5c9bf68a2b92123e68643c6425e7355dee905",
+          "team.compact_followup": "c4db100713a6129377d5861990ccca8699c7a92befb27228b4c7a5e930f1fe3a",
+          "team.role.evidence": "03fdbef4bef24d58ba55f8308a6436d54422b282694c4df7d86b8c10b2f1ab69",
+          "team.role.goal": "286e4cc89eef0dad270f0dc57c4a55a72361ffb1c313dd0b95003675b0095aff",
+          "team.role.meal": "79ae127184046a6350ebe5fd3a15b3c1e1af91460af5ec6cad4521dc6fcb7e78"
+        },
+        "prompt_release_commit": "8f4014f9b18d5c4cf993d9bb6219a8d5bc2cf03d7d4316272010957bc9a173c8"
+      },
+      "no_write": true,
+      "compact_used": true,
+      "route": "followup_direct",
+      "model_calls": 1,
+      "ms": 4703.673299998627,
+      "usage": [
+        {
+          "input_tokens": 1143,
+          "output_tokens": 122,
+          "total_tokens": 1265,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00131475
+    },
+    {
+      "case_id": "h5-updated_goal-00",
+      "family": "updated_goal",
+      "question": "목표를 방금 바꿨어요. 지금 확인된 섭취량 487kcal와 새 하루 목표 1943kcal 기준으로 남은 열량만 알려주세요. 예전 목표는 쓰지 마세요.",
+      "status": "completed",
+      "answer": "새로운 하루 목표 1,943kcal에서 현재 확인된 섭취량 487kcal를 제외한 남은 열량은 **1,456kcal**입니다. 남은 식사는 단백질과 식이섬유를 고루 포함하여 균형 있게 채워보세요.",
+      "model": "gemini-3.8-flash",
+      "input_key": "31977a701a5d9432ed6b75a0d68f48e3299bb20f13cd86de380a90b6edc9a4d3",
+      "prompt_metadata": {
+        "prompt_release": "clarification-v4-20261022",
+        "prompt_bundle_sha256": "38d430ce82357d967fd9d798c8c61982a6178b19ab9ece1baa63f2bbd3754891",
+        "prompt_scope": "registered_primary_templates",
+        "prompt_commit_ids": {
+          "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+          "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+          "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+          "team.base": "7cb880e71a3599c8fd681ad341070d745c1343483b0168404dbcf6505fed2de0",
+          "team.compact_followup": "36d05c3aec0e17aaf53b4534960eb9893ee4f2b74c6452550618db369c90a403",
+          "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+          "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+          "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+        },
+        "prompt_source": "signed",
+        "prompt_hashes": {
+          "legacy.food_extraction": "718176d51a8c2d34ce1c0b32f4afda13b3fa51d033e4ac73b78dab72d3013c4f",
+          "legacy.intent_classification": "771222e7e54f2fe0199072d6995c9beadf386918ed9b95cd51daa431f599ab20",
+          "rag.query_translation": "b34cdcb49ef64b79e264bbf3bf49434809196a3a9e33082ee1ec54ef0f235523",
+          "team.base": "a82230f087a020fb27fd2e4e37e5c9bf68a2b92123e68643c6425e7355dee905",
+          "team.compact_followup": "c4db100713a6129377d5861990ccca8699c7a92befb27228b4c7a5e930f1fe3a",
+          "team.role.evidence": "03fdbef4bef24d58ba55f8308a6436d54422b282694c4df7d86b8c10b2f1ab69",
+          "team.role.goal": "286e4cc89eef0dad270f0dc57c4a55a72361ffb1c313dd0b95003675b0095aff",
+          "team.role.meal": "79ae127184046a6350ebe5fd3a15b3c1e1af91460af5ec6cad4521dc6fcb7e78"
+        },
+        "prompt_release_commit": "8f4014f9b18d5c4cf993d9bb6219a8d5bc2cf03d7d4316272010957bc9a173c8"
+      },
+      "no_write": true,
+      "compact_used": false,
+      "route": "supervisor",
+      "model_calls": 1,
+      "ms": 5733.2779999997,
+      "usage": [
+        {
+          "input_tokens": 1604,
+          "output_tokens": 223,
+          "total_tokens": 1827,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "output_token_details": {
+            "reasoning": 157
+          }
+        }
+      ],
+      "cost_usd": 0.00203925
+    },
+    {
+      "case_id": "h5-stale-06",
+      "family": "stale",
+      "question": "현재 확정 합계는 733kcal로 수정됐고 목표는 2129kcal예요. 이전 대화 합계 대신 지금 값으로 남은 양을 계산해줘요.",
+      "status": "completed",
+      "answer": "수정된 현재 확정 합계(733kcal) 기준으로 오늘 남은 목표 열량은 **1,396kcal**(목표 2,129kcal - 섭취 733kcal)입니다. \n\n남은 식사에서 단백질과 식이섬유를 포함해 균형 있게 채워가시면 좋습니다. 추가로 식사를 기록하시거나 식단 추천이 필요하시면 편하게 말씀해 주세요.",
+      "model": "gemini-3.8-flash",
+      "input_key": "2f1f8b6ace434edd5fe77f3a5f1a9202b73cf46d02c95d7199871ee3c9f1703d",
+      "prompt_metadata": {
+        "prompt_release": "clarification-v4-20261022",
+        "prompt_bundle_sha256": "38d430ce82357d967fd9d798c8c61982a6178b19ab9ece1baa63f2bbd3754891",
+        "prompt_scope": "registered_primary_templates",
+        "prompt_commit_ids": {
+          "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+          "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+          "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+          "team.base": "7cb880e71a3599c8fd681ad341070d745c1343483b0168404dbcf6505fed2de0",
+          "team.compact_followup": "36d05c3aec0e17aaf53b4534960eb9893ee4f2b74c6452550618db369c90a403",
+          "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+          "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+          "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+        },
+        "prompt_source": "signed",
+        "prompt_hashes": {
+          "legacy.food_extraction": "718176d51a8c2d34ce1c0b32f4afda13b3fa51d033e4ac73b78dab72d3013c4f",
+          "legacy.intent_classification": "771222e7e54f2fe0199072d6995c9beadf386918ed9b95cd51daa431f599ab20",
+          "rag.query_translation": "b34cdcb49ef64b79e264bbf3bf49434809196a3a9e33082ee1ec54ef0f235523",
+          "team.base": "a82230f087a020fb27fd2e4e37e5c9bf68a2b92123e68643c6425e7355dee905",
+          "team.compact_followup": "c4db100713a6129377d5861990ccca8699c7a92befb27228b4c7a5e930f1fe3a",
+          "team.role.evidence": "03fdbef4bef24d58ba55f8308a6436d54422b282694c4df7d86b8c10b2f1ab69",
+          "team.role.goal": "286e4cc89eef0dad270f0dc57c4a55a72361ffb1c313dd0b95003675b0095aff",
+          "team.role.meal": "79ae127184046a6350ebe5fd3a15b3c1e1af91460af5ec6cad4521dc6fcb7e78"
+        },
+        "prompt_release_commit": "8f4014f9b18d5c4cf993d9bb6219a8d5bc2cf03d7d4316272010957bc9a173c8"
+      },
+      "no_write": true,
+      "compact_used": false,
+      "route": "supervisor",
+      "model_calls": 1,
+      "ms": 5614.206199999899,
+      "usage": [
+        {
+          "input_tokens": 1599,
+          "output_tokens": 96,
+          "total_tokens": 1695,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "cost_usd": 0.00155925
+    }
+  ]
+}

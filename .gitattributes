@@ -19,3 +19,11 @@ docs/prompt_control/clarification-balanced/v4-independent-20261022/**/*.json -te
 docs/prompt_control/clarification-balanced/v4-independent-20261022/*.json -text whitespace=cr-at-eol
 docs/prompt_control/clarification-balanced/v4-independent-20261022/approval-hardening-originals/*.py -text whitespace=cr-at-eol
 docs/prompt_control/clarification-balanced/v4-independent-20261022/prefix-validation-originals/*.py -text whitespace=cr-at-eol
+
+# Preserve approval policy/receipts and original evidence inventory bytes.
+docs/prompt_control/clarification-balanced/v4-approval-policy-v2-20261022/**/*.json -text whitespace=cr-at-eol
+docs/prompt_control/clarification-balanced/v4-approval-policy-v2-20261022/*.json -text whitespace=cr-at-eol
+
+# The prior immutable Markdown evidence was created with CRLF; reproduce those exact bytes on every OS.
+docs/prompt_control/clarification-balanced/v4-independent-20261022/README.md text eol=crlf
+docs/prompt_control/clarification-balanced/v4-independent-20261022/RESULTS.md text eol=crlf

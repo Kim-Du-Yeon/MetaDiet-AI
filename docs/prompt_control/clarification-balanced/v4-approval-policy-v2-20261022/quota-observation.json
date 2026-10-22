@@ -1,0 +1,21 @@
+{
+  "tier": "Tier1",
+  "scope": "AI Studio last1day peaks, dashboard can lag15minutes; not exact remaining quota",
+  "flash_3_8": {
+    "rpm_peak": 32,
+    "rpm_limit": 1000,
+    "tpm_peak": 198470,
+    "tpm_limit": 2000000,
+    "rpd_peak": 1660,
+    "rpd_limit": 10000
+  },
+  "pro": {
+    "rpd_peak": 246,
+    "rpd_limit": 250,
+    "planned_new_calls": 0
+  },
+  "planned_local_stage_cases": 6,
+  "concurrency": 1,
+  "planned_browser_cases_max": 3,
+  "note": "Browser smoke separate from synthetic performance metrics; model retry policy unchanged."
+}

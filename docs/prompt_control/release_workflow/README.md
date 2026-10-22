@@ -1,3 +1,13 @@
+## 현재 v4 적용 상태 (2026-10-22)
+
+[기준선 실패 분리 정책·서명·실제환경·복구](../clarification-balanced/v4-approval-policy-v2-20261022/RESULTS.md). 기존 holdout 기준은 미통과 그대로 보존했다. 별도 review-v2 suite는 결과를 이미 본 뒤의 명시적 운영 정책 개정으로, candidate의 안전/품질 한계는 유지하고 baseline100시도 정산/채점과 baseline정상완료를 구분한다. 이번 동결v4 원본에만 연결된다. 실제Staging/Production은8f4014f9이며 서버의 실제 두 요청이 새8커밋을 기록했다.
+
+```powershell
+python backend/scripts/approve_prompt_release.py evaluate --candidate docs/prompt_control/clarification-balanced/v4-independent-20261022/candidate.json --results docs/prompt_control/clarification-balanced/v4-approval-policy-v2-20261022 --output tmp/v4-review-receipt-new.json
+```
+
+기존 산출물은 덮어쓰지 않는다. publish는 receipt/정책/원문/코드 해시를 다시 검증하고 서명만 게시하며 환경 승격은 별도다. 아래 이전 미승격 기록과 기존 generic CLI 절차는 역사적/공통 참고로 유지한다.
+
 # 새 후보 커밋 선택 → 평가 재사용 → 서명 → LangSmith 승격
 
 2026-10-22. CLI를 일반화했다. 후보 이름·전체 커밋·결과 폴더를 인자로 받고, 과거 실험 파일을 수정하지 않는다. 실제 사용자 A/B와 캐시는 OFF 유지. 이 절차 검증에는 신규 Gemini 생성/채점0회이며, 기존200답변·100쌍 채점을 재사용했다.
