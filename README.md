@@ -1,3 +1,5 @@
+채점 형식 후속 분석: [남은31쌍 원문·별도 출력 계약·오프라인 검증·잔여$0.108478 재평가 가능성](docs/prompt_control/clarification-balanced/execution-v2/FORMAT_CONTRACT.md). 새 유료 호출0회.
+
 최신 후속 질문 후보 평가: [추가 $0.141522로45쌍 재평가·69/100 유효·31 형식 실패·기존 v1 유지](docs/prompt_control/clarification-balanced/execution-v2/RETRY_025.md).
 
 추가 질문 평가셋: [바로 답변50·필수 질문50·개발20·저장 사례10·Pro RPD 차단과 재개 조건](docs/prompt_control/clarification-balanced/README.md).

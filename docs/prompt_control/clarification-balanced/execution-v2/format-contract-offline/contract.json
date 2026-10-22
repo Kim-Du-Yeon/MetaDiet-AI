@@ -1,0 +1,13 @@
+{
+  "version": "clarification-grade-flat-v1",
+  "semantic_rubric_sha256": "7a52ea7dbe6796fc75c12230051801cf73c4a59acb5b5b5cfa666d284e5e0e70",
+  "system_instruction_sha256": "b207334a1e36ba6749a9f456a435eb255f30e009cd29602f67220401c1cd4c3e",
+  "request_contract_sha256": "7fa8bc62c79e7aa12b9da5a36bc8beb4d1f80a3e738ecf0f247ea4e5358aab2a",
+  "module_sha256": "264190fcfe90e119cd5182ffdd57432aa316ff5fec6723ed4668f38e52b83c6b",
+  "format_instruction": "\nOutput contract clarification-grade-flat-v1: return exactly one JSON object. Each answer has its own explicitly named fields: a_correct, a_faithful, a_fresh_current_values, a_unnecessary_request, a_focused_required_question, a_unsafe_commitment, a_reason, b_correct, b_faithful, b_fresh_current_values, b_unnecessary_request, b_focused_required_question, b_unsafe_commitment, b_reason. All fields ending in _reason are strings; all other fields are JSON booleans. Do not return any array, positional values, nested a/b objects, nulls, extra keys or markdown. This specifies representation only: apply the original rubric unchanged, including negative findings.",
+  "model": "gemini-3.1-pro-preview",
+  "max_output_tokens": 2048,
+  "thinking": "low",
+  "wire_verified_requests": 31,
+  "no_activation": true
+}
