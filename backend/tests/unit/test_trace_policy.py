@@ -123,3 +123,59 @@ def test_masked_messages_keep_only_safe_serialization_discriminators():
     assert masked['kwargs']['content']=='[REDACTED]'
     assert masked['kwargs']['type']=='human'
     assert 'private-user-id' not in json.dumps(masked)
+
+@pytest.mark.asyncio
+async def test_owner_raw_requires_verified_sole_admin_and_opt_in(monkeypatch):
+    from types import SimpleNamespace
+    from app.core import auth
+    p=module()
+    monkeypatch.setenv('TRACE_OWNER_RAW_ENABLED','true')
+    monkeypatch.setattr(auth,'get_settings',lambda:SimpleNamespace(admin_emails='owner@example.test'))
+    checked=[]
+    def verify(token):
+        checked.append(token)
+        if token!='owner-token': raise ValueError('invalid or another account')
+        return 'owner-id'
+    monkeypatch.setattr(auth,'get_current_admin',verify)
+    def scope(token,path='/chat'):
+        return {'type':'http','path':path,'method':'POST','headers':[(b'authorization',('Bearer '+token).encode())]}
+    assert await p.owner_raw_allowed(scope('owner-token'))
+    assert not await p.owner_raw_allowed(scope('other-token'))
+    assert not await p.owner_raw_allowed(scope('owner-token','/users/setup'))
+    monkeypatch.setattr(auth,'get_settings',lambda:SimpleNamespace(admin_emails='owner@example.test,another@example.test'))
+    assert not await p.owner_raw_allowed(scope('owner-token'))
+    monkeypatch.setenv('TRACE_OWNER_RAW_ENABLED','false')
+    assert not await p.owner_raw_allowed(scope('owner-token'))
+
+
+def test_owner_body_preserves_text_but_not_credentials(monkeypatch):
+    p=module()
+    monkeypatch.setenv('TRACE_OWNER_RAW_ENABLED','true')
+    data={'inputs':{'message':'본인 점심 상담','api_key':'private-key'},'outputs':{'response':'답변'}}
+    result=p.sanitize_run(data,'owner')
+    assert result['inputs']['message']=='본인 점심 상담'
+    assert result['inputs']['api_key']=='[REDACTED]'
+    assert result['outputs']['response']=='답변'
+    assert result['extra']['metadata']['trace_data_mode']=='owner'
+
+
+@pytest.mark.asyncio
+async def test_concurrent_owner_and_other_requests_keep_trace_clients_isolated(monkeypatch):
+    import asyncio
+    from types import SimpleNamespace
+    from langsmith.run_helpers import get_tracing_context
+    p=module();seen={}
+    monkeypatch.setenv('LANGSMITH_API_KEY','test-key')
+    monkeypatch.setenv('LANGSMITH_TRACING','true')
+    async def allowed(scope): return scope.get('owner',False)
+    monkeypatch.setattr(p,'owner_raw_allowed',allowed)
+    monkeypatch.setattr(p,'runtime_client',lambda:SimpleNamespace(trace_data_mode='production'))
+    monkeypatch.setattr(p,'owner_runtime_client',lambda:SimpleNamespace(trace_data_mode='owner'))
+    async def app(scope,receive,send):
+        await asyncio.sleep(0)
+        context=get_tracing_context()
+        seen[scope['owner']]=(context['client'].trace_data_mode,context['project_name'])
+    middleware=p.TracePolicyMiddleware(app)
+    await asyncio.gather(middleware({'type':'http','owner':True},None,None),middleware({'type':'http','owner':False},None,None))
+    assert seen[True]==('owner','metadiet-owner-debug')
+    assert seen[False][0]=='production'

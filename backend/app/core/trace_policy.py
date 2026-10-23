@@ -1,10 +1,11 @@
 """Fail-closed trace bodies and standard text-token list-price estimates.
 
-Only explicitly attested, local synthetic runs may retain prose. Production
-retains structure, not free text or health values. This is not a PII classifier.
+Local synthetic runs and explicitly enabled, authenticated sole-owner chat runs
+may retain prose. All other production runs remain masked. Not a PII classifier.
 """
 from __future__ import annotations
 import os
+import asyncio
 import re
 from datetime import date
 from functools import lru_cache
@@ -148,7 +149,7 @@ def sanitize_run(data, mode):
     if 'name' in result: result['name']=safe_name(result['name'])
     for field in ('inputs','outputs'):
         if field in result and result[field] is not None:
-            result[field]=synthetic_body(result[field]) if mode=='synthetic' else mask_body(result[field])
+            result[field]=synthetic_body(result[field]) if mode in {'synthetic','owner'} else mask_body(result[field])
     if result.get('error'): result['error']='execution_failed_details_redacted'
     if 'serialized' in result: result['serialized']={}
     if 'events' in result:
@@ -162,9 +163,11 @@ def sanitize_run(data, mode):
 class PolicyClient(Client):
     """Use the public create/update API boundary; never patch LangSmith internals."""
     def __init__(self, *, mode='production', **kwargs):
-        if mode not in {'production','synthetic'}: raise ValueError('Unknown trace mode')
+        if mode not in {'production','synthetic','owner'}: raise ValueError('Unknown trace mode')
         if mode=='synthetic' and trace_mode()!='synthetic':
             raise ValueError('Synthetic traces require local synthetic-only attestation')
+        if mode=='owner' and os.getenv('TRACE_OWNER_RAW_ENABLED','').lower()!='true':
+            raise ValueError('Owner traces require explicit server opt-in')
         self.trace_data_mode = mode
         super().__init__(hide_inputs=False,hide_outputs=False,hide_metadata=False,
                          omit_traced_runtime_info=True, **kwargs)
@@ -183,16 +186,47 @@ def runtime_client():
                         api_url=os.getenv('LANGSMITH_ENDPOINT','https://api.smith.langchain.com'))
 
 
+@lru_cache(maxsize=1)
+def owner_runtime_client():
+    return PolicyClient(mode='owner',api_key=os.getenv('LANGSMITH_API_KEY'),
+                        api_url=os.getenv('LANGSMITH_ENDPOINT','https://api.smith.langchain.com'))
+
+
+async def owner_raw_allowed(scope):
+    """Only the verified sole admin on chat POSTs; never trust body/user headers."""
+    if (os.getenv('TRACE_OWNER_RAW_ENABLED','').lower()!='true'
+        or scope.get('type')!='http' or scope.get('method')!='POST'
+        or scope.get('path') not in {'/chat','/chat/resume','/chat/rollback'}):
+        return False
+    from app.core.auth import get_current_admin, get_settings
+    allowed={email.strip().lower() for email in get_settings().admin_emails.split(',') if email.strip()}
+    if len(allowed)!=1:
+        return False
+    headers=[v for k,v in scope.get('headers',[]) if k.lower()==b'authorization']
+    if len(headers)!=1:
+        return False
+    try:
+        scheme,token=headers[0].decode('ascii').split(' ',1)
+        if scheme.lower()!='bearer' or not token.strip():
+            return False
+        return bool(await asyncio.wait_for(asyncio.to_thread(get_current_admin,token.strip()),timeout=3))
+    except Exception:
+        # Authentication outage/invalid token always keeps bodies masked.
+        return False
+
+
 class TracePolicyMiddleware:
-    """ASGI context also covers background SSE tasks; HTTP never enables raw mode."""
+    """ASGI context covers SSE tasks; only the opted-in verified owner sees raw bodies."""
     def __init__(self,app): self.app=app
     async def __call__(self,scope,receive,send):
         enabled=os.getenv('LANGSMITH_TRACING','true').lower()=='true' and bool(os.getenv('LANGSMITH_API_KEY'))
         if not enabled:
             with tracing_context(enabled=False): await self.app(scope,receive,send)
             return
-        with tracing_context(client=runtime_client(),enabled=True,
-                             project_name=os.getenv('LANGSMITH_PROJECT','diet-agent')):
+        owner=await owner_raw_allowed(scope)
+        client=owner_runtime_client() if owner else runtime_client()
+        project='metadiet-owner-debug' if owner else os.getenv('LANGSMITH_PROJECT','diet-agent')
+        with tracing_context(client=client,enabled=True,project_name=project):
             await self.app(scope,receive,send)
 
 
