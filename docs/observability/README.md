@@ -78,3 +78,31 @@ LangChain의 고정 메시지 타입과 생성자 식별자만 허용해 마스�
 - 프론트엔드 코드 변경이 없어 별도 프론트 빌드·배포는 하지 않았다. 이번 검증은 관측 기능 검증이며 100건 성능 개선 비교가 아니다.
 
 ![운영 LangSmith 모델별 속도·토큰·비용 툴팁](trace-production-cost.png)
+
+
+## 면접용 합성 Agent 원문 시연 (2026-10-23)
+
+[실제 시연 trace 열기](https://smith.langchain.com/o/587a2f87-e802-40a0-8d1d-2343ab07d304/projects/p/c575e3dd-75de-4d40-a578-06aeb59fcaaf/r/cfb8be3b-4371-4985-8911-cca4166627c6?poll=true).
+LangSmith → Tracing Projects → **metadiet-synthetic-interview** → trace-smoke.
+
+1. root Input에서 고정 합성 질문(점심 쌀밥 200g)을 확인한다.
+2. 첫 모델 Output에서 delegate_meal 위임을 확인한다.
+3. 두 번째 모델 Input의 System을 펼쳐 실제 지시문을 보고, User의 original_request/task를 확인한다. Output은 search_foods(query=쌀밥)이다.
+4. 다음 호출에서 nutrition_lookup, propose_meal 인수와 Tool 결과를 확인한다.
+5. 마지막 호출에서 최종 답변을 보고 root Output의 awaiting_confirmation=true를 확인한다.
+6. 각 호출의 토큰 숫자에 마우스를 올려 속도·토큰·추정 비용을 설명한다.
+
+실제 운영 DietTeam 실행기를 사용하되 **일반 운영의 단순 식사 빠른 계산 경로를 시연에서만 끈다**. 전체 HTTP/LangGraph 서비스 흐름을 재현한 것이 아니라 팀 오케스트레이션/Tool Calling 시연이다. 로컬 식품 CSV는 실제로 조회한다. 제안 저장소는 메모리 객체이며 DB 접근은 오류로 차단한다. 확정·취소 API와 운영 기록은 호출하지 않는다. 자유 입력은 받지 않아 실제 개인정보가 섞이지 않는다. 운영 HTTP 마스킹은 변경하지 않았으며 이 로컬 실행기 때문에 서버를 재배포할 필요는 없다.
+
+```powershell
+# 저장소 루트, 호출 없이 시나리오 확인
+& D:/AX/diet_agent/backend/venv/Scripts/python.exe backend/scripts/demo_langsmith_agent.py
+# 합성 시연 재실행: Gemini 비용 발생, backend/.env의 키 사용
+& D:/AX/diet_agent/backend/venv/Scripts/python.exe backend/scripts/demo_langsmith_agent.py --live --output tmp/interview-trace.json
+```
+
+검증: 관련 테스트 **34 passed**. 실호출은 Flash 5회·도구 4회, DB 조회 0회, 확인 대기 도달. 모델 비용 합계 **$0.02128275 추정**, Agent 실행 약45.95초(루트 trace47.88초). 단일 기능 시연으로 성능 지표가 아니다. 재실행 결과/지연/비용은 달라질 수 있고 모델8회·도구12회·90초 제한을 둔다. [결과](interview-demo.json).
+
+처음 가시성 검사는 정상적으로 제거한 Gemini thought signature까지 본문 숨김으로 오판했다. [초기 검사 기록](interview-demo-initial-check.json)을 보존하고, 서명 필드만 제외하는 테스트를 추가했다. 저장된 5개 trace를 재사용해 본문·도구 인수 표시를 확인했으며 추가 모델 호출은 하지 않았다. API 키와 제공자 서명은 합성 모드에서도 숨긴다.
+
+![실제 합성 질문·프롬프트·도구 호출 원문](interview-demo-visible.png)

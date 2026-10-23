@@ -231,3 +231,6 @@ Pro 한도 원인은 재현 로그의 `generate_requests_per_model_per_day`/`Gen
 ### LangSmith 관측 정책의 운영 검증 (2026-10-23)
 
 합성 개발 trace에서는 Input/Output 원문을 확인하고, 운영 HTTP trace에서는 사용자 자유문·건강 기록·도구 인수를 전송 전에 마스킹하도록 분리했다. LLM child마다 모델·지연·input/output/reasoning/cache usage 및 표준 단가 추정 비용을 연결했다. 전체 테스트 1,851개 통과(기존 skip 1), 합성 실호출 5건과 공개 브라우저 상담 1건의 실제 LangSmith 화면/API를 대조했다. 운영 상담의 두 Flash 호출은 10,379토큰·추정 $0.01019625로 집계됐다. 이는 기능 검증 수치이며 성능 개선 지표가 아니다. 운영 문장 의미 분석 불가, 청구서 확정 금액·실패 호출의 미반환 usage는 별도 대조가 필요하다는 한계를 명시했다. [설계·운영 화면·원본 계측·복구 절차](observability/README.md).
+
+
+면접용 합성 Agent 시연: 운영 DietTeam/Tool Calling을 고정 합성 입력과 메모리 제안 저장소로 실행하고 원문 trace를 별도 LangSmith 프로젝트에 격리했다. 운영 마스킹 유지, DB 접근 차단, 34개 관련 테스트 및 실제 5회 모델 호출의 원문 표시 확인. 단순 식사 빠른 계산을 끈 시연이며 운영 성능이나 전체 HTTP 흐름 검증으로 표현하지 않는다. [시연 순서·실제 trace·한계](observability/README.md#면접용-합성-agent-원문-시연-2026-10-23).
