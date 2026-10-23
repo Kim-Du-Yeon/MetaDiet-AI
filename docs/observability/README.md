@@ -51,11 +51,30 @@ LangSmith → Tracing Projects → 해당 프로젝트 → run → LLM child →
 `LANGSMITH_TRACING=false`면 추적만 중지하고 상담 기능은 유지한다. 원문 공개로 롤백하지 않는다. 변경 전 커밋으로 서버를 재배포하면 기존 전체 숨김 정책으로 복원된다. trace 데이터는 LangSmith 접근권한/보존기간 정책의 관리 대상이다. 이 변경은 과거 trace 삭제나 사용자 계정 삭제와 LangSmith 삭제의 자동 연동을 구현하지 않는다.
 ## 이번 기능 검증 결과 (2026-10-23)
 
-- 백엔드 전체: **1850 passed / 기존 skip 1 / 기존 deprecation warnings 3**. 최종 관련 검사: **15 passed**. 테스트 삭제·새 skip 없음.
+- 백엔드 전체: **1851 passed / 기존 skip 1 / 기존 deprecation warnings 3** (192.42초). 마스킹 정책 전용 검사: **13 passed**. 테스트 삭제·새 skip 없음.
 - 실호출: Flash-Lite와 Flash × 합성 원문/운영 마스킹 정책 = **4/4 통과**. 실제 LangSmith `total_tokens`, `total_cost`와 기록한 usage 계산값을 대조해 일치 확인. 비용 합계 **$0.00097925 추정**. 캐시 적중은 이 짧은 smoke에서 0이므로 실제 캐시 할인 성능을 검증했다고 주장하지 않는다.
 - Flash의 output 121/122 토큰에는 reasoning 119/120이 이미 포함됨을 실제 저장값으로 확인. 별도 가산하지 않음.
 - 처음 두 호출은 상속 프로세스의 오래된 키로 HTTP 402. backend/.env와 프로세스 키의 불일치를 원문 없이 확인하고, 검증 스크립트만 지정 .env 우선으로 수정. 실패 호출의 usage가 없으므로 비용은 미확정이며 성공 4회 합계에서 숨겨서 0원 처리하지 않는다.
 - 실제 브라우저에서 합성 질문/응답, 모델별 지연/토큰/비용 툴팁 표시 확인. 마스킹 정책은 Input/Output이 `redacted_fields` 또는 `[REDACTED]`로 표시됨을 확인.
-- 커밋 `323c6c0fea5376cb4b8da8d9250b3e204aabd567` 배포 요청 완료. 공개 서버 후속 검증 결과는 아래에 별도로 기록한다.
+- 1차 커밋 `323c6c0fea5376cb4b8da8d9250b3e204aabd567` 공개 배포 및 health 정상 확인. 메시지 형식 표시 보완 커밋 `8ccde0caef95eb18217631cece82556ab005ee93`의 후속 검증은 아래에 기록한다.
 
 실제 합성 trace 링크는 [원본 계측 결과](trace-smoke.json)에 보존했다. 인증된 프로젝트 멤버만 열 수 있으며 공개 공유 링크를 만들지 않았다.
+
+### 마스킹 화면 보완
+
+LangChain의 고정 메시지 타입과 생성자 식별자만 허용해 마스킹 후에도 Input/Output이 빈 화면처럼 보이지 않도록 했다. 사용자 ID·본문·도구 인수는 계속 제거한다. 추가 Flash-Lite 호출 1건에서 입력과 출력 `[REDACTED]`, 33토큰, 0.99초를 실제 화면으로 확인했다. 추가 추정 비용 $0.00001075, 합성 성공 호출 총 5건 $0.00099. [추가 계측](trace-render-smoke.json).
+
+![실제 LangSmith 운영 정책 합성 검증: 입력과 출력 마스킹](trace-masked.png)
+
+위 화면은 실제 API를 호출한 **합성 검증**이며 실제 사용자 성과나 성능 비교 결과가 아니다.
+
+### 공개 서비스 검증
+
+- Render 배포 `dep-dbdcfgbncjis739najcg`, `/health` status=ok 및 build commit `8ccde0caef95eb18217631cece82556ab005ee93` 확인.
+- 로그인된 실제 브라우저에서 저장하지 않는 점심 추천 1건을 요청해 답변 완료와 검토 단계 표시 확인. 식사 기록 저장 버튼은 누르지 않았다.
+- 운영 프로젝트 `metadiet-beta`에서 해당 요청의 LLM child 2개 모두 `trace_data_mode=production`, Input/Output `[REDACTED]` 표시 확인. 실제 사용자 입력·섭취 기록 원문은 공개 증거에 포함하지 않았다.
+- Flash 호출 각각 4,917/5,462토큰, 5.34432/4.699932초, $0.00498075/$0.0052155. LangSmith 저장 `total_cost`와 usage 계산값이 일치하며 UI 툴팁에서도 입력·출력·reasoning·비용 표시 확인. 합계 **10,379토큰 / $0.01019625 추정**. 두 모델 호출의 합산 지연을 요청 전체 지연으로 해석하지 않는다.
+- [운영 실행 계측](production-trace-smoke.json), 아래 실제 화면 참조. 합성 smoke와 운영 기능 검증 성공 호출의 확인 가능한 모델 비용은 총 **$0.01118625**. usage 없는 초기 실패 비용은 미확정이다.
+- 프론트엔드 코드 변경이 없어 별도 프론트 빌드·배포는 하지 않았다. 이번 검증은 관측 기능 검증이며 100건 성능 개선 비교가 아니다.
+
+![운영 LangSmith 모델별 속도·토큰·비용 툴팁](trace-production-cost.png)
