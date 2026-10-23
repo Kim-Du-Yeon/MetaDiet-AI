@@ -1,0 +1,30 @@
+[
+  {
+    "project": "metadiet-synthetic-trace-production-20261023-112741",
+    "mode": "production",
+    "root_run_id": "0c7d7096-0add-4e8b-93ad-9b5d6e111880",
+    "llms": [
+      {
+        "run_id": "01a16695-eb5c-7623-b596-5cf76477c304",
+        "model": "gemini-3.1-flash-lite",
+        "usage": {
+          "input_cost": 7.75e-06,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "input_tokens": 31,
+          "output_cost": 3e-06,
+          "output_token_details": {
+            "reasoning": 0
+          },
+          "output_tokens": 2,
+          "total_cost": 1.075e-05,
+          "total_tokens": 33
+        },
+        "duration_seconds": 0.989856,
+        "cost_basis": "standard_text_list_price_estimate_2026-10-23"
+      }
+    ],
+    "url": "https://smith.langchain.com/o/587a2f87-e802-40a0-8d1d-2343ab07d304/projects/p/956b674f-0ff0-4a8e-82ee-052310538c29/r/0c7d7096-0add-4e8b-93ad-9b5d6e111880?poll=true"
+  }
+]

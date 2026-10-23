@@ -112,3 +112,14 @@ def test_synthetic_mode_redacts_credentials_and_rejects_unattested_client(monkey
     assert result['inputs']['question']=='synthetic question'
     assert 'secret-value' not in json.dumps(result)
     assert 'Bearer abc' not in json.dumps(result)
+
+
+def test_masked_messages_keep_only_safe_serialization_discriminators():
+    p=module()
+    value={'lc':1,'type':'constructor','id':['langchain','schema','messages','HumanMessage'],'kwargs':{'content':'private health','type':'human','id':'private-user-id'}}
+    masked=p.mask_body(value)
+    assert masked['id']==['langchain','schema','messages','HumanMessage']
+    assert masked['lc']==1
+    assert masked['kwargs']['content']=='[REDACTED]'
+    assert masked['kwargs']['type']=='human'
+    assert 'private-user-id' not in json.dumps(masked)

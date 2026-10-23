@@ -49,3 +49,13 @@ LangSmith → Tracing Projects → 해당 프로젝트 → run → LLM child →
 ## 복구
 
 `LANGSMITH_TRACING=false`면 추적만 중지하고 상담 기능은 유지한다. 원문 공개로 롤백하지 않는다. 변경 전 커밋으로 서버를 재배포하면 기존 전체 숨김 정책으로 복원된다. trace 데이터는 LangSmith 접근권한/보존기간 정책의 관리 대상이다. 이 변경은 과거 trace 삭제나 사용자 계정 삭제와 LangSmith 삭제의 자동 연동을 구현하지 않는다.
+## 이번 기능 검증 결과 (2026-10-23)
+
+- 백엔드 전체: **1850 passed / 기존 skip 1 / 기존 deprecation warnings 3**. 최종 관련 검사: **15 passed**. 테스트 삭제·새 skip 없음.
+- 실호출: Flash-Lite와 Flash × 합성 원문/운영 마스킹 정책 = **4/4 통과**. 실제 LangSmith `total_tokens`, `total_cost`와 기록한 usage 계산값을 대조해 일치 확인. 비용 합계 **$0.00097925 추정**. 캐시 적중은 이 짧은 smoke에서 0이므로 실제 캐시 할인 성능을 검증했다고 주장하지 않는다.
+- Flash의 output 121/122 토큰에는 reasoning 119/120이 이미 포함됨을 실제 저장값으로 확인. 별도 가산하지 않음.
+- 처음 두 호출은 상속 프로세스의 오래된 키로 HTTP 402. backend/.env와 프로세스 키의 불일치를 원문 없이 확인하고, 검증 스크립트만 지정 .env 우선으로 수정. 실패 호출의 usage가 없으므로 비용은 미확정이며 성공 4회 합계에서 숨겨서 0원 처리하지 않는다.
+- 실제 브라우저에서 합성 질문/응답, 모델별 지연/토큰/비용 툴팁 표시 확인. 마스킹 정책은 Input/Output이 `redacted_fields` 또는 `[REDACTED]`로 표시됨을 확인.
+- 커밋 `323c6c0fea5376cb4b8da8d9250b3e204aabd567` 배포 요청 완료. 공개 서버 후속 검증 결과는 아래에 별도로 기록한다.
+
+실제 합성 trace 링크는 [원본 계측 결과](trace-smoke.json)에 보존했다. 인증된 프로젝트 멤버만 열 수 있으며 공개 공유 링크를 만들지 않았다.

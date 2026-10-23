@@ -32,6 +32,15 @@ def trace_mode(env=None):
 def mask_body(value):
     if isinstance(value, dict):
         result = {k: mask_body(v) for k,v in value.items() if k in STRUCTURE}
+        for key in ('type','role'):
+            if value.get(key) in ('human','ai','system','tool','user','assistant','text','constructor'):
+                result[key]=value[key]
+        identifier=value.get('id')
+        if (isinstance(identifier,list) and len(identifier)==4 and
+            identifier[:3]==['langchain','schema','messages'] and
+            identifier[3] in ('HumanMessage','AIMessage','SystemMessage','ToolMessage','AIMessageChunk')):
+            result['id']=list(identifier)
+            if value.get('lc')==1: result['lc']=1
         if len(result) != len(value): result['redacted_fields'] = True
         return result
     if isinstance(value, (list,tuple)): return [mask_body(v) for v in value]
