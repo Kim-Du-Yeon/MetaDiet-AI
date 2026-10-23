@@ -127,3 +127,5 @@ LangSmith → Tracing Projects → **metadiet-synthetic-interview** → trace-sm
 - Flash 모델 2회, 총 10,365토큰, 모델 추정비용 $0.01041075. 실제 청구서 총액이나 100건 성능 비교를 의미하지 않는다.
 - [원문 없는 계측 증거](owner-live-verification.json). 실제 개인정보가 포함된 화면 캡처/본문은 GitHub에 게시하지 않는다.
 - 다른 사용자 차단은 인증 mock 및 동시 요청 격리 테스트로 검증했다. 타인의 실제 계정으로 테스트하지 않았다.
+
+[실제 두 모델의 역할·병목 및 제한된 직접 연결 개선](TRACE_LATENCY_ANALYSIS.md)
