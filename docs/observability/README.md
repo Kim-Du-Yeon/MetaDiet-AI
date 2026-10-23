@@ -119,3 +119,11 @@ LangSmith → Tracing Projects → **metadiet-synthetic-interview** → trace-sm
 중단: Render에서 TRACE_OWNER_RAW_ENABLED=false로 저장·재배포. 새 요청부터 마스킹하며 진행 중인 요청은 시작 정책을 유지한다. 기존 원문 trace는 자동 삭제되지 않으므로 LangSmith에서 별도 삭제/보존기간 관리가 필요하다. 저장 승인·소유권·HITL 로직은 변경하지 않는다.
 
 검증: 전체 pytest **1858 passed / 기존 skip 1 / 기존 warnings 3**. 인증·기본 마스킹·복수 관리자 차단·동시 요청 격리·자격정보 제거 포함. 배포 및 실제 화면 결과는 아래 후속 기록을 참조한다.
+
+### 운영 적용 확인 (2026-10-23)
+
+- Render 배포 `b0b090d20f25249ba4b624f999f2a70917630ab6` Live 확인 후 공개 웹사이트에서 저장 없는 점심 추천을 요청했다.
+- 실제 owner trace에서 Input의 질문/시스템 지시문과 Output 답변 본문이 표시되는 것을 LangSmith 브라우저에서 확인했다. 제공자 서명의 `[REDACTED]`는 본문 숨김이 아니다.
+- Flash 모델 2회, 총 10,365토큰, 모델 추정비용 $0.01041075. 실제 청구서 총액이나 100건 성능 비교를 의미하지 않는다.
+- [원문 없는 계측 증거](owner-live-verification.json). 실제 개인정보가 포함된 화면 캡처/본문은 GitHub에 게시하지 않는다.
+- 다른 사용자 차단은 인증 mock 및 동시 요청 격리 테스트로 검증했다. 타인의 실제 계정으로 테스트하지 않았다.
