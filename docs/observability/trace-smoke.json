@@ -1,0 +1,122 @@
+[
+  {
+    "project": "metadiet-synthetic-trace-synthetic-20261023-111736",
+    "mode": "synthetic",
+    "root_run_id": "03858ca6-4dbe-47db-bc3f-02437d346886",
+    "llms": [
+      {
+        "run_id": "01a1668c-af89-7af1-baf8-01b243404a1e",
+        "model": "gemini-3.1-flash-lite",
+        "usage": {
+          "input_cost": 7.75e-06,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "input_tokens": 31,
+          "output_cost": 3e-06,
+          "output_token_details": {
+            "reasoning": 0
+          },
+          "output_tokens": 2,
+          "total_cost": 1.075e-05,
+          "total_tokens": 33
+        },
+        "duration_seconds": 1.128196,
+        "cost_basis": "standard_text_list_price_estimate_2026-10-23",
+        "langsmith_total_cost": 1.075e-05,
+        "langsmith_total_tokens": 33
+      }
+    ],
+    "url": "https://smith.langchain.com/o/587a2f87-e802-40a0-8d1d-2343ab07d304/projects/p/d0969c64-fcc5-440c-b20e-22fca8a4182b/r/03858ca6-4dbe-47db-bc3f-02437d346886?poll=true"
+  },
+  {
+    "project": "metadiet-synthetic-trace-synthetic-20261023-111736",
+    "mode": "synthetic",
+    "root_run_id": "e4f34a66-237e-4cfb-a20e-970ccba0e099",
+    "llms": [
+      {
+        "run_id": "01a1668c-d6f4-7340-9223-e5a70b55ac0a",
+        "model": "gemini-3.8-flash",
+        "usage": {
+          "input_cost": 2.325e-05,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "input_tokens": 31,
+          "output_cost": 0.00045375,
+          "output_token_details": {
+            "reasoning": 119
+          },
+          "output_tokens": 121,
+          "total_cost": 0.000477,
+          "total_tokens": 152
+        },
+        "duration_seconds": 2.864766,
+        "cost_basis": "standard_text_list_price_estimate_2026-10-23",
+        "langsmith_total_cost": 0.000477,
+        "langsmith_total_tokens": 152
+      }
+    ],
+    "url": "https://smith.langchain.com/o/587a2f87-e802-40a0-8d1d-2343ab07d304/projects/p/d0969c64-fcc5-440c-b20e-22fca8a4182b/r/e4f34a66-237e-4cfb-a20e-970ccba0e099?poll=true"
+  },
+  {
+    "project": "metadiet-synthetic-trace-production-20261023-111736",
+    "mode": "production",
+    "root_run_id": "66eb29da-85eb-4e89-b7e6-9ce6558a5865",
+    "llms": [
+      {
+        "run_id": "01a1668c-ffbf-7611-9aaa-1c1a85e145e7",
+        "model": "gemini-3.1-flash-lite",
+        "usage": {
+          "input_cost": 7.75e-06,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "input_tokens": 31,
+          "output_cost": 3e-06,
+          "output_token_details": {
+            "reasoning": 0
+          },
+          "output_tokens": 2,
+          "total_cost": 1.075e-05,
+          "total_tokens": 33
+        },
+        "duration_seconds": 0.857375,
+        "cost_basis": "standard_text_list_price_estimate_2026-10-23",
+        "langsmith_total_cost": 1.075e-05,
+        "langsmith_total_tokens": 33
+      }
+    ],
+    "url": "https://smith.langchain.com/o/587a2f87-e802-40a0-8d1d-2343ab07d304/projects/p/308266cd-4c79-432e-91ac-836e27df59a8/r/66eb29da-85eb-4e89-b7e6-9ce6558a5865?poll=true"
+  },
+  {
+    "project": "metadiet-synthetic-trace-production-20261023-111736",
+    "mode": "production",
+    "root_run_id": "d7b2ece3-a505-489a-9ea4-98f0157b6bcc",
+    "llms": [
+      {
+        "run_id": "01a1668d-1f37-7b32-8bbf-2cceb277184e",
+        "model": "gemini-3.8-flash",
+        "usage": {
+          "input_cost": 2.325e-05,
+          "input_token_details": {
+            "cache_read": 0
+          },
+          "input_tokens": 31,
+          "output_cost": 0.0004575,
+          "output_token_details": {
+            "reasoning": 120
+          },
+          "output_tokens": 122,
+          "total_cost": 0.00048075,
+          "total_tokens": 153
+        },
+        "duration_seconds": 2.437862,
+        "cost_basis": "standard_text_list_price_estimate_2026-10-23",
+        "langsmith_total_cost": 0.00048075,
+        "langsmith_total_tokens": 153
+      }
+    ],
+    "url": "https://smith.langchain.com/o/587a2f87-e802-40a0-8d1d-2343ab07d304/projects/p/308266cd-4c79-432e-91ac-836e27df59a8/r/d7b2ece3-a505-489a-9ea4-98f0157b6bcc?poll=true"
+  }
+]

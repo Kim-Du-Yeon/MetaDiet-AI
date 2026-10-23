@@ -50,6 +50,8 @@ logger = logging.getLogger(__name__)
 app = FastAPI(title="Diet Agent API", version="1.0.0", lifespan=lifespan)
 from app.core.request_timing import RequestTimingMiddleware, request_ids, timing as request_timing
 app.add_middleware(RequestTimingMiddleware)
+from app.core.trace_policy import TracePolicyMiddleware
+app.add_middleware(TracePolicyMiddleware)
 from app.api.routes.admin_feedback import router as admin_feedback_router
 app.include_router(admin_feedback_router)
 from app.api.routes.admin_prompts import router as admin_prompt_router
