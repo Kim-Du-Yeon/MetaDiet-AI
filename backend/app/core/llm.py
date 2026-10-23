@@ -98,8 +98,6 @@ class ConfiguredChatModel(Runnable):
                 raise ValueError("Set GEMINI_API_KEY in backend/.env before calling Gemini")
             self._selection = self.selection_metadata()
             model = self._selection['model_name']
-            from app.core.prompts import prompt_metadata
-            prompt_info = prompt_metadata()
             try:
                 loop = asyncio.get_running_loop() if self.reuse_provider else None
             except RuntimeError:
@@ -107,8 +105,7 @@ class ConfiguredChatModel(Runnable):
             timeout = settings.eval_model_timeout_seconds if self.role == 'eval' else settings.model_timeout_seconds
             key = (ChatGoogleGenerativeAI, hashlib.sha256(settings.gemini_api_key.encode()).digest(),
                    model, self.role, self.task, self.temperature, self.max_tokens, self.thinking_level,
-                   timeout, settings.model_max_retries, self.transport_timing,
-                   prompt_info['prompt_bundle_sha256'])
+                   timeout, settings.model_max_retries, self.transport_timing)
             if loop is not None and _shared_provider is not None and (
                     _shared_provider.loop is loop and _shared_provider.key == key):
                 self._provider = _shared_provider.provider
@@ -120,7 +117,7 @@ class ConfiguredChatModel(Runnable):
                 transport_args = {'client_args': {'transport': TimedTransport()}}
             self._provider = ChatGoogleGenerativeAI(
                 model=model, api_key=settings.gemini_api_key,
-                metadata={**prompt_info,'model_task':self.task,'model_role':self.role},
+                metadata={'model_task':self.task,'model_role':self.role},
                 temperature=self.temperature, max_tokens=self.max_tokens,
                 timeout=timeout,
                 max_retries=settings.model_max_retries,
@@ -132,14 +129,14 @@ class ConfiguredChatModel(Runnable):
         return self._provider
 
     def invoke(self, input, config=None, **kwargs):
-        return self._text_response(self._client().invoke(input, config=config, **kwargs))
+        return self._text_response(self._client().invoke(input, config=_prompt_config(config), **kwargs))
 
     def prepare(self):
         """Build only the stateless provider, before timing its external call."""
         self._client()
 
     async def ainvoke(self, input, config=None, **kwargs):
-        return self._text_response(await self._client().ainvoke(input, config=config, **kwargs))
+        return self._text_response(await self._client().ainvoke(input, config=_prompt_config(config), **kwargs))
 
     @staticmethod
     def _text_response(response):
@@ -150,14 +147,14 @@ class ConfiguredChatModel(Runnable):
         return response
 
     async def astream(self, input, config=None, **kwargs):
-        async for chunk in self._client().astream(input, config=config, **kwargs):
+        async for chunk in self._client().astream(input, config=_prompt_config(config), **kwargs):
             yield chunk
 
     def bind_tools(self, tools, **kwargs):
-        return self._client().bind_tools(tools, **kwargs)
+        return _PromptBound(self._client().bind_tools(tools, **kwargs))
 
     def with_structured_output(self, schema, **kwargs):
-        return self._client().with_structured_output(schema, **kwargs)
+        return _PromptBound(self._client().with_structured_output(schema, **kwargs))
 
 
 def get_chat_model(**kwargs) -> ConfiguredChatModel:
@@ -167,3 +164,16 @@ def get_chat_model(**kwargs) -> ConfiguredChatModel:
 def get_evaluation_model():
     """Ragas requires the provider BaseChatModel generate/agenerate interface."""
     return get_chat_model(role="eval")._client()
+
+
+def _prompt_config(config):
+    from app.core.prompts import prompt_metadata
+    return {**(config or {}),"metadata":{**(config or {}).get("metadata",{}),**prompt_metadata()}}
+
+class _PromptBound(Runnable):
+    """Bind provider tools/schema, but attach release metadata only at invocation."""
+    def __init__(self,bound):self.bound=bound
+    def invoke(self,input,config=None,**kwargs):return self.bound.invoke(input,config=_prompt_config(config),**kwargs)
+    async def ainvoke(self,input,config=None,**kwargs):return await self.bound.ainvoke(input,config=_prompt_config(config),**kwargs)
+    async def astream(self,input,config=None,**kwargs):
+        async for chunk in self.bound.astream(input,config=_prompt_config(config),**kwargs):yield chunk

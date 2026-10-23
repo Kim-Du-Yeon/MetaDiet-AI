@@ -1,0 +1,77 @@
+{
+  "suite": "clarification-closing-offer-v5",
+  "code_sha256": {
+    "backend/scripts/eval/clarification_v5.py": "c6d061b251caa6c22424953104ccf058fbe9377109672cf5ff323da5964ffd65",
+    "backend/scripts/eval/run_clarification_v5.py": "7af6592cfd2b4bd8d81bbef2cf22a242bc44ef059a4bbbf82d269de590fbd8e2",
+    "backend/scripts/eval/approve_clarification_v5.py": "971f0bd7538ca39b1c7daf13b482a153af38033e003b35ec7b0bd5ba2dcaf62e",
+    "backend/scripts/eval/v5_evidence_contract.py": "bc4ec8a4680c58204e46a2778e28e7e17089f5400e2f818842152c6388f3e069",
+    "backend/scripts/prompt_release_workflow.py": "48b16215d9b0b995ae485a68d5872bc9d3cb5bfab3e10a950d49799b45e08bd6",
+    "backend/scripts/eval/clarification_holdout.py": "3ea0d8fc22b9a8204316193dd0b66b01d3fca7048d99ff3ab7b216200b231b3c",
+    "backend/scripts/eval/run_clarification_holdout.py": "230a25ad783acc2cebc9f2a98a82da2eb385a08b48cc0cdb1dd8ac8fdd1d7ee0",
+    "backend/scripts/eval/run_clarification_v3.py": "f05c26914ee1457218463155ebe1f3a782a0d480270b819d31db680b9660c6ed",
+    "backend/scripts/eval/run_clarification_v4.py": "f0722a290fb54bd4e4d5d0052427141a10d3fc524f80a5ad460f251e9019c163",
+    "backend/scripts/eval/clarification_v3.py": "9e2fada1f2bf8e53389a449d3b92898df0ca8628fcfb901b226a832a0fec3387",
+    "backend/scripts/eval/clarification_v4.py": "b7cde3cc71fdb58f3a9098f41c413eba89a85aa39e3a9c3a884a0d652e45300e",
+    "backend/scripts/eval/clarification_execution.py": "789147fb998dc16cc53b5baa01be9078038e57665306e1722e4f3cfab2bc56e6",
+    "backend/scripts/eval/run_clarification_comparison.py": "2e906a155e8d92b3fd434e1bad9f4609d24c66d4e56f37defa07de6af1984f4e",
+    "backend/scripts/eval/clarification_cases.py": "ac5b476b85ba7afed873e8fbe3929a40c7c3122de4cd8d99461a0ea30184599d",
+    "backend/scripts/eval/batch_agentic_judges.py": "6874b030ad8b6f18a05a6fc24582b3c150326ba529942800d801213a172e25e8",
+    "backend/scripts/eval/batch_clarification_resume.py": "671f5042d1d0483e475e5ecdc842d0368448d45270a217396a41d5ee7ec39723",
+    "backend/scripts/eval/eval_budget.py": "a5c9d4d52e4fd48d8f5242d0a329307d2ce82e12311598db1d4918913a9039d7",
+    "backend/scripts/eval/model_routing_support.py": "1e93ec3893b0786ebb1d79e1df437f0ea67e5885288b8d2c6ac99f085c973c83",
+    "backend/scripts/eval/cache_artifacts.py": "0d893343a2ac9f1152237f7a8809e153a215da076fc1ec2cbe2ac6eaf8bb6305"
+  },
+  "candidate_sha256": "063fe60dd1337b36b5a847d311201e8faca4d9c6f172cc92f84cd2d5754e8f0c",
+  "cases_sha256": "51fdc9002d4ffeba86a3c469548adc4894555be141b3dc325cffd42a361a11a9",
+  "source_hashes": {
+    "approved.json": "8e81718c2d4bc437570231d5228635e843b14e86235b25a00c7a2fff564df755",
+    "staging-smoke.json": "633087ded02848cd1ec31f542ce9a7eb2cb45ff552e96f79d84f8c968c93b24b",
+    "browser-model-traces.json": "1993aa24f92bcf033b290c3b3185545156d672a22ff04ccbcdf280f1afa99dc5"
+  },
+  "frozen_before_new_outputs": true,
+  "scope": "Separate synthetic development100cases,1known regression replay+99new; no independent validation claim",
+  "reuse": "one baseline answer only, exact request key; old100 benchmark remains historical, no borrowed candidate grades",
+  "gate": "candidate100normal/accounted, correct/faithful>=98 and>=baseline-1, behavior>=98 and>=baseline, required50/50, unsafe0,fresh/no-write100, optional<=2 and strictly<baseline, p95/cost<=1.25baseline;100strict pairs",
+  "planned_calls": "199newcase generations (may use up to3models each),100pairedProBatchrequests, staging/browser smoke only if passed",
+  "expected_usage_estimate_usd": [
+    0.8,
+    1.2
+  ],
+  "actual_user_ab": false,
+  "tracing": {
+    "project": "metadiet-v5-closing-offer-20261022",
+    "enabled": true,
+    "privacy": "client hide_inputs/outputs; static prompt IDs/hashes, synthetic case_id/condition only",
+    "source_recurrence_trace": "not found, saved original output/prompt identity remains evidence"
+  },
+  "original_paid_generation_code_sha256": {
+    "backend/scripts/eval/clarification_v5.py": "7408a5eb3fd4a057991cef9dbf89f36e2506692886a935bb791169ad848667be",
+    "backend/scripts/eval/run_clarification_v5.py": "fa3ff24b833f8121c555469da09b0a0a9bc357b9a5d29ea3ac390ca36f4f6008",
+    "backend/scripts/eval/approve_clarification_v5.py": "581b5a24e1a4956da523557340b95c0e2bd65d6147c749bc2a29d5ff96845146",
+    "backend/scripts/prompt_release_workflow.py": "48b16215d9b0b995ae485a68d5872bc9d3cb5bfab3e10a950d49799b45e08bd6",
+    "backend/scripts/eval/clarification_holdout.py": "3ea0d8fc22b9a8204316193dd0b66b01d3fca7048d99ff3ab7b216200b231b3c",
+    "backend/scripts/eval/run_clarification_holdout.py": "230a25ad783acc2cebc9f2a98a82da2eb385a08b48cc0cdb1dd8ac8fdd1d7ee0",
+    "backend/scripts/eval/run_clarification_v3.py": "f05c26914ee1457218463155ebe1f3a782a0d480270b819d31db680b9660c6ed",
+    "backend/scripts/eval/run_clarification_v4.py": "f0722a290fb54bd4e4d5d0052427141a10d3fc524f80a5ad460f251e9019c163",
+    "backend/scripts/eval/clarification_v3.py": "9e2fada1f2bf8e53389a449d3b92898df0ca8628fcfb901b226a832a0fec3387",
+    "backend/scripts/eval/clarification_v4.py": "b7cde3cc71fdb58f3a9098f41c413eba89a85aa39e3a9c3a884a0d652e45300e",
+    "backend/scripts/eval/clarification_execution.py": "789147fb998dc16cc53b5baa01be9078038e57665306e1722e4f3cfab2bc56e6",
+    "backend/scripts/eval/run_clarification_comparison.py": "2e906a155e8d92b3fd434e1bad9f4609d24c66d4e56f37defa07de6af1984f4e",
+    "backend/scripts/eval/clarification_cases.py": "ac5b476b85ba7afed873e8fbe3929a40c7c3122de4cd8d99461a0ea30184599d",
+    "backend/scripts/eval/batch_agentic_judges.py": "6874b030ad8b6f18a05a6fc24582b3c150326ba529942800d801213a172e25e8",
+    "backend/scripts/eval/batch_clarification_resume.py": "671f5042d1d0483e475e5ecdc842d0368448d45270a217396a41d5ee7ec39723",
+    "backend/scripts/eval/eval_budget.py": "a5c9d4d52e4fd48d8f5242d0a329307d2ce82e12311598db1d4918913a9039d7",
+    "backend/scripts/eval/model_routing_support.py": "1e93ec3893b0786ebb1d79e1df437f0ea67e5885288b8d2c6ac99f085c973c83",
+    "backend/scripts/eval/cache_artifacts.py": "0d893343a2ac9f1152237f7a8809e153a215da076fc1ec2cbe2ac6eaf8bb6305"
+  },
+  "accounting_amendment": {
+    "after_attempts_saved": 29,
+    "scope": "Baseline timeout only, up to2, bound to retained reservation. Raw failed row unchanged. Candidate100normal/known usage criteria unchanged. Cost gate uses baseline KNOWN lower bound, never inflated cap.",
+    "not_originally_preregistered": true,
+    "unknown_usage_is_not_zero": true
+  },
+  "reporting_amendment_after_60_attempts": {
+    "purpose": "Continue all noncapacity failures without retry or replacement; report unknown cost instead of inventing usage. Incomplete accounting still blocks promotion; partial-return timeout costs are lower bounds. No prompt/cohort/quality-gate changes.",
+    "old_protocol_sha256": "cf05443007d9d35b98ac5c257b9e6df4c5725d201e0b38a4087a6e14e665014e"
+  }
+}

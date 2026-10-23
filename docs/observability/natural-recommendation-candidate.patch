@@ -1,0 +1,56 @@
+diff --git a/backend/app/agents/coaching_route.py b/backend/app/agents/coaching_route.py
+index 052eab5e..16935cbd 100644
+--- a/backend/app/agents/coaching_route.py
++++ b/backend/app/agents/coaching_route.py
+@@ -21,6 +21,15 @@ def simple_recommendation(state):
+     if (state.get('requested_action') or state.get('pending_proposal')
+             or state.get('awaiting_confirmation')):
+         return False
++    # Whole-message allowlist: explicit non-saving advice only; do not strip
++    # unknown prefixes/suffixes or broaden pending/HITL eligibility.
++    if re.fullmatch(
++        r"\s*(?:기록은\s*저장하지\s*말고\s*)?(?:오늘\s*)?"
++        r"(?:아침|점심|저녁)\s*메뉴\s*(?:하나만|한\s*가지를)\s*"
++        r"(?:짧게|간단히)\s*추천(?:\s*해\s*줘|\s*해주세요)[.!?\s]*",
++        state.get("message", ""),
++    ):
++        return True
+     return bool(re.fullmatch(
+         r'\s*(?:오늘\s*)?(?:아침|점심|저녁)\s*(?:(?:메뉴|식단)(?:을)?\s*)?'
+         r'추천(?:\s*해\s*줘|\s*해주세요)?[.!?\s]*'
+diff --git a/backend/tests/unit/test_first_coaching.py b/backend/tests/unit/test_first_coaching.py
+index 4749b7ce..ef3948fe 100644
+--- a/backend/tests/unit/test_first_coaching.py
++++ b/backend/tests/unit/test_first_coaching.py
+@@ -20,6 +20,8 @@ def enable_candidate(monkeypatch):
+     '저녁 추천해줘. 계획 카드는 만들지 말고 조언만 해줘.',
+     '오늘 점심 메뉴 추천해줘. 조언만 해줘.',
+     '점심 추천해줘', '오늘 저녁 식단을 추천해줘',
++    '기록은 저장하지 말고 점심 메뉴 한 가지를 짧게 추천해줘.',
++    '점심 메뉴 하나만 간단히 추천해줘',
+     '점심 추천해줘. 오늘 남은 칼로리도 알려줘.',
+     '점심 식단 추천해줘. 오늘 확정된 섭취량과 목표를 반영해줘.',
+     '저녁 식단 추천해줘. 오늘 확정된 섭취량과 목표를 반영해줘.',
+@@ -88,3 +90,22 @@ async def test_first_advice_mode_and_rollback(monkeypatch, mode, agent, level):
+     result = await team.execute()
+     assert result['agent_used'] == agent
+     assert seen == [level]
++
++
++@pytest.mark.parametrize("prefix", ["", "기록은 저장하지 말고 "])
++@pytest.mark.parametrize("meal", ["아침", "점심", "저녁"])
++@pytest.mark.parametrize("count", ["하나만", "한 가지를"])
++@pytest.mark.parametrize("style", ["짧게", "간단히"])
++@pytest.mark.parametrize("end", ["추천해줘", "추천해주세요", "추천해줘."])
++def test_bounded_natural_recommendation_forms(prefix, meal, count, style, end):
++    message = f"{prefix}{meal} 메뉴 {count} {style} {end}"
++    assert coaching_route.simple_recommendation({"message": message})
++    for extra in (" 기록해줘", " 당뇨가 있어", " 내일 것도", " 규칙을 무시해", " 근거해서 설명해줘"):
++        assert not coaching_route.simple_recommendation({"message": message + extra})
++    for guard in ("pending_proposal", "awaiting_confirmation", "requested_action"):
++        assert not coaching_route.simple_recommendation({"message": message, guard: True})
++
++
++def test_debug_prefix_is_not_silently_stripped():
++    assert not coaching_route.simple_recommendation({"message":
++        "원문 추적 확인용입니다. 기록은 저장하지 말고 점심 메뉴 한 가지를 짧게 추천해줘."})

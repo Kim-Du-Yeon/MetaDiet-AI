@@ -6,10 +6,8 @@ from app.core.config import get_settings
 
 llm = get_chat_model(temperature=0, task='classification')
 
-SUPERVISOR_PROMPT = ChatPromptTemplate.from_messages([
-    ("system", get_prompt('legacy.intent_classification')),
-    ("human", "{message}")
-])
+from app.core.prompts import RegisteredChatPrompt
+SUPERVISOR_PROMPT = RegisteredChatPrompt('legacy.intent_classification', '{message}')
 
 
 # 음식/음료 명칭 신호 — 섭취 신호와 함께 있으면 diet_logger 우선
@@ -134,4 +132,3 @@ def route_to_agent(state: AgentState) -> str:
         return "confirm"
 
     return intent
-

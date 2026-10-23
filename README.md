@@ -1,3 +1,41 @@
+## LangSmith 운영 관측 (2026-10-23)
+
+[개발·합성 원문 / 운영 건강정보 마스킹·모델별 토큰과 비용·검증 및 한계](docs/observability/README.md). 운영 자유문은 보수적으로 제거하고, 실제 LLM child의 토큰·캐시·추론 토큰에 표준 단가를 적용한다. 확정 청구액과 추정 비용을 구분한다.
+
+## 선택적 마무리 제안 v5:100쌍 비교·실제 LangSmith 추적 (2026-10-22)
+
+별도 합성 개발100쌍에서 불필요 후속 요청9→0, v5 필수 질문50/50·정답/충실성100/100. 기준선 timeout2건도 분모에 보존했다. 신규199요청의 실제 LangSmith root·8개 프롬프트 커밋을 모두 연결했다. **기준선1건의 usage/예약 미확정으로 전체 승인 미통과·운영v4 유지**다. 품질 개선과 운영 승격을 구분한다. [결과·원문·사례·추적 화면·비용·미승격 이유](docs/prompt_control/clarification-balanced/v5-closing-offer-20261022/RESULTS.md).
+
+## 최신: 기준선 실패 분리 후 v4 운영 적용 (2026-10-22)
+
+[정책 개정·원문 보존·실제 Staging/운영·브라우저·비용](docs/prompt_control/clarification-balanced/v4-approval-policy-v2-20261022/RESULTS.md). 기존100쌍/이전 미통과 기록을 보존하고 후보 자체의 안전·품질 기준을 분리했다. **결과를 본 뒤의 명시적 정책 개정**이며 새 사전등록 검증으로 표현하지 않는다. 기존200답변/Pro100쌍 재사용, 추가Flash8회/Pro0회로 약$0.022 추정. 서명릴리스8f4014f9를 실제Staging→Production 승격하고 공개2요청의 실제사용커밋을 확인했다. 전체pytest1825통과/기존skip1. Staging1건의 선택적 마무리 제안 재발은 한계로 보존하며 실제 사용자A/B는 계속 비활성이다.
+
+아래 이전 holdout 미승격 문단은 당시 사전 기준의 역사적 판단이며 원본 그대로다.
+
+## 최신: v4 신규 합성 holdout·두 프롬프트 승인 경로 (2026-10-22)
+
+새100질문에서 v1/v4 각100시도·Pro100쌍 완료. 정답98→100%, 충실성97→100%, 행동92→100%, 불필요 질문5→0, 필수 질문50/50 유지. v4의 회귀0건이었다. 후보 성능 기준은 충족했으나 사전 기준의 **기준선까지 전건 정상 완료** 조건을 v1 blocked2건이 충족하지 못해 서명·Staging·운영 승격은 하지 않았다. 평가 기준 설계의 한계도 별도 기록했다. [결과·회복8건·비용·승인 제한](docs/prompt_control/clarification-balanced/v4-independent-20261022/RESULTS.md)
+
+## 분량·레시피 질문 구분 비교 (2026-10-22)
+
+별도 개발24건 후 동일100건에서 v4는 정답·충실성100/100 유지, 불필요 질문3→0, 필수 질문50/50을 확인했다. 평가 후보로 채택했고 운영 승격은 수행하지 않았다. [실험 결과·사례·비용·한계](docs/prompt_control/clarification-balanced/v4-calculation-mode-20261022/RESULTS.md)
+
+후속 상담 v3 회귀 개선·비교 완료: [별도 개발24쌍·동일100건·정답99/98/100·행동99/97/97·v1 유지·추가 약$0.81](docs/prompt_control/clarification-balanced/v3-candidate-20261022/RESULTS.md). 평가 문맥 누락과 모델 오류를 구분하고 기존200답변을 재사용했습니다.
+
+후속 질문 프롬프트 비교 완료: [v1/v2 각100건·Pro100쌍 완료·정답98%/96%·충실성100%/96%·후보미채택 및 원문/비용](docs/prompt_control/clarification-balanced/execution-v2/COMPLETE100.md).
+
+채점 형식 후속 분석: [남은31쌍 원문·별도 출력 계약·오프라인 검증·잔여$0.108478 재평가 가능성](docs/prompt_control/clarification-balanced/execution-v2/FORMAT_CONTRACT.md). 새 유료 호출0회.
+
+최신 후속 질문 후보 평가: [추가 $0.141522로45쌍 재평가·69/100 유효·31 형식 실패·기존 v1 유지](docs/prompt_control/clarification-balanced/execution-v2/RETRY_025.md).
+
+추가 질문 평가셋: [바로 답변50·필수 질문50·개발20·저장 사례10·Pro RPD 차단과 재개 조건](docs/prompt_control/clarification-balanced/README.md).
+
+후속 상담 새 후보 비교: [기존 v1 재사용·추가 질문 감소 가설·Pro429 중단·미승격 이유](docs/prompt_control/followup-question-candidate/README.md).
+
+새 후보 승인 절차: [커밋 선택 → 기존 평가 재사용/새 비교 → 검증 receipt → 서명 → 수동 승격](docs/prompt_control/release_workflow/README.md). 미검증 후보는 운영에 적용되지 않습니다.
+
+최신 프롬프트 운영 제어: [LangSmith 비공개8개·원자적 서명 릴리스·HITL 고정·v1/v2각100건·캐시100쌍 비교·실제 승격/롤백·채택 판단](docs/prompt_control/README.md). 실제 사용자A/B와 명시적 캐시는OFF이며, 구현/비교/운영 검증 상태를 구분합니다.
+
 **성능 하락 정성 분석:** [회귀10건의4유형·공통 실패 분리·문맥 조립6건 재현·미채택 판단](docs/agentic_rag/20261021-controlled-hybrid-analysis/README.md). 수치3/시간조건3/전체보류2/목록누락2건으로 분류했다. 인접 청크 우선·6,000자 문맥 한도에 의한 핵심 표현 탈락은 오프라인6/6 동일 문맥 재현으로 확인했다. 새 답변 품질 개선을 뜻하지 않으며,신규 유료 호출 없이 면접 설명·개선 검증 기준까지 정리했다.
 
 ## 최신: 동일 조건 Hybrid vs Hybrid+Agentic100시도씩 비교
@@ -246,3 +284,9 @@ Ragas는 의존성 충돌을 피하기 위해 별도 평가 환경을 사용합�
 관리자 안정성 검증: [실제 인증 세션·10분 지속 조회·DB 연결 장애 복구](docs/admin-feedback/SOAK_RECOVERY.md).
 
 독립 무료 Render 검증 완료: [2시간·720건 조회, 실제 DB 재시작, 동시 수정 100라운드, 직접 백업 복구와 Supabase 차이](docs/admin-feedback/RENDER_RECOVERY_VALIDATION.md). 전체 조회 720/720, 중앙값 530.63ms·p95 753.94ms. 복원 후 데이터/제약/인덱스/RLS hash 일치·조회 100/100. 합성 인증과 관리자 API 범위이며 운영 Supabase 전체 복구 결과는 아닙니다. 검증 웹·DB는 정지했습니다.
+
+후속 질문 의미 평가의 실제 실행·승인 연결: [실행 조건·사전 게이트·예산·원본 결과](docs/prompt_control/clarification-balanced/execution-v2/README.md).
+
+[Pro RPD 진단 및 저장 답변의 Batch 채점 재개](docs/prompt_control/clarification-balanced/execution-v2/RESUME.md).
+
+[후속 채점 오프라인 복구와 남은45쌍 비용 제안](docs/prompt_control/clarification-balanced/execution-v2/OFFLINE_RECOVERY.md).

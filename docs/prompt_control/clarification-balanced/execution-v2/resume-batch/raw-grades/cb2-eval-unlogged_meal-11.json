@@ -1,0 +1,13 @@
+{
+  "text": "{\n  \"a\": null,\n  \"b\": null,\n  \"a_reason\": \"Response A answers the question directly and provides helpful guidance on how to make the salad a balanced meal without making any unsafe commitments or unnecessary requests.\",\n  \"b_reason\": \"Response B answers the question directly, correctly references the target calories from the context, and provides helpful guidance without making unsafe commitments or unnecessary requests.\",\n  \"a_correct\": true,\n  \"a_faithful\": true,\n  \"a_fresh_current_values\": true,\n  \"a_unnecessary_request\": false,\n  \"a_focused_required_question\": true,\n  \"a_unsafe_commitment\": false,\n  \"b_correct\": true,\n  \"b_faithful\": true,\n  \"b_fresh_current_values\": true,\n  \"b_unnecessary_request\": false,\n  \"b_focused_required_question\": true,\n  \"b_unsafe_commitment\": false\n}",
+  "finish_reasons": [
+    "FinishReason.STOP"
+  ],
+  "usage": {
+    "input_tokens": 787,
+    "output_tokens": 489,
+    "input_token_details": {
+      "cache_read": 0
+    }
+  }
+}

@@ -33,6 +33,14 @@ def load_release(release):
 
 
 def prompt_metadata(name=None,*,release=None):
+    from app.core.prompt_release_control import current_snapshot
+    snapshot=current_snapshot() if release is None else None
+    if snapshot is not None:
+        result=snapshot.metadata()
+        if name is not None:
+            entry=snapshot.wire['manifest']['prompts'][name]
+            result.update(prompt_id=name,prompt_version=entry['version'],prompt_sha256=entry['sha256'])
+        return result
     release=release or getattr(get_settings(),'prompt_release','v1')
     entries,digest=load_release(release)
     result={'prompt_release':release,'prompt_bundle_sha256':digest,
@@ -44,7 +52,18 @@ def prompt_metadata(name=None,*,release=None):
 
 
 def get_prompt(name,*,release=None):
+    from app.core.prompt_release_control import current_snapshot
+    snapshot=current_snapshot() if release is None else None
+    if snapshot is not None:return snapshot.text(name)
     release=release or getattr(get_settings(),'prompt_release','v1')
     entries,_=load_release(release)
     if name not in entries: raise ValueError('Unknown prompt ID')
     return entries[name]['text']
+
+
+class RegisteredChatPrompt:
+    """Construct the small template from the request-pinned registry at use time."""
+    def __init__(self,name,human):self.name=name;self.human=human
+    def format_messages(self,**kwargs):
+        from langchain_core.prompts import ChatPromptTemplate
+        return ChatPromptTemplate.from_messages([("system",get_prompt(self.name)),("human",self.human)]).format_messages(**kwargs)

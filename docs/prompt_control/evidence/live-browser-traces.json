@@ -1,0 +1,530 @@
+{
+  "scope": "same browser conversation; correlation thread identifier intentionally omitted",
+  "native_traces": [
+    {
+      "trace_id": "01a15ef3-9cb9-7281-9ee8-59e5e6326f7b",
+      "name": "save_chat",
+      "run_type": "chain",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_cost_langsmith": null
+    },
+    {
+      "trace_id": "01a15ef3-9cb7-7e20-88ac-e5fc1dc31b77",
+      "name": "after_task",
+      "run_type": "chain",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_cost_langsmith": null
+    },
+    {
+      "trace_id": "01a15ef3-60c2-75a2-bf74-694df8bc9ff9",
+      "name": "ChatGoogleGenerativeAI",
+      "run_type": "llm",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 4100,
+      "completion_tokens": 1730,
+      "total_cost_langsmith": "0.0095625"
+    },
+    {
+      "trace_id": "01a15ef3-41e1-7bb1-9d8b-f780e8f6acad",
+      "name": "ChatGoogleGenerativeAI",
+      "run_type": "llm",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 4192,
+      "completion_tokens": 599,
+      "total_cost_langsmith": "0.00539025"
+    },
+    {
+      "trace_id": "01a15ef3-2973-7ce0-b432-c00f89fc268d",
+      "name": "ChatGoogleGenerativeAI",
+      "run_type": "llm",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 85,
+      "completion_tokens": 19,
+      "total_cost_langsmith": "0.00004975"
+    },
+    {
+      "trace_id": "01a15ef3-17ff-7b82-a178-30796aa4135a",
+      "name": "supervisor",
+      "run_type": "chain",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 8377,
+      "completion_tokens": 2348,
+      "total_cost_langsmith": "0.0150025"
+    },
+    {
+      "trace_id": "ad3d1503-3ea8-44b4-b722-cf555c4fdfaf",
+      "name": "LangGraph",
+      "run_type": "chain",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 8377,
+      "completion_tokens": 2348,
+      "total_cost_langsmith": "0.0150025"
+    },
+    {
+      "trace_id": "01a15ef2-792c-7103-b329-d4cb0ebc3499",
+      "name": "save_chat",
+      "run_type": "chain",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_cost_langsmith": null
+    },
+    {
+      "trace_id": "01a15ef2-7929-7cf3-896a-b758bb33c2c0",
+      "name": "after_task",
+      "run_type": "chain",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_cost_langsmith": null
+    },
+    {
+      "trace_id": "01a15ef2-6e2b-7ca0-bcbb-8f965311610c",
+      "name": "ChatGoogleGenerativeAI",
+      "run_type": "llm",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 2517,
+      "completion_tokens": 112,
+      "total_cost_langsmith": "0.00230775"
+    },
+    {
+      "trace_id": "01a15ef2-64ee-71a1-b916-c9a978092b57",
+      "name": "supervisor",
+      "run_type": "chain",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 2517,
+      "completion_tokens": 112,
+      "total_cost_langsmith": "0.00230775"
+    },
+    {
+      "trace_id": "b8921920-2d10-43aa-8779-ecd8a3664281",
+      "name": "LangGraph",
+      "run_type": "chain",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 2517,
+      "completion_tokens": 112,
+      "total_cost_langsmith": "0.00230775"
+    },
+    {
+      "trace_id": "01a15ef0-f538-7cc1-a85c-bf4c2e1adc0f",
+      "name": "save_chat",
+      "run_type": "chain",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_cost_langsmith": null
+    },
+    {
+      "trace_id": "01a15ef0-f536-7922-b1a7-a3028cd6854d",
+      "name": "after_task",
+      "run_type": "chain",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_cost_langsmith": null
+    },
+    {
+      "trace_id": "01a15ef0-e213-76d1-86a5-9270bcf2b745",
+      "name": "ChatGoogleGenerativeAI",
+      "run_type": "llm",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 2111,
+      "completion_tokens": 158,
+      "total_cost_langsmith": "0.00217575"
+    },
+    {
+      "trace_id": "01a15ef0-d74e-7b31-9ebb-e3f8564bccf6",
+      "name": "supervisor",
+      "run_type": "chain",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 2111,
+      "completion_tokens": 158,
+      "total_cost_langsmith": "0.00217575"
+    },
+    {
+      "trace_id": "984b7a1f-7de4-4a4b-b47d-308d733b304e",
+      "name": "LangGraph",
+      "run_type": "chain",
+      "prompt_release": "v1",
+      "release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 2111,
+      "completion_tokens": 158,
+      "total_cost_langsmith": "0.00217575"
+    },
+    {
+      "trace_id": "01a15eef-394f-71f2-8b20-084afedd6b8d",
+      "name": "save_chat",
+      "run_type": "chain",
+      "prompt_release": "v1-control-drill",
+      "release_commit": "6eec616d1db7a13c429aff3ebb82aa27feb154f1eb238f9ab9697108b34cfdaf",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_cost_langsmith": null
+    },
+    {
+      "trace_id": "01a15eef-394c-7692-8b43-c92b9a8ebb82",
+      "name": "after_task",
+      "run_type": "chain",
+      "prompt_release": "v1-control-drill",
+      "release_commit": "6eec616d1db7a13c429aff3ebb82aa27feb154f1eb238f9ab9697108b34cfdaf",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_cost_langsmith": null
+    },
+    {
+      "trace_id": "01a15eef-361a-7eb1-a8c1-8dca1063257e",
+      "name": "confirm",
+      "run_type": "chain",
+      "prompt_release": "v1-control-drill",
+      "release_commit": "6eec616d1db7a13c429aff3ebb82aa27feb154f1eb238f9ab9697108b34cfdaf",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_cost_langsmith": null
+    },
+    {
+      "trace_id": "96460805-8f6e-4e8f-afd7-0b591cc51d8c",
+      "name": "LangGraph",
+      "run_type": "chain",
+      "prompt_release": "v1-control-drill",
+      "release_commit": "6eec616d1db7a13c429aff3ebb82aa27feb154f1eb238f9ab9697108b34cfdaf",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_cost_langsmith": null
+    },
+    {
+      "trace_id": "01a15eeb-921f-75f0-a05f-28730f0f14c2",
+      "name": "save_pending_chat",
+      "run_type": "chain",
+      "prompt_release": "v1-control-drill",
+      "release_commit": "6eec616d1db7a13c429aff3ebb82aa27feb154f1eb238f9ab9697108b34cfdaf",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_cost_langsmith": null
+    },
+    {
+      "trace_id": "01a15eeb-921b-7f72-8db9-68270f2ab59f",
+      "name": "after_task",
+      "run_type": "chain",
+      "prompt_release": "v1-control-drill",
+      "release_commit": "6eec616d1db7a13c429aff3ebb82aa27feb154f1eb238f9ab9697108b34cfdaf",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_cost_langsmith": null
+    },
+    {
+      "trace_id": "01a15eeb-7c39-75b0-9841-4854f65f9c3b",
+      "name": "supervisor",
+      "run_type": "chain",
+      "prompt_release": "v1-control-drill",
+      "release_commit": "6eec616d1db7a13c429aff3ebb82aa27feb154f1eb238f9ab9697108b34cfdaf",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_cost_langsmith": null
+    },
+    {
+      "trace_id": "7ede6c52-5627-48e8-8ac8-7f660c2471ed",
+      "name": "LangGraph",
+      "run_type": "chain",
+      "prompt_release": "v1-control-drill",
+      "release_commit": "6eec616d1db7a13c429aff3ebb82aa27feb154f1eb238f9ab9697108b34cfdaf",
+      "child_commits": {
+        "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+        "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+        "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+        "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+        "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+        "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+        "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+        "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+      },
+      "build_commit": "71975d7131a75d8c752357365251ee9919ba925e",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_cost_langsmith": null
+    }
+  ]
+}

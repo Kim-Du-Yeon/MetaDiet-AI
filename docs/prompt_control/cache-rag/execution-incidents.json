@@ -1,0 +1,33 @@
+{
+  "file_replacement_failure": {
+    "error": "Windows PermissionError WinError5 at write-ahead save before next API invocation",
+    "rows_at_resume_observation": 125,
+    "action": "resume completed keys; no answer regeneration; bounded file-replace retry6, maximum300ms sleeps added; caches recreated as needed after process restart"
+  },
+  "stream_accounting_fix": "interim usage may not settle cancelled/incomplete stream; retain full reservation; timeout above had no output/usage so full reservation already retained",
+  "timeouts": [
+    {
+      "case_id": "ag-015",
+      "condition": "explicit",
+      "status": "failed",
+      "ms": 1264286.748000006,
+      "ttft_ms": null,
+      "error": {
+        "type": "TimeoutError",
+        "code": null
+      }
+    },
+    {
+      "case_id": "ag-027",
+      "condition": "explicit",
+      "status": "failed",
+      "ms": 351816.80930000584,
+      "ttft_ms": null,
+      "error": {
+        "type": "TimeoutError",
+        "code": null
+      }
+    }
+  ],
+  "timeout_interpretation": "Two anomalous wall-clock timeouts; configured asyncio limit65seconds does not establish a hard wall-time bound during host/event-loop pauses. Root cause not established; raw elapsed/failures retained; no clean provider-only speed attribution."
+}

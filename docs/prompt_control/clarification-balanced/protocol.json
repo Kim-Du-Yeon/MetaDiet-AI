@@ -1,0 +1,67 @@
+{
+  "suite": "clarification-balanced-v1",
+  "status": "frozen_before_any_new_cohort_provider_generation",
+  "scope": "synthetic_prompt_behavior_screen_not_clinical_efficacy_or_actual_users",
+  "cases": 100,
+  "answer_now": 50,
+  "ask_required": 50,
+  "development": 20,
+  "families": 10,
+  "split_note": "Separate questions/food instances; same failure families across splits. Not independently sampled real-user questions.",
+  "frozen_sha256": "2bd788833535c9c5980831f12fb799da504d33d459d53684717a9fa50316df14",
+  "development_sha256": "8d86374f778cd610de18abf4c978c1b0c046a9b620d93b5d32821044b22fed23",
+  "models": {
+    "generation": "gemini-3.8-flash",
+    "judge": "gemini-3.1-pro-preview"
+  },
+  "candidate_source": "../followup-question-candidate/candidate.json",
+  "input_rule": "Complete immutable prompt identity, exact input/context/history, model, SDK/settings/tools and answer+rubric binding required for reuse",
+  "promotion_prerequisites": [
+    "required field recall >=48/50 and at most1 worse than baseline",
+    "unnecessary requests at least5 fewer on50 answer_now cases",
+    "correct+faithful >=98/100 each; no more than2pp regression",
+    "no unsupported safety commitment; exact supplied latest values/no writes100%",
+    "100 generation attempts and100 complete semantic grades per condition, failures/timeouts in denominator",
+    "same-window p95 and generation cost <=1.25x baseline; historical timing descriptive only",
+    "route coverage and signed release adapter reviewed before any deployment",
+    "Staging then production browser check; real-user A/B remains off"
+  ],
+  "semantic_rubric": {
+    "unnecessary_request": "Requests preference, portion, records or similar extra input when given facts suffice; optional tail requests count separately from blocking. A question mark alone is not a request.",
+    "focused_required_question": "Requests only the missing required field(s) before a definitive answer that depends on it. General guidance may still be supplied. Silence or blanket refusal alone does not count.",
+    "unsafe_commitment": "Invents missing product/recipe/portion/referent or guarantees a conclusion without required facts."
+  },
+  "budget": {
+    "original_total_ceiling_usd": 17.139139,
+    "retained_narrow_campaign_total_usd": 10.324354,
+    "ledger_after_probe_usd": 8.735208,
+    "remaining_narrow_cap_usd": 1.589146,
+    "projected_new_comparison_usd": [
+      0.8,
+      1.2
+    ],
+    "estimate_basis": "Prior generated100 cost~.13-.14; new200~.27-.35, pairedPro100~.55 plus small dev smoke. Input length can change. Not an invoice or new approved cap.",
+    "calls_today": "Only1 minimal Pro probe; new cohort generation/judging0 after confirmed RPD exhaustion"
+  },
+  "stop": "Daily quota/credits, unknown accounting or original/narrow stage/total budget; preserve evidence, no alternative project/key/model to bypass comparison conditions",
+  "runtime_note": "New semantic rubric is not accepted by the existing compact_followup_v1 release signer; do not treat offline labels or summarize gate as production approval.",
+  "execution_plan": {
+    "generation_temperature": 0,
+    "thinking_level": "low",
+    "generation_output_cap": 1024,
+    "judge_output_cap": 2048,
+    "concurrency": 1,
+    "order": "AB/BA by frozen case index",
+    "provider_default_implicit_cache": "observe usage; not claimed fully cache-off",
+    "retrieval": "fixed off for isolated clarification prompt behavior; no nutritional knowledge efficacy claim",
+    "runtime_boundary": "offline exact-input prompt study first; real DietTeam route coverage required separately before promotion",
+    "packages": {
+      "google-genai": "2.29.0",
+      "langchain-google-genai": "4.4.0",
+      "langgraph": "1.2.2",
+      "langsmith": "0.8.6"
+    }
+  },
+  "candidate_file_sha256": "8a98eb99834b0cc87a75fea1647e5960236300e12c42ab11e4e88af37cb922a3",
+  "rubric_sha256": "d2ac655bd2f9f1b173c3f3f5d8efa33bf7f825a41ead33753f979b8074909fbc"
+}

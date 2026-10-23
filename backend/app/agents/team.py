@@ -113,6 +113,9 @@ class DietTeam:
         self.simple_meals_enabled = simple_meals_enabled
         self.jev_location = jev_location
         self.jev_mode = jev_mode
+        self.base_instruction = get_prompt('team.base')
+        self.role_instructions = {role:get_prompt('team.role.'+role) for role in ('meal','goal','evidence')}
+        self.compact_instruction = get_prompt('team.compact_followup')
         self.state = dict(state)
         if not self.state.get("requested_action") and _is_record_only_request(state.get("message", "")):
             self.state["requested_action"] = "record_only"
@@ -624,7 +627,7 @@ class DietTeam:
             await emit_runtime_event('execution_route', route='read_only_goal_direct')
             await emit_runtime_event('delegated', agent='goal')
             result = await run_agent(model=self.model_factory(),
-                instruction=BASE_INSTRUCTION + self.evidence_instruction() + '\n담당: goal\n' + ROLE_INSTRUCTIONS['goal'] +
+                instruction=self.base_instruction + self.evidence_instruction() + '\n담당: goal\n' + self.role_instructions['goal'] +
                     '\n읽기 전용 목표 검토입니다. 최신 기록을 조회하고 필요한 영양 근거를 검토하세요. 기록이나 전략을 변경하지 마세요.',
                 request=json.dumps({'message':message, 'requested_evidence':self.requested_evidence, 'recent_messages':
                     [str(m)[:2000] for m in self.state.get('messages', [])[-10:]]}, ensure_ascii=False),
@@ -648,7 +651,7 @@ class DietTeam:
                     await self.budget.persist(f"delegate:{selected}")
                 self.delegations[selected] = self.delegations.get(selected, 0) + 1
                 result = await run_agent(model=self.model_factory(),
-                    instruction=BASE_INSTRUCTION + self.evidence_instruction() + f"\n담당: {selected}\n{ROLE_INSTRUCTIONS[selected]}",
+                    instruction=self.base_instruction + self.evidence_instruction() + f"\n담당: {selected}\n{self.role_instructions[selected]}",
                     request=json.dumps({"task": args.query, "original_request": self.state["message"],
                         "recent_messages": [str(m)[:2000] for m in self.state.get("messages", [])[-10:]],
                         "previous_proposal": self.state.get("pending_proposal"),
@@ -693,11 +696,11 @@ class DietTeam:
             bool(self.state.get('pending_proposal') or self.state.get('awaiting_confirmation')))
         if direct:
             factory = self.first_coaching_model_factory if first_direct else self.coaching_model_factory
-            instruction = (BASE_INSTRUCTION + '\n담당: meal\n' + ROLE_INSTRUCTIONS['meal'] +
+            instruction = (self.base_instruction + '\n담당: meal\n' + self.role_instructions['meal'] +
                 ('\n읽기 전용 식사 조언입니다.' if first_direct else '\n읽기 전용 후속 조언입니다.') +
                 ' 질문에 바로 답하고 최신 verified_context를 우선하세요. 저장이나 계획 생성은 하지 마세요.')
             if not first_direct and get_settings().compact_followup_prompt:
-                instruction = COMPACT_FOLLOWUP_INSTRUCTION
+                instruction = self.compact_instruction
             if brief:
                 instruction += ('\n단순 후속 질문의 답변은 250자 이내로 완결하세요. '
                     '요청한 현재 수치는 먼저 표시하고, 결론 1문장과 실천 방법 1~2문장만 답하세요. '
@@ -719,7 +722,7 @@ class DietTeam:
         return await self.finalize_result(result, 'meal' if direct else 'supervisor')
 
     async def run_supervisor(self, delegates, verified_context, context_verified):
-        return await run_agent(model=self.model_factory(), instruction=BASE_INSTRUCTION + self.evidence_instruction() +
+        return await run_agent(model=self.model_factory(), instruction=self.base_instruction + self.evidence_instruction() +
             "\n당신은 Supervisor입니다. 필요한 전문 Agent에 위임하고 결과에 따라 다음 작업을 결정하세요. 제안이 만들어지면 추가 제안으로 덮어쓰지 말고 사용자 확인을 요청하세요.",
             request=json.dumps({"message": self.state["message"], "recent_messages": [str(m)[:2000] for m in self.state.get("messages", [])[-10:]],
                 "verified_context": verified_context, "requested_evidence": self.requested_evidence}, ensure_ascii=False),

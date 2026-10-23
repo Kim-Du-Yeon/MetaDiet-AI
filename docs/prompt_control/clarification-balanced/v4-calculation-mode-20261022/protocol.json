@@ -1,0 +1,77 @@
+{
+  "code_sha256": {
+    "clarification_v4.py": "b7cde3cc71fdb58f3a9098f41c413eba89a85aa39e3a9c3a884a0d652e45300e",
+    "run_clarification_v4.py": "f0722a290fb54bd4e4d5d0052427141a10d3fc524f80a5ad460f251e9019c163",
+    "run_clarification_v3.py": "f05c26914ee1457218463155ebe1f3a782a0d480270b819d31db680b9660c6ed"
+  },
+  "source_hashes": {
+    "source-answers.json": "ca3fd804bcb6f914765ef279b87d6c0c433d30f1ce779f68e77cc5a4fa28c944",
+    "source-judges.json": "e09f79e3e3f27a24f91653b673120ab03e42b50847a04bf32eed940f457e9872",
+    "source-summary.json": "038123442bea979e80ccaefd15f0228f8590fe3b876eb4538e7354c0db8b8b97",
+    "frozen.json": "28110f43ff8cbe63f1461b6f3bf00c815fa6f96ff0ae75d24e65f4fe6f5396fb"
+  },
+  "candidate_sha256": "992365605cc2cada1089a11d2ac1a9850d78ad9c69bb5d602852ca8c8353c1c3",
+  "development_sha256": "8a9093c01e5896d598627781742a043a430369b8290ba462fdfee152765d71d0",
+  "conditions": {
+    "runtime": "actual_DietTeam_no_forced_routing",
+    "fixture_date": "2026-10-22",
+    "model": "gemini-3.8-flash",
+    "temperature": 0,
+    "thinking": "low",
+    "output_cap": 1024,
+    "model_call_cap": 3,
+    "tool_call_cap": 8,
+    "timeout_seconds": 65,
+    "concurrency": 1,
+    "order": "AB/BA",
+    "retrieval": "off",
+    "allowed_domain_tools": [
+      "read_profile",
+      "read_intake"
+    ],
+    "first_direct": "off",
+    "compact": true,
+    "brief": false,
+    "delivery": "invoke",
+    "model_routing": false,
+    "followup_tools": false,
+    "packages": {
+      "google-genai": "2.29.0",
+      "langchain-google-genai": "4.4.0",
+      "langgraph": "1.2.2",
+      "langsmith": "0.8.6"
+    }
+  },
+  "labels": [
+    "v1",
+    "v3",
+    "v4"
+  ],
+  "development_labels": [
+    "v3",
+    "v4"
+  ],
+  "old100_exposed": true,
+  "new_development_cases": 24,
+  "development_gate": "all24 judged/accounted; each family6/6 correct/faithful, required families6/6 focused,0 extra questions, unsafe0; v4 behavior>=v3",
+  "reused_generation_rows": 200,
+  "new_generation_rows": 100,
+  "judge": "gemini-3.1-pro-preview",
+  "judge_rubric_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+  "expected_new_usage_usd": [
+    0.7,
+    1.3
+  ],
+  "budget_waiver_retained": true,
+  "gate": "correct=faithful=100; full behavior>=max98/v1 and >=v3; necessary50/50; unsafe0; fresh/no-write100; all extra questions<v3 and <=v1; p95/cost<=1.25*v1; all usage and100 grades complete",
+  "scope": "synthetic same exposed100 diagnostic, not independent holdout or actual-user outcomes",
+  "production_adoption": false,
+  "candidate_commit_provenance": "local content identities only; not remote LangSmith commits",
+  "old_judges": "preserved historical; regrade v1/v3/v4 together because answer payload changed, original semantic rubric unchanged",
+  "paid_generation_code_sha256": {
+    "clarification_v4.py": "b7cde3cc71fdb58f3a9098f41c413eba89a85aa39e3a9c3a884a0d652e45300e",
+    "run_clarification_v4.py": "a5bbab5e072a3f9d34e6e8e1eab9e1655a8dfe288389c82ee5f037f32826ed0c",
+    "run_clarification_v3.py": "f05c26914ee1457218463155ebe1f3a782a0d480270b819d31db680b9660c6ed"
+  },
+  "scope_metadata_correction": "Only summary not_independent_holdout changed from not dev to True. Development is not an independent holdout. No prompt, case, criterion, generation or grade changes."
+}

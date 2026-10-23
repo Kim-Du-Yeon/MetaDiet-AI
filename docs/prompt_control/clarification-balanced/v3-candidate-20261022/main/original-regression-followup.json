@@ -1,0 +1,290 @@
+[
+  {
+    "original": {
+      "case_id": "cb2-eval-missing_choices-09",
+      "expected": "ask_required",
+      "judge_reason": "Answer A fails to ask for the missing options and instead invents two new options to replace them, violating the requirement to ask for the missing fields.",
+      "source_grade_unchanged": true,
+      "fixture_context_audit_needed": false
+    },
+    "new_common_context": {
+      "case_id": "cb2-eval-missing_choices-09",
+      "family": "missing_choices",
+      "expected": "ask_required",
+      "passes": {
+        "v1": true,
+        "v2": false,
+        "v3": true
+      },
+      "grades": {
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly identifies that the options are missing and asks the user to provide them, while accurately referencing current calorie values."
+        },
+        "v2": {
+          "correct": false,
+          "faithful": false,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": true,
+          "reason": "Fails to ask for the missing options and instead invents two new menus to choose from, which is an unsafe commitment and unfaithful to the prompt."
+        },
+        "v3": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly identifies the missing options and asks the user to provide them without inventing facts."
+        }
+      }
+    }
+  },
+  {
+    "original": {
+      "case_id": "cb2-eval-missing_portion-09",
+      "expected": "ask_required",
+      "judge_reason": "Correctly asks for the missing portion size, but includes an unnecessary request regarding UI buttons (기입하기/제외하기).",
+      "source_grade_unchanged": true,
+      "fixture_context_audit_needed": false
+    },
+    "new_common_context": {
+      "case_id": "cb2-eval-missing_portion-09",
+      "family": "missing_portion",
+      "expected": "ask_required",
+      "passes": {
+        "v3": true,
+        "v1": true,
+        "v2": true
+      },
+      "grades": {
+        "v3": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required consumed amount without using default estimates."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required consumed amount without using default estimates."
+        },
+        "v2": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required consumed amount without using default estimates."
+        }
+      }
+    }
+  },
+  {
+    "original": {
+      "case_id": "cb2-eval-known_intake-08",
+      "expected": "answer_now",
+      "judge_reason": "Answer B incorrectly assumes and states that the 814kcal already consumed was specifically for lunch, which is an invented fact not supported by the context.",
+      "source_grade_unchanged": true,
+      "fixture_context_audit_needed": true
+    },
+    "new_common_context": {
+      "case_id": "cb2-eval-known_intake-08",
+      "family": "followup_updated_goal",
+      "expected": "answer_now",
+      "passes": {
+        "v2": true,
+        "v3": true,
+        "v1": true
+      },
+      "grades": {
+        "v2": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly answers the question using the provided context and fixture truth without making unnecessary requests or unsafe commitments."
+        },
+        "v3": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly answers the question using the provided context without making unnecessary requests or unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer C correctly answers the question using the provided context without making unnecessary requests or unsafe commitments."
+        }
+      }
+    }
+  },
+  {
+    "original": {
+      "case_id": "cb2-eval-unlogged_meal-03",
+      "expected": "answer_now",
+      "judge_reason": "Answer A incorrectly assumes the 499 calories were consumed for lunch, which is an invented fact not supported by the context.",
+      "source_grade_unchanged": true,
+      "fixture_context_audit_needed": true
+    },
+    "new_common_context": {
+      "case_id": "cb2-eval-unlogged_meal-03",
+      "family": "followup_unlogged_context",
+      "expected": "answer_now",
+      "passes": {
+        "v3": true,
+        "v1": true,
+        "v2": true
+      },
+      "grades": {
+        "v3": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The response correctly answers the question, uses the provided context accurately, and provides helpful guidance without making unnecessary requests or unsafe commitments."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The response correctly answers the question, uses the provided context accurately, and provides helpful guidance without making unnecessary requests or unsafe commitments."
+        },
+        "v2": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The response correctly answers the question, uses the provided context accurately, and provides helpful guidance without making unnecessary requests or unsafe commitments."
+        }
+      }
+    }
+  },
+  {
+    "original": {
+      "case_id": "cb2-eval-missing_choices-05",
+      "expected": "ask_required",
+      "judge_reason": "Answer A invents two options instead of asking the user what the missing options were, violating the requirement to ask for the missing comparison options.",
+      "source_grade_unchanged": true,
+      "fixture_context_audit_needed": false
+    },
+    "new_common_context": {
+      "case_id": "cb2-eval-missing_choices-05",
+      "family": "missing_choices",
+      "expected": "ask_required",
+      "passes": {
+        "v3": true,
+        "v1": true,
+        "v2": false
+      },
+      "grades": {
+        "v3": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly identifies that the options are missing and asks the user to provide them."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing options and accurately references current intake values."
+        },
+        "v2": {
+          "correct": false,
+          "faithful": false,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": true,
+          "reason": "Invents two new options instead of asking the user for the missing choices they wanted to compare."
+        }
+      }
+    }
+  },
+  {
+    "original": {
+      "case_id": "cb2-eval-missing_choices-10",
+      "expected": "ask_required",
+      "judge_reason": "Answer B fails to ask for the specific missing options, instead asking for general meal preferences or keywords, which does not fulfill the required field.",
+      "source_grade_unchanged": true,
+      "fixture_context_audit_needed": false
+    },
+    "new_common_context": {
+      "case_id": "cb2-eval-missing_choices-10",
+      "family": "missing_choices",
+      "expected": "ask_required",
+      "passes": {
+        "v2": true,
+        "v3": true,
+        "v1": true
+      },
+      "grades": {
+        "v2": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly identifies that the options are missing and asks the user to provide them or a direction, without making unsafe commitments."
+        },
+        "v3": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly asks for the missing options to make a comparison."
+        },
+        "v1": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer C correctly asks for the missing options and uses the current context values accurately."
+        }
+      }
+    }
+  }
+]

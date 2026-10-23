@@ -1,0 +1,66 @@
+[
+  {
+    "trace_id": "01a15eeb-921f-75f0-a05f-28730f0f14c2",
+    "name": "save_pending_chat",
+    "prompt_release": "v1-control-drill",
+    "release_commit": "6eec616d1db7a13c429aff3ebb82aa27feb154f1eb238f9ab9697108b34cfdaf",
+    "child_commits": {
+      "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+      "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+      "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+      "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+      "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+      "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+      "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+      "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+    }
+  },
+  {
+    "trace_id": "01a15eeb-921b-7f72-8db9-68270f2ab59f",
+    "name": "after_task",
+    "prompt_release": "v1-control-drill",
+    "release_commit": "6eec616d1db7a13c429aff3ebb82aa27feb154f1eb238f9ab9697108b34cfdaf",
+    "child_commits": {
+      "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+      "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+      "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+      "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+      "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+      "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+      "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+      "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+    }
+  },
+  {
+    "trace_id": "01a15eeb-7c39-75b0-9841-4854f65f9c3b",
+    "name": "supervisor",
+    "prompt_release": "v1-control-drill",
+    "release_commit": "6eec616d1db7a13c429aff3ebb82aa27feb154f1eb238f9ab9697108b34cfdaf",
+    "child_commits": {
+      "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+      "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+      "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+      "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+      "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+      "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+      "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+      "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+    }
+  },
+  {
+    "trace_id": "7ede6c52-5627-48e8-8ac8-7f660c2471ed",
+    "name": "LangGraph",
+    "prompt_release": "v1-control-drill",
+    "release_commit": "6eec616d1db7a13c429aff3ebb82aa27feb154f1eb238f9ab9697108b34cfdaf",
+    "child_commits": {
+      "legacy.food_extraction": "f23a5665d515e0e89a89f91d8fae38eeecb3aa1579baead6943107e78ee206ff",
+      "legacy.intent_classification": "cd7967949228a71b64fe4793db6ef7bc0c17a21fb2ef5a4e483923968c240073",
+      "rag.query_translation": "9078da11910ca090acfe22896fed0cced36f750460d112b104206ea918730367",
+      "team.base": "d306d6d8557c8b8e2713a609ffd0e2bbe52e173b4dcbb97e71e520e14f31fa6e",
+      "team.compact_followup": "4018a3569f6d2f7eeda6b3cfaa2cb4f426627968f2e4ddb02c678f29e69111ea",
+      "team.role.evidence": "99485b48569dcefd8861763865954d692d45531a27669dc8281f959504f3662f",
+      "team.role.goal": "604fea0ae7b2d8f05b53455fa6aec270e673ae8d34aafaffb883b5fae709b5a7",
+      "team.role.meal": "ae3277edcad105ea7d6edf281cecada9bf77617a65f60c503879f4fb577d78de"
+    }
+  }
+]

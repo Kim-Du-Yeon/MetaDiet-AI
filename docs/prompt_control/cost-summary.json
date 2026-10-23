@@ -1,0 +1,27 @@
+{
+  "committed_usd": 8.324354,
+  "stages": {
+    "browser": 1.0,
+    "comparison": 3.589834,
+    "development": 0.025021,
+    "judge": 3.557208,
+    "probe": 0.152291
+  },
+  "total_limit_usd": 17.139139,
+  "stopped": false,
+  "stop_reason": null,
+  "previous_committed_usd": 5.139139,
+  "incremental_committed_usd": 3.185215,
+  "incremental_limit_usd": 12,
+  "invoice_verified": false,
+  "browser_budget_is_conservative_not_invoice": 1,
+  "known_browser_llm_estimate_usd": 0.019486,
+  "prompt_comparison_and_initial_probe_estimate_usd": 0.8080525,
+  "explicit_admission_probe_reservations_usd": 0.15,
+  "cache_generation_known_estimate_usd": 0.32660737500000003,
+  "cache_creation_input_and_full_ttl_upper_usd": 0.06703041666666666,
+  "cache_judge_known_estimate_usd": 0.771668,
+  "unknown_cache_generation_attempts": 2,
+  "unknown_judge_timeout_attempts_retained": 1,
+  "note": "Ledger commitments include conservative unknown usage and full browser bound, not actual invoice; smoke/probes included in ledger. Original spend never reset."
+}

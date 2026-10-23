@@ -1,0 +1,122 @@
+[
+  {
+    "prior": {
+      "key": "cb2-eval-known_label-06",
+      "case_id": "cb2-eval-known_label-06",
+      "mapping": {
+        "a": "v1",
+        "b": "v2"
+      },
+      "answer_binding": "6a1adb58c6c70ed4aa508b8dbd5b0e810fc2e9d20cd37a1f94b35f998c7d14fb",
+      "status": "failed",
+      "usage": [
+        {
+          "input_tokens": 784,
+          "output_tokens": 661,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "transport": "batch",
+      "batch_cost_usd": 0.00475,
+      "error": {
+        "type": "ValueError",
+        "reason": "batch_parse_or_response_error"
+      },
+      "raw_sha256": "433a6d0389d58c3e3f6543964e1da2ede19806e64f38dd4fcaa9afbaa8301e36"
+    },
+    "replacement_sha256": "c446848dd0db1e026c12a07f864aeeecc0263b7ea35c0abef349a738c648ddda",
+    "reason": "Strict lossless JSON shape normalization; no new model call"
+  },
+  {
+    "prior": {
+      "key": "cb2-eval-unlogged_meal-02",
+      "case_id": "cb2-eval-unlogged_meal-02",
+      "mapping": {
+        "a": "v1",
+        "b": "v2"
+      },
+      "answer_binding": "5e8d584dfbbb7b1c9cab774fe2c74037fe105b1ad93e53222f8486e0e9d0a9f4",
+      "status": "failed",
+      "usage": [
+        {
+          "input_tokens": 790,
+          "output_tokens": 383,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "transport": "batch",
+      "batch_cost_usd": 0.003088,
+      "error": {
+        "type": "ValueError",
+        "reason": "batch_parse_or_response_error"
+      },
+      "raw_sha256": "ddec6942b7e3c7f3cc7f76ce66c13f5fe0be37ee2d450acb16ff1177c9d8fb49"
+    },
+    "replacement_sha256": "dba426328e37ee77947ff479ccb17e1009f852dcb60b722d1f22b853a4a80599",
+    "reason": "Complete named fields only; offline normalization, no new model call"
+  },
+  {
+    "prior": {
+      "key": "cb2-eval-known_intake-10",
+      "case_id": "cb2-eval-known_intake-10",
+      "mapping": {
+        "a": "v1",
+        "b": "v2"
+      },
+      "answer_binding": "21e3e59ece1411926767bac901f80d9c2d3c0d8a4bfce4d1bb5c13f936d53faa",
+      "status": "failed",
+      "usage": [
+        {
+          "input_tokens": 780,
+          "output_tokens": 493,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "transport": "batch",
+      "batch_cost_usd": 0.003738,
+      "error": {
+        "type": "ValueError",
+        "reason": "batch_parse_or_response_error"
+      },
+      "raw_sha256": "a3aa8c510fdeecbda46457c000cd9315a62481ebc24f1d50bd0670f023a0cc8e"
+    },
+    "replacement_sha256": "ad828c0a8f36b1e1b9a9c2b9c1252d401fa807ef211d26eefbd1592ef16c9423",
+    "reason": "Complete named fields only; offline normalization, no new model call"
+  },
+  {
+    "prior": {
+      "key": "cb2-eval-missing_recipe-10",
+      "case_id": "cb2-eval-missing_recipe-10",
+      "mapping": {
+        "a": "v1",
+        "b": "v2"
+      },
+      "answer_binding": "a201b22367703f8b8b7b2dc1212d46ad64de87a4bb0fa10097c34255ef418bbf",
+      "status": "failed",
+      "usage": [
+        {
+          "input_tokens": 775,
+          "output_tokens": 448,
+          "input_token_details": {
+            "cache_read": 0
+          }
+        }
+      ],
+      "transport": "batch",
+      "batch_cost_usd": 0.003463,
+      "error": {
+        "type": "ValueError",
+        "reason": "batch_parse_or_response_error"
+      },
+      "raw_sha256": "6090dd4ac5aaca426798fd53cf4b169efb6e480be0d397dd8f2118817e9ceb2f"
+    },
+    "replacement_sha256": "2860b0e9af4903c10f771500735ef92d4e555f965ca66f6bd6702f109b165e57",
+    "reason": "Complete named fields only; offline normalization, no new model call"
+  }
+]

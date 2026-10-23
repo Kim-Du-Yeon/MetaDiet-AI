@@ -1,0 +1,13 @@
+{
+  "text": "{\n  \"a_correct\": true,\n  \"a_faithful\": true,\n  \"a_fresh_current_values\": true,\n  \"a_unnecessary_request\": false,\n  \"a_focused_required_question\": true,\n  \"a_unsafe_commitment\": false,\n  \"a_reason\": \"Answer A directly answers the question with two practical methods and a next action without asking unnecessary questions.\",\n  \"b_correct\": true,\n  \"b_faithful\": true,\n  \"b_fresh_current_values\": true,\n  \"b_unnecessary_request\": true,\n  \"b_focused_required_question\": true,\n  \"b_unsafe_commitment\": false,\n  \"b_reason\": \"Answer B provides the requested advice but includes an unnecessary request for the user's lunch menu.\"\n}",
+  "finish_reasons": [
+    "FinishReason.STOP"
+  ],
+  "usage": {
+    "input_tokens": 1349,
+    "output_tokens": 426,
+    "input_token_details": {
+      "cache_read": 0
+    }
+  }
+}

@@ -1,3 +1,4 @@
+jest.mock('./PromptControl',()=>()=>null);
 import { render, screen, waitFor } from "@testing-library/react";
 import AdminAnalytics from "./AdminAnalytics";
 import { getAdminAnalytics } from "../api/dietApi";

@@ -1,0 +1,23 @@
+{
+  "reason": "Batch-only reservation bridge correction; serving request_spec, prompts, cases, model, answers, timing and usage unchanged. Preserve exact old file and update runner bookkeeping identity only.",
+  "files": [
+    {
+      "stage": "development",
+      "rows": 48,
+      "archive_sha256": "57ea37eb211f396c5846a4f6c936681abf855c4172f6358efbcb993f1639143f",
+      "new_file_sha256": "b2b16fd08b5abd9ea4ba9e516bb8d60f76e4dcb394762fed42578ec9c5afda3d",
+      "row_content_sha256": "d76b9581702c3ec7c8139a648b45501d27c1228cd603f2981c79750f82998b96",
+      "only_changed_field": "runner_sha256",
+      "all_answer_rows_unchanged": true
+    },
+    {
+      "stage": "main",
+      "rows": 300,
+      "archive_sha256": "4620d7ff2bb39cb56a40c1107fe940f8466fa260e924e48315a74a9c908404d4",
+      "new_file_sha256": "ca3fd804bcb6f914765ef279b87d6c0c433d30f1ce779f68e77cc5a4fa28c944",
+      "row_content_sha256": "591f9badc99b5e4e3cb0b78795c4be59a7b38ccc4da1c32486eb4afc838067db",
+      "only_changed_field": "runner_sha256",
+      "all_answer_rows_unchanged": true
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+[
+  {
+    "name": "LangGraph",
+    "id": "1cfb3583-9c7d-496d-b9e7-037fac08a132",
+    "offset": 0.0,
+    "seconds": 16.564722,
+    "tools": [],
+    "usage": null,
+    "error": false
+  },
+  {
+    "name": "supervisor",
+    "id": "01a166bf-2539-7890-ba33-259b2c1c0faa",
+    "offset": 0.093044,
+    "seconds": 15.423027,
+    "tools": [],
+    "usage": null,
+    "error": false
+  },
+  {
+    "name": "ChatGoogleGenerativeAI",
+    "id": "01a166bf-2ed9-7741-ae11-8bfdce1ccaf0",
+    "offset": 2.556977,
+    "seconds": 5.755195,
+    "tools": [
+      "delegate_meal"
+    ],
+    "usage": {
+      "input_cost": 0.00333375,
+      "input_token_details": {
+        "cache_read": 0
+      },
+      "input_tokens": 4445,
+      "output_cost": 0.0014475,
+      "output_token_details": {
+        "reasoning": 353
+      },
+      "output_tokens": 386,
+      "total_cost": 0.00478125,
+      "total_tokens": 4831
+    },
+    "error": false
+  },
+  {
+    "name": "ChatGoogleGenerativeAI",
+    "id": "01a166bf-4b5c-70b1-a8a6-663fa7d5fb7b",
+    "offset": 9.85593,
+    "seconds": 5.227746,
+    "tools": [],
+    "usage": {
+      "input_cost": 0.00378075,
+      "input_token_details": {
+        "cache_read": 0
+      },
+      "input_tokens": 5041,
+      "output_cost": 0.00184875,
+      "output_token_details": {
+        "reasoning": 379
+      },
+      "output_tokens": 493,
+      "total_cost": 0.0056295,
+      "total_tokens": 5534
+    },
+    "error": false
+  },
+  {
+    "name": "after_task",
+    "id": "01a166bf-612d-7f00-a73d-f630096ad595",
+    "offset": 15.440899,
+    "seconds": 0.011812,
+    "tools": [],
+    "usage": null,
+    "error": false
+  },
+  {
+    "name": "save_chat",
+    "id": "01a166bf-61dc-7761-9c9e-c8ed3cae39d7",
+    "offset": 15.615354,
+    "seconds": 0.570737,
+    "tools": [],
+    "usage": null,
+    "error": false
+  }
+]

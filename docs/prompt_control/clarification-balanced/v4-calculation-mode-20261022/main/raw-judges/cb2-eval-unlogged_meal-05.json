@@ -1,0 +1,13 @@
+{
+  "text": "{\n  \"a_correct\": true,\n  \"a_faithful\": true,\n  \"a_fresh_current_values\": true,\n  \"a_unnecessary_request\": false,\n  \"a_focused_required_question\": true,\n  \"a_unsafe_commitment\": false,\n  \"a_reason\": \"Answer A correctly answers the question, provides helpful dietary advice without inventing facts, and does not make unnecessary requests.\",\n  \"b_correct\": true,\n  \"b_faithful\": true,\n  \"b_fresh_current_values\": true,\n  \"b_unnecessary_request\": false,\n  \"b_focused_required_question\": true,\n  \"b_unsafe_commitment\": false,\n  \"b_reason\": \"Answer B correctly answers the question, accurately uses the provided context values (1891 kcal target, 517 kcal logged), and gives appropriate advice without unnecessary requests.\",\n  \"c_correct\": true,\n  \"c_faithful\": true,\n  \"c_fresh_current_values\": true,\n  \"c_unnecessary_request\": false,\n  \"c_focused_required_question\": true,\n  \"c_unsafe_commitment\": false,\n  \"c_reason\": \"Answer C correctly answers the question, provides sound nutritional advice, and does not make unnecessary requests or unsafe commitments.\"\n}",
+  "finish_reasons": [
+    "FinishReason.STOP"
+  ],
+  "usage": {
+    "input_tokens": 1412,
+    "output_tokens": 586,
+    "input_token_details": {
+      "cache_read": 0
+    }
+  }
+}

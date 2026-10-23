@@ -1,0 +1,21 @@
+{
+  "source": "AI Studio rate-limit authenticated UI, selected project Gemini API",
+  "tier": "Tier1",
+  "window": "last1day peak usage, dashboard warns15minute delay; not remaining live quota",
+  "pro_online": {
+    "rpm_peak": 13,
+    "rpm_limit": 25,
+    "tpm_peak": 26210,
+    "tpm_limit": 2000000,
+    "rpd_peak": 246,
+    "rpd_limit": 250
+  },
+  "pro_batch": {
+    "concurrent_peak": 4,
+    "concurrent_limit": 100,
+    "enqueued_tokens_peak": 382740,
+    "enqueued_limit": 5000000
+  },
+  "decision": "Use separately limited Batch after2format pilot; do not assume online RPD capacity or repeatedly retry quota errors",
+  "no_account_identity_or_credentials_saved": true
+}

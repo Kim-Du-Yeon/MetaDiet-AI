@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-22",
+  "ledger": "D:/AX/diet_agent/tmp/eval-budget.sqlite",
+  "total_limit_usd": 10.324354,
+  "stage_caps": {
+    "development": 0.145021,
+    "comparison": 4.27726,
+    "judge": 4.57445,
+    "probe": 0.178477,
+    "browser": 1.149146
+  },
+  "quota_note": "Tier/RPM/RPD not available from model metadata; success probe is not full-quota verification",
+  "stop": "fatal auth/credit/daily quota,unknown accounting or budget exhaustion; individual quality errors remain in100 denominator",
+  "live_ab_enabled": false,
+  "caching_gate": "natural token minimum and break-even; no padding; ineligible history is not a completed provider quality comparison",
+  "campaign_start_usd": 8.735208,
+  "allocations_remaining_usd": {
+    "development": 0.12,
+    "comparison": 0.55,
+    "judge": 0.75,
+    "probe": 0.02,
+    "browser": 0.149146
+  },
+  "used_before_reallocation_usd": {
+    "browser": 1.0,
+    "comparison": 3.72726,
+    "development": 0.025021,
+    "judge": 3.82445,
+    "probe": 0.158477
+  },
+  "reallocation_only": true,
+  "original_total_ceiling_usd": 17.139139,
+  "expected_new_cost_usd": [
+    0.8,
+    1.2
+  ],
+  "reason": "User authorized stage reallocation; same ledger and narrow/overall ceilings, no new cost rows or stopped-state reset.",
+  "planned_generation_attempts": 200,
+  "planned_paired_grades": 100,
+  "exact_saved_answer_reuse_available": 0
+}

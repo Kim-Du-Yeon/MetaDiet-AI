@@ -1,0 +1,34 @@
+# Frozen raw hashes must survive Windows checkout conversion.
+docs/food_catalog/COMMON_FOODS_100.json text eol=lf
+
+# Preserve exact hashed bytes of the frozen clarification format runners.
+backend/scripts/eval/clarification_flat_retry.py -text whitespace=cr-at-eol
+backend/scripts/eval/complete_clarification_flat.py -text whitespace=cr-at-eol
+backend/scripts/eval/clarification_grade_contract.py -text whitespace=cr-at-eol
+
+# Preserve raw v3 evaluation evidence hashes across checkout conversion.
+docs/prompt_control/clarification-balanced/v3-candidate-20261022/**/*.json -text whitespace=cr-at-eol
+docs/prompt_control/clarification-balanced/v3-candidate-20261022/*.json -text whitespace=cr-at-eol
+
+docs/prompt_control/clarification-balanced/v4-calculation-mode-20261022/**/*.json -text whitespace=cr-at-eol
+docs/prompt_control/clarification-balanced/v4-calculation-mode-20261022/*.json -text whitespace=cr-at-eol
+
+docs/prompt_control/clarification-balanced/v4-calculation-mode-20261022/scope-metadata-originals/run_clarification_v4.py -text whitespace=cr-at-eol
+
+docs/prompt_control/clarification-balanced/v4-independent-20261022/**/*.json -text whitespace=cr-at-eol
+docs/prompt_control/clarification-balanced/v4-independent-20261022/*.json -text whitespace=cr-at-eol
+docs/prompt_control/clarification-balanced/v4-independent-20261022/approval-hardening-originals/*.py -text whitespace=cr-at-eol
+docs/prompt_control/clarification-balanced/v4-independent-20261022/prefix-validation-originals/*.py -text whitespace=cr-at-eol
+
+# Preserve approval policy/receipts and original evidence inventory bytes.
+docs/prompt_control/clarification-balanced/v4-approval-policy-v2-20261022/**/*.json -text whitespace=cr-at-eol
+docs/prompt_control/clarification-balanced/v4-approval-policy-v2-20261022/*.json -text whitespace=cr-at-eol
+
+# The prior immutable Markdown evidence was created with CRLF; reproduce those exact bytes on every OS.
+docs/prompt_control/clarification-balanced/v4-independent-20261022/README.md text eol=crlf
+docs/prompt_control/clarification-balanced/v4-independent-20261022/RESULTS.md text eol=crlf
+
+# Preserve v5 frozen evidence and archived evaluator source bytes.
+docs/prompt_control/clarification-balanced/v5-closing-offer-20261022/**/*.json -text whitespace=cr-at-eol
+docs/prompt_control/clarification-balanced/v5-closing-offer-20261022/*.json -text whitespace=cr-at-eol
+docs/prompt_control/clarification-balanced/v5-closing-offer-20261022/**/*.py -text whitespace=cr-at-eol

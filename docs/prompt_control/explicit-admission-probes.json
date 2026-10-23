@@ -1,0 +1,38 @@
+{
+  "type": "static-prefix cache admission, no generateContent calls",
+  "rows": [
+    {
+      "model": "gemini-3.8-flash",
+      "ttl_seconds": 60,
+      "content": "registered generic compact instruction only; no personal data",
+      "generation_called": false,
+      "reserved_usd": 0.05,
+      "status": "rejected",
+      "code": 400,
+      "minimum_tokens": 1024,
+      "below_minimum": true
+    },
+    {
+      "model": "gemini-3.1-pro-preview",
+      "ttl_seconds": 60,
+      "content": "registered generic compact instruction only; no personal data",
+      "generation_called": false,
+      "reserved_usd": 0.05,
+      "status": "rejected",
+      "code": 400,
+      "minimum_tokens": 1024,
+      "below_minimum": true
+    },
+    {
+      "model": "gemini-3.1-flash-lite",
+      "ttl_seconds": 60,
+      "content": "registered generic compact instruction only; no personal data",
+      "generation_called": false,
+      "reserved_usd": 0.05,
+      "status": "rejected",
+      "code": 400,
+      "minimum_tokens": 1024,
+      "below_minimum": true
+    }
+  ]
+}

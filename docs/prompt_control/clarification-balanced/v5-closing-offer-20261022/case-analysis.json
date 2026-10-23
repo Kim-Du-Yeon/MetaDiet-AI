@@ -1,0 +1,248 @@
+{
+  "scope": "Pro semantic flags and exact original answers; synthetic development only; timing failures are separate from prompt recoveries",
+  "cases": [
+    {
+      "case_id": "v5-stale-00",
+      "family": "stale",
+      "question": "현재 확정 합계는 733kcal로 수정됐고 목표는 2129kcal예요. 이전 대화 합계 대신 지금 값으로 남은 양을 계산해줘요.",
+      "v4": "수정된 현재 확정 합계(733kcal) 기준으로 오늘 남은 목표 열량은 **1,396kcal**(목표 2,129kcal - 섭취 733kcal)입니다. \n\n남은 식사에서 단백질과 식이섬유를 포함해 균형 있게 채워가시면 좋습니다. 추가로 식사를 기록하시거나 식단 추천이 필요하시면 편하게 말씀해 주세요.",
+      "v5": "현재 확정 섭취량 733kcal 기준으로 목표 2129kcal까지 남은 열량은 1,396kcal입니다.",
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly calculates the remaining calories using the current values, but includes an unnecessary request at the end."
+        },
+        "v5": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly calculates the remaining calories using the current values without any unnecessary requests."
+        }
+      }
+    },
+    {
+      "case_id": "v5-unlogged-00",
+      "family": "unlogged",
+      "question": "오늘 저녁은 모임 1에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+      "v4": "저녁 모임에서 일반식을 드실 예정이라도 점심을 굶지 않고 단백질과 채소 위주로 적정량을 챙겨 드시는 것이 과식을 예방하는 데 효과적입니다. 실천 방법으로는 점심에 닭가슴살·달걀·두부 등 담백한 단백질과 채소를 곁들여 포만감을 유지하고, 밥 등 정제 탄수화물 분량만 평소보다 가볍게 조절해 보세요. 저녁 식사 후 드신 메뉴와 대략적인 양을 편하게 남겨주시면 이후 식단 관리를 이어 도와드리겠습니다.",
+      "v5": "저녁에 일반식 모임이 예정되어 있다면 점심을 굶지 않고 단백질과 식이섬유 위주로 가볍게 식사하여 과도한 공복감을 막는 것이 좋습니다. 실천 방법으로는 점심 식사 시 채소 샐러드나 나물류를 넉넉히 섭취하고 닭가슴살·달걀·두부 등 기름기 적은 단백질 급원을 선택해 포만감을 유지하세요. 다음 행동으로는 점심을 규칙적으로 챙겨 드신 뒤, 저녁 모임에서는 천천히 식사하며 섭취량을 편안하게 조절해보세요.",
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer A provides the requested advice but includes an unnecessary request to log the dinner menu and amount."
+        },
+        "v5": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer B provides the requested advice and next actions without making any unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "case_id": "v5-unlogged-01",
+      "family": "unlogged",
+      "question": "오늘 저녁은 모임 2에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+      "v4": "저녁 일반식 모임을 앞두고 점심을 굶지 않으면서 대비할 수 있는 실천 방법과 다음 행동입니다.\n\n1. **실천 방법 두 가지**\n   - **단백질과 채소 중심의 가벼운 구성 선택**: 점심을 굶으면 저녁에 과식하기 쉬우므로, 닭가슴살·달걀·두부 등 기름기 적은 단백질과 채소 위주로 구성해 포만감을 챙기세요.\n   - **정제 탄수화물 및 고지방 소스 줄이기**: 밥·빵·면 등 탄수화물 양을 평소보다 가볍게 조절하고, 드레싱이나 양념을 최소화해 저녁 식사를 위한 열량 여유를 확보하세요.\n\n2. **다음 행동**\n   - 드실 점심 메뉴나 구체적인 식사 후보를 알려주시면, 기준에 맞추어 식사 기록 및 영양 구성을 안내해 드리겠습니다.",
+      "v5": "저녁 모임 일반식을 앞두고 점심을 굶지 않으면서 대비할 수 있는 실천 방법과 다음 행동입니다.\n\n1. **단백질과 채소 위주 식사**: 점심에는 기름기가 적은 살코기, 생선, 두부, 달걀 등 충분한 단백질과 채소를 중심으로 섭취해 포만감을 유지하고 혈당 급상승을 예방하세요.\n2. **정제 탄수화물 및 국물·소스 줄이기**: 밥은 평소보다 1/3~1/2 공기 정도로 가볍게 조절하고, 나트륨과 당류가 많은 찌개 국물이나 자극적인 소스는 피하는 것이 좋습니다.\n\n**다음 행동**:\n저녁 모임 30분~1시간 전 물을 충분히 마시거나 간단한 오이·당근 스틱, 견과류 소량을 섭취해 과식을 예방하고, 모임 자리에서는 채소류를 먼저 드신 후 본 식사를 시작하세요.",
+      "grades": {
+        "v5": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response A directly answers the question with two practical methods and a valid next action without asking unnecessary questions."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response B answers the question but includes an unnecessary request for the user's lunch menu candidates as the next action."
+        }
+      }
+    },
+    {
+      "case_id": "v5-unlogged-02",
+      "family": "unlogged",
+      "question": "오늘 저녁은 모임 3에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+      "v4": "저녁 모임 전 점심을 굶으면 과식으로 이어지기 쉬우므로, 단백질과 채소 위주로 가볍지만 포만감 있게 챙겨 드시는 것이 좋습니다. 밥이나 면 같은 탄수화물 양은 평소의 절반 정도로 조절하고 기름진 음식은 피해 저녁 식사에 부담을 줄여보세요. 오늘 점심 식사를 마친 후 드신 메뉴를 편하게 말씀해 주시면 됩니다.",
+      "v5": "저녁 모임 일반식을 앞두고 점심을 굶지 않는 실천 방법은 단백질과 채소 위주로 가볍게 식사하여 허기를 예방하고, 정제 탄수화물과 당류 섭취를 최소화해 저녁 폭식을 막는 것입니다. 다음 행동으로는 저녁 식사 전까지 충분한 수분을 섭취하고, 모임 자리에서 채소나 단백질 요리를 먼저 드시면서 전체적인 식사 속도를 천천히 유지해 보세요.",
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer a provides the requested advice but includes an unnecessary request to log the lunch menu."
+        },
+        "v5": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer b provides the requested advice and next actions without making any unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "case_id": "v5-unlogged-03",
+      "family": "unlogged",
+      "question": "오늘 저녁은 모임 4에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+      "v4": "점심을 굶지 않고 저녁 일반식 모임을 준비하는 실천 방법입니다.\n\n1. **점심 단백질·채소 위주 식사**: 점심을 거르면 저녁에 과식하기 쉬우므로, 닭가슴살·달걀·생선 등 단백질과 채소 위주로 든든하게 챙겨 드세요.\n2. **저녁 식사 순서 조절**: 저녁 모임에서는 채소나 단백질 반찬을 먼저 섭취하고 밥·면 등 탄수화물과 음료 섭취량을 가볍게 조절해 보세요.\n\n다음 행동으로, 저녁 식사를 마치신 후 드신 메뉴와 대략적인 양을 편하게 남겨주시면 영양 기록을 도와드릴게요.",
+      "v5": "저녁 모임 일반식을 앞두고 점심을 굶지 않고 대비하는 실천 방법 두 가지와 다음 행동입니다.\n\n1. **점심 식사는 단백질과 채소 위주로 구성하기**: 점심을 굶으면 저녁 모임에서 과식할 위험이 커지므로, 닭가슴살·달걀·두부 등 담백한 단백질과 채소 중심의 가벼운 식사로 허기를 달래 포만감을 유지하세요.\n2. **저녁 모임에서 채소·단백질 먼저 섭취하기**: 모임 자리에서는 식이섬유가 풍부한 채소류와 단백질 메뉴를 먼저 드신 후, 탄수화물이나 기름진 음식은 덜어 먹는 방식으로 식사 순서를 조절하세요.\n\n**다음 행동**: 오늘 점심은 건너뛰지 마시고 가벼운 단백질·채소 위주 식사로 진행하시기 바랍니다.",
+      "grades": {
+        "v5": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A directly answers the question with two practical methods and a next action without any unnecessary requests or invented facts."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B answers the question but includes an unnecessary request for the user to log their dinner later."
+        }
+      }
+    },
+    {
+      "case_id": "v5-unlogged-04",
+      "family": "unlogged",
+      "question": "오늘 저녁은 모임 5에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+      "v4": "저녁 모임에서 과식을 예방하기 위해 점심은 굶지 않고 단백질과 채소 위주로 가볍게 드시는 것이 좋습니다. \n\n실천 방법으로는 닭가슴살 샐러드나 달걀을 곁들인 두부 요리처럼 포만감을 오래 유지해 주는 가벼운 식사를 선택하시고, 식사 전후로 충분한 물을 마셔 공복감을 달래보세요. \n\n다음 행동으로는 오늘 점심으로 드실 메뉴를 정해 편하게 알려주시면 됩니다.",
+      "v5": "저녁 일반식 모임을 대비해 점심을 거르지 않고 실천할 수 있는 두 가지 방법과 다음 행동입니다.\n\n1. **단백질과 식이섬유 위주의 가벼운 식사 구성**: 닭가슴살 샐러드, 두부구이, 달걀 채소 덮밥처럼 단백질과 채소를 충분히 섭취해 포만감을 유지하면 저녁 모임 시 과식을 예방하는 데 도움이 됩니다.\n2. **복합 탄수화물 적정량 섭취**: 정제된 탄수화물 대신 잡곡밥이나 고구마 등을 적정량 섭취해 오후 중 급격한 허기가 찾아오지 않도록 에너지를 안정적으로 공급해 주세요.\n\n**다음 행동**: 점심 식사 후 실제 드신 음식과 분량을 확인해 기록해 주시고, 저녁 모임에서는 채소나 단백질 반찬부터 천천히 섭취해 보세요.",
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A provides the requested advice but includes an unnecessary request for the user to reply with their chosen lunch menu."
+        },
+        "v5": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B provides the requested advice and suggests logging as the next action, fulfilling the user's prompt without making an unnecessary conversational request."
+        }
+      }
+    },
+    {
+      "case_id": "v5-unlogged-07",
+      "family": "unlogged",
+      "question": "오늘 저녁은 모임 8에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+      "v4": "저녁 모임에서 과식을 방지하면서 점심을 건강하게 챙기기 위한 실천 방법과 다음 행동입니다.\n\n1. **단백질과 식이섬유 중심의 식사**: 점심에는 기름진 음식 대신 살코기·달걀·두부 등 단백질과 채소를 충분히 섭취해 포만감을 오래 유지하세요.\n2. **적정 탄수화물 유지**: 점심을 아예 굶거나 탄수화물을 완전히 제한하면 저녁 모임에서 폭식하기 쉬우므로, 밥 반 공기에서 한 공기 수준의 복합 탄수화물을 규칙적으로 드시는 것이 좋습니다.\n\n다음 행동으로는 오늘 점심으로 드신 메뉴나 예정인 식사를 알려주시면, 남은 하루 영양 균형에 맞게 안내해 드리겠습니다. 저녁 모임을 마친 뒤에는 실제 드신 음식을 편하게 기록해 주세요.",
+      "v5": "저녁 일반식 모임을 앞두고 점심을 굶지 않으면서 대비하는 실천 방법 두 가지입니다.\n\n1. **단백질과 식이섬유 위주로 식사 구성하기**: 닭가슴살, 달걀, 두부 등 담백한 단백질과 채소를 충분히 섭취해 포만감을 높이고 급격한 혈당 상승과 허기를 방지하세요.\n2. **정제 탄수화물과 기름진 양념 줄이기**: 밥은 반 공기 정도로 평소보다 가볍게 조절하고, 튀김류나 당류가 많은 소스를 피해 가볍게 섭취하세요.\n\n**다음 행동**: 점심은 정해진 시간에 굶지 않고 가볍게 식사하시고, 저녁 모임에서는 채소와 단백질 안주부터 먼저 드신 후 술과 탄수화물 섭취량을 조절하세요.",
+      "grades": {
+        "v5": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A directly answers the question with two practical methods and a next action without asking unnecessary questions."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B provides the requested advice but includes an unnecessary request for the user's lunch menu."
+        }
+      }
+    },
+    {
+      "case_id": "v5-unlogged-08",
+      "family": "unlogged",
+      "question": "오늘 저녁은 모임 9에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+      "v4": "저녁 일반식 모임을 앞두고 점심을 굶으면 저녁 과식으로 이어지기 쉬우므로, 단백질과 식이섬유 중심의 가벼운 식사를 챙겨 포만감을 유지하는 것이 좋습니다. 또한 식사 전후로 물을 충분히 섭취해 불필요한 공복감을 줄여보세요. 점심 식사 후 드신 메뉴를 편하게 말씀해 주시면 기록과 함께 저녁 식사 가이드를 안내해 드리겠습니다.",
+      "v5": "저녁 모임에서 과식을 예방하고 균형을 유지하기 위한 실천 방법 두 가지입니다.\n\n1. **단백질과 식이섬유 중심 식사**: 점심에는 기름진 메뉴를 피하고 살코기, 달걀, 두부 등 충분한 단백질과 채소를 곁들여 포만감을 오래 유지하세요.\n2. **정제 탄수화물 조절**: 저녁에 탄수화물 섭취가 늘어날 가능성이 높으므로 점심의 밥이나 면 등 정제 탄수화물 양은 평소의 1/2~2/3 정도로 가볍게 섭취하세요.\n\n**다음 행동**: 점심 식사 후 저녁 식사 전까지 탈수를 방지하고 허기를 달랠 수 있도록 물을 충분히 섭취해 두세요.",
+      "grades": {
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A provides the requested advice but includes an unnecessary request to report the lunch menu for recording."
+        },
+        "v5": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B directly answers the question with two practical methods and the next action without any unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "case_id": "v5-unlogged-09",
+      "family": "unlogged",
+      "question": "오늘 저녁은 모임 10에서 일반식 예정이고 아직 먹지 않았어요. 점심을 굶지 않고 준비할 실천 방법 두 가지와 다음 행동을 알려주세요.",
+      "v4": "저녁 모임에서 일반식을 드실 예정이더라도 점심을 굶지 않고 단백질과 채소 위주로 가볍게 챙겨 드시는 것이 과식을 예방하는 좋은 방법입니다. 또한 식사 시 채소와 단백질을 먼저 섭취하고 물을 충분히 곁들이면 포만감을 유지하는 데 도움이 됩니다. 편안하게 점심을 드신 후, 나중에 드신 메뉴를 알려주시면 식사 기록을 도와드릴게요.",
+      "v5": "저녁 일반식을 앞두고 점심을 굶지 않고 대처하는 실천 방법 두 가지와 다음 행동입니다.\n\n1. **단백질과 식이섬유 위주 구성**: 점심에 닭가슴살, 달걀, 두부 등 담백한 단백질과 채소를 충분히 섭취해 포만감을 오래 유지하고 정제 탄수화물 비중을 줄이세요.\n2. **저녁 식사 전 수분 섭취 및 속도 조절**: 모임 시작 전 물을 한두 잔 마셔 갈증으로 인한 과식을 막고, 저녁 식사 시 채소나 단백질 요리부터 천천히 드세요.\n\n**다음 행동**: 점심 식단은 기름진 메뉴를 피해 가벼운 단백질 샐러드나 담백한 한식 백반 위주로 선택하시고, 저녁 모임에서는 튀김류나 고열량 소스류의 섭취량을 조절해 보세요.",
+      "grades": {
+        "v5": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer a directly answers the question with two practical methods and next actions without any unnecessary requests or invented facts."
+        },
+        "v4": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer b provides the requested advice but includes an unnecessary request at the end asking the user to report their menu later for logging."
+        }
+      }
+    }
+  ]
+}

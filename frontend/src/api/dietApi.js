@@ -428,3 +428,12 @@ export async function submitBetaFeedback(payload) {
   }
   return data;
 }
+
+export async function adminPromptRequest(refresh = false) {
+  const res = notifyAuthExpired(await fetch(`${BASE_URL}/admin/prompts${refresh ? '/refresh' : ''}`, {
+    method: refresh ? 'POST' : 'GET', cache: 'no-store', headers: authHeaders(),
+  }));
+  if (res.status === 403) return null;
+  if (!res.ok) throw new Error('프롬프트 릴리스를 확인하지 못했습니다.');
+  return res.json();
+}

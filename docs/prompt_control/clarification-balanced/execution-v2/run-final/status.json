@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-22",
+  "implementation": "execution and semantic signing adapter complete; live A/B disabled",
+  "offline_route_checks": 200,
+  "offline_route_passed": true,
+  "regression": {
+    "unit_passed": 1541,
+    "security_rag_integration_passed": 196,
+    "existing_optional_skipped": 1
+  },
+  "generation_attempts_per_condition": 100,
+  "generation_completed_per_condition": 100,
+  "pro_pairs_completed": 4,
+  "pro_pairs_failed": 1,
+  "pro_pairs_unattempted": 95,
+  "quality_comparison_complete": false,
+  "approved": false,
+  "staging_applied": false,
+  "production_applied": false,
+  "stop_reason": "GoogleRateLimitError quota_exhausted; persisted error does not distinguish RPM/TPM/RPD; no retries or new calls",
+  "historical_committed_usd": 8.735208,
+  "current_committed_usd": 9.183194,
+  "new_committed_usd": 0.447986,
+  "campaign_cap_usd": 10.324354,
+  "original_overall_cap_usd": 17.139139,
+  "campaign_remaining_usd": 1.14116,
+  "known_generation_usage_estimate_usd": 0.3803535,
+  "known_judge_usage_estimate_usd": 0.029076,
+  "probe_settled_usd": 0.000886,
+  "unknown_failed_call_reservation_retained": true,
+  "selected": "v1 maintained because candidate evaluation incomplete",
+  "references": [
+    "route-audit.json",
+    "pro-probe.json",
+    "paired.json",
+    "judges.json",
+    "summary.json",
+    "stop.json"
+  ],
+  "paid_resume": "Not automatic. Inspect capacity and preserved stop/accounting before authorizing a bounded resumption; never regenerate saved answers."
+}

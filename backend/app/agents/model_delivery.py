@@ -28,6 +28,9 @@ async def _invoke_model(model, messages, config, *, buffered_stream=False):
             raise ValueError('empty_model_stream')
         response = message_chunk_to_message(aggregate)
     usage = getattr(response, 'usage_metadata', None) or {}
-    await emit_runtime_event('model_usage', **{
+    cached=(usage.get('input_token_details') or {}).get('cache_read',0)
+    reasoning=(usage.get('output_token_details') or {}).get('reasoning',0)
+    await emit_runtime_event('model_usage', cached_input_tokens=max(0,int(cached or 0)),
+        reasoning_output_tokens=max(0,int(reasoning or 0)), **{
         name: max(0, int(usage.get(name, 0))) for name in ('input_tokens', 'output_tokens', 'total_tokens')})
     return response

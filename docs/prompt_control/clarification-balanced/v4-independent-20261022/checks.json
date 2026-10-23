@@ -1,0 +1,31 @@
+{
+  "full_backend_regression": {
+    "passed": 1806,
+    "skipped_existing": 1,
+    "new_skips": 0,
+    "exit_code": 0,
+    "command": "python -m pytest backend/tests -q --basetemp=D:/AX/diet_agent/tmp/h5-evidence-all --junitxml=tmp/h5-final-pytest.xml"
+  },
+  "new_verifier_tests": {
+    "passed": 11,
+    "red_finish_reason_test_observed": true,
+    "green_exit_code": 0,
+    "red_runtime_suffix_test_observed": true,
+    "wrong_version_prefix_tamper_rejected": true
+  },
+  "offline_fake_routes": {
+    "attempts": 200,
+    "passed": true,
+    "not_quality_evidence": true
+  },
+  "review": "Two P2 gaps fixed: normal finish reason plus delegated helper hash pinning; independently reviewed unchanged200 paid rows; no further important issues.",
+  "frontend_build": "Not rerun: no frontend or serving runtime code changes.",
+  "lint_typecheck": "No Python lint/type scripts configured for this CLI-only change.",
+  "production_candidate_checks": "Not performed because preregistered completion gate fails; no signing/promotion/browser success claim.",
+  "focused_recheck": {
+    "passed": 11,
+    "exit_code": 0,
+    "command": "python -m pytest backend/tests/unit/test_clarification_holdout.py -q --basetemp=D:/AX/diet_agent/tmp/h5-final-focused",
+    "default_temp_attempt": "3 passed, 8 setup errors: WinError5 on default temp directory; resolved with workspace basetemp, no code change"
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "conditions": {
+    "v3": {
+      "expected": 24,
+      "attempted": 24,
+      "judged": 24,
+      "passed": 23,
+      "unnecessary_requests": 1,
+      "required_recall_numerator": 18,
+      "required_recall_denominator": 18,
+      "unsafe_commitments": 0,
+      "ungraded_or_failed": 0,
+      "fresh": 24,
+      "no_write": 24,
+      "gate_passed": false,
+      "correct": 24,
+      "faithful": 24,
+      "correct_faithful": 24,
+      "unnecessary_all": 1,
+      "generation_failures": 0,
+      "generation_attempts": 24,
+      "p95_ms": 9340.30630000052,
+      "mean_ms": 6295.824854168434,
+      "cost_usd": 0.0541005,
+      "usage_complete": true
+    },
+    "v4": {
+      "expected": 24,
+      "attempted": 24,
+      "judged": 24,
+      "passed": 24,
+      "unnecessary_requests": 0,
+      "required_recall_numerator": 18,
+      "required_recall_denominator": 18,
+      "unsafe_commitments": 0,
+      "ungraded_or_failed": 0,
+      "fresh": 24,
+      "no_write": 24,
+      "gate_passed": false,
+      "correct": 24,
+      "faithful": 24,
+      "correct_faithful": 24,
+      "unnecessary_all": 0,
+      "generation_failures": 0,
+      "generation_attempts": 24,
+      "p95_ms": 6698.173500000848,
+      "mean_ms": 5222.111433335158,
+      "cost_usd": 0.05331975,
+      "usage_complete": true
+    }
+  },
+  "families": {
+    "v3": {
+      "known_reference": {
+        "expected": 6,
+        "judged": 6,
+        "correct": 6,
+        "faithful": 6,
+        "focused": 5,
+        "unnecessary": 1
+      },
+      "recipe_exact": {
+        "expected": 6,
+        "judged": 6,
+        "correct": 6,
+        "faithful": 6,
+        "focused": 6,
+        "unnecessary": 0
+      },
+      "reference_portion": {
+        "expected": 6,
+        "judged": 6,
+        "correct": 6,
+        "faithful": 6,
+        "focused": 6,
+        "unnecessary": 0
+      },
+      "required_controls": {
+        "expected": 6,
+        "judged": 6,
+        "correct": 6,
+        "faithful": 6,
+        "focused": 6,
+        "unnecessary": 0
+      }
+    },
+    "v4": {
+      "known_reference": {
+        "expected": 6,
+        "judged": 6,
+        "correct": 6,
+        "faithful": 6,
+        "focused": 5,
+        "unnecessary": 0
+      },
+      "recipe_exact": {
+        "expected": 6,
+        "judged": 6,
+        "correct": 6,
+        "faithful": 6,
+        "focused": 6,
+        "unnecessary": 0
+      },
+      "reference_portion": {
+        "expected": 6,
+        "judged": 6,
+        "correct": 6,
+        "faithful": 6,
+        "focused": 6,
+        "unnecessary": 0
+      },
+      "required_controls": {
+        "expected": 6,
+        "judged": 6,
+        "correct": 6,
+        "faithful": 6,
+        "focused": 6,
+        "unnecessary": 0
+      }
+    }
+  },
+  "calculation_mode_controls_passed": true,
+  "development_passed": true,
+  "judge_attempts": 24,
+  "judge_format_failed": 0,
+  "old_answers_reused": false,
+  "historical_grades_preserved_not_mixed_with_new": true,
+  "not_independent_holdout": true,
+  "source_hashes": {
+    "answers.json": "a9ddcbea8a387feee719c694a050d8717c214d490ba9828a69dabaad1efb9b81",
+    "judges.json": "ebd0ae5334d92a1b7ac1897f30945da6123290fdc0d384924cd3fb9f6c306b79"
+  }
+}

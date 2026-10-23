@@ -1,0 +1,546 @@
+[
+  {
+    "id": "cb2-dev-generic_menu-00",
+    "split": "development",
+    "family": "followup_ordinary_choice",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 400,
+      "target": 1800,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아?",
+    "rationale": "확인된 최신 문맥으로 일반 식사 선택에 먼저 답할 수 있다. 선호·분량·추가 기록은 필수가 아니다. 미기록/이전 수치를 현재 사실로 추측하지 않는다.",
+    "source_case_id": "dev-generic_menu-00"
+  },
+  {
+    "id": "cb2-dev-generic_menu-01",
+    "split": "development",
+    "family": "followup_ordinary_choice",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 409,
+      "target": 1807,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "그럼 샌드위치 먹어도 괜찮아?",
+    "rationale": "확인된 최신 문맥으로 일반 식사 선택에 먼저 답할 수 있다. 선호·분량·추가 기록은 필수가 아니다. 미기록/이전 수치를 현재 사실로 추측하지 않는다.",
+    "source_case_id": "dev-generic_menu-01"
+  },
+  {
+    "id": "cb2-dev-unlogged_meal-00",
+    "split": "development",
+    "family": "followup_unlogged_context",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 418,
+      "target": 1814,
+      "record_completeness": "breakfast_unlogged_not_fasting",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "밥이랑 계란 먹어도 괜찮아?",
+    "rationale": "확인된 최신 문맥으로 일반 식사 선택에 먼저 답할 수 있다. 선호·분량·추가 기록은 필수가 아니다. 미기록/이전 수치를 현재 사실로 추측하지 않는다.",
+    "source_case_id": "dev-unlogged_meal-00"
+  },
+  {
+    "id": "cb2-dev-unlogged_meal-01",
+    "split": "development",
+    "family": "followup_unlogged_context",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 427,
+      "target": 1821,
+      "record_completeness": "breakfast_unlogged_not_fasting",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "닭가슴살이랑 샐러드 먹어도 괜찮아?",
+    "rationale": "확인된 최신 문맥으로 일반 식사 선택에 먼저 답할 수 있다. 선호·분량·추가 기록은 필수가 아니다. 미기록/이전 수치를 현재 사실로 추측하지 않는다.",
+    "source_case_id": "dev-unlogged_meal-01"
+  },
+  {
+    "id": "cb2-dev-known_choices-00",
+    "split": "development",
+    "family": "followup_optional_preference",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 436,
+      "target": 1828,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "그럼 샐러드 먹어도 괜찮아?",
+    "rationale": "확인된 최신 문맥으로 일반 식사 선택에 먼저 답할 수 있다. 선호·분량·추가 기록은 필수가 아니다. 미기록/이전 수치를 현재 사실로 추측하지 않는다.",
+    "source_case_id": "dev-known_choices-00"
+  },
+  {
+    "id": "cb2-dev-known_choices-01",
+    "split": "development",
+    "family": "followup_optional_preference",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 445,
+      "target": 1835,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "그럼 한식뷔페 가서 일반식 먹어도 괜찮아?",
+    "rationale": "확인된 최신 문맥으로 일반 식사 선택에 먼저 답할 수 있다. 선호·분량·추가 기록은 필수가 아니다. 미기록/이전 수치를 현재 사실로 추측하지 않는다.",
+    "source_case_id": "dev-known_choices-01"
+  },
+  {
+    "id": "cb2-dev-known_label-00",
+    "split": "development",
+    "family": "followup_stale_history",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 454,
+      "target": 1842,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다. 이전 조회는 섭취300kcal, 하루목표2200kcal였습니다."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "그럼 샌드위치 먹어도 괜찮아?",
+    "rationale": "확인된 최신 문맥으로 일반 식사 선택에 먼저 답할 수 있다. 선호·분량·추가 기록은 필수가 아니다. 미기록/이전 수치를 현재 사실로 추측하지 않는다.",
+    "source_case_id": "dev-known_label-00"
+  },
+  {
+    "id": "cb2-dev-known_label-01",
+    "split": "development",
+    "family": "followup_stale_history",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 463,
+      "target": 1849,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다. 이전 조회는 섭취300kcal, 하루목표2200kcal였습니다."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "밥이랑 계란 먹어도 괜찮아?",
+    "rationale": "확인된 최신 문맥으로 일반 식사 선택에 먼저 답할 수 있다. 선호·분량·추가 기록은 필수가 아니다. 미기록/이전 수치를 현재 사실로 추측하지 않는다.",
+    "source_case_id": "dev-known_label-01"
+  },
+  {
+    "id": "cb2-dev-known_intake-00",
+    "split": "development",
+    "family": "followup_updated_goal",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 472,
+      "target": 1856,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "닭가슴살이랑 샐러드 먹어도 괜찮아?",
+    "rationale": "확인된 최신 문맥으로 일반 식사 선택에 먼저 답할 수 있다. 선호·분량·추가 기록은 필수가 아니다. 미기록/이전 수치를 현재 사실로 추측하지 않는다.",
+    "source_case_id": "dev-known_intake-00"
+  },
+  {
+    "id": "cb2-dev-known_intake-01",
+    "split": "development",
+    "family": "followup_updated_goal",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 481,
+      "target": 1863,
+      "record_completeness": "unknown",
+      "pending_proposal": false
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "점심 메뉴 추천해줘."
+      },
+      {
+        "role": "assistant",
+        "content": "밥에 단백질 반찬과 채소를 곁들이는 구성을 추천합니다."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "answer_now",
+    "required_fields": [],
+    "question": "그럼 샐러드 먹어도 괜찮아?",
+    "rationale": "확인된 최신 문맥으로 일반 식사 선택에 먼저 답할 수 있다. 선호·분량·추가 기록은 필수가 아니다. 미기록/이전 수치를 현재 사실로 추측하지 않는다.",
+    "source_case_id": "dev-known_intake-01"
+  },
+  {
+    "id": "cb2-dev-missing_choices-00",
+    "split": "development",
+    "family": "missing_choices",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 600,
+      "target": 1800,
+      "record_completeness": "confirmed_rows_only",
+      "pending_proposal": false,
+      "choices": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "식사 선택 조언을 이어서 해줘. 저장하지는 마."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "ask_required",
+    "required_fields": [
+      "comparison_options"
+    ],
+    "question": "비빔밥 말고 아까 말한 두 가지 중 하나를 골라줘. 그 두 가지가 현재 대화에는 안 남아 있어.",
+    "rationale": "실제 비교할 두 선택지가 없어 선택지를 확인해야 함. 임의 메뉴를 이전 선택지로 꾸미지 않음.",
+    "source_case_id": "dev-missing_choices-00"
+  },
+  {
+    "id": "cb2-dev-missing_choices-01",
+    "split": "development",
+    "family": "missing_choices",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 625,
+      "target": 1830,
+      "record_completeness": "confirmed_rows_only",
+      "pending_proposal": false,
+      "choices": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "식사 선택 조언을 이어서 해줘. 저장하지는 마."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "ask_required",
+    "required_fields": [
+      "comparison_options"
+    ],
+    "question": "샌드위치 말고 아까 말한 두 가지 중 하나를 골라줘. 그 두 가지가 현재 대화에는 안 남아 있어.",
+    "rationale": "실제 비교할 두 선택지가 없어 선택지를 확인해야 함. 임의 메뉴를 이전 선택지로 꾸미지 않음.",
+    "source_case_id": "dev-missing_choices-01"
+  },
+  {
+    "id": "cb2-dev-missing_label-00",
+    "split": "development",
+    "family": "missing_label",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 600,
+      "target": 1800,
+      "record_completeness": "confirmed_rows_only",
+      "pending_proposal": false,
+      "product_labels": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "식사 선택 조언을 이어서 해줘. 저장하지는 마."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "ask_required",
+    "required_fields": [
+      "product_label_or_exact_product"
+    ],
+    "question": "편의점에서 산 비빔밥 제품의 단백질이 정확히 몇 g인지 알려줘. 제품명이나 영양표는 아직 안 보냈고 대표값 추정은 원하지 않아.",
+    "rationale": "제품을 식별할 정보와 표가 없어 정확한 제품 수치를 지어내지 말고 해당 정보만 요청.",
+    "source_case_id": "dev-missing_label-00"
+  },
+  {
+    "id": "cb2-dev-missing_label-01",
+    "split": "development",
+    "family": "missing_label",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 625,
+      "target": 1830,
+      "record_completeness": "confirmed_rows_only",
+      "pending_proposal": false,
+      "product_labels": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "식사 선택 조언을 이어서 해줘. 저장하지는 마."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "ask_required",
+    "required_fields": [
+      "product_label_or_exact_product"
+    ],
+    "question": "편의점에서 산 샌드위치 제품의 단백질이 정확히 몇 g인지 알려줘. 제품명이나 영양표는 아직 안 보냈고 대표값 추정은 원하지 않아.",
+    "rationale": "제품을 식별할 정보와 표가 없어 정확한 제품 수치를 지어내지 말고 해당 정보만 요청.",
+    "source_case_id": "dev-missing_label-01"
+  },
+  {
+    "id": "cb2-dev-missing_portion-00",
+    "split": "development",
+    "family": "missing_portion",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 600,
+      "target": 1800,
+      "record_completeness": "confirmed_rows_only",
+      "pending_proposal": false,
+      "unknown_meal": {
+        "food": "비빔밥",
+        "consumed_g": null
+      }
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "식사 선택 조언을 이어서 해줘. 저장하지는 마."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "question": "먹은 비빔밥의 실제 칼로리를 정확히 계산해줘. 얼마나 먹었는지는 아직 말하지 않았고 기본 1인분 추정은 이번엔 쓰지 마.",
+    "rationale": "사용자가 정확한 실제량을 요구하고 기본량 추정을 배제했으므로 먹은 양이 필수. 일반 기본분량 흐름과 구분.",
+    "source_case_id": "dev-missing_portion-00"
+  },
+  {
+    "id": "cb2-dev-missing_portion-01",
+    "split": "development",
+    "family": "missing_portion",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 625,
+      "target": 1830,
+      "record_completeness": "confirmed_rows_only",
+      "pending_proposal": false,
+      "unknown_meal": {
+        "food": "샌드위치",
+        "consumed_g": null
+      }
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "식사 선택 조언을 이어서 해줘. 저장하지는 마."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "ask_required",
+    "required_fields": [
+      "consumed_amount"
+    ],
+    "question": "먹은 샌드위치의 실제 칼로리를 정확히 계산해줘. 얼마나 먹었는지는 아직 말하지 않았고 기본 1인분 추정은 이번엔 쓰지 마.",
+    "rationale": "사용자가 정확한 실제량을 요구하고 기본량 추정을 배제했으므로 먹은 양이 필수. 일반 기본분량 흐름과 구분.",
+    "source_case_id": "dev-missing_portion-01"
+  },
+  {
+    "id": "cb2-dev-missing_recipe-00",
+    "split": "development",
+    "family": "missing_recipe",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 600,
+      "target": 1800,
+      "record_completeness": "confirmed_rows_only",
+      "pending_proposal": false,
+      "recipe": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "식사 선택 조언을 이어서 해줘. 저장하지는 마."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "ask_required",
+    "required_fields": [
+      "recipe_ingredients_and_amounts"
+    ],
+    "question": "직접 만든 비빔밥 한 냄비의 총 지방을 정확히 계산하고 싶어. 재료와 기름 양은 아직 안 적었어. 대표 음식 수치로 바꾸지는 마.",
+    "rationale": "개별 레시피 합계의 재료와 양이 없어 성분표 대표값으로 정확한 총량을 대체할 수 없음.",
+    "source_case_id": "dev-missing_recipe-00"
+  },
+  {
+    "id": "cb2-dev-missing_recipe-01",
+    "split": "development",
+    "family": "missing_recipe",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 625,
+      "target": 1830,
+      "record_completeness": "confirmed_rows_only",
+      "pending_proposal": false,
+      "recipe": null
+    },
+    "recent_messages": [
+      {
+        "role": "user",
+        "content": "식사 선택 조언을 이어서 해줘. 저장하지는 마."
+      }
+    ],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "ask_required",
+    "required_fields": [
+      "recipe_ingredients_and_amounts"
+    ],
+    "question": "직접 만든 샌드위치 한 냄비의 총 지방을 정확히 계산하고 싶어. 재료와 기름 양은 아직 안 적었어. 대표 음식 수치로 바꾸지는 마.",
+    "rationale": "개별 레시피 합계의 재료와 양이 없어 성분표 대표값으로 정확한 총량을 대체할 수 없음.",
+    "source_case_id": "dev-missing_recipe-01"
+  },
+  {
+    "id": "cb2-dev-missing_referent-00",
+    "split": "development",
+    "family": "missing_referent",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 600,
+      "target": 1800,
+      "record_completeness": "confirmed_rows_only",
+      "pending_proposal": false
+    },
+    "recent_messages": [],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "ask_required",
+    "required_fields": [
+      "referenced_food"
+    ],
+    "question": "내가 말한 그 음식이 비빔밥보다 단백질이 많아? 앞에서 말한 음식 이름이 현재 대화에는 없어.",
+    "rationale": "비교 대상의 지시어가 해소되지 않아 그 음식의 이름을 확인해야 함.",
+    "source_case_id": "dev-missing_referent-00"
+  },
+  {
+    "id": "cb2-dev-missing_referent-01",
+    "split": "development",
+    "family": "missing_referent",
+    "verified_context": {
+      "scope": "fresh_current_request",
+      "calories": 625,
+      "target": 1830,
+      "record_completeness": "confirmed_rows_only",
+      "pending_proposal": false
+    },
+    "recent_messages": [],
+    "provenance": "synthetic_counterexample_informed_by_saved_outputs",
+    "expected": "ask_required",
+    "required_fields": [
+      "referenced_food"
+    ],
+    "question": "내가 말한 그 음식이 샌드위치보다 단백질이 많아? 앞에서 말한 음식 이름이 현재 대화에는 없어.",
+    "rationale": "비교 대상의 지시어가 해소되지 않아 그 음식의 이름을 확인해야 함.",
+    "source_case_id": "dev-missing_referent-01"
+  }
+]

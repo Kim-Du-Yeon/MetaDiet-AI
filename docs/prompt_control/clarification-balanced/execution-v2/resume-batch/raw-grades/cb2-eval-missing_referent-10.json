@@ -1,0 +1,13 @@
+{
+  "text": "{\n  \"a\": [\n    true,\n    true,\n    true,\n    false,\n    true,\n    false,\n    \"Response A correctly identifies the missing referent and asks for the name of the food to compare without making any unsafe commitments or unnecessary requests.\"\n  ],\n  \"b\": [\n    true,\n    true,\n    true,\n    false,\n    true,\n    false,\n    \"Response B correctly identifies the missing referent and asks for the food name. It provides a bit more explanation but remains focused on the required field.\"\n  ]\n}",
+  "finish_reasons": [
+    "FinishReason.STOP"
+  ],
+  "usage": {
+    "input_tokens": 625,
+    "output_tokens": 355,
+    "input_token_details": {
+      "cache_read": 0
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "backend_full": {
+    "passed": 1825,
+    "existing_skipped": 1,
+    "new_skips": 0,
+    "exit_code": 0,
+    "command": "python -m pytest backend/tests -q --basetemp=D:/AX/diet_agent/tmp/policy-v2-full --junitxml=tmp/policy-v2-tests.xml"
+  },
+  "new_tests": 19,
+  "tdd_red_missing_module_failed_tests": 17,
+  "offline_evidence_recheck": {
+    "generation_calls": 0,
+    "pro_calls": 0,
+    "metrics_equal_original": true
+  },
+  "independent_review": "No critical/important issues. Reviewer default tmp fixture permission error was environment-only; primary full suite used workspace basetemp successfully.",
+  "frontend_build": "Not rerun: no serving/frontend runtime edits; existing approved server supports signed remote release.",
+  "deployment": "Prompt manifest promotion + server background refresh; no new Render application build required.",
+  "browser": "Two completed read-only counseling requests with actual production trace commits; actual user AB kept disabled; no meal/goal changes.",
+  "checkout_reproducibility": {
+    "original_markdown_files": 2,
+    "original_bytes_unchanged": true,
+    "explicit_eol": "crlf",
+    "verification": "git -c core.autocrlf=false cat-file --filters --path=<path> HEAD:<path>; both filtered SHA equal frozen original inventory. JSON/Python raw bytes preserved by existing -text attributes."
+  },
+  "final_related_recheck": {
+    "passed": 43,
+    "exit_code": 0,
+    "command": "python -m pytest backend/tests/unit/test_clarification_approval_review.py backend/tests/unit/test_prompt_release_workflow.py backend/tests/unit/test_prompt_control.py -q --basetemp=D:/AX/diet_agent/tmp/policy-v2-final"
+  }
+}

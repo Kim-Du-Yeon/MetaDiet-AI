@@ -1,0 +1,35 @@
+{
+  "date": "2026-10-23",
+  "project": "metadiet-owner-debug",
+  "build": "b0b090d20f25249ba4b624f999f2a70917630ab6",
+  "trace_id": "1cfb3583-9c7d-496d-b9e7-037fac08a132",
+  "root_seconds": 16.564722,
+  "total_tokens": 10365,
+  "estimated_model_usd": "0.01041075",
+  "browser_input_output_verified": true,
+  "raw_content_in_this_artifact": false,
+  "models": [
+    {
+      "run_id": "01a166bf-4b5c-70b1-a8a6-663fa7d5fb7b",
+      "model": "gemini-3.8-flash",
+      "input_has_test_question": true,
+      "output_body_visible": true,
+      "seconds": 5.227746,
+      "tokens": 5534,
+      "estimated_usd": "0.0056295",
+      "tool_call_output_visible": false,
+      "output_kind": "text"
+    },
+    {
+      "run_id": "01a166bf-2ed9-7741-ae11-8bfdce1ccaf0",
+      "model": "gemini-3.8-flash",
+      "input_has_test_question": true,
+      "output_body_visible": false,
+      "seconds": 5.755195,
+      "tokens": 4831,
+      "estimated_usd": "0.00478125",
+      "tool_call_output_visible": true,
+      "output_kind": "tool_call"
+    }
+  ]
+}

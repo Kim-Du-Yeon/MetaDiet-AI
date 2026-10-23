@@ -1,0 +1,87 @@
+{
+  "recovered_pairs": 3,
+  "new_model_calls": 0,
+  "cost_change_usd": 0,
+  "all_prior_completed_preserved": true,
+  "parser_module_sha256": "b7078c33e176e97b8560b2d38566184a0c9028fed88fecf1b007e58a0e63d341",
+  "changes": [
+    {
+      "case_id": "cb2-eval-unlogged_meal-02",
+      "raw_sha256": "ddec6942b7e3c7f3cc7f76ce66c13f5fe0be37ee2d450acb16ff1177c9d8fb49",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The response directly answers the question and provides helpful guidance on how to eat at a Korean buffet without making unsafe commitments or asking unnecessary questions."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The response directly answers the question and provides helpful guidance on how to eat at a Korean buffet without making unsafe commitments or asking unnecessary questions."
+        }
+      },
+      "usage_unchanged": true,
+      "answer_binding_unchanged": true
+    },
+    {
+      "case_id": "cb2-eval-known_intake-10",
+      "raw_sha256": "a3aa8c510fdeecbda46457c000cd9315a62481ebc24f1d50bd0670f023a0cc8e",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response A correctly answers the question, uses the current context values accurately, and provides helpful advice without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response B correctly answers the question, accurately references the current context values, and provides appropriate dietary advice without unnecessary requests or unsafe commitments."
+        }
+      },
+      "usage_unchanged": true,
+      "answer_binding_unchanged": true
+    },
+    {
+      "case_id": "cb2-eval-missing_recipe-10",
+      "raw_sha256": "6090dd4ac5aaca426798fd53cf4b169efb6e480be0d397dd8f2118817e9ceb2f",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response A correctly identifies the missing ingredients and oil amounts and asks for them without making unsafe commitments or unnecessary requests."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Response B correctly asks for the required ingredients and amounts to calculate the exact fat content, adhering to the user's constraints."
+        }
+      },
+      "usage_unchanged": true,
+      "answer_binding_unchanged": true
+    }
+  ]
+}

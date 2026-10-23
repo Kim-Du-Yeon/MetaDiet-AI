@@ -1,0 +1,103 @@
+{
+  "synthetic": true,
+  "database_access": "disabled",
+  "production_fast_path": "disabled_for_demo_only",
+  "root_run_id": "cfb8be3b-4371-4985-8911-cca4166627c6",
+  "url": "https://smith.langchain.com/o/587a2f87-e802-40a0-8d1d-2343ab07d304/projects/p/c575e3dd-75de-4d40-a578-06aeb59fcaaf/r/cfb8be3b-4371-4985-8911-cca4166627c6?poll=true",
+  "question": "오늘 점심에 조리된 쌀밥 200g을 먹었어. 기록만 해줘. 음식 검색 후 계산해서 확인할 제안을 만들어줘.",
+  "response": "오늘 점심으로 드신 쌀밥(멥쌀, 백미, 밥) 200g에 대한 섭취 기록 제안을 생성했습니다.\n\n**영양 정보 (200g 기준)**\n- **열량**: 292 kcal\n- **탄수화물**: 63.4g\n- **단백질**: 5.3g\n- **지방**: 0.7g\n\n해당 영양 수치는 검증된 표준 데이터를 기준으로 계산되었으며, 실제 조리법이나 밥의 수분 상태 등에 따라 약간의 차이가 있을 수 있습니다.\n\n현재 상태는 바로 저장된 것이 아닌 제안 상태이므로, 화면에 표시된 확인 카드에서 내용을 검토하시고 확인 버튼을 눌러 기록을 확정해 주세요. 필요 시 분량을 수정하실 수도 있습니다.",
+  "awaiting_confirmation": true,
+  "status": "completed",
+  "agent_events": [
+    {
+      "type": "tool_requested",
+      "tool": "search_foods",
+      "agent": "meal"
+    },
+    {
+      "type": "tool_succeeded",
+      "tool": "search_foods",
+      "agent": "meal"
+    },
+    {
+      "type": "tool_requested",
+      "tool": "nutrition_lookup",
+      "agent": "meal"
+    },
+    {
+      "type": "tool_succeeded",
+      "tool": "nutrition_lookup",
+      "agent": "meal"
+    },
+    {
+      "type": "tool_requested",
+      "tool": "propose_meal",
+      "agent": "meal"
+    },
+    {
+      "type": "tool_succeeded",
+      "tool": "propose_meal",
+      "agent": "meal"
+    },
+    {
+      "type": "tool_requested",
+      "tool": "delegate_meal",
+      "agent": "supervisor"
+    },
+    {
+      "type": "tool_succeeded",
+      "tool": "delegate_meal",
+      "agent": "supervisor"
+    },
+    {
+      "type": "request_context_metrics",
+      "db_queries": 0,
+      "cache_hits": 0,
+      "prefetched": false
+    }
+  ],
+  "usage": {
+    "model_calls": 5,
+    "tool_calls": 4,
+    "elapsed_seconds": 45.953999999997905,
+    "validation_attempts": 0,
+    "replans": 0
+  },
+  "llms": [
+    {
+      "model": "gemini-3.8-flash",
+      "tokens": 947,
+      "cost": "0.00108825",
+      "input_visible": true,
+      "output_visible": false
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "tokens": 1366,
+      "cost": "0.0015555",
+      "input_visible": true,
+      "output_visible": false
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "tokens": 1653,
+      "cost": "0.00177375",
+      "input_visible": false,
+      "output_visible": false
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "tokens": 4456,
+      "cost": "0.01119",
+      "input_visible": false,
+      "output_visible": false
+    },
+    {
+      "model": "gemini-3.8-flash",
+      "tokens": 5107,
+      "cost": "0.00567525",
+      "input_visible": false,
+      "output_visible": false
+    }
+  ]
+}

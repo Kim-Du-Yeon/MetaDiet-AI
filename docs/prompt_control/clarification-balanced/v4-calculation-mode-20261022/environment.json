@@ -1,0 +1,31 @@
+{
+  "python": "3.12.10 (tags/v3.12.10:0cc8128, Apr  8 2025, 12:21:36) [MSC v.1943 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "packages": {
+    "google-genai": "2.29.0",
+    "langchain-google-genai": "4.4.0",
+    "langgraph": "1.2.2",
+    "langsmith": "0.8.6"
+  },
+  "expected_versions_match": true,
+  "serving_execution_code": {
+    "scripts/eval/clarification_execution.py": "789147fb998dc16cc53b5baa01be9078038e57665306e1722e4f3cfab2bc56e6",
+    "scripts/eval/run_clarification_comparison.py": "2e906a155e8d92b3fd434e1bad9f4609d24c66d4e56f37defa07de6af1984f4e",
+    "app/agents/team.py": "a84e3f9bbbda26b6e2c951d90cda0a898a39e0a4326e7f29778427b3fbb8f69e",
+    "app/agents/coaching_route.py": "4d9252ea42cfa65ced9bf2e5834b90b93f45d179c64981418369233e45086f03",
+    "app/agents/runtime.py": "6dc6b52d0da3031ff740a808f10a8ae4695bc15315a77b45ba393c419184e9db",
+    "app/agents/model_delivery.py": "8bf20c0fcff5eb25d199dd895b89a711ecc7e351664ff2a50b70733e4142d879",
+    "app/agents/answer_basis.py": "f4a841038e421ea14af94183a37e1dbf33fdbb98ea1ffbec15ad6bbc15c9fb2f",
+    "app/core/llm.py": "e94325043dd987da66cb6e54178fd9752cfb0b7b562168a2a4c85cb59a3c72b6",
+    "app/core/prompts.py": "1f5e45e17f52038e272a8388f6d3c9977307a474c55072556094c13533a3f8b2",
+    "app/core/prompt_release_control.py": "e64d3424646323d99c828c7bbc1654770228c857ab94c32a22987ac4365fa8bd",
+    "app/core/external_retry.py": "f25060a47b3132af7ffb91b46203805de983205e9959ce02a68e0023bef6a6cd",
+    "app/core/config.py": "3fcacea0e544eb47d563fcd440bcbbe685461cecffd8486ddb2ee82a94a5720d"
+  },
+  "concurrency": 1,
+  "retrieval": "off",
+  "local_regression_tests_not_overlapped_with_main_generation": true,
+  "historical_v1_v3_latency_not_contemporaneous": true,
+  "temperature_zero_not_deterministic": true,
+  "all_domain_records_synthetic": true
+}

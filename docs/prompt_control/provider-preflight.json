@@ -1,0 +1,80 @@
+{
+  "quota": "not exposed by model metadata",
+  "counts": {
+    "team_base_meal": 740,
+    "compact_followup": 252,
+    "synthetic_short_history_sample": 493
+  },
+  "probes": [
+    {
+      "model": "gemini-3.8-flash",
+      "status": "completed",
+      "finish_reason": "FinishReason.STOP",
+      "usage": {
+        "cache_tokens_details": null,
+        "cached_content_token_count": null,
+        "candidates_token_count": 1,
+        "candidates_tokens_details": null,
+        "prompt_token_count": 6,
+        "prompt_tokens_details": [
+          {
+            "modality": "TEXT",
+            "token_count": 6
+          }
+        ],
+        "thoughts_token_count": null,
+        "tool_use_prompt_token_count": null,
+        "tool_use_prompt_tokens_details": null,
+        "total_token_count": 7,
+        "traffic_type": null
+      }
+    },
+    {
+      "model": "gemini-3.1-pro-preview",
+      "status": "completed",
+      "finish_reason": "FinishReason.STOP",
+      "usage": {
+        "cache_tokens_details": null,
+        "cached_content_token_count": null,
+        "candidates_token_count": 1,
+        "candidates_tokens_details": null,
+        "prompt_token_count": 6,
+        "prompt_tokens_details": [
+          {
+            "modality": "TEXT",
+            "token_count": 6
+          }
+        ],
+        "thoughts_token_count": 81,
+        "tool_use_prompt_token_count": null,
+        "tool_use_prompt_tokens_details": null,
+        "total_token_count": 88,
+        "traffic_type": null
+      }
+    }
+  ],
+  "budget_before": {
+    "committed_usd": 5.139139,
+    "stages": {
+      "comparison": 2.926568,
+      "development": 0.025021,
+      "judge": 2.186264,
+      "probe": 0.001286
+    },
+    "total_limit_usd": 17.139139,
+    "stopped": false,
+    "stop_reason": null
+  },
+  "budget_after": {
+    "committed_usd": 5.140144,
+    "stages": {
+      "comparison": 2.926568,
+      "development": 0.025021,
+      "judge": 2.186264,
+      "probe": 0.002291
+    },
+    "total_limit_usd": 17.139139,
+    "stopped": false,
+    "stop_reason": null
+  }
+}

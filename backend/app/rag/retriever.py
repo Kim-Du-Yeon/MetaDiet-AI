@@ -37,10 +37,8 @@ embeddings = GeminiEmbeddings()
 
 _translate_llm = get_chat_model(temperature=0, task='query_translation')
 _KOREAN_RE = re.compile(r"[가-힣]")
-_TRANSLATE_PROMPT = ChatPromptTemplate.from_messages([
-    ("system", get_prompt('rag.query_translation')),
-    ("human", "{query}"),
-])
+from app.core.prompts import RegisteredChatPrompt
+_TRANSLATE_PROMPT = RegisteredChatPrompt('rag.query_translation', '{query}')
 
 
 async def _translate_to_english(query: str) -> str:

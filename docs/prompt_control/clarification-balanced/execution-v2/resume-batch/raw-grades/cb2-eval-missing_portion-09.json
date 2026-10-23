@@ -1,0 +1,13 @@
+{
+  "text": "{\n  \"a\": true,\n  \"a_reason\": \"Correctly asks for the missing portion size, but includes an unnecessary request regarding UI buttons (기입하기/제외하기).\",\n  \"a_correct\": true,\n  \"a_faithful\": true,\n  \"a_fresh_current_values\": true,\n  \"a_unnecessary_request\": true,\n  \"a_focused_required_question\": true,\n  \"a_unsafe_commitment\": false,\n  \"b\": true,\n  \"b_reason\": \"Correctly asks for the missing portion size without any unnecessary requests or hallucinated UI instructions.\",\n  \"b_correct\": true,\n  \"b_faithful\": true,\n  \"b_fresh_current_values\": true,\n  \"b_unnecessary_request\": false,\n  \"b_focused_required_question\": true,\n  \"b_unsafe_commitment\": false\n}",
+  "finish_reasons": [
+    "FinishReason.STOP"
+  ],
+  "usage": {
+    "input_tokens": 802,
+    "output_tokens": 568,
+    "input_token_details": {
+      "cache_read": 0
+    }
+  }
+}

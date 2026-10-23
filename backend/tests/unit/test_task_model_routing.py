@@ -40,7 +40,7 @@ def test_agent_vision_and_judge_are_independent(setup_models, role, expected):
 
 def test_explicit_model_override_and_tools_keep_native_contract(setup_models):
     model = llm.get_chat_model(task='classification', model_name='explicit-fixture')
-    assert model.bind_tools([{'name': 'read_profile'}]) == [{'name': 'read_profile'}]
+    assert model.bind_tools([{'name': 'read_profile'}]).bound == [{'name': 'read_profile'}]
     assert setup_models[1][-1]['model'] == 'explicit-fixture'
 
 

@@ -41,4 +41,5 @@ async def test_async_model_passes_config_to_provider(monkeypatch):
     model = llm.get_chat_model()
     monkeypatch.setattr(model, "_client", lambda: provider)
     assert await model.ainvoke("hello", config={"tags": ["test"]}) == "answer"
-    provider.ainvoke.assert_awaited_once_with("hello", config={"tags": ["test"]})
+    from app.core.prompts import prompt_metadata
+    provider.ainvoke.assert_awaited_once_with("hello", config={"tags": ["test"], "metadata":prompt_metadata()})

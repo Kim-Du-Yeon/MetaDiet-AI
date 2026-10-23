@@ -1,0 +1,17 @@
+{
+  "command": [
+    "backend/scripts/approve_prompt_release.py",
+    "evaluate",
+    "--candidate",
+    "docs\\prompt_control\\clarification-balanced\\v5-closing-offer-20261022\\candidate.json",
+    "--results",
+    "docs\\prompt_control\\clarification-balanced\\v5-closing-offer-20261022",
+    "--output",
+    "tmp/v5-receipt.json"
+  ],
+  "exit_code": 1,
+  "error": "ValueError: Unknown unaccounted usage",
+  "receipt_created": false,
+  "signed": false,
+  "promoted": false
+}

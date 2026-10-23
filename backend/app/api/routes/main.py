@@ -50,8 +50,12 @@ logger = logging.getLogger(__name__)
 app = FastAPI(title="Diet Agent API", version="1.0.0", lifespan=lifespan)
 from app.core.request_timing import RequestTimingMiddleware, request_ids, timing as request_timing
 app.add_middleware(RequestTimingMiddleware)
+from app.core.trace_policy import TracePolicyMiddleware
+app.add_middleware(TracePolicyMiddleware)
 from app.api.routes.admin_feedback import router as admin_feedback_router
 app.include_router(admin_feedback_router)
+from app.api.routes.admin_prompts import router as admin_prompt_router
+app.include_router(admin_prompt_router)
 sb  = get_supabase()
 
 app.add_middleware(
@@ -335,7 +339,8 @@ async def _invoke_with_progress(graph, graph_input, config: dict, journal: Execu
         if _v2(config):
             await journal.publish('started', {'build': build, 'trace_id': str(trace_id)})
         async with measure_stage('graph_total'):
-            outcome = await graph.ainvoke(graph_input, config=invocation_config)
+            from app.core.prompt_service import invoke_with_prompt_pin
+            outcome = await invoke_with_prompt_pin(graph, graph_input, invocation_config)
         terminal_status = "blocked" if isinstance(outcome, dict) and outcome.get("execution_status") == "blocked" else "completed"
         async with measure_stage('terminal_checkpoint'):
             await graph.aupdate_state(config, {"execution_status": terminal_status, "execution_error": None,
@@ -1437,7 +1442,8 @@ async def weekly_report(current_user: str = Depends(get_current_user)):
     readonly = ["read_profile", "read_intake", "read_recent_intake", "read_measurements",
                 "assess_goal_progress", "search_evidence"]
     async with conversation_lock(current_user, "report"):
-        await graph.ainvoke(_initial_state(ChatRequest(message="이번 주 식단 리포트를 보여주세요.",
+        from app.core.prompt_service import invoke_with_prompt_pin
+        await invoke_with_prompt_pin(graph, _initial_state(ChatRequest(message="이번 주 식단 리포트를 보여주세요.",
                                                        requested_action="weekly_review",
                                                        tool_policy=readonly), current_user), config=config)
     state = _sv(await graph.aget_state(config))
@@ -1602,4 +1608,3 @@ async def _mutate_with_snapshot(user_id,meal_id,quantity_g=None,**options):
 @app.get("/health")
 async def health():
     return {"status":"ok", 'build': build_info()}
-

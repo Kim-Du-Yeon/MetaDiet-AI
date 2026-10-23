@@ -1,0 +1,69 @@
+{
+  "suite": "clarification-two-template-holdout-v1",
+  "code_sha256": {
+    "backend/scripts/eval/clarification_holdout.py": "3ea0d8fc22b9a8204316193dd0b66b01d3fca7048d99ff3ab7b216200b231b3c",
+    "backend/scripts/eval/run_clarification_holdout.py": "230a25ad783acc2cebc9f2a98a82da2eb385a08b48cc0cdb1dd8ac8fdd1d7ee0",
+    "backend/scripts/prompt_release_workflow.py": "08af22bfc95e657911eab0662de1e44db4c77b17c66c2b56941c10fa71af673e",
+    "backend/scripts/eval/run_clarification_v3.py": "f05c26914ee1457218463155ebe1f3a782a0d480270b819d31db680b9660c6ed",
+    "backend/scripts/eval/run_clarification_v4.py": "f0722a290fb54bd4e4d5d0052427141a10d3fc524f80a5ad460f251e9019c163",
+    "backend/scripts/eval/clarification_v3.py": "9e2fada1f2bf8e53389a449d3b92898df0ca8628fcfb901b226a832a0fec3387",
+    "backend/scripts/eval/clarification_v4.py": "b7cde3cc71fdb58f3a9098f41c413eba89a85aa39e3a9c3a884a0d652e45300e",
+    "backend/scripts/eval/clarification_execution.py": "789147fb998dc16cc53b5baa01be9078038e57665306e1722e4f3cfab2bc56e6",
+    "backend/scripts/eval/run_clarification_comparison.py": "2e906a155e8d92b3fd434e1bad9f4609d24c66d4e56f37defa07de6af1984f4e",
+    "backend/scripts/eval/clarification_cases.py": "ac5b476b85ba7afed873e8fbe3929a40c7c3122de4cd8d99461a0ea30184599d",
+    "backend/scripts/eval/batch_agentic_judges.py": "6874b030ad8b6f18a05a6fc24582b3c150326ba529942800d801213a172e25e8",
+    "backend/scripts/eval/batch_clarification_resume.py": "671f5042d1d0483e475e5ecdc842d0368448d45270a217396a41d5ee7ec39723",
+    "backend/scripts/eval/eval_budget.py": "a5c9d4d52e4fd48d8f5242d0a329307d2ce82e12311598db1d4918913a9039d7",
+    "backend/scripts/eval/model_routing_support.py": "1e93ec3893b0786ebb1d79e1df437f0ea67e5885288b8d2c6ac99f085c973c83",
+    "backend/scripts/eval/cache_artifacts.py": "0d893343a2ac9f1152237f7a8809e153a215da076fc1ec2cbe2ac6eaf8bb6305"
+  },
+  "cases_sha256": "2b6a6fad2c5061f63c2c812474cf18eda371c0112fef6107159642d88c9e52c5",
+  "candidate_sha256": "7f7609f5faaed5d5360b08ee11c4e95de78ea55b993b873ea75b337ebd5061e0",
+  "historical_sha256": {
+    "candidate.json": "3acdc3172ea5ea5d2c1390537b6acb33862fcf230db64f65e43c3fe74a168812",
+    "protocol.json": "5e78760d3d310cd5edc0428b59f9f65e41db26cdcde38d94c5717fcb68b6a438",
+    "main/answers.json": "9e0789033e9737a2eac0bf2e1d3d4736c40205b305d7b58b04d87230f10303ed",
+    "main/judges.json": "fa5697d95c119180c1ba2d40ce8d26aaf93efd6af825470b24531f4818370c41",
+    "main/summary.json": "cd3cfa4669a1f6dffeae5c8b8e1fe9bc2a041469a753020da330dbbf292a3af6"
+  },
+  "gate": "100 completed/judged/accounted each; candidate correct and faithful>=98 and >=baseline-1, behavior>=98 and >=baseline, required>=49/50, unsafe0, fresh/no-write100, extra<=2 and <=baseline, p95/cost<=1.25baseline; old diagnostic gate also required",
+  "candidate_frozen_before_new_outputs": true,
+  "existing_results_reused": "v4 diagnostic gate/48dev/300answers/100triplegrades and all original usage preserved; no old answer is a new holdout answer",
+  "planned_calls": "new200 Flash generations +100 paired Pro Batch judgments +staging/browser smoke, case may call multiple models",
+  "expected_usage_usd": [
+    0.8,
+    1.5
+  ],
+  "scope": "New synthetic100 question strings, disjoint exact text from old cohorts, same author/10families; not external clinical/user holdout",
+  "actual_user_ab": false,
+  "candidate_commit_ids": {
+    "team.base": "7cb880e71a3599c8fd681ad341070d745c1343483b0168404dbcf6505fed2de0",
+    "team.compact_followup": "36d05c3aec0e17aaf53b4534960eb9893ee4f2b74c6452550618db369c90a403"
+  },
+  "prepaid_route_refinement": {
+    "reason": "Original natural questions all used supervisor; refine ordinary10 wording/history before any paid generation to exercise compact without changing router",
+    "paid_model_calls_before_refinement": 0,
+    "archive": "prepaid-route-refinement"
+  },
+  "paid_generation_code_sha256": {
+    "backend/scripts/eval/clarification_holdout.py": "1cfde0ecc834ba33a5c4d3394b151d323fd5ff6c80583d472d663b6b16331e2b",
+    "backend/scripts/eval/run_clarification_holdout.py": "230a25ad783acc2cebc9f2a98a82da2eb385a08b48cc0cdb1dd8ac8fdd1d7ee0",
+    "backend/scripts/prompt_release_workflow.py": "08af22bfc95e657911eab0662de1e44db4c77b17c66c2b56941c10fa71af673e"
+  },
+  "approval_hardening": {
+    "reason": "Strict normal-finish check, delegated evaluator source pinning and package check; no generation behavior/prompt/cohort/gate change",
+    "archive": "approval-hardening-originals",
+    "changed_functions": [
+      "code_sha",
+      "verify"
+    ],
+    "unchanged_helpers_equal_preexisting_commit": "8bba8d81",
+    "generation_rows_unchanged": true
+  },
+  "prefix_validation_fix": {
+    "reason": "Verify static template as leading exact text with runtime-owned suffix; longest known version prefix prevents v1 borrowing v4",
+    "archive": "prefix-validation-originals",
+    "only_changed_function": "verify",
+    "no_generation_or_grade_changes": true
+  }
+}

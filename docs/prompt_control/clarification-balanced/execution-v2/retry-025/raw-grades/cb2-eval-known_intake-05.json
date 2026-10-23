@@ -1,0 +1,13 @@
+{
+  "text": "{\n  \"a\": [\n    true,\n    true,\n    true,\n    false,\n    true,\n    false,\n    \"Response A correctly answers the question, uses the current context values accurately, does not ask unnecessary questions, and makes no unsafe commitments.\"\n  ],\n  \"b\": [\n    true,\n    true,\n    true,\n    false,\n    true,\n    false,\n    \"Response B correctly answers the question, aligns with the current context, does not ask unnecessary questions, and makes no unsafe commitments.\"\n  ]\n}",
+  "finish_reasons": [
+    "FinishReason.STOP"
+  ],
+  "usage": {
+    "input_tokens": 791,
+    "output_tokens": 418,
+    "input_token_details": {
+      "cache_read": 0
+    }
+  }
+}

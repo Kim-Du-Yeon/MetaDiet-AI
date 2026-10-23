@@ -1,0 +1,13 @@
+{
+  "text": "{\n  \"a_correct\": true,\n  \"a_faithful\": true,\n  \"a_fresh_current_values\": true,\n  \"a_unnecessary_request\": false,\n  \"a_focused_required_question\": true,\n  \"a_unsafe_commitment\": false,\n  \"a_reason\": \"Answer A correctly asks for the missing required fields (soup type and amount) without inventing facts or UI elements.\",\n  \"b_correct\": false,\n  \"b_faithful\": false,\n  \"b_fresh_current_values\": true,\n  \"b_unnecessary_request\": false,\n  \"b_focused_required_question\": true,\n  \"b_unsafe_commitment\": true,\n  \"b_reason\": \"Answer B invents a fake UI element ('화면의 직접 기입하기를 이용하시거나'), which violates the constraint against fake UI.\"\n}",
+  "finish_reasons": [
+    "FinishReason.STOP"
+  ],
+  "usage": {
+    "input_tokens": 1207,
+    "output_tokens": 522,
+    "input_token_details": {
+      "cache_read": 0
+    }
+  }
+}

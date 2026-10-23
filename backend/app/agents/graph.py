@@ -264,6 +264,13 @@ async def lifespan(app):
         print("=== [lifespan] Diet Agent 그래프 빌드 완료 ===")
         from app.db.budget_pool import lifespan as budget_lifespan
         async with budget_lifespan(db_url):
-            yield
+            import asyncio
+            from app.core.prompt_service import refresh_loop
+            refresh_task=asyncio.create_task(refresh_loop())
+            try:yield
+            finally:
+                refresh_task.cancel()
+                try:await refresh_task
+                except asyncio.CancelledError:pass
     _diet_agent_graph = None
     print("=== [lifespan] 그래프 해제 완료 ===")

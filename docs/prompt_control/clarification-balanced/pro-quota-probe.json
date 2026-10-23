@@ -1,0 +1,31 @@
+{
+  "model": "gemini-3.1-pro-preview",
+  "attempts": 1,
+  "before_usd": 8.729022,
+  "requested_max_output_tokens": 128,
+  "available_probe_usd": 0.04899500000000001,
+  "status": "failed",
+  "exception_types": [
+    "GoogleRateLimitError",
+    "ClientError"
+  ],
+  "status_codes": [
+    "429"
+  ],
+  "quota_metrics": [
+    "generativelanguage.googleapis.com/generate_requests_per_model_per_day"
+  ],
+  "quota_ids": [
+    "GenerateRequestsPerDayPerProjectPerModel"
+  ],
+  "retry_seconds": [
+    "6",
+    "22360s",
+    "6",
+    "22360s"
+  ],
+  "raw_error_stored": false,
+  "usage": [],
+  "after_usd": 8.735208,
+  "quota_scope_note": "Probe checks immediate availability; active numerical limits require AI Studio. Only safe allowlisted error fields retained."
+}

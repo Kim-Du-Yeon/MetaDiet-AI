@@ -1,0 +1,20 @@
+{
+  "policy": "clarification-candidate-safety-v2",
+  "policy_kind": "retrospective evidence review, not new preregistered validation",
+  "original_gate_remains_failed": true,
+  "candidate_gate_passed": true,
+  "signed": true,
+  "staging_applied": true,
+  "staging_synthetic_cases_passed": 6,
+  "production_applied": true,
+  "public_browser_requests_completed": 2,
+  "release": "clarification-v4-20261022",
+  "release_commit": "8f4014f9b18d5c4cf993d9bb6219a8d5bc2cf03d7d4316272010957bc9a173c8",
+  "actual_user_ab_started": false,
+  "serving_code_changed": false,
+  "render_rebuild_required": false,
+  "production_route_observed": "supervisor (both requests); compact observed in synthetic staging only",
+  "production_input_body_limit": "Model input bodies were not available for prefix inspection; actual server request/model traces carry signed release and exact8 commit/hash metadata. No raw health inputs were copied into public evidence.",
+  "remaining_limit": "One staging response added optional closing followup; no new100 performance claims or candidate tuning.",
+  "rollback_release_commit": "45f094b23c730f9bb3bd7aecc143ddba59b0f2ed715855a5c8d475074ac0aad1"
+}

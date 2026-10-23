@@ -1,0 +1,36 @@
+# Prompt control and Gemini caching design
+
+User intent: make prompt operations reproducible, inspectable and defensible without replacing LangGraph, model routing or HITL. Human has delegated routine design/execution choices; no repeated design-approval interruptions. Actual-user A/B remains disabled until separate authorization.
+
+## Inventory and decisions
+Eight primary templates already have packaged version/hash validation. They are loaded at import in several callers; restart is currently needed. LangSmith0.8.6,langchain-google-genai4.4.0,google-genai2.29.0 are installed. Existing usage captures input/output and some offline cache_read, but online cache-hit telemetry and explicit lifecycle are absent. Shared SDK client, local template cache, retriever cache and checkpoints are not input-token caches.
+
+Choice: keep local v1; add a private LangSmith release-manifest prompt plus eight private template repos. A manifest references exact full commit IDs, hashes, variable contracts and code-owned output-contract IDs. The environment pointer is mutable only at the release-manifest level. Individual-template tag changes cannot create mixed releases. Signed offline validation approvals use Ed25519, with configured trusted public key and ignored local private signer. UI edits are drafts until their exact bundle passes contract/tests/evaluation and is signed. Production/Staging promotion and rollback operate on that signed manifest prompt. The runtime never executes deserialized remote Runnable/model/tool objects.
+
+## Runtime invariants
+Fetch complete candidate under a bounded timeout; validate all8/private ownership/format/contracts/hash/signature before atomic pointer swap. Refresh every60s, admin-only force refresh endpoint, no prompt text in status. Last good atomic file plus archived request snapshot, local v1 initial fallback. In-flight ContextVar snapshot never changes. Server-owned checkpoint pin carries validated generic bundle+approval (no user content), so pending HITL/reconnect/restart use the same release. Ordinary new requests use newest production; enabled experiments keep user/conversation assignment stable. A/B disabled by default; deterministic HMAC hashing, experiment-specific salt and pinned release digests. Deactivation/rollback cannot switch a pending approval mid-flow.
+
+Code-owned ownership checks, proposals/HITL and loop budgets remain authoritative. Remote text cannot modify tool schemas, allowlists or output schemas. Input variables must exactly match v1; output-contract identifiers fixed in code. Reject unknown prompts, untrusted signatures, unexpected objects, extra variables, public repos, oversized text and obvious credential/PII patterns. Pattern detection is not a universal PII detector; publisher accepts static template text only.
+
+Trace metadata contains only experiment/group/release/bundle/prompt IDs+commit hashes/model and token counts. No account IDs, question, meal records, goals, credentials or full prompt text in new metadata. Long-lived provider objects must not retain a stale release label.
+
+## Caching
+Observe implicit cache_read first; baseline is implicit-enabled ordinary calls. Stable instructions precede current dynamic data. Explicit cache registry keys include model/release/prefix hash and HMAC user/conversation+revision for private entries. Bounded TTL and request coalescing, fail-closed reuse, provider delete cleanup queue; normal generation fallback once on cache-reference errors only. Never retry an ambiguous generation timeout just to use uncached input. Never cache current intake/current goal/question/new search results accidentally. Only exact public retrieved context may join a fixed prefix after eligibility/break-even check. Private history uses existing truncation and is rejected if too short; no padding, no longer history. If private caching is ineligible it remains off; lifecycle is still mock-tested. New release keys separate caches; edits/deletes/account removal invalidate matching private entries before reuse. Production explicit policy defaults off until comparison passes.
+
+## Experiments frozen before paid generation
+1 v1/v2: candidate changes compact follow-up only, hypothesis: separate confirmed intake/current target from future planned meals and avoid unsupported sufficiency claims/compensation quantities. Same100 synthetic cases, generator/model/tools/retrieval, alternating AB/BA,2workers,LOW and output cap. Separate20 synthetic development probes are not headline results. Freshness scenarios cover create/edit/delete/goal update and cross-owner isolation.
+2 fixed-prefix RAG cache: selected prompt/model/retrieval frozen after1,100 attempts each ordinary implicit vs eligibility-gated explicit. Only retrieved public excerpts, bounded context, no corpus stuffing. Separate first creation/reuse/storage estimate/TTFT/full latency; preserve failures.
+3 private multiturn cache: existing history limits unchanged,100 paired eligibility inputs. If naturally eligible run100 generations each; otherwise report applicability rejection, not a completed model-speed/quality comparison. Synthetic policy/allocation tests are not actual-user A/B.
+Gate: safety/ownership/HITL/freshness contracts100%, no new invalid-schema or data-leak path, evaluator completion and usage required. Prompt quality noninferior within2pp overall with targeted error reduction, p95<=1.25x,cost<=1.25x. Cache quality noninferior within2pp,freshness/isolation100%,failure noninferior,p95<=1.1x,total cost including creation/storage at least10% lower for measured workload. Failure/timeout/judge-missing remain denominator. Repeated developer cases not independent user outcomes. Never change these gates after seeing outcomes; exploratory adjustments require new protocol.
+
+## Cost and external boundaries
+Estimate incremental$4-8,safety cap$12; snapshot/preserve existing cumulative ledger. No new subscription/plan upgrade authorized. Account quota may not be exposed by API; successful probe is not proof of full quota. Fatal auth/credits/daily quota or unknown accounting stops submissions and preserves resume state. Individual wrong answers do not stop100. LangSmith prompt publishing authorized private templates only. No production user A/B. Public deployment only passing code paths, feature defaults off where evidence insufficient. Real UI promotion->server commit verification is required to claim operational control; mocks alone never suffice.
+
+## Official references checked2026-10-21
+- https://docs.langchain.com/langsmith/manage-prompts
+- https://docs.langchain.com/langsmith/manage-prompts-programmatically
+- https://reference.langchain.com/python/langsmith/client/Client/push_prompt
+- https://ai.google.dev/gemini-api/docs/generate-content/caching?hl=en
+- https://ai.google.dev/api/caching
+- https://ai.google.dev/gemini-api/docs/pricing
+The application uses generateContent. Flash3.8 minimum4096; explicit supported on Gemini3/2.5, not Gemini4/Interactions. Explicit create/get/delete and TTL are available; default TTL1h, chosen short TTL300s. Current Flash text input/output/cache$.75/$3.75/$.075 per million,storage$.50/M-token-hour. These are dated estimates,not invoices. Do not assume Lite minimum without provider/model verification.

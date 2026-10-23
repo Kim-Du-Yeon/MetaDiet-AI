@@ -1,3 +1,4 @@
+import PromptControl from './PromptControl';
 import { useEffect, useState } from "react";
 import { getAdminAnalytics } from "../api/dietApi";
 import AdminFeedback from './AdminFeedback';
@@ -44,6 +45,6 @@ export default function AdminAnalytics() {
       ))}</div>
       <p className="analytics-privacy">대화 내용과 건강 수치는 수집하지 않고 단계·성공 여부·지연만 집계합니다.</p>
       <p className="analytics-privacy">전환율은 선택 기간에 가입한 계정의 현재 완료 상태입니다. 응답 완료율은 브라우저 수신 기준이며 답변 정확도를 뜻하지 않습니다. 삭제된 계정은 집계에서 제외됩니다.</p>
-    </section><AdminFeedback /></>
+    </section><PromptControl /><AdminFeedback /></>
   );
 }

@@ -1,0 +1,58 @@
+[
+  {
+    "run_id": "01a1669e-8ade-7ae3-b7e4-9b254ed5726d",
+    "trace_id": "1a61e462-bba7-4732-bd6e-1d882d5f4e31",
+    "model": "gemini-3.8-flash",
+    "build_commit": "8ccde0caef95eb18217631cece82556ab005ee93",
+    "trace_data_mode": "production",
+    "usage": {
+      "input_cost": 0.00381675,
+      "input_token_details": {
+        "cache_read": 0
+      },
+      "input_tokens": 5089,
+      "output_cost": 0.00139875,
+      "output_token_details": {
+        "reasoning": 244
+      },
+      "output_tokens": 373,
+      "total_cost": 0.0052155,
+      "total_tokens": 5462
+    },
+    "total_tokens": 5462,
+    "total_cost": "0.0052155",
+    "cost_basis": "standard_text_list_price_estimate_2026-10-23",
+    "duration_seconds": 4.699932,
+    "input_redacted": true,
+    "output_redacted": true,
+    "url": "https://smith.langchain.com/o/587a2f87-e802-40a0-8d1d-2343ab07d304/projects/p/b56ebadb-8edd-4602-9040-e178f02d4978/r/01a1669e-8ade-7ae3-b7e4-9b254ed5726d?poll=true"
+  },
+  {
+    "run_id": "01a1669e-6fe4-7230-8760-72ffe629ea6e",
+    "trace_id": "1a61e462-bba7-4732-bd6e-1d882d5f4e31",
+    "model": "gemini-3.8-flash",
+    "build_commit": "8ccde0caef95eb18217631cece82556ab005ee93",
+    "trace_data_mode": "production",
+    "usage": {
+      "input_cost": 0.0033645,
+      "input_token_details": {
+        "cache_read": 0
+      },
+      "input_tokens": 4486,
+      "output_cost": 0.00161625,
+      "output_token_details": {
+        "reasoning": 391
+      },
+      "output_tokens": 431,
+      "total_cost": 0.00498075,
+      "total_tokens": 4917
+    },
+    "total_tokens": 4917,
+    "total_cost": "0.00498075",
+    "cost_basis": "standard_text_list_price_estimate_2026-10-23",
+    "duration_seconds": 5.34432,
+    "input_redacted": true,
+    "output_redacted": true,
+    "url": "https://smith.langchain.com/o/587a2f87-e802-40a0-8d1d-2343ab07d304/projects/p/b56ebadb-8edd-4602-9040-e178f02d4978/r/01a1669e-6fe4-7230-8760-72ffe629ea6e?poll=true"
+  }
+]

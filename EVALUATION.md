@@ -1,3 +1,21 @@
+## v5 종료 규칙 별도 개발 비교 (2026-10-22)
+
+[실패 포함 각100시도·Pro100쌍·불필요 요청9→0·필수 질문50/50·실제LangSmith199root·회계 미확정으로 운영미승격](docs/prompt_control/clarification-balanced/v5-closing-offer-20261022/RESULTS.md). 합성 개발셋이며 독립/실사용자/Ragas 평가와 구분한다.
+
+## 최신: 기준선 실패 분리 후 v4 운영 적용 (2026-10-22)
+
+[정책 개정·원문 보존·실제 Staging/운영·브라우저·비용](docs/prompt_control/clarification-balanced/v4-approval-policy-v2-20261022/RESULTS.md). 기존100쌍/이전 미통과 기록을 보존하고 후보 자체의 안전·품질 기준을 분리했다. **결과를 본 뒤의 명시적 정책 개정**이며 새 사전등록 검증으로 표현하지 않는다. 기존200답변/Pro100쌍 재사용, 추가Flash8회/Pro0회로 약$0.022 추정. 서명릴리스8f4014f9를 실제Staging→Production 승격하고 공개2요청의 실제사용커밋을 확인했다. 전체pytest1825통과/기존skip1. Staging1건의 선택적 마무리 제안 재발은 한계로 보존하며 실제 사용자A/B는 계속 비활성이다.
+
+아래 이전 holdout 미승격 문단은 당시 사전 기준의 역사적 판단이며 원본 그대로다.
+
+## Two-template prospective holdout approval (2026-10-22)
+
+The fixed v4 `team.base` + `team.compact_followup` combination now has a separately reviewed approval adapter. It pins immutable8commits, prospective synthetic100pairs, actual two-template execution, raw semantic grades/normal finishes/usage, and delegated evaluator source hashes. Other route changes still fail closed. The frozen gate is not relaxed after baseline blocked attempts, so this candidate is not signed or promoted. [Protocol, result and limits](docs/prompt_control/clarification-balanced/v4-independent-20261022/RESULTS.md).
+
+## General immutable candidate approval (2026-10-22)
+
+[Generic release workflow](docs/prompt_control/release_workflow/README.md) separates immutable selection, evidence verification, signing and environment promotion. Saved results are reused only for identical8commit/text/contracts. New evidence binds prompt/model/cohort and exact graded answers; only the exact hashed historical run may omit pre-binding metadata. The current code-reviewed quality adapter covers compact followup; other semantic routes fail closed. No model calls or new performance comparison were needed for this workflow validation; earlier metrics remain historical.
+
 **성능 하락 정성 분석:** [회귀10건의4유형·공통 실패 분리·문맥 조립6건 재현·미채택 판단](docs/agentic_rag/20261021-controlled-hybrid-analysis/README.md). 수치3/시간조건3/전체보류2/목록누락2건으로 분류했다. 인접 청크 우선·6,000자 문맥 한도에 의한 핵심 표현 탈락은 오프라인6/6 동일 문맥 재현으로 확인했다. 새 답변 품질 개선을 뜻하지 않으며,신규 유료 호출 없이 면접 설명·개선 검증 기준까지 정리했다.
 
 ## 최신: 동일 조건 Hybrid vs Hybrid+Agentic100시도씩 비교

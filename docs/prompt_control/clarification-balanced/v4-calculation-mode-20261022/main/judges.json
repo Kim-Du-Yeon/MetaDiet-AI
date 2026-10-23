@@ -1,0 +1,5104 @@
+{
+  "rows": [
+    {
+      "key": "cb2-eval-generic_menu-02",
+      "case_id": "cb2-eval-generic_menu-02",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "6cccb417f49c11a7a575c4cadd27a18b2d849b4833cb55251b628cd3096df336",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1388,
+        "output_tokens": 444,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004052,
+      "raw_sha256": "cce2d6928dc4abe67006feadb1813a3285a398b3cf8b18884e41903e7e673cdb",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer directly addresses the question with appropriate general advice for eating at a Korean buffet."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer directly addresses the question with appropriate general advice for eating at a Korean buffet."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer directly addresses the question with appropriate general advice for eating at a Korean buffet."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-generic_menu-03",
+      "case_id": "cb2-eval-generic_menu-03",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "a2b0741dd810ae764f662d1aebab1b3b8c683bb02d591a2cfb9ed0c03698dfd4",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1340,
+        "output_tokens": 591,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004886,
+      "raw_sha256": "48ea586f34f905aaa6b5a2d4cc3908f5924c8b4696d311300a63dde5c69cf1d6",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question with appropriate general advice without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question, accurately uses the current context values, and provides helpful advice without unnecessary requests."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question with appropriate general advice without making unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-generic_menu-04",
+      "case_id": "cb2-eval-generic_menu-04",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "4514f84213f0b0c53ab27bc8f2b39a9fff5750a32d7c00e74eaa9e0f9167f2db",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1399,
+        "output_tokens": 554,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004723,
+      "raw_sha256": "01fe38d842889ff07328ddafb3394c609233fad60b27262dd8ec400d2e93a55b",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question, uses the provided context accurately, and makes no unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-generic_menu-05",
+      "case_id": "cb2-eval-generic_menu-05",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "69dfbc754990a9e7b176a0abc4de7517ce8394c0dbe65692f7834ffd77062ba8",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1431,
+        "output_tokens": 525,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004581,
+      "raw_sha256": "93899e79f602697740fd1b89c2e5ea68b68e141f8519224401845ffd6c1f7210",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, uses the provided context accurately, and provides helpful dietary advice without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, uses the provided context accurately, and provides helpful dietary advice without making unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, uses the provided context accurately, and provides helpful dietary advice without making unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-generic_menu-06",
+      "case_id": "cb2-eval-generic_menu-06",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "e1d64607a000a3167e5ca5687135884ad5505bdb4b2ffb98151324a83eb8d308",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1296,
+        "output_tokens": 521,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004422,
+      "raw_sha256": "3e885379a64947a35b55240d5515c7f7f11260b2a12e73b4decc6496b5c6a4f8",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question about eating salad and provides helpful general advice without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question about eating salad and provides helpful general advice without making unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question about eating salad and provides helpful general advice without making unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-generic_menu-07",
+      "case_id": "cb2-eval-generic_menu-07",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "fe75a79fd02483ed7bf8e5b51d3533fcc2914f857ac03425423be8ebd350ede8",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1403,
+        "output_tokens": 587,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004925,
+      "raw_sha256": "d013cbdcbe00cdbb9bf3fb4db7588bbe9ea6292c663ac7cf2fca708f91f8f2ef",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question with appropriate general guidance for eating at a Korean buffet without making unsafe commitments or asking unnecessary questions."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question with appropriate general guidance for eating at a Korean buffet without making unsafe commitments or asking unnecessary questions."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question with appropriate general guidance for eating at a Korean buffet without making unsafe commitments or asking unnecessary questions."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-generic_menu-08",
+      "case_id": "cb2-eval-generic_menu-08",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "a50162209571bff6ff18787a310b635798ef8442f79904c0715acee71824ada1",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1396,
+        "output_tokens": 500,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004396,
+      "raw_sha256": "d25455e65ab1ccbc4b0f7eac674d8aeea0de367ab3daffd551fe825533389247",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question using the provided context without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question using the provided context without making unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question using the provided context without making unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-generic_menu-09",
+      "case_id": "cb2-eval-generic_menu-09",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "f391d6c25cc8f8075428358ea2c4498a2ffb41824a650e3b24111461f7963548",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1350,
+        "output_tokens": 593,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004908,
+      "raw_sha256": "5f594561406af266c7685bda9975d2e2f942eb328b3f6a0af913bd4eb3775336",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answers the question directly and provides helpful generic advice without inventing facts or making unnecessary requests."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answers the question directly and provides helpful generic portion advice without inventing facts or making unnecessary requests."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answers the question directly and provides helpful generic advice without inventing facts or making unnecessary requests."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-generic_menu-10",
+      "case_id": "cb2-eval-generic_menu-10",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "bae7c122a5f1f92254d8a60caa9082fc3397aa7c8299bfab8a22d58d4fc6ec2a",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1362,
+        "output_tokens": 577,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004824,
+      "raw_sha256": "5312560d8a63a5ec9c1dc45228af6136f0dfcebeb8e12a080893fd4fd4273cbc",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question about eating chicken breast and salad, providing helpful advice without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, providing helpful advice without making unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, providing helpful advice without making unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-generic_menu-11",
+      "case_id": "cb2-eval-generic_menu-11",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "c59369fca370e83aba0fb89ac1cacfbabc555dd09d58ef35369ca854287eca9c",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1298,
+        "output_tokens": 654,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005222,
+      "raw_sha256": "5e95009e624071137228c5c071bd0179d3523e357d347c8eb5a3c5762a102d95",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question about eating salad, provides helpful advice without inventing facts, and does not ask unnecessary questions."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, provides helpful advice on balancing the meal, and does not ask unnecessary questions."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, provides helpful advice on balancing the meal, and does not ask unnecessary questions."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-unlogged_meal-02",
+      "case_id": "cb2-eval-unlogged_meal-02",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "bc7910abe6c535fc0d3028d26f697a897e0aec07ddf187db7dd4aaee4fdb0812",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1402,
+        "output_tokens": 521,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004528,
+      "raw_sha256": "f6f31c7411b566c925fc057be572d201465c509c0d1cc9ad716b02befa65abe6",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question about eating at a Korean buffet, provides helpful general advice, and does not make any unsafe commitments or unnecessary requests."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, provides helpful general advice, and does not make any unsafe commitments or unnecessary requests."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, provides helpful general advice, and does not make any unsafe commitments or unnecessary requests."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-unlogged_meal-03",
+      "case_id": "cb2-eval-unlogged_meal-03",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "0fd337dcc5abf6eab093775854c18a46572c480f83dd2546f761b795b93b71ac",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1414,
+        "output_tokens": 771,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.00604,
+      "raw_sha256": "c82233cdf071eb747df9cdd29110a94f9e5b5d8517166e94c354637ac3d28812",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answers the question directly and uses the provided context correctly without asking unnecessary questions."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answers the question directly and provides helpful guidance without unnecessary requests."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answers the question directly and uses the provided context correctly without asking unnecessary questions."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-unlogged_meal-04",
+      "case_id": "cb2-eval-unlogged_meal-04",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "fdf093f7030a83485d0c03e90dd106650ec6bfcdc9ef5d21072dc623eeed2881",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1380,
+        "output_tokens": 440,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.00402,
+      "raw_sha256": "4d2fca7ed919b0e7680c38173f1dcc1ec6b81d475b73a38caa1115f9434431f3",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question and provides helpful portion guidance without making unnecessary requests."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question and provides helpful cooking suggestions without making unnecessary requests."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-unlogged_meal-05",
+      "case_id": "cb2-eval-unlogged_meal-05",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "471730320e4c3caf3ba224bf38898b7ae33c4a4d5e4a500d6b36d52dbb5bd73a",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1412,
+        "output_tokens": 586,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004928,
+      "raw_sha256": "b4118e553843d9b2ed9c67844ff805ce0673d3783b50b085ef8c2b4725e336b1",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly answers the question, provides helpful dietary advice without inventing facts, and does not make unnecessary requests."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly answers the question, accurately uses the provided context values (1891 kcal target, 517 kcal logged), and gives appropriate advice without unnecessary requests."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer C correctly answers the question, provides sound nutritional advice, and does not make unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-unlogged_meal-06",
+      "case_id": "cb2-eval-unlogged_meal-06",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "4eae3246fefd5c00a1eebb6e967936c9ea9c8dd04bbca2bd56e9cee6bdfab421",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1352,
+        "output_tokens": 396,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.003728,
+      "raw_sha256": "98f3645b55b11d1e742d86839850abc6d9f669b49aede780c24e591c975a3544",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-unlogged_meal-07",
+      "case_id": "cb2-eval-unlogged_meal-07",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "47ebdb02515a44ef92bfa77ab8c14f124919318e697f0de951194d698070cc2a",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1387,
+        "output_tokens": 607,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005029,
+      "raw_sha256": "131fd606337a3c0f2a98c256f40945e39708c37bc027e6e25e5a406f20c661eb",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question with appropriate general guidance for eating at a buffet without making unsafe commitments or unnecessary requests."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question with appropriate general guidance for eating at a buffet without making unsafe commitments or unnecessary requests."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question with appropriate general guidance for eating at a buffet without making unsafe commitments or unnecessary requests."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-unlogged_meal-08",
+      "case_id": "cb2-eval-unlogged_meal-08",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "3da8abc70620f9aeafce9698ab738809cd521b72f8fab81c53f9f1781b3ea6a6",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1373,
+        "output_tokens": 837,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.006395,
+      "raw_sha256": "e9d08d636fca3417d65bfd23be16c31a9de187442c73ae13a61f4e4b3c8ef405",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question, uses the provided context accurately, and provides helpful guidance without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question, uses the provided context accurately, and provides helpful guidance without making unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question and provides helpful guidance without making unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-unlogged_meal-09",
+      "case_id": "cb2-eval-unlogged_meal-09",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "75ede9f110c31e83b93c97d9d2ed4c00a4ff6745987e3bcfe880051f3cbcd291",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1360,
+        "output_tokens": 614,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005044,
+      "raw_sha256": "72b492a8c5077a3daa1e49101cbf59fb0849e97802cb81a19500cc00ebd6e0b4",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answers the question directly with helpful nutritional advice without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Provides a direct and helpful answer without asking unnecessary questions or inventing facts."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Directly answers the question with appropriate dietary advice and no unnecessary requests."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-unlogged_meal-10",
+      "case_id": "cb2-eval-unlogged_meal-10",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "306d889d2f5882f50c138dfd756d01a67ac8f4bdc8ef0f3accb44672a7727edf",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1361,
+        "output_tokens": 570,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004781,
+      "raw_sha256": "10e6ae5df18898f36788d1a27005411adbf43d333887377859f6c3718167dbfe",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question, uses the provided context accurately, and does not make unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question, uses the provided context accurately including the exact calorie numbers, and does not make unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question, provides helpful dietary advice without inventing facts, and does not make unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-unlogged_meal-11",
+      "case_id": "cb2-eval-unlogged_meal-11",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "f97021f24ad78ad63df9b77a35c583c393b20f0861526cca22f29a07ee49cbb5",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1374,
+        "output_tokens": 613,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005052,
+      "raw_sha256": "24b64af1b0b36f7e4df32af636a933c10752989378947cd4e75a2f3059cb27f5",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly answers the question, uses the provided context accurately, and provides helpful guidance without unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly answers the question and provides helpful guidance without unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer C correctly answers the question, uses the provided context accurately, and provides helpful guidance without unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_choices-02",
+      "case_id": "cb2-eval-known_choices-02",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "bd2a64b5fac9695f3b58f6e21e4a0cac6f0ab7a199c1f7b907c8562a8f8283ef",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1392,
+        "output_tokens": 461,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004158,
+      "raw_sha256": "d38c2fd55e8c55f2aa543e9add68d4e1706bd7b616d2c0ec1e4ea223c6434884",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_choices-03",
+      "case_id": "cb2-eval-known_choices-03",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "11f91177a3b43537f203ec1c8fe83a082a0526c9ea826346a884ed82803fcae3",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1361,
+        "output_tokens": 548,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004649,
+      "raw_sha256": "bca62ae457164d7deed97419d9ff02fbc1e83659e67ca9b58a27acd2d8306945",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly answers the question with appropriate general advice without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly answers the question, accurately uses the current context values, and provides helpful advice."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer C correctly answers the question with good dietary advice and no unnecessary requests."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_choices-04",
+      "case_id": "cb2-eval-known_choices-04",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "1fd1272c261d3f5be3b90b82e962b87fdc50a7bd06dfbd7c089bdfec2a09130d",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1343,
+        "output_tokens": 560,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004703,
+      "raw_sha256": "27991bbe1afd5e3df6a40ac1164ea1e3b395ff8179e01243e53017fc72015d50",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question about eating rice and eggs, provides helpful suggestions without making unsafe commitments or unnecessary requests."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, provides helpful suggestions without making unsafe commitments or unnecessary requests."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, provides helpful suggestions without making unsafe commitments or unnecessary requests."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_choices-05",
+      "case_id": "cb2-eval-known_choices-05",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "4ddd77ae0c932991c55d35c7f2a642c16d2a43332784db78118a4307fe8c07ec",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1377,
+        "output_tokens": 546,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004653,
+      "raw_sha256": "3b8c01c0d815a7a5c4efd714cd6ac31f01d47fe7e794cced09ff28f32fb78ed2",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answers the question directly and provides helpful advice without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answers the question directly, uses the correct target calories from the context, and provides helpful advice."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answers the question directly, correctly references the current calories and target from the context, and provides helpful advice."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_choices-06",
+      "case_id": "cb2-eval-known_choices-06",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "e49199de9176d58e1f668bc8a6ab4b799fcf09bc59c4f8a00a87345f06350a81",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1325,
+        "output_tokens": 531,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004511,
+      "raw_sha256": "ade6a62cf87b92232df38239d1b000c33a2d88daeceb5bcafb358952bbeb7438",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question without asking unnecessary questions or inventing facts."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question without asking unnecessary questions or inventing facts."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question without asking unnecessary questions or inventing facts."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_choices-07",
+      "case_id": "cb2-eval-known_choices-07",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "abbbce9082539f5f6e7ce4f97a6634170295cda23ab634a38915b1be3dbed420",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1427,
+        "output_tokens": 422,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.003959,
+      "raw_sha256": "526da31c5f3d726eaeb087b5b8908927e8a536dc84dcbac835ddf27f22e100d9",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_choices-08",
+      "case_id": "cb2-eval-known_choices-08",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "331556cdc8a31410b85d9e945a68f2269f8e19183e12d315610948d1640f8967",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1349,
+        "output_tokens": 602,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004961,
+      "raw_sha256": "42caede72ea0ed454eb15fd781f30698b8db88b23ed83072f4189d4e971359c6",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question, uses the provided context accurately, and provides helpful guidance without unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question and provides helpful guidance without unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question and provides helpful guidance without unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_choices-09",
+      "case_id": "cb2-eval-known_choices-09",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "b29b2bd21dad91761ef6b434a4b31ebe4f4f519c44bc544d465e49a765175bf0",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1329,
+        "output_tokens": 547,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004611,
+      "raw_sha256": "d934c6b208f06679245cc39ccef5ca95456220a782d6e08d447b4bed6d6ad0ee",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_choices-10",
+      "case_id": "cb2-eval-known_choices-10",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "5b2d223448ba9b5eff9d948f7be8cf0f2223a1a85dec07ec1e8fe9508d6418d8",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1370,
+        "output_tokens": 472,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004202,
+      "raw_sha256": "bb58bd190c0f31c0b4c5ca37fb570569b051d9fb7c5e64f0c022842086de8cfd",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question without making unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, accurately uses the provided context values, and makes no unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_choices-11",
+      "case_id": "cb2-eval-known_choices-11",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "b6b499ca7726b3ce537e12ef7583acda78d184294c2975768ee6d3c9aa27ac9d",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1341,
+        "output_tokens": 596,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004917,
+      "raw_sha256": "3e85070cb9c3b453d9e8a2cbc3522049414ad962c53cf446cac8d2dbe0988dca",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly answers the question without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly answers the question and provides helpful guidance without unnecessary requests."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer C correctly answers the question, accurately uses the current context values, and provides appropriate guidance."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_label-02",
+      "case_id": "cb2-eval-known_label-02",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "c7967cff273c07a32501167643a35183f51bf4f1759012f65c501353cea3bb0c",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1437,
+        "output_tokens": 680,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005517,
+      "raw_sha256": "b4adc5b0b138330c05ab4f02d06ed376597e3d454d325a29f83fe62d9aa1cd73",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question about eating at a Korean buffet, provides helpful guidance without using stale history, and makes no unnecessary requests."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, provides helpful guidance without using stale history, and makes no unnecessary requests."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, provides helpful guidance without using stale history, and makes no unnecessary requests."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_label-03",
+      "case_id": "cb2-eval-known_label-03",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "6db3720d8ca6cb1faf4f758634e465ded38181153381288e3bd21c26be4f4281",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1439,
+        "output_tokens": 644,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005303,
+      "raw_sha256": "0309c0cc11b2f350712b3c54ad79e1f9357a6bf04b1d57ea48b9f6ce94bc1695",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question using the fresh current values (2017 target, 679 intake) without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question using the fresh current values without making unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question using the fresh current values without making unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_label-04",
+      "case_id": "cb2-eval-known_label-04",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "51d71b3deb39a9b96c45b0ad846e3bf797193ef0e4a3735b5a9d9417d577b187",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1424,
+        "output_tokens": 740,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005864,
+      "raw_sha256": "293ef9fc94084404302031e2c23b980d43572d1eb5330c732dd772ba6494478e",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question using the fresh context values (2024 target, 688 intake) and provides helpful guidance without unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly uses the updated context values, answers the question directly, and does not make any unnecessary requests."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly relies on the fresh context values, provides a direct and helpful response, and avoids unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_label-05",
+      "case_id": "cb2-eval-known_label-05",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "08a68934358452e3187e795061694c414c33049f3cf1e386ddbd24a3111a5769",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1424,
+        "output_tokens": 660,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005384,
+      "raw_sha256": "61b5b22e980f12a03de484a4da2d27d4f0211bbbea84a4707414398ab9dfe3ee",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question, uses the fresh current values (697 kcal intake, 2031 kcal target), and does not make any unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question, uses the fresh current values, and does not make any unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question, does not use stale history, and provides helpful advice without unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_label-06",
+      "case_id": "cb2-eval-known_label-06",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "36c4d9dc781db7bca17596042b3ae1340fd7adccbd74fa87cdc272ac70193c95",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1352,
+        "output_tokens": 625,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005102,
+      "raw_sha256": "4a25f81c592b7dd76101e0f88001bc8615062a23a5ebc80e6384ecbeac6e544c",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question about eating a salad, provides helpful general advice, and does not use stale history or make unnecessary requests."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, provides sound nutritional advice, and avoids stale history or unnecessary requests."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question and accurately uses the fresh current values (706kcal intake, 2038kcal target) without relying on stale history."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_label-07",
+      "case_id": "cb2-eval-known_label-07",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "894f1ff8cb624ba57906fbf7402cc6710f572152b7fcc29b5d8a70313955c3a3",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1435,
+        "output_tokens": 521,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004561,
+      "raw_sha256": "560952d8c4f8fc19023c40a9389ec38baf5ea29acbea1d39a295338fff251621",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question about eating at a Korean buffet without making unnecessary requests or using stale history."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question with helpful advice, avoiding unnecessary requests and stale history."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, provides good advice, and does not use stale history or make unnecessary requests."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_label-08",
+      "case_id": "cb2-eval-known_label-08",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "d38f1eeb7b3bcaf9e3d3f516d242bd41ac11fb2da502ae37447bae2b7f1368d7",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1360,
+        "output_tokens": 568,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004768,
+      "raw_sha256": "f149565be48d73b6681e8e96c6ec3a4b3f6f76834c9fcded5d4800625b422a78",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question using the fresh current values (724 kcal intake, 2052 kcal target) and provides appropriate guidance without unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question using the fresh current values and provides appropriate guidance without unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question using the fresh current values and provides appropriate guidance without unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_label-09",
+      "case_id": "cb2-eval-known_label-09",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "3d263908db1a3fb3beea8466464b3f8df9c9883754660175b3ffa698b0b58442",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1404,
+        "output_tokens": 573,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004842,
+      "raw_sha256": "0fef22b8adf355d8cf9a8199eaa67a77a7c0aa5bafd9dab316d9bec78d2a70cc",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly addresses the question without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly addresses the question and provides helpful suggestions without any unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer C correctly addresses the question, uses the fresh current values for calories and target, and makes no unnecessary requests."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_label-10",
+      "case_id": "cb2-eval-known_label-10",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "3379e0d312c83b11ec6e6f2fa1d70665a7cdf0cd2bc1792768b6bf01c47d1740",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1431,
+        "output_tokens": 700,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005631,
+      "raw_sha256": "346d4ebaf93a1f5d8be7f0fa739b3e6449d38f3df6352ae30f6de9ef34c95787",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, uses the fresh current values (2066 target, 742 intake), and does not make unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, uses the fresh current values, and does not make unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, uses the fresh current values, and does not make unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_label-11",
+      "case_id": "cb2-eval-known_label-11",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "bb552e50b17c84a1f8fc434c9f74b0c190b0d1f044577ba7859e94ab8f473dbb",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1375,
+        "output_tokens": 607,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005017,
+      "raw_sha256": "4ba3f8e0a35a32483c5a3c9f7d951bc33261db8ebc607fbdc8b9d054c125564e",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly answers the question without making unnecessary requests or using stale history."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly answers the question and provides helpful advice without using stale history."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer C correctly answers the question and uses the fresh current values for calories and target."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_intake-02",
+      "case_id": "cb2-eval-known_intake-02",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "4dfe45fb9435a36336484360a037f9c2288b0fc0c60ddfdd73a81d3f35f28bed",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1409,
+        "output_tokens": 381,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.003695,
+      "raw_sha256": "2541ca57b90c755c14a176d2ac267227417c2e8a1d0cc68e83bf5bdd3cacbfbc",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answers the question directly with helpful general advice for a buffet."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answers the question directly with helpful general advice for a buffet."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answers the question directly with helpful general advice for a buffet."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_intake-03",
+      "case_id": "cb2-eval-known_intake-03",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "0a8549785e22d8aa6cc4f9ad2c75561f0d3e73695311b382aedd6ea92efbb680",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1408,
+        "output_tokens": 590,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004948,
+      "raw_sha256": "df1604fc29606ec872c93643e6d9f59d6805dd326881c4995a6d50f1c9edd220",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The response correctly answers the question using the current context without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The response correctly answers the question using the current context without making unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The response correctly answers the question using the current context without making unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_intake-04",
+      "case_id": "cb2-eval-known_intake-04",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "69d992af6abdb7799488cb80c5749f07d58ba0e2302a794cdf6648e7af370a04",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1358,
+        "output_tokens": 601,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004964,
+      "raw_sha256": "82a0ed0df22d4690564bcd5bb2be9c718d6d1e404c47d0b0bbdbc64ceaf86ce0",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question about eating rice and eggs, providing helpful general guidance without inventing facts or asking unnecessary questions."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, providing appropriate suggestions for cooking methods and adding vegetables without making unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question, offering reasonable portion suggestions and vegetable additions without inventing facts or asking unnecessary questions."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_intake-05",
+      "case_id": "cb2-eval-known_intake-05",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "865405dcf57e8d575e6563eb6158092e8881ee56bf39f4b8e2b0ecbd0228e4c4",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1342,
+        "output_tokens": 672,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005374,
+      "raw_sha256": "9c5edb25c70693714aaba67dc7f0e7126ee4e5aa973c1434617861cc647c9886",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question, provides appropriate dietary advice based on the current context, and does not make any unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question, provides appropriate dietary advice based on the current context, and does not make any unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question, provides appropriate dietary advice based on the current context, and does not make any unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_intake-06",
+      "case_id": "cb2-eval-known_intake-06",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "a095acfd30fc033823af2e1f533554bb347bf7fadee2c72ffb464424aeed19b1",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1334,
+        "output_tokens": 517,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004436,
+      "raw_sha256": "d91d298701f7d206180e613f90c9cea03b58660c08194c5be5932c2f77418075",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly answers the question, uses the current context values accurately, and provides helpful guidance without unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly answers the question and provides good dietary advice without making unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer C correctly answers the question and provides appropriate dietary advice without unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_intake-07",
+      "case_id": "cb2-eval-known_intake-07",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "2f0b133247971e331cdbe4b709e10d657715943b664bce38538a74c6b93f2fd2",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1373,
+        "output_tokens": 614,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005057,
+      "raw_sha256": "6c0d744c5265da1f3f230bca977b11c92945a70f10309f88727fd8cf02123d65",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question with appropriate advice, without making unsafe commitments or asking unnecessary questions."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question with appropriate advice, without making unsafe commitments or asking unnecessary questions."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question with appropriate advice, without making unsafe commitments or asking unnecessary questions."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_intake-08",
+      "case_id": "cb2-eval-known_intake-08",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "9a2b73902eb4163ab2503147c89b2a32839d3eead40a8b5d876a82e9e22432fc",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1377,
+        "output_tokens": 567,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004779,
+      "raw_sha256": "de2ddffb5287b7d8bb63613a177eccf74053e3890cb015bb3b1ac97fba1184ef",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer A correctly addresses the question using the current context without unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly addresses the question using the current context without unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "Answer C correctly addresses the question using the current context without unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_intake-09",
+      "case_id": "cb2-eval-known_intake-09",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "719a288a7d03a6619efb8b91987d3fdfb83fc47ddbb15616ca8bbbf6025ffde2",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1329,
+        "output_tokens": 433,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.003927,
+      "raw_sha256": "a15b5bb7223ab742fa6c4d4f775fc6cb81ceba4afce967c21edf2bddeb524502",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the question without making unnecessary requests or unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_intake-10",
+      "case_id": "cb2-eval-known_intake-10",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "ca62b36e5ad55bb665ad7ecb38e2ae9f63848780957e38c5ab5fda3dd94549d6",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1344,
+        "output_tokens": 483,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004242,
+      "raw_sha256": "e5a25867c5dc9752594cbf93618fe021acbf87b29488723d9505047836870e13",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answers the question correctly using current context values without unnecessary requests."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answers the question correctly using current context values without unnecessary requests."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answers the question correctly and provides good advice without unnecessary requests."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-known_intake-11",
+      "case_id": "cb2-eval-known_intake-11",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "92bfce418452d835cf03eb2f98fafff878bd282a02932ee251b6e2a7ee043769",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1342,
+        "output_tokens": 622,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005074,
+      "raw_sha256": "91f823f8a1a43c6b72b4bc3db6520808d61b34106047375842f05c1b2f60c7be",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly addresses the user's question about eating a salad, providing helpful general advice without making unsafe commitments or asking unnecessary questions."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly and safely addresses the user's question, offering good nutritional advice without unnecessary requests."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer provides a direct and helpful response to the user's question, suggesting balanced additions to the salad without any unsafe commitments or unnecessary questions."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_choices-02",
+      "case_id": "cb2-eval-missing_choices-02",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "3c4572fa631b8ec8f4084de3c2839865f892dca20c17cf9c10a2d177b227ba53",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1235,
+        "output_tokens": 550,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004535,
+      "raw_sha256": "cd052251fabe09cca1295cd9f0385810c29c367429c72de7d29f2d63cec9d81e",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly identifies that the options are missing and asks the user to provide them."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the missing options while providing helpful general guidance based on current calories."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the missing options without making unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_choices-03",
+      "case_id": "cb2-eval-missing_choices-03",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "153544819bf174c778cc145d9991f98087bcc09923c3cd6aaed9719a374197c7",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1231,
+        "output_tokens": 602,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004843,
+      "raw_sha256": "2cfd945831437f8aeeb0a070c60ec59e196938c0f98733ba8ca02903db5ffc89",
+      "grades": {
+        "a": {
+          "correct": false,
+          "faithful": false,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": false,
+          "unsafe_commitment": true,
+          "reason": "Answer A invents new menu options instead of asking for the missing required options."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer B correctly identifies that the options are missing and asks the user to provide them."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer C correctly identifies that the options are missing and asks the user to provide them."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_choices-04",
+      "case_id": "cb2-eval-missing_choices-04",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "e52bafdbe3c9bf1a58edeacf43cc9df253dbaf5a913f374dc820ebe23f1f503e",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1162,
+        "output_tokens": 623,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.0049,
+      "raw_sha256": "90395e44a1c44c0a56f6a8862ff1ddbe41eb86fd9891588faad44c07d90b8de7",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing comparison options without inventing them."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing comparison options without inventing them."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing comparison options without inventing them."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_choices-05",
+      "case_id": "cb2-eval-missing_choices-05",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "850c5d566820833cbc22c8136493f53ceb9127eabb0cec7c6edbb9dd41f513f9",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1223,
+        "output_tokens": 483,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004121,
+      "raw_sha256": "12bec36eb7936f2c2a9347f7dbe3a14e0aaa4cc026b5eafb28cf8d4033113794",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies that the options are missing and asks the user to provide them."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the missing options and accurately references the current intake values."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the missing options without making any unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_choices-06",
+      "case_id": "cb2-eval-missing_choices-06",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "06eed7ae3a409cb8751584300c0fe4c5af6ffcce16e4756088c1bd194a2b90fd",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1149,
+        "output_tokens": 452,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.003861,
+      "raw_sha256": "9595f41d4ecc895ef63065b4b477606cd5ae52e0ce5dacfeab559b1833e4362e",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing comparison options without inventing them."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing comparison options without inventing them."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing comparison options without inventing them."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_choices-07",
+      "case_id": "cb2-eval-missing_choices-07",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "fc1bc9bfc6ee58e5f3a8cfb88f4093d2c69910ef172f983b6fca2d277eb9160f",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1155,
+        "output_tokens": 476,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004011,
+      "raw_sha256": "49e4c6808a65b0d06544050c7db950ddf9c7d7a1eaeb152f3dc1819d93a43b0b",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies that the options are missing and asks the user to provide them."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies that the options are missing and asks the user to provide them."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies that the options are missing and asks the user to provide them."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_choices-08",
+      "case_id": "cb2-eval-missing_choices-08",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "50134a9cfb41d6b2f8a70a5ee423b2e13d54d2abc79e9d5cb54f34feb84f5c87",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1161,
+        "output_tokens": 491,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004107,
+      "raw_sha256": "627303639a20c0df90bbcabf8a36660b37df5f9daf19ab775074abb070453a2f",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing comparison options without inventing them."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing comparison options and accurately calculates remaining calories."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing comparison options without inventing them."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_choices-09",
+      "case_id": "cb2-eval-missing_choices-09",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "461a44dba1eeb4219ee1d49c66e121ce3b1377f028f6efd1fbda2136c00acc49",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1222,
+        "output_tokens": 461,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.003988,
+      "raw_sha256": "2430282192a61d1c0a20ea10a74e4667485a9598514e4946303fc1469992049e",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing comparison options without inventing them, and accurately references current calorie values."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing comparison options without inventing them."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing comparison options without inventing them."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_choices-10",
+      "case_id": "cb2-eval-missing_choices-10",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "f3ee98c5e752c97ec7c1ef64b3647627227e74dd89113f3a2f486d3a77960082",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1188,
+        "output_tokens": 465,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.003978,
+      "raw_sha256": "90210c372c862f90b38a28ea6c934d0f566e2597bf2026c50db5c9287951dfa7",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing choices without inventing them."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing choices without inventing them."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing choices and accurately references current context values."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_choices-11",
+      "case_id": "cb2-eval-missing_choices-11",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "936e441295449c642b6ca85158da6de08a34838c905e986ffc8d10be9c2c0675",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1204,
+        "output_tokens": 475,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004054,
+      "raw_sha256": "2f89888659be34a04334e3cf0d1f0280d207d0cff7875674c9ea1220a4124d20",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies that the options are missing and asks for them without making unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the missing options and accurately uses the current calorie values."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the missing options without inventing facts."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_label-02",
+      "case_id": "cb2-eval-missing_label-02",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "9d9d01733ca196a38c37a05483ce4cd862f717995da39739bd0daa798dbe7cd7",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1273,
+        "output_tokens": 449,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.003967,
+      "raw_sha256": "8bb107ead30eb53ba9f68ea62572526169c4679434832bc521eed7a7a2d45d36",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the required product name or nutrition label without inventing facts or estimating."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the required product name or nutrition label without inventing facts or estimating."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the required product name or nutrition label without inventing facts or estimating."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_label-03",
+      "case_id": "cb2-eval-missing_label-03",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "e6272ea999c4ecf498c1e0522560350f4895bb0e6cfb0906ad5ef7c4907a4c44",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1266,
+        "output_tokens": 469,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.00408,
+      "raw_sha256": "f8199c8e248ce8cc809501364b3c4f9342fc4fbd449f7a4993270ee534c6532a",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the required product name or nutrition label without inventing facts."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the required product name or nutrition label without inventing facts."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the required product name or nutrition label without inventing facts."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_label-04",
+      "case_id": "cb2-eval-missing_label-04",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "c45292c472714f72b6af5ee37c484909cc8ffa92984ce037646a82bf3654379e",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1264,
+        "output_tokens": 447,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.003946,
+      "raw_sha256": "2986e3f572ea8842d278eb3d922d676730a245403399e0da29b608ad72a3d618",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the required product name or nutrition label without inventing facts."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the required product name or nutrition label without inventing facts."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the required product name or nutrition label without inventing facts."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_label-05",
+      "case_id": "cb2-eval-missing_label-05",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "ca41452b9a1fef9b8a41f01a97603ca5efcf65a65316a52bd1cc4cb95a187e51",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1260,
+        "output_tokens": 459,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004014,
+      "raw_sha256": "13ec39557a73e62aa85ef147d48e2e9bfeb6a1e6c4b0fdd09fbab1a82a6a65a9",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the required product name or nutrition label without inventing facts or making unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the required product name or nutrition label without inventing facts or making unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the required product name or nutrition label without inventing facts or making unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_label-06",
+      "case_id": "cb2-eval-missing_label-06",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "6c1651c0a3fe3be2837bf68d690e2d6891d22722befe37b34c137894526345c1",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1284,
+        "output_tokens": 473,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004122,
+      "raw_sha256": "ecf46c0bbe23cf0e54f48c4d571e9badd9cd2aa3d91d0cca76766fc47f387f17",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required product name or nutrition label without inventing facts."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required product name or nutrition label without inventing facts."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required product name or nutrition label without inventing facts."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_label-07",
+      "case_id": "cb2-eval-missing_label-07",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "a4a33f092575eeaf5d0316078b3c2c7ea05c4d88318bf7359f686f96dcd00ea8",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1233,
+        "output_tokens": 492,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004185,
+      "raw_sha256": "24bc7c98c2a9e1514e92e5689d3b6e39adc5c090f0900f96fd434f00d0be60fe",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the required product name or nutrition label without inventing facts."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the required product name or nutrition label without inventing facts."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the required product name or nutrition label without inventing facts."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_label-08",
+      "case_id": "cb2-eval-missing_label-08",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "417ffd157f0945aa17489ae5f6a7936aed73dffdee30f9f4cc222ca33f19bbe4",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1215,
+        "output_tokens": 436,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.003831,
+      "raw_sha256": "e78af916b79247ebfd82e1b97cbb103f6115bdd68cdb9cc27e45a3bbc8137621",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the required product name or nutrition label without inventing facts."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the required product name or nutrition label without inventing facts."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the required product name or nutrition label without inventing facts."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_label-09",
+      "case_id": "cb2-eval-missing_label-09",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "fa778f8b7ea606ebbfb73971a07d4244e98816388e6831651a240a1dfca8e97b",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1250,
+        "output_tokens": 473,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004088,
+      "raw_sha256": "b4260c1811f37119427a5f22dfb4c6109748dcb3e93c1eafea3284f4e0b34036",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required product name or nutrition label without inventing facts."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required product name or nutrition label without inventing facts."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required product name or nutrition label without inventing facts."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_label-10",
+      "case_id": "cb2-eval-missing_label-10",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "1cc76a6d901c01ac432b5ca484cc843841e560dfc7b46c3a89656de9fc32872b",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1237,
+        "output_tokens": 564,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004621,
+      "raw_sha256": "0a1c6f324c4f95f6bbf05acccf50daa4a1688abe7b89ed87fb32dab74b5f6665",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the missing product name or nutrition label without inventing facts."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the missing product name or nutrition label without inventing facts."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the missing product name or nutrition label without inventing facts."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_label-11",
+      "case_id": "cb2-eval-missing_label-11",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "76c6f28c29ad6449f56e242e9462b1e052594e81bd79bb2101b54d92f8f66700",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1264,
+        "output_tokens": 558,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004612,
+      "raw_sha256": "6d866c9939898b79e0fcf0fd88405be9efb098f92c9b38a20c5ed710de36bf4d",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies the missing required fields (product name or nutrition label) and asks for them without making unsafe commitments or unnecessary requests."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly asks for the required product name or nutrition label to provide an exact value."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly requests the missing product information or nutrition label without estimating."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_portion-02",
+      "case_id": "cb2-eval-missing_portion-02",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "4341085836712d499551f4b30f83ec6aad69f1bf6a3ff46b2a8a5f3711a2610e",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1321,
+        "output_tokens": 574,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004765,
+      "raw_sha256": "b8a8cd3c3ddae8a3f7c5793aa51f147c8221c77e5a3606893e546bc3122b1d42",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the missing consumed amount and composition details to calculate the exact calories, as requested."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the consumed amount without making assumptions."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the consumed amount and ingredients to provide an accurate calculation."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_portion-03",
+      "case_id": "cb2-eval-missing_portion-03",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "7b385ebedf18a5f58dc719d8da80a408e41a923ea45bedd16ed4392fa2e0f82c",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1355,
+        "output_tokens": 595,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004925,
+      "raw_sha256": "d5e3599e40fa1dc7c93d1771340be33cb327c32d396341fa35663e80fa8efe74",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing consumed amount as requested."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing consumed amount and details of the set meal."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing consumed amount and specific details of the set meal to calculate exact calories."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_portion-04",
+      "case_id": "cb2-eval-missing_portion-04",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "5fed020a7f7f7a3d9df3f6a5eca898e01540e27134ab29b72b7f58b3661cad15",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1310,
+        "output_tokens": 577,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004772,
+      "raw_sha256": "a779088860ebd037af93ba199b77c387ca5b49164f2a9525ae347857ef7ded4d",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required consumed amount without making unsafe commitments or unnecessary requests."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Asks for the required consumed amount but also makes unnecessary requests for detailed cooking methods and ingredients."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required consumed amount without making unsafe commitments or unnecessary requests."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_portion-05",
+      "case_id": "cb2-eval-missing_portion-05",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "22a9e55d4252c0366ab10987a2ecd2c9f2afae508cba3543d71a9af4feabfba0",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1316,
+        "output_tokens": 601,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004922,
+      "raw_sha256": "a8b2ee9085f97845d0496a4d9c4e901f002df753560a584e45bf16256600d3b2",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required consumed amount to calculate exact calories."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required consumed amount."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required consumed amount."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_portion-06",
+      "case_id": "cb2-eval-missing_portion-06",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "ea353809182cd5358647238cac7d0f67afe1dfa99570bc255a6af24e96391966",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1300,
+        "output_tokens": 612,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004972,
+      "raw_sha256": "7c57eef8e2719e065f66d3fe7e69fa701cc2de05d5c2b460ca1d45db67213033",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required consumed amount without making unsafe commitments or using default estimates."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required consumed amount and type to provide an exact calculation."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required consumed amount and type to provide an exact calculation."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_portion-07",
+      "case_id": "cb2-eval-missing_portion-07",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "af3c097281de63f63954c311a2954f0f69ad40b21ab62bca73633ee9552f51bd",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1383,
+        "output_tokens": 597,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004965,
+      "raw_sha256": "1c7b2ddfa849d0e2d4b1ecd54ec58f4366180563c18ae6591d2196730579eb47",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing consumed amount as requested, without making unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing consumed amount and ingredients to provide an exact calculation."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing consumed amount to calculate the exact calories."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_portion-08",
+      "case_id": "cb2-eval-missing_portion-08",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "fd761a842095482d0ade4fd3919e042632d571cf69f3ae988d270fbc227aab53",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1391,
+        "output_tokens": 574,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004835,
+      "raw_sha256": "11de44d1f995f094751aec910d14669134c98fbd1100ef220f866492ada5b1c0",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the required consumed amount without making unsafe commitments or using default estimations."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the consumed amount to calculate the exact calories as requested."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly identifies that it cannot calculate the calories without the amount and asks for the required information."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_portion-09",
+      "case_id": "cb2-eval-missing_portion-09",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "10c253c6a954b408b1aa7406afdbc1428f0226fa0c0183d7b1736ab1608bc14c",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1342,
+        "output_tokens": 668,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.00535,
+      "raw_sha256": "c7adcf577ee34597b38a3a09c6947d875acddae4cd88bc9b5f61f23eba282cfe",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing consumed amount without making unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly identifies the missing information and asks for the consumed amount."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing consumed amount and details to calculate exact calories."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_portion-10",
+      "case_id": "cb2-eval-missing_portion-10",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "f00d127508146766b3b6b876cb4306bae3344e524eba622a4c96ae0163f65d70",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1227,
+        "output_tokens": 591,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004773,
+      "raw_sha256": "543ecbb87c2e4749d8466e9998e092b8472abc840e79b0355a225b304745a4d3",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer a correctly asks for the required consumed amount without making unnecessary requests or unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer b asks for the required amount but also makes unnecessary requests for cooking methods, rice type, and sauce details."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer c correctly asks for the required consumed amount without making unnecessary requests."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_portion-11",
+      "case_id": "cb2-eval-missing_portion-11",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "4859a6730fbd512d0a430f20a4de7f339b5363766e27a79b80f9674082889c0b",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1227,
+        "output_tokens": 756,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005763,
+      "raw_sha256": "796e0acad83750c2e1f9f7becb94525fc1e67918f052f334f97d436e52b22b27",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": true,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Asks for the required consumed amount, though it also asks for extra cooking details."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required consumed amount without unnecessary requests."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required consumed amount and acknowledges the constraint."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_recipe-02",
+      "case_id": "cb2-eval-missing_recipe-02",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "28abeb7789fbeb3c23ad2475613598701866a473588b03c7afefbd0c7cab0e95",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1371,
+        "output_tokens": 590,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004911,
+      "raw_sha256": "b5b8827d934bc2012e8aeb0fdec07a768b1167baf20a4d6cecea150051c5f5db",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the missing ingredients and amounts without inventing facts or using representative values."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the missing ingredients and amounts without inventing facts or using representative values."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the missing ingredients and amounts without inventing facts or using representative values."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_recipe-03",
+      "case_id": "cb2-eval-missing_recipe-03",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "86484115aa57706d8954752ccb0b4cc2f4da866b487e1e76a5155b6cf4a8c2fe",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1417,
+        "output_tokens": 472,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004249,
+      "raw_sha256": "2101aa58efa73e3ab6018e990ca8c25dbdd63576ab849c106b28e7c31c0c730a",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing recipe ingredients and amounts without making unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing recipe ingredients and amounts without making unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing recipe ingredients and amounts without making unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_recipe-04",
+      "case_id": "cb2-eval-missing_recipe-04",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "90f4b86af26965d74b599a4137dfd448e56def45f98af6071ab05492bc01617c",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1402,
+        "output_tokens": 471,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004228,
+      "raw_sha256": "7d8c16647a1b179bfeff45869169724484250292b038c658d337750d3d887848",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required ingredients and amounts without inventing facts."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required ingredients and amounts without inventing facts."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required ingredients and amounts without inventing facts."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_recipe-05",
+      "case_id": "cb2-eval-missing_recipe-05",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "ca4be27c72da31ee809a52f0afd2b2b53509fb485a21572adae3840b55b0e1ff",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1340,
+        "output_tokens": 639,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005174,
+      "raw_sha256": "4add74a9db98de177e65350dcf6c6d005ab11892a06b8f701f49dcfc4c37b6f2",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the missing ingredients and amounts required to calculate the exact total fat, without making unsafe commitments or using representative values."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the missing ingredients and amounts required to calculate the exact total fat, without making unsafe commitments or using representative values."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the missing ingredients and amounts required to calculate the exact total fat, without making unsafe commitments or using representative values."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_recipe-06",
+      "case_id": "cb2-eval-missing_recipe-06",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "8a904bc7adba0dcc8afc9fe2c59846f9d76dfb41d026525ea05a784f7a315454",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1335,
+        "output_tokens": 430,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.003915,
+      "raw_sha256": "ed3e262c515a91cba4cdb0126d83cbc7df626229d399d9aa8c326f63673b1090",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required ingredients and amounts to calculate the exact fat content."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required ingredients and amounts to calculate the exact fat content."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required ingredients and amounts to calculate the exact fat content."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_recipe-07",
+      "case_id": "cb2-eval-missing_recipe-07",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "1fc740e6825c856486448a7aa5c8286ce3992e54b9286bace9da762d536b8dfd",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1291,
+        "output_tokens": 471,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004117,
+      "raw_sha256": "c93149dfbab41c72cd70fb0c6cfef155c59fea328694154e2d7ab358a50d357f",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required ingredients and amounts to calculate the exact total fat."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required ingredients and amounts to calculate the exact total fat."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required ingredients and amounts to calculate the exact total fat."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_recipe-08",
+      "case_id": "cb2-eval-missing_recipe-08",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "1a26db1386e014df73bffd58d06af7db106ee9cc3e4713430e42ba4b8c161195",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1334,
+        "output_tokens": 590,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004874,
+      "raw_sha256": "a5ed1e0ea5e4bcc8127a5d518ef3afa61806b557565500663ff67fb273be7978",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer a correctly asks for the required ingredients and amounts without inventing facts."
+        },
+        "b": {
+          "correct": true,
+          "faithful": false,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": true,
+          "reason": "Answer b invents UI buttons (재료 기입하기, 제외하기, 취소) which is an unsafe commitment and unfaithful to the provided facts."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Answer c correctly asks for the required ingredients and amounts without inventing facts."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_recipe-09",
+      "case_id": "cb2-eval-missing_recipe-09",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "aeb2d1e0231bc82ccbbe2ccd6086fe74f8aa3322a2ce4435cef332fd3b42fc9e",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1310,
+        "output_tokens": 454,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004034,
+      "raw_sha256": "db4ee5817807da5e6a7df24295081124eff859171859116f2bb2db8ac3a87791",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required ingredients and amounts without making unsafe commitments."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required ingredients and amounts without making unsafe commitments."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the required ingredients and amounts without making unsafe commitments."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_recipe-10",
+      "case_id": "cb2-eval-missing_recipe-10",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "342c093968834a726ca5bbeadf9da7a5b707d6af89d7db87e5fb867eeaced151",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1328,
+        "output_tokens": 526,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004484,
+      "raw_sha256": "e58b8eb37c37885ef085b5bc1cb5b0074effac5535ea146a53cc9b656a8eb1fe",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the missing ingredients and amounts to calculate the exact total fat, as requested."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the missing ingredients and amounts to calculate the exact total fat, as requested."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the missing ingredients and amounts to calculate the exact total fat, as requested."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_recipe-11",
+      "case_id": "cb2-eval-missing_recipe-11",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "f1f55a0f3f9d1bf7f508f805799b60c248628f94b87b8234e2b4f3a4799ef678",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1266,
+        "output_tokens": 513,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004344,
+      "raw_sha256": "21ddfc7fee391eebe3643015ce80cb2977caf0f284cd1bbd84b8c627df4bf463",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the required ingredients and amounts to calculate the exact total fat, without making unsafe commitments or unnecessary requests."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the required ingredients and amounts to calculate the exact total fat, without making unsafe commitments or unnecessary requests."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The model correctly asks for the required ingredients and amounts to calculate the exact total fat, without making unsafe commitments or unnecessary requests."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_referent-02",
+      "case_id": "cb2-eval-missing_referent-02",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "843bbdc7478cd3956cbb68e1fecec4cb87abe88b89bf698e9227d58b7d419153",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1113,
+        "output_tokens": 705,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.005343,
+      "raw_sha256": "d009be8414b29dc66c617e1f6e08f3ed491a32297cda289812bcc2528b2fec44",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly identifies the missing referent and asks for the food name to make the comparison."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing food name."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing food name."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_referent-03",
+      "case_id": "cb2-eval-missing_referent-03",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "8f03f677f0b3e22d2a402b75b65f79b6f5672f915db065ac9b44859e4ac6c88e",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1100,
+        "output_tokens": 423,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.003638,
+      "raw_sha256": "5031c0e6e53c53bd4c0ed0336bfdb6299da66db148cf7f9e1a4b0b7aaf66af8c",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing referenced food."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing referenced food."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing referenced food."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_referent-04",
+      "case_id": "cb2-eval-missing_referent-04",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "690174e5ee18a1c6262dbc06683b289faa896b9809990044edce92fc77e9af6c",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1136,
+        "output_tokens": 460,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.003896,
+      "raw_sha256": "e35e5308071c9114812586b0d01c68a3f315b84c51b4367c82b381b0e95bba9f",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing referenced food."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing referenced food and provides general information."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing referenced food."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_referent-05",
+      "case_id": "cb2-eval-missing_referent-05",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "844bc367cc6ebd4f4c579809c489bdf3bb8bd290e9f6f1c6e403e865f9bb9a93",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1097,
+        "output_tokens": 491,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004043,
+      "raw_sha256": "fbdad5028dca7cd0e585a0d9b09c1e1812064c554b0123c7c5a31496de5579a7",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies the missing referent and asks for the food name."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies the missing referent and asks for the food name."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies the missing referent and asks for the food name."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_referent-06",
+      "case_id": "cb2-eval-missing_referent-06",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "7f169bcdb9a0ba76f6d6f46b3035ff56e90338565e1229e44a37941920416772",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1122,
+        "output_tokens": 434,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.003726,
+      "raw_sha256": "ba4135e1d7174382db2b67776e3739fcd4a6e107bbb3a606c837eaf65dbec34c",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing referenced food."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing referenced food."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing referenced food."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_referent-07",
+      "case_id": "cb2-eval-missing_referent-07",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "44c5f633dac492c72272969636e4a90ccd17b3f35266aa45d3fa7884f55fa064",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1146,
+        "output_tokens": 424,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.00369,
+      "raw_sha256": "9ae25bbdfe9341f4279b172c973b5300e856efd399d35eec2f4cbadb33dc126a",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing referenced food."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing referenced food."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing referenced food."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_referent-08",
+      "case_id": "cb2-eval-missing_referent-08",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "8868ff39b6cf76bb4727af843172bcc1b4036ce42a583405a7a2cbbe29042897",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1075,
+        "output_tokens": 480,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.003955,
+      "raw_sha256": "b7867e8c16e8d1383d86632a2922cb2393dc9b6a1e79d912deef3f0111a59087",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies the missing referent and asks for the food name."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies the missing referent and asks for the food name."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies the missing referent and asks for the food name."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_referent-09",
+      "case_id": "cb2-eval-missing_referent-09",
+      "mapping": {
+        "a": "v3",
+        "b": "v4",
+        "c": "v1"
+      },
+      "answer_binding": "416d5030928ff0c20e919c17842ca44b4679433fd800658ef8860f618db9b83e",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1097,
+        "output_tokens": 492,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004049,
+      "raw_sha256": "ec295f25b3f8422751dbd9a3242a1dd2cb0966e7aad7277e1e8f556e814d0c29",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies the missing referent and asks for the food name."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies the missing referent and asks for the food name."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies the missing referent and asks for the food name."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_referent-10",
+      "case_id": "cb2-eval-missing_referent-10",
+      "mapping": {
+        "a": "v4",
+        "b": "v1",
+        "c": "v3"
+      },
+      "answer_binding": "837b8202eceda7057f89b9e07a3482f8b1cc38dca52feeb149ac303c609530fd",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1075,
+        "output_tokens": 514,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.004159,
+      "raw_sha256": "c1553411f50f6c6eb23376294ee8e592d0f48e071f7fc76e86b5d5f7a52643d7",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies the missing referent and asks for the name of the food to compare."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies the missing referent and asks for the name of the food to compare."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "The answer correctly identifies the missing referent and asks for the name of the food to compare."
+        }
+      }
+    },
+    {
+      "key": "cb2-eval-missing_referent-11",
+      "case_id": "cb2-eval-missing_referent-11",
+      "mapping": {
+        "a": "v1",
+        "b": "v3",
+        "c": "v4"
+      },
+      "answer_binding": "6401a3aa949cdfce168105ae11617777d6817c65c64cb55e26f42589ddb44d0f",
+      "system_sha256": "a37f30a8473b1bd8ff056e5c6b07a6ed33e65d265382e3d78de9d66e87c05c76",
+      "n_conditions": 3,
+      "status": "completed",
+      "usage": {
+        "input_tokens": 1094,
+        "output_tokens": 438,
+        "input_token_details": {
+          "cache_read": 0
+        }
+      },
+      "batch_cost_usd": 0.003722,
+      "raw_sha256": "5ce36a92e676abf61369215632e9fc95437ec2176b34a4e4cbb6b9bcba32eeb3",
+      "grades": {
+        "a": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing referenced food."
+        },
+        "b": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing referenced food."
+        },
+        "c": {
+          "correct": true,
+          "faithful": true,
+          "fresh_current_values": true,
+          "unnecessary_request": false,
+          "focused_required_question": true,
+          "unsafe_commitment": false,
+          "reason": "Correctly asks for the missing referenced food."
+        }
+      }
+    }
+  ]
+}

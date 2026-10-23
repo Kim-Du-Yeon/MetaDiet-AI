@@ -1,0 +1,31 @@
+{
+  "suite": "clarification-two-template-holdout-v1",
+  "code_sha256": {
+    "backend/scripts/eval/clarification_holdout.py": "1f8daf42e5404d4b8dd976a94991fb8f53bae7dae206fd3d7c7593506fe500d0",
+    "backend/scripts/eval/run_clarification_holdout.py": "230a25ad783acc2cebc9f2a98a82da2eb385a08b48cc0cdb1dd8ac8fdd1d7ee0",
+    "backend/scripts/prompt_release_workflow.py": "08af22bfc95e657911eab0662de1e44db4c77b17c66c2b56941c10fa71af673e"
+  },
+  "cases_sha256": "e5c8e97c3aff6889e42be0bde87a11b348d20f143ac82daa112cfbc7004513a9",
+  "candidate_sha256": "7f7609f5faaed5d5360b08ee11c4e95de78ea55b993b873ea75b337ebd5061e0",
+  "historical_sha256": {
+    "candidate.json": "3acdc3172ea5ea5d2c1390537b6acb33862fcf230db64f65e43c3fe74a168812",
+    "protocol.json": "5e78760d3d310cd5edc0428b59f9f65e41db26cdcde38d94c5717fcb68b6a438",
+    "main/answers.json": "9e0789033e9737a2eac0bf2e1d3d4736c40205b305d7b58b04d87230f10303ed",
+    "main/judges.json": "fa5697d95c119180c1ba2d40ce8d26aaf93efd6af825470b24531f4818370c41",
+    "main/summary.json": "cd3cfa4669a1f6dffeae5c8b8e1fe9bc2a041469a753020da330dbbf292a3af6"
+  },
+  "gate": "100 completed/judged/accounted each; candidate correct and faithful>=98 and >=baseline-1, behavior>=98 and >=baseline, required>=49/50, unsafe0, fresh/no-write100, extra<=2 and <=baseline, p95/cost<=1.25baseline; old diagnostic gate also required",
+  "candidate_frozen_before_new_outputs": true,
+  "existing_results_reused": "v4 diagnostic gate/48dev/300answers/100triplegrades and all original usage preserved; no old answer is a new holdout answer",
+  "planned_calls": "new200 Flash generations +100 paired Pro Batch judgments +staging/browser smoke, case may call multiple models",
+  "expected_usage_usd": [
+    0.8,
+    1.5
+  ],
+  "scope": "New synthetic100 question strings, disjoint exact text from old cohorts, same author/10families; not external clinical/user holdout",
+  "actual_user_ab": false,
+  "candidate_commit_ids": {
+    "team.base": "7cb880e71a3599c8fd681ad341070d745c1343483b0168404dbcf6505fed2de0",
+    "team.compact_followup": "36d05c3aec0e17aaf53b4534960eb9893ee4f2b74c6452550618db369c90a403"
+  }
+}

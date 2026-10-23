@@ -1,0 +1,43 @@
+{
+  "reason": "Only summary not_independent_holdout changed from not dev to True. Development is not an independent holdout. No prompt, case, criterion, generation or grade changes.",
+  "original_paid_generation_code_sha256": {
+    "clarification_v4.py": "b7cde3cc71fdb58f3a9098f41c413eba89a85aa39e3a9c3a884a0d652e45300e",
+    "run_clarification_v4.py": "a5bbab5e072a3f9d34e6e8e1eab9e1655a8dfe288389c82ee5f037f32826ed0c",
+    "run_clarification_v3.py": "f05c26914ee1457218463155ebe1f3a782a0d480270b819d31db680b9660c6ed"
+  },
+  "current_reporting_code_sha256": {
+    "clarification_v4.py": "b7cde3cc71fdb58f3a9098f41c413eba89a85aa39e3a9c3a884a0d652e45300e",
+    "run_clarification_v4.py": "f0722a290fb54bd4e4d5d0052427141a10d3fc524f80a5ad460f251e9019c163",
+    "run_clarification_v3.py": "f05c26914ee1457218463155ebe1f3a782a0d480270b819d31db680b9660c6ed"
+  },
+  "original_protocol_sha256": "601eeb06b4ff5d453aa1d19106c631d6d976817fe0c05ff1a2afa500c1647218",
+  "current_protocol_sha256": "5e78760d3d310cd5edc0428b59f9f65e41db26cdcde38d94c5717fcb68b6a438",
+  "all_original_protocol_fields_except_reporting_code_unchanged": true,
+  "candidate_cases_criteria_and_grades_unchanged": true,
+  "development_judges_sha256": "ebd0ae5334d92a1b7ac1897f30945da6123290fdc0d384924cd3fb9f6c306b79",
+  "reports": [
+    {
+      "stage": "development",
+      "answer_rows": 48,
+      "row_digest_unchanged": "d7d05e5e999e30693a9af0e0e179b3768d0490ebfe49e7535a0b0a9512b88e9f",
+      "changed_fields": [
+        "runner_sha256",
+        "protocol_sha256"
+      ],
+      "original_file_sha256": "dc8d317645a6f992b6c12f1883b1910184dec420e57dbfe31a7364183669c0cc",
+      "current_file_sha256": "a9ddcbea8a387feee719c694a050d8717c214d490ba9828a69dabaad1efb9b81"
+    },
+    {
+      "stage": "main",
+      "answer_rows": 300,
+      "row_digest_unchanged": "57f304ded6e088d73836109b5171f0ac9e69824d5390fad96f0ffbe466b30ff8",
+      "changed_fields": [
+        "runner_sha256",
+        "protocol_sha256"
+      ],
+      "original_file_sha256": "f8aa769c9f0e9d6c7c319729912ef7d98b784412343212cd5170cc8da43fb707",
+      "current_file_sha256": "9e0789033e9737a2eac0bf2e1d3d4736c40205b305d7b58b04d87230f10303ed"
+    }
+  ],
+  "no_model_calls_for_correction": true
+}

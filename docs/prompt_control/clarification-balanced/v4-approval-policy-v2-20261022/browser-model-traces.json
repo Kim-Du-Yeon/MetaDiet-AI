@@ -1,0 +1,37 @@
+{
+  "rows": [
+    {
+      "run_id": "01a1626b-d2b1-7362-9414-bdc80ec45f0d",
+      "trace_id": "37f40123-972f-4992-a503-cdede3b61047",
+      "name": "ChatGoogleGenerativeAI",
+      "release": "clarification-v4-20261022",
+      "commit": "8f4014f9b18d5c4cf993d9bb6219a8d5bc2cf03d7d4316272010957bc9a173c8",
+      "route": "supervisor",
+      "model": "gemini-3.8-flash",
+      "registered_system_prefixes": [],
+      "prompt_tokens": 2595,
+      "completion_tokens": 847,
+      "total_tokens": 3442,
+      "langsmith_total_cost_usd": "0.0051225",
+      "error": false,
+      "latency_ms": 9158.573
+    },
+    {
+      "run_id": "01a1626b-5096-7102-aa33-9bde997d5c48",
+      "trace_id": "223210c5-bdaa-4628-be6d-dd0ba4e5d9d2",
+      "name": "ChatGoogleGenerativeAI",
+      "release": "clarification-v4-20261022",
+      "commit": "8f4014f9b18d5c4cf993d9bb6219a8d5bc2cf03d7d4316272010957bc9a173c8",
+      "route": "supervisor",
+      "model": "gemini-3.8-flash",
+      "registered_system_prefixes": [],
+      "prompt_tokens": 2212,
+      "completion_tokens": 1038,
+      "total_tokens": 3250,
+      "langsmith_total_cost_usd": "0.0055515",
+      "error": false,
+      "latency_ms": 11159.554
+    }
+  ],
+  "scope": "Only static-prefix IDs, release metadata, usage/latency; actual inputs/outputs and user data excluded. Provider trace cost is estimate, not invoice."
+}
